@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Adventure</title>
+		<script node>getAsset("logo")</script>node>
+		<script node>getAsset("meta")</script>node>
+		<script node>getAsset("fonts")</script>node>
+		<script node>getAsset("css-variables")</script>node>
+		<link rel="stylesheet" href="/main.css"/>
+		<link rel="stylesheet" href="/game.css"/>
+		<script src="/main.js"></script>
+		<script src="/game.js"></script>
+		<script>window.RULES = <script node>JSON.stringify(getAsset("rules"))</script>node></script>
+		<script>window.USER = <script node>REQUEST.user ? JSON.stringify(REQUEST.user) : "null"</script>node></script>
+	</head>
+	<body>
+		<section id="top">
+			<section id="stream">
+				<div id="stream-history"></div>
+			</section>
+		</section>
+		<section id="left" tool="settings">
+			<section id="tools">
+				<button class="tool nav-tab" id="tools-settings">&#x2699;</button>
+				<button class="tool nav-tab" id="tools-rules">&#x1f50e;</button>
+				<button class="tool nav-tab" id="tools-character">&#x1f464;</button>
+				<button class="tool nav-tab" id="tools-chat">&#x1f4ac;<span id="tools-chat-notification" visibility="false">&#x1f514;</span></button>
+				<button class="tool nav-tab" id="tools-content">&#x1f4dd;</button>
+			</section>
+			<section id="settings">
+				<h2>settings</h2>
+				<div id="settings-game" class="subsection">
+					<h3>game</h3>
+					<form id="settings-game-form" method="post" action="javascript:;">
+						<select id="settings-game-select">
+							<optgroup label="my games" id="settings-game-select-custom"></optgroup>
+							<optgroup label="other" id="settings-game-select-other">
+								<option id="settings-game-select-none" value="[none]" disabled>[close game]</option>
+								<option id="settings-game-select-new" value="[new]">[new game]</option>
+								<option id="settings-game-select-search" value="[search]" selected>[find game]</option>
+							</optgroup>
+						</select>
+						<input id="settings-game-input" type="text" placeholder="game name" class="form-pair" visibility="true"/>
+						<button id="settings-game-button" class="form-pair">&rarr;</button>
+					</form>
+				</div>
+				<div id="settings-audio" class="subsection">
+					<h3>audio</h3>
+					<form id="settings-audio-form" method="post" action="javascript:;">
+						<div id="settings-audio-label" class="form-pair">&#x1f50a;</div>
+						<input id="settings-audio-volume" type="range" min="0" max="1" step="0.01" value="1" class="form-pair"/>
+					</form>
+				</div>
+				<div id="settings-user" class="subsection">
+					<h3>user</h3>
+					<form id="settings-user-name-form" method="post" action="javascript:;">
+						<h4>change name</h4>
+						<input id="settings-user-name-input" type="text" placeholder="name" class="form-pair" autocomplete="off"/>
+						<button id="settings-user-name-button" class="form-pair">&rarr;</button>
+					</form>
+					<form id="settings-user-password-form" method="post" action="javascript:;">
+						<h4>change password</h4>
+						<input id="settings-user-password-input-old" type="password" placeholder="old password" autocomplete="off"/>
+						<input id="settings-user-password-input-new" type="password" placeholder="new password" class="form-pair" autocomplete="off"/>
+						<button id="settings-user-password-button" class="form-pair">&rarr;</button>
+					</form>
+				</div>
+				<div id="settings-auth" class="subsection">
+					<form id="settings-auth-signout-form" method="post" action="javascript:;">
+						<button id="settings-auth-signout-button">sign out</button>
+					</form>
+				</div>
+			</section>
+			<section id="rules">
+				<form id="rules-search-form" method="post" action="javascript:;" class="subsection">
+					<input type="text" id="rules-search-input" placeholder="search rules" class="form-pair"/>
+					<button id="rules-search-button" class="form-pair">&#x1f50e;</button>
+				</form>
+				<div id="rules-results"></div>
+			</section>
+			<section id="character" mode="settings">
+				<div id="character-modes">
+					<button class="mode nav-tab" id="character-modes-settings">&#x2699;</button>
+					<button class="mode nav-tab" id="character-modes-play">&#9860;</button>
+					<button class="mode nav-tab" id="character-modes-edit">&#9999;</button>
+					<button class="mode nav-tab" id="character-modes-items">&#9874;</button>
+					<button class="mode nav-tab" id="character-modes-conditions">&#9729;</button>
+					<button class="mode nav-tab" id="character-modes-damage">&#9760;</button>
+				</div>
+				<div id="character-settings">
+					<div id="character-settings-main" class="subsection">
+						<h3>selection</h3>
+						<form id="character-settings-form" method="post" action="javascript:;">
+							<input id="character-settings-upload" type="file"/>
+							<select id="character-settings-select">
+								<optgroup label="game characters" id="character-settings-select-custom"></optgroup>
+								<optgroup label="other" id="character-settings-select-other">
+									<option id="character-settings-select-none" value="[none]" disabled>[close character]</option>
+									<option id="character-settings-select-upload" value="[upload]">[upload character]</option>
+									<option id="character-settings-select-new" value="[new]" selected>[new character]</option>
+								</optgroup>
+							</select>
+							<select id="character-settings-select-templates" class="form-pair">
+								<optgroup label="blank">
+									<option id="character-settings-select-blank" value="[template-blank]" selected>[blank template]</option>
+								</optgroup>
+							</select>
+							<button id="character-settings-select-button" class="form-pair">&rarr;</button>
+						</form>
+					</div>
+					<div id="character-settings-metadata" class="subsection" visibility="false">
+						<form id="character-settings-access-form" method="post" action="javascript:;">
+							<h4>access</h4>
+							<select id="character-settings-access-select" class="form-pair">
+								<option id="character-settings-access-select-all" value="[all]">[all]</option>
+								<option id="character-settings-access-select-me" value="[me]" selected>[me]</option>
+							</select>
+							<button id="character-settings-access-button" class="form-pair">&rarr;</button>
+						</form>
+						<form id="character-settings-download-form" method="post" action="javascript:;">
+							<button id="character-settings-download-button">download</button>
+						</form>
+						<form id="character-settings-delete-form" method="post" action="javascript:;">
+							<button id="character-settings-delete-button">delete character</button>
+						</form>
+					</div>
+					<div id="character-settings-rng" class="subsection">
+						<h3 id="character-settings-rng-header">rng</h3>
+						<form id="character-settings-rng-form" method="post" action="javascript:;">
+							<input id="character-settings-rng-count" type="number" placeholder="count" min="1" step="1"/>
+							<select id="character-settings-rng-d">
+								<option id="character-settings-rng-d2" value="2">d2</option>
+								<option id="character-settings-rng-d4" value="4">d4</option>
+								<option id="character-settings-rng-d6" value="6">d6</option>
+								<option id="character-settings-rng-d8" value="8">d8</option>
+								<option id="character-settings-rng-d10" value="10">d10</option>
+								<option id="character-settings-rng-d12" value="12">d12</option>
+								<option id="character-settings-rng-d20" value="20">d20</option>
+								<option id="character-settings-rng-d100" value="100">d100</option>
+							</select>
+							<input id="character-settings-rng-label" type="text" placeholder="label" class="form-pair"/>
+							<button id="character-settings-rng-button" class="form-pair">&rarr;</button>
+						</form>
+					</div>
+					<div id="character-settings-recipient" class="subsection">
+						<h3 id="character-settings-recipient-header">targeting</h3>
+						<form id="character-settings-recipient-form" method="post" action="javascript:;">
+							<select id="character-settings-recipient-select">
+								<optgroup label="other">
+									<option id="character-settings-recipient-none" value="">[none]</option>
+									<option id="character-settings-recipient-environment" value="[environment]">[environment]</option>
+								</optgroup>
+								<optgroup id="character-settings-recipient-custom" label="characters"></optgroup>
+							</select>
+						</form>
+					</div>
+				</div>
+				<div id="character-content">
+					<div id="character-conditions" class="section">
+						<select id="character-conditions-select">
+							<option id="character-conditions-disabled" disabled selected>+ condition</option>
+						</select>
+					</div>
+					<div id="character-damage" class="section">
+						<input id="character-info-damage" type="number" step="1" placeholder="damage"/>
+						<button id="character-info-recover">recover</button>
+					</div>
+					<details id="character-info" class="section">
+						<summary>
+							<div id="character-info-name"></div>
+						</summary>
+						<input readonly class="editable" type="text" id="character-info-name-text" placeholder="name">
+						<div id="character-info-image">
+							<button id="character-info-image-reset" class="minor-button">x</button>
+						</div>
+						<form id="character-info-image-form" method="post" action="javascript:;">
+							<input id="character-info-image-upload" type="file"/>
+							<button id="character-info-image-button">upload image</button>
+						</form>
+						<div id="character-info-demographics">
+							<div class="column-left">
+								<label>race<select disabled class="editable" type="text" id="character-info-race" dir="rtl">
+									<option id="character-info-race-disabled" disabled selected>...</option>
+								</select></label>
+								<label>sex<input readonly class="editable" type="text" id="character-info-sex"></label>
+								<label>age<input readonly class="editable" type="number" step="1" min="0" id="character-info-age" placeholder="y"></label>
+							</div>
+							<div class="column-right">
+								<label>height<input readonly class="editable" type="number" step="1" min="0" id="character-info-height" placeholder="ft"></label>
+								<label>weight<input readonly class="editable" type="number" step="1" min="0" id="character-info-weight" placeholder="lb"></label>
+								<label>exp<input readonly class="editable" type="number" step="1" id="character-info-points" placeholder="exp"></label>
+							</div>
+						</div>
+						<div id="character-info-abilities">
+							<div class="column-left">
+								<label>run (mph)<input readonly type="number" id="character-info-run"></label>
+								<label>move (sq)<input readonly type="number" id="character-info-move"></label>
+								<label>swim (mph)<input readonly type="number" id="character-info-swim"></label>
+							</div>
+							<div class="column-right">
+								<label>carry (lb)<input readonly type="number" id="character-info-carry"><span>/</span><input readonly type="number" id="character-info-burden"></label>
+								<label>throw (ft-lb)<input readonly type="number" id="character-info-throw"></label>
+								<label>jump (in)<input readonly type="number" id="character-info-jump"></label>
+							</div>
+						</div>
+						<textarea id="character-info-race-ability" readonly></textarea>
+						<textarea id="character-info-description" readonly class="editable" placeholder="description"></textarea>
+					</details>
+					<details id="character-perception" class="statistic section">
+						<summary>
+							<div class="column-left">
+								<div class="statistic-name">perception</div>
+							</div>
+							<div class="column-right">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" class="statistic-condition">
+								<input readonly type="number" step="1" class="statistic-damage">
+								<input readonly type="number" step="1" class="statistic-current d20">
+							</div>
+						</summary>
+						<div class="skills-list"></div>
+						<select id="character-perception-select">
+							<option id="character-perception-disabled" disabled selected>+ skill</option>
+						</select>
+					</details>
+					<details id="character-memory" class="statistic section">
+						<summary>
+							<div class="column-left">
+								<div class="statistic-name">memory</div>
+							</div>
+							<div class="column-right">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" class="statistic-condition">
+								<input readonly type="number" step="1" class="statistic-damage">
+								<input readonly type="number" step="1" class="statistic-current d20">
+							</div>
+						</summary>
+						<div class="skills-list"></div>
+						<select id="character-memory-select">
+							<option id="character-memory-disabled" disabled selected>+ skill</option>
+						</select>
+					</details>
+					<details id="character-logic" class="statistic section">
+						<summary>
+							<div class="column-left">
+								<div class="statistic-name">logic</div>
+							</div>
+							<div class="column-right">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" class="statistic-condition">
+								<input readonly type="number" step="1" class="statistic-damage">
+								<input readonly type="number" step="1" class="statistic-current d20">
+							</div>
+						</summary>
+						<div class="skills-list"></div>
+						<select id="character-logic-select">
+							<option id="character-logic-disabled" disabled selected>+ skill</option>
+						</select>
+					</details>
+					<details id="character-strength" class="statistic section">
+						<summary>
+							<div class="column-left">
+								<div class="statistic-name">strength</div>
+							</div>
+							<div class="column-right">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" class="statistic-condition">
+								<input readonly type="number" step="1" class="statistic-damage">
+								<input readonly type="number" step="1" class="statistic-current d20">
+							</div>
+						</summary>
+						<div class="skills-list"></div>
+						<select id="character-strength-select">
+							<option id="character-strength-disabled" disabled selected>+ skill</option>
+						</select>
+					</details>
+					<details id="character-dexterity" class="statistic section">
+						<summary>
+							<div class="column-left">
+								<div class="statistic-name">dexterity</div>
+							</div>
+							<div class="column-right">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" class="statistic-condition">
+								<input readonly type="number" step="1" class="statistic-damage">
+								<input readonly type="number" step="1" class="statistic-current d20">
+							</div>
+						</summary>
+						<div class="skills-list"></div>
+						<select id="character-dexterity-select">
+							<option id="character-dexterity-disabled" disabled selected>+ skill</option>
+						</select>
+					</details>
+					<details id="character-immunity" class="statistic section">
+						<summary>
+							<div class="column-left">
+								<div class="statistic-name">immunity</div>
+							</div>
+							<div class="column-right">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" class="statistic-condition">
+								<input readonly type="number" step="1" class="statistic-damage">
+								<input readonly type="number" step="1" class="statistic-current d20">
+							</div>
+						</summary>
+						<div class="skills-list"></div>
+						<select id="character-immunity-select">
+							<option id="character-immunity-disabled" disabled selected>+ skill</option>
+						</select>
+					</details>
+					<details id="character-speed" class="statistic section">
+						<summary>
+							<div class="column-left">
+								<div class="statistic-name">speed</div>
+							</div>
+							<div class="column-right">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" class="statistic-condition">
+								<input readonly type="number" step="1" class="statistic-damage">
+								<input readonly type="number" step="1" class="statistic-current d20">
+							</div>
+						</summary>
+						<div class="skills-list"></div>
+						<select id="character-speed-select">
+							<option id="character-speed-disabled" disabled selected>+ skill</option>
+						</select>
+					</details>
+					<details id="character-items" class="section">
+						<summary>
+							<div id="character-items-equipped"></div>
+							<div id="character-items-ellipsis">...</div>
+						</summary>
+						<div id="character-items-unequipped"></div>
+					</details>
+					<select id="character-items-select">
+						<option id="character-items-disabled" disabled selected>+ item</option>
+					</select>
+				</div>
+			</section>
+			<section id="chat">
+				<div id="chat-messages"></div>
+				<form id="chat-send-form" method="post" action="javascript:;">
+					<select id="chat-send-sender">
+						<option id="chat-send-sender-anonymous" value="[anonymous]">[anonymous]</option>
+						<option id="chat-send-sender-user" value="[user]" selected>[user]</option>
+						<option id="chat-send-sender-character" value="[character]" disabled>[character]</option>
+					</select>
+					<div id="chat-send-arrow">&rarr;</div>
+					<select id="chat-send-recipients">
+						<option id="chat-send-recipients-all" value="[all]" selected>[everyone]</option>
+					</select>
+					<input type="text" id="chat-send-input" placeholder="type chat message" autocomplete="off" class="form-pair"/>
+					<button id="chat-send-button" class="form-pair">&rarr;</button>
+				</form>
+			</section>
+			<section id="content" mode="none">
+				<form id="content-choose-form" method="post" action="javascript:;" class="subsection">
+					<h3>selection</h3>
+					<select id="content-choose-select">
+						<optgroup id="content-choose-select-arena" label="game arena"></optgroup>
+						<optgroup id="content-choose-select-text" label="game text"></optgroup>
+						<optgroup id="content-choose-select-image" label="game image"></optgroup>
+						<optgroup id="content-choose-select-audio" label="game audio"></optgroup>
+						<optgroup id="content-choose-select-embed" label="game embed"></optgroup>
+						<optgroup id="content-choose-select-other" label="other">
+							<option id="content-choose-select-none" value="[none]" disabled>[close document]</option>
+							<option id="content-choose-select-new" value="[new]" selected>[new document]</option>
+						</optgroup>
+					</select>
+					<select id="content-choose-types" class="form-pair" visibility="true">
+						<option id="content-choose-types-arena" value="arena" selected>arena</option>
+						<option id="content-choose-types-text" value="text" selected>text</option>
+						<option id="content-choose-types-image" value="image">image</option>
+						<option id="content-choose-types-audio" value="audio">audio</option>
+						<option id="content-choose-types-embed" value="embed">embed</option>
+					</select>
+					<button id="content-choose-button" class="form-pair">&rarr;</button>
+				</form>
+				<div id="content-metadata" class="subsection">
+					<h3 id="content-metadata-header">content</h3>
+					<button id="content-send" class="minor-button">&#x1f4ac;</button>
+					<form id="content-name-form" method="post" action="javascript:;">
+						<h4>name</h4>
+						<input type="text" id="content-name-input" placeholder="document name" class="form-pair"/>
+						<button id="content-name-button" class="form-pair">&rarr;</button>
+					</form>
+					<form id="content-access-form" method="post" action="javascript:;">
+						<h4>access</h4>
+						<select id="content-access-select" class="form-pair">
+							<option id="content-access-select-all" value="[all]">[all]</option>
+							<option id="content-access-select-me" value="[me]" selected>[me]</option>
+						</select>
+						<button id="content-access-button" class="form-pair">&rarr;</button>
+					</form>
+					<form id="content-data-form" method="post" action="javascript:;">
+						<h4>data</h4>
+						<textarea id="content-data-embedCode" placeholder="embed html"></textarea>
+						<input type="text" id="content-data-url" placeholder="embed url"/>
+						<button id="content-data-button">save content</button>
+					</form>
+					<form id="content-upload-form" method="post" action="javascript:;" enctype="multipart/form-data">
+						<input type="file" id="content-upload-input"/>
+						<button id="content-upload-button">upload file</button>
+					</form>
+					<form id="content-delete-form" method="post" action="javascript:;">
+						<button id="content-delete-button">delete content</button>
+					</form>
+				</div>
+				<div id="content-controls" class="subsection">
+					<h3 id="content-controls-header">controls</h3>
+					<form id="content-controls-zoom-form" method="post" action="javascript:;">
+						<h4>zoom</h4>
+						<button id="content-controls-zoom-out" value="-0.25">-</button>
+						<button id="content-controls-zoom-zero" value="0">0</button>
+						<button id="content-controls-zoom-in" value="0.25">+</button>
+					</form>
+					<form id="content-controls-pan-form" method="post" action="javascript:;">
+						<h4>pan</h4>
+						<button id="content-controls-pan-left" value="-x">&larr;</button>
+						<button id="content-controls-pan-up" value="y">&uarr;</button>
+						<button id="content-controls-pan-down" value="-y">&darr;</button>
+						<button id="content-controls-pan-right" value="x">&rarr;</button>
+					</form>
+				</div>
+				<div id="content-objects" class="subsection">
+					<h3 id="content-objects-header">objects</h3>
+					<form id="content-objects-form" method="post" action="javascript:;">
+						<select id="content-objects-select" class="form-pair">
+							<optgroup label="other">
+								<option id="content-objects-select-blank" value="[blank object]" selected>[blank object]</option>
+							</optgroup>
+							<optgroup id="content-objects-select-custom" label="characters"></optgroup>
+						</select>
+						<button id="content-objects-button" class="form-pair">&rarr;</button>
+					</form>
+					<div id="content-objects-list"></div>
+				</div>
+			</section>
+		</section>
+		<section id="right">
+			<section id="gametable"></section>
+		</section>
+	</body>
+</html>

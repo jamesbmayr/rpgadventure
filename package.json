@@ -1,0 +1,21 @@
+{
+  "name": "rpgadventure",
+  "version": "1.0.0",
+  "description": "a virtual environment for the Adventure tabletop rpg",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"test\"",
+    "start": "node index.js",
+    "mongo": "mongod --dbpath=data/db --port 27017"
+  },
+  "author": "James Mayr",
+  "license": "ISC",
+  "engines": {
+    "node": "6.11.1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.677.0",
+    "mongodb": "^3.1.13",
+    "websocket": "^1.0.25"
+  }
+}

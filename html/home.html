@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Adventure</title>
+		<script node>getAsset("logo")</script>node>
+		<script node>getAsset("meta")</script>node>
+		<script node>getAsset("fonts")</script>node>
+		<script node>getAsset("css-variables")</script>node>
+		<link rel="stylesheet" href="/main.css"/>	
+		<script src="/main.js"></script>
+		<script src="/home.js"></script>
+	</head>
+	<body>
+		<div class="center-container">
+			<h1>Adventure</h1>
+			<form id="signup-form" method="post" action="javascript:;" visibility=false>
+				<h2>sign up <span id="signup-switch" class="pseudo-link">(sign in)</span></h2>
+				<div class="subsection">
+					<h4>name</h4>
+					<input  id="signup-username" type="text" placeholder="username" autocomplete="off"/>
+					<h4>password</h4>
+					<input  id="signup-password" type="password" placeholder="password" autocomplete="off"/>
+					<button id="signup-button">sign up</button>
+					<div    id="signup-error" class="error"></div>
+				</div>
+			</form>
+			<form id="signin-form" method="post" action="javascript:;" visibility=true>
+				<h2>sign in <span id="signin-switch" class="pseudo-link">(sign up)</span></h2>
+				<div class="subsection">
+					<h4>name</h4>
+					<input  id="signin-username" type="text" placeholder="username" autocomplete="on"/>
+					<h4>password</h4>
+					<input  id="signin-password" type="password" placeholder="password" autocomplete="on"/>
+					<button id="signin-button">sign in</button>
+					<div    id="signin-error" class="error"></div>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>
