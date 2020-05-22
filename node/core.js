@@ -271,6 +271,7 @@
 							return {
 								id: generateRandom(),
 								name: null,
+								creator: null,
 								users: {}
 							}
 						break
@@ -336,6 +337,7 @@
 								name: null,
 								url: null,
 								embedCode: null,
+								file: null,
 								text: null,
 								arena: null
 							}
@@ -353,6 +355,7 @@
 								id: generateRandom(),
 								time: new Date().getTime(),
 								characterId: null,
+								contentId: null,
 								text: null,
 								visible: true,
 								x: 0,
@@ -361,6 +364,8 @@
 								width: 1,
 								height: 1,
 								corners: 0,
+								rotation: 0,
+								glow: 0.1,
 								shadow: colors["medium-gray"],
 								opacity: 1,
 								color: colors["light-gray"],
@@ -474,7 +479,8 @@
 
 						case "constants":
 							return {
-								cookieLength: 1000 * 60 * 60 * 24 * 7
+								cookieLength: 1000 * 60 * 60 * 24 * 7,
+								contentDuration: 1000 * 60 * 60 * 24 * 7
 							}
 						break
 
@@ -526,6 +532,7 @@
 								info: {
 									name: "(name)",
 									image: null,
+									file: null,
 									demographics: {
 										race: "",
 										age: 0,
@@ -6593,6 +6600,15 @@
 										"Players can use this simulation to solve a randomly generated hole-patching puzzle by clicking to select, dragging to move, and pressing Space to rotate patches, with the goal of covering all the holes.",
 										"The GM can use query parameters (x, y, colors, pieces) to customize the puzzle."
 									]
+								},
+								{
+									name: "combination lock",
+									url: "https://jamesmayr.com/wheelturner",
+									steps: [
+										"Within the world, characters encounter a combination lock, which can be solved using lock-picking. The story determines how they learn the combination.",
+										"Players can use this simulation to solve a puzzle in which the combination is already known, but the mechanism is randomly generated. Turning one dial will inadvertently cause another dial to turn, requiring players to logically map out a sequence of moves that will arrange the dials in the desired orientation.",
+										"The GM can use query parameters (wheelCount, maxNotchEffect, notchEffectChance, symbolSet, solution) to customize the puzzle."
+									]
 								}
 							]
 						break
@@ -6606,7 +6622,7 @@
 											name: "human smart",
 											demographics: { race: "human", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
@@ -6633,7 +6649,7 @@
 											name: "human skilled",
 											demographics: { race: "human", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
@@ -6661,7 +6677,7 @@
 											name: "human strong",
 											demographics: { race: "human", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
@@ -6688,7 +6704,7 @@
 											name: "human child",
 											demographics: { race: "human", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
@@ -6709,7 +6725,7 @@
 											name: "human boss",
 											demographics: { race: "human", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
@@ -6738,7 +6754,7 @@
 											name: "elf smart",
 											demographics: { race: "elf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -6765,7 +6781,7 @@
 											name: "elf skilled",
 											demographics: { race: "elf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -6793,7 +6809,7 @@
 											name: "elf strong",
 											demographics: { race: "elf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -6820,7 +6836,7 @@
 											name: "elf child",
 											demographics: { race: "elf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -6841,7 +6857,7 @@
 											name: "elf boss",
 											demographics: { race: "elf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -6870,7 +6886,7 @@
 											name: "dwarf smart",
 											demographics: { race: "dwarf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -6897,7 +6913,7 @@
 											name: "dwarf skilled",
 											demographics: { race: "dwarf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 6, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -6925,7 +6941,7 @@
 											name: "dwarf strong",
 											demographics: { race: "dwarf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -6952,7 +6968,7 @@
 											name: "dwarf child",
 											demographics: { race: "dwarf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 6, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -6973,7 +6989,7 @@
 											name: "dwarf boss",
 											demographics: { race: "dwarf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7002,7 +7018,7 @@
 											name: "halfling smart",
 											demographics: { race: "halfling", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -7029,7 +7045,7 @@
 											name: "halfling skilled",
 											demographics: { race: "halfling", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -7057,7 +7073,7 @@
 											name: "halfling strong",
 											demographics: { race: "halfling", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -7084,7 +7100,7 @@
 											name: "halfling child",
 											demographics: { race: "halfling", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -7105,7 +7121,7 @@
 											name: "halfling boss",
 											demographics: { race: "halfling", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -7134,7 +7150,7 @@
 											name: "gnome smart",
 											demographics: { race: "gnome", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7161,7 +7177,7 @@
 											name: "gnome skilled",
 											demographics: { race: "gnome", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7189,7 +7205,7 @@
 											name: "gnome strong",
 											demographics: { race: "gnome", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7216,7 +7232,7 @@
 											name: "gnome child",
 											demographics: { race: "gnome", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7237,7 +7253,7 @@
 											name: "gnome boss",
 											demographics: { race: "gnome", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7266,7 +7282,7 @@
 											name: "goblin smart",
 											demographics: { race: "goblin", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7293,7 +7309,7 @@
 											name: "goblin skilled",
 											demographics: { race: "goblin", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7321,7 +7337,7 @@
 											name: "goblin strong",
 											demographics: { race: "goblin", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7348,7 +7364,7 @@
 											name: "goblin child",
 											demographics: { race: "goblin", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7369,7 +7385,7 @@
 											name: "goblin boss",
 											demographics: { race: "goblin", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7398,7 +7414,7 @@
 											name: "orc smart",
 											demographics: { race: "orc", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7425,7 +7441,7 @@
 											name: "orc skilled",
 											demographics: { race: "orc", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7453,7 +7469,7 @@
 											name: "orc strong",
 											demographics: { race: "orc", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7480,7 +7496,7 @@
 											name: "orc child",
 											demographics: { race: "orc", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7501,7 +7517,7 @@
 											name: "orc boss",
 											demographics: { race: "orc", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7530,7 +7546,7 @@
 											name: "lizardfolk smart",
 											demographics: { race: "lizardfolk", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
@@ -7557,7 +7573,7 @@
 											name: "lizardfolk skilled",
 											demographics: { race: "lizardfolk", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
@@ -7585,7 +7601,7 @@
 											name: "lizardfolk strong",
 											demographics: { race: "lizardfolk", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
@@ -7612,7 +7628,7 @@
 											name: "lizardfolk child",
 											demographics: { race: "lizardfolk", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
@@ -7633,7 +7649,7 @@
 											name: "lizardfolk boss",
 											demographics: { race: "lizardfolk", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
@@ -7662,7 +7678,7 @@
 											name: "bhios smart",
 											demographics: { race: "bhios", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7689,7 +7705,7 @@
 											name: "bhios skilled",
 											demographics: { race: "bhios", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7717,7 +7733,7 @@
 											name: "bhios strong",
 											demographics: { race: "bhios", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7744,7 +7760,7 @@
 											name: "bhios child",
 											demographics: { race: "bhios", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7765,7 +7781,7 @@
 											name: "bhios boss",
 											demographics: { race: "bhios", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7794,7 +7810,7 @@
 											name: "mellifax smart",
 											demographics: { race: "mellifax", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
@@ -7821,7 +7837,7 @@
 											name: "mellifax skilled",
 											demographics: { race: "mellifax", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
@@ -7849,7 +7865,7 @@
 											name: "mellifax strong",
 											demographics: { race: "mellifax", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
@@ -7876,7 +7892,7 @@
 											name: "mellifax child",
 											demographics: { race: "mellifax", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
@@ -7897,7 +7913,7 @@
 											name: "mellifax boss",
 											demographics: { race: "mellifax", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
@@ -7926,7 +7942,7 @@
 											name: "preas smart",
 											demographics: { race: "preas", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7953,7 +7969,7 @@
 											name: "preas skilled",
 											demographics: { race: "preas", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7981,7 +7997,7 @@
 											name: "preas strong",
 											demographics: { race: "preas", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8008,7 +8024,7 @@
 											name: "preas child",
 											demographics: { race: "preas", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8029,7 +8045,7 @@
 											name: "preas boss",
 											demographics: { race: "preas", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8058,7 +8074,7 @@
 											name: "winge smart",
 											demographics: { race: "winge", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -8085,7 +8101,7 @@
 											name: "winge skilled",
 											demographics: { race: "winge", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -8113,7 +8129,7 @@
 											name: "winge strong",
 											demographics: { race: "winge", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -8140,7 +8156,7 @@
 											name: "winge child",
 											demographics: { race: "winge", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -8161,7 +8177,7 @@
 											name: "winge boss",
 											demographics: { race: "winge", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
-											status: { points: 0, burden: 0, conditions: [], damage: 0 }
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -10286,6 +10302,7 @@
 
 				// delete
 					if (data.command == "delete") {
+						data.path = ENVIRONMENT.storage_bucket + data.path
 						FS.unlink(data.path, function (error) {
 							if (error) {
 								callback({success: false, message: error})

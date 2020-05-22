@@ -63,6 +63,7 @@
 		h1 {
 			float: left;
 			width: 100%;
+			height: var(--huge-font-size);
 			padding: var(--medium-gap-size) 0;
 			margin: 0;
 			line-height: 1;
@@ -71,6 +72,13 @@
 			color: var(--medium-gray);
 			margin-bottom: var(--huge-font-size);
 			font-family: var(--font-0);
+		}
+
+		h1 img {
+			float: right;
+			height: 100%;
+			width: auto;
+			filter: drop-shadow(0 0 var(--shadow-size) var(--medium-gray));
 		}
 
 		h2 {
@@ -151,7 +159,7 @@
 
 		input[type=number][readonly]::-webkit-inner-spin-button, 
 		input[type=number][readonly]::-webkit-outer-spin-button { 
-			-webkit-appearance: none; 
+			-webkit-appearance: none;
 			margin: 0; 
 		}
 
@@ -294,6 +302,27 @@
 			text-decoration: none;	
 		}
 
+	/* details / summary */
+		details {
+			float: left;
+			width: 100%;
+			outline: none;
+			border-bottom: var(--border-size) solid var(--medium-gray);
+			padding: var(--medium-gap-size) 0;
+		}
+
+		summary {
+			float: left;
+			width: 100%;
+			outline: none;
+			cursor: pointer;
+			-webkit-appearance: none;
+		}
+
+		details summary::-webkit-details-marker {
+			display:none;
+		}
+
 	/* other */
 		audio {
 			width: calc(100% - 4 * var(--medium-gap-size));
@@ -320,21 +349,6 @@
 			width: 100%;
 			border: calc(var(--border-size) / 2) solid var(--medium-gray);
 			margin: var(--large-gap-size) 0;
-		}
-
-		details {
-			float: left;
-			width: 100%;
-			outline: none;
-			border-bottom: var(--border-size) solid var(--medium-gray);
-			padding: var(--medium-gap-size) 0;
-		}
-
-		summary {
-			float: left;
-			width: 100%;
-			outline: none;
-			cursor: pointer;
 		}
 
 		iframe {
@@ -384,6 +398,35 @@
 
 		.pseudo-link:hover, .pseudo-link:focus {
 			text-shadow: 0 0 var(--shadow-size) var(--medium-blue);
+		}
+
+	/* delete gate */
+		details.delete-gate {
+			border-bottom: none;
+		}
+		
+		.delete-gate summary {
+			float: left;
+			border-radius: var(--border-radius);
+			width: 100%;
+			padding: var(--medium-gap-size);
+			height: calc(var(--medium-font-size) + 4 * var(--small-gap-size));
+			font-size: var(--medium-font-size);
+			background-color: var(--medium-red);
+			color: var(--light-gray);
+			margin: var(--small-gap-size) 0;
+			cursor: pointer;
+			text-align: center;
+			box-sizing: border-box;
+			font-weight: bold;
+		}
+
+		.delete-gate summary:hover, .delete-gate summary:focus {
+			box-shadow: 0 0 var(--shadow-size) var(--medium-gray);
+		}
+
+		.delete-gate button {
+			background-color: var(--medium-red);
 		}
 
 	/* containers */

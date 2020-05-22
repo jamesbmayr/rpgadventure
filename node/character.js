@@ -28,7 +28,13 @@
 
 				// upload or template?
 					if (REQUEST.post.character.info && REQUEST.post.character.statistics) {
-						var character = REQUEST.post.character
+						var character = CORE.duplicateObject(RULES.character)
+
+						for (var i in REQUEST.post.character) {
+							character[i] = REQUEST.post.character[i]
+						}
+
+						character.info.name = "Copy of " + character.info.name
 					}
 					else if (!REQUEST.post.character.template) {
 						callback({success: false, message: "no character template", recipients: [REQUEST.user.id]})
@@ -595,6 +601,7 @@
 						// update character
 							delete REQUEST.post.character.file
 							REQUEST.post.character.info.image = results.path
+							REQUEST.post.character.info.file = REQUEST.post.character.id + "." + extension
 
 						// query
 							var query = CORE.getSchema("query")
@@ -696,7 +703,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "characters"
 								query.command = "delete"
-								query.filters = {id: REQUEST.post.character.id}
+								query.filters = {id: character.id}
 
 						// delete
 							CORE.accessDatabase(query, function(results) {
@@ -710,7 +717,7 @@
 									var query = CORE.getSchema("query")
 										query.collection = "users"
 										query.command = "find"
-										query.filters = {gameId: REQUEST.post.character.gameId}
+										query.filters = {gameId: character.gameId}
 
 								// find
 									CORE.accessDatabase(query, function(results) {
@@ -759,8 +766,8 @@
 									})
 
 								// delete actual file
-									if (REQUEST.post.character.info.image) {
-										CORE.accessFiles({command: "delete", path: REQUEST.post.character.info.image}, function(data) {
+									if (character.info.image && character.info.file) {
+										CORE.accessFiles({command: "delete", path: character.info.file}, function(data) {
 											CORE.logMessage(JSON.stringify(data))
 										})
 									}

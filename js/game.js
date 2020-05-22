@@ -3,309 +3,412 @@ window.onload = function() {
 		/* libraries */
 			var TRIGGERS = window.TRIGGERS
 			var FUNCTIONS = window.FUNCTIONS
+			var ELEMENTS = window.ELEMENTS = {}
 			var RULES = window.RULES || {}
 			var USER = window.USER || null
 			var GAME = window.GAME || null
 			var CHARACTER = window.CHARACTER || null
 			var CONTENT = window.CONTENT || null
-
-		/* elements */
-			var ELEMENTS = window.ELEMENTS = {
-				body: document.body,
-				structure: {
-					top: document.getElementById("top"),
-					left: document.getElementById("left"),
-					right: document.getElementById("right")
-				},
-				stream: {
-					history: document.getElementById("stream-history")
-				},
-				tools: {
-					element: document.getElementById("tools"),
-					settings: document.getElementById("tools-settings"),
-					rules: document.getElementById("tools-rules"),
-					character: document.getElementById("tools-character"),
-					chat: document.getElementById("tools-chat"),
-					content: document.getElementById("tools-content"),
-					notification: document.getElementById("tools-chat-notification")
-				},
-				settings: {
-					element: document.getElementById("settings"),
-					game: {
-						element: document.getElementById("settings-game"),
-						form: document.getElementById("settings-game-form"),
-						select: {
-							element: document.getElementById("settings-game-select"),
-							custom: document.getElementById("settings-game-select-custom"),
-							none: document.getElementById("settings-game-select-none"),
-							new: document.getElementById("settings-game-select-new"),
-							search: document.getElementById("settings-game-select-search")
-						},
-						input: document.getElementById("settings-game-input")
-					},
-					audio: {
-						volume: document.getElementById("settings-audio-volume")
-					},
-					user: {
-						element: document.getElementById("settings-user"),
-						name: {
-							form: document.getElementById("settings-user-name-form"),
-							input: document.getElementById("settings-user-name-input")
-						},
-						password: {
-							form: document.getElementById("settings-user-password-form"),
-							old: document.getElementById("settings-user-password-input-old"),
-							new: document.getElementById("settings-user-password-input-new")
-						}
-					},
-					auth: {
-						signout: {
-							form: document.getElementById("settings-auth-signout-form")
-						}
-					}
-				},
-				rules: {
-					element: document.getElementById("rules"),
-					search: {
-						form: document.getElementById("rules-search-form"),
-						input: document.getElementById("rules-search-input"),
-						button: document.getElementById("rules-search-button"),
-					},
-					results: document.getElementById("rules-results")
-				},
-				character: {
-					element: document.getElementById("character"),
-					content: document.getElementById("character-content"),
-					modes: {
-						settings: document.getElementById("character-modes-settings"),
-						play: document.getElementById("character-modes-play"),
-						edit: document.getElementById("character-modes-edit"),
-						items: document.getElementById("character-modes-items"),
-						conditions: document.getElementById("character-modes-conditions"),
-						damage: document.getElementById("character-modes-damage")
-					},
-					settings: {
-						element: document.getElementById("character-settings"),
-						select: {
-							form: document.getElementById("character-settings-form"),
-							element: document.getElementById("character-settings-select"),
-							custom: document.getElementById("character-settings-select-custom"),
-							upload: document.getElementById("character-settings-select-upload"),
-							none: document.getElementById("character-settings-select-none"),
-							new: document.getElementById("character-settings-select-new"),
-							templates: document.getElementById("character-settings-select-templates"),
-							blank: document.getElementById("character-settings-select-blank")
-						},
-						upload: document.getElementById("character-settings-upload"),
-						metadata: document.getElementById("character-settings-metadata"),
-						access: {
-							form: document.getElementById("character-settings-access-form"),
-							select: {
-								element: document.getElementById("character-settings-access-select"),
-								all: document.getElementById("character-settings-access-select-all"),
-								me: document.getElementById("character-settings-access-select-me")
-							}
-						},
-						download: {
-							form: document.getElementById("character-settings-download-form")
-						},
-						delete: {
-							form: document.getElementById("character-settings-delete-form")
-						},
-						rng: {
-							form: document.getElementById("character-settings-rng-form"),
-							count: document.getElementById("character-settings-rng-count"),
-							d: document.getElementById("character-settings-rng-d"),
-							label: document.getElementById("character-settings-rng-label"),
-							button: document.getElementById("character-settings-rng-button")
-						},
-						recipient: {
-							form: document.getElementById("character-settings-recipient-form"),
-							select: document.getElementById("character-settings-recipient-select"),
-							none: document.getElementById("character-settings-recipient-none"),
-							environment: document.getElementById("character-settings-recipient-environment"),
-							custom: document.getElementById("character-settings-recipient-custom")
-						}
-					},
-					info: {
-						element: document.getElementById("character-info"),
-						name: document.getElementById("character-info-name"),
-						nameText: document.getElementById("character-info-name-text"),
-						image: document.getElementById("character-info-image"),
-						imageReset: document.getElementById("character-info-image-reset"),
-						imageForm: document.getElementById("character-info-image-form"),
-						imageUpload: document.getElementById("character-info-image-upload"),
-						burden: document.getElementById("character-info-burden"),
-						points: document.getElementById("character-info-points"),
-						damage: document.getElementById("character-info-damage"),
-						race: document.getElementById("character-info-race"),
-						raceDisabled: document.getElementById("character-info-race-disabled"),
-						raceAbility: document.getElementById("character-info-race-ability"),
-						age: document.getElementById("character-info-age"),
-						sex: document.getElementById("character-info-sex"),
-						height: document.getElementById("character-info-height"),
-						weight: document.getElementById("character-info-weight"),
-						description: document.getElementById("character-info-description"),
-						run: document.getElementById("character-info-run"),
-						move: document.getElementById("character-info-move"),
-						swim: document.getElementById("character-info-swim"),
-						jump: document.getElementById("character-info-jump"),
-						throw: document.getElementById("character-info-throw"),
-						carry: document.getElementById("character-info-carry"),
-						recover: document.getElementById("character-info-recover"),
-					},
-					statistics: {
-						perception: document.getElementById("character-perception"),
-						memory: document.getElementById("character-memory"),
-						logic: document.getElementById("character-logic"),
-						strength: document.getElementById("character-strength"),
-						dexterity: document.getElementById("character-dexterity"),
-						immunity: document.getElementById("character-immunity"),
-						speed: document.getElementById("character-speed")
-					},
-					items: {
-						element: document.getElementById("character-items"),
-						select: document.getElementById("character-items-select"),
-						disabled: document.getElementById("character-items-disabled"),
-						equipped: document.getElementById("character-items-equipped"),
-						unequipped: document.getElementById("character-items-unequipped"),
-					},
-					conditions: {
-						element: document.getElementById("character-conditions"),
-						select: document.getElementById("character-conditions-select"),
-						disabled: document.getElementById("character-conditions-disabled"),
-					},
-				},
-				chat: {
-					element: document.getElementById("chat"),
-					messages: document.getElementById("chat-messages"),
-					send: {
-						form: document.getElementById("chat-send-form"),
-						sender: {
-							select: document.getElementById("chat-send-sender"),
-							anonymous: document.getElementById("chat-send-sender-anonymous"),
-							user: document.getElementById("chat-send-sender-user"),
-							character: document.getElementById("chat-send-sender-character")
-						},
-						recipients: {
-							select: document.getElementById("chat-send-recipients"),
-							all: document.getElementById("chat-send-recipients-all")
-						},
-						input: document.getElementById("chat-send-input"),
-						button: document.getElementById("chat-send-button"),
-					}
-				},
-				content: {
-					element: document.getElementById("content"),
-					send: document.getElementById("content-send"),
-					choose: {
-						form: document.getElementById("content-choose-form"),
-						select: {
-							element: document.getElementById("content-choose-select"),
-							none: document.getElementById("content-choose-select-none"),
-							new: document.getElementById("content-choose-select-new"),
-							arena: document.getElementById("content-choose-select-arena"),
-							text: document.getElementById("content-choose-select-text"),
-							image: document.getElementById("content-choose-select-image"),
-							audio: document.getElementById("content-choose-select-audio"),
-							embed: document.getElementById("content-choose-select-embed"),
-						},
-						types: {
-							element: document.getElementById("content-choose-types"),
-							arena: document.getElementById("content-choose-types-arena"),
-							text: document.getElementById("content-choose-types-text"),
-							image: document.getElementById("content-choose-types-image"),
-							audio: document.getElementById("content-choose-types-audio"),
-							embed: document.getElementById("content-choose-types-embed"),
-						}
-					},
-					name: {
-						form: document.getElementById("content-name-form"),
-						input: document.getElementById("content-name-input")
-					},
-					access: {
-						form: document.getElementById("content-access-form"),
-						select: document.getElementById("content-access-select"),
-						all: document.getElementById("content-access-select-all"),
-						me: document.getElementById("content-access-select-me")
-					},
-					data: {
-						form: document.getElementById("content-data-form"),
-						url: document.getElementById("content-data-url"),
-						embedCode: document.getElementById("content-data-embedCode"),
-						button: document.getElementById("content-data-button")
-					},
-					upload: {
-						form: document.getElementById("content-upload-form"),
-						input: document.getElementById("content-upload-input"),
-						button: document.getElementById("content-upload-button")
-					},
-					delete: {
-						form: document.getElementById("content-delete-form"),
-						button: document.getElementById("content-delete-button")
-					},
-					controls: {
-						zoom: {
-							form: document.getElementById("content-controls-zoom-form"),
-							out: document.getElementById("content-controls-zoom-out"),
-							zero: document.getElementById("content-controls-zoom-zero"),
-							in: document.getElementById("content-controls-zoom-in")
-						},
-						pan: {
-							form: document.getElementById("content-controls-pan-form"),
-							left: document.getElementById("content-controls-pan-left"),
-							up: document.getElementById("content-controls-pan-up"),
-							down: document.getElementById("content-controls-pan-down"),
-							right: document.getElementById("content-controls-pan-right")
-						}
-					},
-					objects: {
-						form: document.getElementById("content-objects-form"),
-						select: document.getElementById("content-objects-select"),
-						blank: document.getElementById("content-objects-select-blank"),
-						custom: document.getElementById("content-objects-select-custom"),
-						button: document.getElementById("content-objects-button"),
-						list: document.getElementById("content-objects-list")
-					}
-				},
-				gametable: {
-					element: document.getElementById("gametable"),
-					grabbed: null,
-					canvas: {
-						element: null,
-						context: null,
-						offsetX: 0,
-						offsetY: 0,
-						zoomPower: 0,
-						panLoops: {},
-						cellSize: 50,
-						gridColor: "#dddddd",
-						gridBackground: "#555555",
-						images: {}
-					},
-				}
-			}
+			var SOCKET = window.SOCKET = null
+			var SOCKETCHECK = null
 
 		/* initiate */
 			initiateApp()
 			function initiateApp() {
 				try {
+					// elements
+						findElements()
+
 					// games
 						listGames()
 
 					// character lists
-						createTemplatesList()
-						createRaceList()
-						createSkillLists()
-						createConditionsList()
-						createItemsList()
+						listCharacterTemplates()
+						listCharacterRaces()
+						listCharacterSkills()
+						listCharacterConditions()
+						listCharacterItems()
+
+					// listeners
+						attachListeners()
+
+					// connect
+						createSocket()
+						checkSocket()
+				} catch (error) {console.log(error)}
+			}
+
+		/* findElements */
+			function findElements() {
+				try {
+					// top-level
+						ELEMENTS.body = document.body
+						ELEMENTS.structure = {
+							top: document.getElementById("top"),
+							left: document.getElementById("left"),
+							right: document.getElementById("right")
+						}
+
+					// special
+						ELEMENTS.stream = {
+							history: document.getElementById("stream-history")
+						}
+						ELEMENTS.tools = {
+							element: document.getElementById("tools"),
+							settings: document.getElementById("tools-settings"),
+							rules: document.getElementById("tools-rules"),
+							character: document.getElementById("tools-character"),
+							chat: document.getElementById("tools-chat"),
+							content: document.getElementById("tools-content"),
+							notification: document.getElementById("tools-chat-notification")
+						}
+						ELEMENTS.gametable = {
+							element: document.getElementById("gametable"),
+							grabbed: null,
+							canvas: {
+								element: null,
+								context: null,
+								offsetX: 0,
+								offsetY: 0,
+								zoomPower: 0,
+								panLoops: {},
+								cellSize: 50,
+								gridColor: "#dddddd",
+								gridBackground: "#555555",
+								images: {}
+							}
+						}
+
+					// settings
+						ELEMENTS.settings = {
+							element: document.getElementById("settings"),
+							game: {
+								element: document.getElementById("settings-game"),
+								form: document.getElementById("settings-game-form"),
+								select: {
+									element: document.getElementById("settings-game-select"),
+									custom: document.getElementById("settings-game-select-custom"),
+									none: document.getElementById("settings-game-select-none"),
+									new: document.getElementById("settings-game-select-new"),
+									search: document.getElementById("settings-game-select-search")
+								},
+								input: document.getElementById("settings-game-input"),
+								delete: {
+									gate: document.getElementById("settings-game-delete-gate"),
+									form: document.getElementById("settings-game-delete-form"),
+									button: document.getElementById("settings-game-delete-button")
+								}
+							},
+							audio: {
+								volume: document.getElementById("settings-audio-volume")
+							},
+							user: {
+								element: document.getElementById("settings-user"),
+								name: {
+									form: document.getElementById("settings-user-name-form"),
+									input: document.getElementById("settings-user-name-input")
+								},
+								password: {
+									form: document.getElementById("settings-user-password-form"),
+									old: document.getElementById("settings-user-password-input-old"),
+									new: document.getElementById("settings-user-password-input-new")
+								}
+							},
+							auth: {
+								signout: {
+									form: document.getElementById("settings-auth-signout-form")
+								}
+							}
+						}
+
+					// rules
+						ELEMENTS.rules = {
+							element: document.getElementById("rules"),
+							search: {
+								form: document.getElementById("rules-search-form"),
+								input: document.getElementById("rules-search-input"),
+								button: document.getElementById("rules-search-button"),
+							},
+							results: document.getElementById("rules-results")
+						}
+
+					// character
+						ELEMENTS.character = {
+							element: document.getElementById("character"),
+							content: document.getElementById("character-content"),
+							modes: {
+								settings: document.getElementById("character-modes-settings"),
+								play: document.getElementById("character-modes-play"),
+								edit: document.getElementById("character-modes-edit"),
+								items: document.getElementById("character-modes-items"),
+								conditions: document.getElementById("character-modes-conditions"),
+								damage: document.getElementById("character-modes-damage")
+							},
+							settings: {
+								element: document.getElementById("character-settings"),
+								select: {
+									form: document.getElementById("character-settings-form"),
+									element: document.getElementById("character-settings-select"),
+									custom: document.getElementById("character-settings-select-custom"),
+									upload: document.getElementById("character-settings-select-upload"),
+									none: document.getElementById("character-settings-select-none"),
+									new: document.getElementById("character-settings-select-new"),
+									templates: document.getElementById("character-settings-select-templates"),
+									blank: document.getElementById("character-settings-select-blank")
+								},
+								upload: document.getElementById("character-settings-upload"),
+								metadata: document.getElementById("character-settings-metadata"),
+								access: {
+									form: document.getElementById("character-settings-access-form"),
+									select: {
+										element: document.getElementById("character-settings-access-select"),
+										all: document.getElementById("character-settings-access-select-all"),
+										me: document.getElementById("character-settings-access-select-me")
+									}
+								},
+								download: {
+									form: document.getElementById("character-settings-download-form")
+								},
+								duplicate: {
+									form: document.getElementById("character-settings-duplicate-form"),
+									button: document.getElementById("character-settings-duplicate-button")
+								},
+								delete: {
+									gate: document.getElementById("character-settings-delete-gate"),
+									form: document.getElementById("character-settings-delete-form")
+								},
+								rng: {
+									form: document.getElementById("character-settings-rng-form"),
+									count: document.getElementById("character-settings-rng-count"),
+									d: document.getElementById("character-settings-rng-d"),
+									label: document.getElementById("character-settings-rng-label"),
+									button: document.getElementById("character-settings-rng-button")
+								},
+								recipient: {
+									form: document.getElementById("character-settings-recipient-form"),
+									select: document.getElementById("character-settings-recipient-select"),
+									none: document.getElementById("character-settings-recipient-none"),
+									environment: document.getElementById("character-settings-recipient-environment"),
+									custom: document.getElementById("character-settings-recipient-custom")
+								}
+							},
+							info: {
+								element: document.getElementById("character-info"),
+								name: document.getElementById("character-info-name"),
+								nameText: document.getElementById("character-info-name-text"),
+								image: document.getElementById("character-info-image"),
+								imageReset: document.getElementById("character-info-image-reset"),
+								imageForm: document.getElementById("character-info-image-form"),
+								imageUpload: document.getElementById("character-info-image-upload"),
+								burden: document.getElementById("character-info-burden"),
+								points: document.getElementById("character-info-points"),
+								damage: document.getElementById("character-info-damage"),
+								race: document.getElementById("character-info-race"),
+								raceDisabled: document.getElementById("character-info-race-disabled"),
+								raceAbility: document.getElementById("character-info-race-ability"),
+								age: document.getElementById("character-info-age"),
+								sex: document.getElementById("character-info-sex"),
+								height: document.getElementById("character-info-height"),
+								weight: document.getElementById("character-info-weight"),
+								description: document.getElementById("character-info-description"),
+								run: document.getElementById("character-info-run"),
+								move: document.getElementById("character-info-move"),
+								swim: document.getElementById("character-info-swim"),
+								jump: document.getElementById("character-info-jump"),
+								throw: document.getElementById("character-info-throw"),
+								carry: document.getElementById("character-info-carry"),
+								recover: document.getElementById("character-info-recover"),
+							},
+							statistics: {
+								perception: document.getElementById("character-perception"),
+								memory: document.getElementById("character-memory"),
+								logic: document.getElementById("character-logic"),
+								strength: document.getElementById("character-strength"),
+								dexterity: document.getElementById("character-dexterity"),
+								immunity: document.getElementById("character-immunity"),
+								speed: document.getElementById("character-speed")
+							},
+							items: {
+								element: document.getElementById("character-items"),
+								select: document.getElementById("character-items-select"),
+								disabled: document.getElementById("character-items-disabled"),
+								equipped: document.getElementById("character-items-equipped"),
+								unequipped: document.getElementById("character-items-unequipped"),
+							},
+							conditions: {
+								element: document.getElementById("character-conditions"),
+								select: document.getElementById("character-conditions-select"),
+								disabled: document.getElementById("character-conditions-disabled"),
+							},
+						}
+
+					// chat
+						ELEMENTS.chat = {
+							element: document.getElementById("chat"),
+							messages: document.getElementById("chat-messages"),
+							send: {
+								form: document.getElementById("chat-send-form"),
+								sender: {
+									select: document.getElementById("chat-send-sender"),
+									anonymous: document.getElementById("chat-send-sender-anonymous"),
+									user: document.getElementById("chat-send-sender-user"),
+									character: document.getElementById("chat-send-sender-character")
+								},
+								recipients: {
+									select: document.getElementById("chat-send-recipients"),
+									all: document.getElementById("chat-send-recipients-all")
+								},
+								input: document.getElementById("chat-send-input"),
+								button: document.getElementById("chat-send-button"),
+							}
+						}
+
+					// content
+						ELEMENTS.content = {
+							element: document.getElementById("content"),
+							send: document.getElementById("content-send"),
+							choose: {
+								form: document.getElementById("content-choose-form"),
+								select: {
+									element: document.getElementById("content-choose-select"),
+									none: document.getElementById("content-choose-select-none"),
+									new: document.getElementById("content-choose-select-new"),
+									arena: document.getElementById("content-choose-select-arena"),
+									text: document.getElementById("content-choose-select-text"),
+									image: document.getElementById("content-choose-select-image"),
+									audio: document.getElementById("content-choose-select-audio"),
+									embed: document.getElementById("content-choose-select-embed"),
+								},
+								types: {
+									element: document.getElementById("content-choose-types"),
+									arena: document.getElementById("content-choose-types-arena"),
+									text: document.getElementById("content-choose-types-text"),
+									image: document.getElementById("content-choose-types-image"),
+									audio: document.getElementById("content-choose-types-audio"),
+									embed: document.getElementById("content-choose-types-embed"),
+								}
+							},
+							name: {
+								form: document.getElementById("content-name-form"),
+								input: document.getElementById("content-name-input")
+							},
+							access: {
+								form: document.getElementById("content-access-form"),
+								select: document.getElementById("content-access-select"),
+								all: document.getElementById("content-access-select-all"),
+								me: document.getElementById("content-access-select-me")
+							},
+							data: {
+								form: document.getElementById("content-data-form"),
+								url: document.getElementById("content-data-url"),
+								embedCode: document.getElementById("content-data-embedCode"),
+								button: document.getElementById("content-data-button")
+							},
+							upload: {
+								form: document.getElementById("content-upload-form"),
+								input: document.getElementById("content-upload-input"),
+								button: document.getElementById("content-upload-button")
+							},
+							duplicate: {
+								form: document.getElementById("content-duplicate-form"),
+								button: document.getElementById("content-duplicate-button")
+							},
+							delete: {
+								gate: document.getElementById("content-delete-gate"),
+								form: document.getElementById("content-delete-form"),
+								button: document.getElementById("content-delete-button")
+							},
+							controls: {
+								zoom: {
+									form: document.getElementById("content-controls-zoom-form"),
+									out: document.getElementById("content-controls-zoom-out"),
+									zero: document.getElementById("content-controls-zoom-zero"),
+									in: document.getElementById("content-controls-zoom-in")
+								},
+								pan: {
+									form: document.getElementById("content-controls-pan-form"),
+									left: document.getElementById("content-controls-pan-left"),
+									up: document.getElementById("content-controls-pan-up"),
+									down: document.getElementById("content-controls-pan-down"),
+									right: document.getElementById("content-controls-pan-right")
+								}
+							},
+							objects: {
+								form: document.getElementById("content-objects-form"),
+								select: document.getElementById("content-objects-select"),
+								blank: document.getElementById("content-objects-select-blank"),
+								characters: document.getElementById("content-objects-select-characters"),
+								images: document.getElementById("content-objects-select-images"),
+								button: document.getElementById("content-objects-button"),
+								list: document.getElementById("content-objects-list")
+							}
+						}
+				} catch (error) {console.log(error)}
+			}
+
+		/* attachListeners */
+			function attachListeners() {
+				try {
+					// tools
+						ELEMENTS.tools.element.querySelectorAll(".tool").forEach(function(button) { button.addEventListener(TRIGGERS.click, changeTool) })
+
+					// settings
+						ELEMENTS.settings.game.select.element.addEventListener(TRIGGERS.change, changeGameSelection)
+						ELEMENTS.settings.game.form.addEventListener(TRIGGERS.submit, selectGame)
+						ELEMENTS.settings.game.delete.form.addEventListener(TRIGGERS.submit, deleteGame)
+						ELEMENTS.settings.audio.volume.addEventListener(TRIGGERS.change, updateUserVolume)
+						ELEMENTS.settings.user.name.form.addEventListener(TRIGGERS.change, updateUserName)
+						ELEMENTS.settings.user.password.form.addEventListener(TRIGGERS.change, updateUserPassword)
+						ELEMENTS.settings.auth.signout.form.addEventListener(TRIGGERS.submit, signoutUser)
+
+					// rules
+						ELEMENTS.rules.search.form.addEventListener(TRIGGERS.submit, searchRules)
+
+					// character
+						ELEMENTS.character.element.querySelectorAll(".mode").forEach(function(button) { button.addEventListener(TRIGGERS.click, changeCharacterMode) })
+						ELEMENTS.character.settings.select.element.addEventListener(TRIGGERS.change, changeCharacterSelection)
+						ELEMENTS.character.settings.select.form.addEventListener(TRIGGERS.submit, selectCharacter)
+						ELEMENTS.character.settings.download.form.addEventListener(TRIGGERS.submit, downloadCharacter)
+						ELEMENTS.character.settings.access.form.addEventListener(TRIGGERS.submit, updateCharacterAccess)
+						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, duplicateCharacter)
+						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, deleteCharacter)
+						ELEMENTS.character.settings.rng.form.addEventListener(TRIGGERS.submit, rollDie)
+						ELEMENTS.character.content.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, rolld20) })
+						ELEMENTS.character.info.imageForm.addEventListener(TRIGGERS.submit, uploadCharacterImage)
+						ELEMENTS.character.info.imageReset.addEventListener(TRIGGERS.click, resetCharacterImage)
+						ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, updateCharacterInfo) })
+						ELEMENTS.character.content.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, updateCharacterStatistic) })
+						ELEMENTS.character.content.querySelectorAll(".statistic select").forEach(function(select) { select.addEventListener(TRIGGERS.change, addCharacterSkill) })
+						ELEMENTS.character.items.select.addEventListener(TRIGGERS.change, addCharacterItem)
+						ELEMENTS.character.conditions.select.addEventListener(TRIGGERS.change, addCharacterCondition)
+						ELEMENTS.character.info.damage.addEventListener(TRIGGERS.change, updateCharacterDamage)
+						ELEMENTS.character.info.recover.addEventListener(TRIGGERS.click, recoverCharacterDamage)
+						ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, damageCharacterStatistic) })
+
+					// chat
+						ELEMENTS.chat.send.form.addEventListener(TRIGGERS.submit, submitChat)
+
+					// content
+						ELEMENTS.content.choose.select.element.addEventListener(TRIGGERS.change, changeContentSelection)
+						ELEMENTS.content.choose.form.addEventListener(TRIGGERS.submit, selectContent)
+						ELEMENTS.content.send.addEventListener(TRIGGERS.click, sendContentToChat)
+						ELEMENTS.content.name.form.addEventListener(TRIGGERS.submit, updateContentName)
+						ELEMENTS.content.access.form.addEventListener(TRIGGERS.submit, updateContentAccess)
+						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, updateContentData)
+						ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, uploadContentFile)
+						ELEMENTS.content.duplicate.form.addEventListener(TRIGGERS.submit, duplicateContent)
+						ELEMENTS.content.delete.form.addEventListener(TRIGGERS.submit, deleteContent)
+						ELEMENTS.body.addEventListener(TRIGGERS.mousemove, moveContent)
+						ELEMENTS.body.addEventListener(TRIGGERS.mouseup, ungrabContent)
+						ELEMENTS.content.controls.zoom.form.addEventListener(TRIGGERS.submit, zoomContent)
+						ELEMENTS.content.objects.form.addEventListener(TRIGGERS.submit, addContentArenaObject)
+						window.addEventListener(TRIGGERS.resize, displayContentArena)
+						ELEMENTS.content.controls.pan.form.addEventListener(TRIGGERS.submit, panContentArena)
 				} catch (error) {console.log(error)}
 			}
 
 	/*** SOCKET ***/
 		/* socket */
-			var SOCKET = window.SOCKET = null
-			createSocket()
 			function createSocket() {
 				try {
 					SOCKET = new WebSocket(location.href.replace("http","ws"))
@@ -324,7 +427,7 @@ window.onload = function() {
 						try {
 							var post = JSON.parse(message.data)
 							if (post && (typeof post == "object")) {
-								receivePost(post)
+								receiveSocket(post)
 							}
 						}
 						catch (error) {console.log(error)}
@@ -334,8 +437,6 @@ window.onload = function() {
 			}
 
 		/* checkLoop */
-			var SOCKETCHECK = null
-			checkSocket()
 			function checkSocket() {
 				SOCKETCHECK = setInterval(function() {
 					try {
@@ -353,8 +454,8 @@ window.onload = function() {
 				}, 5000)
 			}
 
-		/* receivePost */
-			function receivePost(data) {
+		/* receiveSocket */
+			function receiveSocket(data) {
 				try {
 					// meta
 						// failure
@@ -446,7 +547,7 @@ window.onload = function() {
 				} catch (error) {console.log(error)}
 			}
 
-		/*** updateInRolls **/
+		/** updateInRolls **/
 			function updateInRolls(data) {
 				try {
 					// directory
@@ -614,7 +715,6 @@ window.onload = function() {
 
 	/*** TOOLS ***/
 		/** changeTool **/
-			ELEMENTS.tools.element.querySelectorAll(".tool").forEach(function(button) { button.addEventListener(TRIGGERS.click, changeTool) })
 			function changeTool(event) {
 				try {
 					// get tool
@@ -644,6 +744,18 @@ window.onload = function() {
 						// close option?
 							ELEMENTS.settings.game.select.none.disabled = (GAME && GAME.id) ? false : true
 
+						// edit forms?
+							ELEMENTS.settings.game.delete.gate.setAttribute("visibility", (GAME && GAME.id && GAME.creator == USER.id) ? true : false)
+
+						// remove extra games
+							var gameOptions = Array.from(ELEMENTS.settings.game.select.custom.querySelectorAll("option"))
+							var gameKeys = Object.keys(USER.games)
+							for (var g in gameOptions) {
+								if (!gameKeys.includes(gameOptions[g].value)) {
+									gameOptions[g].remove()
+								}
+							}
+
 						// custom games, from USER object
 							for (var g in USER.games) {
 								var game = USER.games[g]
@@ -669,7 +781,6 @@ window.onload = function() {
 				}
 
 			/* changeGameSelection */
-				ELEMENTS.settings.game.select.element.addEventListener(TRIGGERS.change, changeGameSelection)
 				function changeGameSelection(event) {
 					try {
 						// reveal
@@ -691,7 +802,6 @@ window.onload = function() {
 				}
 
 			/* selectGame */
-				ELEMENTS.settings.game.form.addEventListener(TRIGGERS.submit, selectGame)
 				function selectGame(event) {
 					try {
 						// select value
@@ -769,8 +879,14 @@ window.onload = function() {
 								GAME[i] = game[i]
 							}
 
+						// delete?
+							if (GAME.delete) {
+								GAME = {}
+							}
+
 						// relist content
 							listChatRecipients()
+							listGames()
 					} catch (error) {console.log(error)}
 				}
 
@@ -806,10 +922,32 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
+			/* deleteGame */
+				function deleteGame(event) {
+					try {
+						// post
+							var post = {
+								action: "deleteGame",
+								game: {
+									id: GAME ? GAME.id : null,
+									name: GAME ? GAME.name : null
+								}
+							}
+
+						// validate
+							if (!post.game.id) {
+								FUNCTIONS.showToast({success: false, message: "no game found"})
+								return
+							}
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
 		/** USER **/
-			/* adjustVolume */
-				ELEMENTS.settings.audio.volume.addEventListener(TRIGGERS.change, adjustVolume)
-				function adjustVolume(event) {
+			/* updateUserVolume */
+				function updateUserVolume(event) {
 					try {
 						// get number
 							var volume = Math.max(0, Math.min(1, Number(event.target.value)))
@@ -842,7 +980,6 @@ window.onload = function() {
 				}
 
 			/* updateUserName */
-				ELEMENTS.settings.user.name.form.addEventListener(TRIGGERS.change, updateUserName)
 				function updateUserName(event) {
 					try {
 						// connected?
@@ -874,7 +1011,6 @@ window.onload = function() {
 				}
 
 			/* updateUserPassword */
-				ELEMENTS.settings.user.password.form.addEventListener(TRIGGERS.change, updateUserPassword)
 				function updateUserPassword(event) {
 					try {
 						// connected?
@@ -939,27 +1075,27 @@ window.onload = function() {
 				}
 
 			/* signout */
-				ELEMENTS.settings.auth.signout.form.addEventListener(TRIGGERS.submit, signoutUser)
 				function signoutUser(event) {
-					// data
-						var post = {
-							action: "signOut"
-						}
-
-					// un-authenticate
-						FUNCTIONS.sendPost(post, function(response) {
-							if (!response.success) {
-								return
+					try {
+						// data
+							var post = {
+								action: "signOut"
 							}
 
-							window.location = response.location
+						// un-authenticate
+							FUNCTIONS.sendPost(post, function(response) {
+								if (!response.success) {
+									return
+								}
+
+								window.location = response.location
 						})
+					} catch (error) {console.log(error)}
 				}
 
 	/*** RULES ***/
 		/** search **/
 			/* searchRules */
-				ELEMENTS.rules.search.form.addEventListener(TRIGGERS.submit, searchRules)
 				function searchRules(event) {
 					try {
 						// clear
@@ -1239,39 +1375,38 @@ window.onload = function() {
 
 						// race
 							if (result.type == "race") {
-								changeRace(CHARACTER.info.demographics.race, result.name)
+								updateCharacterRace(CHARACTER.info.demographics.race, result.name)
 								changeTool({target: ELEMENTS.tools.character})
-								changeMode({target: ELEMENTS.character.modes.edit})
+								changeCharacterMode({target: ELEMENTS.character.modes.edit})
 							}
 							
 						// skill
 							else if (result.type == "skill") {
-								addSkill({target: {value: result.name}})
+								addCharacterSkill({target: {value: result.name}})
 								changeTool({target: ELEMENTS.tools.character})
-								changeMode({target: ELEMENTS.character.modes.edit})
+								changeCharacterMode({target: ELEMENTS.character.modes.edit})
 							}
 
 						// item
 							else if (result.type == "item") {
-								addItem({target: {value: result.name, category: result.data.type || "miscellaneous"}})
+								addCharacterItem({target: {value: result.name, category: result.data.type || "miscellaneous"}})
 								changeTool({target: ELEMENTS.tools.character})
-								changeMode({target: ELEMENTS.character.modes.items})
+								changeCharacterMode({target: ELEMENTS.character.modes.items})
 							}
 
 						// condition
 							else if (result.type == "condition") {
-								addCondition({target: {value: result.name}})
+								addCharacterCondition({target: {value: result.name}})
 								changeTool({target: ELEMENTS.tools.character})
-								changeMode({target: ELEMENTS.character.modes.conditions})
+								changeCharacterMode({target: ELEMENTS.character.modes.conditions})
 							}
 					} catch (error) {console.log(error)}
 				}
 
 	/*** CHARACTER ***/
 		/** OVERALL **/
-			/* changeMode */
-				ELEMENTS.character.element.querySelectorAll(".mode").forEach(function(button) { button.addEventListener(TRIGGERS.click, changeMode) })
-				function changeMode(event) {
+			/* changeCharacterMode */
+				function changeCharacterMode(event) {
 					try {
 						// mode
 							var mode = event.target.id.replace("character-modes-", "")
@@ -1411,8 +1546,8 @@ window.onload = function() {
 				}
 
 		/** SETTINGS **/
-			/* createTemplatesList */
-				function createTemplatesList() {
+			/* listCharacterTemplates */
+				function listCharacterTemplates() {
 					try {
 						// NPCs
 							var optgroup = document.createElement("optgroup")
@@ -1462,7 +1597,8 @@ window.onload = function() {
 							if (!GAME) {
 								ELEMENTS.character.settings.select.custom.innerHTML = ""
 								ELEMENTS.character.settings.recipient.custom.innerHTML = ""
-								ELEMENTS.content.objects.custom.innerHTML = ""
+								ELEMENTS.content.objects.characters.innerHTML = ""
+								ELEMENTS.content.objects.images.innerHTML = ""
 								return
 							}
 
@@ -1517,7 +1653,7 @@ window.onload = function() {
 									}
 
 								// arena content objects select
-									var contentOption = ELEMENTS.content.objects.custom.querySelector("option[value='" + character.id + "']")
+									var contentOption = ELEMENTS.content.objects.characters.querySelector("option[value='" + character.id + "']")
 									if (contentOption && character.delete) {
 										if (ELEMENTS.content.objects.select.value == contentOption.value) {
 											ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
@@ -1531,14 +1667,14 @@ window.onload = function() {
 										contentOption = document.createElement("option")
 										contentOption.value = character.id
 										contentOption.innerText = character.name
-										ELEMENTS.content.objects.custom.appendChild(contentOption)
+										contentOption.setAttribute("type", "character")
+										ELEMENTS.content.objects.characters.appendChild(contentOption)
 									}
 							}
 					} catch (error) {console.log(error)}
 				}
 
 			/* changeCharacterSelection */
-				ELEMENTS.character.settings.select.element.addEventListener(TRIGGERS.change, changeCharacterSelection)
 				function changeCharacterSelection(event) {
 					try {
 						// reveal
@@ -1556,7 +1692,6 @@ window.onload = function() {
 				}
 
 			/* selectCharacter */
-				ELEMENTS.character.settings.select.form.addEventListener(TRIGGERS.submit, selectCharacter)
 				function selectCharacter(event) {
 					try {
 						// value
@@ -1671,6 +1806,12 @@ window.onload = function() {
 												post.character.userId = USER ? USER.id : null
 												post.character.gameId = GAME ? GAME.id : null
 
+											// validate
+												if (!post.character.gameId) {
+													FUNCTIONS.showToast({success: false, message: "no game selected"})
+													return
+												}
+
 											// send socket request
 												SOCKET.send(JSON.stringify(post))
 										}
@@ -1685,7 +1826,6 @@ window.onload = function() {
 				}
 
 			/* downloadCharacter */
-				ELEMENTS.character.settings.download.form.addEventListener(TRIGGERS.submit, downloadCharacter)
 				function downloadCharacter(event) {
 					try {
 						// package up
@@ -1705,7 +1845,6 @@ window.onload = function() {
 				}
 
 			/* updateCharacterAccess */
-				ELEMENTS.character.settings.access.form.addEventListener(TRIGGERS.submit, updateCharacterAccess)
 				function updateCharacterAccess(event) {
 					try {
 						// post
@@ -1769,8 +1908,37 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
+			/* duplicateCharacter */
+				function duplicateCharacter(event) {
+					try {
+						// post
+							var post = {
+								action: "createCharacter",
+								character: CHARACTER || null
+							}
+
+						// validate
+							if (!post.character) {
+								FUNCTIONS.showToast({success: false, message: "no character to duplicate"})
+								return
+							}
+
+						// assign
+							post.character.userId = USER ? USER.id : null
+							post.character.gameId = GAME ? GAME.id : null
+
+						// validate
+							if (!post.character.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
 			/* deleteCharacter */
-				ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, deleteCharacter)
 				function deleteCharacter(event) {
 					try {
 						// post
@@ -1790,9 +1958,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* createRNG */
-				ELEMENTS.character.settings.rng.form.addEventListener(TRIGGERS.submit, createRNG)
-				function createRNG(event) {
+			/* rollDie */
+				function rollDie(event) {
 					try {
 						// rolls
 							var rolls = []
@@ -1843,26 +2010,26 @@ window.onload = function() {
 							var mode = ELEMENTS.character.element.getAttribute("mode") || "play"
 
 						// conditions
-							displayConditions(CHARACTER, ELEMENTS.character.conditions.element)
+							displayCharacterConditions(CHARACTER, ELEMENTS.character.conditions.element)
 
 						// items
-							displayItems(CHARACTER, ELEMENTS.character.items.equipped, ELEMENTS.character.items.unequipped, mode == "items")
+							displayCharacterItems(CHARACTER, ELEMENTS.character.items.equipped, ELEMENTS.character.items.unequipped, mode == "items")
 
 						// statistics
 							for (var i in CHARACTER.statistics) {
 								// statistic
 									var container = ELEMENTS.character.statistics[i]
-									displayStatistic(CHARACTER, container, i, mode == "edit")
+									displayCharacterStatistic(CHARACTER, container, i, mode == "edit")
 
 								// skills
 									container.querySelector(".skills-list").innerHTML = ""
 									for (var s in CHARACTER.statistics[i].skills) {
-										displaySkill(CHARACTER, container, i, CHARACTER.statistics[i].skills[s], mode == "edit")
+										displayCharacterSkill(CHARACTER, container, i, CHARACTER.statistics[i].skills[s], mode == "edit")
 									}
 							}
 
 						// info
-							displayInfo(CHARACTER)
+							displayCharacterInfo(CHARACTER)
 
 						// chat
 							ELEMENTS.chat.send.sender.character.disabled = CHARACTER ? false : true
@@ -1871,7 +2038,6 @@ window.onload = function() {
 				}
 
 			/* rolld20 */
-				ELEMENTS.character.content.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, rolld20) })
 				function rolld20(event) {
 					try {
 						// play?
@@ -2135,7 +2301,6 @@ window.onload = function() {
 
 		/** INFO **/
 			/* uploadCharacterImage */
-				ELEMENTS.character.info.imageForm.addEventListener(TRIGGERS.submit, uploadCharacterImage)
 				function uploadCharacterImage(event) {
 					try {
 						ELEMENTS.character.info.imageUpload.click()
@@ -2187,7 +2352,6 @@ window.onload = function() {
 				}
 
 			/* resetCharacterImage */
-				ELEMENTS.character.info.imageReset.addEventListener(TRIGGERS.click, resetCharacterImage)
 				function resetCharacterImage(event) {
 					try {
 						// change image
@@ -2198,8 +2362,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* createRaceList */
-				function createRaceList() {
+			/* listCharacterRaces */
+				function listCharacterRaces() {
 					try {
 						var container = ELEMENTS.character.info.race
 						for (var i in RULES.races) {
@@ -2214,9 +2378,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* changeInfo */
-				ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, changeInfo) })
-				function changeInfo(event) {
+			/* updateCharacterInfo */
+				function updateCharacterInfo(event) {
 					try {
 						// name
 							if (event.target.id == "character-info-name-text") {
@@ -2226,7 +2389,7 @@ window.onload = function() {
 
 						// race & sex
 							if (event.target.id == "character-info-race") {
-								changeRace(CHARACTER.info.demographics.race, event.target.value.toLowerCase().trim())
+								updateCharacterRace(CHARACTER.info.demographics.race, event.target.value.toLowerCase().trim())
 							}
 							else if (event.target.id == "character-info-sex") {
 								CHARACTER.info.demographics.sex = event.target.value
@@ -2258,8 +2421,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* changeRace */
-				function changeRace(before, after) {
+			/* updateCharacterRace */
+				function updateCharacterRace(before, after) {
 					try {
 						// unset perks
 							if (before !== after && Object.keys(RULES.races).includes(before)) {
@@ -2353,8 +2516,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayInfo */
-				function displayInfo(character) {
+			/* displayCharacterInfo */
+				function displayCharacterInfo(character) {
 					try {
 						// name
 							ELEMENTS.character.info.name.innerText = CHARACTER.info.name
@@ -2362,7 +2525,7 @@ window.onload = function() {
 
 						// image
 							if (character.info.image) {
-								ELEMENTS.character.info.image.style.backgroundImage = "url(" + character.info.image + "?" + new Date().getTime() + ")"
+								ELEMENTS.character.info.image.style.backgroundImage = "url(" + character.info.image + (character.info.file ? ("?" + new Date().getTime()) : "") + ")"
 								ELEMENTS.character.info.image.setAttribute("visibility", true)
 							}
 							else {
@@ -2414,11 +2577,8 @@ window.onload = function() {
 				}
 
 		/** STATISTICS **/
-			/* changeStatistic */
-				ELEMENTS.character.content.querySelectorAll(".statistic-maximum").forEach(function(statistic) {
-					statistic.addEventListener(TRIGGERS.change, changeStatistic)
-				})
-				function changeStatistic(event) {
+			/* updateCharacterStatistic */
+				function updateCharacterStatistic(event) {
 					try {
 						// get statistic
 							var statistic = event.target.closest(".statistic").id.replace("character-", "")
@@ -2436,8 +2596,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayStatistic */
-				function displayStatistic(character, container, statistic, enable) {
+			/* displayCharacterStatistic */
+				function displayCharacterStatistic(character, container, statistic, enable) {
 					try {
 						// statistic
 							container.querySelector(".statistic-maximum"  ).value = character.statistics[statistic].maximum
@@ -2456,8 +2616,8 @@ window.onload = function() {
 				}
 
 		/** SKILLS **/
-			/* createSkillLists */
-				function createSkillLists() {
+			/* listCharacterSkills */
+				function listCharacterSkills() {
 					try {
 						for (var i in RULES.skills) {
 							var container = ELEMENTS.character.statistics[i].querySelector("select")
@@ -2474,9 +2634,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* addSkill */
-				ELEMENTS.character.content.querySelectorAll(".statistic select").forEach(function(select) { select.addEventListener(TRIGGERS.change, addSkill) })
-				function addSkill(event) {
+			/* addCharacterSkill */
+				function addCharacterSkill(event) {
 					try {
 						// find statistic / skill
 							var name = event.target.value.replace(/\s/g, "_")
@@ -2520,8 +2679,8 @@ window.onload = function() {
 					catch (error) {console.log(error)}
 				}
 
-			/* removeSkill */
-				function removeSkill(event) {
+			/* removeCharacterSkill */
+				function removeCharacterSkill(event) {
 					try {
 						// skill name
 							var skillName = event.fromConditions ? event.skillName : event.target.closest(".skill").querySelector(".skill-name-text").value
@@ -2557,8 +2716,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* changeSkill */
-				function changeSkill(event) {
+			/* updateCharacterSkill */
+				function updateCharacterSkill(event) {
 					try {
 						// get statistic
 							var name = event.target.closest(".skill").querySelector(".skill-name-text").value.replace(/\s/g, "_")
@@ -2595,8 +2754,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* displaySkill */
-				function displaySkill(character, container, statistic, skill, enable) {
+			/* displayCharacterSkill */
+				function displayCharacterSkill(character, container, statistic, skill, enable) {
 					try {
 						// block
 							var block = document.createElement("div")
@@ -2610,7 +2769,7 @@ window.onload = function() {
 								var remove = document.createElement("button")
 									remove.className = "skill-remove"
 									remove.innerText = "x"
-									remove.addEventListener(TRIGGERS.click, removeSkill)
+									remove.addEventListener(TRIGGERS.click, removeCharacterSkill)
 								block.prepend(remove)
 							}
 
@@ -2635,7 +2794,7 @@ window.onload = function() {
 									d6.placeholder = "d6"
 									d6.value = skill.d6
 									d6.addEventListener(TRIGGERS.click, rolld6)
-									d6.addEventListener(TRIGGERS.change, changeSkill)
+									d6.addEventListener(TRIGGERS.change, updateCharacterSkill)
 								name.appendChild(d6)
 							}
 
@@ -2659,7 +2818,7 @@ window.onload = function() {
 								maximum.className = "skill-maximum editable"
 								maximum.value = skill.maximum
 								maximum.placeholder = "↑"
-								maximum.addEventListener(TRIGGERS.change, changeSkill)
+								maximum.addEventListener(TRIGGERS.change, updateCharacterSkill)
 							right.appendChild(maximum)
 
 							var condition = document.createElement("input")
@@ -2690,8 +2849,8 @@ window.onload = function() {
 				}
 
 		/** ITEMS **/
-			/* createItemsList */
-				function createItemsList() {
+			/* listCharacterItems */
+				function listCharacterItems() {
 					try {
 						var container = ELEMENTS.character.items.select
 
@@ -2714,9 +2873,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* addItem */
-				ELEMENTS.character.items.select.addEventListener(TRIGGERS.change, addItem)
-				function addItem(event) {
+			/* addCharacterItem */
+				function addCharacterItem(event) {
 					try {
 						// add to items
 							var name = event.target.value
@@ -2736,8 +2894,8 @@ window.onload = function() {
 					catch (error) {console.log(error)}
 				}
 
-			/* removeItem */
-				function removeItem(event) {
+			/* removeCharacterItem */
+				function removeCharacterItem(event) {
 					try {
 						// item name
 							var id = event.target.closest(".item").id
@@ -2759,8 +2917,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* changeItem */
-				function changeItem(event) {
+			/* updateCharacterItem */
+				function updateCharacterItem(event) {
 					try {
 						// get item
 							var id = event.target.closest(".item").id
@@ -2881,8 +3039,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* equipItem */
-				function equipItem(event) {
+			/* equipCharacterItem */
+				function equipCharacterItem(event) {
 					try {
 						// get item
 							var id = event.target.closest(".item").id
@@ -2899,8 +3057,8 @@ window.onload = function() {
 					catch (error) {console.log(error)}
 				}
 
-			/* displayItems */
-				function displayItems(character, equipped, unequipped, enable) {
+			/* displayCharacterItems */
+				function displayCharacterItems(character, equipped, unequipped, enable) {
 					try {
 						// clear
 							equipped.innerHTML   = ""
@@ -2927,7 +3085,7 @@ window.onload = function() {
 									var remove = document.createElement("button")
 										remove.className = "item-remove"
 										remove.innerText = "x"
-										remove.addEventListener(TRIGGERS.click, removeItem)
+										remove.addEventListener(TRIGGERS.click, removeCharacterItem)
 									block.prepend(remove)
 
 								// equip
@@ -2937,7 +3095,7 @@ window.onload = function() {
 										if (item.equipped) {
 											equip.setAttribute("equipped", true)
 										}
-										equip.addEventListener(TRIGGERS.click, equipItem)
+										equip.addEventListener(TRIGGERS.click, equipCharacterItem)
 									block.prepend(equip)
 
 								// name
@@ -2955,7 +3113,7 @@ window.onload = function() {
 										d6.min = 0
 										d6.className = "d6 editable"
 										d6.placeholder = "d6"
-										d6.addEventListener(TRIGGERS.change, changeItem)
+										d6.addEventListener(TRIGGERS.change, updateCharacterItem)
 										d6.addEventListener(TRIGGERS.click, rolld6)
 										d6.value = item.d6 || 0
 										if (!item.d6) {
@@ -2972,7 +3130,7 @@ window.onload = function() {
 										text.className = "item-name-text editable"
 										text.placeholder = "item"
 										text.value = item.name
-										text.addEventListener(TRIGGERS.change, changeItem)
+										text.addEventListener(TRIGGERS.change, updateCharacterItem)
 									name.appendChild(text)
 
 									var count = document.createElement("input")
@@ -2985,7 +3143,7 @@ window.onload = function() {
 										}
 										count.placeholder = "#"
 										count.value = item.count
-										count.addEventListener(TRIGGERS.change, changeItem)
+										count.addEventListener(TRIGGERS.change, updateCharacterItem)
 									name.appendChild(count)
 
 								// usage
@@ -3017,7 +3175,7 @@ window.onload = function() {
 													d6.className += " combat"
 												}
 												d6.placeholder = "d6"
-												d6.addEventListener(TRIGGERS.change, changeItem)
+												d6.addEventListener(TRIGGERS.change, updateCharacterItem)
 												d6.addEventListener(TRIGGERS.click, rolld6)
 												d6.value = usage.d6 || 0
 											usageElement.appendChild(d6)
@@ -3041,7 +3199,7 @@ window.onload = function() {
 												select.className = "item-usage-skill editable"
 												select.placeholder = "skill"
 												select.value = usage.skill
-												select.addEventListener(TRIGGERS.change, changeItem)
+												select.addEventListener(TRIGGERS.change, updateCharacterItem)
 											usageElement.appendChild(select)
 
 											var d20 = document.createElement("input")
@@ -3074,7 +3232,7 @@ window.onload = function() {
 												d6.step = 1
 												d6.min = 0
 												d6.className = "d6 editable"
-												d6.addEventListener(TRIGGERS.change, changeItem)
+												d6.addEventListener(TRIGGERS.change, updateCharacterItem)
 												d6.addEventListener(TRIGGERS.click, rolld6)
 												d6.value = item.conditions[i] || 0
 												d6.placeholder = "d6"
@@ -3093,7 +3251,7 @@ window.onload = function() {
 												}
 												select.className = "item-condition-name editable"
 												select.value = i
-												select.addEventListener(TRIGGERS.change, changeItem)
+												select.addEventListener(TRIGGERS.change, updateCharacterItem)
 											condition.appendChild(select)
 
 											
@@ -3115,7 +3273,7 @@ window.onload = function() {
 											input.placeholder = "weight"
 											input.value = item.weight || 0
 											input.setAttribute("field", "weight")
-											input.addEventListener(TRIGGERS.change, changeItem)
+											input.addEventListener(TRIGGERS.change, updateCharacterItem)
 											if (!enable) {
 												input.setAttribute("readonly", true)
 											}
@@ -3137,7 +3295,7 @@ window.onload = function() {
 											input.placeholder = "cost"
 											input.value = item.cost || 0
 											input.setAttribute("field", "cost")
-											input.addEventListener(TRIGGERS.change, changeItem)
+											input.addEventListener(TRIGGERS.change, updateCharacterItem)
 											if (!enable) {
 												input.setAttribute("readonly", true)
 											}
@@ -3159,7 +3317,7 @@ window.onload = function() {
 											input.placeholder = "fuel"
 											input.value = item.fuel || 0
 											input.setAttribute("field", "fuel")
-											input.addEventListener(TRIGGERS.change, changeItem)
+											input.addEventListener(TRIGGERS.change, updateCharacterItem)
 											if (!enable) {
 												input.setAttribute("readonly", true)
 											}
@@ -3178,7 +3336,7 @@ window.onload = function() {
 										var input = document.createElement("select")
 											input.className = "item-info-input editable"
 											input.setAttribute("field", "magnetic")
-											input.addEventListener(TRIGGERS.change, changeItem)
+											input.addEventListener(TRIGGERS.change, updateCharacterItem)
 											if (!enable) {
 												input.setAttribute("disabled", true)
 											}
@@ -3207,7 +3365,7 @@ window.onload = function() {
 											input.placeholder = "hands"
 											input.value = item.hands || 0
 											input.setAttribute("field", "hands")
-											input.addEventListener(TRIGGERS.change, changeItem)
+											input.addEventListener(TRIGGERS.change, updateCharacterItem)
 											if (!enable) {
 												input.setAttribute("readonly", true)
 											}
@@ -3229,7 +3387,7 @@ window.onload = function() {
 											input.placeholder = "materials"
 											input.value = item.materials || 0
 											input.setAttribute("field", "materials")
-											input.addEventListener(TRIGGERS.change, changeItem)
+											input.addEventListener(TRIGGERS.change, updateCharacterItem)
 											if (!enable) {
 												input.setAttribute("readonly", true)
 											}
@@ -3241,7 +3399,7 @@ window.onload = function() {
 											description.setAttribute("readonly", true)
 										}
 										description.className = "item-description editable"
-										description.addEventListener(TRIGGERS.change, changeItem)
+										description.addEventListener(TRIGGERS.change, updateCharacterItem)
 										description.placeholder = "description"
 										description.value = ""
 									block.appendChild(description)
@@ -3263,8 +3421,8 @@ window.onload = function() {
 				}
 
 		/** CONDITIONS **/
-			/* createConditionsList */
-				function createConditionsList() {
+			/* listCharacterConditions */
+				function listCharacterConditions() {
 					try {
 						var container = ELEMENTS.character.conditions.select
 
@@ -3280,9 +3438,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* addCondition	*/
-				ELEMENTS.character.conditions.select.addEventListener(TRIGGERS.change, addCondition)
-				function addCondition(event) {
+			/* addCharacterCondition	*/
+				function addCharacterCondition(event) {
 					try {
 						if (Object.keys(RULES.conditions).includes(event.target.value)) {
 							// apply condition
@@ -3297,7 +3454,7 @@ window.onload = function() {
 											else {
 												var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
 												if (!skill) {
-													addSkill({target: {value: j}, fromConditions: true})
+													addCharacterSkill({target: {value: j}, fromConditions: true})
 													var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
 												}
 
@@ -3313,8 +3470,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* removeCondition */
-				function removeCondition(event) {
+			/* removeCharacterCondition */
+				function removeCharacterCondition(event) {
 					try {
 						if (Object.keys(RULES.conditions).includes(event.target.parentNode.getAttribute("value"))) {
 							// unapply condition
@@ -3333,7 +3490,7 @@ window.onload = function() {
 												skill.condition -= effects[i][j]
 
 												if (!skill.maximum && !skill.unremovable) {
-													removeSkill({skillName: skill.name, fromConditions: true})
+													removeCharacterSkill({skillName: skill.name, fromConditions: true})
 												}
 											}
 										}
@@ -3346,8 +3503,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayConditions */
-				function displayConditions(character, container) {
+			/* displayCharacterConditions */
+				function displayCharacterConditions(character, container) {
 					try {
 						// unset
 							var conditions = Array.from(container.querySelectorAll(".condition"))
@@ -3387,7 +3544,7 @@ window.onload = function() {
 									var remove = document.createElement("button")
 										remove.className = "condition-remove"
 										remove.innerText = "x"
-										remove.addEventListener(TRIGGERS.click, removeCondition)
+										remove.addEventListener(TRIGGERS.click, removeCharacterCondition)
 									conditionElement.prepend(remove)
 
 								// disable in select
@@ -3401,9 +3558,8 @@ window.onload = function() {
 				}
 
 		/** DAMAGE **/
-			/* changeDamage */
-				ELEMENTS.character.info.damage.addEventListener(TRIGGERS.change, changeDamage)
-				function changeDamage(event) {
+			/* updateCharacterDamage */
+				function updateCharacterDamage(event) {
 					try {
 						// change damage
 							CHARACTER.info.status.damage = Number(event.target.value)
@@ -3413,9 +3569,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* recoverDamage */
-				ELEMENTS.character.info.recover.addEventListener(TRIGGERS.click, recoverDamage)
-				function recoverDamage(event) {
+			/* recoverCharacterDamage */
+				function recoverCharacterDamage(event) {
 					try {
 						// rolls
 							var rolls = []
@@ -3453,9 +3608,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* damageStatistic */
-				ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, damageStatistic) })
-				function damageStatistic(event) {
+			/* damageCharacterStatistic */
+				function damageCharacterStatistic(event) {
 					try {
 						// change statistic
 							var statistic = event.target.closest(".statistic").id.replace("character-", "")
@@ -3507,9 +3661,8 @@ window.onload = function() {
 				} catch (error) {console.log(error)}
 			}
 
-		/** submitMessage **/
-			ELEMENTS.chat.send.form.addEventListener(TRIGGERS.submit, submitMessage)
-			function submitMessage(event) {
+		/** submitChat **/
+			function submitChat(event) {
 				try {
 					// post
 						var post = {
@@ -3608,7 +3761,7 @@ window.onload = function() {
 				try {
 					// element
 						var messageElement = document.createElement("div")
-							messageElement.className = "chat-message"
+							messageElement.className = "chat-message" + (message.recipientId ? " chat-secret" : "")
 							messageElement.id = "chat-" + message.id
 						ELEMENTS.chat.messages.appendChild(messageElement)
 
@@ -3642,6 +3795,10 @@ window.onload = function() {
 					try {
 						// close option?
 							ELEMENTS.content.choose.select.none.disabled = (CONTENT && CONTENT.id) ? false : true
+							if (!CONTENT) {
+								ELEMENTS.content.choose.select.element.value = ELEMENTS.content.choose.select.new.value
+							}
+							changeContentSelection()
 
 						// no game?
 							if (!GAME) {
@@ -3661,6 +3818,11 @@ window.onload = function() {
 										ELEMENTS.content.choose.select.element.value = ELEMENTS.content.choose.select.new.value
 									}
 									option.remove()
+
+									var contentOption = ELEMENTS.content.objects.images.querySelector("option[value='" + content.id + "']")
+									if (contentOption) {
+										contentOption.remove()
+									}
 									continue
 								}
 
@@ -3680,12 +3842,32 @@ window.onload = function() {
 									ELEMENTS.content.choose.select.element.className = "form-pair"
 									ELEMENTS.content.choose.types.element.setAttribute("visibility", false)
 								}
+
+								// arena
+									if (content.type == "image") {
+										var contentOption = ELEMENTS.content.objects.images.querySelector("option[value='" + content.id + "']")
+										if (contentOption && content.delete) {
+											if (ELEMENTS.content.objects.select.value == contentOption.value) {
+												ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
+											}
+											contentOption.remove()
+										}
+										else if (contentOption) {
+											contentOption.innerText = content.name
+										}
+										else {
+											contentOption = document.createElement("option")
+											contentOption.value = content.id
+											contentOption.innerText = content.name
+											contentOption.setAttribute("type", "content")
+											ELEMENTS.content.objects.images.appendChild(contentOption)
+										}
+									}
 							}
 					} catch (error) {console.log(error)}
 				}
 
 			/* changeContentSelection */
-				ELEMENTS.content.choose.select.element.addEventListener(TRIGGERS.change, changeContentSelection)
 				function changeContentSelection(event) {
 					try {
 						// reveal
@@ -3703,7 +3885,6 @@ window.onload = function() {
 				}
 
 			/* selectContent */
-				ELEMENTS.content.choose.form.addEventListener(TRIGGERS.submit, selectContent)
 				function selectContent(event) {
 					try {
 						// select value
@@ -3760,7 +3941,6 @@ window.onload = function() {
 				}
 
 			/* sendContentToChat */
-				ELEMENTS.content.send.addEventListener(TRIGGERS.click, sendContentToChat)
 				function sendContentToChat(event) {
 					try {
 						// post
@@ -3815,7 +3995,6 @@ window.onload = function() {
 
 		/** editing **/
 			/* updateContentName */
-				ELEMENTS.content.name.form.addEventListener(TRIGGERS.submit, updateContentName)
 				function updateContentName(event) {
 					try {
 						// post
@@ -3845,7 +4024,6 @@ window.onload = function() {
 				}
 
 			/* updateContentAccess */
-				ELEMENTS.content.access.form.addEventListener(TRIGGERS.submit, updateContentAccess)
 				function updateContentAccess(event) {
 					try {
 						// post
@@ -3877,7 +4055,6 @@ window.onload = function() {
 				}
 
 			/* updateContentData */
-				ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, updateContentData)
 				function updateContentData(event) {
 					try {
 						// post
@@ -3910,7 +4087,7 @@ window.onload = function() {
 				}
 
 			/* uploadContentFile */
-				ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, uploadContentFile)
+
 				function uploadContentFile(event) {
 					try {
 						ELEMENTS.content.upload.input.click()
@@ -3966,8 +4143,37 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
+			/* duplicateContent */
+				function duplicateContent(event) {
+					try {
+						// post
+							var post = {
+								action: "createContent",
+								content: CONTENT || null
+							}
+
+						// validate
+							if (!post.content) {
+								FUNCTIONS.showToast({success: false, message: "no content to duplicate"})
+								return
+							}
+
+						// assign
+							post.content.userId = USER ? USER.id : null
+							post.content.gameId = GAME ? GAME.id : null
+
+						// validate
+							if (!post.content.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
 			/* deleteContent */
-				ELEMENTS.content.delete.form.addEventListener(TRIGGERS.submit, deleteContent)
 				function deleteContent(event) {
 					try {
 						// post
@@ -4031,8 +4237,8 @@ window.onload = function() {
 											var panningOverlay = document.createElement("div")
 												panningOverlay.setAttribute("directions", directions[i])
 												panningOverlay.className = "content-arena-panning"
-												panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningArena)
-												panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningArena)
+												panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
+												panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
 											ELEMENTS.gametable.element.appendChild(panningOverlay)
 										}
 									}
@@ -4040,7 +4246,7 @@ window.onload = function() {
 								// update
 									ELEMENTS.gametable.canvas.element = arena
 									ELEMENTS.gametable.canvas.context = ELEMENTS.gametable.canvas.element.getContext("2d")
-									displayArena()
+									displayContentArena()
 							}
 
 						// text?
@@ -4075,7 +4281,7 @@ window.onload = function() {
 
 								// update
 									if (CONTENT.url) {
-										image.src = CONTENT.url + "?" + new Date().getTime()
+										image.src = CONTENT.url + (CONTENT.file ? ("?" + new Date().getTime()) : "")
 									}
 
 								// zoom
@@ -4200,7 +4406,7 @@ window.onload = function() {
 							if (content.type == "image") {
 								var resultDataContent = document.createElement("img")
 									resultDataContent.className = "content-chat-data content-image"
-									resultDataContent.src = content.url + "?" + new Date().getTime()
+									resultDataContent.src = content.url + (content.url ? ("?" + new Date().getTime()) : "")
 								resultElement.appendChild(resultDataContent)
 							}
 
@@ -4277,7 +4483,7 @@ window.onload = function() {
 
 						// arena
 							if (CONTENT.type == "arena") {
-								grabArenaObject(cursor)
+								grabContentArenaObject(cursor)
 								return
 							}
 
@@ -4300,7 +4506,6 @@ window.onload = function() {
 				}
 
 			/* moveContent */
-				ELEMENTS.body.addEventListener(TRIGGERS.mousemove, moveContent)
 				function moveContent(event) {
 					try {
 						// nothing grabbed
@@ -4316,7 +4521,7 @@ window.onload = function() {
 
 						// arena
 							if (ELEMENTS.gametable.grabbed.arenaObject) {
-								moveArenaObject(cursor)
+								moveContentArenaObject(cursor)
 								return
 							}
 
@@ -4334,7 +4539,6 @@ window.onload = function() {
 				}
 
 			/* ungrabContent */
-				ELEMENTS.body.addEventListener(TRIGGERS.mouseup, ungrabContent)
 				function ungrabContent(event) {
 					try {
 						// reset grabbing styling
@@ -4344,7 +4548,7 @@ window.onload = function() {
 
 						// arena
 							if (ELEMENTS.gametable.grabbed && ELEMENTS.gametable.grabbed.arenaObject) {
-								ungrabArenaObject()
+								ungrabContentArenaObject()
 								return
 							}
 
@@ -4354,7 +4558,6 @@ window.onload = function() {
 				}
 
 			/* zoomContent */
-				ELEMENTS.content.controls.zoom.form.addEventListener(TRIGGERS.submit, zoomContent)
 				function zoomContent(event) {
 					try {
 						// no content
@@ -4364,7 +4567,7 @@ window.onload = function() {
 
 						// arena
 							if (CONTENT.type == "arena") {
-								zoomArena(event)
+								zoomContentArena(event)
 								return
 							}
 
@@ -4379,9 +4582,8 @@ window.onload = function() {
 				}
 
 		/** arena changes **/
-			/* addArenaObject */
-				ELEMENTS.content.objects.form.addEventListener(TRIGGERS.submit, addArenaObject)
-				function addArenaObject(event) {
+			/* addContentArenaObject */
+				function addContentArenaObject(event) {
 					try {
 						// new object
 							var post = {
@@ -4398,11 +4600,12 @@ window.onload = function() {
 								}
 							}
 
-						// character?
+						// character / image
 							if (ELEMENTS.content.objects.select.value !== ELEMENTS.content.objects.blank.value) {
-								post.content.arena.objects.new = {
-									characterId: ELEMENTS.content.objects.select.value
-								}
+								var option = ELEMENTS.content.objects.select.querySelector("option[value='" + ELEMENTS.content.objects.select.value + "']")
+								var type = option.getAttribute("type")
+								post.content.arena.objects.new = {}
+								post.content.arena.objects.new[type + "Id"] = ELEMENTS.content.objects.select.value
 							}
 
 						// validate
@@ -4417,8 +4620,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* updateArenaObject */
-				function updateArenaObject(event) {
+			/* updateContentArenaObject */
+				function updateContentArenaObject(event) {
 					try {
 						// update object
 							var post = {
@@ -4461,8 +4664,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* removeArenaObject */
-				function removeArenaObject(event) {
+			/* removeContentArenaObject */
+				function removeContentArenaObject(event) {
 					try {
 						// new object
 							var post = {
@@ -4500,9 +4703,8 @@ window.onload = function() {
 				}
 
 		/** arena display **/
-			/* displayArena */
-				window.addEventListener(TRIGGERS.resize, displayArena)
-				function displayArena() {
+			/* displayContentArena */
+				function displayContentArena() {
 					try {
 						// no arena
 							if (!CONTENT || !CONTENT.arena || !ELEMENTS.gametable.canvas.element) {
@@ -4519,7 +4721,7 @@ window.onload = function() {
 
 						// update sidebar
 							for (var i in CONTENT.arena.objects) {
-								displayArenaObjectListing(CONTENT.arena.objects[i])
+								displayContentArenaObjectListing(CONTENT.arena.objects[i])
 							}
 
 						// sort objects
@@ -4541,28 +4743,23 @@ window.onload = function() {
 									ELEMENTS.gametable.canvas.images[key] = document.createElement("img")
 								}
 
-								if (ELEMENTS.gametable.canvas.images[key].src !== imageURL) {
+								if (ELEMENTS.gametable.canvas.images[key].getAttribute("src") !== imageURL) {
 									unloadedCount++
 									ELEMENTS.gametable.canvas.images[key].src = imageURL
-									ELEMENTS.gametable.canvas.images[key].addEventListener("load", function() {
+									ELEMENTS.gametable.canvas.images[key].onload = ELEMENTS.gametable.canvas.images[key].onerror = function() {
 										unloadedCount--
-
-										if (!unloadedCount) {
-											displayArenaCanvas(sortedKeys)
-										}
-									})
+										if (!unloadedCount) { displayContentArenaCanvas(sortedKeys) }
+									}
 								}
 							}
 
 						// display canvas
-							if (!unloadedCount) {
-								displayArenaCanvas(sortedKeys)
-							}
+							if (!unloadedCount) { displayContentArenaCanvas(sortedKeys) }
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayArenaObjectListing */
-				function displayArenaObjectListing(object) {
+			/* displayContentArenaObjectListing */
+				function displayContentArenaObjectListing(object) {
 					try {
 						// listing
 							var listing = ELEMENTS.content.objects.list.querySelector("#arena-object-" + object.id)
@@ -4581,7 +4778,7 @@ window.onload = function() {
 											inputVisible.className = "arena-object-visible"
 											inputVisible.setAttribute("property", "visible")
 											inputVisible.type = "checkbox"
-											inputVisible.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputVisible.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										listing.appendChild(inputVisible)
 
 									// z
@@ -4590,7 +4787,7 @@ window.onload = function() {
 											upButton.innerHTML = "&uarr;"
 											upButton.setAttribute("property", "z")
 											upButton.value = "1"
-											upButton.addEventListener(TRIGGERS.click, updateArenaObject)
+											upButton.addEventListener(TRIGGERS.click, updateContentArenaObject)
 										listing.appendChild(upButton)
 
 										var downButton = document.createElement("button")
@@ -4598,14 +4795,14 @@ window.onload = function() {
 											downButton.innerHTML = "&darr;"
 											downButton.value = "-1"
 											downButton.setAttribute("property", "z")
-											downButton.addEventListener(TRIGGERS.click, updateArenaObject)
+											downButton.addEventListener(TRIGGERS.click, updateContentArenaObject)
 										listing.appendChild(downButton)
 
 									// remove
 										var removeButton = document.createElement("button")
 											removeButton.className = "arena-object-remove"
 											removeButton.innerText = "x"
-											removeButton.addEventListener(TRIGGERS.click, removeArenaObject)
+											removeButton.addEventListener(TRIGGERS.click, removeContentArenaObject)
 										listing.appendChild(removeButton)
 
 									// text
@@ -4618,7 +4815,7 @@ window.onload = function() {
 											inputText.setAttribute("property", "text")
 											inputText.placeholder = "text"
 											inputText.type = "text"
-											inputText.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputText.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										labelText.appendChild(inputText)
 
 										var spanText = document.createElement("span")
@@ -4637,7 +4834,7 @@ window.onload = function() {
 											inputX.placeholder = "x"
 											inputX.step = 0.5
 											inputX.type = "number"
-											inputX.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputX.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										labelX.appendChild(inputX)
 
 										var spanX = document.createElement("span")
@@ -4656,7 +4853,7 @@ window.onload = function() {
 											inputY.placeholder = "y"
 											inputY.step = 0.5
 											inputY.type = "number"
-											inputY.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputY.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										labelY.appendChild(inputY)
 
 										var spanY = document.createElement("span")
@@ -4676,7 +4873,7 @@ window.onload = function() {
 											inputWidth.step = 1
 											inputWidth.min = 0
 											inputWidth.type = "number"
-											inputWidth.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputWidth.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										labelWidth.appendChild(inputWidth)
 
 										var spanWidth = document.createElement("span")
@@ -4696,7 +4893,7 @@ window.onload = function() {
 											inputHeight.step = 1
 											inputHeight.min = 0
 											inputHeight.type = "number"
-											inputHeight.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputHeight.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										labelHeight.appendChild(inputHeight)
 
 										var spanHeight = document.createElement("span")
@@ -4716,13 +4913,52 @@ window.onload = function() {
 											inputCorners.min = 0
 											inputCorners.max = 50
 											inputCorners.type = "range"
-											inputCorners.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputCorners.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										labelCorners.appendChild(inputCorners)
 
 										var spanCorners = document.createElement("span")
 											spanCorners.className = "arena-object-label-text"
 											spanCorners.innerText = "corners"
 										labelCorners.appendChild(spanCorners)
+
+									// rotation
+										var labelRotation = document.createElement("label")
+											labelRotation.className = "arena-object-label"
+										listing.appendChild(labelRotation)
+
+										var inputRotation = document.createElement("input")
+											inputRotation.className = "arena-object-input"
+											inputRotation.setAttribute("property", "rotation")
+											inputRotation.step = 45
+											inputRotation.min = 0
+											inputRotation.max = 360
+											inputRotation.type = "range"
+											inputRotation.addEventListener(TRIGGERS.change, updateContentArenaObject)
+										labelRotation.appendChild(inputRotation)
+
+										var spanRotation = document.createElement("span")
+											spanRotation.className = "arena-object-label-text"
+											spanRotation.innerText = "rotation"
+										labelRotation.appendChild(spanRotation)
+
+									// glow
+										var labelGlow = document.createElement("label")
+											labelGlow.className = "arena-object-label"
+										listing.appendChild(labelGlow)
+
+										var inputGlow = document.createElement("input")
+											inputGlow.className = "arena-object-input"
+											inputGlow.setAttribute("property", "glow")
+											inputGlow.step = 0.01
+											inputGlow.min = 0
+											inputGlow.type = "number"
+											inputGlow.addEventListener(TRIGGERS.change, updateContentArenaObject)
+										labelGlow.appendChild(inputGlow)
+
+										var spanGlow = document.createElement("span")
+											spanGlow.className = "arena-object-label-text"
+											spanGlow.innerText = "glow"
+										labelGlow.appendChild(spanGlow)
 
 									// shadow
 										var labelShadow = document.createElement("label")
@@ -4733,7 +4969,7 @@ window.onload = function() {
 											inputShadow.className = "arena-object-input"
 											inputShadow.setAttribute("property", "shadow")
 											inputShadow.type = "color"
-											inputShadow.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputShadow.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										labelShadow.appendChild(inputShadow)
 
 										var spanShadow = document.createElement("span")
@@ -4753,7 +4989,7 @@ window.onload = function() {
 											inputOpacity.min = 0
 											inputOpacity.max = 1
 											inputOpacity.type = "range"
-											inputOpacity.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputOpacity.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										labelOpacity.appendChild(inputOpacity)
 
 										var spanOpacity = document.createElement("span")
@@ -4770,7 +5006,7 @@ window.onload = function() {
 											inputColor.className = "arena-object-input"
 											inputColor.setAttribute("property", "color")
 											inputColor.type = "color"
-											inputColor.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputColor.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										labelColor.appendChild(inputColor)
 
 										var spanColor = document.createElement("span")
@@ -4788,7 +5024,7 @@ window.onload = function() {
 											inputImage.setAttribute("property", "image")
 											inputImage.placeholder = "image"
 											inputImage.type = "text"
-											inputImage.addEventListener(TRIGGERS.change, updateArenaObject)
+											inputImage.addEventListener(TRIGGERS.change, updateContentArenaObject)
 										labelImage.appendChild(inputImage)
 
 										var spanImage = document.createElement("span")
@@ -4806,6 +5042,8 @@ window.onload = function() {
 								var inputWidth = listing.querySelector("input[property='width']")
 								var inputHeight = listing.querySelector("input[property='height']")
 								var inputCorners = listing.querySelector("input[property='corners']")
+								var inputRotation = listing.querySelector("input[property='rotation']")
+								var inputGlow = listing.querySelector("input[property='glow']")
 								var inputShadow = listing.querySelector("input[property='shadow']")
 								var inputOpacity = listing.querySelector("input[property='opacity']")
 								var inputColor = listing.querySelector("input[property='color']")
@@ -4822,6 +5060,8 @@ window.onload = function() {
 							inputWidth.value = object.width || 0
 							inputHeight.value = object.height || 0
 							inputCorners.value = object.corners || 0
+							inputRotation.value = object.rotation || 0
+							inputGlow.value = object.glow || 0
 							inputShadow.value = object.shadow || ELEMENTS.gametable.canvas.gridBackground
 							inputOpacity.value = object.opacity || 0
 							inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor
@@ -4830,8 +5070,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayArenaCanvas */
-				function displayArenaCanvas(sortedKeys) {
+			/* displayContentArenaCanvas */
+				function displayContentArenaCanvas(sortedKeys) {
 					try {
 						// resize & clear canvas
 							FUNCTIONS.resizeCanvas(ELEMENTS.gametable.canvas.element)
@@ -4841,16 +5081,16 @@ window.onload = function() {
 
 						// loop through to display
 							for (var i in sortedKeys) {
-								displayArenaObject(CONTENT.arena.objects[sortedKeys[i]])
+								displayContentArenaObject(CONTENT.arena.objects[sortedKeys[i]])
 							}
 
 						// display grid
-							displayArenaGrid()
+							displayContentArenaGrid()
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayArenaObject */
-				function displayArenaObject(object) {
+			/* displayContentArenaObject */
+				function displayContentArenaObject(object) {
 					try {
 						// not visible?
 							if (!object.visible) {
@@ -4861,11 +5101,14 @@ window.onload = function() {
 							var cellSize = Math.round(ELEMENTS.gametable.canvas.cellSize)
 							var x = (object.x - (object.width / 2)) * cellSize
 							var y = (object.y - (object.height / 2)) * cellSize
+							var rotateX = object.x * cellSize
+							var rotateY = ELEMENTS.gametable.canvas.element.height - object.y * cellSize
 							var width = object.width * cellSize
 							var height = object.height * cellSize
 							var options = {
 								color: object.color,
-								opacity: object.opacity
+								opacity: object.opacity,
+								rotation: 1 * object.rotation
 							}
 
 						// corners
@@ -4881,20 +5124,24 @@ window.onload = function() {
 							}
 
 						// shadow
-							if (object.shadow) {
+							if (object.glow) {
 								options.shadow = object.shadow
-								options.blur = cellSize / 10
+								options.blur = cellSize * object.glow
 							}
 
 						// image
 							if (object.image) {
 								options.image = ELEMENTS.gametable.canvas.images[object.id]
-								FUNCTIONS.drawImage(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, y, width, height, options)
+								FUNCTIONS.rotateCanvas(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, rotateX, rotateY, options.rotation, function() {
+									FUNCTIONS.drawImage(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, y, width, height, options)
+								})
 							}
 
 						// draw
 							else {
-								FUNCTIONS.drawRectangle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, y, width, height, options)
+								FUNCTIONS.rotateCanvas(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, rotateX, rotateY, options.rotation, function() {
+									FUNCTIONS.drawRectangle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, y, width, height, options)
+								})
 							}
 
 						// text
@@ -4904,8 +5151,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayArenaGrid */
-				function displayArenaGrid() {
+			/* displayContentArenaGrid */
+				function displayContentArenaGrid() {
 					try {
 						// move canvas
 							var halfWidth = Math.round(ELEMENTS.gametable.canvas.element.width / 2)
@@ -4940,8 +5187,8 @@ window.onload = function() {
 				}
 
 		/** arena controls **/
-			/* zoomArena */
-				function zoomArena() {
+			/* zoomContentArena */
+				function zoomContentArena() {
 					try {
 						// get submitter
 							var modifier = Number(event.submitter.value) || 0
@@ -4949,13 +5196,12 @@ window.onload = function() {
 							ELEMENTS.gametable.canvas.cellSize = 50 * Math.pow(2, ELEMENTS.gametable.canvas.zoomPower)
 						
 						// redraw
-							displayArena()
+							displayContentArena()
 					} catch (error) {console.log(error)}
 				}
 
-			/* panArena */
-				ELEMENTS.content.controls.pan.form.addEventListener(TRIGGERS.submit, panArena)
-				function panArena(event) {
+			/* panContentArena */
+				function panContentArena(event) {
 					try {
 						// get value
 							var value = event.submitter.value
@@ -4970,12 +5216,12 @@ window.onload = function() {
 							}
 
 						// redraw
-							displayArena()
+							displayContentArena()
 					} catch (error) {console.log(error)}
 				}
 
-			/* startPanningArena */
-				function startPanningArena(event) {
+			/* startPanningContentArena */
+				function startPanningContentArena(event) {
 					try {
 						// get direction
 							var directions = event.target.getAttribute("directions").split(/\s/gi)
@@ -4984,14 +5230,14 @@ window.onload = function() {
 							for (var i in directions) {
 								var direction = directions[i]
 								ELEMENTS.gametable.canvas.panLoops[direction] = setInterval(function(direction) {
-									panArena({submitter: {value: direction, distance: 0.1}})
+									panContentArena({submitter: {value: direction, distance: 0.1}})
 								}, 10, direction)
 							}
 					} catch (error) {console.log(error)}
 				}
 
-			/* stopPanningArena */
-				function stopPanningArena(event) {
+			/* stopPanningContentArena */
+				function stopPanningContentArena(event) {
 					try {
 						// get direction
 							var directions = event.target.getAttribute("directions").split(/\s/gi)
@@ -5005,8 +5251,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* grabArenaObject */
-				function grabArenaObject(cursor) {
+			/* grabContentArenaObject */
+				function grabContentArenaObject(cursor) {
 					try {
 						// no content or canvas?
 							if (!CONTENT || !ELEMENTS.gametable.canvas.element) {
@@ -5063,8 +5309,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* moveArenaObject */
-				function moveArenaObject(cursor) {
+			/* moveContentArenaObject */
+				function moveContentArenaObject(cursor) {
 					try {
 						// no content or canvas?
 							if (!CONTENT || !ELEMENTS.gametable.canvas.element) {
@@ -5097,12 +5343,12 @@ window.onload = function() {
 								arenaObject.y = Math.round(coordinates.y * 2) / 2
 
 						// display
-							displayArena()
+							displayContentArena()
 					} catch (error) {console.log(error)}
 				}
 
-			/* ungrabArenaObject */
-				function ungrabArenaObject() {
+			/* ungrabContentArenaObject */
+				function ungrabContentArenaObject() {
 					try {
 						// no content
 							if (!CONTENT || !ELEMENTS.gametable.grabbed || !ELEMENTS.gametable.grabbed.arenaObject) {

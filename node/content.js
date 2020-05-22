@@ -28,16 +28,33 @@
 						return
 					}
 
-				// create content
-					var content = CORE.getSchema("content")
-						content.userId = REQUEST.user.id
-						content.gameId = REQUEST.post.content.gameId
-						content.type = REQUEST.post.content.type
-						content.name = "unnamed " + content.type
-						content.access = REQUEST.user.id
-					if (content.type == "arena") {
-						content.arena = CORE.getSchema("arena")
+				// create new content fresh
+					if (REQUEST.post.content.name) {
+						var content = CORE.getSchema("content")
+
+						for (var i in REQUEST.post.content) {
+							if (i !== "id") {
+								content[i] = REQUEST.post.content[i]
+							}
+						}
+
+						content.name = "Copy of " + content.name
 					}
+
+				// create content from template
+					else {
+						var content = CORE.getSchema("content")
+							content.type = REQUEST.post.content.type
+							content.name = "unnamed " + content.type
+						if (content.type == "arena") {
+							content.arena = CORE.getSchema("arena")
+						}
+					}
+
+				// assign
+					content.userId = REQUEST.user.id
+					content.gameId = REQUEST.post.content.gameId
+					content.access = REQUEST.user.id
 
 				// query
 					var query = CORE.getSchema("query")
@@ -580,7 +597,7 @@
 								query.collection = "content"
 								query.command = "update"
 								query.filters = {id: REQUEST.post.content.id}
-								query.document = {url: results.path}
+								query.document = {url: results.path, file: REQUEST.post.content.id + "." + extension}
 
 						// update
 							CORE.accessDatabase(query, function(results) {
@@ -671,11 +688,7 @@
 											object.z = count
 										arena.objects[object.id] = object
 										
-										if (!REQUEST.post.content.arena.objects.new.characterId) {
-											saveArenaObject()
-											return
-										}
-										else {
+										if (REQUEST.post.content.arena.objects.new.characterId) {
 											// query
 												var query = CORE.getSchema("query")
 													query.collection = "characters"
@@ -696,6 +709,34 @@
 													saveArenaObject()
 													return
 												})
+											return
+										}
+										else if (REQUEST.post.content.arena.objects.new.contentId) {
+											// query
+												var query = CORE.getSchema("query")
+													query.collection = "content"
+													query.command = "find"
+													query.filters = {id: REQUEST.post.content.arena.objects.new.contentId}
+
+											// find
+												CORE.accessDatabase(query, function(results) {
+													if (!results.success) {
+														saveArenaObject()
+														return
+													}
+
+													var content = results.documents[0]
+													object.contentId = content.id
+													object.image = content.url
+													object.text = content.name
+													saveArenaObject()
+													return
+												})
+											return
+										}
+										else {
+											saveArenaObject()
+											return
 										}
 									}
 
@@ -851,7 +892,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "content"
 								query.command = "delete"
-								query.filters = {id: REQUEST.post.content.id}
+								query.filters = {id: content.id}
 
 						// delete
 							CORE.accessDatabase(query, function(results) {
@@ -865,7 +906,7 @@
 									var query = CORE.getSchema("query")
 										query.collection = "users"
 										query.command = "find"
-										query.filters = {gameId: REQUEST.post.content.gameId}
+										query.filters = {gameId: content.gameId}
 
 								// find
 									CORE.accessDatabase(query, function(results) {
@@ -914,8 +955,8 @@
 									})
 
 								// delete actual file
-									if (REQUEST.post.content.url) {
-										CORE.accessFiles({command: "delete", path: REQUEST.post.content.url}, function(data) {
+									if (content.url && content.file) {
+										CORE.accessFiles({command: "delete", path: content.file}, function(data) {
 											CORE.logMessage(JSON.stringify(data))
 										})
 									}

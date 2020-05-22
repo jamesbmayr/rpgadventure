@@ -336,11 +336,15 @@
 
 				// find
 					CORE.accessDatabase(query, function(results) {
-						// sort
+						// sort & limit
+							var timestamp = new Date().getTime() - CORE.getAsset("constants").contentDuration
 							var rollGroups = results.documents.sort(function(a, b) {
 								return a.time - b.time
 							}) || []
-							rollGroups = rollGroups.slice(0, 100)
+							rollGroups = rollGroups.slice(0, 100) || []
+							rollGroups = rollGroups.filter(function(r) {
+								return r.time > timestamp
+							}) || []
 
 						// return
 							callback({success: true, roll: rollGroups, recipients: [REQUEST.user.id]})

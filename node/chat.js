@@ -116,11 +116,15 @@
 
 				// find
 					CORE.accessDatabase(query, function(results) {
-						// sort
+						// sort & limit
+							var timestamp = new Date().getTime() - CORE.getAsset("constants").contentDuration
 							var chats = results.documents.sort(function(a, b) {
 								return a.time - b.time
 							}) || []
-							chats = chats.slice(0, 100)
+							chats = chats.slice(0, 100) || []
+							chats = chats.filter(function(c) {
+								return c.time > timestamp
+							}) || []
 
 						// filter
 							chats = chats.filter(function(c) { 

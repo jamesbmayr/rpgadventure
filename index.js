@@ -415,7 +415,7 @@
 			try {
 				switch (REQUEST.post.action) {
 					// user
-						// name / password
+						// update
 							case "updateUserName":
 							case "updateUserPassword":
 							case "updateUserSettings":
@@ -444,6 +444,14 @@
 							case "unreadGame":
 								try {
 									GAME.unreadOne(REQUEST, sendSocketData)
+								}
+								catch (error) {_400(REQUEST, "unable to " + REQUEST.post.action)}
+							break
+
+						// delete
+							case "deleteGame":
+								try {
+									GAME.deleteOne(REQUEST, sendSocketData)
 								}
 								catch (error) {_400(REQUEST, "unable to " + REQUEST.post.action)}
 							break

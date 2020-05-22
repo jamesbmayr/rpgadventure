@@ -163,6 +163,31 @@ window.addEventListener("load", function() {
 					context.translate(offsetX, -offsetY)
 			}
 
+		/* rotateCanvas */
+			window.FUNCTIONS.rotateCanvas = rotateCanvas
+			function rotateCanvas(canvas, context, x, y, degrees, callback) {
+				try {
+					// no rotation
+						if (!degrees || degrees % 360 == 0) {
+							callback()
+							return
+						}
+						
+					// rotate
+						context.translate(x, y)
+						context.rotate(degrees * Math.PI / 180)
+						context.translate(-x, -y)
+
+					// do whatever
+						callback()
+
+					// rotate back
+						context.translate(x, y)
+						context.rotate(-degrees * Math.PI / 180)
+						context.translate(-x, -y)
+				} catch (error) {}
+			}
+
 		/* drawLine */
 			window.FUNCTIONS.drawLine = drawLine
 			function drawLine(canvas, context, x1, y1, x2, y2, options) {
@@ -248,6 +273,9 @@ window.addEventListener("load", function() {
 			window.FUNCTIONS.drawImage = drawImage
 			function drawImage(canvas, context, x, y, width, height, options) {
 				try {
+					// get blur
+						drawRectangle(canvas, context, x, y, width, height, options)
+
 					// save
 						context.save()
 
@@ -281,7 +309,9 @@ window.addEventListener("load", function() {
 						}
 
 					// image
-						context.drawImage(options.image, x, canvas.height - y - height, width, height)
+						try {
+							context.drawImage(options.image, x, canvas.height - y - height, width, height)
+						} catch (error) {}
 
 					// restore
 						context.restore()

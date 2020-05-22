@@ -261,6 +261,11 @@
 			text-shadow: 0 0 var(--shadow-size) var(--medium-gray);
 		}
 
+	/** game **/
+		#settings-game-delete-button {
+			background-color: var(--medium-red);
+		}
+
 	/** audio **/
 		#settings-audio-label {
 			float: left;
@@ -510,15 +515,6 @@
 			width: calc(100% - 2 * var(--medium-gap-size));
 			padding: var(--medium-gap-size);
 		}
-
-		/* delete */
-			#character-settings-delete-form {
-				margin-top: var(--large-gap-size);
-			}
-
-			#character-settings-delete-button {
-				background-color: var(--medium-red);
-			}
 
 		/* rng */
 			#character-settings-rng-count {
@@ -1429,6 +1425,7 @@
 				padding: 0 var(--small-gap-size) 0 0;
 			}
 
+		/* message components */
 			.chat-message-name {
 				font-weight: bold;
 				width: 100%;
@@ -1458,6 +1455,18 @@
 				border-left: var(--border-size) solid var(--medium-gray);
 				padding: 0 0 0 var(--small-gap-size);
 				word-break: break-word;
+			}
+
+		/* special */
+			.chat-secret {
+				width: calc(100% - 2 * var(--small-gap-size));
+				border-radius: var(--border-radius);
+				padding: var(--small-gap-size);
+				box-shadow: 0 0 var(--shadow-size) var(--medium-gray) inset;
+			}
+
+			.chat-secret .chat-message-left {
+				width: calc(var(--edge-size) - var(--small-gap-size) - var(--small-gap-size));
 			}
 
 	/** form **/
@@ -1532,15 +1541,6 @@
 		/* upload */
 			#content[mode="arena"] #content-upload-form, #content[mode="text"] #content-upload-form, #content[mode="embed"] #content-upload-form {
 				display: none;
-			}
-
-		/* delete */
-			#content-delete-form, #content-upload-form {
-				margin-top: var(--large-gap-size);
-			}
-
-			#content-delete-button {
-				background-color: var(--medium-red);
 			}
 
 	/** controls **/

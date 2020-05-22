@@ -43,6 +43,12 @@
 						<input id="settings-game-input" type="text" placeholder="game name" class="form-pair" visibility="true"/>
 						<button id="settings-game-button" class="form-pair">&rarr;</button>
 					</form>
+					<details id="settings-game-delete-gate" class="delete-gate" visibility="false">
+						<summary>delete game</summary>
+						<form id="settings-game-delete-form" method="post" action="javascript:;">
+							<button id="settings-game-delete-button">confirm delete</button>
+						</form>
+					</details>
 				</div>
 				<div id="settings-audio" class="subsection">
 					<h3>audio</h3>
@@ -118,11 +124,18 @@
 							<button id="character-settings-access-button" class="form-pair">&rarr;</button>
 						</form>
 						<form id="character-settings-download-form" method="post" action="javascript:;">
+							<h4>file</h4>
 							<button id="character-settings-download-button">download</button>
 						</form>
-						<form id="character-settings-delete-form" method="post" action="javascript:;">
-							<button id="character-settings-delete-button">delete character</button>
+						<form id="character-settings-duplicate-form" method="post" action="javascript:;">
+							<button id="character-settings-duplicate-button">duplicate</button>
 						</form>
+						<details id="character-settings-delete-gate" class="delete-gate">
+							<summary>delete?</summary>
+							<form id="character-settings-delete-form" method="post" action="javascript:;">
+								<button id="character-settings-delete-button">confirm delete</button>
+							</form>
+						</details>
 					</div>
 					<div id="character-settings-rng" class="subsection">
 						<h3 id="character-settings-rng-header">rng</h3>
@@ -396,15 +409,22 @@
 						<h4>data</h4>
 						<textarea id="content-data-embedCode" placeholder="embed html"></textarea>
 						<input type="text" id="content-data-url" placeholder="embed url"/>
-						<button id="content-data-button">save content</button>
+						<button id="content-data-button">save</button>
 					</form>
 					<form id="content-upload-form" method="post" action="javascript:;" enctype="multipart/form-data">
 						<input type="file" id="content-upload-input"/>
-						<button id="content-upload-button">upload file</button>
+						<button id="content-upload-button">upload</button>
 					</form>
-					<form id="content-delete-form" method="post" action="javascript:;">
-						<button id="content-delete-button">delete content</button>
+					<form id="content-duplicate-form" method="post" action="javascript:;">
+						<h4>file</h4>
+						<button id="content-duplicate-button">duplicate</button>
 					</form>
+					<details id="content-delete-gate" class="delete-gate">
+						<summary>delete?</summary>
+						<form id="content-delete-form" method="post" action="javascript:;">
+							<button id="content-delete-button">confirm delete</button>
+						</form>
+					</details>
 				</div>
 				<div id="content-controls" class="subsection">
 					<h3 id="content-controls-header">controls</h3>
@@ -429,7 +449,8 @@
 							<optgroup label="other">
 								<option id="content-objects-select-blank" value="[blank object]" selected>[blank object]</option>
 							</optgroup>
-							<optgroup id="content-objects-select-custom" label="characters"></optgroup>
+							<optgroup id="content-objects-select-characters" label="characters"></optgroup>
+							<optgroup id="content-objects-select-images" label="images"></optgroup>
 						</select>
 						<button id="content-objects-button" class="form-pair">&rarr;</button>
 					</form>
