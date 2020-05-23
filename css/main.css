@@ -491,6 +491,13 @@
 			border-radius: var(--border-radius) 0 0 var(--border-radius);
 		}
 
+		textarea.form-pair {
+			margin: var(--small-gap-size) 0;
+			max-width: calc(100% - (var(--medium-font-size) + 4 * var(--small-gap-size)) - 2 * (var(--border-size) + var(--small-gap-size)));
+			min-width: calc(100% - (var(--medium-font-size) + 4 * var(--small-gap-size)) - 2 * (var(--border-size) + var(--small-gap-size)));
+			border-radius: var(--border-radius) 0 var(--border-radius) var(--border-radius);
+		}
+
 		button.form-pair, div.form-pair {
 			width: calc(var(--medium-font-size) + 4 * var(--small-gap-size));
 			border-radius: 0 var(--border-radius) var(--border-radius) 0;

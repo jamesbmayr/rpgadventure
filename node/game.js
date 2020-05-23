@@ -43,7 +43,7 @@
 
 						// create
 							var game = CORE.getSchema("game")
-								game.creator = REQUEST.user.id
+								game.userId = REQUEST.user.id
 								game.name = REQUEST.post.game.name
 								game.users[REQUEST.user.id] = {
 									id: REQUEST.user.id,
@@ -252,6 +252,108 @@
 			}
 		}
 
+/*** updates ***/
+	/* updateOne */
+		module.exports.updateOne = updateOne
+		function updateOne(REQUEST, callback) {
+			try {
+				// authenticated?
+					if (!REQUEST.user || !REQUEST.user.id) {
+						callback({success: false, message: "not signed in"})
+						return
+					}
+
+				// validate
+					if (!REQUEST.post.game || !REQUEST.post.game.id) {
+						callback({success: false, message: "no game object", recipients: [REQUEST.user.id]})
+						return
+					}
+
+				// action
+					if (REQUEST.post.action == "clearGameChat") {
+						var collection = "chats"
+					}
+					else if (REQUEST.post.action == "clearGameRolls") {
+						var collection = "rolls"
+					}
+					else {
+						callback({success: false, message: "unknown game update action", recipients: [REQUEST.user.id]})
+						return
+					}
+
+				// query
+					var query = CORE.getSchema("query")
+						query.collection = "games"
+						query.command = "find"
+						query.filters = {id: REQUEST.post.game.id}
+
+				// find
+					CORE.accessDatabase(query, function(results) {
+						if (!results.success) {
+							results.recipients = [REQUEST.user.id]
+							callback(results)
+							return
+						}
+
+						// validate
+							var game = results.documents[0]
+							if (game.userId !== REQUEST.user.id) {
+								callback({success: false, message: "only the game creator may clear chat or rolls", recipients: [REQUEST.user.id]})
+								return
+							}
+
+						// query
+							var query = CORE.getSchema("query")
+								query.collection = collection
+								query.command = "delete"
+								query.filters = {gameId: game.id}
+
+						// delete
+							CORE.accessDatabase(query, function(results) {
+								if (!results.success) {
+									results.recipients = [REQUEST.user.id]
+									callback(results)
+									return
+								}
+
+								// query
+									var query = CORE.getSchema("query")
+										query.collection = "users"
+										query.command = "find"
+										query.filters = {gameId: REQUEST.post.game.id}
+
+								// find
+									CORE.accessDatabase(query, function(results) {
+										if (!results.success) {
+											results.recipients = [REQUEST.user.id]
+											callback(results)
+											return
+										}
+
+										// ids
+											var users = results.documents
+											var ids = results.documents.map(function(u) {
+												return u.id
+											}) || []
+
+										// send update
+											if (collection == "chats") {
+												callback({success: true, message: REQUEST.user.name + " cleared the chat", chat: {delete: true}, recipients: ids})
+											}
+											else if (collection == "rolls") {
+												callback({success: true, message: REQUEST.user.name + " cleared all rolls", roll: {delete: true}, recipients: ids})	
+											}
+											return
+									})
+							})
+					})
+			}
+			catch (error) {
+				CORE.logError(error)
+				callback({success: false, message: "unable to " + arguments.callee.name})
+			}
+		}
+
 /*** deletes ***/
 	/* deleteOne */
 		module.exports.deleteOne = deleteOne
@@ -275,7 +377,7 @@
 						query.command = "find"
 						query.filters = {id: REQUEST.post.game.id}
 
-				// delete
+				// find
 					CORE.accessDatabase(query, function(results) {
 						if (!results.success) {
 							results.recipients = [REQUEST.user.id]
@@ -285,7 +387,7 @@
 
 						// validate
 							var game = results.documents[0]
-							if (game.creator !== REQUEST.user.id) {
+							if (game.userId !== REQUEST.user.id) {
 								callback({success: false, message: "only the game creator may delete the game", recipients: [REQUEST.user.id]})
 								return
 							}
@@ -294,7 +396,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "games"
 								query.command = "delete"
-								query.filters = {id: REQUEST.post.game.id}
+								query.filters = {id: REQUEST.post.game.id, userId: REQUEST.user.id}
 
 						// delete
 							CORE.accessDatabase(query, function(results) {
@@ -359,6 +461,70 @@
 															callback({success: true, user: updatedUser, location: "/", recipients: [updatedUser.id]})
 													})
 											}
+
+										// delete chats
+											// query
+												var query = CORE.getSchema("query")
+													query.collection = "chats"
+													query.command = "delete"
+													query.filters = {gameId: game.id}
+
+											// delete
+												CORE.accessDatabase(query, function(results) {
+													if (!results.success) {
+														results.recipients = [REQUEST.user.id]
+														callback(results)
+														return
+													}
+												})
+
+										// delete rolls
+											// query
+												var query = CORE.getSchema("query")
+													query.collection = "rolls"
+													query.command = "delete"
+													query.filters = {gameId: game.id}
+
+											// delete
+												CORE.accessDatabase(query, function(results) {
+													if (!results.success) {
+														results.recipients = [REQUEST.user.id]
+														callback(results)
+														return
+													}
+												})
+
+										// delete content
+											// query
+												var query = CORE.getSchema("query")
+													query.collection = "content"
+													query.command = "delete"
+													query.filters = {gameId: game.id}
+
+											// delete
+												CORE.accessDatabase(query, function(results) {
+													if (!results.success) {
+														results.recipients = [REQUEST.user.id]
+														callback(results)
+														return
+													}
+												})
+
+										// delete characters
+											// query
+												var query = CORE.getSchema("query")
+													query.collection = "characters"
+													query.command = "delete"
+													query.filters = {gameId: game.id}
+
+											// delete
+												CORE.accessDatabase(query, function(results) {
+													if (!results.success) {
+														results.recipients = [REQUEST.user.id]
+														callback(results)
+														return
+													}
+												})
 									})
 							})
 					})

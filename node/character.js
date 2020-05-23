@@ -2,9 +2,6 @@
 	if (!CORE) { var CORE = require("../node/core") }
 	if (!USER) { var USER = require("../node/user") }
 
-/*** globals ***/
-	if (!RULES) { var RULES = CORE.getAsset("rules") }
-
 /*** creates ***/
 	/* createOne */
 		module.exports.createOne = createOne
@@ -28,7 +25,7 @@
 
 				// upload or template?
 					if (REQUEST.post.character.info && REQUEST.post.character.statistics) {
-						var character = CORE.duplicateObject(RULES.character)
+						var character = CORE.getSchema("character")
 
 						for (var i in REQUEST.post.character) {
 							character[i] = REQUEST.post.character[i]
@@ -41,11 +38,12 @@
 						return
 					}
 					else if (!REQUEST.post.character.template.type) {
-						var character = CORE.duplicateObject(RULES.character)
+						var character = CORE.getSchema("character")
 					}
 					else {
 						// template validation
-							if (REQUEST.post.character.template.type && !RULES[REQUEST.post.character.template.type]) {
+							var templates = CORE.getAsset(REQUEST.post.character.template.type)
+							if (REQUEST.post.character.template.type && !templates) {
 								callback({success: false, message: "invalid character template type", recipients: [REQUEST.user.id]})
 								return
 							}
@@ -55,7 +53,7 @@
 							}
 
 						// find
-							var original = RULES[REQUEST.post.character.template.type].find(function(c) {
+							var original = templates.find(function(c) {
 								return c.info && c.info.name == REQUEST.post.character.template.name
 							})
 							if (!original) {
@@ -391,12 +389,16 @@
 						callback({success: false, message: "no character object", recipients: [REQUEST.user.id]})
 						return
 					}
+					if (REQUEST.post.character.userId !== REQUEST.user.id) {
+						callback({success: false, message: "only the creator may change access", recipients: [REQUEST.user.id]})
+						return
+					}
 
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "characters"
 						query.command = "update"
-						query.filters = {id: REQUEST.post.character.id}
+						query.filters = {id: REQUEST.post.character.id, userId: REQUEST.user.id}
 						query.document = {access: REQUEST.post.character.access}
 
 				// update
@@ -696,14 +698,19 @@
 						// validate
 							var character = results.documents[0]
 							if (character.access && character.access !== REQUEST.user.id) {
-								callback({success: false, message: "no access to this character", recipients: [REQUEST.uesr.id]})
+								callback({success: false, message: "no access to this character", recipients: [REQUEST.user.id]})
+								return
+							}
+							if (character.userId !== REQUEST.user.id) {
+								callback({success: false, message: "only the creator may delete the character", recipients: [REQUEST.user.id]})
+								return
 							}
 
 						// query
 							var query = CORE.getSchema("query")
 								query.collection = "characters"
 								query.command = "delete"
-								query.filters = {id: character.id}
+								query.filters = {id: character.id, userId: REQUEST.user.id}
 
 						// delete
 							CORE.accessDatabase(query, function(results) {

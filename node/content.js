@@ -384,12 +384,16 @@
 						callback({success: false, message: "no content object", recipients: [REQUEST.user.id]})
 						return
 					}
+					if (REQUEST.post.content.userId !== REQUEST.user.id) {
+						callback({success: false, message: "only the creator may change access", recipients: [REQUEST.user.id]})
+						return
+					}
 
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "content"
 						query.command = "update"
-						query.filters = {id: REQUEST.post.content.id}
+						query.filters = {id: REQUEST.post.content.id, userId: REQUEST.post.content.userId}
 						query.document = {access: REQUEST.post.content.access}
 
 				// update
@@ -885,14 +889,19 @@
 						// validate
 							var content = results.documents[0]
 							if (content.access && content.access !== REQUEST.user.id) {
-								callback({success: false, message: "no access to this content", recipients: [REQUEST.uesr.id]})
+								callback({success: false, message: "no access to this content", recipients: [REQUEST.user.id]})
+								return
+							}
+							if (content.userId !== REQUEST.user.id) {
+								callback({success: false, message: "only the creator may delete the content", recipients: [REQUEST.user.id]})
+								return
 							}
 
 						// query
 							var query = CORE.getSchema("query")
 								query.collection = "content"
 								query.command = "delete"
-								query.filters = {id: content.id}
+								query.filters = {id: content.id, userId: REQUEST.user.id}
 
 						// delete
 							CORE.accessDatabase(query, function(results) {

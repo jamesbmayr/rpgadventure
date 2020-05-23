@@ -40,8 +40,14 @@
 								<option id="settings-game-select-search" value="[search]" selected>[find game]</option>
 							</optgroup>
 						</select>
-						<input id="settings-game-input" type="text" placeholder="game name" class="form-pair" visibility="true"/>
+						<input id="settings-game-input" type="text" placeholder="game name" class="form-pair" autocomplete="off" visibility="true"/>
 						<button id="settings-game-button" class="form-pair">&rarr;</button>
+					</form>
+					<form id="settings-game-clearChat-form" method="post" action="javascript:;" visibility="false">
+						<button id="settings-game-clearChat-button">clear chat</button>
+					</form>
+					<form id="settings-game-clearRolls-form" method="post" action="javascript:;" visibility="false">
+						<button id="settings-game-clearRolls-button">clear rolls</button>
 					</form>
 					<details id="settings-game-delete-gate" class="delete-gate" visibility="false">
 						<summary>delete game</summary>
@@ -83,6 +89,7 @@
 					<button id="rules-search-button" class="form-pair">&#x1f50e;</button>
 				</form>
 				<div id="rules-results"></div>
+				<a id="rules-link" target="_blank" href="<script node>getAsset('rules-doc')</script>node>">[explore rules guide]</a>
 			</section>
 			<section id="character" mode="settings">
 				<div id="character-modes">
@@ -173,6 +180,7 @@
 						<select id="character-conditions-select">
 							<option id="character-conditions-disabled" disabled selected>+ condition</option>
 						</select>
+						<div id="character-conditions-list"></div>
 					</div>
 					<div id="character-damage" class="section">
 						<input id="character-info-damage" type="number" step="1" placeholder="damage"/>
@@ -338,6 +346,9 @@
 							<option id="character-speed-disabled" disabled selected>+ skill</option>
 						</select>
 					</details>
+					<select id="character-items-select">
+						<option id="character-items-disabled" disabled selected>+ item</option>
+					</select>
 					<details id="character-items" class="section">
 						<summary>
 							<div id="character-items-equipped"></div>
@@ -345,9 +356,6 @@
 						</summary>
 						<div id="character-items-unequipped"></div>
 					</details>
-					<select id="character-items-select">
-						<option id="character-items-disabled" disabled selected>+ item</option>
-					</select>
 				</div>
 			</section>
 			<section id="chat">
@@ -405,11 +413,19 @@
 						</select>
 						<button id="content-access-button" class="form-pair">&rarr;</button>
 					</form>
+					<form id="content-embedCode-form" method="post" action="javascript:;">
+						<h4>embed</h4>
+						<textarea id="content-embedCode-input" placeholder="embed html" class="form-pair"></textarea>
+						<button id="content-embedCode-button" class="form-pair">&rarr;</button>
+					</form>
+					<form id="content-url-form" method="post" action="javascript:;">
+						<h4>url</h4>
+						<input type="text" id="content-url-input" placeholder="url" class="form-pair"/>
+						<button id="content-url-button" class="form-pair">&rarr;</button>
+					</form>
 					<form id="content-data-form" method="post" action="javascript:;">
 						<h4>data</h4>
-						<textarea id="content-data-embedCode" placeholder="embed html"></textarea>
-						<input type="text" id="content-data-url" placeholder="embed url"/>
-						<button id="content-data-button">save</button>
+						<button id="content-data-button">save content &rarr;</button>
 					</form>
 					<form id="content-upload-form" method="post" action="javascript:;" enctype="multipart/form-data">
 						<input type="file" id="content-upload-input"/>

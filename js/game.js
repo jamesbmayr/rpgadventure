@@ -93,6 +93,14 @@ window.onload = function() {
 									search: document.getElementById("settings-game-select-search")
 								},
 								input: document.getElementById("settings-game-input"),
+								clearChat: {
+									form: document.getElementById("settings-game-clearChat-form"),
+									button: document.getElementById("settings-game-clearChat-button"),
+								},
+								clearRolls: {
+									form: document.getElementById("settings-game-clearRolls-form"),
+									button: document.getElementById("settings-game-clearRolls-button"),
+								},
 								delete: {
 									gate: document.getElementById("settings-game-delete-gate"),
 									form: document.getElementById("settings-game-delete-form"),
@@ -129,7 +137,8 @@ window.onload = function() {
 								input: document.getElementById("rules-search-input"),
 								button: document.getElementById("rules-search-button"),
 							},
-							results: document.getElementById("rules-results")
+							results: document.getElementById("rules-results"),
+							link: document.getElementById("rules-link")
 						}
 
 					// character
@@ -237,6 +246,7 @@ window.onload = function() {
 							},
 							conditions: {
 								element: document.getElementById("character-conditions"),
+								list: document.getElementById("character-conditions-list"),
 								select: document.getElementById("character-conditions-select"),
 								disabled: document.getElementById("character-conditions-disabled"),
 							},
@@ -298,10 +308,18 @@ window.onload = function() {
 								all: document.getElementById("content-access-select-all"),
 								me: document.getElementById("content-access-select-me")
 							},
+							embedCode: {
+								form: document.getElementById("content-embedCode-form"),
+								input: document.getElementById("content-embedCode-input"),
+								button: document.getElementById("content-embedCode-button")
+							},
+							url: {
+								form: document.getElementById("content-url-form"),
+								input: document.getElementById("content-url-input"),
+								button: document.getElementById("content-url-button")
+							},
 							data: {
 								form: document.getElementById("content-data-form"),
-								url: document.getElementById("content-data-url"),
-								embedCode: document.getElementById("content-data-embedCode"),
 								button: document.getElementById("content-data-button")
 							},
 							upload: {
@@ -355,6 +373,8 @@ window.onload = function() {
 					// settings
 						ELEMENTS.settings.game.select.element.addEventListener(TRIGGERS.change, changeGameSelection)
 						ELEMENTS.settings.game.form.addEventListener(TRIGGERS.submit, selectGame)
+						ELEMENTS.settings.game.clearChat.form.addEventListener(TRIGGERS.submit, clearGameChat)
+						ELEMENTS.settings.game.clearRolls.form.addEventListener(TRIGGERS.submit, clearGameRolls)
 						ELEMENTS.settings.game.delete.form.addEventListener(TRIGGERS.submit, deleteGame)
 						ELEMENTS.settings.audio.volume.addEventListener(TRIGGERS.change, updateUserVolume)
 						ELEMENTS.settings.user.name.form.addEventListener(TRIGGERS.change, updateUserName)
@@ -394,6 +414,8 @@ window.onload = function() {
 						ELEMENTS.content.send.addEventListener(TRIGGERS.click, sendContentToChat)
 						ELEMENTS.content.name.form.addEventListener(TRIGGERS.submit, updateContentName)
 						ELEMENTS.content.access.form.addEventListener(TRIGGERS.submit, updateContentAccess)
+						ELEMENTS.content.embedCode.form.addEventListener(TRIGGERS.submit, updateContentData)
+						ELEMENTS.content.url.form.addEventListener(TRIGGERS.submit, updateContentData)
 						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, updateContentData)
 						ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, uploadContentFile)
 						ELEMENTS.content.duplicate.form.addEventListener(TRIGGERS.submit, duplicateContent)
@@ -585,6 +607,12 @@ window.onload = function() {
 		/** receiveRolls */
 			function receiveRolls(rollGroups) {
 				try {
+					// delete?
+						if (rollGroups.delete) {
+							ELEMENTS.stream.history.innerHTML = ""
+							return
+						}
+
 					// loop through rollGroups
 						for (var i in rollGroups) {
 							// already exists
@@ -745,7 +773,9 @@ window.onload = function() {
 							ELEMENTS.settings.game.select.none.disabled = (GAME && GAME.id) ? false : true
 
 						// edit forms?
-							ELEMENTS.settings.game.delete.gate.setAttribute("visibility", (GAME && GAME.id && GAME.creator == USER.id) ? true : false)
+							ELEMENTS.settings.game.clearChat.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
+							ELEMENTS.settings.game.clearRolls.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
+							ELEMENTS.settings.game.delete.gate.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
 
 						// remove extra games
 							var gameOptions = Array.from(ELEMENTS.settings.game.select.custom.querySelectorAll("option"))
@@ -917,6 +947,52 @@ window.onload = function() {
 							displayCharacter()
 							listCharacters()
 						
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* clearGameChat */
+				function clearGameChat(event) {
+					try {
+						// post
+							var post = {
+								action: "clearGameChat",
+								game: {
+									id: GAME ? GAME.id : null,
+									userId: USER ? USER.id : null
+								}
+							}
+
+						// validate
+							if (!post.game || !post.game.id) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* clearGameRolls */
+				function clearGameRolls(event) {
+					try {
+						// post
+							var post = {
+								action: "clearGameRolls",
+								game: {
+									id: GAME ? GAME.id : null,
+									userId: USER ? USER.id : null
+								}
+							}
+
+						// validate
+							if (!post.game || !post.game.id) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+
 						// send
 							SOCKET.send(JSON.stringify(post))
 					} catch (error) {console.log(error)}
@@ -2005,6 +2081,8 @@ window.onload = function() {
 						// metadata
 							ELEMENTS.character.settings.metadata.setAttribute("visibility", true)
 							ELEMENTS.character.settings.access.select.element.value = CHARACTER.access ? ELEMENTS.character.settings.access.select.me.value : ELEMENTS.character.settings.access.select.all.value
+							ELEMENTS.character.settings.access.form.setAttribute("visibility", (CHARACTER && CHARACTER.id && CHARACTER.userId == USER.id) ? true : false)
+							ELEMENTS.character.settings.delete.gate.setAttribute("visibility", (CHARACTER && CHARACTER.id && CHARACTER.userId == USER.id) ? true : false)
 
 						// mode
 							var mode = ELEMENTS.character.element.getAttribute("mode") || "play"
@@ -3075,10 +3153,10 @@ window.onload = function() {
 										block.id = item.id
 
 										if (item.equipped) {
-											equipped.appendChild(block)
+											equipped.prepend(block)
 										}
 										else {
-											unequipped.appendChild(block)
+											unequipped.prepend(block)
 										}
 
 								// remove
@@ -3526,7 +3604,7 @@ window.onload = function() {
 									var conditionElement = document.createElement("div")
 										conditionElement.className = "condition"
 										conditionElement.setAttribute("value", condition)
-									ELEMENTS.character.conditions.element.prepend(conditionElement)
+									ELEMENTS.character.conditions.list.prepend(conditionElement)
 
 								// name
 									var name = document.createElement("div")
@@ -3711,6 +3789,12 @@ window.onload = function() {
 		/** receiveChat **/
 			function receiveChat(messages) {
 				try {
+					// clear messages?
+						if (messages.delete) {
+							ELEMENTS.chat.messages.innerHTML = ""
+							return
+						}
+
 					// no new messages
 						var newMessages = false
 
@@ -4064,8 +4148,8 @@ window.onload = function() {
 									id: CONTENT.id,
 									userId: USER ? USER.id : null,
 									gameId: GAME ? GAME.id : null,
-									url: ELEMENTS.content.data.url.value || null,
-									embedCode: ELEMENTS.content.data.embedCode.value || null,
+									url: ELEMENTS.content.url.input.value || null,
+									embedCode: ELEMENTS.content.embedCode.input.value || null,
 									text: CONTENT.type == "text" ? ELEMENTS.gametable.element.querySelector(".content-text").innerHTML : null
 								}
 							}
@@ -4215,13 +4299,17 @@ window.onload = function() {
 
 						// access
 							ELEMENTS.content.access.select.value = CONTENT.access ? ELEMENTS.content.access.me.value : ELEMENTS.content.access.all.value
+							ELEMENTS.content.access.form.setAttribute("visibility", (CONTENT && CONTENT.id && CONTENT.userId == USER.id) ? true : false)
+
+						// edit forms?
+							ELEMENTS.content.delete.gate.setAttribute("visibility", (CONTENT && CONTENT.id && CONTENT.userId == USER.id) ? true : false)
 
 						// form
 							ELEMENTS.content.element.setAttribute("mode", CONTENT.type || "none")
-							ELEMENTS.content.data.url.value = CONTENT.url || null
-							ELEMENTS.content.data.embedCode.value = CONTENT.embedCode || null
+							ELEMENTS.content.url.input.value = CONTENT.url || null
+							ELEMENTS.content.embedCode.input.value = CONTENT.embedCode || null
 
-						// arena?
+						// arena
 							if (CONTENT.type == "arena") {
 								// content
 									var arena = ELEMENTS.gametable.element.querySelector(".content-arena")
@@ -4249,7 +4337,7 @@ window.onload = function() {
 									displayContentArena()
 							}
 
-						// text?
+						// text
 							if (CONTENT.type == "text") {
 								// content
 									var text = ELEMENTS.gametable.element.querySelector(".content-text")
@@ -4406,7 +4494,7 @@ window.onload = function() {
 							if (content.type == "image") {
 								var resultDataContent = document.createElement("img")
 									resultDataContent.className = "content-chat-data content-image"
-									resultDataContent.src = content.url + (content.url ? ("?" + new Date().getTime()) : "")
+									resultDataContent.src = content.url ? (content.url + (content.file ? ("?" + new Date().getTime()) : "")) : "#"
 								resultElement.appendChild(resultDataContent)
 							}
 

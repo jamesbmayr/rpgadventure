@@ -448,6 +448,15 @@
 								catch (error) {_400(REQUEST, "unable to " + REQUEST.post.action)}
 							break
 
+						// update
+							case "clearGameChat":
+							case "clearGameRolls":
+								try {
+									GAME.updateOne(REQUEST, sendSocketData)
+								}
+								catch (error) {_400(REQUEST, "unable to " + REQUEST.post.action)}
+							break
+
 						// delete
 							case "deleteGame":
 								try {
