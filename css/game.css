@@ -42,11 +42,11 @@
 			-o-user-select: none !important;
 		}
 
-		.d6:hover {
+		.d6:hover, .d6:focus {
 			box-shadow: 0 0 var(--shadow-size) var(--medium-gray) !important;
 		}
 
-		.d20:hover {
+		.d20:hover, .d20:focus {
 			filter: drop-shadow(0 0 var(--shadow-size) var(--medium-gray)) !important;
 		}
 
@@ -200,7 +200,7 @@
 				background-color: var(--medium-red);
 			}
 
-			#stream-history .d6[type="item"] {
+			#stream-history .d6[type="item"], #stream-history .d6[type="other"] {
 				background-color: var(--medium-yellow);	
 			}
 
@@ -932,7 +932,7 @@
 				background-color: transparent;
 			}
 
-			.skill-remove:hover {
+			.skill-remove:hover, .skill-remove:focus {
 				box-shadow: none;
 				text-shadow: 0 0 var(--shadow-size) var(--medium-gray);
 			}
@@ -948,7 +948,7 @@
 				font-weight: bold;
 			}
 
-			.statistic select:hover {
+			.statistic select:hover, .statistic select:focus {
 				box-shadow: 0 0 var(--shadow-size) var(--light-gray);
 			}
 
@@ -982,7 +982,7 @@
 				pointer-events: all;
 			}
 
-			#character-items-ellipsis:hover {
+			#character-items-ellipsis:hover, #character-items-ellipsis:focus {
 				text-shadow: 0 0 var(--shadow-size) var(--medium-gray);
 			}
 
@@ -1207,7 +1207,7 @@
 				text-decoration: line-through;
 			}
 
-			.item-equip:hover {
+			.item-equip:hover, .item-equip:focus {
 				box-shadow: none;
 				text-shadow: 0 0 var(--shadow-size) var(--light-gray);
 			}
@@ -1231,7 +1231,7 @@
 				padding: 0;
 			}
 
-			.item-remove:hover {
+			.item-remove:hover, .item-remove:focus {
 				box-shadow: none;
 				text-shadow: 0 0 var(--shadow-size) var(--light-gray);
 			}
@@ -1301,7 +1301,7 @@
 				padding: 0;
 			}
 
-			.condition-remove:hover {
+			.condition-remove:hover, .condition-remove:focus {
 				box-shadow: none;
 				text-shadow: 0 0 var(--shadow-size) var(--light-blue);
 			}
@@ -1533,28 +1533,28 @@
 			width: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)));
 		}
 
-		/* embedCode */
-			#content:not([mode="embed"]) #content-embedCode-form {
+		/* code */
+			#content[mode="arena"] #content-code-form, #content[mode="text"] #content-code-form, #content[mode="image"] #content-code-form, #content[mode="audio"] #content-code-form {
 				display: none;
 			}
 
 		/* url */
-			#content[mode="text"] #content-url-form, #content[mode="arena"] #content-url-form {
+			#content[mode="arena"] #content-url-form, #content[mode="text"] #content-url-form, #content[mode="component"] #content-url-form {
 				display: none;
 			}
 
 		/* data */
-			#content:not([mode="text"]) #content-data-form {
+			#content[mode="arena"] #content-data-form, #content[mode="image"] #content-data-form, #content[mode="audio"] #content-data-form, #content[mode="embed"] #content-data-form, #content[mode="component"] #content-data-form {
 				display: none;
 			}
 
 		/* upload */
-			#content[mode="arena"] #content-upload-form, #content[mode="text"] #content-upload-form, #content[mode="embed"] #content-upload-form {
+			#content[mode="arena"] #content-upload-form, #content[mode="text"] #content-upload-form, #content[mode="embed"] #content-upload-form, #content[mode="component"] #content-upload-form {
 				display: none;
 			}
 
 	/** controls **/
-		#content[mode="none"] #content-controls, #content[mode="text"] #content-controls, #content[mode="audio"] #content-controls, #content[mode="embed"] #content-controls {
+		#content[mode="none"] #content-controls, #content[mode="text"] #content-controls, #content[mode="audio"] #content-controls, #content[mode="embed"] #content-controls, #content[mode="component"] #content-controls {
 			display: none;
 		}
 
@@ -1594,8 +1594,13 @@
 				border-radius: 0 var(--border-radius) var(--border-radius) 0;
 			}
 
+		/* turn order */
+			#content:not([mode="arena"]) #content-controls-turn-form {
+				display: none;
+			}
+
 	/** arena objects **/
-		#content[mode="none"] #content-objects, #content[mode="text"] #content-objects, #content[mode="image"] #content-objects, #content[mode="audio"] #content-objects, #content[mode="embed"] #content-objects {
+		#content:not([mode="arena"]) #content-objects {
 			display: none;
 		}
 

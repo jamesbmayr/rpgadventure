@@ -347,7 +347,7 @@
 								type: null,
 								name: null,
 								url: null,
-								embedCode: null,
+								code: null,
 								file: null,
 								text: null,
 								arena: null
@@ -1119,38 +1119,31 @@
 								perception: [
 									{name: "sight", unremovable: true}, {name: "sound", unremovable: true}, {name: "scent", unremovable: true}, {name: "taste", unremovable: true}, {name: "touch", unremovable: true},
 									{name: "internal_clock"}, {name: "perfect_pitch"}, {name: "color_sense"},
-									{name: "night_vision", animals: true}, {name: "infrared_vision", animals: true}, {name: "internal_compass", animals: true}, {name: "infrasound", animals: true}, {name: "echolocation", animals: true}, {name: "camouflage", animals: true},
-									{name: "custom_perception"}
+									{name: "night_vision", animals: true}, {name: "infrared_vision", animals: true}, {name: "internal_compass", animals: true}, {name: "infrasound", animals: true}, {name: "echolocation", animals: true}, {name: "camouflage", animals: true}
 								],
 								memory: [
 									{name: "alchemy"}, {name: "astronomy"}, {name: "botany"}, {name: "cooking"}, {name: "facial_recognition"}, {name: "geography"}, {name: "geology"}, {name: "history"}, {name: "leatherworking"}, {name: "linguistics"}, {name: "lip_reading"}, {name: "medicine"}, {name: "metalworking"}, {name: "woodworking"}, {name: "voice_recognition"}, {name: "zoology"},
-									{name: "lang_human"}, {name: "lang_elf"}, {name: "lang_dwarf"}, {name: "lang_halfling"}, {name: "lang_gnome"}, {name: "lang_goblin"}, {name: "lang_orc"}, {name: "lang_bhios"}, {name: "lang_mellifax"}, {name: "lang_preas"}, {name: "lang_winge"}, {name: "lang_lizardfolk"},
-									{name: "custom_memory"}
+									{name: "lang_human"}, {name: "lang_elf"}, {name: "lang_dwarf"}, {name: "lang_halfling"}, {name: "lang_gnome"}, {name: "lang_goblin"}, {name: "lang_orc"}, {name: "lang_bhios"}, {name: "lang_mellifax"}, {name: "lang_preas"}, {name: "lang_winge"}, {name: "lang_lizardfolk"}
 								],
 								logic: [
 									{name: "evoke_emotion", charisma: true, counters: ["judge_character", "remain_calm"]}, {name: "game_playing"}, {name: "handle_animals", charisma: true, counters: ["judge_character", "aggression"]}, {name: "humor", charisma: true, counters: ["remain_calm"]}, {name: "intimidate", charisma: true, counters: ["remain_calm"]}, {name: "judge_character"}, {name: "mathematics"}, {name: "mechanics"}, {name: "pattern_recognition"}, {name: "persuade", charisma: true, counters:["judge_character"]}, {name: "remain_calm"}, {name: "seduce", charisma: true, counters:["judge_character", "remain_calm"]}, {name: "spatial_reasoning"},
-									{name: "aggression", animals: true}, {name: "training", animals: true},
-									{name: "custom_logic"}
+									{name: "aggression", animals: true}, {name: "training", animals: true}
 								],
 								strength: [
 									{name: "archery", combat: true}, {name: "block"}, {name: "carry", unremovable: true}, {name: "climb"}, {name: "fishing"}, {name: "melee", combat: true}, {name: "punch", combat: true, d6: 2, unremovable: true}, {name: "throw", combat: true, unremovable: true},
-									{name: "bite", combat: true, animals: true, d6: 4}, {name: "slam", combat: true, animals: true, d6: 4}, {name: "tusk", combat: true, animals: true, d6: 4},
-									{name: "custom_strength"}
+									{name: "bite", combat: true, animals: true, d6: 4}, {name: "slam", combat: true, animals: true, d6: 4}, {name: "tusk", combat: true, animals: true, d6: 4}
 								],
 								dexterity: [
 									{name: "catch"}, {name: "crafting"}, {name: "drawing"}, {name: "escape_bonds"}, {name: "fencing", combat: true}, {name: "knifing", combat: true}, {name: "lock_picking"}, {name: "martial_arts", combat: true, d6: 2, unremovable: true}, {name: "missile", combat: true}, {name: "musicianship"}, {name: "penmanship"}, {name: "performance"}, {name: "ride_animals"}, {name: "sneak"},
-									{name: "claws", combat: true, animals: true, d6: 3}, {name: "talons", combat: true, animals: true, d6: 2},
-									{name: "custom_dexterity"}
+									{name: "claws", combat: true, animals: true, d6: 3}, {name: "talons", combat: true, animals: true, d6: 2}
 								],
 								immunity: [
 									{name: "alcohol_tolerance"}, {name: "allergy_resistance"}, {name: "hold_breath"}, {name: "infection_resistance"}, {name: "metabolism"}, {name: "pain_tolerance"}, {name: "poison_resistance"}, {name: "recover", d6: 2, unremovable: true}, {name: "sleep_resistance"},
-									{name: "defend", animals: true, d6: 0}, {name: "temperature_resistance", animals: true},
-									{name: "custom_immunity"}
+									{name: "defend", animals: true, d6: 0}, {name: "temperature_resistance", animals: true}
 								],
 								speed: [
 									{name: "dodge"}, {name: "jump", unremovable: true}, {name: "kick", combat: true, d6: 2, unremovable: true}, {name: "run", unremovable: true}, {name: "swim", unremovable: true},
-									{name: "fly", animals: true},
-									{name: "custom_speed"}
+									{name: "fly", animals: true}
 								]
 							}
 						break
@@ -1268,6 +1261,7 @@
 						case "conditions":
 							return {
 								alertness: {
+									name: "alertness",
 									description: "Boosts physical attributes.",
 									effects: {
 										strength: {statistic: 2},
@@ -1277,6 +1271,7 @@
 									}
 								},
 								asphyxiation: {
+									name: "asphyxiation",
 									description: "Roll hold breath before rolling a check for any other statistic. Unconscious in 20 rounds (2 minutes).",
 									effects: {
 										perception: {taste: -10, scent: -10},
@@ -1287,6 +1282,7 @@
 									}
 								},
 								blinding_light: {
+									name: "blinding_light",
 									description: "Impairs sight. -10 on skills where sight matters, such as combat.",
 									effects: {
 										perception: {sight: -10},
@@ -1296,6 +1292,7 @@
 									}
 								},
 								concentration: {
+									name: "concentration",
 									description: "Boosts mental attributes.",
 									effects: {
 										memory: {statistic: 2},
@@ -1304,6 +1301,7 @@
 									}
 								},
 								darkness: {
+									name: "darkness",
 									description: "Impairs sight. -10 on skills where sight matters, such as combat.",
 									effects: {
 										perception: {sight: -10},
@@ -1313,6 +1311,7 @@
 									}
 								},
 								dual_wielding: {
+									name: "dual_wielding",
 									description: "Impairs dexterity & strength. Caused by using two weapons or using a weapon with a shield.",
 									effects: {
 										dexterity: {statistic: -5},
@@ -1320,6 +1319,7 @@
 									}
 								},
 								encumbrance: {
+									name: "encumbrance",
 									description: "Caused by carrying weight meeting or exceeding maximum carrying capacity.",
 									effects: {
 										dexterity: {statistic: -2, sneak: -2},
@@ -1327,6 +1327,7 @@
 									}
 								},
 								exhaustion: {
+									name: "exhaustion",
 									description: "Roll sleep resistance before rolling a check for any other statistic. Unconscious in 1 week of no sleep or 1 week of no food.",
 									effects: {
 										strength: {statistic: -2},
@@ -1339,6 +1340,7 @@
 									}
 								},
 								extreme_cold: {
+									name: "extreme_cold",
 									description: "Roll pain tolerance before strength, dexterity, speed.",
 									immunity_check: {
 										skill: "pain_tolerance",
@@ -1347,6 +1349,7 @@
 									}
 								},
 								extreme_heat: {
+									name: "extreme_heat",
 									description: "Roll pain tolerance before strength, dexterity, speed.",
 									immunity_check: {
 										skill: "pain_tolerance",
@@ -1355,6 +1358,7 @@
 									}
 								},
 								fog: {
+									name: "fog",
 									description: "Impairs sight. -5 on skills where sight matters, such as combat.",
 									effects: {
 										perception: {sight: -5},
@@ -1364,12 +1368,14 @@
 									}	
 								},
 								immunity_boost: {
+									name: "immunity_boost",
 									description: "Boosts recovery and immunity against infection and poison.",
 									effects: {
 										immunity: {recover: 5, infection_resistance: 5, poison_resistance: 5, alcohol_tolerance: 5}
 									}
 								},
 								inebriation: {
+									name: "inebriation",
 									description: "Impairs perception. Roll alcohol tolerance before rolling a check for any other statistic.",
 									effects: {
 										perception: {statistic: -10},
@@ -1380,6 +1386,7 @@
 									}
 								},
 								infection: {
+									name: "infection",
 									description: "Roll infection resistance during each recover attempt until a successful check. Unable to recover.",
 									immunity_check: {
 										skill: "infection_resistance",
@@ -1387,18 +1394,21 @@
 									}
 								},
 								liquid_barrier: {
+									name: "liquid_barrier",
 									description: "Impairs sound.",
 									effects: {
 										perception: {sound: -10}
 									}
 								},
 								loud_noise: {
+									name: "loud_noise",
 									description: "Impairs sound.",
 									effects: {
 										perception: {sound: -10}
 									}
 								},
 								minor_pain_body: {
+									name: "minor_pain_body",
 									description: "Roll pain tolerance before strength, dexterity, speed.",
 									immunity_check: {
 										skill: "pain_tolerance",
@@ -1406,6 +1416,7 @@
 									}
 								},
 								minor_pain_head: {
+									name: "minor_pain_head",
 									description: "Roll pain tolerance before perception, memory, logic.",
 									immunity_check: {
 										skill: "pain_tolerance",
@@ -1413,18 +1424,21 @@
 									}
 								},
 								noxious_odor: {
+									name: "noxious_odor",
 									description: "Smells bad.",
 									effects: {
 										perception: {scent: -10}
 									}
 								},
 								pain_relief: {
+									name: "pain_relief",
 									description: "Boosts pain resistance.",
 									effects: {
 										immunity: {pain_tolerance: 5}
 									}
 								},
 								paralysis_arms: {
+									name: "paralysis_arms",
 									description: "Impairs dexterity & strength.",
 									effects: {
 										dexterity: {statistic: -10},
@@ -1432,12 +1446,14 @@
 									}
 								},
 								paralysis_legs: {
+									name: "paralysis_legs",
 									description: "Impairs speed.",
 									effects: {
 										speed: {statistic: -10}
 									}
 								},
 								perceptiveness: {
+									name: "perceptiveness",
 									description: "Boosts perception and insight skills.",
 									effects: {
 										perception: {statistic: 2},
@@ -1446,6 +1462,7 @@
 									}
 								},
 								poison: {
+									name: "poison",
 									description: "Roll poison resistance during each recover attempt until a successful check. Unable to recover.",
 									immunity_check: {
 										skill: "poison_resistance",
@@ -1453,12 +1470,14 @@
 									}
 								},
 								resistance: {
+									name: "resistance",
 									description: "Boost recovery and immunity against infection and poison. Roll an additional 1d6 armor against physical attacks.", // ???
 									effects: {
 										immunity: {recover: 5, infection_resistance: 5, poison_resistance: 5, alcohol_tolerance: 5}
 									}
 								},
 								severe_pain: {
+									name: "severe_pain",
 									description: "Roll pain tolerance before rolling a check for any other statistic. Caused when any statistic is reduced to 1.",
 									immunity_check: {
 										skill: "pain_tolerance",
@@ -1466,6 +1485,7 @@
 									}
 								},
 								sleep: {
+									name: "sleep",
 									description: "Roll sleep resistance or else unable to act in any way. To be awakened, roll perception plus applicable sense. If attacked, immediately wake up.",
 									immunity_check: {
 										skill: "sleep_resistance",
@@ -1476,6 +1496,7 @@
 									}
 								},
 								smoke: {
+									name: "smoke",
 									description: "Impairs sight & scent. -5 on skills where sight matters, such as combat. Roll hold breath before strength and speed.",
 									immunity_check: {
 										skill: "hold_breath",
@@ -1489,15 +1510,18 @@
 									}	
 								},
 								solid_barrier: {
+									name: "solid_barrier",
 									description: "Impairs sound.",
 									effects: {
 										perception: {sound: -10}
 									}
 								},
 								surprise: {
+									name: "surprise",
 									description: "Roll remain calm or else unable to act for 1 round.",
 								},
 								unconsciousness: {
+									name: "unconsciousness",
 									description: "A character with any statistic at 0 is unconscious and unable to act in any way.",
 									effects: {
 										perception: {statistic: -100},

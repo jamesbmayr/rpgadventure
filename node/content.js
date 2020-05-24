@@ -505,7 +505,7 @@
 						query.collection = "content"
 						query.command = "update"
 						query.filters = {id: REQUEST.post.content.id}
-						query.document = {url: REQUEST.post.content.url, embedCode: REQUEST.post.content.embedCode, text: REQUEST.post.content.text}
+						query.document = {url: REQUEST.post.content.url, code: REQUEST.post.content.code, text: REQUEST.post.content.text}
 
 				// update
 					CORE.accessDatabase(query, function(results) {

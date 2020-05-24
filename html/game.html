@@ -170,7 +170,8 @@
 									<option id="character-settings-recipient-none" value="">[none]</option>
 									<option id="character-settings-recipient-environment" value="[environment]">[environment]</option>
 								</optgroup>
-								<optgroup id="character-settings-recipient-custom" label="characters"></optgroup>
+								<optgroup id="character-settings-recipient-characters" label="characters"></optgroup>
+								<optgroup id="character-settings-recipient-arena" label="arena"></optgroup>
 							</select>
 						</form>
 					</div>
@@ -378,11 +379,12 @@
 				<form id="content-choose-form" method="post" action="javascript:;" class="subsection">
 					<h3>selection</h3>
 					<select id="content-choose-select">
-						<optgroup id="content-choose-select-arena" label="game arena"></optgroup>
-						<optgroup id="content-choose-select-text" label="game text"></optgroup>
-						<optgroup id="content-choose-select-image" label="game image"></optgroup>
-						<optgroup id="content-choose-select-audio" label="game audio"></optgroup>
-						<optgroup id="content-choose-select-embed" label="game embed"></optgroup>
+						<optgroup id="content-choose-select-arena" label="arena"></optgroup>
+						<optgroup id="content-choose-select-text" label="text"></optgroup>
+						<optgroup id="content-choose-select-image" label="image"></optgroup>
+						<optgroup id="content-choose-select-audio" label="audio"></optgroup>
+						<optgroup id="content-choose-select-embed" label="embed"></optgroup>
+						<optgroup id="content-choose-select-component" label="component"></optgroup>
 						<optgroup id="content-choose-select-other" label="other">
 							<option id="content-choose-select-none" value="[none]" disabled>[close document]</option>
 							<option id="content-choose-select-new" value="[new]" selected>[new document]</option>
@@ -394,6 +396,7 @@
 						<option id="content-choose-types-image" value="image">image</option>
 						<option id="content-choose-types-audio" value="audio">audio</option>
 						<option id="content-choose-types-embed" value="embed">embed</option>
+						<option id="content-choose-types-component" value="component">component</option>
 					</select>
 					<button id="content-choose-button" class="form-pair">&rarr;</button>
 				</form>
@@ -402,7 +405,7 @@
 					<button id="content-send" class="minor-button">&#x1f4ac;</button>
 					<form id="content-name-form" method="post" action="javascript:;">
 						<h4>name</h4>
-						<input type="text" id="content-name-input" placeholder="document name" class="form-pair"/>
+						<input type="text" id="content-name-input" placeholder="document name" autocomplete="off" class="form-pair"/>
 						<button id="content-name-button" class="form-pair">&rarr;</button>
 					</form>
 					<form id="content-access-form" method="post" action="javascript:;">
@@ -413,14 +416,14 @@
 						</select>
 						<button id="content-access-button" class="form-pair">&rarr;</button>
 					</form>
-					<form id="content-embedCode-form" method="post" action="javascript:;">
-						<h4>embed</h4>
-						<textarea id="content-embedCode-input" placeholder="embed html" class="form-pair"></textarea>
-						<button id="content-embedCode-button" class="form-pair">&rarr;</button>
+					<form id="content-code-form" method="post" action="javascript:;">
+						<h4>code</h4>
+						<textarea id="content-code-input" placeholder="enter code here" autocomplete="off" class="form-pair"></textarea>
+						<button id="content-code-button" class="form-pair">&rarr;</button>
 					</form>
 					<form id="content-url-form" method="post" action="javascript:;">
 						<h4>url</h4>
-						<input type="text" id="content-url-input" placeholder="url" class="form-pair"/>
+						<input type="text" id="content-url-input" placeholder="url" autocomplete="off" class="form-pair"/>
 						<button id="content-url-button" class="form-pair">&rarr;</button>
 					</form>
 					<form id="content-data-form" method="post" action="javascript:;">
@@ -456,6 +459,10 @@
 						<button id="content-controls-pan-up" value="y">&uarr;</button>
 						<button id="content-controls-pan-down" value="-y">&darr;</button>
 						<button id="content-controls-pan-right" value="x">&rarr;</button>
+					</form>
+					<form id="content-controls-turn-form" method="post" action="javascript:;">
+						<h4>turn order</h4>
+						<button id="content-controls-turn-button">calculate turn order</button>
 					</form>
 				</div>
 				<div id="content-objects" class="subsection">

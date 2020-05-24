@@ -13,6 +13,12 @@
 						return
 					}
 
+				// turn order?
+					if (REQUEST.post.action == "createTurnOrder") {
+						createTurnOrder(REQUEST, callback)
+						return
+					}
+
 				// validate
 					if (!REQUEST.post.rollGroup || !REQUEST.post.rollGroup.rolls) {
 						callback({success: false, message: "invalid roll object", recipients: [REQUEST.user.id]})
@@ -305,6 +311,173 @@
 									})
 							})
 					}
+			}
+			catch (error) {
+				CORE.logError(error)
+				callback({success: false, message: "unable to " + arguments.callee.name})
+			}
+		}
+
+	/* createTurnOrder */
+		module.exports.createTurnOrder = createTurnOrder
+		function createTurnOrder(REQUEST, callback) {
+			try {
+				// authenticated?
+					if (!REQUEST.user || !REQUEST.user.id) {
+						callback({success: false, message: "not signed in", recipients: [REQUEST.user.id]})
+						return
+					}
+
+				// validate
+					if (!REQUEST.post.rollGroup || !REQUEST.post.rollGroup.contentId) {
+						callback({success: false, message: "no content selected", recipients: [REQUEST.user.id]})
+						return
+					}
+					if (!REQUEST.post.rollGroup.gameId) {
+						callback({success: false, message: "no game selected", recipients: [REQUEST.user.id]})
+						return
+					}
+
+				// query
+					var query = CORE.getSchema("query")
+						query.collection = "content"
+						query.command = "find"
+						query.filters = {gameId: REQUEST.post.rollGroup.gameId, id: REQUEST.post.rollGroup.contentId}
+
+				// find
+					CORE.accessDatabase(query, function(results) {
+						if (!results.success) {
+							results.recipients = [REQUEST.user.id]
+							callback(results)
+							return
+						}
+
+						// arena
+							var content = results.documents[0]
+							if (!content || content.type !== "arena" || !content.arena) {
+								callback({success: false, message: "arena not found", recipients: [REQUEST.user.id]})
+								return
+							}
+
+						// get arena objects with associated character ids
+							var turnOrder = []
+							for (var i in content.arena.objects) {
+								if (content.arena.objects[i].characterId) {
+									turnOrder.push({
+										id: content.arena.objects[i].characterId,
+										name: content.arena.objects[i].text || null
+									})
+								}
+							}
+
+						// validate
+							if (!turnOrder || !turnOrder.length) {
+								callback({success: false, message: "no characters in this arena", recipients: [REQUEST.user.id]})
+								return
+							}
+
+						// query
+							var query = CORE.getSchema("query")
+								query.collection = "characters"
+								query.command = "find"
+								query.filters = {gameId: REQUEST.post.rollGroup.gameId}
+
+						// find
+							CORE.accessDatabase(query, function(results) {
+								if (!results.success) {
+									results.recipients = [REQUEST.user.id]
+									callback(results)
+									return
+								}
+
+								// characters
+									var characters = results.documents || []
+									if (!characters || !characters.length) {
+										callback({success: false, message: "characters not found", recipients: [REQUEST.user.id]})
+										return
+									}
+
+								// calculate speed
+									for (var i in turnOrder) {
+										var character = characters.find(function(c) {
+											return c.id == turnOrder[i].id
+										}) || null
+
+										if (!character) {
+											turnOrder[i].initiative = 0
+											continue
+										}
+
+										var run = character.statistics.speed.skills.find(function(skill) { return skill.name == "run" }) || {maximum: 0, condition: 0}
+										turnOrder[i].initiative = Math.max(0, character.statistics.speed.maximum + character.statistics.speed.damage + character.statistics.speed.condition + run.maximum + run.condition)
+									}
+
+								// sort
+									turnOrder = turnOrder.sort(function(a, b) {
+										return b.initiative - a.initiative
+									})
+
+								// rollGroup
+									var rollGroup = CORE.getSchema("rollGroup")
+										rollGroup.userId = REQUEST.user.id
+										rollGroup.gameId = REQUEST.post.rollGroup.gameId
+
+									var roll = CORE.getSchema("roll")
+										roll.display.spacer = true
+										roll.display.text = "turn order"
+									rollGroup.rolls.push(roll)
+
+								// initiative list
+									for (var i in turnOrder) {
+										var roll = CORE.getSchema("roll")
+											roll.display.d = 20
+											roll.display.text = turnOrder[i].name
+											roll.display.total = "(" + turnOrder[i].initiative + ")"
+											roll.display.success = true
+										rollGroup.rolls.push(roll)
+									}
+
+								// query
+									var query = CORE.getSchema("query")
+										query.collection = "rolls"
+										query.command = "insert"
+										query.document = rollGroup
+
+								// insert
+									CORE.accessDatabase(query, function(results) {
+										if (!results.success) {
+											results.recipients = [REQUEST.user.id]
+											callback(results)
+											return
+										}
+
+										// rollGroups
+											var rollGroups = [results.documents[0]]
+
+										// query
+											var query = CORE.getSchema("query")
+												query.collection = "users"
+												query.command = "find"
+												query.filters = {gameId: REQUEST.post.rollGroup.gameId}
+
+										// find
+											CORE.accessDatabase(query, function(results) {
+												if (!results.success) {
+													results.recipients = [REQUEST.user.id]
+													callback(results)
+													return
+												}
+
+												// return
+													var ids = results.documents.map(function(u) {
+														return u.id
+													}) || []
+													callback({success: true, roll: rollGroups, recipients: ids})
+													return
+											})
+									})
+							})
+					})
 			}
 			catch (error) {
 				CORE.logError(error)

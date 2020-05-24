@@ -517,6 +517,7 @@
 
 					// stream
 						// create
+							case "createTurnOrder":
 							case "createRollGroup":
 								try {
 									ROLL.createOne(REQUEST, sendSocketData)

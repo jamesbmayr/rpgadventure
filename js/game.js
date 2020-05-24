@@ -198,7 +198,8 @@ window.onload = function() {
 									select: document.getElementById("character-settings-recipient-select"),
 									none: document.getElementById("character-settings-recipient-none"),
 									environment: document.getElementById("character-settings-recipient-environment"),
-									custom: document.getElementById("character-settings-recipient-custom")
+									characters: document.getElementById("character-settings-recipient-characters"),
+									arena: document.getElementById("character-settings-recipient-arena")
 								}
 							},
 							info: {
@@ -288,6 +289,7 @@ window.onload = function() {
 									image: document.getElementById("content-choose-select-image"),
 									audio: document.getElementById("content-choose-select-audio"),
 									embed: document.getElementById("content-choose-select-embed"),
+									component: document.getElementById("content-choose-select-component"),
 								},
 								types: {
 									element: document.getElementById("content-choose-types"),
@@ -296,6 +298,7 @@ window.onload = function() {
 									image: document.getElementById("content-choose-types-image"),
 									audio: document.getElementById("content-choose-types-audio"),
 									embed: document.getElementById("content-choose-types-embed"),
+									component: document.getElementById("content-choose-types-component")
 								}
 							},
 							name: {
@@ -308,10 +311,10 @@ window.onload = function() {
 								all: document.getElementById("content-access-select-all"),
 								me: document.getElementById("content-access-select-me")
 							},
-							embedCode: {
-								form: document.getElementById("content-embedCode-form"),
-								input: document.getElementById("content-embedCode-input"),
-								button: document.getElementById("content-embedCode-button")
+							code: {
+								form: document.getElementById("content-code-form"),
+								input: document.getElementById("content-code-input"),
+								button: document.getElementById("content-code-button")
 							},
 							url: {
 								form: document.getElementById("content-url-form"),
@@ -349,6 +352,10 @@ window.onload = function() {
 									up: document.getElementById("content-controls-pan-up"),
 									down: document.getElementById("content-controls-pan-down"),
 									right: document.getElementById("content-controls-pan-right")
+								},
+								turn: {
+									form: document.getElementById("content-controls-turn-form"),
+									button: document.getElementById("content-controls-turn-button")
 								}
 							},
 							objects: {
@@ -414,7 +421,7 @@ window.onload = function() {
 						ELEMENTS.content.send.addEventListener(TRIGGERS.click, sendContentToChat)
 						ELEMENTS.content.name.form.addEventListener(TRIGGERS.submit, updateContentName)
 						ELEMENTS.content.access.form.addEventListener(TRIGGERS.submit, updateContentAccess)
-						ELEMENTS.content.embedCode.form.addEventListener(TRIGGERS.submit, updateContentData)
+						ELEMENTS.content.code.form.addEventListener(TRIGGERS.submit, updateContentData)
 						ELEMENTS.content.url.form.addEventListener(TRIGGERS.submit, updateContentData)
 						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, updateContentData)
 						ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, uploadContentFile)
@@ -423,6 +430,7 @@ window.onload = function() {
 						ELEMENTS.body.addEventListener(TRIGGERS.mousemove, moveContent)
 						ELEMENTS.body.addEventListener(TRIGGERS.mouseup, ungrabContent)
 						ELEMENTS.content.controls.zoom.form.addEventListener(TRIGGERS.submit, zoomContent)
+						ELEMENTS.content.controls.turn.form.addEventListener(TRIGGERS.submit, calculateContentTurnOrder)
 						ELEMENTS.content.objects.form.addEventListener(TRIGGERS.submit, addContentArenaObject)
 						window.addEventListener(TRIGGERS.resize, displayContentArena)
 						ELEMENTS.content.controls.pan.form.addEventListener(TRIGGERS.submit, panContentArena)
@@ -1249,6 +1257,7 @@ window.onload = function() {
 							for (var c in RULES.conditions) {
 								if (c.includes(searchText) || c.includes(similarSearchText)) {
 									var result = FUNCTIONS.duplicateObject(RULES.conditions[c])
+									delete result.name
 									resultsList.push({name: c, type: "condition", data: result, addable: true})
 								}
 							}
@@ -1451,28 +1460,28 @@ window.onload = function() {
 
 						// race
 							if (result.type == "race") {
-								updateCharacterRace(CHARACTER.info.demographics.race, result.name)
+								updateCharacterRace(result)
 								changeTool({target: ELEMENTS.tools.character})
 								changeCharacterMode({target: ELEMENTS.character.modes.edit})
 							}
 							
 						// skill
 							else if (result.type == "skill") {
-								addCharacterSkill({target: {value: result.name}})
+								addCharacterSkill(result)
 								changeTool({target: ELEMENTS.tools.character})
 								changeCharacterMode({target: ELEMENTS.character.modes.edit})
 							}
 
 						// item
 							else if (result.type == "item") {
-								addCharacterItem({target: {value: result.name, category: result.data.type || "miscellaneous"}})
+								addCharacterItem(result)
 								changeTool({target: ELEMENTS.tools.character})
 								changeCharacterMode({target: ELEMENTS.character.modes.items})
 							}
 
 						// condition
 							else if (result.type == "condition") {
-								addCharacterCondition({target: {value: result.name}})
+								addCharacterCondition(result)
 								changeTool({target: ELEMENTS.tools.character})
 								changeCharacterMode({target: ELEMENTS.character.modes.conditions})
 							}
@@ -1672,7 +1681,8 @@ window.onload = function() {
 						// no game?
 							if (!GAME) {
 								ELEMENTS.character.settings.select.custom.innerHTML = ""
-								ELEMENTS.character.settings.recipient.custom.innerHTML = ""
+								ELEMENTS.character.settings.recipient.characters.innerHTML = ""
+								ELEMENTS.character.settings.recipient.arena.innerHTML = ""
 								ELEMENTS.content.objects.characters.innerHTML = ""
 								ELEMENTS.content.objects.images.innerHTML = ""
 								return
@@ -1711,7 +1721,7 @@ window.onload = function() {
 									}
 
 								// character targeting
-									var targetOption = ELEMENTS.character.settings.recipient.custom.querySelector("option[value='" + character.id + "']")
+									var targetOption = ELEMENTS.character.settings.recipient.characters.querySelector("option[value='" + character.id + "']")
 									if (targetOption && character.delete) {
 										if (ELEMENTS.character.settings.recipient.select.value == targetOption.value) {
 											ELEMENTS.character.settings.recipient.select.value = ELEMENTS.character.settings.recipient.none.value
@@ -1725,7 +1735,7 @@ window.onload = function() {
 										targetOption = document.createElement("option")
 										targetOption.value = character.id
 										targetOption.innerText = character.name
-										ELEMENTS.character.settings.recipient.custom.appendChild(targetOption)
+										ELEMENTS.character.settings.recipient.characters.appendChild(targetOption)
 									}
 
 								// arena content objects select
@@ -2167,7 +2177,7 @@ window.onload = function() {
 								var statistic = event.target.closest(".statistic").id.replace("character-", "")
 								var skill = RULES.skills[statistic].find(function(k) {
 									return k.name == skillName
-								})
+								}) || {name: skillName}
 							}
 
 						// from a statistic
@@ -2205,19 +2215,16 @@ window.onload = function() {
 
 						// immunity check ?
 							var immunity_checks = []
-							var conditions = []
-							ELEMENTS.character.content.querySelectorAll(".condition-name").forEach(function (element) {
-								conditions.push(element.innerText.replace(/\s/g, "_"))
-							})
+							var conditions = CHARACTER.info.status.conditions || []
 							for (var c in conditions) {
-								if (RULES.conditions[conditions[c]].immunity_check && RULES.conditions[conditions[c]].immunity_check.before) {
-									if ((skillName && RULES.conditions[conditions[c]].immunity_check.before.includes(skillName)) 
-									 || (statistic && RULES.conditions[conditions[c]].immunity_check.before.includes(statistic))) {
+								if (conditions[c].immunity_check && conditions[c].immunity_check.before) {
+									if ((skillName && conditions[c].immunity_check.before.includes(skillName)) 
+									 || (statistic && conditions[c].immunity_check.before.includes(statistic))) {
 										// get target
 											var target = CHARACTER.statistics.immunity.maximum + CHARACTER.statistics.immunity.damage + CHARACTER.statistics.immunity.condition
-											if (RULES.conditions[conditions[c]].immunity_check.skill) {
+											if (conditions[c].immunity_check.skill) {
 												var immunitySkill = CHARACTER.statistics.immunity.skills.find(function(s) {
-													return s.name == RULES.conditions[conditions[c]].immunity_check.skill
+													return s.name == conditions[c].immunity_check.skill
 												}) || {name: null, maximum: 0, condition: 0}
 												target += immunitySkill.maximum + immunitySkill.condition
 											}
@@ -2467,7 +2474,7 @@ window.onload = function() {
 
 						// race & sex
 							if (event.target.id == "character-info-race") {
-								updateCharacterRace(CHARACTER.info.demographics.race, event.target.value.toLowerCase().trim())
+								updateCharacterRace({name: event.target.value.toLowerCase().trim()})
 							}
 							else if (event.target.id == "character-info-sex") {
 								CHARACTER.info.demographics.sex = event.target.value
@@ -2500,24 +2507,36 @@ window.onload = function() {
 				}
 
 			/* updateCharacterRace */
-				function updateCharacterRace(before, after) {
+				function updateCharacterRace(event) {
 					try {
+						// names
+							var beforeName = CHARACTER.info.demographics.race || null
+							var afterName = event.name
+
+						// no change?
+							if (beforeName == afterName) {
+								return
+							}
+
+						// before race
+							var beforeRace = RULES.races[beforeName] || {}
+
 						// unset perks
-							if (before !== after && Object.keys(RULES.races).includes(before)) {
+							if (beforeRace) {
 								// statistics
-									for (var s in RULES.races[before].statistics) {
-										CHARACTER.statistics[s].maximum -= RULES.races[before].statistics[s]
+									for (var s in beforeRace.statistics) {
+										CHARACTER.statistics[s].maximum -= beforeRace.statistics[s]
 									}
 
 								// skills
-									for (var s in RULES.races[before].skills) {
-										for (var i in RULES.races[before].skills[s]) {
+									for (var s in beforeRace.skills) {
+										for (var i in beforeRace.skills[s]) {
 											var skill = CHARACTER.statistics[s].skills.find(function(j) {
 												return j.name == i
 											})
 
 											if (skill) {
-												skill.maximum -= RULES.races[before].skills[s][i]
+												skill.maximum -= beforeRace.skills[s][i]
 
 												if (!skill.maximum && !skill.unremovable) {
 													CHARACTER.statistics[s].skills = CHARACTER.statistics[s].skills.filter(function(j) {
@@ -2529,8 +2548,8 @@ window.onload = function() {
 									}
 
 								// d6
-									for (var d in RULES.races[before].d6changes) {
-										var change = RULES.races[before].d6changes[d]
+									for (var d in beforeRace.d6changes) {
+										var change = beforeRace.d6changes[d]
 										var skill = CHARACTER.statistics[change.statistic].skills.find(function(s) {
 											return s.name == change.skill
 										})
@@ -2540,29 +2559,33 @@ window.onload = function() {
 									}
 							}
 
+						// after race
+							var afterRace = event.data ? (event.data || {}) : RULES.races[afterName] || {}
+								afterRace.name = afterName
+
 						// set new perks
-							if (before !== after && Object.keys(RULES.races).includes(after)) {
+							if (afterRace) {
 								// statistics
-									for (var s in RULES.races[after].statistics) {
-										CHARACTER.statistics[s].maximum += RULES.races[after].statistics[s]
+									for (var s in afterRace.statistics) {
+										CHARACTER.statistics[s].maximum += afterRace.statistics[s]
 									}
 
 								// skills
-									for (var s in RULES.races[after].skills) {
-										for (var i in RULES.races[after].skills[s]) {
+									for (var s in afterRace.skills) {
+										for (var i in afterRace.skills[s]) {
 											var skill = CHARACTER.statistics[s].skills.find(function(j) {
 												return j.name == i
 											})
 
 											if (skill) {
-												skill.maximum += RULES.races[after].skills[s][i]
+												skill.maximum += afterRace.skills[s][i]
 											}
 											else {
 												var rulesSkill = RULES.skills[s].find(function(k) {
 													return k.name == i
 												})
 												var skill = FUNCTIONS.duplicateObject(rulesSkill)
-													skill.maximum = RULES.races[after].skills[s][i]
+													skill.maximum = afterRace.skills[s][i]
 													skill.condition = 0
 												CHARACTER.statistics[s].skills.push(skill)
 											}
@@ -2570,8 +2593,8 @@ window.onload = function() {
 									}
 
 								// d6
-									for (var d in RULES.races[after].d6changes) {
-										var change = RULES.races[after].d6changes[d]
+									for (var d in afterRace.d6changes) {
+										var change = afterRace.d6changes[d]
 										var skill = CHARACTER.statistics[change.statistic].skills.find(function(s) {
 											return s.name == change.skill
 										})
@@ -2582,11 +2605,11 @@ window.onload = function() {
 							}
 
 						// set new info
-							CHARACTER.info.demographics.race = after
-							if (RULES.races[after]) {
-								CHARACTER.info.demographics.age    = RULES.races[after].info.age
-								CHARACTER.info.demographics.height = RULES.races[after].info.height
-								CHARACTER.info.demographics.weight = RULES.races[after].info.weight
+							CHARACTER.info.demographics.race = afterRace.name
+							if (afterRace.info) {
+								CHARACTER.info.demographics.age    = afterRace.info.age
+								CHARACTER.info.demographics.height = afterRace.info.height
+								CHARACTER.info.demographics.weight = afterRace.info.weight
 							}
 
 						// save
@@ -2616,6 +2639,11 @@ window.onload = function() {
 
 						// demographics
 							for (var i in CHARACTER.info.demographics) {
+								if (i == "race" && !ELEMENTS.character.info.race.querySelector("option[value='" + CHARACTER.info.demographics[i] + "']")) {
+									var option = document.createElement("option")
+										option.innerText = option.value = CHARACTER.info.demographics[i]
+									ELEMENTS.character.info.race.appendChild(option)
+								}
 								ELEMENTS.character.info[i].value = CHARACTER.info.demographics[i]
 							}
 
@@ -2715,21 +2743,37 @@ window.onload = function() {
 			/* addCharacterSkill */
 				function addCharacterSkill(event) {
 					try {
-						// find statistic / skill
-							var name = event.target.value.replace(/\s/g, "_")
-							var statistic = Object.keys(RULES.skills).find(function(i) {
-								return RULES.skills[i].find(function(k) {
-									return k.name.includes(name)
-								})
-							})
-							if (CHARACTER.statistics[statistic].skills.find(function(k) { return k.name == name })) {
+						// from dropdown
+							if (event.target) {
+								var skillName = event.target.value.replace(/\s/g, "_")
+								var statistic = event.target.id.replace("character-", "").replace("-select", "")
+							}
+
+						// from conditions
+							else if (event.fromConditions) {
+								var skillName = event.skillName
+								var statistic = event.statistic
+							}
+
+						// from search result
+							else {
+								var skillName = event.name
+								var statistic = event.data.statistic
+								var skill = event.data
+									skill.name = skillName
+							}
+
+						// already have it?
+							if (CHARACTER.statistics[statistic].skills.find(function(k) { return k.name == skillName })) {
 								return false
 							}
 
 						// add to skills
-							var skill = FUNCTIONS.duplicateObject(RULES.skills[statistic].find(function(k) {
-								return k.name.includes(name)
-							}))
+							if (!skill) {
+								var skill = FUNCTIONS.duplicateObject(RULES.skills[statistic].find(function(k) {
+									return k.name.includes(skillName)
+								})) || {name: skillName}
+							}
 							skill.maximum = skill.condition = 0
 
 							CHARACTER.statistics[statistic].skills.push(skill)
@@ -2744,7 +2788,7 @@ window.onload = function() {
 								var condition = RULES.conditions[CHARACTER.info.status.conditions[i]]
 								for (var e in condition.effects) {
 									for (var s in condition.effects[e]) {
-										if (s == name) {
+										if (s == skill.name) {
 											CHARACTER.statistics[statistic].skills[CHARACTER.statistics[statistic].skills.length - 1].condition += condition.effects[e][s]
 										}
 									}
@@ -2760,13 +2804,17 @@ window.onload = function() {
 			/* removeCharacterSkill */
 				function removeCharacterSkill(event) {
 					try {
-						// skill name
-							var skillName = event.fromConditions ? event.skillName : event.target.closest(".skill").querySelector(".skill-name-text").value
-							var statistic = Object.keys(RULES.skills).find(function(i) {
-								return RULES.skills[i].find(function(k) {
-									return k.name.includes(skillName.replace(/\s/g, "_"))
-								})
-							})
+						// from dropdown
+							if (event.target) {
+								var skillName = event.target.closest(".skill").querySelector(".skill-name-text").value
+								var statistic = event.target.closest(".statistic").id.replace("character-", "")
+							}
+
+						// from conditions
+							else if (event.fromConditions) {
+								var skillName = event.skillName
+								var statistic = event.statistic
+							}
 
 						// remove skill
 							for (var i = 0; i < CHARACTER.statistics[statistic].skills.length; i++) {
@@ -2799,11 +2847,7 @@ window.onload = function() {
 					try {
 						// get statistic
 							var name = event.target.closest(".skill").querySelector(".skill-name-text").value.replace(/\s/g, "_")
-							var statistic = Object.keys(RULES.skills).find(function(stat) {
-								return RULES.skills[stat].find(function(k) {
-									return k.name.includes(name)
-								})
-							})
+							var statistic = event.target.closest(".statistic").id.replace("character-", "")
 						
 						// get skill
 							var skill = CHARACTER.statistics[statistic].skills.find(function(s) {
@@ -2922,7 +2966,8 @@ window.onload = function() {
 							right.appendChild(current)
 						
 						// disable in select
-							ELEMENTS.character.statistics[statistic].querySelector("option[value=" + skill.name + "]").setAttribute("disabled", true)
+							var option = ELEMENTS.character.statistics[statistic].querySelector("option[value=" + skill.name + "]")
+							if (option) { option.setAttribute("disabled", true) }
 					} catch (error) {console.log(error)}
 				}
 
@@ -2954,17 +2999,27 @@ window.onload = function() {
 			/* addCharacterItem */
 				function addCharacterItem(event) {
 					try {
+						// from dropdown
+							if (event.target) {
+								var name = event.target.value
+								var category = event.target.querySelector("[value='" + event.target.value + "']").parentNode.label
+								var item = FUNCTIONS.duplicateObject(RULES.items[category].find(function(i) {
+									return i.name == name
+								}))
+							}
+
+						// from search result
+							else {
+								var item = event.data
+									item.name = event.name
+							}
+
 						// add to items
-							var name = event.target.value
-							var category = event.target.category || event.target.querySelector("[value='" + event.target.value + "']").parentNode.label
-							var item = FUNCTIONS.duplicateObject(RULES.items[category].find(function(i) {
-								return i.name == name
-							}))
 							item.id = FUNCTIONS.generateRandom()
 							CHARACTER.items.push(item)
 
 						// update burden
-							CHARACTER.info.status.burden += (item.weight * item.count)
+							CHARACTER.info.status.burden += ((item.weight || 0) * (item.count || 0))
 
 						// save
 							saveCharacter(CHARACTER)
@@ -3519,11 +3574,26 @@ window.onload = function() {
 			/* addCharacterCondition	*/
 				function addCharacterCondition(event) {
 					try {
-						if (Object.keys(RULES.conditions).includes(event.target.value)) {
-							// apply condition
-								if (!CHARACTER.info.status.conditions.includes(event.target.value)) {
-									CHARACTER.info.status.conditions.push(event.target.value)
-									var effects = RULES.conditions[event.target.value].effects
+						// from dropdown
+							if (event.target) {
+								var conditionName = event.target.value
+								var condition = RULES.conditions[conditionName] || {name: conditionName}
+							}
+
+						// from search result
+							else {
+								var conditionName = event.name
+								var condition = event.data
+									condition.name = conditionName
+							}
+
+						// apply condition
+							if (!CHARACTER.info.status.conditions.includes(condition.name)) {
+								// add to conditions array
+									CHARACTER.info.status.conditions.push(condition)
+
+								// add effects
+									var effects = condition.effects
 									for (var i in effects) {
 										for (var j in effects[i]) {
 											if (j == "statistic") {
@@ -3532,7 +3602,7 @@ window.onload = function() {
 											else {
 												var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
 												if (!skill) {
-													addCharacterSkill({target: {value: j}, fromConditions: true})
+													addCharacterSkill({skillName: j, statistic: i, fromConditions: true})
 													var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
 												}
 
@@ -3540,44 +3610,49 @@ window.onload = function() {
 											}
 										}
 									}
-								}
+							}
 
-							// save
-								saveCharacter(CHARACTER)
-						}
+						// save
+							saveCharacter(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
 			/* removeCharacterCondition */
 				function removeCharacterCondition(event) {
 					try {
-						if (Object.keys(RULES.conditions).includes(event.target.parentNode.getAttribute("value"))) {
-							// unapply condition
-								CHARACTER.info.status.conditions = CHARACTER.info.status.conditions.filter(function(c) {
-									return c !== event.target.parentNode.getAttribute("value")
-								})
-								var effects = RULES.conditions[event.target.parentNode.getAttribute("value")].effects
-								for (var i in effects) {
-									for (var j in effects[i]) {
-										if (j == "statistic") {
-											CHARACTER.statistics[i].condition -= effects[i][j]
-										}
-										else {
-											var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
-											if (skill) {
-												skill.condition -= effects[i][j]
+						// get condition
+							var conditionName = event.target.parentNode.getAttribute("value")
+							var condition = CHARACTER.info.status.conditions.find(function(c) {
+								return c.name == conditionName
+							}) || {name: conditionName}
 
-												if (!skill.maximum && !skill.unremovable) {
-													removeCharacterSkill({skillName: skill.name, fromConditions: true})
-												}
+						// remove from conditions array
+							CHARACTER.info.status.conditions = CHARACTER.info.status.conditions.filter(function(c) {
+								return c.name !== conditionName
+							})
+
+						// remove effects
+							var effects = condition.effects
+							for (var i in effects) {
+								for (var j in effects[i]) {
+									if (j == "statistic") {
+										CHARACTER.statistics[i].condition -= effects[i][j]
+									}
+									else {
+										var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
+										if (skill) {
+											skill.condition -= effects[i][j]
+
+											if (!skill.maximum && !skill.unremovable) {
+												removeCharacterSkill({skillName: j, statistic: i, fromConditions: true})
 											}
 										}
 									}
 								}
+							}
 
-							// save
-								saveCharacter(CHARACTER)
-						}
+						// save
+							saveCharacter(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
@@ -3585,9 +3660,9 @@ window.onload = function() {
 				function displayCharacterConditions(character, container) {
 					try {
 						// unset
-							var conditions = Array.from(container.querySelectorAll(".condition"))
-							for (var i in conditions) {
-								conditions[i].remove()
+							var conditionElements = Array.from(container.querySelectorAll(".condition"))
+							for (var i in conditionElements) {
+								conditionElements[i].remove()
 							}
 
 							var options = Array.from(ELEMENTS.character.conditions.select.querySelectorAll("option"))
@@ -3603,19 +3678,19 @@ window.onload = function() {
 								// container
 									var conditionElement = document.createElement("div")
 										conditionElement.className = "condition"
-										conditionElement.setAttribute("value", condition)
+										conditionElement.setAttribute("value", condition.name)
 									ELEMENTS.character.conditions.list.prepend(conditionElement)
 
 								// name
 									var name = document.createElement("div")
 										name.className = "condition-name"
-										name.innerText = condition.replace(/_/g, " ")
+										name.innerText = condition.name.replace(/_/g, " ")
 									conditionElement.appendChild(name)
 
 								// description
 									var description = document.createElement("div")
 										description.className = "condition-description"
-										description.innerText = RULES.conditions[condition].description || ""
+										description.innerText = condition.description || ""
 									conditionElement.appendChild(description)
 
 								// remove
@@ -3626,7 +3701,10 @@ window.onload = function() {
 									conditionElement.prepend(remove)
 
 								// disable in select
-									ELEMENTS.character.conditions.select.querySelector("[value=" + condition + "]").setAttribute("disabled", true)
+									var conditionOption = ELEMENTS.character.conditions.select.querySelector("[value=" + condition.name + "]")
+									if (conditionOption) {
+										conditionOption.setAttribute("disabled", true)
+									}
 							}
 
 						// disabled
@@ -3886,10 +3964,12 @@ window.onload = function() {
 
 						// no game?
 							if (!GAME) {
+								ELEMENTS.content.choose.select.arena.innerHTML = ""
 								ELEMENTS.content.choose.select.text.innerHTML = ""
 								ELEMENTS.content.choose.select.image.innerHTML = ""
 								ELEMENTS.content.choose.select.audio.innerHTML = ""
 								ELEMENTS.content.choose.select.embed.innerHTML = ""
+								ELEMENTS.content.choose.select.component.innerHTML = ""
 								return
 							}
 
@@ -4149,7 +4229,7 @@ window.onload = function() {
 									userId: USER ? USER.id : null,
 									gameId: GAME ? GAME.id : null,
 									url: ELEMENTS.content.url.input.value || null,
-									embedCode: ELEMENTS.content.embedCode.input.value || null,
+									code: ELEMENTS.content.code.input.value || null,
 									text: CONTENT.type == "text" ? ELEMENTS.gametable.element.querySelector(".content-text").innerHTML : null
 								}
 							}
@@ -4159,7 +4239,7 @@ window.onload = function() {
 								FUNCTIONS.showToast({success: false, message: "no content selected"})
 								return
 							}
-							if (CONTENT.type == "embed" && !post.content.url && !post.content.embedCode) {
+							if (CONTENT.type == "embed" && !post.content.url && !post.content.code) {
 								FUNCTIONS.showToast({success: false, message: "no url or embed code entered"})
 								return
 							}
@@ -4291,6 +4371,7 @@ window.onload = function() {
 							if (!CONTENT) {
 								ELEMENTS.content.element.setAttribute("mode", "none")
 								ELEMENTS.gametable.element.innerHTML = ""
+								ELEMENTS.character.settings.recipient.arena.innerHTML = ""
 								return
 							}
 
@@ -4307,7 +4388,7 @@ window.onload = function() {
 						// form
 							ELEMENTS.content.element.setAttribute("mode", CONTENT.type || "none")
 							ELEMENTS.content.url.input.value = CONTENT.url || null
-							ELEMENTS.content.embedCode.input.value = CONTENT.embedCode || null
+							ELEMENTS.content.code.input.value = CONTENT.code || null
 
 						// arena
 							if (CONTENT.type == "arena") {
@@ -4335,6 +4416,7 @@ window.onload = function() {
 									ELEMENTS.gametable.canvas.element = arena
 									ELEMENTS.gametable.canvas.context = ELEMENTS.gametable.canvas.element.getContext("2d")
 									displayContentArena()
+									return
 							}
 
 						// text
@@ -4353,6 +4435,7 @@ window.onload = function() {
 									if (text.innerHTML !== CONTENT.text) {
 										text.innerHTML = CONTENT.text
 									}
+									return
 							}
 
 						// image
@@ -4377,6 +4460,7 @@ window.onload = function() {
 										CONTENT.zoomPower = 0
 										CONTENT.zoom = 1
 									}
+									return
 							}
 
 						// audio
@@ -4404,12 +4488,13 @@ window.onload = function() {
 										source.setAttribute("type", "audio/" + (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg"))
 										source.setAttribute("src", CONTENT.url)
 									}
+									return
 							}
 
 						// embed
 							if (CONTENT.type == "embed") {
-								// embedCode
-									if (CONTENT.embedCode) {
+								// code
+									if (CONTENT.code) {
 										var embed = ELEMENTS.gametable.element.querySelector("div.content-embed")
 										if (!embed) {
 											ELEMENTS.gametable.element.innerHTML = ""
@@ -4418,8 +4503,8 @@ window.onload = function() {
 											ELEMENTS.gametable.element.appendChild(embed)
 										}
 
-										if (embed.innerHTML !== CONTENT.embedCode) {
-											embed.innerHTML = CONTENT.embedCode
+										if (embed.innerHTML !== CONTENT.code) {
+											embed.innerHTML = CONTENT.code
 										}
 									}
 
@@ -4443,7 +4528,14 @@ window.onload = function() {
 									else {
 										ELEMENTS.gametable.element.innerHTML = ""
 									}
+									return
 							}
+
+						// component
+							if (CONTENT.type == "component") {
+								ELEMENTS.gametable.element.innerHTML = ""
+							}
+							return
 					} catch (error) {console.log(error)}
 				}
 
@@ -4480,6 +4572,7 @@ window.onload = function() {
 									resultDataContent.className = "content-chat-data"
 									resultDataContent.innerHTML = ""
 								resultElement.appendChild(resultDataContent)
+								return
 							}
 
 						// text
@@ -4488,6 +4581,7 @@ window.onload = function() {
 									resultDataContent.className = "content-chat-data"
 									resultDataContent.innerHTML = content.text
 								resultElement.appendChild(resultDataContent)
+								return
 							}
 
 						// image
@@ -4496,6 +4590,7 @@ window.onload = function() {
 									resultDataContent.className = "content-chat-data content-image"
 									resultDataContent.src = content.url ? (content.url + (content.file ? ("?" + new Date().getTime()) : "")) : "#"
 								resultElement.appendChild(resultDataContent)
+								return
 							}
 
 						// audio
@@ -4512,19 +4607,33 @@ window.onload = function() {
 									source.src = content.url
 									source.setAttribute("type", "audio/" + (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg"))
 								resultDataContent.appendChild(source)
+								return
 							}
 
 						// embed
 							if (content.type == "embed") {
 								var resultDataContent = document.createElement("div")
 									resultDataContent.className = "content-chat-data"
-									if (content.embedCode) {
-										resultDataContent.innerText = content.embedCode
+									if (content.code) {
+										resultDataContent.innerText = content.code
 									}
 									else if (content.url) {
 										resultDataContent.innerHTML = `<a target="_blank" href="` + content.url + `">` + content.url + `</a>`
 									}
 								resultElement.appendChild(resultDataContent)
+								return
+							}
+
+						// component
+							if (content.type == "component") {
+								try {
+									var code = JSON.parse(content.code)
+								} catch (error) {
+									var code = {name: (content.text || "custom component"), type: "error", data: {error: "malformed JSON"}}
+								}
+
+								displaySearchResult(code, ELEMENTS.chat.messages)
+								return
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -4804,6 +4913,15 @@ window.onload = function() {
 							for (var i in listingElements) {
 								if (!CONTENT.arena.objects[listingElements[i].id.replace("arena-object-", "")]) {
 									listingElements[i].remove()
+								}
+							}
+
+						// clear old targeting
+							var arenaObjectKeys = Object.keys(CONTENT.arena.objects)
+							var targetingOptions = Array.from(ELEMENTS.character.settings.recipient.arena.querySelectorAll("option"))
+							for (var i in targetingOptions) {
+								if (!arenaObjectKeys.find(function(o) { return CONTENT.arena.objects[o].characterId == targetingOptions[i].value })) {
+									targetingOptions[i].remove()
 								}
 							}
 
@@ -5155,6 +5273,16 @@ window.onload = function() {
 							inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor
 							inputImage.value = object.image || ""
 							inputCharacter = object.character || "[none]"
+
+						// targeting
+							if (object.characterId) {
+								if (!ELEMENTS.character.settings.recipient.arena.querySelector("option[value='" + object.characterId + "']")) {
+									var targetOption = document.createElement("option")
+										targetOption.value = object.characterId
+										targetOption.innerText = object.text || "[?]"
+									ELEMENTS.character.settings.recipient.arena.appendChild(targetOption)
+								}
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -5275,6 +5403,32 @@ window.onload = function() {
 				}
 
 		/** arena controls **/
+			/* calculateContentTurnOrder */
+				function calculateContentTurnOrder(event) {
+					try {
+						// post
+							var post = {
+								action: "createTurnOrder",
+								rollGroup: {
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									contentId: CONTENT ? CONTENT.id : null
+								}
+							}
+
+						// validate
+							if (!post.rollGroup || !post.rollGroup.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+							}
+							if (!post.rollGroup || !post.rollGroup.contentId) {
+								FUNCTIONS.showToast({success: false, message: "no content selected"})
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
 			/* zoomContentArena */
 				function zoomContentArena() {
 					try {
