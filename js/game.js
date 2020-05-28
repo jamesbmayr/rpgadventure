@@ -12,7 +12,7 @@ window.onload = function() {
 			var SOCKET = window.SOCKET = null
 			var SOCKETCHECK = null
 
-		/* initiate */
+		/* initiateApp */
 			initiateApp()
 			function initiateApp() {
 				try {
@@ -20,17 +20,22 @@ window.onload = function() {
 						findElements()
 
 					// games
-						listGames()
+						displayGameList()
 
 					// character lists
-						listCharacterTemplates()
-						listCharacterRaces()
-						listCharacterSkills()
-						listCharacterConditions()
-						listCharacterItems()
+						displayCharacterListTemplates()
+						displayCharacterListRaces()
+						displayCharacterListSkills()
+						displayCharacterListConditions()
+						displayCharacterListItems()
 
 					// listeners
 						attachListeners()
+
+					// user
+						if (window.USER) {
+							receiveUser(USER)
+						}
 
 					// connect
 						createSocket()
@@ -375,70 +380,70 @@ window.onload = function() {
 			function attachListeners() {
 				try {
 					// tools
-						ELEMENTS.tools.element.querySelectorAll(".tool").forEach(function(button) { button.addEventListener(TRIGGERS.click, changeTool) })
+						ELEMENTS.tools.element.querySelectorAll(".tool").forEach(function(button) { button.addEventListener(TRIGGERS.click, displayTool) })
 
 					// settings
-						ELEMENTS.settings.game.select.element.addEventListener(TRIGGERS.change, changeGameSelection)
-						ELEMENTS.settings.game.form.addEventListener(TRIGGERS.submit, selectGame)
-						ELEMENTS.settings.game.clearChat.form.addEventListener(TRIGGERS.submit, clearGameChat)
-						ELEMENTS.settings.game.clearRolls.form.addEventListener(TRIGGERS.submit, clearGameRolls)
-						ELEMENTS.settings.game.delete.form.addEventListener(TRIGGERS.submit, deleteGame)
-						ELEMENTS.settings.audio.volume.addEventListener(TRIGGERS.change, updateUserVolume)
-						ELEMENTS.settings.user.name.form.addEventListener(TRIGGERS.change, updateUserName)
-						ELEMENTS.settings.user.password.form.addEventListener(TRIGGERS.change, updateUserPassword)
-						ELEMENTS.settings.auth.signout.form.addEventListener(TRIGGERS.submit, signoutUser)
+						ELEMENTS.settings.game.select.element.addEventListener(TRIGGERS.change, displayGameListSelection)
+						ELEMENTS.settings.game.form.addEventListener(TRIGGERS.submit, submitGameRead)
+						ELEMENTS.settings.game.clearChat.form.addEventListener(TRIGGERS.submit, submitGameUpdateChatDelete)
+						ELEMENTS.settings.game.clearRolls.form.addEventListener(TRIGGERS.submit, submitGameUpdateRollsDelete)
+						ELEMENTS.settings.game.delete.form.addEventListener(TRIGGERS.submit, submitGameDelete)
+						ELEMENTS.settings.audio.volume.addEventListener(TRIGGERS.change, submitUserUpdateVolume)
+						ELEMENTS.settings.user.name.form.addEventListener(TRIGGERS.submit, submitUserUpdateName)
+						ELEMENTS.settings.user.password.form.addEventListener(TRIGGERS.submit, submitUserUpdatePassword)
+						ELEMENTS.settings.auth.signout.form.addEventListener(TRIGGERS.submit, submitUserUpdateSignout)
 
 					// rules
-						ELEMENTS.rules.search.form.addEventListener(TRIGGERS.submit, searchRules)
+						ELEMENTS.rules.search.form.addEventListener(TRIGGERS.submit, submitRulesSearch)
 
 					// character
-						ELEMENTS.character.element.querySelectorAll(".mode").forEach(function(button) { button.addEventListener(TRIGGERS.click, changeCharacterMode) })
-						ELEMENTS.character.settings.select.element.addEventListener(TRIGGERS.change, changeCharacterSelection)
-						ELEMENTS.character.settings.select.form.addEventListener(TRIGGERS.submit, selectCharacter)
-						ELEMENTS.character.settings.download.form.addEventListener(TRIGGERS.submit, downloadCharacter)
-						ELEMENTS.character.settings.access.form.addEventListener(TRIGGERS.submit, updateCharacterAccess)
-						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, duplicateCharacter)
-						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, deleteCharacter)
-						ELEMENTS.character.settings.rng.form.addEventListener(TRIGGERS.submit, rollDie)
-						ELEMENTS.character.content.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, rolld20) })
-						ELEMENTS.character.info.imageForm.addEventListener(TRIGGERS.submit, uploadCharacterImage)
-						ELEMENTS.character.info.imageReset.addEventListener(TRIGGERS.click, resetCharacterImage)
-						ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, updateCharacterInfo) })
-						ELEMENTS.character.content.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, updateCharacterStatistic) })
-						ELEMENTS.character.content.querySelectorAll(".statistic select").forEach(function(select) { select.addEventListener(TRIGGERS.change, addCharacterSkill) })
-						ELEMENTS.character.items.select.addEventListener(TRIGGERS.change, addCharacterItem)
-						ELEMENTS.character.conditions.select.addEventListener(TRIGGERS.change, addCharacterCondition)
-						ELEMENTS.character.info.damage.addEventListener(TRIGGERS.change, updateCharacterDamage)
-						ELEMENTS.character.info.recover.addEventListener(TRIGGERS.click, recoverCharacterDamage)
-						ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, damageCharacterStatistic) })
+						ELEMENTS.character.element.querySelectorAll(".mode").forEach(function(button) { button.addEventListener(TRIGGERS.click, displayCharacterMode) })
+						ELEMENTS.character.settings.select.element.addEventListener(TRIGGERS.change, displayCharacterListSelection)
+						ELEMENTS.character.settings.select.form.addEventListener(TRIGGERS.submit, submitCharacterRead)
+						ELEMENTS.character.settings.download.form.addEventListener(TRIGGERS.submit, displayCharacterDownload)
+						ELEMENTS.character.settings.access.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateAccess)
+						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, submitCharacterCreateDuplicate)
+						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, submitCharacterDelete)
+						ELEMENTS.character.settings.rng.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateCustom)
+						ELEMENTS.character.content.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20) })
+						ELEMENTS.character.info.imageForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImage)
+						ELEMENTS.character.info.imageReset.addEventListener(TRIGGERS.click, submitCharacterUpdateImageDelete)
+						ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateInfo) })
+						ELEMENTS.character.content.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, submitCharacterUpdateStatistic) })
+						ELEMENTS.character.content.querySelectorAll(".statistic select").forEach(function(select) { select.addEventListener(TRIGGERS.change, submitCharacterUpdateSkillCreate) })
+						ELEMENTS.character.items.select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemCreate)
+						ELEMENTS.character.conditions.select.addEventListener(TRIGGERS.change, submitCharacterUpdateConditionCreate)
+						ELEMENTS.character.info.damage.addEventListener(TRIGGERS.change, submitCharacterUpdateDamage)
+						ELEMENTS.character.info.recover.addEventListener(TRIGGERS.click, submitRollGroupCreateRecover)
+						ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateDamageStatistic) })
 
 					// chat
-						ELEMENTS.chat.send.form.addEventListener(TRIGGERS.submit, submitChat)
+						ELEMENTS.chat.send.form.addEventListener(TRIGGERS.submit, submitChatCreate)
 
 					// content
-						ELEMENTS.content.choose.select.element.addEventListener(TRIGGERS.change, changeContentSelection)
-						ELEMENTS.content.choose.form.addEventListener(TRIGGERS.submit, selectContent)
-						ELEMENTS.content.send.addEventListener(TRIGGERS.click, sendContentToChat)
-						ELEMENTS.content.name.form.addEventListener(TRIGGERS.submit, updateContentName)
-						ELEMENTS.content.access.form.addEventListener(TRIGGERS.submit, updateContentAccess)
-						ELEMENTS.content.code.form.addEventListener(TRIGGERS.submit, updateContentData)
-						ELEMENTS.content.url.form.addEventListener(TRIGGERS.submit, updateContentData)
-						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, updateContentData)
-						ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, uploadContentFile)
-						ELEMENTS.content.duplicate.form.addEventListener(TRIGGERS.submit, duplicateContent)
-						ELEMENTS.content.delete.form.addEventListener(TRIGGERS.submit, deleteContent)
+						ELEMENTS.content.choose.select.element.addEventListener(TRIGGERS.change, displayContentListSelection)
+						ELEMENTS.content.choose.form.addEventListener(TRIGGERS.submit, submitContentRead)
+						ELEMENTS.content.send.addEventListener(TRIGGERS.click, submitChatCreateContent)
+						ELEMENTS.content.name.form.addEventListener(TRIGGERS.submit, submitContentUpdateName)
+						ELEMENTS.content.access.form.addEventListener(TRIGGERS.submit, submitContentUpdateAccess)
+						ELEMENTS.content.code.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
+						ELEMENTS.content.url.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
+						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
+						ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, submitContentUpdateFile)
+						ELEMENTS.content.duplicate.form.addEventListener(TRIGGERS.submit, submitContentCreateDuplicate)
+						ELEMENTS.content.delete.form.addEventListener(TRIGGERS.submit, submitContentDelete)
 						ELEMENTS.body.addEventListener(TRIGGERS.mousemove, moveContent)
 						ELEMENTS.body.addEventListener(TRIGGERS.mouseup, ungrabContent)
 						ELEMENTS.content.controls.zoom.form.addEventListener(TRIGGERS.submit, zoomContent)
-						ELEMENTS.content.controls.turn.form.addEventListener(TRIGGERS.submit, calculateContentTurnOrder)
-						ELEMENTS.content.objects.form.addEventListener(TRIGGERS.submit, addContentArenaObject)
+						ELEMENTS.content.controls.turn.form.addEventListener(TRIGGERS.submit, submitContentArenaTurnOrder)
+						ELEMENTS.content.objects.form.addEventListener(TRIGGERS.submit, submitContentArenaObjectCreate)
 						window.addEventListener(TRIGGERS.resize, displayContentArena)
 						ELEMENTS.content.controls.pan.form.addEventListener(TRIGGERS.submit, panContentArena)
 				} catch (error) {console.log(error)}
 			}
 
 	/*** SOCKET ***/
-		/* socket */
+		/* createSocket */
 			function createSocket() {
 				try {
 					SOCKET = new WebSocket(location.href.replace("http","ws"))
@@ -466,7 +471,7 @@ window.onload = function() {
 				catch (error) {console.log(error)}
 			}
 
-		/* checkLoop */
+		/* checkSocket */
 			function checkSocket() {
 				SOCKETCHECK = setInterval(function() {
 					try {
@@ -524,7 +529,7 @@ window.onload = function() {
 
 						// characterList
 							if (data.characterList) {
-								listCharacters(data.characterList)
+								displayCharacterList(data.characterList)
 							}
 
 					// content
@@ -535,7 +540,7 @@ window.onload = function() {
 
 						// contentList
 							if (data.contentList) {
-								listContent(data.contentList)
+								displayContentList(data.contentList)
 							}
 
 					// other
@@ -546,236 +551,63 @@ window.onload = function() {
 
 						// roll
 							if (data.roll) {
-								receiveRolls(data.roll)
+								receiveRollGroups(data.roll)
 							}
-				} catch (error) {console.log(error)}
-			}
-
-	/*** STREAM ***/
-		/** addToRolls **/
-			function addToRolls(rolls) {
-				try {
-					// post
-						var post = {
-							action: "createRollGroup",
-							rollGroup: {
-								userId: USER ? USER.id : null,
-								gameId: GAME ? GAME.id : null,
-								characterId: CHARACTER ? CHARACTER.id : null,
-								rolls: rolls
-							}
-						}
-
-					// validate
-						if (!post.rollGroup.gameId) {
-							FUNCTIONS.showToast({success: false, message: "no game selected"})
-							return
-						}
-
-					// send socket request
-						SOCKET.send(JSON.stringify(post))
-				} catch (error) {console.log(error)}
-			}
-
-		/** updateInRolls **/
-			function updateInRolls(data) {
-				try {
-					// directory
-						var directory = data.id.split("-")
-
-					// post
-						var post = {
-							action: "updateRollGroup",
-							rollGroup: {
-								userId: USER ? USER.id : null,
-								gameId: GAME ? GAME.id : null,
-								characterId: CHARACTER ? CHARACTER.id : null,
-								id: directory[1],
-								rollId: directory[2],
-								index: directory[3],
-								counting: data.counting
-							}
-						}
-
-					// validate
-						if (!post.rollGroup.gameId) {
-							FUNCTIONS.showToast({success: false, message: "no game selected"})
-							return
-						}
-						if (!post.rollGroup.id || !post.rollGroup.rollId) {
-							FUNCTIONS.showToast({success: false, message: "no dice selected"})
-							return
-						}
-
-					// send socket request
-						SOCKET.send(JSON.stringify(post))
-				} catch (error) {console.log(error)}
-			}
-
-		/** receiveRolls */
-			function receiveRolls(rollGroups) {
-				try {
-					// delete?
-						if (rollGroups.delete) {
-							ELEMENTS.stream.history.innerHTML = ""
-							return
-						}
-
-					// loop through rollGroups
-						for (var i in rollGroups) {
-							// already exists
-								if (ELEMENTS.stream.history.querySelector("#roll-" + rollGroups[i].id)) {
-									updateRollGroup(rollGroups[i], ELEMENTS.stream.history.querySelector("#roll-" + rollGroups[i].id))
-									continue
-								}
-
-							// new
-								createRollGroup(rollGroups[i])
-						}
-				} catch (error) {console.log(error)}
-			}
-
-		/** createRollGroup **/
-			function createRollGroup(rollGroup) {
-				try {
-					// group element
-						var rollGroupElement = document.createElement("div")
-							rollGroupElement.className = "roll-group"
-							rollGroupElement.id = "roll-" + rollGroup.id
-						ELEMENTS.stream.history.appendChild(rollGroupElement)
-
-					// loop through rolls
-						for (var j in rollGroup.rolls) {
-							// data
-								var data = rollGroup.rolls[j]
-						
-							// spacer
-								if (data.display.spacer) {
-									var spacerElement = document.createElement("div")
-										spacerElement.id = "roll-" + rollGroup.id + "-" + data.id
-										spacerElement.className = "spacer"
-										spacerElement.innerText = data.display.text
-									rollGroupElement.appendChild(spacerElement)
-								}
-
-							// d20
-								else if (data.display.success !== null && !data.display.dice.length) {
-									var label = document.createElement("label")
-										label.id = "roll-" + rollGroup.id + "-" + data.id
-									rollGroupElement.appendChild(label)
-
-									var text = document.createElement("span")
-										text.innerText = data.display.text
-									label.appendChild(text)
-
-									var d20 = document.createElement("div")
-										d20.className = "d20"
-										d20.innerText = data.display.total
-										d20.setAttribute("success", data.display.success)
-									label.prepend(d20)
-								}
-
-							// d6
-								else {
-									var label = document.createElement("label")
-										label.id = "roll-" + rollGroup.id + "-" + data.id
-									rollGroupElement.appendChild(label)
-
-									var text = document.createElement("span")
-										text.innerText = data.display.text
-									label.prepend(text)
-
-									var total = document.createElement("div")
-										total.className = "d6 total"
-										total.id = "roll-" + rollGroup.id + "-" + data.id + "-total"
-										total.innerText = data.display.total
-										total.setAttribute("type", data.display.type)
-									label.prepend(total)
-
-									var equals = document.createElement("div")
-										equals.className = "equals"
-										equals.innerHTML = "&rarr;"
-									label.prepend(equals)
-
-									for (var r in data.display.dice) {
-										var d6 = document.createElement("div")
-											d6.id = "roll-" + rollGroup.id + "-" + data.id + "-" + r
-											d6.className = "d6"
-											d6.setAttribute("counting", data.display.dice[r].counting)
-											d6.addEventListener(TRIGGERS.click, toggled6)
-											d6.innerText = data.display.dice[r].number
-										label.prepend(d6)
-									}
-								}
-						}
-
-					// scroll
-						ELEMENTS.stream.history.scrollLeft = 1000000
-				} catch (error) {console.log(error)}
-			}
-
-		/** updateRollGroup **/
-			function updateRollGroup(rollGroup, rollGroupElement) {
-				try {
-					// loop through rolls
-						for (var j in rollGroup.rolls) {
-							// data
-								var data = rollGroup.rolls[j]
-						
-							// spacer
-								if (data.display.spacer) {
-									continue
-								}
-
-							// d20
-								else if (data.display.d == 20) {
-									continue
-								}
-
-							// d6
-								else {
-									// update total
-										var total = rollGroupElement.querySelector("#roll-" + rollGroup.id + "-" + data.id + "-total")
-											total.innerText = data.display.total
-
-									// update dice
-										for (var r in data.display.dice) {
-											var d6 = rollGroupElement.querySelector("#roll-" + rollGroup.id + "-" + data.id + "-" + r)
-												d6.setAttribute("counting", data.display.dice[r].counting)
-												d6.innerText = data.display.dice[r].number
-										}
-								}
-						}
 				} catch (error) {console.log(error)}
 			}
 
 	/*** TOOLS ***/
-		/** changeTool **/
-			function changeTool(event) {
-				try {
-					// get tool
-						var tool = event.target.id.replace("tools-", "")
+		/** display **/
+			/* displayTool */
+				function displayTool(event) {
+					try {
+						// get tool
+							var tool = event.target.id.replace("tools-", "")
 
-					// check for game
-						if ((tool == "character" || tool == "chat" || tool == "content") && !GAME) {
-							FUNCTIONS.showToast({success: false, message: "no game selected"})
-							return false
-						}
+						// check for game
+							if ((tool == "character" || tool == "chat" || tool == "content") && !GAME) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return false
+							}
 
-					// switch
-						ELEMENTS.structure.left.setAttribute("tool", tool)
+						// switch
+							ELEMENTS.structure.left.setAttribute("tool", tool)
 
-					// chat notification
-						if (tool == "chat") {
-							ELEMENTS.tools.notification.setAttribute("visibility", false)
-						}
-				} catch (error) {console.log(error)}
-			}
+						// chat notification
+							if (tool == "chat") {
+								ELEMENTS.tools.notification.setAttribute("visibility", false)
+							}
+					} catch (error) {console.log(error)}
+				}
 
-	/*** SETTINGS ***/
-		/** GAME **/
-			/* listGames */
-				function listGames() {
+	/*** SETTINGS - GAME ***/
+			/* receiveGame */
+				function receiveGame(game) {
+					try {
+						// no GAME object
+							if (!GAME) {
+								GAME = {}
+							}
+
+						// loop through game properties
+							for (var i in game) {
+								GAME[i] = game[i]
+							}
+
+						// delete?
+							if (GAME.delete) {
+								GAME = {}
+							}
+
+						// relist content
+							displayChatListRecipients()
+							displayGameList()
+					} catch (error) {console.log(error)}
+				}
+
+		/** display **/
+			/* displayGameList */
+				function displayGameList() {
 					try {
 						// close option?
 							ELEMENTS.settings.game.select.none.disabled = (GAME && GAME.id) ? false : true
@@ -818,36 +650,39 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* changeGameSelection */
-				function changeGameSelection(event) {
+			/* displayGameListSelection */
+				function displayGameListSelection(event) {
 					try {
 						// reveal
 							if (ELEMENTS.settings.game.select.element.value == ELEMENTS.settings.game.select.search.value) {
 								ELEMENTS.settings.game.input.setAttribute("visibility", true)
 								ELEMENTS.settings.game.select.element.className = ""
+								return
 							}
-							else if (ELEMENTS.settings.game.select.element.value == ELEMENTS.settings.game.select.new.value) {
+							
+							if (ELEMENTS.settings.game.select.element.value == ELEMENTS.settings.game.select.new.value) {
 								ELEMENTS.settings.game.input.setAttribute("visibility", true)
 								ELEMENTS.settings.game.select.element.className = ""
+								return
 							}
 
 						// hide
-							else {
-								ELEMENTS.settings.game.input.setAttribute("visibility", false)
-								ELEMENTS.settings.game.select.element.className = "form-pair"
-							}
+							ELEMENTS.settings.game.input.setAttribute("visibility", false)
+							ELEMENTS.settings.game.select.element.className = "form-pair"
+							return
 					} catch (error) {console.log(error)}
 				}
 
-			/* selectGame */
-				function selectGame(event) {
+		/** submit **/
+			/* submitGameRead */
+				function submitGameRead(event) {
 					try {
 						// select value
 							var value = ELEMENTS.settings.game.select.element.value
 
 						// none
 							if (value == ELEMENTS.settings.game.select.none.value) {
-								clearGame()
+								submitGameUnread()
 								return
 							}
 
@@ -896,7 +731,7 @@ window.onload = function() {
 
 						// leave?
 							if (GAME && GAME.id) {
-								clearGame()
+								submitGameUnread()
 							}
 
 						// send socket request
@@ -904,32 +739,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* receiveGame */
-				function receiveGame(game) {
-					try {
-						// no GAME object
-							if (!GAME) {
-								GAME = {}
-							}
-
-						// loop through game properties
-							for (var i in game) {
-								GAME[i] = game[i]
-							}
-
-						// delete?
-							if (GAME.delete) {
-								GAME = {}
-							}
-
-						// relist content
-							listChatRecipients()
-							listGames()
-					} catch (error) {console.log(error)}
-				}
-
-			/* clearGame */
-				function clearGame(event) {
+			/* submitGameUnread */
+				function submitGameUnread(event) {
 					try {
 						// post
 							var post = {
@@ -941,27 +752,27 @@ window.onload = function() {
 
 						// clear game object
 							GAME = null
-							listChatRecipients()
+							displayChatListRecipients()
 							ELEMENTS.stream.history.innerHTML = ""
 							ELEMENTS.chat.messages.innerHTML = ""
 						
 						// content
 							CONTENT = null
 							displayContent()
-							listContent()
+							displayContentList()
 
 						// character
 							CHARACTER = null
 							displayCharacter()
-							listCharacters()
+							displayCharacterList()
 						
 						// send
 							SOCKET.send(JSON.stringify(post))
 					} catch (error) {console.log(error)}
 				}
 
-			/* clearGameChat */
-				function clearGameChat(event) {
+			/* submitGameUpdateChatDelete */
+				function submitGameUpdateChatDelete(event) {
 					try {
 						// post
 							var post = {
@@ -983,8 +794,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* clearGameRolls */
-				function clearGameRolls(event) {
+			/* submitGameUpdateRollsDelete */
+				function submitGameUpdateRollsDelete(event) {
 					try {
 						// post
 							var post = {
@@ -1006,8 +817,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* deleteGame */
-				function deleteGame(event) {
+			/* submitGameDelete */
+				function submitGameDelete(event) {
 					try {
 						// post
 							var post = {
@@ -1029,26 +840,65 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-		/** USER **/
-			/* updateUserVolume */
-				function updateUserVolume(event) {
+	/*** SETTINGS - USER ***/
+		/** receive **/	
+			/* receiveUser */
+				function receiveUser(user) {
 					try {
+						// no user?
+							if (!USER) { USER = {} }
+
+						// loop through properties
+							for (var i in user) {
+								USER[i] = user[i]
+							}
+
+						// display
+							displayUser(user)
+					} catch (error) {console.log(error)}
+				}
+
+		/** display **/
+			/* displayUser */
+				function displayUser(user) {
+					try {
+						// username
+							ELEMENTS.settings.user.name.input.value = USER.name
+
+						// password
+							ELEMENTS.settings.user.password.old.value = null
+							ELEMENTS.settings.user.password.new.value = null
+
+						// volume
+							ELEMENTS.settings.audio.volume.value = Math.max(0, Math.min(1, USER.settings.volume))
+							var audios = Array.from(ELEMENTS.body.querySelectorAll("audio"))
+							for (var a in audios) {
+								audios[a].volume = Math.max(0, Math.min(1, volume))
+							}
+
+						// chat
+							ELEMENTS.chat.send.sender.user.innerText = user.name
+
+						// relist games
+							displayGameList()
+					} catch (error) {console.log(error)}
+				}
+
+		/** submit **/
+			/* submitUserUpdateVolume */
+				function submitUserUpdateVolume(event) {
+					try {
+						// connected?
+							if (!SOCKET) {
+								FUNCTIONS.showToast({success: false, message: "no websocket connection"})
+								return
+							}
+
 						// get number
 							var volume = Math.max(0, Math.min(1, Number(event.target.value)))
 
 						// save
 							USER.settings.volume = volume
-
-						// adjust existing audio
-							var audios = Array.from(ELEMENTS.body.querySelectorAll("audio"))
-							for (var a in audios) {
-								audios[a].volume = Math.max(0, Math.min(1, USER.settings.volume))
-							}
-
-						// connected?
-							if (!SOCKET) {
-								return
-							}
 
 						// post
 							var post = {
@@ -1063,8 +913,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* updateUserName */
-				function updateUserName(event) {
+			/* submitUserUpdateName */
+				function submitUserUpdateName(event) {
 					try {
 						// connected?
 							if (!SOCKET) {
@@ -1088,14 +938,11 @@ window.onload = function() {
 
 						// send
 							SOCKET.send(JSON.stringify(post))
-
-						// reset
-							ELEMENTS.settings.user.name.input.value = null
 					} catch (error) {console.log(error)}
 				}
 
-			/* updateUserPassword */
-				function updateUserPassword(event) {
+			/* submitUserUpdatePassword */
+				function submitUserUpdatePassword(event) {
 					try {
 						// connected?
 							if (!SOCKET) {
@@ -1126,40 +973,15 @@ window.onload = function() {
 								return
 							}
 
+							console.log(post)
+
 						// send
 							SOCKET.send(JSON.stringify(post))
-
-						// reset
-							ELEMENTS.settings.user.password.old.value = null
-							ELEMENTS.settings.user.password.new.value = null
 					} catch (error) {console.log(error)}
 				}
 
-			/* receiveUser */
-				function receiveUser(user) {
-					try {
-						// no user?
-							if (!USER) { USER = {} }
-
-						// loop through properties
-							for (var i in user) {
-								USER[i] = user[i]
-							}
-
-						// adjust settings
-							ELEMENTS.settings.audio.volume.value = Math.max(0, Math.min(1, USER.settings.volume))
-							ELEMENTS.settings.user.name.input.value = USER.name
-
-						// relist games
-							listGames()
-
-						// chat name
-							ELEMENTS.chat.send.sender.user.innerText = user.name
-					} catch (error) {console.log(error)}
-				}
-
-			/* signout */
-				function signoutUser(event) {
+			/* submitUserUpdateSignout */
+				function submitUserUpdateSignout(event) {
 					try {
 						// data
 							var post = {
@@ -1177,688 +999,177 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-	/*** RULES ***/
-		/** search **/
-			/* searchRules */
-				function searchRules(event) {
+	/*** ROLLS ***/
+		/** receive **/
+			/* receiveRollGroups */
+				function receiveRollGroups(rollGroups) {
 					try {
-						// clear
-							ELEMENTS.rules.results.innerHTML = ""
-
-						// input
-							var searchText = ELEMENTS.rules.search.input.value.toLowerCase()
-							if (!searchText) {
+						// delete?
+							if (rollGroups.delete) {
+								ELEMENTS.stream.history.innerHTML = ""
 								return
 							}
-							var similarSearchText = searchText.replace(/\s/gi, "_")
 
-						// results list
-							var resultsList = []
-
-						// overviews
-							for (var o in RULES.overviews) {
-								if (o.includes(searchText) || o.includes(similarSearchText)) {
-									var result = FUNCTIONS.duplicateObject(RULES.overviews[o])
-									delete result.name
-									resultsList.push({name: o, type: "overview", data: result})
-								}
-							}
-
-						// races
-							for (var r in RULES.races) {
-								if (r.includes(searchText) || r.includes(similarSearchText)) {
-									var result = FUNCTIONS.duplicateObject(RULES.races[r])
-									resultsList.push({name: r, type: "race", data: result, addable: true})
-								}
-							}
-
-						// classes
-							for (var c in RULES.classes) {
-								if (c.includes(searchText) || c.includes(similarSearchText)) {
-									var result = FUNCTIONS.duplicateObject(RULES.classes[c])
-									resultsList.push({name: c, type: "class", data: result})
-								}
-							}
-
-						// statistics
-							for (var s in RULES.statistics) {
-								if (s.includes(searchText) || s.includes(similarSearchText)) {
-									var description = FUNCTIONS.duplicateObject(RULES.statistics[s])
-									var skills = FUNCTIONS.duplicateObject(RULES.skills[s]).map(function(k) {
-										return k.name
-									})
-									var result = {description: description, skills: skills}
-									resultsList.push({name: s, type: "statistic", data: result})
-								}
-							}
-
-						// skills
-							for (var s in RULES.skills) {
-								for (var i in RULES.skills[s]) {
-									if (RULES.skills[s][i].name.includes(searchText) || RULES.skills[s][i].name.includes(similarSearchText)) {
-										var name = RULES.skills[s][i].name
-										var result = FUNCTIONS.duplicateObject(RULES.skills[s][i])
-											result.statistic = s
-										delete result.name
-										resultsList.push({name: name, type: "skill", data: result, addable: true})
-									}
-								}
-							}
-
-						// damage
-							for (var d in RULES.damage) {
-								if (d.includes(searchText) || d.includes(similarSearchText)) {
-									var result = FUNCTIONS.duplicateObject(RULES.damage[d])
-									resultsList.push({name: d, type: "damage", data: result})
-								}
-							}
-
-						// conditions
-							for (var c in RULES.conditions) {
-								if (c.includes(searchText) || c.includes(similarSearchText)) {
-									var result = FUNCTIONS.duplicateObject(RULES.conditions[c])
-									delete result.name
-									resultsList.push({name: c, type: "condition", data: result, addable: true})
-								}
-							}
-
-						// items
-							for (var i in RULES.items) {
-								for (var j in RULES.items[i]) {
-									if (RULES.items[i][j].name && (RULES.items[i][j].name.includes(searchText) || RULES.items[i][j].name.includes(similarSearchText))) {
-										var result = FUNCTIONS.duplicateObject(RULES.items[i][j])
-										delete result.name
-										resultsList.push({name: RULES.items[i][j].name, type: "item", data: result, addable: true})
-									}
-								}
-							}
-
-						// puzzles
-							for (var p in RULES.puzzles) {
-								if (RULES.puzzles[p].name.includes(searchText) || RULES.puzzles[p].name.includes(similarSearchText)) {
-									var result = FUNCTIONS.duplicateObject(RULES.puzzles[p])
-									var name = result.name
-									delete result.name
-									resultsList.push({name: name, type: "puzzle", data: result})
-								}
-							}
-
-						// npcs
-							for (var n in RULES.npcs) {
-								if (RULES.npcs[n].info.name.includes(searchText) || RULES.npcs[n].info.name.includes(similarSearchText)) {
-									var result = FUNCTIONS.duplicateObject(RULES.npcs[n])
-									var name = result.info.name
-									delete result.info.name
-									resultsList.push({name: name, type: "npc", data: result})
-								}
-							}
-
-						// animals
-							for (var a in RULES.animals) {
-								if (RULES.animals[a].info.name.includes(searchText) || RULES.animals[a].info.name.includes(similarSearchText)) {
-									var result = FUNCTIONS.duplicateObject(RULES.animals[a])
-									var name = result.info.name
-									delete result.info.name
-									resultsList.push({name: name, type: "npc", data: result})
-								}
-							}
-
-						// creatures
-							for (var c in RULES.creatures) {
-								if (RULES.creatures[c].info.name.includes(searchText) || RULES.creatures[c].info.name.includes(similarSearchText)) {
-									var result = FUNCTIONS.duplicateObject(RULES.creatures[c])
-									var name = result.info.name
-									delete result.info.name
-									resultsList.push({name: name, type: "npc", data: result})
-								}
-							}
-
-						// services
-							for (var s in RULES.services) {
-								if (RULES.services[s].name.includes(searchText) || RULES.services[s].name.includes(similarSearchText)) {
-									var result = FUNCTIONS.duplicateObject(RULES.services[s])
-									var name = result.name
-									delete result.name
-									result = result.tasks
-									resultsList.push({name: name, type: "service", data: result})
-								}
-							}
-
-						// spit out results
-							for (var r in resultsList) {
-								displaySearchResult(resultsList[r], ELEMENTS.rules.results)
-							}
-
-						// lose focus
-							ELEMENTS.rules.search.input.blur()
-							ELEMENTS.rules.search.button.blur()
+						// redisplay section
+							displayRollGroups(rollGroups)
 					} catch (error) {console.log(error)}
 				}
 
-			/* displaySearchResult */
-				function displaySearchResult(result, parent) {
+		/** display **/
+			/* displayRollGroups */
+				function displayRollGroups(rollGroups) {
+					try {
+						// loop through rollGroups
+							for (var i in rollGroups) {
+								// already exists
+									if (ELEMENTS.stream.history.querySelector("#roll-" + rollGroups[i].id)) {
+										displayRollGroupUpdate(rollGroups[i])
+										continue
+									}
+
+								// new
+									displayRollGroupCreate(rollGroups[i])
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayRollGroupCreate */
+				function displayRollGroupCreate(rollGroup) {
+					try {
+						// group element
+							var rollGroupElement = document.createElement("div")
+								rollGroupElement.className = "roll-group"
+								rollGroupElement.id = "roll-" + rollGroup.id
+							ELEMENTS.stream.history.appendChild(rollGroupElement)
+
+						// loop through rolls
+							for (var j in rollGroup.rolls) {
+								// data
+									var data = rollGroup.rolls[j]
+							
+								// spacer
+									if (data.display.spacer) {
+										var spacerElement = document.createElement("div")
+											spacerElement.id = "roll-" + rollGroup.id + "-" + data.id
+											spacerElement.className = "spacer"
+											spacerElement.innerText = data.display.text
+										rollGroupElement.appendChild(spacerElement)
+									}
+
+								// d20
+									else if (data.display.success !== null && !data.display.dice.length) {
+										var label = document.createElement("label")
+											label.id = "roll-" + rollGroup.id + "-" + data.id
+										rollGroupElement.appendChild(label)
+
+										var text = document.createElement("span")
+											text.innerText = data.display.text
+										label.appendChild(text)
+
+										var d20 = document.createElement("div")
+											d20.className = "d20"
+											d20.innerText = data.display.total
+											d20.setAttribute("success", data.display.success)
+										label.prepend(d20)
+									}
+
+								// d6
+									else {
+										var label = document.createElement("label")
+											label.id = "roll-" + rollGroup.id + "-" + data.id
+										rollGroupElement.appendChild(label)
+
+										var text = document.createElement("span")
+											text.innerText = data.display.text
+										label.prepend(text)
+
+										var total = document.createElement("div")
+											total.className = "d6 total"
+											total.id = "roll-" + rollGroup.id + "-" + data.id + "-total"
+											total.innerText = data.display.total
+											total.setAttribute("type", data.display.type)
+										label.prepend(total)
+
+										var equals = document.createElement("div")
+											equals.className = "equals"
+											equals.innerHTML = "&rarr;"
+										label.prepend(equals)
+
+										for (var r in data.display.dice) {
+											var d6 = document.createElement("div")
+												d6.id = "roll-" + rollGroup.id + "-" + data.id + "-" + r
+												d6.className = "d6"
+												d6.setAttribute("counting", data.display.dice[r].counting)
+												d6.addEventListener(TRIGGERS.click, submitRollGroupUpdate)
+												d6.innerText = data.display.dice[r].number
+											label.prepend(d6)
+										}
+									}
+							}
+
+						// scroll
+							ELEMENTS.stream.history.scrollLeft = 1000000
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayRollGroupUpdate */
+				function displayRollGroupUpdate(rollGroup) {
 					try {
 						// element
-							var resultElement = document.createElement("div")
-								resultElement.className = "search-result"
-								resultElement.setAttribute("type", result.type)
-								resultElement.setAttribute("data", JSON.stringify(result))
-							parent.appendChild(resultElement)
-
-						// actions
-							var resultSend = document.createElement("button")
-								resultSend.className = "search-result-send minor-button"
-								resultSend.innerHTML = "&#x1f4ac;"
-								resultSend.addEventListener(TRIGGERS.click, sendSearchResultToChat)
-							resultElement.appendChild(resultSend)
-
-							if (result.addable) {
-								var resultAdd = document.createElement("button")
-									resultAdd.className = "search-result-add minor-button"
-									resultAdd.innerHTML = "&#x1f464;"
-									resultAdd.addEventListener(TRIGGERS.click, addSearchResultToCharacter)
-								resultElement.appendChild(resultAdd)
+							var rollGroupElement = ELEMENTS.stream.history.querySelector("#roll-" + rollGroup.id)
+							if (!rollGroupElement) {
+								return
 							}
+
+						// loop through rolls
+							for (var j in rollGroup.rolls) {
+								// data
+									var data = rollGroup.rolls[j]
 							
-						// name
-							var resultName = document.createElement("h3")
-								resultName.className = "search-result-name"
-								resultName.innerText = result.name.replace(/_/gi, " ")
-							resultElement.appendChild(resultName)
-
-						// data
-							var resultDataList = document.createElement("ul")
-								resultDataList.className = "search-result-data"
-							resultElement.appendChild(resultDataList)
-
-							for (var i in result.data) {
-								var resultDataItem = document.createElement("li")
-									resultDataItem.className = "search-result-data-item"
-								resultDataList.appendChild(resultDataItem)
-
-								var resultDataItemProperty = document.createElement("span")
-									resultDataItemProperty.className = "search-result-data-item-property"
-									resultDataItemProperty.innerText = i.replace(/_/gi, " ")
-								resultDataItem.appendChild(resultDataItemProperty)
-
-								if (["string","number","boolean"].includes(typeof result.data[i])) {
-									var resultDataItemValue = document.createElement("span")
-										resultDataItemValue.className = "search-result-data-item-value"
-										resultDataItemValue.innerText = result.data[i]
-									resultDataItem.appendChild(resultDataItemValue)
-								}
-								else {
-									var resultDataItemSublist = document.createElement("ul")
-										resultDataItemSublist.className = "search-result-data-item-sublist"
-									resultDataItem.appendChild(resultDataItemSublist)
-
-									for (var j in result.data[i]) {
-										var resultDataItemSubitem = document.createElement("li")
-											resultDataItemSubitem.className = "search-result-data-item-subitem"
-										resultDataItemSublist.appendChild(resultDataItemSubitem)
-
-										if (isNaN(j)) {
-											var resultDataItemSubproperty = document.createElement("span")
-												resultDataItemSubproperty.className = "search-result-data-item-subproperty"
-												resultDataItemSubproperty.innerText = j.replace(/_/gi, " ")
-											resultDataItemSubitem.appendChild(resultDataItemSubproperty)
-										}
-
-										var resultDataItemSubvalue = document.createElement("span")
-											resultDataItemSubvalue.className = "search-result-data-item-subvalue"
-											resultDataItemSubvalue.innerText = JSON.stringify(result.data[i][j], null, 2).replace(/\{|\}|\[|\]|\"/gi,"").replace(/_/gi, " ").trim()
-										resultDataItemSubitem.appendChild(resultDataItemSubvalue)
+								// spacer
+									if (data.display.spacer) {
+										continue
 									}
-								}
+
+								// d20
+									else if (data.display.d == 20) {
+										continue
+									}
+
+								// d6
+									else {
+										// update total
+											var total = rollGroupElement.querySelector("#roll-" + rollGroup.id + "-" + data.id + "-total")
+												total.innerText = data.display.total
+
+										// update dice
+											for (var r in data.display.dice) {
+												var d6 = rollGroupElement.querySelector("#roll-" + rollGroup.id + "-" + data.id + "-" + r)
+													d6.setAttribute("counting", data.display.dice[r].counting)
+													d6.innerText = data.display.dice[r].number
+											}
+									}
 							}
 					} catch (error) {console.log(error)}
 				}
 
-			/* sendSearchResultToChat */
-				function sendSearchResultToChat(event) {
+		/** submit **/
+			/* submitRollGroupCreate */
+				function submitRollGroupCreate(rolls) {
 					try {
 						// post
 							var post = {
-								action: "createChat",
-								chat: {
+								action: "createRollGroup",
+								rollGroup: {
 									userId: USER ? USER.id : null,
 									gameId: GAME ? GAME.id : null,
-									display: {
-										data: JSON.parse(event.target.closest(".search-result").getAttribute("data"))
-									}
-								}
-							}
-						
-						// validate
-							if (!post.chat.gameId) {
-								FUNCTIONS.showToast({success: false, message: "no game selected"})
-								return
-							}
-							if (!post.chat.display.data) {
-								FUNCTIONS.showToast({success: false, message: "invalid search result"})
-								return
-							}
-
-						// send socket request
-							SOCKET.send(JSON.stringify(post))
-							changeTool({target: ELEMENTS.tools.chat})
-					} catch (error) {console.log(error)}
-				}
-
-			/* addSearchResultToCharacter */
-				function addSearchResultToCharacter(event) {
-					try {
-						// no character
-							if (!CHARACTER) {
-								FUNCTIONS.showToast({success: false, message: "no character selected"})
-								return
-							}
-
-						// get data
-							var resultElement = event.target.closest(".search-result")
-							var result = JSON.parse(resultElement.getAttribute("data") || "{}")
-
-						// race
-							if (result.type == "race") {
-								updateCharacterRace(result)
-								changeTool({target: ELEMENTS.tools.character})
-								changeCharacterMode({target: ELEMENTS.character.modes.edit})
-							}
-							
-						// skill
-							else if (result.type == "skill") {
-								addCharacterSkill(result)
-								changeTool({target: ELEMENTS.tools.character})
-								changeCharacterMode({target: ELEMENTS.character.modes.edit})
-							}
-
-						// item
-							else if (result.type == "item") {
-								addCharacterItem(result)
-								changeTool({target: ELEMENTS.tools.character})
-								changeCharacterMode({target: ELEMENTS.character.modes.items})
-							}
-
-						// condition
-							else if (result.type == "condition") {
-								addCharacterCondition(result)
-								changeTool({target: ELEMENTS.tools.character})
-								changeCharacterMode({target: ELEMENTS.character.modes.conditions})
-							}
-					} catch (error) {console.log(error)}
-				}
-
-	/*** CHARACTER ***/
-		/** OVERALL **/
-			/* changeCharacterMode */
-				function changeCharacterMode(event) {
-					try {
-						// mode
-							var mode = event.target.id.replace("character-modes-", "")
-
-							if (!CHARACTER && mode !== "settings") {
-								FUNCTIONS.showToast({success: false, message: "no character selected"})
-								return
-							}
-
-							ELEMENTS.character.element.setAttribute("mode", mode)
-
-							if (!CHARACTER) {
-								return
-							}
-
-						// close up inputs
-							ELEMENTS.character.content.querySelectorAll(".editable").forEach(function(input) {
-								input.setAttribute("readonly", true)
-							})
-
-							ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
-								input.setAttribute("readonly", true)
-							})
-
-						// disable selects
-							ELEMENTS.character.content.querySelectorAll("select").forEach(function(select) {
-								select.setAttribute("disabled", true)
-							})
-
-						// play
-							if (mode == "play") {
-								// close info & items
-									ELEMENTS.character.info.element.removeAttribute("open")
-									ELEMENTS.character.items.element.removeAttribute("open")
-							}
-
-						// edit
-							if (mode == "edit") {
-								// open info
-									ELEMENTS.character.info.element.setAttribute("open", true)
-
-								// info
-									ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(input) {
-										input.removeAttribute("readonly")
-									})
-									ELEMENTS.character.info.race.removeAttribute("disabled")
-
-								// statistics
-									ELEMENTS.character.content.querySelectorAll(".statistic input.editable").forEach(function(input) {
-										input.removeAttribute("readonly")
-									})
-
-								// skills
-									ELEMENTS.character.content.querySelectorAll(".statistic select").forEach(function(select) {
-										select.removeAttribute("disabled")
-									})
-							}
-
-						// items
-							else if (mode == "items") {
-								// items
-									ELEMENTS.character.content.querySelectorAll(".item .editable").forEach(function(input) {
-										input.removeAttribute("readonly")
-									})
-
-									ELEMENTS.character.content.querySelectorAll(".item select.editable").forEach(function(select) {
-										select.removeAttribute("disabled")
-									})
-
-								// items select
-									ELEMENTS.character.items.select.removeAttribute("disabled")
-
-								// open items
-									ELEMENTS.character.items.element.setAttribute("open", true)
-							}
-
-						// conditions
-							else if (mode == "conditions") {
-								// conditions select
-									ELEMENTS.character.conditions.select.removeAttribute("disabled")
-							}
-
-						// damage
-							else if (mode == "damage") {
-								// open items
-									ELEMENTS.character.items.element.setAttribute("open", true)
-
-								// statistics
-									ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
-										input.removeAttribute("readonly")
-									})
-							}
-					} catch (error) {console.log(error)}
-				}
-
-			/* saveCharacter */
-				function saveCharacter(character) {
-					try {
-						// post
-							var post = {
-								action: "updateCharacterData",
-								character: character
-							}
-
-						// validate
-							if (!post.character || !post.character.id) {
-								FUNCTIONS.showToast({success: false, message: "no character selected"})
-								return	
-							}
-							if (!post.character.gameId) {
-								FUNCTIONS.showToast({success: false, message: "no game selected"})
-								return
-							}
-
-						// socket
-							SOCKET.send(JSON.stringify(post))
-					} catch (error) {console.log(error)}
-				}
-
-			/* receiveCharacter */
-				function receiveCharacter(character, selectCharacter) {
-					try {
-						// selecting character?
-							if (selectCharacter) {
-								CHARACTER = {id: selectCharacter}
-							}
-
-						// current content?
-							if (CHARACTER && CHARACTER.id == character.id) {
-								CHARACTER = character.delete ? null : character
-								displayCharacter()
-							}
-
-						// relist
-							listCharacters()
-					} catch (error) {console.log(error)}
-				}
-
-		/** SETTINGS **/
-			/* listCharacterTemplates */
-				function listCharacterTemplates() {
-					try {
-						// NPCs
-							var optgroup = document.createElement("optgroup")
-								optgroup.label = "NPCs"
-							ELEMENTS.character.settings.select.templates.appendChild(optgroup)
-
-							for (var n in RULES.npcs) {
-								var option = document.createElement("option")
-									option.value = "[template-npcs-" + RULES.npcs[n].info.name + "]"
-									option.innerText = RULES.npcs[n].info.name
-								optgroup.appendChild(option)
-							}
-
-						// animals
-							var optgroup = document.createElement("optgroup")
-								optgroup.label = "animals"
-							ELEMENTS.character.settings.select.templates.appendChild(optgroup)
-
-							for (var a in RULES.animals) {
-								var option = document.createElement("option")
-									option.value = "[template-animals-" + RULES.animals[a].info.name + "]"
-									option.innerText = RULES.animals[a].info.name
-								optgroup.appendChild(option)
-							}
-
-						// creatures
-							var optgroup = document.createElement("optgroup")
-								optgroup.label = "creatures"
-							ELEMENTS.character.settings.select.templates.appendChild(optgroup)
-
-							for (var c in RULES.creatures) {
-								var option = document.createElement("option")
-									option.value = "[template-creatures-" + RULES.creatures[c].info.name + "]"
-									option.innerText = RULES.creatures[c].info.name
-								optgroup.appendChild(option)
-							}
-					} catch (error) {console.log(error)}
-				}
-
-			/* listCharacters */
-				function listCharacters(characterList) {
-					try {
-						// close option?
-							ELEMENTS.character.settings.select.none.disabled = (CHARACTER && CHARACTER.id) ? false : true
-
-						// no game?
-							if (!GAME) {
-								ELEMENTS.character.settings.select.custom.innerHTML = ""
-								ELEMENTS.character.settings.recipient.characters.innerHTML = ""
-								ELEMENTS.character.settings.recipient.arena.innerHTML = ""
-								ELEMENTS.content.objects.characters.innerHTML = ""
-								ELEMENTS.content.objects.images.innerHTML = ""
-								return
-							}
-
-						// custom characters, from USER object
-							for (var c in characterList) {
-								// character
-									var character = characterList[c]
-
-								// character select
-									var option = ELEMENTS.character.settings.select.custom.querySelector("option[value='" + character.id + "']")
-									if (option && character.delete) {
-										if (ELEMENTS.character.settings.select.element.value == option.value) {
-											ELEMENTS.character.settings.select.element.value = ELEMENTS.character.settings.select.new.value
-											ELEMENTS.character.settings.select.element.className = ""
-											ELEMENTS.character.settings.select.templates.setAttribute("visibility", true)
-										}
-										option.remove()
-									}
-									else if (option) {
-										option.innerText = character.name
-									}
-									else {
-										option = document.createElement("option")
-										option.value = character.id
-										option.innerText = character.name
-										ELEMENTS.character.settings.select.custom.appendChild(option)
-									}
-
-									if (option && CHARACTER && CHARACTER.id == character.id) {
-										option.selected = true
-										ELEMENTS.character.settings.select.element.value = character.id
-										ELEMENTS.character.settings.select.element.className = "form-pair"
-										ELEMENTS.character.settings.select.templates.setAttribute("visibility", false)
-									}
-
-								// character targeting
-									var targetOption = ELEMENTS.character.settings.recipient.characters.querySelector("option[value='" + character.id + "']")
-									if (targetOption && character.delete) {
-										if (ELEMENTS.character.settings.recipient.select.value == targetOption.value) {
-											ELEMENTS.character.settings.recipient.select.value = ELEMENTS.character.settings.recipient.none.value
-										}
-										targetOption.remove()
-									}
-									else if (targetOption) {
-										targetOption.innerText = character.name
-									}
-									else {
-										targetOption = document.createElement("option")
-										targetOption.value = character.id
-										targetOption.innerText = character.name
-										ELEMENTS.character.settings.recipient.characters.appendChild(targetOption)
-									}
-
-								// arena content objects select
-									var contentOption = ELEMENTS.content.objects.characters.querySelector("option[value='" + character.id + "']")
-									if (contentOption && character.delete) {
-										if (ELEMENTS.content.objects.select.value == contentOption.value) {
-											ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
-										}
-										contentOption.remove()
-									}
-									else if (contentOption) {
-										contentOption.innerText = character.name
-									}
-									else {
-										contentOption = document.createElement("option")
-										contentOption.value = character.id
-										contentOption.innerText = character.name
-										contentOption.setAttribute("type", "character")
-										ELEMENTS.content.objects.characters.appendChild(contentOption)
-									}
-							}
-					} catch (error) {console.log(error)}
-				}
-
-			/* changeCharacterSelection */
-				function changeCharacterSelection(event) {
-					try {
-						// reveal
-							if (ELEMENTS.character.settings.select.element.value == ELEMENTS.character.settings.select.new.value) {
-								ELEMENTS.character.settings.select.templates.setAttribute("visibility", true)
-								ELEMENTS.character.settings.select.element.className = ""
-							}
-
-						// hide
-							else {
-								ELEMENTS.character.settings.select.templates.setAttribute("visibility", false)
-								ELEMENTS.character.settings.select.element.className = "form-pair"
-							}
-					} catch (error) {console.log(error)}
-				}
-
-			/* selectCharacter */
-				function selectCharacter(event) {
-					try {
-						// value
-							var value = ELEMENTS.character.settings.select.element.value
-
-						// none
-							if (value == ELEMENTS.character.settings.select.none.value) {
-								var post = {
-									action: "unreadCharacter",
-									character: {
-										userId: USER ? USER.id : null,
-										gameId: GAME ? GAME.id : null,
-										id: CHARACTER.id || null
-									}
-								}
-
-								CHARACTER = null
-								displayCharacter()
-								listCharacters()
-							}
-
-						// upload
-							else if (value == ELEMENTS.character.settings.select.upload.value) {
-								uploadCharacter()
-								return
-							}
-
-						// new
-							else if (value == ELEMENTS.character.settings.select.new.value) {
-								// blank template
-									if (ELEMENTS.character.settings.select.templates.value == ELEMENTS.character.settings.select.blank.value) {
-										var post = {
-											action: "createCharacter",
-											character: {
-												userId: USER ? USER.id : null,
-												gameId: GAME ? GAME.id : null,
-												template: {
-													type: null,
-													name: null
-												}
-											}
-										}
-									}
-
-								// new from template
-									else {
-										var value = ELEMENTS.character.settings.select.templates.value
-										var directory = value.slice(1,value.length - 1).split("-")
-										var post = {
-											action: "createCharacter",
-											character: {
-												userId: USER ? USER.id : null,
-												gameId: GAME ? GAME.id : null,
-												template: {
-													type: directory[1],
-													name: directory[2]
-												}
-											}
-										}
-
-										if (!post.character.template.type || !post.character.template.name) {
-											FUNCTIONS.showToast({success: false, message: "invalid template selection"})
-											return
-										}
-									}
-							}
-						
-						// find in user
-							else {
-								var post = {
-									action: "readCharacter",
-									character: {
-										userId: USER ? USER.id : null,
-										gameId: GAME ? GAME.id : null,
-										id: value
-									}
+									characterId: CHARACTER ? CHARACTER.id : null,
+									rolls: rolls
 								}
 							}
 
 						// validate
-							if (!post.character.gameId) {
+							if (!post.rollGroup.gameId) {
 								FUNCTIONS.showToast({success: false, message: "no game selected"})
 								return
 							}
@@ -1868,265 +1179,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* uploadCharacter */
-				function uploadCharacter(event) {
-					try {
-						ELEMENTS.character.settings.upload.click()
-						ELEMENTS.character.settings.upload.addEventListener(TRIGGERS.change, function(event) {
-							if (ELEMENTS.character.settings.upload.value && ELEMENTS.character.settings.upload.value.length) {
-								// start reading
-									var reader = new FileReader()
-										reader.readAsText(event.target.files[0])
-
-								// end reading
-									reader.onload = function(event) {
-										var obj = String(event.target.result)
-										try {
-											// parse character
-												var post = {
-													action: "createCharacter",
-													character: JSON.parse(obj)
-												}
-
-											// assign
-												post.character.userId = USER ? USER.id : null
-												post.character.gameId = GAME ? GAME.id : null
-
-											// validate
-												if (!post.character.gameId) {
-													FUNCTIONS.showToast({success: false, message: "no game selected"})
-													return
-												}
-
-											// send socket request
-												SOCKET.send(JSON.stringify(post))
-										}
-										catch (error) {
-											FUNCTIONS.showToast({success: false, message: "unable to read file"})
-											return
-										}
-									}
-							}
-						})
-					} catch (error) {console.log(error)}
-				}
-
-			/* downloadCharacter */
-				function downloadCharacter(event) {
-					try {
-						// package up
-							var downloadLink = document.createElement("a")
-								downloadLink.id = "download-link"
-								downloadLink.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(CHARACTER)))
-								downloadLink.setAttribute("download", CHARACTER.info.name + ".json")
-								downloadLink.addEventListener(TRIGGERS.click, function() {
-									var downloadLink = ELEMENTS.body.querySelector("#download-link")
-									ELEMENTS.body.removeChild(downloadLink)
-								})
-						
-						// click
-							ELEMENTS.body.appendChild(downloadLink)
-							downloadLink.click()
-					} catch (error) {console.log(error)}
-				}
-
-			/* updateCharacterAccess */
-				function updateCharacterAccess(event) {
-					try {
-						// post
-							var post = {
-								action: "updateCharacterAccess",
-								character: {
-									id: CHARACTER ? CHARACTER.id : null,
-									userId: USER ? USER.id : null,
-									gameId: GAME ? GAME.id : null,
-									access: ELEMENTS.character.settings.access.select.element.value
-								}
-							}
-
-						// validate
-							if (!post.character || !post.character.id) {
-								FUNCTIONS.showToast({success: false, message: "no character selected"})
-								return	
-							}
-							if (!post.character.gameId) {
-								FUNCTIONS.showToast({success: false, message: "no game selected"})
-								return
-							}
-								
-						// set
-							if (post.character.access == ELEMENTS.character.settings.access.select.all.value) {
-								post.character.access = null
-							}
-							if (post.character.access == ELEMENTS.character.settings.access.select.me.value) {
-								post.character.access = USER.id
-							}
-
-						// send socket request
-							SOCKET.send(JSON.stringify(post))
-					} catch (error) {console.log(error)}
-				}
-
-			/* updateCharacterName */
-				function updateCharacterName(event) {
-					try {
-						// update name
-							CHARACTER.info.name = event.target.value
-
-						// post
-							var post = {
-								action: "updateCharacterName",
-								character: CHARACTER
-							}
-
-						// validate
-							if (!post.character || !post.character.id) {
-								FUNCTIONS.showToast({success: false, message: "no character selected"})
-								return	
-							}
-							if (!post.character.gameId) {
-								FUNCTIONS.showToast({success: false, message: "no game selected"})
-								return
-							}
-
-						// send
-							SOCKET.send(JSON.stringify(post))
-					} catch (error) {console.log(error)}
-				}
-
-			/* duplicateCharacter */
-				function duplicateCharacter(event) {
-					try {
-						// post
-							var post = {
-								action: "createCharacter",
-								character: CHARACTER || null
-							}
-
-						// validate
-							if (!post.character) {
-								FUNCTIONS.showToast({success: false, message: "no character to duplicate"})
-								return
-							}
-
-						// assign
-							post.character.userId = USER ? USER.id : null
-							post.character.gameId = GAME ? GAME.id : null
-
-						// validate
-							if (!post.character.gameId) {
-								FUNCTIONS.showToast({success: false, message: "no game selected"})
-								return
-							}
-
-						// send socket request
-							SOCKET.send(JSON.stringify(post))
-					} catch (error) {console.log(error)}
-				}
-
-			/* deleteCharacter */
-				function deleteCharacter(event) {
-					try {
-						// post
-							var post = {
-								action: "deleteCharacter",
-								character: CHARACTER
-							}
-
-						// validate
-							if (!post.character.id) {
-								FUNCTIONS.showToast({success: false, message: "no character selected"})
-								return
-							}
-
-						// send socket request
-							SOCKET.send(JSON.stringify(post))
-					} catch (error) {console.log(error)}
-				}
-
-			/* rollDie */
-				function rollDie(event) {
-					try {
-						// rolls
-							var rolls = []
-
-						// spacer
-							rolls.push({
-								spacer: true,
-								text: CHARACTER ? CHARACTER.info.name : "environment"
-							})
-
-						// add to history
-							var d = Math.max(2, ELEMENTS.character.settings.rng.d.value || 6)
-							var count = Math.max(1, ELEMENTS.character.settings.rng.count.value)
-							var text = (ELEMENTS.character.settings.rng.label.value || "?") + " (" + count + "d" + d + ")" 
-							rolls.push({
-								type: "environment",
-								d: d,
-								count: count,
-								text: text,
-								recipient: ELEMENTS.character.settings.recipient.select.value || null
-							})
-
-						// post
-							addToRolls(rolls)
-					} catch (error) {console.log(error)}
-				}
-
-		/** PLAY **/
-			/* displayCharacter */
-				function displayCharacter() {
-					try {
-						// no character?
-							if (!CHARACTER) {
-								ELEMENTS.character.element.setAttribute("mode", "settings")
-								ELEMENTS.character.settings.metadata.setAttribute("visibility", false)
-
-								ELEMENTS.chat.send.sender.character.disabled = true
-								ELEMENTS.chat.send.sender.character.innerText = ELEMENTS.chat.send.sender.character.value
-								ELEMENTS.chat.send.sender.select.value = ELEMENTS.chat.send.sender.user.value
-								return
-							}
-
-						// metadata
-							ELEMENTS.character.settings.metadata.setAttribute("visibility", true)
-							ELEMENTS.character.settings.access.select.element.value = CHARACTER.access ? ELEMENTS.character.settings.access.select.me.value : ELEMENTS.character.settings.access.select.all.value
-							ELEMENTS.character.settings.access.form.setAttribute("visibility", (CHARACTER && CHARACTER.id && CHARACTER.userId == USER.id) ? true : false)
-							ELEMENTS.character.settings.delete.gate.setAttribute("visibility", (CHARACTER && CHARACTER.id && CHARACTER.userId == USER.id) ? true : false)
-
-						// mode
-							var mode = ELEMENTS.character.element.getAttribute("mode") || "play"
-
-						// conditions
-							displayCharacterConditions(CHARACTER, ELEMENTS.character.conditions.element)
-
-						// items
-							displayCharacterItems(CHARACTER, ELEMENTS.character.items.equipped, ELEMENTS.character.items.unequipped, mode == "items")
-
-						// statistics
-							for (var i in CHARACTER.statistics) {
-								// statistic
-									var container = ELEMENTS.character.statistics[i]
-									displayCharacterStatistic(CHARACTER, container, i, mode == "edit")
-
-								// skills
-									container.querySelector(".skills-list").innerHTML = ""
-									for (var s in CHARACTER.statistics[i].skills) {
-										displayCharacterSkill(CHARACTER, container, i, CHARACTER.statistics[i].skills[s], mode == "edit")
-									}
-							}
-
-						// info
-							displayCharacterInfo(CHARACTER)
-
-						// chat
-							ELEMENTS.chat.send.sender.character.disabled = CHARACTER ? false : true
-							ELEMENTS.chat.send.sender.character.innerText = CHARACTER ? CHARACTER.info.name : ELEMENTS.chat.send.sender.character.value
-					} catch (error) {console.log(error)}
-				}
-
-			/* rolld20 */
-				function rolld20(event) {
+			/* submitRollGroupCreateD20 */
+				function submitRollGroupCreateD20(event) {
 					try {
 						// play?
 							if (ELEMENTS.character.element.getAttribute("mode") !== "play") {
@@ -2252,12 +1306,12 @@ window.onload = function() {
 							}
 
 						// post
-							addToRolls(rolls)
+							submitRollGroupCreate(rolls)
 					} catch (error) {console.log(error)}
 				}
 
-			/* rolld6 */
-				function rolld6(event) {
+			/* submitRollGroupCreateD6 */
+				function submitRollGroupCreateD6(event) {
 					try {
 						// play?
 							if (ELEMENTS.character.element.getAttribute("mode") !== "play" && ELEMENTS.character.element.getAttribute("mode") !== "damage") {
@@ -2369,24 +1423,1648 @@ window.onload = function() {
 							})
 
 						// post
-							addToRolls(rolls)
+							submitRollGroupCreate(rolls)
 					} catch (error) {console.log(error)}
 				}
 
-			/* toggled6 */
-				function toggled6(event) {
+			/* submitRollGroupCreateRecover */
+				function submitRollGroupCreateRecover(event) {
 					try {
-						// update in rolls
-							updateInRolls({
-								id: event.target.id,
-								counting: String(event.target.getAttribute("counting")) == "true" ? false : true,
+						// rolls
+							var rolls = []
+
+						// spacer
+							rolls.push({
+								spacer: true,
+								text: CHARACTER.info.name
 							})
+
+						// recover skill
+							var skill = CHARACTER.statistics.immunity.skills.find(function (s) { return s.name == "recover" }) || {maximum: 0, condition: 0, d6: 2}
+							var target = Math.max(0, CHARACTER.statistics.immunity.maximum + CHARACTER.statistics.immunity.damage + CHARACTER.statistics.immunity.condition + skill.maximum + skill.condition)
+
+							rolls.push({
+								d: 20,
+								target: target,
+								text: "recover",
+								ifSuccess: {
+									type: "healing",
+									d: 6,
+									count: skill.d6,
+									text: "recover"
+								},
+								ifFailure: {
+									type: "healing",
+									d: 6,
+									count: 1,
+									text: "recover"
+								}
+							})
+
+						// post
+							submitRollGroupCreate(rolls)
 					} catch (error) {console.log(error)}
 				}
 
-		/** INFO **/
-			/* uploadCharacterImage */
-				function uploadCharacterImage(event) {
+			/* submitRollGroupCreateCustom */
+				function submitRollGroupCreateCustom(event) {
+					try {
+						// rolls
+							var rolls = []
+
+						// spacer
+							rolls.push({
+								spacer: true,
+								text: CHARACTER ? CHARACTER.info.name : "environment"
+							})
+
+						// add to history
+							var d = Math.max(2, ELEMENTS.character.settings.rng.d.value || 6)
+							var count = Math.max(1, ELEMENTS.character.settings.rng.count.value)
+							var text = (ELEMENTS.character.settings.rng.label.value || "?") + " (" + count + "d" + d + ")" 
+							rolls.push({
+								type: "environment",
+								d: d,
+								count: count,
+								text: text,
+								recipient: ELEMENTS.character.settings.recipient.select.value || null
+							})
+
+						// post
+							submitRollGroupCreate(rolls)
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitRollGroupUpdate */
+				function submitRollGroupUpdate(event) {
+					try {
+						// directory
+							var directory = event.target.id.split("-")
+
+						// post
+							var post = {
+								action: "updateRollGroup",
+								rollGroup: {
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									characterId: CHARACTER ? CHARACTER.id : null,
+									id: directory[1],
+									rollId: directory[2],
+									index: directory[3],
+									counting: String(event.target.getAttribute("counting")) == "true" ? false : true
+								}
+							}
+
+						// validate
+							if (!post.rollGroup.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+							if (!post.rollGroup.id || !post.rollGroup.rollId) {
+								FUNCTIONS.showToast({success: false, message: "no dice selected"})
+								return
+							}
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+	/*** RULES ***/
+		/** display **/
+			/* displayRulesSearch */
+				function displayRulesSearch(resultsList) {
+					try {
+						// clear
+							ELEMENTS.rules.results.innerHTML = ""
+
+						// spit out results
+							for (var r in resultsList) {
+								displayRulesSearchResult(resultsList[r], ELEMENTS.rules.results)
+							}
+
+						// lose focus
+							ELEMENTS.rules.search.input.blur()
+							ELEMENTS.rules.search.button.blur()
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayRulesSearchResult */
+				function displayRulesSearchResult(result, parent) {
+					try {
+						// element
+							var resultElement = document.createElement("div")
+								resultElement.className = "search-result"
+								resultElement.setAttribute("type", result.type)
+								resultElement.setAttribute("data", JSON.stringify(result))
+							parent.appendChild(resultElement)
+
+						// actions
+							var resultSend = document.createElement("button")
+								resultSend.className = "search-result-send minor-button"
+								resultSend.innerHTML = "&#x1f4ac;"
+								resultSend.addEventListener(TRIGGERS.click, submitChatCreateRules)
+							resultElement.appendChild(resultSend)
+
+							if (result.addable) {
+								var resultAdd = document.createElement("button")
+									resultAdd.className = "search-result-add minor-button"
+									resultAdd.innerHTML = "&#x1f464;"
+									resultAdd.addEventListener(TRIGGERS.click, submitCharacterUpdateRules)
+								resultElement.appendChild(resultAdd)
+							}
+							
+						// name
+							var resultName = document.createElement("h3")
+								resultName.className = "search-result-name"
+								resultName.innerText = result.name.replace(/_/gi, " ")
+							resultElement.appendChild(resultName)
+
+						// data
+							var resultDataList = document.createElement("ul")
+								resultDataList.className = "search-result-data"
+							resultElement.appendChild(resultDataList)
+
+							for (var i in result.data) {
+								var resultDataItem = document.createElement("li")
+									resultDataItem.className = "search-result-data-item"
+								resultDataList.appendChild(resultDataItem)
+
+								var resultDataItemProperty = document.createElement("span")
+									resultDataItemProperty.className = "search-result-data-item-property"
+									resultDataItemProperty.innerText = i.replace(/_/gi, " ")
+								resultDataItem.appendChild(resultDataItemProperty)
+
+								if (["string","number","boolean"].includes(typeof result.data[i])) {
+									var resultDataItemValue = document.createElement("span")
+										resultDataItemValue.className = "search-result-data-item-value"
+										resultDataItemValue.innerText = result.data[i]
+									resultDataItem.appendChild(resultDataItemValue)
+								}
+								else {
+									var resultDataItemSublist = document.createElement("ul")
+										resultDataItemSublist.className = "search-result-data-item-sublist"
+									resultDataItem.appendChild(resultDataItemSublist)
+
+									for (var j in result.data[i]) {
+										var resultDataItemSubitem = document.createElement("li")
+											resultDataItemSubitem.className = "search-result-data-item-subitem"
+										resultDataItemSublist.appendChild(resultDataItemSubitem)
+
+										if (isNaN(j)) {
+											var resultDataItemSubproperty = document.createElement("span")
+												resultDataItemSubproperty.className = "search-result-data-item-subproperty"
+												resultDataItemSubproperty.innerText = j.replace(/_/gi, " ")
+											resultDataItemSubitem.appendChild(resultDataItemSubproperty)
+										}
+
+										var resultDataItemSubvalue = document.createElement("span")
+											resultDataItemSubvalue.className = "search-result-data-item-subvalue"
+											resultDataItemSubvalue.innerText = JSON.stringify(result.data[i][j], null, 2).replace(/\{|\}|\[|\]|\"/gi,"").replace(/_/gi, " ").trim()
+										resultDataItemSubitem.appendChild(resultDataItemSubvalue)
+									}
+								}
+							}
+					} catch (error) {console.log(error)}
+				}
+
+		/** submit **/
+			/* submitRulesSearch */
+				function submitRulesSearch(event) {
+					try {
+						// results list
+							var resultsList = []
+
+						// input
+							var searchText = ELEMENTS.rules.search.input.value.toLowerCase()
+							if (!searchText) {
+								displayRulesSearch(resultsList)
+								return
+							}
+							var similarSearchText = searchText.replace(/\s/gi, "_")
+
+						// go through rules
+							// overviews
+								for (var o in RULES.overviews) {
+									if (o.includes(searchText) || o.includes(similarSearchText)) {
+										var result = FUNCTIONS.duplicateObject(RULES.overviews[o])
+										delete result.name
+										resultsList.push({name: o, type: "overview", data: result})
+									}
+								}
+
+							// races
+								for (var r in RULES.races) {
+									if (r.includes(searchText) || r.includes(similarSearchText)) {
+										var result = FUNCTIONS.duplicateObject(RULES.races[r])
+										resultsList.push({name: r, type: "race", data: result, addable: true})
+									}
+								}
+
+							// classes
+								for (var c in RULES.classes) {
+									if (c.includes(searchText) || c.includes(similarSearchText)) {
+										var result = FUNCTIONS.duplicateObject(RULES.classes[c])
+										resultsList.push({name: c, type: "class", data: result})
+									}
+								}
+
+							// statistics
+								for (var s in RULES.statistics) {
+									if (s.includes(searchText) || s.includes(similarSearchText)) {
+										var description = FUNCTIONS.duplicateObject(RULES.statistics[s])
+										var skills = FUNCTIONS.duplicateObject(RULES.skills[s]).map(function(k) {
+											return k.name
+										})
+										var result = {description: description, skills: skills}
+										resultsList.push({name: s, type: "statistic", data: result})
+									}
+								}
+
+							// skills
+								for (var s in RULES.skills) {
+									for (var i in RULES.skills[s]) {
+										if (RULES.skills[s][i].name.includes(searchText) || RULES.skills[s][i].name.includes(similarSearchText)) {
+											var name = RULES.skills[s][i].name
+											var result = FUNCTIONS.duplicateObject(RULES.skills[s][i])
+												result.statistic = s
+											delete result.name
+											resultsList.push({name: name, type: "skill", data: result, addable: true})
+										}
+									}
+								}
+
+							// damage
+								for (var d in RULES.damage) {
+									if (d.includes(searchText) || d.includes(similarSearchText)) {
+										var result = FUNCTIONS.duplicateObject(RULES.damage[d])
+										resultsList.push({name: d, type: "damage", data: result})
+									}
+								}
+
+							// conditions
+								for (var c in RULES.conditions) {
+									if (c.includes(searchText) || c.includes(similarSearchText)) {
+										var result = FUNCTIONS.duplicateObject(RULES.conditions[c])
+										delete result.name
+										resultsList.push({name: c, type: "condition", data: result, addable: true})
+									}
+								}
+
+							// items
+								for (var i in RULES.items) {
+									for (var j in RULES.items[i]) {
+										if (RULES.items[i][j].name && (RULES.items[i][j].name.includes(searchText) || RULES.items[i][j].name.includes(similarSearchText))) {
+											var result = FUNCTIONS.duplicateObject(RULES.items[i][j])
+											delete result.name
+											resultsList.push({name: RULES.items[i][j].name, type: "item", data: result, addable: true})
+										}
+									}
+								}
+
+							// puzzles
+								for (var p in RULES.puzzles) {
+									if (RULES.puzzles[p].name.includes(searchText) || RULES.puzzles[p].name.includes(similarSearchText)) {
+										var result = FUNCTIONS.duplicateObject(RULES.puzzles[p])
+										var name = result.name
+										delete result.name
+										resultsList.push({name: name, type: "puzzle", data: result})
+									}
+								}
+
+							// npcs
+								for (var n in RULES.npcs) {
+									if (RULES.npcs[n].info.name.includes(searchText) || RULES.npcs[n].info.name.includes(similarSearchText)) {
+										var result = FUNCTIONS.duplicateObject(RULES.npcs[n])
+										var name = result.info.name
+										delete result.info.name
+										resultsList.push({name: name, type: "npc", data: result})
+									}
+								}
+
+							// animals
+								for (var a in RULES.animals) {
+									if (RULES.animals[a].info.name.includes(searchText) || RULES.animals[a].info.name.includes(similarSearchText)) {
+										var result = FUNCTIONS.duplicateObject(RULES.animals[a])
+										var name = result.info.name
+										delete result.info.name
+										resultsList.push({name: name, type: "npc", data: result})
+									}
+								}
+
+							// creatures
+								for (var c in RULES.creatures) {
+									if (RULES.creatures[c].info.name.includes(searchText) || RULES.creatures[c].info.name.includes(similarSearchText)) {
+										var result = FUNCTIONS.duplicateObject(RULES.creatures[c])
+										var name = result.info.name
+										delete result.info.name
+										resultsList.push({name: name, type: "npc", data: result})
+									}
+								}
+
+							// services
+								for (var s in RULES.services) {
+									if (RULES.services[s].name.includes(searchText) || RULES.services[s].name.includes(similarSearchText)) {
+										var result = FUNCTIONS.duplicateObject(RULES.services[s])
+										var name = result.name
+										delete result.name
+										result = result.tasks
+										resultsList.push({name: name, type: "service", data: result})
+									}
+								}
+
+						// display
+							displayRulesSearch(resultsList)
+					} catch (error) {console.log(error)}
+				}
+
+	/*** CHARACTER ***/
+		/** receive **/
+			/* receiveCharacter */
+				function receiveCharacter(character, selectCharacter) {
+					try {
+						// selecting character?
+							if (selectCharacter) {
+								CHARACTER = {id: selectCharacter}
+							}
+
+						// current content?
+							if (CHARACTER && CHARACTER.id == character.id) {
+								CHARACTER = character.delete ? null : character
+								displayCharacter()
+							}
+
+						// relist
+							displayCharacterList()
+					} catch (error) {console.log(error)}
+				}
+
+		/** display - onload **/
+			/* displayCharacterListTemplates */
+				function displayCharacterListTemplates() {
+					try {
+						// NPCs
+							var optgroup = document.createElement("optgroup")
+								optgroup.label = "NPCs"
+							ELEMENTS.character.settings.select.templates.appendChild(optgroup)
+
+							for (var n in RULES.npcs) {
+								var option = document.createElement("option")
+									option.value = "[template-npcs-" + RULES.npcs[n].info.name + "]"
+									option.innerText = RULES.npcs[n].info.name
+								optgroup.appendChild(option)
+							}
+
+						// animals
+							var optgroup = document.createElement("optgroup")
+								optgroup.label = "animals"
+							ELEMENTS.character.settings.select.templates.appendChild(optgroup)
+
+							for (var a in RULES.animals) {
+								var option = document.createElement("option")
+									option.value = "[template-animals-" + RULES.animals[a].info.name + "]"
+									option.innerText = RULES.animals[a].info.name
+								optgroup.appendChild(option)
+							}
+
+						// creatures
+							var optgroup = document.createElement("optgroup")
+								optgroup.label = "creatures"
+							ELEMENTS.character.settings.select.templates.appendChild(optgroup)
+
+							for (var c in RULES.creatures) {
+								var option = document.createElement("option")
+									option.value = "[template-creatures-" + RULES.creatures[c].info.name + "]"
+									option.innerText = RULES.creatures[c].info.name
+								optgroup.appendChild(option)
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterListRaces */
+				function displayCharacterListRaces() {
+					try {
+						var container = ELEMENTS.character.info.race
+						for (var i in RULES.races) {
+							if (!container.querySelector("option[value=" + i + "]")) {
+								var option = document.createElement("option")
+									option.value = i
+									option.innerText = i
+								container.appendChild(option)
+							}
+						}
+						ELEMENTS.character.info.raceDisabled.selected = true
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterListSkills */
+				function displayCharacterListSkills() {
+					try {
+						for (var i in RULES.skills) {
+							var container = ELEMENTS.character.statistics[i].querySelector("select")
+
+							for (var j in RULES.skills[i]) {
+								if (!container.querySelector("option[value=" + RULES.skills[i][j].name + "]")) {
+									var option = document.createElement("option")
+										option.value = RULES.skills[i][j].name
+										option.innerText = RULES.skills[i][j].name.replace(/_/g, " ")
+									container.appendChild(option)
+								}
+							}
+						}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterListItems */
+				function displayCharacterListItems() {
+					try {
+						var container = ELEMENTS.character.items.select
+
+						// add group
+							for (var i in RULES.items) {
+								var optgroup = document.createElement("optgroup")
+									optgroup.label = i
+								container.appendChild(optgroup)
+
+								// add items
+									for (var j in RULES.items[i]) {
+										if (!container.querySelector("option[value='" + RULES.items[i][j].name + "']")) {
+											var option = document.createElement("option")
+												option.value = RULES.items[i][j].name
+												option.innerText = RULES.items[i][j].name
+											optgroup.appendChild(option)
+										}
+									}
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterListConditions */
+				function displayCharacterListConditions() {
+					try {
+						var container = ELEMENTS.character.conditions.select
+
+						// add conditions
+							for (var i in RULES.conditions) {
+								if (!container.querySelector("option[value='" + i + "']")) {
+									var condition = document.createElement("option")
+										condition.value = i
+										condition.innerText = i.replace(/_/g, " ")
+									container.appendChild(condition)
+								}
+							}
+					} catch (error) {console.log(error)}
+				}
+
+		/** display - settings **/
+			/* displayCharacterMode */
+				function displayCharacterMode(event) {
+					try {
+						// mode
+							var mode = event.target.id.replace("character-modes-", "")
+
+							if (!CHARACTER && mode !== "settings") {
+								FUNCTIONS.showToast({success: false, message: "no character selected"})
+								return
+							}
+
+							ELEMENTS.character.element.setAttribute("mode", mode)
+
+							if (!CHARACTER) {
+								return
+							}
+
+						// close up inputs
+							ELEMENTS.character.content.querySelectorAll(".editable").forEach(function(input) {
+								input.setAttribute("readonly", true)
+							})
+
+							ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
+								input.setAttribute("readonly", true)
+							})
+
+						// disable selects
+							ELEMENTS.character.content.querySelectorAll("select").forEach(function(select) {
+								select.setAttribute("disabled", true)
+							})
+
+						// play
+							if (mode == "play") {
+								// close info & items
+									ELEMENTS.character.info.element.removeAttribute("open")
+									ELEMENTS.character.items.element.removeAttribute("open")
+							}
+
+						// edit
+							if (mode == "edit") {
+								// open info
+									ELEMENTS.character.info.element.setAttribute("open", true)
+
+								// info
+									ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(input) {
+										input.removeAttribute("readonly")
+									})
+									ELEMENTS.character.info.race.removeAttribute("disabled")
+
+								// statistics
+									ELEMENTS.character.content.querySelectorAll(".statistic input.editable").forEach(function(input) {
+										input.removeAttribute("readonly")
+									})
+
+								// skills
+									ELEMENTS.character.content.querySelectorAll(".statistic select").forEach(function(select) {
+										select.removeAttribute("disabled")
+									})
+							}
+
+						// items
+							else if (mode == "items") {
+								// items
+									ELEMENTS.character.content.querySelectorAll(".item .editable").forEach(function(input) {
+										input.removeAttribute("readonly")
+									})
+
+									ELEMENTS.character.content.querySelectorAll(".item select.editable").forEach(function(select) {
+										select.removeAttribute("disabled")
+									})
+
+								// items select
+									ELEMENTS.character.items.select.removeAttribute("disabled")
+
+								// open items
+									ELEMENTS.character.items.element.setAttribute("open", true)
+							}
+
+						// conditions
+							else if (mode == "conditions") {
+								// conditions select
+									ELEMENTS.character.conditions.select.removeAttribute("disabled")
+							}
+
+						// damage
+							else if (mode == "damage") {
+								// open items
+									ELEMENTS.character.items.element.setAttribute("open", true)
+
+								// statistics
+									ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
+										input.removeAttribute("readonly")
+									})
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterList */
+				function displayCharacterList(characterList) {
+					try {
+						// close option?
+							ELEMENTS.character.settings.select.none.disabled = (CHARACTER && CHARACTER.id) ? false : true
+
+						// no game?
+							if (!GAME) {
+								ELEMENTS.character.settings.select.custom.innerHTML = ""
+								ELEMENTS.character.settings.recipient.characters.innerHTML = ""
+								ELEMENTS.character.settings.recipient.arena.innerHTML = ""
+								ELEMENTS.content.objects.characters.innerHTML = ""
+								ELEMENTS.content.objects.images.innerHTML = ""
+								return
+							}
+
+						// custom characters, from USER object
+							for (var c in characterList) {
+								// character
+									var character = characterList[c]
+
+								// character select
+									var option = ELEMENTS.character.settings.select.custom.querySelector("option[value='" + character.id + "']")
+									if (option && character.delete) {
+										if (ELEMENTS.character.settings.select.element.value == option.value) {
+											ELEMENTS.character.settings.select.element.value = ELEMENTS.character.settings.select.new.value
+											ELEMENTS.character.settings.select.element.className = ""
+											ELEMENTS.character.settings.select.templates.setAttribute("visibility", true)
+										}
+										option.remove()
+									}
+									else if (option) {
+										option.innerText = character.name
+									}
+									else {
+										option = document.createElement("option")
+										option.value = character.id
+										option.innerText = character.name
+										ELEMENTS.character.settings.select.custom.appendChild(option)
+									}
+
+									if (option && CHARACTER && CHARACTER.id == character.id) {
+										option.selected = true
+										ELEMENTS.character.settings.select.element.value = character.id
+										ELEMENTS.character.settings.select.element.className = "form-pair"
+										ELEMENTS.character.settings.select.templates.setAttribute("visibility", false)
+									}
+
+								// character targeting
+									var targetOption = ELEMENTS.character.settings.recipient.characters.querySelector("option[value='" + character.id + "']")
+									if (targetOption && character.delete) {
+										if (ELEMENTS.character.settings.recipient.select.value == targetOption.value) {
+											ELEMENTS.character.settings.recipient.select.value = ELEMENTS.character.settings.recipient.none.value
+										}
+										targetOption.remove()
+									}
+									else if (targetOption) {
+										targetOption.innerText = character.name
+									}
+									else {
+										targetOption = document.createElement("option")
+										targetOption.value = character.id
+										targetOption.innerText = character.name
+										ELEMENTS.character.settings.recipient.characters.appendChild(targetOption)
+									}
+
+								// arena content objects select
+									var contentOption = ELEMENTS.content.objects.characters.querySelector("option[value='" + character.id + "']")
+									if (contentOption && character.delete) {
+										if (ELEMENTS.content.objects.select.value == contentOption.value) {
+											ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
+										}
+										contentOption.remove()
+									}
+									else if (contentOption) {
+										contentOption.innerText = character.name
+									}
+									else {
+										contentOption = document.createElement("option")
+										contentOption.value = character.id
+										contentOption.innerText = character.name
+										contentOption.setAttribute("type", "character")
+										ELEMENTS.content.objects.characters.appendChild(contentOption)
+									}
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterListSelection */
+				function displayCharacterListSelection(event) {
+					try {
+						// reveal
+							if (ELEMENTS.character.settings.select.element.value == ELEMENTS.character.settings.select.new.value) {
+								ELEMENTS.character.settings.select.templates.setAttribute("visibility", true)
+								ELEMENTS.character.settings.select.element.className = ""
+								return
+							}
+
+						// hide
+							ELEMENTS.character.settings.select.templates.setAttribute("visibility", false)
+							ELEMENTS.character.settings.select.element.className = "form-pair"
+							return
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterDownload */
+				function displayCharacterDownload(event) {
+					try {
+						// package up
+							var downloadLink = document.createElement("a")
+								downloadLink.id = "download-link"
+								downloadLink.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(CHARACTER)))
+								downloadLink.setAttribute("download", CHARACTER.info.name + ".json")
+								downloadLink.addEventListener(TRIGGERS.click, function() {
+									var downloadLink = ELEMENTS.body.querySelector("#download-link")
+									ELEMENTS.body.removeChild(downloadLink)
+								})
+						
+						// click
+							ELEMENTS.body.appendChild(downloadLink)
+							downloadLink.click()
+					} catch (error) {console.log(error)}
+				}
+
+		/** display - gameplay **/
+			/* displayCharacter */
+				function displayCharacter() {
+					try {
+						// no character?
+							if (!CHARACTER) {
+								ELEMENTS.character.element.setAttribute("mode", "settings")
+								ELEMENTS.character.settings.metadata.setAttribute("visibility", false)
+
+								ELEMENTS.chat.send.sender.character.disabled = true
+								ELEMENTS.chat.send.sender.character.innerText = ELEMENTS.chat.send.sender.character.value
+								ELEMENTS.chat.send.sender.select.value = ELEMENTS.chat.send.sender.user.value
+								return
+							}
+
+						// metadata
+							ELEMENTS.character.settings.metadata.setAttribute("visibility", true)
+							ELEMENTS.character.settings.access.select.element.value = CHARACTER.access ? ELEMENTS.character.settings.access.select.me.value : ELEMENTS.character.settings.access.select.all.value
+							ELEMENTS.character.settings.access.form.setAttribute("visibility", (CHARACTER && CHARACTER.id && CHARACTER.userId == USER.id) ? true : false)
+							ELEMENTS.character.settings.delete.gate.setAttribute("visibility", (CHARACTER && CHARACTER.id && CHARACTER.userId == USER.id) ? true : false)
+
+						// mode
+							var mode = ELEMENTS.character.element.getAttribute("mode") || "play"
+
+						// conditions
+							displayCharacterConditions(CHARACTER, ELEMENTS.character.conditions.element)
+
+						// items
+							displayCharacterItems(CHARACTER, ELEMENTS.character.items.equipped, ELEMENTS.character.items.unequipped, mode == "items")
+
+						// statistics
+							for (var i in CHARACTER.statistics) {
+								// statistic
+									var container = ELEMENTS.character.statistics[i]
+									displayCharacterStatistic(CHARACTER, container, i, mode == "edit")
+
+								// skills
+									container.querySelector(".skills-list").innerHTML = ""
+									for (var s in CHARACTER.statistics[i].skills) {
+										displayCharacterSkill(CHARACTER, container, i, CHARACTER.statistics[i].skills[s], mode == "edit")
+									}
+							}
+
+						// info
+							displayCharacterInfo(CHARACTER)
+
+						// chat
+							ELEMENTS.chat.send.sender.character.disabled = CHARACTER ? false : true
+							ELEMENTS.chat.send.sender.character.innerText = CHARACTER ? CHARACTER.info.name : ELEMENTS.chat.send.sender.character.value
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterInfo */
+				function displayCharacterInfo(character) {
+					try {
+						// name
+							ELEMENTS.character.info.name.innerText = CHARACTER.info.name
+							ELEMENTS.character.info.nameText.value = CHARACTER.info.name
+
+						// image
+							if (character.info.image) {
+								ELEMENTS.character.info.image.style.backgroundImage = "url(" + character.info.image + (character.info.file ? ("?" + new Date().getTime()) : "") + ")"
+								ELEMENTS.character.info.image.setAttribute("visibility", true)
+							}
+							else {
+								ELEMENTS.character.info.image.style.backgroundImage = ""
+								ELEMENTS.character.info.image.setAttribute("visibility", false)
+							}
+
+						// damage
+							ELEMENTS.character.info.damage.value = CHARACTER.info.status.damage
+
+						// demographics
+							for (var i in CHARACTER.info.demographics) {
+								if (i == "race" && !ELEMENTS.character.info.race.querySelector("option[value='" + CHARACTER.info.demographics[i] + "']")) {
+									var option = document.createElement("option")
+										option.innerText = option.value = CHARACTER.info.demographics[i]
+									ELEMENTS.character.info.race.appendChild(option)
+								}
+								ELEMENTS.character.info[i].value = CHARACTER.info.demographics[i]
+							}
+
+						// carrying
+							ELEMENTS.character.info.burden.value = CHARACTER.info.status.burden
+
+						// points
+							ELEMENTS.character.info.points.value = CHARACTER.info.status.points
+
+						// description
+							ELEMENTS.character.info.description.value = CHARACTER.info.description
+							if (CHARACTER.info.demographics.race && RULES.races[CHARACTER.info.demographics.race]) {
+								ELEMENTS.character.info.raceAbility.value = RULES.races[CHARACTER.info.demographics.race].info.ability
+							}
+
+						// abilities
+							var run   = CHARACTER.statistics.speed.skills.find(   function(skill) { return skill.name == "run"  }) || {maximum: 0, condition: 0}
+							var swim  = CHARACTER.statistics.speed.skills.find(   function(skill) { return skill.name == "swim" }) || {maximum: 0, condition: 0}
+							var jump  = CHARACTER.statistics.speed.skills.find(   function(skill) { return skill.name == "jump" }) || {maximum: 0, condition: 0}
+							var carry = CHARACTER.statistics.strength.skills.find(function(skill) { return skill.name == "carry"}) || {maximum: 0, condition: 0}
+							var thro  = CHARACTER.statistics.strength.skills.find(function(skill) { return skill.name == "throw"}) || {maximum: 0, condition: 0}
+
+							ELEMENTS.character.info.run.value   = Math.max(0, ((CHARACTER.statistics.speed.maximum    + CHARACTER.statistics.speed.damage    + CHARACTER.statistics.speed.condition)    + (run.maximum   + run.condition  ))     )
+							ELEMENTS.character.info.move.value  = Math.max(0, ((CHARACTER.statistics.speed.maximum    + CHARACTER.statistics.speed.damage    + CHARACTER.statistics.speed.condition)    + (run.maximum   + run.condition  ))     )
+							ELEMENTS.character.info.swim.value  = Math.max(0, ((CHARACTER.statistics.speed.maximum    + CHARACTER.statistics.speed.damage    + CHARACTER.statistics.speed.condition)    + (swim.maximum  + swim.condition )) / 4 )
+							ELEMENTS.character.info.jump.value  = Math.max(0, ((CHARACTER.statistics.speed.maximum    + CHARACTER.statistics.speed.damage    + CHARACTER.statistics.speed.condition)    + (jump.maximum  + jump.condition )) * 10)
+							ELEMENTS.character.info.carry.value = Math.max(0, ((CHARACTER.statistics.strength.maximum + CHARACTER.statistics.strength.damage + CHARACTER.statistics.strength.condition) + (carry.maximum + carry.condition)) * 10)
+							ELEMENTS.character.info.throw.value = Math.max(0, ((CHARACTER.statistics.strength.maximum + CHARACTER.statistics.strength.damage + CHARACTER.statistics.strength.condition) + (thro.maximum  + thro.condition )) * 10)
+
+							if (CHARACTER.info.status.burden > ELEMENTS.character.info.carry.value) {
+								ELEMENTS.character.info.burden.setAttribute("overburdened", true)
+							}
+							else {
+								ELEMENTS.character.info.burden.removeAttribute("overburdened")
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterStatistic */
+				function displayCharacterStatistic(character, container, statistic, enable) {
+					try {
+						// statistic
+							container.querySelector(".statistic-maximum"  ).value = character.statistics[statistic].maximum
+							container.querySelector(".statistic-damage"   ).value = Math.max(-99, Math.min(99, character.statistics[statistic].damage))    || ""
+							container.querySelector(".statistic-condition").value = Math.max(-99, Math.min(99, character.statistics[statistic].condition)) || ""
+							container.querySelector(".statistic-current"  ).value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition)
+
+						// skill list
+							var select = ELEMENTS.character.statistics[statistic].querySelector("select")
+							var options = Array.from(select.querySelectorAll("option"))
+							for (var o in options) {
+								options[o].removeAttribute("disabled")
+							}
+							ELEMENTS.character.statistics[statistic].querySelector("#character-" + statistic + "-disabled").selected = true
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterSkill */
+				function displayCharacterSkill(character, container, statistic, skill, enable) {
+					try {
+						// block
+							var block = document.createElement("div")
+								block.className = "skill"
+							container.querySelector(".skills-list").appendChild(block)
+
+							if (skill.unremovable) {
+								block.className += " unremovable"
+							}
+							else {
+								var remove = document.createElement("button")
+									remove.className = "skill-remove"
+									remove.innerText = "x"
+									remove.addEventListener(TRIGGERS.click, submitCharacterUpdateSkillDelete)
+								block.prepend(remove)
+							}
+
+						// left column
+							var left = document.createElement("div")
+								left.className = "column-left"
+							block.appendChild(left)
+
+							var name = document.createElement("div")
+								name.className = "skill-name"
+							left.appendChild(name)
+
+							if (skill.d6 !== undefined) {
+								var d6 = document.createElement("input")
+									d6.type = "number"
+									d6.step = 1
+									d6.min = 0
+									if (!enable) {
+										d6.setAttribute("readonly", true)
+									}
+									d6.className = "d6 editable"
+									d6.placeholder = "d6"
+									d6.value = skill.d6
+									d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
+									d6.addEventListener(TRIGGERS.change, submitCharacterUpdateSkillUpdate)
+								name.appendChild(d6)
+							}
+
+							var text = document.createElement("input")
+								text.className = "skill-name-text"
+								text.type = "text"
+								text.setAttribute("disabled", true)
+								text.value = skill.name.replace(/_/g, " ")
+							name.appendChild(text)
+
+						// right column
+							var right = document.createElement("div")
+								right.className = "column-right"
+							block.appendChild(right)
+
+							var maximum = document.createElement("input")
+								maximum.type = "number"
+								if (!enable) {
+									maximum.setAttribute("readonly", true)
+								}
+								maximum.className = "skill-maximum editable"
+								maximum.value = skill.maximum
+								maximum.placeholder = "↑"
+								maximum.addEventListener(TRIGGERS.change, submitCharacterUpdateSkillUpdate)
+							right.appendChild(maximum)
+
+							var condition = document.createElement("input")
+								condition.type = "number"
+								condition.setAttribute("readonly", true)
+								condition.className = "skill-condition"
+								condition.value = Math.max(-99, Math.min(99, skill.condition)) || ""
+							right.appendChild(condition)
+
+							var damage = document.createElement("input")
+								damage.type = "number"
+								damage.setAttribute("readonly", true)
+								damage.className = "skill-damage"
+								damage.value = ""
+							right.appendChild(damage)
+
+							var current = document.createElement("input")
+								current.type = "number"
+								current.setAttribute("readonly", true)
+								current.className = "skill-current d20"
+								current.value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition + skill.maximum + skill.condition)
+								current.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
+							right.appendChild(current)
+						
+						// disable in select
+							var option = ELEMENTS.character.statistics[statistic].querySelector("option[value=" + skill.name + "]")
+							if (option) { option.setAttribute("disabled", true) }
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterItems */
+				function displayCharacterItems(character, equipped, unequipped, enable) {
+					try {
+						// clear
+							equipped.innerHTML   = ""
+							unequipped.innerHTML = ""
+
+						// loop through items
+							for (var i in character.items) {
+								// data
+									var item = character.items[i]
+
+								// block
+									var block = document.createElement("div")
+										block.className = "item " + (item.type || "miscellaneous")
+										block.id = item.id
+
+										if (item.equipped) {
+											equipped.prepend(block)
+										}
+										else {
+											unequipped.prepend(block)
+										}
+
+								// remove
+									var remove = document.createElement("button")
+										remove.className = "item-remove"
+										remove.innerText = "x"
+										remove.addEventListener(TRIGGERS.click, submitCharacterUpdateItemDelete)
+									block.prepend(remove)
+
+								// equip
+									var equip = document.createElement("button")
+										equip.className = "item-equip"
+										equip.innerHTML = "&#x2713;"
+										if (item.equipped) {
+											equip.setAttribute("equipped", true)
+										}
+										equip.addEventListener(TRIGGERS.click, submitCharacterUpdateItemEquip)
+									block.prepend(equip)
+
+								// name
+									var name = document.createElement("div")
+										name.className = "item-name"
+									block.appendChild(name)
+
+								// d6
+									var d6 = document.createElement("input")
+										d6.type = "number"
+										if (!enable) {
+											d6.setAttribute("readonly", true)
+										}
+										d6.step = 1
+										d6.min = 0
+										d6.className = "d6 editable"
+										d6.placeholder = "d6"
+										d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+										d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
+										d6.value = item.d6 || 0
+										if (!item.d6) {
+											d6.className += " d6-zero"
+										}
+									name.appendChild(d6)
+
+								// name text & count
+									var text = document.createElement("input")
+										text.type = "text"
+										if (!enable) {
+											text.setAttribute("readonly", true)
+										}
+										text.className = "item-name-text editable"
+										text.placeholder = "item"
+										text.value = item.name
+										text.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+									name.appendChild(text)
+
+									var count = document.createElement("input")
+										count.type = "number"
+										count.step = 1
+										count.min = 0
+										count.className = "item-count editable"
+										if (!enable) {
+											count.setAttribute("readonly", true)
+										}
+										count.placeholder = "#"
+										count.value = item.count
+										count.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+									name.appendChild(count)
+
+								// usage
+									if (item.usage) {
+										var usages = document.createElement("div")
+											usages.className = "item-usages"
+										block.appendChild(usages)
+
+										for (var u in item.usage) {
+											var usage = item.usage[u]
+											
+											if (usage.skill) {
+												var skill = character.statistics[usage.statistic].skills.find(function(skill) { return skill.name == usage.skill }) || {maximum: 0, condition: 0}
+											}
+
+											var usageElement = document.createElement("div")
+												usageElement.className = "item-usage"
+											usages.appendChild(usageElement)
+
+											var d6 = document.createElement("input")
+												d6.type = "number"
+												if (!enable) {
+													d6.setAttribute("readonly", true)
+												}
+												d6.step = 1
+												d6.min = 0
+												d6.className = "d6 editable"
+												if (skill.combat) {
+													d6.className += " combat"
+												}
+												d6.placeholder = "d6"
+												d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+												d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
+												d6.value = usage.d6 || 0
+											usageElement.appendChild(d6)
+
+											var select = document.createElement("select")
+												for (var s in RULES.skills) {
+													var optgroup = document.createElement("optgroup")
+														optgroup.label = s
+													select.appendChild(optgroup)
+
+													for (var k in RULES.skills[s]) {
+														var option = document.createElement("option")
+															option.value = RULES.skills[s][k].name
+															option.innerText = RULES.skills[s][k].name.replace(/_/g, " ")
+														optgroup.appendChild(option)
+													}
+												}
+												if (!enable) {
+													select.setAttribute("disabled", true)
+												}
+												select.className = "item-usage-skill editable"
+												select.placeholder = "skill"
+												select.value = usage.skill
+												select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+											usageElement.appendChild(select)
+
+											var d20 = document.createElement("input")
+												d20.type = "number"
+												d20.setAttribute("readonly", true)
+												d20.step = 1
+												d20.className = "d20"
+												d20.value = Math.max(0, character.statistics[usage.statistic].maximum + character.statistics[usage.statistic].damage + character.statistics[usage.statistic].condition + (usage.skill ? skill.maximum + skill.condition : 0) + (usage.modifier ? usage.modifier : 0))
+												d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
+											usageElement.appendChild(d20)
+										}
+									}
+
+								// conditions
+									if (item.conditions) {
+										var conditions = document.createElement("div")
+											conditions.className = "item-conditions"
+										block.appendChild(conditions)
+
+										for (var i in item.conditions) {
+											var condition = document.createElement("div")
+												condition.className = "item-condition"
+											conditions.append(condition)
+
+											var d6 = document.createElement("input")
+												d6.type = "number"
+												if (!enable) {
+													d6.setAttribute("readonly", true)
+												}
+												d6.step = 1
+												d6.min = 0
+												d6.className = "d6 editable"
+												d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+												d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
+												d6.value = item.conditions[i] || 0
+												d6.placeholder = "d6"
+											condition.appendChild(d6)
+
+											var select = document.createElement("select")
+												for (var c in RULES.conditions) {
+													var option = document.createElement("option")
+														option.innerText = c.replace(/_/g, " ")
+														option.value = c
+													select.appendChild(option)
+												}
+
+												if (!enable) {
+													select.setAttribute("disabled", true)
+												}
+												select.className = "item-condition-name editable"
+												select.value = i
+												select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+											condition.appendChild(select)
+
+											
+											if (!item.conditions[i]) {
+												select.className += " item-condition-remove"
+											}
+										}
+									}
+
+								// other info
+									// weight
+										var label = document.createElement("label")
+											label.className = "item-info-label"
+										block.appendChild(label)
+
+										var input = document.createElement("input")
+											input.type = "number"
+											input.className = "item-info-input editable"
+											input.placeholder = "weight"
+											input.value = item.weight || 0
+											input.setAttribute("field", "weight")
+											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+											if (!enable) {
+												input.setAttribute("readonly", true)
+											}
+										label.appendChild(input)
+
+										var span = document.createElement("span")
+											span.className = "item-info-label-text"
+											span.innerText = "lbs"
+										label.appendChild(span)
+
+									// cost
+										var label = document.createElement("label")
+											label.className = "item-info-label"
+										block.appendChild(label)
+
+										var input = document.createElement("input")
+											input.type = "number"
+											input.className = "item-info-input editable"
+											input.placeholder = "cost"
+											input.value = item.cost || 0
+											input.setAttribute("field", "cost")
+											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+											if (!enable) {
+												input.setAttribute("readonly", true)
+											}
+										label.appendChild(input)
+
+										var span = document.createElement("span")
+											span.className = "item-info-label-text"
+											span.innerText = "❑"
+										label.appendChild(span)
+
+									// fuel
+										var label = document.createElement("label")
+											label.className = "item-info-label"
+										block.appendChild(label)
+
+										var input = document.createElement("input")
+											input.type = "number"
+											input.className = "item-info-input editable"
+											input.placeholder = "fuel"
+											input.value = item.fuel || 0
+											input.setAttribute("field", "fuel")
+											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+											if (!enable) {
+												input.setAttribute("readonly", true)
+											}
+										label.appendChild(input)
+
+										var span = document.createElement("span")
+											span.className = "item-info-label-text"
+											span.innerText = "d6 fuel"
+										label.appendChild(span)
+
+									// magnetic
+										var label = document.createElement("label")
+											label.className = "item-info-label"
+										block.appendChild(label)
+
+										var input = document.createElement("select")
+											input.className = "item-info-input editable"
+											input.setAttribute("field", "magnetic")
+											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+											if (!enable) {
+												input.setAttribute("disabled", true)
+											}
+										label.appendChild(input)
+
+										var option = document.createElement("option")
+											option.value = false
+											option.innerText = "nonmagnetic"
+											if (!item.magnetic) { option.selected = true }
+										input.appendChild(option)
+
+										var option = document.createElement("option")
+											option.value = true
+											option.innerText = "magnetic"
+											if (item.magnetic) { option.selected = true }
+										input.appendChild(option)
+
+									// hands
+										var label = document.createElement("label")
+											label.className = "item-info-label"
+										block.appendChild(label)
+
+										var input = document.createElement("input")
+											input.type = "number"
+											input.className = "item-info-input editable"
+											input.placeholder = "hands"
+											input.value = item.hands || 0
+											input.setAttribute("field", "hands")
+											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+											if (!enable) {
+												input.setAttribute("readonly", true)
+											}
+										label.appendChild(input)
+
+										var span = document.createElement("span")
+											span.className = "item-info-label-text"
+											span.innerText = "handed"
+										label.appendChild(span)
+
+									// materials
+										var label = document.createElement("label")
+											label.className = "item-info-label"
+										block.appendChild(label)
+
+										var input = document.createElement("input")
+											input.type = "text"
+											input.className = "item-info-input editable"
+											input.placeholder = "materials"
+											input.value = item.materials || ""
+											input.setAttribute("field", "materials")
+											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+											if (!enable) {
+												input.setAttribute("readonly", true)
+											}
+										label.appendChild(input)
+
+								// description
+									var description = document.createElement("textarea")
+										if (!enable) {
+											description.setAttribute("readonly", true)
+										}
+										description.className = "item-description editable"
+										description.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+										description.placeholder = "description"
+										description.value = ""
+									block.appendChild(description)
+									
+									if (item.weapons)      { description.value += " | for use with " + item.weapons.join(", ")}
+									if (item.recipe)       { description.value += " | recipe: " + JSON.stringify(item.recipe).replace(/{|}|"|:/g,"").replace(/,/g,", ")}
+									if (item.costPerPound) { description.value += " | cost per pound: " + item.costPerPound + "❑"}
+									if (item.description)  { description.value += " | " + item.description                    }
+
+									description.value = description.value.slice(3)
+							}
+
+						// open all?
+							if (enable) {
+								ELEMENTS.character.items.element.setAttribute("open", true)
+								event.preventDefault()
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterConditions */
+				function displayCharacterConditions(character, container) {
+					try {
+						// unset
+							var conditionElements = Array.from(container.querySelectorAll(".condition"))
+							for (var i in conditionElements) {
+								conditionElements[i].remove()
+							}
+
+							var options = Array.from(ELEMENTS.character.conditions.select.querySelectorAll("option"))
+							for (var i in options) {
+								options[i].removeAttribute("disabled")
+							}
+
+						// loop through
+							for (var i in character.info.status.conditions) {
+								// data
+									var condition = character.info.status.conditions[i]
+
+								// container
+									var conditionElement = document.createElement("div")
+										conditionElement.className = "condition"
+										conditionElement.setAttribute("value", condition.name)
+									ELEMENTS.character.conditions.list.prepend(conditionElement)
+
+								// name
+									var name = document.createElement("div")
+										name.className = "condition-name"
+										name.innerText = condition.name.replace(/_/g, " ")
+									conditionElement.appendChild(name)
+
+								// description
+									var description = document.createElement("div")
+										description.className = "condition-description"
+										description.innerText = condition.description || ""
+									conditionElement.appendChild(description)
+
+								// remove
+									var remove = document.createElement("button")
+										remove.className = "condition-remove"
+										remove.innerText = "x"
+										remove.addEventListener(TRIGGERS.click, submitCharacterUpdateConditionDelete)
+									conditionElement.prepend(remove)
+
+								// disable in select
+									var conditionOption = ELEMENTS.character.conditions.select.querySelector("[value=" + condition.name + "]")
+									if (conditionOption) {
+										conditionOption.setAttribute("disabled", true)
+									}
+							}
+
+						// disabled
+							ELEMENTS.character.conditions.disabled.setAttribute("disabled", true)
+							ELEMENTS.character.conditions.disabled.selected = true
+					} catch (error) {console.log(error)}
+				}
+
+		/** submit - settings **/
+			/* submitCharacterRead */
+				function submitCharacterRead(event) {
+					try {
+						// value
+							var value = ELEMENTS.character.settings.select.element.value
+
+						// none
+							if (value == ELEMENTS.character.settings.select.none.value) {
+								var post = {
+									action: "unreadCharacter",
+									character: {
+										userId: USER ? USER.id : null,
+										gameId: GAME ? GAME.id : null,
+										id: CHARACTER.id || null
+									}
+								}
+
+								CHARACTER = null
+								displayCharacter()
+								displayCharacterList()
+							}
+
+						// upload
+							else if (value == ELEMENTS.character.settings.select.upload.value) {
+								submitCharacterCreateUpload()
+								return
+							}
+
+						// new
+							else if (value == ELEMENTS.character.settings.select.new.value) {
+								// blank template
+									if (ELEMENTS.character.settings.select.templates.value == ELEMENTS.character.settings.select.blank.value) {
+										var post = {
+											action: "createCharacter",
+											character: {
+												userId: USER ? USER.id : null,
+												gameId: GAME ? GAME.id : null,
+												template: {
+													type: null,
+													name: null
+												}
+											}
+										}
+									}
+
+								// new from template
+									else {
+										var value = ELEMENTS.character.settings.select.templates.value
+										var directory = value.slice(1,value.length - 1).split("-")
+										var post = {
+											action: "createCharacter",
+											character: {
+												userId: USER ? USER.id : null,
+												gameId: GAME ? GAME.id : null,
+												template: {
+													type: directory[1],
+													name: directory[2]
+												}
+											}
+										}
+
+										if (!post.character.template.type || !post.character.template.name) {
+											FUNCTIONS.showToast({success: false, message: "invalid template selection"})
+											return
+										}
+									}
+							}
+						
+						// find in user
+							else {
+								var post = {
+									action: "readCharacter",
+									character: {
+										userId: USER ? USER.id : null,
+										gameId: GAME ? GAME.id : null,
+										id: value
+									}
+								}
+							}
+
+						// validate
+							if (!post.character.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterCreateUpload */
+				function submitCharacterCreateUpload(event) {
+					try {
+						ELEMENTS.character.settings.upload.click()
+						ELEMENTS.character.settings.upload.addEventListener(TRIGGERS.change, function(event) {
+							if (ELEMENTS.character.settings.upload.value && ELEMENTS.character.settings.upload.value.length) {
+								// start reading
+									var reader = new FileReader()
+										reader.readAsText(event.target.files[0])
+
+								// end reading
+									reader.onload = function(event) {
+										var obj = String(event.target.result)
+										try {
+											// parse character
+												var post = {
+													action: "createCharacter",
+													character: JSON.parse(obj)
+												}
+
+											// assign
+												post.character.userId = USER ? USER.id : null
+												post.character.gameId = GAME ? GAME.id : null
+
+											// validate
+												if (!post.character.gameId) {
+													FUNCTIONS.showToast({success: false, message: "no game selected"})
+													return
+												}
+
+											// send socket request
+												SOCKET.send(JSON.stringify(post))
+										}
+										catch (error) {
+											FUNCTIONS.showToast({success: false, message: "unable to read file"})
+											return
+										}
+									}
+							}
+						})
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterCreateDuplicate */
+				function submitCharacterCreateDuplicate(event) {
+					try {
+						// post
+							var post = {
+								action: "createCharacter",
+								character: CHARACTER || null
+							}
+
+						// validate
+							if (!post.character) {
+								FUNCTIONS.showToast({success: false, message: "no character to duplicate"})
+								return
+							}
+
+						// assign
+							post.character.userId = USER ? USER.id : null
+							post.character.gameId = GAME ? GAME.id : null
+
+						// validate
+							if (!post.character.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterDelete */
+				function submitCharacterDelete(event) {
+					try {
+						// post
+							var post = {
+								action: "deleteCharacter",
+								character: CHARACTER
+							}
+
+						// validate
+							if (!post.character.id) {
+								FUNCTIONS.showToast({success: false, message: "no character selected"})
+								return
+							}
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterUpdate */
+				function submitCharacterUpdate(character) {
+					try {
+						// post
+							var post = {
+								action: "updateCharacterData",
+								character: character
+							}
+
+						// validate
+							if (!post.character || !post.character.id) {
+								FUNCTIONS.showToast({success: false, message: "no character selected"})
+								return	
+							}
+							if (!post.character.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+
+						// socket
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterUpdateAccess */
+				function submitCharacterUpdateAccess(event) {
+					try {
+						// post
+							var post = {
+								action: "updateCharacterAccess",
+								character: {
+									id: CHARACTER ? CHARACTER.id : null,
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									access: ELEMENTS.character.settings.access.select.element.value
+								}
+							}
+
+						// validate
+							if (!post.character || !post.character.id) {
+								FUNCTIONS.showToast({success: false, message: "no character selected"})
+								return	
+							}
+							if (!post.character.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+								
+						// set
+							if (post.character.access == ELEMENTS.character.settings.access.select.all.value) {
+								post.character.access = null
+							}
+							if (post.character.access == ELEMENTS.character.settings.access.select.me.value) {
+								post.character.access = USER.id
+							}
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+		/** submit - gameplay **/
+			/* submitCharacterUpdateName */
+				function submitCharacterUpdateName(event) {
+					try {
+						// update name
+							CHARACTER.info.name = event.target.value
+
+						// post
+							var post = {
+								action: "updateCharacterName",
+								character: CHARACTER
+							}
+
+						// validate
+							if (!post.character || !post.character.id) {
+								FUNCTIONS.showToast({success: false, message: "no character selected"})
+								return	
+							}
+							if (!post.character.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterUpdateImage */
+				function submitCharacterUpdateImage(event) {
 					try {
 						ELEMENTS.character.info.imageUpload.click()
 						ELEMENTS.character.info.imageUpload.addEventListener(TRIGGERS.change, function(event) {
@@ -2436,45 +3114,30 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* resetCharacterImage */
-				function resetCharacterImage(event) {
+			/* submitCharacterUpdateImageDelete */
+				function submitCharacterUpdateImageDelete(event) {
 					try {
 						// change image
 							CHARACTER.info.image = null
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
-			/* listCharacterRaces */
-				function listCharacterRaces() {
-					try {
-						var container = ELEMENTS.character.info.race
-						for (var i in RULES.races) {
-							if (!container.querySelector("option[value=" + i + "]")) {
-								var option = document.createElement("option")
-									option.value = i
-									option.innerText = i
-								container.appendChild(option)
-							}
-						}
-						ELEMENTS.character.info.raceDisabled.selected = true
-					} catch (error) {console.log(error)}
-				}
-
-			/* updateCharacterInfo */
-				function updateCharacterInfo(event) {
+			/* submitCharacterUpdateInfo */
+				function submitCharacterUpdateInfo(event) {
 					try {
 						// name
 							if (event.target.id == "character-info-name-text") {
-								updateCharacterName(event)
+								submitCharacterUpdateName(event)
 								return
 							}
 
 						// race & sex
 							if (event.target.id == "character-info-race") {
-								updateCharacterRace({name: event.target.value.toLowerCase().trim()})
+								submitCharacterUpdateRace({name: event.target.value.toLowerCase().trim()})
+								return
 							}
 							else if (event.target.id == "character-info-sex") {
 								CHARACTER.info.demographics.sex = event.target.value
@@ -2502,12 +3165,12 @@ window.onload = function() {
 							}
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
-			/* updateCharacterRace */
-				function updateCharacterRace(event) {
+			/* submitCharacterUpdateRace */
+				function submitCharacterUpdateRace(event) {
 					try {
 						// names
 							var beforeName = CHARACTER.info.demographics.race || null
@@ -2613,78 +3276,12 @@ window.onload = function() {
 							}
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayCharacterInfo */
-				function displayCharacterInfo(character) {
-					try {
-						// name
-							ELEMENTS.character.info.name.innerText = CHARACTER.info.name
-							ELEMENTS.character.info.nameText.value = CHARACTER.info.name
-
-						// image
-							if (character.info.image) {
-								ELEMENTS.character.info.image.style.backgroundImage = "url(" + character.info.image + (character.info.file ? ("?" + new Date().getTime()) : "") + ")"
-								ELEMENTS.character.info.image.setAttribute("visibility", true)
-							}
-							else {
-								ELEMENTS.character.info.image.style.backgroundImage = ""
-								ELEMENTS.character.info.image.setAttribute("visibility", false)
-							}
-
-						// damage
-							ELEMENTS.character.info.damage.value = CHARACTER.info.status.damage
-
-						// demographics
-							for (var i in CHARACTER.info.demographics) {
-								if (i == "race" && !ELEMENTS.character.info.race.querySelector("option[value='" + CHARACTER.info.demographics[i] + "']")) {
-									var option = document.createElement("option")
-										option.innerText = option.value = CHARACTER.info.demographics[i]
-									ELEMENTS.character.info.race.appendChild(option)
-								}
-								ELEMENTS.character.info[i].value = CHARACTER.info.demographics[i]
-							}
-
-						// carrying
-							ELEMENTS.character.info.burden.value = CHARACTER.info.status.burden
-
-						// points
-							ELEMENTS.character.info.points.value = CHARACTER.info.status.points
-
-						// description
-							ELEMENTS.character.info.description.value = CHARACTER.info.description
-							if (CHARACTER.info.demographics.race && RULES.races[CHARACTER.info.demographics.race]) {
-								ELEMENTS.character.info.raceAbility.value = RULES.races[CHARACTER.info.demographics.race].info.ability
-							}
-
-						// abilities
-							var run   = CHARACTER.statistics.speed.skills.find(   function(skill) { return skill.name == "run"  }) || {maximum: 0, condition: 0}
-							var swim  = CHARACTER.statistics.speed.skills.find(   function(skill) { return skill.name == "swim" }) || {maximum: 0, condition: 0}
-							var jump  = CHARACTER.statistics.speed.skills.find(   function(skill) { return skill.name == "jump" }) || {maximum: 0, condition: 0}
-							var carry = CHARACTER.statistics.strength.skills.find(function(skill) { return skill.name == "carry"}) || {maximum: 0, condition: 0}
-							var thro  = CHARACTER.statistics.strength.skills.find(function(skill) { return skill.name == "throw"}) || {maximum: 0, condition: 0}
-
-							ELEMENTS.character.info.run.value   = Math.max(0, ((CHARACTER.statistics.speed.maximum    + CHARACTER.statistics.speed.damage    + CHARACTER.statistics.speed.condition)    + (run.maximum   + run.condition  ))     )
-							ELEMENTS.character.info.move.value  = Math.max(0, ((CHARACTER.statistics.speed.maximum    + CHARACTER.statistics.speed.damage    + CHARACTER.statistics.speed.condition)    + (run.maximum   + run.condition  ))     )
-							ELEMENTS.character.info.swim.value  = Math.max(0, ((CHARACTER.statistics.speed.maximum    + CHARACTER.statistics.speed.damage    + CHARACTER.statistics.speed.condition)    + (swim.maximum  + swim.condition )) / 4 )
-							ELEMENTS.character.info.jump.value  = Math.max(0, ((CHARACTER.statistics.speed.maximum    + CHARACTER.statistics.speed.damage    + CHARACTER.statistics.speed.condition)    + (jump.maximum  + jump.condition )) * 10)
-							ELEMENTS.character.info.carry.value = Math.max(0, ((CHARACTER.statistics.strength.maximum + CHARACTER.statistics.strength.damage + CHARACTER.statistics.strength.condition) + (carry.maximum + carry.condition)) * 10)
-							ELEMENTS.character.info.throw.value = Math.max(0, ((CHARACTER.statistics.strength.maximum + CHARACTER.statistics.strength.damage + CHARACTER.statistics.strength.condition) + (thro.maximum  + thro.condition )) * 10)
-
-							if (CHARACTER.info.status.burden > ELEMENTS.character.info.carry.value) {
-								ELEMENTS.character.info.burden.setAttribute("overburdened", true)
-							}
-							else {
-								ELEMENTS.character.info.burden.removeAttribute("overburdened")
-							}
-					} catch (error) {console.log(error)}
-				}
-
-		/** STATISTICS **/
-			/* updateCharacterStatistic */
-				function updateCharacterStatistic(event) {
+			/* submitCharacterUpdateStatistic */
+				function submitCharacterUpdateStatistic(event) {
 					try {
 						// get statistic
 							var statistic = event.target.closest(".statistic").id.replace("character-", "")
@@ -2698,50 +3295,55 @@ window.onload = function() {
 							CHARACTER.info.status.points += cost
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayCharacterStatistic */
-				function displayCharacterStatistic(character, container, statistic, enable) {
+			/* submitCharacterUpdateRules */
+				function submitCharacterUpdateRules(event) {
 					try {
-						// statistic
-							container.querySelector(".statistic-maximum"  ).value = character.statistics[statistic].maximum
-							container.querySelector(".statistic-damage"   ).value = Math.max(-99, Math.min(99, character.statistics[statistic].damage))    || ""
-							container.querySelector(".statistic-condition").value = Math.max(-99, Math.min(99, character.statistics[statistic].condition)) || ""
-							container.querySelector(".statistic-current"  ).value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition)
-
-						// skill list
-							var select = ELEMENTS.character.statistics[statistic].querySelector("select")
-							var options = Array.from(select.querySelectorAll("option"))
-							for (var o in options) {
-								options[o].removeAttribute("disabled")
+						// no character
+							if (!CHARACTER) {
+								FUNCTIONS.showToast({success: false, message: "no character selected"})
+								return
 							}
-							ELEMENTS.character.statistics[statistic].querySelector("#character-" + statistic + "-disabled").selected = true
+
+						// get data
+							var resultElement = event.target.closest(".search-result")
+							var result = JSON.parse(resultElement.getAttribute("data") || "{}")
+
+						// race
+							if (result.type == "race") {
+								submitCharacterUpdateRace(result)
+								displayTool({target: ELEMENTS.tools.character})
+								displayCharacterMode({target: ELEMENTS.character.modes.edit})
+							}
+							
+						// skill
+							else if (result.type == "skill") {
+								submitCharacterUpdateSkillCreate(result)
+								displayTool({target: ELEMENTS.tools.character})
+								displayCharacterMode({target: ELEMENTS.character.modes.edit})
+							}
+
+						// item
+							else if (result.type == "item") {
+								submitCharacterUpdateItemCreate(result)
+								displayTool({target: ELEMENTS.tools.character})
+								displayCharacterMode({target: ELEMENTS.character.modes.items})
+							}
+
+						// condition
+							else if (result.type == "condition") {
+								submitCharacterUpdateConditionCreate(result)
+								displayTool({target: ELEMENTS.tools.character})
+								displayCharacterMode({target: ELEMENTS.character.modes.conditions})
+							}
 					} catch (error) {console.log(error)}
 				}
 
-		/** SKILLS **/
-			/* listCharacterSkills */
-				function listCharacterSkills() {
-					try {
-						for (var i in RULES.skills) {
-							var container = ELEMENTS.character.statistics[i].querySelector("select")
-
-							for (var j in RULES.skills[i]) {
-								if (!container.querySelector("option[value=" + RULES.skills[i][j].name + "]")) {
-									var option = document.createElement("option")
-										option.value = RULES.skills[i][j].name
-										option.innerText = RULES.skills[i][j].name.replace(/_/g, " ")
-									container.appendChild(option)
-								}
-							}
-						}
-					} catch (error) {console.log(error)}
-				}
-
-			/* addCharacterSkill */
-				function addCharacterSkill(event) {
+			/* submitCharacterUpdateSkillCreate */
+				function submitCharacterUpdateSkillCreate(event) {
 					try {
 						// from dropdown
 							if (event.target) {
@@ -2796,13 +3398,46 @@ window.onload = function() {
 							}
 
 						// save
-							saveCharacter(CHARACTER)
-					}
-					catch (error) {console.log(error)}
+							submitCharacterUpdate(CHARACTER)
+					} catch (error) {console.log(error)}
 				}
 
-			/* removeCharacterSkill */
-				function removeCharacterSkill(event) {
+			/* submitCharacterUpdateSkillUpdate */
+				function submitCharacterUpdateSkillUpdate(event) {
+					try {
+						// get statistic
+							var name = event.target.closest(".skill").querySelector(".skill-name-text").value.replace(/\s/g, "_")
+							var statistic = event.target.closest(".statistic").id.replace("character-", "")
+						
+						// get skill
+							var skill = CHARACTER.statistics[statistic].skills.find(function(s) {
+								return s.name == name
+							})
+
+						// changing d6?
+							if (event.target.className.includes("d6")) {
+								// update d6
+									skill.d6 = Math.max(0, Math.round(Number(event.target.value)))
+							}
+
+						// changing skill points?
+							else {
+								// set maximum
+									var old = skill.maximum
+									skill.maximum = Math.min(20, Math.max(0, Math.round(Number(event.target.value))))
+
+								// update points
+									var cost = (old - skill.maximum)
+									CHARACTER.info.status.points += cost
+							}
+
+						// save
+							submitCharacterUpdate(CHARACTER)
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterUpdateSkillDelete */
+				function submitCharacterUpdateSkillDelete(event) {
 					try {
 						// from dropdown
 							if (event.target) {
@@ -2838,166 +3473,12 @@ window.onload = function() {
 							}
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
-			/* updateCharacterSkill */
-				function updateCharacterSkill(event) {
-					try {
-						// get statistic
-							var name = event.target.closest(".skill").querySelector(".skill-name-text").value.replace(/\s/g, "_")
-							var statistic = event.target.closest(".statistic").id.replace("character-", "")
-						
-						// get skill
-							var skill = CHARACTER.statistics[statistic].skills.find(function(s) {
-								return s.name == name
-							})
-
-						// changing d6?
-							if (event.target.className.includes("d6")) {
-								// update d6
-									skill.d6 = Math.max(0, Math.round(Number(event.target.value)))
-							}
-
-						// changing skill points?
-							else {
-								// set maximum
-									var old = skill.maximum
-									skill.maximum = Math.min(20, Math.max(0, Math.round(Number(event.target.value))))
-
-								// update points
-									var cost = (old - skill.maximum)
-									CHARACTER.info.status.points += cost
-							}
-
-						// save
-							saveCharacter(CHARACTER)
-					} catch (error) {console.log(error)}
-				}
-
-			/* displayCharacterSkill */
-				function displayCharacterSkill(character, container, statistic, skill, enable) {
-					try {
-						// block
-							var block = document.createElement("div")
-								block.className = "skill"
-							container.querySelector(".skills-list").appendChild(block)
-
-							if (skill.unremovable) {
-								block.className += " unremovable"
-							}
-							else {
-								var remove = document.createElement("button")
-									remove.className = "skill-remove"
-									remove.innerText = "x"
-									remove.addEventListener(TRIGGERS.click, removeCharacterSkill)
-								block.prepend(remove)
-							}
-
-						// left column
-							var left = document.createElement("div")
-								left.className = "column-left"
-							block.appendChild(left)
-
-							var name = document.createElement("div")
-								name.className = "skill-name"
-							left.appendChild(name)
-
-							if (skill.d6 !== undefined) {
-								var d6 = document.createElement("input")
-									d6.type = "number"
-									d6.step = 1
-									d6.min = 0
-									if (!enable) {
-										d6.setAttribute("readonly", true)
-									}
-									d6.className = "d6 editable"
-									d6.placeholder = "d6"
-									d6.value = skill.d6
-									d6.addEventListener(TRIGGERS.click, rolld6)
-									d6.addEventListener(TRIGGERS.change, updateCharacterSkill)
-								name.appendChild(d6)
-							}
-
-							var text = document.createElement("input")
-								text.className = "skill-name-text"
-								text.type = "text"
-								text.setAttribute("disabled", true)
-								text.value = skill.name.replace(/_/g, " ")
-							name.appendChild(text)
-
-						// right column
-							var right = document.createElement("div")
-								right.className = "column-right"
-							block.appendChild(right)
-
-							var maximum = document.createElement("input")
-								maximum.type = "number"
-								if (!enable) {
-									maximum.setAttribute("readonly", true)
-								}
-								maximum.className = "skill-maximum editable"
-								maximum.value = skill.maximum
-								maximum.placeholder = "↑"
-								maximum.addEventListener(TRIGGERS.change, updateCharacterSkill)
-							right.appendChild(maximum)
-
-							var condition = document.createElement("input")
-								condition.type = "number"
-								condition.setAttribute("readonly", true)
-								condition.className = "skill-condition"
-								condition.value = Math.max(-99, Math.min(99, skill.condition)) || ""
-							right.appendChild(condition)
-
-							var damage = document.createElement("input")
-								damage.type = "number"
-								damage.setAttribute("readonly", true)
-								damage.className = "skill-damage"
-								damage.value = ""
-							right.appendChild(damage)
-
-							var current = document.createElement("input")
-								current.type = "number"
-								current.setAttribute("readonly", true)
-								current.className = "skill-current d20"
-								current.value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition + skill.maximum + skill.condition)
-								current.addEventListener(TRIGGERS.click, rolld20)
-							right.appendChild(current)
-						
-						// disable in select
-							var option = ELEMENTS.character.statistics[statistic].querySelector("option[value=" + skill.name + "]")
-							if (option) { option.setAttribute("disabled", true) }
-					} catch (error) {console.log(error)}
-				}
-
-		/** ITEMS **/
-			/* listCharacterItems */
-				function listCharacterItems() {
-					try {
-						var container = ELEMENTS.character.items.select
-
-						// add group
-							for (var i in RULES.items) {
-								var optgroup = document.createElement("optgroup")
-									optgroup.label = i
-								container.appendChild(optgroup)
-
-								// add items
-									for (var j in RULES.items[i]) {
-										if (!container.querySelector("option[value='" + RULES.items[i][j].name + "']")) {
-											var option = document.createElement("option")
-												option.value = RULES.items[i][j].name
-												option.innerText = RULES.items[i][j].name
-											optgroup.appendChild(option)
-										}
-									}
-							}
-					} catch (error) {console.log(error)}
-				}
-
-			/* addCharacterItem */
-				function addCharacterItem(event) {
+			/* submitCharacterUpdateItemCreate */
+				function submitCharacterUpdateItemCreate(event) {
 					try {
 						// from dropdown
 							if (event.target) {
@@ -3022,36 +3503,13 @@ window.onload = function() {
 							CHARACTER.info.status.burden += ((item.weight || 0) * (item.count || 0))
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					}
 					catch (error) {console.log(error)}
 				}
 
-			/* removeCharacterItem */
-				function removeCharacterItem(event) {
-					try {
-						// item name
-							var id = event.target.closest(".item").id
-
-						// remove item
-							for (var i = 0; i < CHARACTER.items.length; i++) {
-								if (CHARACTER.items[i].id == id) {
-									// update burden
-										CHARACTER.info.status.burden -= (CHARACTER.items[i].weight * CHARACTER.items[i].count)
-
-									// remove
-										CHARACTER.items.splice(i, 1)
-										break
-								}
-							}
-
-						// save
-							saveCharacter(CHARACTER)
-					} catch (error) {console.log(error)}
-				}
-
-			/* updateCharacterItem */
-				function updateCharacterItem(event) {
+			/* submitCharacterUpdateItemUpdate */
+				function submitCharacterUpdateItemUpdate(event) {
 					try {
 						// get item
 							var id = event.target.closest(".item").id
@@ -3168,12 +3626,12 @@ window.onload = function() {
 							}
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
-			/* equipCharacterItem */
-				function equipCharacterItem(event) {
+			/* submitCharacterUpdateItemEquip */
+				function submitCharacterUpdateItemEquip(event) {
 					try {
 						// get item
 							var id = event.target.closest(".item").id
@@ -3185,394 +3643,36 @@ window.onload = function() {
 							item.equipped = !item.equipped
 					
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					}
 					catch (error) {console.log(error)}
 				}
 
-			/* displayCharacterItems */
-				function displayCharacterItems(character, equipped, unequipped, enable) {
+			/* submitCharacterUpdateItemDelete */
+				function submitCharacterUpdateItemDelete(event) {
 					try {
-						// clear
-							equipped.innerHTML   = ""
-							unequipped.innerHTML = ""
+						// item name
+							var id = event.target.closest(".item").id
 
-						// loop through items
-							for (var i in character.items) {
-								// data
-									var item = character.items[i]
+						// remove item
+							for (var i = 0; i < CHARACTER.items.length; i++) {
+								if (CHARACTER.items[i].id == id) {
+									// update burden
+										CHARACTER.info.status.burden -= (CHARACTER.items[i].weight * CHARACTER.items[i].count)
 
-								// block
-									var block = document.createElement("div")
-										block.className = "item " + (item.type || "miscellaneous")
-										block.id = item.id
-
-										if (item.equipped) {
-											equipped.prepend(block)
-										}
-										else {
-											unequipped.prepend(block)
-										}
-
-								// remove
-									var remove = document.createElement("button")
-										remove.className = "item-remove"
-										remove.innerText = "x"
-										remove.addEventListener(TRIGGERS.click, removeCharacterItem)
-									block.prepend(remove)
-
-								// equip
-									var equip = document.createElement("button")
-										equip.className = "item-equip"
-										equip.innerHTML = "&#x2713;"
-										if (item.equipped) {
-											equip.setAttribute("equipped", true)
-										}
-										equip.addEventListener(TRIGGERS.click, equipCharacterItem)
-									block.prepend(equip)
-
-								// name
-									var name = document.createElement("div")
-										name.className = "item-name"
-									block.appendChild(name)
-
-								// d6
-									var d6 = document.createElement("input")
-										d6.type = "number"
-										if (!enable) {
-											d6.setAttribute("readonly", true)
-										}
-										d6.step = 1
-										d6.min = 0
-										d6.className = "d6 editable"
-										d6.placeholder = "d6"
-										d6.addEventListener(TRIGGERS.change, updateCharacterItem)
-										d6.addEventListener(TRIGGERS.click, rolld6)
-										d6.value = item.d6 || 0
-										if (!item.d6) {
-											d6.className += " d6-zero"
-										}
-									name.appendChild(d6)
-
-								// name text & count
-									var text = document.createElement("input")
-										text.type = "text"
-										if (!enable) {
-											text.setAttribute("readonly", true)
-										}
-										text.className = "item-name-text editable"
-										text.placeholder = "item"
-										text.value = item.name
-										text.addEventListener(TRIGGERS.change, updateCharacterItem)
-									name.appendChild(text)
-
-									var count = document.createElement("input")
-										count.type = "number"
-										count.step = 1
-										count.min = 0
-										count.className = "item-count editable"
-										if (!enable) {
-											count.setAttribute("readonly", true)
-										}
-										count.placeholder = "#"
-										count.value = item.count
-										count.addEventListener(TRIGGERS.change, updateCharacterItem)
-									name.appendChild(count)
-
-								// usage
-									if (item.usage) {
-										var usages = document.createElement("div")
-											usages.className = "item-usages"
-										block.appendChild(usages)
-
-										for (var u in item.usage) {
-											var usage = item.usage[u]
-											
-											if (usage.skill) {
-												var skill = character.statistics[usage.statistic].skills.find(function(skill) { return skill.name == usage.skill }) || {maximum: 0, condition: 0}
-											}
-
-											var usageElement = document.createElement("div")
-												usageElement.className = "item-usage"
-											usages.appendChild(usageElement)
-
-											var d6 = document.createElement("input")
-												d6.type = "number"
-												if (!enable) {
-													d6.setAttribute("readonly", true)
-												}
-												d6.step = 1
-												d6.min = 0
-												d6.className = "d6 editable"
-												if (skill.combat) {
-													d6.className += " combat"
-												}
-												d6.placeholder = "d6"
-												d6.addEventListener(TRIGGERS.change, updateCharacterItem)
-												d6.addEventListener(TRIGGERS.click, rolld6)
-												d6.value = usage.d6 || 0
-											usageElement.appendChild(d6)
-
-											var select = document.createElement("select")
-												for (var s in RULES.skills) {
-													var optgroup = document.createElement("optgroup")
-														optgroup.label = s
-													select.appendChild(optgroup)
-
-													for (var k in RULES.skills[s]) {
-														var option = document.createElement("option")
-															option.value = RULES.skills[s][k].name
-															option.innerText = RULES.skills[s][k].name.replace(/_/g, " ")
-														optgroup.appendChild(option)
-													}
-												}
-												if (!enable) {
-													select.setAttribute("disabled", true)
-												}
-												select.className = "item-usage-skill editable"
-												select.placeholder = "skill"
-												select.value = usage.skill
-												select.addEventListener(TRIGGERS.change, updateCharacterItem)
-											usageElement.appendChild(select)
-
-											var d20 = document.createElement("input")
-												d20.type = "number"
-												d20.setAttribute("readonly", true)
-												d20.step = 1
-												d20.className = "d20"
-												d20.value = Math.max(0, character.statistics[usage.statistic].maximum + character.statistics[usage.statistic].damage + character.statistics[usage.statistic].condition + (usage.skill ? skill.maximum + skill.condition : 0) + (usage.modifier ? usage.modifier : 0))
-												d20.addEventListener(TRIGGERS.click, rolld20)
-											usageElement.appendChild(d20)
-										}
-									}
-
-								// conditions
-									if (item.conditions) {
-										var conditions = document.createElement("div")
-											conditions.className = "item-conditions"
-										block.appendChild(conditions)
-
-										for (var i in item.conditions) {
-											var condition = document.createElement("div")
-												condition.className = "item-condition"
-											conditions.append(condition)
-
-											var d6 = document.createElement("input")
-												d6.type = "number"
-												if (!enable) {
-													d6.setAttribute("readonly", true)
-												}
-												d6.step = 1
-												d6.min = 0
-												d6.className = "d6 editable"
-												d6.addEventListener(TRIGGERS.change, updateCharacterItem)
-												d6.addEventListener(TRIGGERS.click, rolld6)
-												d6.value = item.conditions[i] || 0
-												d6.placeholder = "d6"
-											condition.appendChild(d6)
-
-											var select = document.createElement("select")
-												for (var c in RULES.conditions) {
-													var option = document.createElement("option")
-														option.innerText = c.replace(/_/g, " ")
-														option.value = c
-													select.appendChild(option)
-												}
-
-												if (!enable) {
-													select.setAttribute("disabled", true)
-												}
-												select.className = "item-condition-name editable"
-												select.value = i
-												select.addEventListener(TRIGGERS.change, updateCharacterItem)
-											condition.appendChild(select)
-
-											
-											if (!item.conditions[i]) {
-												select.className += " item-condition-remove"
-											}
-										}
-									}
-
-								// other info
-									// weight
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("input")
-											input.type = "number"
-											input.className = "item-info-input editable"
-											input.placeholder = "weight"
-											input.value = item.weight || 0
-											input.setAttribute("field", "weight")
-											input.addEventListener(TRIGGERS.change, updateCharacterItem)
-											if (!enable) {
-												input.setAttribute("readonly", true)
-											}
-										label.appendChild(input)
-
-										var span = document.createElement("span")
-											span.className = "item-info-label-text"
-											span.innerText = "lbs"
-										label.appendChild(span)
-
-									// cost
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("input")
-											input.type = "number"
-											input.className = "item-info-input editable"
-											input.placeholder = "cost"
-											input.value = item.cost || 0
-											input.setAttribute("field", "cost")
-											input.addEventListener(TRIGGERS.change, updateCharacterItem)
-											if (!enable) {
-												input.setAttribute("readonly", true)
-											}
-										label.appendChild(input)
-
-										var span = document.createElement("span")
-											span.className = "item-info-label-text"
-											span.innerText = "❑"
-										label.appendChild(span)
-
-									// fuel
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("input")
-											input.type = "number"
-											input.className = "item-info-input editable"
-											input.placeholder = "fuel"
-											input.value = item.fuel || 0
-											input.setAttribute("field", "fuel")
-											input.addEventListener(TRIGGERS.change, updateCharacterItem)
-											if (!enable) {
-												input.setAttribute("readonly", true)
-											}
-										label.appendChild(input)
-
-										var span = document.createElement("span")
-											span.className = "item-info-label-text"
-											span.innerText = "d6 fuel"
-										label.appendChild(span)
-
-									// magnetic
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("select")
-											input.className = "item-info-input editable"
-											input.setAttribute("field", "magnetic")
-											input.addEventListener(TRIGGERS.change, updateCharacterItem)
-											if (!enable) {
-												input.setAttribute("disabled", true)
-											}
-										label.appendChild(input)
-
-										var option = document.createElement("option")
-											option.value = false
-											option.innerText = "nonmagnetic"
-											if (!item.magnetic) { option.selected = true }
-										input.appendChild(option)
-
-										var option = document.createElement("option")
-											option.value = true
-											option.innerText = "magnetic"
-											if (item.magnetic) { option.selected = true }
-										input.appendChild(option)
-
-									// hands
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("input")
-											input.type = "number"
-											input.className = "item-info-input editable"
-											input.placeholder = "hands"
-											input.value = item.hands || 0
-											input.setAttribute("field", "hands")
-											input.addEventListener(TRIGGERS.change, updateCharacterItem)
-											if (!enable) {
-												input.setAttribute("readonly", true)
-											}
-										label.appendChild(input)
-
-										var span = document.createElement("span")
-											span.className = "item-info-label-text"
-											span.innerText = "handed"
-										label.appendChild(span)
-
-									// materials
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("input")
-											input.type = "text"
-											input.className = "item-info-input editable"
-											input.placeholder = "materials"
-											input.value = item.materials || 0
-											input.setAttribute("field", "materials")
-											input.addEventListener(TRIGGERS.change, updateCharacterItem)
-											if (!enable) {
-												input.setAttribute("readonly", true)
-											}
-										label.appendChild(input)
-
-								// description
-									var description = document.createElement("textarea")
-										if (!enable) {
-											description.setAttribute("readonly", true)
-										}
-										description.className = "item-description editable"
-										description.addEventListener(TRIGGERS.change, updateCharacterItem)
-										description.placeholder = "description"
-										description.value = ""
-									block.appendChild(description)
-									
-									if (item.weapons)      { description.value += " | for use with " + item.weapons.join(", ")}
-									if (item.recipe)       { description.value += " | recipe: " + JSON.stringify(item.recipe).replace(/{|}|"|:/g,"").replace(/,/g,", ")}
-									if (item.costPerPound) { description.value += " | cost per pound: " + item.costPerPound + "❑"}
-									if (item.description)  { description.value += " | " + item.description                    }
-
-									description.value = description.value.slice(3)
-							}
-
-						// open all?
-							if (enable) {
-								ELEMENTS.character.items.element.setAttribute("open", true)
-								event.preventDefault()
-							}
-					} catch (error) {console.log(error)}
-				}
-
-		/** CONDITIONS **/
-			/* listCharacterConditions */
-				function listCharacterConditions() {
-					try {
-						var container = ELEMENTS.character.conditions.select
-
-						// add conditions
-							for (var i in RULES.conditions) {
-								if (!container.querySelector("option[value='" + i + "']")) {
-									var condition = document.createElement("option")
-										condition.value = i
-										condition.innerText = i.replace(/_/g, " ")
-									container.appendChild(condition)
+									// remove
+										CHARACTER.items.splice(i, 1)
+										break
 								}
 							}
+
+						// save
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
-			/* addCharacterCondition	*/
-				function addCharacterCondition(event) {
+			/* submitCharacterUpdateConditionCreate	*/
+				function submitCharacterUpdateConditionCreate(event) {
 					try {
 						// from dropdown
 							if (event.target) {
@@ -3602,7 +3702,7 @@ window.onload = function() {
 											else {
 												var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
 												if (!skill) {
-													addCharacterSkill({skillName: j, statistic: i, fromConditions: true})
+													submitCharacterUpdateSkillCreate({skillName: j, statistic: i, fromConditions: true})
 													var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
 												}
 
@@ -3613,12 +3713,12 @@ window.onload = function() {
 							}
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
-			/* removeCharacterCondition */
-				function removeCharacterCondition(event) {
+			/* submitCharacterUpdateConditionDelete */
+				function submitCharacterUpdateConditionDelete(event) {
 					try {
 						// get condition
 							var conditionName = event.target.parentNode.getAttribute("value")
@@ -3644,7 +3744,7 @@ window.onload = function() {
 											skill.condition -= effects[i][j]
 
 											if (!skill.maximum && !skill.unremovable) {
-												removeCharacterSkill({skillName: j, statistic: i, fromConditions: true})
+												submitCharacterUpdateSkillDelete({skillName: j, statistic: i, fromConditions: true})
 											}
 										}
 									}
@@ -3652,120 +3752,23 @@ window.onload = function() {
 							}
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayCharacterConditions */
-				function displayCharacterConditions(character, container) {
-					try {
-						// unset
-							var conditionElements = Array.from(container.querySelectorAll(".condition"))
-							for (var i in conditionElements) {
-								conditionElements[i].remove()
-							}
-
-							var options = Array.from(ELEMENTS.character.conditions.select.querySelectorAll("option"))
-							for (var i in options) {
-								options[i].removeAttribute("disabled")
-							}
-
-						// loop through
-							for (var i in character.info.status.conditions) {
-								// data
-									var condition = character.info.status.conditions[i]
-
-								// container
-									var conditionElement = document.createElement("div")
-										conditionElement.className = "condition"
-										conditionElement.setAttribute("value", condition.name)
-									ELEMENTS.character.conditions.list.prepend(conditionElement)
-
-								// name
-									var name = document.createElement("div")
-										name.className = "condition-name"
-										name.innerText = condition.name.replace(/_/g, " ")
-									conditionElement.appendChild(name)
-
-								// description
-									var description = document.createElement("div")
-										description.className = "condition-description"
-										description.innerText = condition.description || ""
-									conditionElement.appendChild(description)
-
-								// remove
-									var remove = document.createElement("button")
-										remove.className = "condition-remove"
-										remove.innerText = "x"
-										remove.addEventListener(TRIGGERS.click, removeCharacterCondition)
-									conditionElement.prepend(remove)
-
-								// disable in select
-									var conditionOption = ELEMENTS.character.conditions.select.querySelector("[value=" + condition.name + "]")
-									if (conditionOption) {
-										conditionOption.setAttribute("disabled", true)
-									}
-							}
-
-						// disabled
-							ELEMENTS.character.conditions.disabled.setAttribute("disabled", true)
-							ELEMENTS.character.conditions.disabled.selected = true
-					} catch (error) {console.log(error)}
-				}
-
-		/** DAMAGE **/
-			/* updateCharacterDamage */
-				function updateCharacterDamage(event) {
+			/* submitCharacterUpdateDamage */
+				function submitCharacterUpdateDamage(event) {
 					try {
 						// change damage
 							CHARACTER.info.status.damage = Number(event.target.value)
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
-			/* recoverCharacterDamage */
-				function recoverCharacterDamage(event) {
-					try {
-						// rolls
-							var rolls = []
-
-						// spacer
-							rolls.push({
-								spacer: true,
-								text: CHARACTER.info.name
-							})
-
-						// recover skill
-							var skill = CHARACTER.statistics.immunity.skills.find(function (s) { return s.name == "recover" }) || {maximum: 0, condition: 0, d6: 2}
-							var target = Math.max(0, CHARACTER.statistics.immunity.maximum + CHARACTER.statistics.immunity.damage + CHARACTER.statistics.immunity.condition + skill.maximum + skill.condition)
-
-							rolls.push({
-								d: 20,
-								target: target,
-								text: "recover",
-								ifSuccess: {
-									type: "healing",
-									d: 6,
-									count: skill.d6,
-									text: "recover"
-								},
-								ifFailure: {
-									type: "healing",
-									d: 6,
-									count: 1,
-									text: "recover"
-								}
-							})
-
-						// post
-							addToRolls(rolls)
-					} catch (error) {console.log(error)}
-				}
-
-			/* damageCharacterStatistic */
-				function damageCharacterStatistic(event) {
+			/* submitCharacterUpdateDamageStatistic */
+				function submitCharacterUpdateDamageStatistic(event) {
 					try {
 						// change statistic
 							var statistic = event.target.closest(".statistic").id.replace("character-", "")
@@ -3783,184 +3786,586 @@ window.onload = function() {
 							}
 
 						// save
-							saveCharacter(CHARACTER)
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
 	/*** CHAT ***/
-		/** listChatRecipients **/
-			function listChatRecipients() {
-				try {
-					// remove existing
-						var allValue = ELEMENTS.chat.send.recipients.all.value
-						var recipientsList = Array.from(ELEMENTS.chat.send.recipients.select.querySelectorAll("option"))
-						for (var i in recipientsList) {
-							if (recipientsList[i].value !== allValue) {
-								recipientsList[i].remove()
+		/** receive **/
+			/* receiveChat */
+				function receiveChat(messages) {
+					try {
+						// clear messages?
+							if (messages.delete) {
+								ELEMENTS.chat.messages.innerHTML = ""
+								return
 							}
-						}
 
-					// no game?
-						if (!GAME) {
-							ELEMENTS.chat.send.sender.select.value = ELEMENTS.chat.send.sender.user.value
-							return
-						}
+						// display messages
+							displayChat(messages)
+					} catch (error) {console.log(error)}
+				}
 
-					// loop through
-						for (var i in GAME.users) {
-							if (i == USER.id) { continue }
-							var option = document.createElement("option")
-								option.innerText = GAME.users[i].name
-								option.value = GAME.users[i].id
-							ELEMENTS.chat.send.recipients.select.appendChild(option)
-						}
-				} catch (error) {console.log(error)}
-			}
-
-		/** submitChat **/
-			function submitChat(event) {
-				try {
-					// post
-						var post = {
-							action: "createChat",
-							chat: {
-								userId: USER ? USER.id : null,
-								gameId: GAME ? GAME.id : null,
-								recipientId: ELEMENTS.chat.send.recipients.select.value,
-								display: {
-									sender: ELEMENTS.chat.send.sender.select.value,
-									time: new Date().getTime(),
-									text: ELEMENTS.chat.send.input.value
+		/** display **/
+			/* displayChatListRecipients */
+				function displayChatListRecipients() {
+					try {
+						// remove existing
+							var allValue = ELEMENTS.chat.send.recipients.all.value
+							var recipientsList = Array.from(ELEMENTS.chat.send.recipients.select.querySelectorAll("option"))
+							for (var i in recipientsList) {
+								if (recipientsList[i].value !== allValue) {
+									recipientsList[i].remove()
 								}
 							}
-						}
 
-					// validate
-						if (!post.chat.display.text) {
-							return
-						}
-						if (!post.chat.gameId) {
-							FUNCTIONS.showToast({success: false, message: "no game selected"})
-							return
-						}
+						// no game?
+							if (!GAME) {
+								ELEMENTS.chat.send.sender.select.value = ELEMENTS.chat.send.sender.user.value
+								return
+							}
 
-					// convert
-						if (post.chat.recipientId == ELEMENTS.chat.send.recipients.all.value) {
-							post.chat.recipientId = null
-						}
+						// loop through
+							for (var i in GAME.users) {
+								if (i == USER.id) { continue }
+								var option = document.createElement("option")
+									option.innerText = GAME.users[i].name
+									option.value = GAME.users[i].id
+								ELEMENTS.chat.send.recipients.select.appendChild(option)
+							}
+					} catch (error) {console.log(error)}
+				}
 
-						if (post.chat.display.sender == ELEMENTS.chat.send.sender.character.value) {
-							post.chat.display.sender = CHARACTER ? CHARACTER.info.name : ELEMENTS.chat.send.sender.anonymous.value
-						}
-						if (post.chat.display.sender == ELEMENTS.chat.send.sender.user.value) {
-							post.chat.display.sender = USER ? USER.name : ELEMENTS.chat.send.sender.anonymous.value
-						}
+			/* displayChat */
+				function displayChat(messages) {
+					try {
+						// no new messages
+							var newMessages = false
 
-					// clear input
-						ELEMENTS.chat.send.input.value = ""
+						// loop through messages
+							for (var i in messages) {
+								// already exists?
+									if (ELEMENTS.chat.messages.querySelector("#chat-" + messages[i].id)) {
+										continue
+									}
 
-					// send socket request
-						SOCKET.send(JSON.stringify(post))
-				} catch (error) {console.log(error)}
-			}
+								// search result
+									if (messages[i].display.data) {
+										newMessages = true
+										displayRulesSearchResult(messages[i].display.data, ELEMENTS.chat.messages)
+										continue
+									}
 
-		/** receiveChat **/
-			function receiveChat(messages) {
-				try {
-					// clear messages?
-						if (messages.delete) {
-							ELEMENTS.chat.messages.innerHTML = ""
-							return
-						}
+								// content
+									if (messages[i].display.content) {
+										newMessages = true
+										displayChatContent(messages[i].display.content)
+										continue
+									}
 
-					// no new messages
-						var newMessages = false
-
-					// loop through messages
-						for (var i in messages) {
-							// search result
-								if (messages[i].display.data) {
+								// new
 									newMessages = true
-									displaySearchResult(messages[i].display.data, ELEMENTS.chat.messages)
-									continue
+									displayChatMessage(messages[i])
+							}
+
+						// scroll
+							ELEMENTS.chat.messages.scrollTop = 1000000
+
+						// one message, and it's a sound?
+							if (messages && messages.length == 1 && messages[0].display.content && messages[0].display.content.type == "audio") {
+								var parent = ELEMENTS.chat.messages.querySelector("#chat-" + messages[0].display.content.id)
+									parent.querySelector("audio").play()
+							}
+
+						// notification
+							if (newMessages && ELEMENTS.structure.left.getAttribute("tool") !== "chat") {
+								ELEMENTS.tools.notification.setAttribute("visibility", true)
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayChatMessage */
+				function displayChatMessage(message) {
+					try {
+						// element
+							var messageElement = document.createElement("div")
+								messageElement.className = "chat-message" + (message.recipientId ? " chat-secret" : "")
+								messageElement.id = "chat-" + message.id
+							ELEMENTS.chat.messages.appendChild(messageElement)
+
+						// left
+							var messageLeft = document.createElement("div")
+								messageLeft.className = "chat-message-left"
+							messageElement.appendChild(messageLeft)
+
+							var messageName = document.createElement("div")
+								messageName.className = "chat-message-name"
+								messageName.innerText = message.display.sender
+							messageLeft.appendChild(messageName)
+
+							var messageTime = document.createElement("div")
+								messageTime.className = "chat-message-time"
+								messageTime.innerText = new Date(message.display.time).toLocaleTimeString()
+							messageLeft.appendChild(messageTime)
+
+						// text
+							var messageText = document.createElement("div")
+								messageText.className = "chat-message-text"
+								messageText.innerText = message.display.text
+							messageElement.appendChild(messageText)
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayChatContent */
+				function displayChatContent(content) {
+					try {
+						// validate
+							if (!content) {
+								return
+							}
+
+						// element
+							var messageElement = document.createElement("div")
+								messageElement.className = "content-chat"
+								messageElement.id = "chat-" + content.id
+							ELEMENTS.chat.messages.appendChild(messageElement)
+							
+						// name
+							var messageName = document.createElement("h3")
+								messageName.className = "content-chat-name"
+								messageName.innerText = content.name
+							messageElement.appendChild(messageName)
+
+						// open
+							var messageButton = document.createElement("button")
+								messageButton.className = "content-chat-button minor-button"
+								messageButton.innerHTML = "&rarr;"
+								messageButton.addEventListener(TRIGGERS.click, submitContentReadChat)
+							messageElement.appendChild(messageButton)
+
+						// arena
+							if (content.type == "arena") {
+								var messageDataContent = document.createElement("div")
+									messageDataContent.className = "content-chat-data"
+									messageDataContent.innerHTML = ""
+								messageElement.appendChild(messageDataContent)
+								return
+							}
+
+						// text
+							if (content.type == "text") {
+								var messageDataContent = document.createElement("div")
+									messageDataContent.className = "content-chat-data"
+									messageDataContent.innerHTML = content.text
+								messageElement.appendChild(messageDataContent)
+								return
+							}
+
+						// image
+							if (content.type == "image") {
+								var messageDataContent = document.createElement("img")
+									messageDataContent.className = "content-chat-data content-image"
+									messageDataContent.src = content.url ? (content.url + (content.file ? ("?" + new Date().getTime()) : "")) : "#"
+								messageElement.appendChild(messageDataContent)
+								return
+							}
+
+						// audio
+							if (content.type == "audio") {
+								var messageDataContent = document.createElement("audio")
+									messageDataContent.className = "content-chat-data content-audio"
+									messageDataContent.volume = USER.settings.volume || 0
+									messageDataContent.setAttribute("controls", true)
+								messageElement.appendChild(messageDataContent)
+
+								var fileType = content.url.slice(-3).toLowerCase()
+
+								var source = document.createElement("source")
+									source.src = content.url
+									source.setAttribute("type", "audio/" + (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg"))
+								messageDataContent.appendChild(source)
+								return
+							}
+
+						// embed
+							if (content.type == "embed") {
+								var messageDataContent = document.createElement("div")
+									messageDataContent.className = "content-chat-data"
+									if (content.code) {
+										messageDataContent.innerText = content.code
+									}
+									else if (content.url) {
+										messageDataContent.innerHTML = `<a target="_blank" href="` + content.url + `">` + content.url + `</a>`
+									}
+								messageElement.appendChild(messageDataContent)
+								return
+							}
+
+						// component
+							if (content.type == "component") {
+								try {
+									var code = JSON.parse(content.code)
+								} catch (error) {
+									var code = {name: (content.text || "custom component"), type: "error", data: {error: "malformed JSON"}}
 								}
 
-							// content
-								if (messages[i].display.content) {
-									newMessages = true
-									displayContentInChat(messages[i].display.content)
-									continue
+								displayRulesSearchResult(code, ELEMENTS.chat.messages)
+								return
+							}
+					} catch (error) {console.log(error)}
+				}
+
+		/** submit **/
+			/* submitChatCreate */
+				function submitChatCreate(event) {
+					try {
+						// post
+							var post = {
+								action: "createChat",
+								chat: {
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									recipientId: ELEMENTS.chat.send.recipients.select.value,
+									display: {
+										sender: ELEMENTS.chat.send.sender.select.value,
+										time: new Date().getTime(),
+										text: ELEMENTS.chat.send.input.value
+									}
 								}
+							}
 
-							// already exists?
-								if (ELEMENTS.chat.messages.querySelector("#chat-" + messages[i].id)) {
-									continue
+						// validate
+							if (!post.chat.display.text) {
+								return
+							}
+							if (!post.chat.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+
+						// convert
+							if (post.chat.recipientId == ELEMENTS.chat.send.recipients.all.value) {
+								post.chat.recipientId = null
+							}
+
+							if (post.chat.display.sender == ELEMENTS.chat.send.sender.character.value) {
+								post.chat.display.sender = CHARACTER ? CHARACTER.info.name : ELEMENTS.chat.send.sender.anonymous.value
+							}
+							if (post.chat.display.sender == ELEMENTS.chat.send.sender.user.value) {
+								post.chat.display.sender = USER ? USER.name : ELEMENTS.chat.send.sender.anonymous.value
+							}
+
+						// clear input
+							ELEMENTS.chat.send.input.value = ""
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitChatCreateRules */
+				function submitChatCreateRules(event) {
+					try {
+						// post
+							var post = {
+								action: "createChat",
+								chat: {
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									display: {
+										data: JSON.parse(event.target.closest(".search-result").getAttribute("data"))
+									}
 								}
+							}
+						
+						// validate
+							if (!post.chat.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+							if (!post.chat.display.data) {
+								FUNCTIONS.showToast({success: false, message: "invalid search result"})
+								return
+							}
 
-							// new
-								createChat(messages[i])
-								newMessages = true
-						}
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+							displayTool({target: ELEMENTS.tools.chat})
+					} catch (error) {console.log(error)}
+				}
 
-					// scroll
-						ELEMENTS.chat.messages.scrollTop = 1000000
+			/* submitChatCreateContent */
+				function submitChatCreateContent(event) {
+					try {
+						// post
+							var post = {
+								action: "createChat",
+								chat: {
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									display: {
+										content: CONTENT
+									}
+								}
+							}
+						
+						// validate
+							if (!post.chat.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+							if (!post.chat.display.content) {
+								FUNCTIONS.showToast({success: false, message: "invalid content"})
+								return
+							}
 
-					// one message, and it's a sound?
-						if (messages && messages.length == 1 && messages[0].display.content && messages[0].display.content.type == "audio") {
-							var parent = ELEMENTS.chat.messages.querySelector("#chat-" + messages[0].display.content.id)
-								parent.querySelector("audio").play()
-						}
-
-					// notification
-						if (newMessages && ELEMENTS.structure.left.getAttribute("tool") !== "chat") {
-							ELEMENTS.tools.notification.setAttribute("visibility", true)
-						}
-				} catch (error) {console.log(error)}
-			}
-
-		/** createChat **/
-			function createChat(message) {
-				try {
-					// element
-						var messageElement = document.createElement("div")
-							messageElement.className = "chat-message" + (message.recipientId ? " chat-secret" : "")
-							messageElement.id = "chat-" + message.id
-						ELEMENTS.chat.messages.appendChild(messageElement)
-
-					// left
-						var messageLeft = document.createElement("div")
-							messageLeft.className = "chat-message-left"
-						messageElement.appendChild(messageLeft)
-
-						var messageName = document.createElement("div")
-							messageName.className = "chat-message-name"
-							messageName.innerText = message.display.sender
-						messageLeft.appendChild(messageName)
-
-						var messageTime = document.createElement("div")
-							messageTime.className = "chat-message-time"
-							messageTime.innerText = new Date(message.display.time).toLocaleTimeString()
-						messageLeft.appendChild(messageTime)
-
-					// text
-						var messageText = document.createElement("div")
-							messageText.className = "chat-message-text"
-							messageText.innerText = message.display.text
-						messageElement.appendChild(messageText)
-				} catch (error) {console.log(error)}
-			}
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+							displayTool({target: ELEMENTS.tools.chat})
+					} catch (error) {console.log(error)}
+				}
 
 	/*** CONTENT ***/
-		/** selection **/
-			/* listContent */
-				function listContent(contentList) {
+		/** receive **/
+			/* receiveContent */
+				function receiveContent(content, selectContent) {
+					try {
+						// selecting content?
+							if (selectContent) {
+								CONTENT = {id: selectContent}
+							}
+
+						// current content?
+							if (CONTENT && CONTENT.id == content.id) {
+								CONTENT = content.delete ? null : content
+								displayContent()
+							}
+
+						// relist
+							displayContentList()
+					} catch (error) {console.log(error)}
+				}
+
+		/** display **/
+			/* displayContent */
+				function displayContent() {
+					try {
+						// no content?
+							if (!CONTENT) {
+								ELEMENTS.character.settings.recipient.arena.innerHTML = ""
+							}
+
+						// sidebar panel
+							displayContentPanel()
+
+						// gametable
+							displayContentGametable()
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentPanel */
+				function displayContentPanel() {
+					try {
+						// no content?
+							if (!CONTENT) {
+								ELEMENTS.content.element.setAttribute("mode", "none")
+								return
+							}
+
+						// name
+							ELEMENTS.content.name.input.value = CONTENT.name
+
+						// access
+							ELEMENTS.content.access.select.value = CONTENT.access ? ELEMENTS.content.access.me.value : ELEMENTS.content.access.all.value
+							ELEMENTS.content.access.form.setAttribute("visibility", (CONTENT && CONTENT.id && CONTENT.userId == USER.id) ? true : false)
+
+						// data
+							ELEMENTS.content.url.input.value = CONTENT.url || null
+							ELEMENTS.content.code.input.value = CONTENT.code || null
+
+						// delete gate
+							ELEMENTS.content.delete.gate.setAttribute("visibility", (CONTENT && CONTENT.id && CONTENT.userId == USER.id) ? true : false)
+
+						// mode
+							ELEMENTS.content.element.setAttribute("mode", CONTENT.type || "none")
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentGametable */
+				function displayContentGametable() {
+					try {
+						// no content?
+							if (!CONTENT || !CONTENT.type) {
+								ELEMENTS.gametable.element.innerHTML = ""
+								return
+							}
+
+						// arena
+							if (CONTENT.type == "arena") {
+								// content
+									var arena = ELEMENTS.gametable.element.querySelector(".content-arena")
+									if (!arena) {
+										// canvas
+											ELEMENTS.gametable.element.innerHTML = ""
+												arena = document.createElement("canvas")
+												arena.className = "content-arena"
+												arena.addEventListener(TRIGGERS.mousedown, grabContent)
+											ELEMENTS.gametable.element.appendChild(arena)
+
+										// panning
+											var directions = ["-y", "-y -x", "-x", "-x y", "y", "y x", "x", "x -y"]
+											for (var i in directions) {
+												var panningOverlay = document.createElement("div")
+													panningOverlay.setAttribute("directions", directions[i])
+													panningOverlay.className = "content-arena-panning"
+													panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
+													panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
+												ELEMENTS.gametable.element.appendChild(panningOverlay)
+											}
+									}
+
+								// update
+									ELEMENTS.gametable.canvas.element = arena
+									ELEMENTS.gametable.canvas.context = ELEMENTS.gametable.canvas.element.getContext("2d")
+									displayContentArena()
+									return
+							}
+
+						// text
+							if (CONTENT.type == "text") {
+								// content
+									var text = ELEMENTS.gametable.element.querySelector(".content-text")
+									if (!text) {
+										// contenteditable
+											ELEMENTS.gametable.element.innerHTML = ""
+												text = document.createElement("div")
+												text.className = "content-text"
+												text.setAttribute("contenteditable", true)
+											ELEMENTS.gametable.element.appendChild(text)
+									}
+
+								// update
+									if (text.innerHTML !== CONTENT.text) {
+										text.innerHTML = CONTENT.text
+									}
+									return
+							}
+
+						// image
+							if (CONTENT.type == "image") {
+								// content
+									var image = ELEMENTS.gametable.element.querySelector(".content-image")
+									if (!image) {
+										// grabbable image
+											ELEMENTS.gametable.element.innerHTML = ""
+												image = document.createElement("img")
+												image.className = "content-image content-grabbable"
+												image.addEventListener(TRIGGERS.mousedown, grabContent)
+											ELEMENTS.gametable.element.appendChild(image)
+									}
+
+								// update
+									if (CONTENT.url) {
+										image.src = CONTENT.url + (CONTENT.file ? ("?" + new Date().getTime()) : "")
+									}
+
+								// zoom
+									if (!CONTENT.zoom) {
+										CONTENT.zoomPower = 0
+										CONTENT.zoom = 1
+									}
+									return
+							}
+
+						// audio
+							if (CONTENT.type == "audio") {
+								// content
+									var audio = ELEMENTS.gametable.element.querySelector(".content-audio")
+									if (!audio) {
+										// audio player
+											ELEMENTS.gametable.element.innerHTML = ""
+												audio = document.createElement("audio")
+												audio.className = "content-audio"
+												audio.volume = USER.settings.volume || 0
+												audio.setAttribute("controls", true)
+											ELEMENTS.gametable.element.appendChild(audio)
+									}
+
+								// update
+									if (CONTENT.url) {
+										// remove old source
+											var source = audio.querySelector("source")
+											if (source) { source.remove() }
+
+										// add new source
+											var fileType = CONTENT.url.slice(-3).toLowerCase()
+												fileType = (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg")
+											var source = document.createElement("source")
+												source.setAttribute("type", "audio/" + fileType)
+												source.setAttribute("src", CONTENT.url)
+											audio.appendChild(source)
+									}
+									return
+							}
+
+						// embed
+							if (CONTENT.type == "embed") {
+								// code
+									if (CONTENT.code) {
+										var embed = ELEMENTS.gametable.element.querySelector("div.content-embed")
+										if (!embed) {
+											// embedded html
+												ELEMENTS.gametable.element.innerHTML = ""
+													embed = document.createElement("div")
+													embed.className = "content-embed"
+												ELEMENTS.gametable.element.appendChild(embed)
+										}
+
+										if (embed.innerHTML !== CONTENT.code) {
+											embed.innerHTML = CONTENT.code
+										}
+									}
+
+								// url
+									else if (CONTENT.url) {
+										var embed = ELEMENTS.gametable.element.querySelector("iframe.content-embed")
+										if (!embed) {
+											// iframe
+												ELEMENTS.gametable.element.innerHTML = ""
+													embed = document.createElement("iframe")
+													embed.className = "content-embed"
+													embed.setAttribute("frameborder", "none")
+												ELEMENTS.gametable.element.appendChild(embed)
+										}
+
+										if (embed.src !== CONTENT.url) {
+											embed.src = CONTENT.url
+										}
+									}
+
+								// neither
+									else {
+										ELEMENTS.gametable.element.innerHTML = ""
+									}
+									return
+							}
+
+						// component
+							if (CONTENT.type == "component") {
+								ELEMENTS.gametable.element.innerHTML = ""
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentList */
+				function displayContentList(contentList) {
 					try {
 						// close option?
 							ELEMENTS.content.choose.select.none.disabled = (CONTENT && CONTENT.id) ? false : true
 							if (!CONTENT) {
 								ELEMENTS.content.choose.select.element.value = ELEMENTS.content.choose.select.new.value
 							}
-							changeContentSelection()
+							displayContentListSelection()
 
 						// no game?
 							if (!GAME) {
@@ -4031,25 +4436,545 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* changeContentSelection */
-				function changeContentSelection(event) {
+			/* displayContentListSelection */
+				function displayContentListSelection(event) {
 					try {
 						// reveal
 							if (ELEMENTS.content.choose.select.element.value == ELEMENTS.content.choose.select.new.value) {
 								ELEMENTS.content.choose.types.element.setAttribute("visibility", true)
 								ELEMENTS.content.choose.select.element.className = ""
+								return
 							}
 
 						// hide
-							else {
-								ELEMENTS.content.choose.types.element.setAttribute("visibility", false)
-								ELEMENTS.content.choose.select.element.className = "form-pair"
+							ELEMENTS.content.choose.types.element.setAttribute("visibility", false)
+							ELEMENTS.content.choose.select.element.className = "form-pair"
+							return
+					} catch (error) {console.log(error)}
+				}
+
+		/** display - arena **/
+			/* displayContentArena */
+				function displayContentArena() {
+					try {
+						// no arena
+							if (!CONTENT || !CONTENT.arena || !ELEMENTS.gametable.canvas.element) {
+								return
+							}
+
+						// clear old targeting
+							var arenaObjectKeys = Object.keys(CONTENT.arena.objects)
+							var targetingOptions = Array.from(ELEMENTS.character.settings.recipient.arena.querySelectorAll("option"))
+							for (var i in targetingOptions) {
+								if (!arenaObjectKeys.find(function(o) { return CONTENT.arena.objects[o].characterId == targetingOptions[i].value })) {
+									targetingOptions[i].remove()
+								}
+							}
+						
+						// sidebar panel
+							displayContentArenaPanel()
+
+						// gametable
+							displayContentArenaGametable()
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentArenaPanel */
+				function displayContentArenaPanel() {
+					try {
+						// clear old sidebar
+							var listingElements = Array.from(ELEMENTS.content.objects.list.querySelectorAll(".arena-object"))
+							for (var i in listingElements) {
+								if (!CONTENT.arena.objects[listingElements[i].id.replace("arena-object-", "")]) {
+									listingElements[i].remove()
+								}
+							}
+
+						// update sidebar
+							for (var i in CONTENT.arena.objects) {
+								displayContentArenaObjectListing(CONTENT.arena.objects[i])
 							}
 					} catch (error) {console.log(error)}
 				}
 
-			/* selectContent */
-				function selectContent(event) {
+			/* displayContentArenaObjectListing */
+				function displayContentArenaObjectListing(object) {
+					try {
+						// listing
+							var listing = ELEMENTS.content.objects.list.querySelector("#arena-object-" + object.id)
+
+						// create
+							if (!listing) {
+								// block
+									var listing = document.createElement("div")
+										listing.id = "arena-object-" + object.id
+										listing.className = "arena-object"
+									ELEMENTS.content.objects.list.appendChild(listing)
+
+								// inputs
+									// visible
+										var inputVisible = document.createElement("input")
+											inputVisible.className = "arena-object-visible"
+											inputVisible.setAttribute("property", "visible")
+											inputVisible.type = "checkbox"
+											inputVisible.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										listing.appendChild(inputVisible)
+
+									// z
+										var upButton = document.createElement("button")
+											upButton.className = "arena-object-up"
+											upButton.innerHTML = "&uarr;"
+											upButton.setAttribute("property", "z")
+											upButton.value = "1"
+											upButton.addEventListener(TRIGGERS.click, submitContentArenaObjectUpdate)
+										listing.appendChild(upButton)
+
+										var downButton = document.createElement("button")
+											downButton.className = "arena-object-down"
+											downButton.innerHTML = "&darr;"
+											downButton.value = "-1"
+											downButton.setAttribute("property", "z")
+											downButton.addEventListener(TRIGGERS.click, submitContentArenaObjectUpdate)
+										listing.appendChild(downButton)
+
+									// remove
+										var removeButton = document.createElement("button")
+											removeButton.className = "arena-object-remove"
+											removeButton.innerText = "x"
+											removeButton.addEventListener(TRIGGERS.click, submitContentArenaObjectDelete)
+										listing.appendChild(removeButton)
+
+									// text
+										var labelText = document.createElement("label")
+											labelText.className = "arena-object-label arena-object-text"
+										listing.appendChild(labelText)
+
+										var inputText = document.createElement("input")
+											inputText.className = "arena-object-input"
+											inputText.setAttribute("property", "text")
+											inputText.placeholder = "text"
+											inputText.type = "text"
+											inputText.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelText.appendChild(inputText)
+
+										var spanText = document.createElement("span")
+											spanText.className = "arena-object-label-text"
+											spanText.innerText = "text"
+										labelText.appendChild(spanText)
+
+									// x
+										var labelX = document.createElement("label")
+											labelX.className = "arena-object-label"
+										listing.appendChild(labelX)
+
+										var inputX = document.createElement("input")
+											inputX.className = "arena-object-input"
+											inputX.setAttribute("property", "x")
+											inputX.placeholder = "x"
+											inputX.step = 0.5
+											inputX.type = "number"
+											inputX.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelX.appendChild(inputX)
+
+										var spanX = document.createElement("span")
+											spanX.className = "arena-object-label-text"
+											spanX.innerText = "x"
+										labelX.appendChild(spanX)
+
+									// y
+										var labelY = document.createElement("label")
+											labelY.className = "arena-object-label"
+										listing.appendChild(labelY)
+
+										var inputY = document.createElement("input")
+											inputY.className = "arena-object-input"
+											inputY.setAttribute("property", "y")
+											inputY.placeholder = "y"
+											inputY.step = 0.5
+											inputY.type = "number"
+											inputY.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelY.appendChild(inputY)
+
+										var spanY = document.createElement("span")
+											spanY.className = "arena-object-label-text"
+											spanY.innerText = "y"
+										labelY.appendChild(spanY)
+
+									// width
+										var labelWidth = document.createElement("label")
+											labelWidth.className = "arena-object-label"
+										listing.appendChild(labelWidth)
+
+										var inputWidth = document.createElement("input")
+											inputWidth.className = "arena-object-input"
+											inputWidth.setAttribute("property", "width")
+											inputWidth.placeholder = "width"
+											inputWidth.step = 1
+											inputWidth.min = 0
+											inputWidth.type = "number"
+											inputWidth.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelWidth.appendChild(inputWidth)
+
+										var spanWidth = document.createElement("span")
+											spanWidth.className = "arena-object-label-text"
+											spanWidth.innerText = "width"
+										labelWidth.appendChild(spanWidth)
+
+									// height
+										var labelHeight = document.createElement("label")
+											labelHeight.className = "arena-object-label"
+										listing.appendChild(labelHeight)
+
+										var inputHeight = document.createElement("input")
+											inputHeight.className = "arena-object-input"
+											inputHeight.setAttribute("property", "height")
+											inputHeight.placeholder = "height"
+											inputHeight.step = 1
+											inputHeight.min = 0
+											inputHeight.type = "number"
+											inputHeight.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelHeight.appendChild(inputHeight)
+
+										var spanHeight = document.createElement("span")
+											spanHeight.className = "arena-object-label-text"
+											spanHeight.innerText = "height"
+										labelHeight.appendChild(spanHeight)
+
+									// corners
+										var labelCorners = document.createElement("label")
+											labelCorners.className = "arena-object-label"
+										listing.appendChild(labelCorners)
+
+										var inputCorners = document.createElement("input")
+											inputCorners.className = "arena-object-input"
+											inputCorners.setAttribute("property", "corners")
+											inputCorners.step = 1
+											inputCorners.min = 0
+											inputCorners.max = 50
+											inputCorners.type = "range"
+											inputCorners.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelCorners.appendChild(inputCorners)
+
+										var spanCorners = document.createElement("span")
+											spanCorners.className = "arena-object-label-text"
+											spanCorners.innerText = "corners"
+										labelCorners.appendChild(spanCorners)
+
+									// rotation
+										var labelRotation = document.createElement("label")
+											labelRotation.className = "arena-object-label"
+										listing.appendChild(labelRotation)
+
+										var inputRotation = document.createElement("input")
+											inputRotation.className = "arena-object-input"
+											inputRotation.setAttribute("property", "rotation")
+											inputRotation.step = 45
+											inputRotation.min = 0
+											inputRotation.max = 360
+											inputRotation.type = "range"
+											inputRotation.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelRotation.appendChild(inputRotation)
+
+										var spanRotation = document.createElement("span")
+											spanRotation.className = "arena-object-label-text"
+											spanRotation.innerText = "rotation"
+										labelRotation.appendChild(spanRotation)
+
+									// glow
+										var labelGlow = document.createElement("label")
+											labelGlow.className = "arena-object-label"
+										listing.appendChild(labelGlow)
+
+										var inputGlow = document.createElement("input")
+											inputGlow.className = "arena-object-input"
+											inputGlow.setAttribute("property", "glow")
+											inputGlow.step = 0.01
+											inputGlow.min = 0
+											inputGlow.type = "number"
+											inputGlow.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelGlow.appendChild(inputGlow)
+
+										var spanGlow = document.createElement("span")
+											spanGlow.className = "arena-object-label-text"
+											spanGlow.innerText = "glow"
+										labelGlow.appendChild(spanGlow)
+
+									// shadow
+										var labelShadow = document.createElement("label")
+											labelShadow.className = "arena-object-label"
+										listing.appendChild(labelShadow)
+
+										var inputShadow = document.createElement("input")
+											inputShadow.className = "arena-object-input"
+											inputShadow.setAttribute("property", "shadow")
+											inputShadow.type = "color"
+											inputShadow.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelShadow.appendChild(inputShadow)
+
+										var spanShadow = document.createElement("span")
+											spanShadow.className = "arena-object-label-text"
+											spanShadow.innerText = "shadow"
+										labelShadow.appendChild(spanShadow)
+
+									// opacity
+										var labelOpacity = document.createElement("label")
+											labelOpacity.className = "arena-object-label"
+										listing.appendChild(labelOpacity)
+
+										var inputOpacity = document.createElement("input")
+											inputOpacity.className = "arena-object-input"
+											inputOpacity.setAttribute("property", "opacity")
+											inputOpacity.step = 0.01
+											inputOpacity.min = 0
+											inputOpacity.max = 1
+											inputOpacity.type = "range"
+											inputOpacity.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelOpacity.appendChild(inputOpacity)
+
+										var spanOpacity = document.createElement("span")
+											spanOpacity.className = "arena-object-label-text"
+											spanOpacity.innerText = "opacity"
+										labelOpacity.appendChild(spanOpacity)
+
+									// color
+										var labelColor = document.createElement("label")
+											labelColor.className = "arena-object-label"
+										listing.appendChild(labelColor)
+
+										var inputColor = document.createElement("input")
+											inputColor.className = "arena-object-input"
+											inputColor.setAttribute("property", "color")
+											inputColor.type = "color"
+											inputColor.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelColor.appendChild(inputColor)
+
+										var spanColor = document.createElement("span")
+											spanColor.className = "arena-object-label-text"
+											spanColor.innerText = "color"
+										labelColor.appendChild(spanColor)
+
+									// image
+										var labelImage = document.createElement("label")
+											labelImage.className = "arena-object-label arena-object-image"
+										listing.appendChild(labelImage)
+
+										var inputImage = document.createElement("input")
+											inputImage.className = "arena-object-input"
+											inputImage.setAttribute("property", "image")
+											inputImage.placeholder = "image"
+											inputImage.type = "text"
+											inputImage.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelImage.appendChild(inputImage)
+
+										var spanImage = document.createElement("span")
+											spanImage.className = "arena-object-label-text"
+											spanImage.innerText = "image"
+										labelImage.appendChild(spanImage)
+							}
+
+						// find
+							else {
+								var inputVisible = listing.querySelector("input[property='visible']")
+								var inputText = listing.querySelector("input[property='text']")
+								var inputX = listing.querySelector("input[property='x']")
+								var inputY = listing.querySelector("input[property='y']")
+								var inputWidth = listing.querySelector("input[property='width']")
+								var inputHeight = listing.querySelector("input[property='height']")
+								var inputCorners = listing.querySelector("input[property='corners']")
+								var inputRotation = listing.querySelector("input[property='rotation']")
+								var inputGlow = listing.querySelector("input[property='glow']")
+								var inputShadow = listing.querySelector("input[property='shadow']")
+								var inputOpacity = listing.querySelector("input[property='opacity']")
+								var inputColor = listing.querySelector("input[property='color']")
+								var inputImage = listing.querySelector("input[property='image']")
+								var inputCharacter = listing.querySelector("select[property='character']")
+							}
+
+						// set values
+							listing.style.order = object.z || 0
+							inputVisible.checked = object.visible || false
+							inputText.value = object.text || ""
+							inputX.value = object.x || 0
+							inputY.value = object.y || 0
+							inputWidth.value = object.width || 0
+							inputHeight.value = object.height || 0
+							inputCorners.value = object.corners || 0
+							inputRotation.value = object.rotation || 0
+							inputGlow.value = object.glow || 0
+							inputShadow.value = object.shadow || ELEMENTS.gametable.canvas.gridBackground
+							inputOpacity.value = object.opacity || 0
+							inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor
+							inputImage.value = object.image || ""
+							inputCharacter = object.character || "[none]"
+
+						// targeting
+							if (object.characterId) {
+								if (!ELEMENTS.character.settings.recipient.arena.querySelector("option[value='" + object.characterId + "']")) {
+									var targetOption = document.createElement("option")
+										targetOption.value = object.characterId
+										targetOption.innerText = object.text || "[?]"
+									ELEMENTS.character.settings.recipient.arena.appendChild(targetOption)
+								}
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentArenaGametable */
+				function displayContentArenaGametable() {
+					try {
+						// sort objects
+							var sortedKeys = Object.keys(CONTENT.arena.objects) || []
+								sortedKeys = sortedKeys.sort(function(a, b) {
+									return CONTENT.arena.objects[a].z - CONTENT.arena.objects[b].z
+								})
+
+						// update images
+							var unloadedCount = 0
+							for (var i in sortedKeys) {
+								var key = sortedKeys[i]
+								var imageURL = CONTENT.arena.objects[key].image
+								if (!imageURL) {
+									continue
+								}
+
+								if (!ELEMENTS.gametable.canvas.images[key]) {
+									ELEMENTS.gametable.canvas.images[key] = document.createElement("img")
+								}
+
+								if (ELEMENTS.gametable.canvas.images[key].getAttribute("src") !== imageURL) {
+									unloadedCount++
+									ELEMENTS.gametable.canvas.images[key].src = imageURL
+									ELEMENTS.gametable.canvas.images[key].onload = ELEMENTS.gametable.canvas.images[key].onerror = function() {
+										unloadedCount--
+										if (!unloadedCount) { displayContentArenaCanvas(sortedKeys) }
+									}
+								}
+							}
+
+						// display canvas
+							if (!unloadedCount) { displayContentArenaCanvas(sortedKeys) }
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentArenaCanvas */
+				function displayContentArenaCanvas(sortedKeys) {
+					try {
+						// resize & clear canvas
+							FUNCTIONS.resizeCanvas(ELEMENTS.gametable.canvas.element)
+							FUNCTIONS.clearCanvas(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context)
+							FUNCTIONS.drawRectangle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, 0, 0, ELEMENTS.gametable.canvas.element.width, ELEMENTS.gametable.canvas.element.height, {color: ELEMENTS.gametable.canvas.gridBackground})
+							FUNCTIONS.translateCanvas(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, ELEMENTS.gametable.canvas.offsetX, ELEMENTS.gametable.canvas.offsetY)							
+
+						// loop through to display
+							for (var i in sortedKeys) {
+								displayContentArenaObject(CONTENT.arena.objects[sortedKeys[i]])
+							}
+
+						// display grid
+							displayContentArenaGrid()
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentArenaObject */
+				function displayContentArenaObject(object) {
+					try {
+						// not visible?
+							if (!object.visible) {
+								return
+							}
+
+						// dimensions
+							var cellSize = Math.round(ELEMENTS.gametable.canvas.cellSize)
+							var x = (object.x - (object.width / 2)) * cellSize
+							var y = (object.y - (object.height / 2)) * cellSize
+							var rotateX = object.x * cellSize
+							var rotateY = ELEMENTS.gametable.canvas.element.height - object.y * cellSize
+							var width = object.width * cellSize
+							var height = object.height * cellSize
+							var options = {
+								color: object.color,
+								opacity: object.opacity,
+								rotation: 1 * object.rotation
+							}
+
+						// corners
+							var corners = Number(object.corners)
+							if (corners) {
+								var absoluteRadius = corners / 100 * (width + height) / 2
+								options.radii = {
+									topLeft: absoluteRadius,
+									topRight: absoluteRadius,
+									bottomRight: absoluteRadius,
+									bottomLeft: absoluteRadius
+								}
+							}
+
+						// shadow
+							if (object.glow) {
+								options.shadow = object.shadow
+								options.blur = cellSize * object.glow
+							}
+
+						// image
+							if (object.image) {
+								options.image = ELEMENTS.gametable.canvas.images[object.id]
+								FUNCTIONS.rotateCanvas(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, rotateX, rotateY, options.rotation, function() {
+									FUNCTIONS.drawImage(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, y, width, height, options)
+								})
+							}
+
+						// draw
+							else {
+								FUNCTIONS.rotateCanvas(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, rotateX, rotateY, options.rotation, function() {
+									FUNCTIONS.drawRectangle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, y, width, height, options)
+								})
+							}
+
+						// text
+							if (object.text) {
+								FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x + width / 2, y + height / 2, object.text, {color: ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow:ELEMENTS.gametable.canvas.gridBackground, size: cellSize / 2})
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentArenaGrid */
+				function displayContentArenaGrid() {
+					try {
+						// move canvas
+							var halfWidth = Math.round(ELEMENTS.gametable.canvas.element.width / 2)
+							var halfHeight = Math.round(ELEMENTS.gametable.canvas.element.height / 2)
+
+						// edges
+							var pannedLeft = Math.round(-ELEMENTS.gametable.canvas.offsetX - halfWidth)
+							var pannedRight = Math.round(-ELEMENTS.gametable.canvas.offsetX + halfWidth)
+							var pannedBottom = Math.round(-ELEMENTS.gametable.canvas.offsetY - halfHeight)
+							var pannedTop = Math.round(-ELEMENTS.gametable.canvas.offsetY + halfHeight)
+
+						// based on zoom
+							var cellSize = Math.round(ELEMENTS.gametable.canvas.cellSize)
+
+						// x
+							for (var x = pannedLeft; x < pannedRight; x++) {
+								if (x % cellSize == 0) {
+									FUNCTIONS.drawLine(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, pannedBottom, x, pannedTop, {color: ELEMENTS.gametable.canvas.gridColor, opacity: 0.5})
+								}
+							}
+
+						// y
+							for (var y = pannedBottom; y < pannedTop; y++) {
+								if (y % cellSize == 0) {
+									FUNCTIONS.drawLine(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, pannedLeft, y, pannedRight, y, {color: ELEMENTS.gametable.canvas.gridColor, opacity: 0.5})
+								}
+							}
+
+						// origin
+							FUNCTIONS.drawCircle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, 0, 0, (ELEMENTS.gametable.canvas.cellSize / 4), {color: ELEMENTS.gametable.canvas.gridColor, opacity: 0.5})
+					} catch (error) {console.log(error)}
+				}
+
+		/** submit **/
+			/* submitContentRead */
+				function submitContentRead(event) {
 					try {
 						// select value
 							var value = ELEMENTS.content.choose.select.element.value
@@ -4067,7 +4992,7 @@ window.onload = function() {
 
 								CONTENT = null
 								displayContent()
-								listContent()
+								displayContentList()
 							}
 
 						// create
@@ -4104,39 +5029,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* sendContentToChat */
-				function sendContentToChat(event) {
-					try {
-						// post
-							var post = {
-								action: "createChat",
-								chat: {
-									userId: USER ? USER.id : null,
-									gameId: GAME ? GAME.id : null,
-									display: {
-										content: CONTENT
-									}
-								}
-							}
-						
-						// validate
-							if (!post.chat.gameId) {
-								FUNCTIONS.showToast({success: false, message: "no game selected"})
-								return
-							}
-							if (!post.chat.display.content) {
-								FUNCTIONS.showToast({success: false, message: "invalid content"})
-								return
-							}
-
-						// send socket request
-							SOCKET.send(JSON.stringify(post))
-							changeTool({target: ELEMENTS.tools.chat})
-					} catch (error) {console.log(error)}
-				}
-
-			/* openContentFromChat */
-				function openContentFromChat(event) {
+			/* submitContentReadChat */
+				function submitContentReadChat(event) {
 					try {
 						// select value
 							var value = event.target.closest(".content-chat").id.replace("chat-", "")
@@ -4153,13 +5047,12 @@ window.onload = function() {
 
 						// send socket request
 							SOCKET.send(JSON.stringify(post))
-							changeTool({target: ELEMENTS.tools.content})
+							displayTool({target: ELEMENTS.tools.content})
 					} catch (error) {console.log(error)}
 				}
 
-		/** editing **/
-			/* updateContentName */
-				function updateContentName(event) {
+			/* submitContentUpdateName */
+				function submitContentUpdateName(event) {
 					try {
 						// post
 							var post = {
@@ -4187,8 +5080,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* updateContentAccess */
-				function updateContentAccess(event) {
+			/* submitContentUpdateAccess */
+				function submitContentUpdateAccess(event) {
 					try {
 						// post
 							var post = {
@@ -4218,8 +5111,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* updateContentData */
-				function updateContentData(event) {
+			/* submitContentUpdateData */
+				function submitContentUpdateData(event) {
 					try {
 						// post
 							var post = {
@@ -4250,9 +5143,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* uploadContentFile */
-
-				function uploadContentFile(event) {
+			/* submitContentUpdateFile */
+				function submitContentUpdateFile(event) {
 					try {
 						ELEMENTS.content.upload.input.click()
 						ELEMENTS.content.upload.input.addEventListener(TRIGGERS.change, function(event) {
@@ -4307,8 +5199,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* duplicateContent */
-				function duplicateContent(event) {
+			/* submitContentCreateDuplicate */
+				function submitContentCreateDuplicate(event) {
 					try {
 						// post
 							var post = {
@@ -4337,8 +5229,8 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* deleteContent */
-				function deleteContent(event) {
+			/* submitContentDelete */
+				function submitContentDelete(event) {
 					try {
 						// post
 							var post = {
@@ -4363,301 +5255,154 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-		/** display **/
-			/* displayContent */
-				function displayContent() {
+		/** submit - arena **/
+			/* submitContentArenaTurnOrder */
+				function submitContentArenaTurnOrder(event) {
 					try {
-						// no content?
-							if (!CONTENT) {
-								ELEMENTS.content.element.setAttribute("mode", "none")
-								ELEMENTS.gametable.element.innerHTML = ""
-								ELEMENTS.character.settings.recipient.arena.innerHTML = ""
-								return
-							}
-
-						// name
-							ELEMENTS.content.name.input.value = CONTENT.name
-
-						// access
-							ELEMENTS.content.access.select.value = CONTENT.access ? ELEMENTS.content.access.me.value : ELEMENTS.content.access.all.value
-							ELEMENTS.content.access.form.setAttribute("visibility", (CONTENT && CONTENT.id && CONTENT.userId == USER.id) ? true : false)
-
-						// edit forms?
-							ELEMENTS.content.delete.gate.setAttribute("visibility", (CONTENT && CONTENT.id && CONTENT.userId == USER.id) ? true : false)
-
-						// form
-							ELEMENTS.content.element.setAttribute("mode", CONTENT.type || "none")
-							ELEMENTS.content.url.input.value = CONTENT.url || null
-							ELEMENTS.content.code.input.value = CONTENT.code || null
-
-						// arena
-							if (CONTENT.type == "arena") {
-								// content
-									var arena = ELEMENTS.gametable.element.querySelector(".content-arena")
-									if (!arena) {
-										ELEMENTS.gametable.element.innerHTML = ""
-											arena = document.createElement("canvas")
-											arena.className = "content-arena"
-											arena.addEventListener(TRIGGERS.mousedown, grabContent)
-										ELEMENTS.gametable.element.appendChild(arena)
-
-										var directions = ["-y", "-y -x", "-x", "-x y", "y", "y x", "x", "x -y"]
-										for (var i in directions) {
-											var panningOverlay = document.createElement("div")
-												panningOverlay.setAttribute("directions", directions[i])
-												panningOverlay.className = "content-arena-panning"
-												panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
-												panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
-											ELEMENTS.gametable.element.appendChild(panningOverlay)
-										}
-									}
-
-								// update
-									ELEMENTS.gametable.canvas.element = arena
-									ELEMENTS.gametable.canvas.context = ELEMENTS.gametable.canvas.element.getContext("2d")
-									displayContentArena()
-									return
-							}
-
-						// text
-							if (CONTENT.type == "text") {
-								// content
-									var text = ELEMENTS.gametable.element.querySelector(".content-text")
-									if (!text) {
-										ELEMENTS.gametable.element.innerHTML = ""
-											text = document.createElement("div")
-											text.className = "content-text"
-											text.setAttribute("contenteditable", true)
-										ELEMENTS.gametable.element.appendChild(text)
-									}
-
-								// update
-									if (text.innerHTML !== CONTENT.text) {
-										text.innerHTML = CONTENT.text
-									}
-									return
-							}
-
-						// image
-							if (CONTENT.type == "image") {
-								// content
-									var image = ELEMENTS.gametable.element.querySelector(".content-image")
-									if (!image) {
-										ELEMENTS.gametable.element.innerHTML = ""
-											image = document.createElement("img")
-											image.className = "content-image content-grabbable"
-											image.addEventListener(TRIGGERS.mousedown, grabContent)
-										ELEMENTS.gametable.element.appendChild(image)
-									}
-
-								// update
-									if (CONTENT.url) {
-										image.src = CONTENT.url + (CONTENT.file ? ("?" + new Date().getTime()) : "")
-									}
-
-								// zoom
-									if (!CONTENT.zoom) {
-										CONTENT.zoomPower = 0
-										CONTENT.zoom = 1
-									}
-									return
-							}
-
-						// audio
-							if (CONTENT.type == "audio") {
-								// content
-									var audio = ELEMENTS.gametable.element.querySelector(".content-audio")
-									if (!audio) {
-										ELEMENTS.gametable.element.innerHTML = ""
-											audio = document.createElement("audio")
-											audio.className = "content-audio"
-											audio.volume = USER.settings.volume || 0
-											audio.setAttribute("controls", true)
-										ELEMENTS.gametable.element.appendChild(audio)
-									}
-
-								// update
-									if (CONTENT.url) {
-										var source = audio.querySelector("source")
-										if (source) { source.remove() }
-
-										var source = document.createElement("source")
-										audio.appendChild(source)
-
-										var fileType = CONTENT.url.slice(-3).toLowerCase()
-										source.setAttribute("type", "audio/" + (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg"))
-										source.setAttribute("src", CONTENT.url)
-									}
-									return
-							}
-
-						// embed
-							if (CONTENT.type == "embed") {
-								// code
-									if (CONTENT.code) {
-										var embed = ELEMENTS.gametable.element.querySelector("div.content-embed")
-										if (!embed) {
-											ELEMENTS.gametable.element.innerHTML = ""
-												embed = document.createElement("div")
-												embed.className = "content-embed"
-											ELEMENTS.gametable.element.appendChild(embed)
-										}
-
-										if (embed.innerHTML !== CONTENT.code) {
-											embed.innerHTML = CONTENT.code
-										}
-									}
-
-								// url
-									else if (CONTENT.url) {
-										var embed = ELEMENTS.gametable.element.querySelector("iframe.content-embed")
-										if (!embed) {
-											ELEMENTS.gametable.element.innerHTML = ""
-											embed = document.createElement("iframe")
-											embed.className = "content-embed"
-											embed.setAttribute("frameborder", "none")
-											ELEMENTS.gametable.element.appendChild(embed)
-										}
-
-										if (embed.src !== CONTENT.url) {
-											embed.src = CONTENT.url
-										}
-									}
-
-								// neither
-									else {
-										ELEMENTS.gametable.element.innerHTML = ""
-									}
-									return
-							}
-
-						// component
-							if (CONTENT.type == "component") {
-								ELEMENTS.gametable.element.innerHTML = ""
-							}
-							return
-					} catch (error) {console.log(error)}
-				}
-
-			/* displayContentInChat */
-				function displayContentInChat(content) {
-					try {
-						// validate
-							if (!content) {
-								return
-							}
-
-						// element
-							var resultElement = document.createElement("div")
-								resultElement.className = "content-chat"
-								resultElement.id = "chat-" + content.id
-							ELEMENTS.chat.messages.appendChild(resultElement)
-							
-						// name
-							var resultName = document.createElement("h3")
-								resultName.className = "content-chat-name"
-								resultName.innerText = content.name
-							resultElement.appendChild(resultName)
-
-						// open
-							var resultButton = document.createElement("button")
-								resultButton.className = "content-chat-button minor-button"
-								resultButton.innerHTML = "&rarr;"
-								resultButton.addEventListener(TRIGGERS.click, openContentFromChat)
-							resultElement.appendChild(resultButton)
-
-						// arena
-							if (content.type == "arena") {
-								var resultDataContent = document.createElement("div")
-									resultDataContent.className = "content-chat-data"
-									resultDataContent.innerHTML = ""
-								resultElement.appendChild(resultDataContent)
-								return
-							}
-
-						// text
-							if (content.type == "text") {
-								var resultDataContent = document.createElement("div")
-									resultDataContent.className = "content-chat-data"
-									resultDataContent.innerHTML = content.text
-								resultElement.appendChild(resultDataContent)
-								return
-							}
-
-						// image
-							if (content.type == "image") {
-								var resultDataContent = document.createElement("img")
-									resultDataContent.className = "content-chat-data content-image"
-									resultDataContent.src = content.url ? (content.url + (content.file ? ("?" + new Date().getTime()) : "")) : "#"
-								resultElement.appendChild(resultDataContent)
-								return
-							}
-
-						// audio
-							if (content.type == "audio") {
-								var resultDataContent = document.createElement("audio")
-									resultDataContent.className = "content-chat-data content-audio"
-									resultDataContent.volume = USER.settings.volume || 0
-									resultDataContent.setAttribute("controls", true)
-								resultElement.appendChild(resultDataContent)
-
-								var fileType = content.url.slice(-3).toLowerCase()
-
-								var source = document.createElement("source")
-									source.src = content.url
-									source.setAttribute("type", "audio/" + (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg"))
-								resultDataContent.appendChild(source)
-								return
-							}
-
-						// embed
-							if (content.type == "embed") {
-								var resultDataContent = document.createElement("div")
-									resultDataContent.className = "content-chat-data"
-									if (content.code) {
-										resultDataContent.innerText = content.code
-									}
-									else if (content.url) {
-										resultDataContent.innerHTML = `<a target="_blank" href="` + content.url + `">` + content.url + `</a>`
-									}
-								resultElement.appendChild(resultDataContent)
-								return
-							}
-
-						// component
-							if (content.type == "component") {
-								try {
-									var code = JSON.parse(content.code)
-								} catch (error) {
-									var code = {name: (content.text || "custom component"), type: "error", data: {error: "malformed JSON"}}
+						// post
+							var post = {
+								action: "createTurnOrder",
+								rollGroup: {
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									contentId: CONTENT ? CONTENT.id : null
 								}
+							}
 
-								displaySearchResult(code, ELEMENTS.chat.messages)
+						// validate
+							if (!post.rollGroup || !post.rollGroup.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+							}
+							if (!post.rollGroup || !post.rollGroup.contentId) {
+								FUNCTIONS.showToast({success: false, message: "no content selected"})
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitContentArenaObjectCreate */
+				function submitContentArenaObjectCreate(event) {
+					try {
+						// new object
+							var post = {
+								action: "updateContentData",
+								content: {
+									id: CONTENT.id,
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									arena: {
+										objects: {
+											new: true
+										}
+									}
+								}
+							}
+
+						// character / image
+							if (ELEMENTS.content.objects.select.value !== ELEMENTS.content.objects.blank.value) {
+								var option = ELEMENTS.content.objects.select.querySelector("option[value='" + ELEMENTS.content.objects.select.value + "']")
+								var type = option.getAttribute("type")
+								post.content.arena.objects.new = {}
+								post.content.arena.objects.new[type + "Id"] = ELEMENTS.content.objects.select.value
+							}
+
+						// validate
+							if (!post.content.id) {
+								FUNCTIONS.showToast({success: false, message: "no content selected"})
 								return
 							}
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+							FUNCTIONS.showToast({success: true, message: "object added"})
 					} catch (error) {console.log(error)}
 				}
 
-			/* receiveContent */
-				function receiveContent(content, selectContent) {
+			/* submitContentArenaObjectUpdate */
+				function submitContentArenaObjectUpdate(event) {
 					try {
-						// selecting content?
-							if (selectContent) {
-								CONTENT = {id: selectContent}
+						// update object
+							var post = {
+								action: "updateContentData",
+								content: {
+									id: CONTENT.id,
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									arena: {
+										objects: {}
+									}
+								}
 							}
 
-						// current content?
-							if (CONTENT && CONTENT.id == content.id) {
-								CONTENT = content.delete ? null : content
-								displayContent()
+						// validate
+							if (!post.content.id) {
+								FUNCTIONS.showToast({success: false, message: "no content selected"})
+								return
 							}
 
-						// relist
-							listContent()
+						// specify object
+							var id = event.target.closest(".arena-object").id.replace("arena-object-", "")
+							if (!id) {
+								FUNCTIONS.showToast({success: false, message: "no arena object selected"})
+								return
+							}
+							post.content.arena.objects[id] = {}
+
+						// set property
+							var property = event.target.getAttribute("property")
+							if (!property) {
+								FUNCTIONS.showToast({success: false, message: "no property updated"})
+								return
+							}
+							post.content.arena.objects[id][property] = (event.target.type == "checkbox") ? event.target.checked : event.target.value
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+							FUNCTIONS.showToast({success: true, message: "object updated"})
 					} catch (error) {console.log(error)}
 				}
 
-		/** zoom / pan images **/
+			/* submitContentArenaObjectDelete */
+				function submitContentArenaObjectDelete(event) {
+					try {
+						// new object
+							var post = {
+								action: "updateContentData",
+								content: {
+									id: CONTENT.id,
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									arena: {
+										objects: {
+											delete: true,
+										}
+									}
+								}
+							}
+
+						// validate
+							if (!post.content.id) {
+								FUNCTIONS.showToast({success: false, message: "no content selected"})
+								return
+							}
+
+						// specify object
+							var id = event.target.closest(".arena-object").id.replace("arena-object-", "")
+							if (!id) {
+								FUNCTIONS.showToast({success: false, message: "no arena object selected"})
+								return
+							}
+							post.content.arena.objects[id] = true
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+							FUNCTIONS.showToast({success: true, message: "object removed"})
+					} catch (error) {console.log(error)}
+				}
+
+		/** controls **/
 			/* grabContent */
 				function grabContent(event) {
 					try {
@@ -4778,670 +5523,7 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-		/** arena changes **/
-			/* addContentArenaObject */
-				function addContentArenaObject(event) {
-					try {
-						// new object
-							var post = {
-								action: "updateContentData",
-								content: {
-									id: CONTENT.id,
-									userId: USER ? USER.id : null,
-									gameId: GAME ? GAME.id : null,
-									arena: {
-										objects: {
-											new: true
-										}
-									}
-								}
-							}
-
-						// character / image
-							if (ELEMENTS.content.objects.select.value !== ELEMENTS.content.objects.blank.value) {
-								var option = ELEMENTS.content.objects.select.querySelector("option[value='" + ELEMENTS.content.objects.select.value + "']")
-								var type = option.getAttribute("type")
-								post.content.arena.objects.new = {}
-								post.content.arena.objects.new[type + "Id"] = ELEMENTS.content.objects.select.value
-							}
-
-						// validate
-							if (!post.content.id) {
-								FUNCTIONS.showToast({success: false, message: "no content selected"})
-								return
-							}
-
-						// send socket request
-							SOCKET.send(JSON.stringify(post))
-							FUNCTIONS.showToast({success: true, message: "object added"})
-					} catch (error) {console.log(error)}
-				}
-
-			/* updateContentArenaObject */
-				function updateContentArenaObject(event) {
-					try {
-						// update object
-							var post = {
-								action: "updateContentData",
-								content: {
-									id: CONTENT.id,
-									userId: USER ? USER.id : null,
-									gameId: GAME ? GAME.id : null,
-									arena: {
-										objects: {}
-									}
-								}
-							}
-
-						// validate
-							if (!post.content.id) {
-								FUNCTIONS.showToast({success: false, message: "no content selected"})
-								return
-							}
-
-						// specify object
-							var id = event.target.closest(".arena-object").id.replace("arena-object-", "")
-							if (!id) {
-								FUNCTIONS.showToast({success: false, message: "no arena object selected"})
-								return
-							}
-							post.content.arena.objects[id] = {}
-
-						// set property
-							var property = event.target.getAttribute("property")
-							if (!property) {
-								FUNCTIONS.showToast({success: false, message: "no property updated"})
-								return
-							}
-							post.content.arena.objects[id][property] = (event.target.type == "checkbox") ? event.target.checked : event.target.value
-
-						// send socket request
-							SOCKET.send(JSON.stringify(post))
-							FUNCTIONS.showToast({success: true, message: "object updated"})
-					} catch (error) {console.log(error)}
-				}
-
-			/* removeContentArenaObject */
-				function removeContentArenaObject(event) {
-					try {
-						// new object
-							var post = {
-								action: "updateContentData",
-								content: {
-									id: CONTENT.id,
-									userId: USER ? USER.id : null,
-									gameId: GAME ? GAME.id : null,
-									arena: {
-										objects: {
-											delete: true,
-										}
-									}
-								}
-							}
-
-						// validate
-							if (!post.content.id) {
-								FUNCTIONS.showToast({success: false, message: "no content selected"})
-								return
-							}
-
-						// specify object
-							var id = event.target.closest(".arena-object").id.replace("arena-object-", "")
-							if (!id) {
-								FUNCTIONS.showToast({success: false, message: "no arena object selected"})
-								return
-							}
-							post.content.arena.objects[id] = true
-
-						// send socket request
-							SOCKET.send(JSON.stringify(post))
-							FUNCTIONS.showToast({success: true, message: "object removed"})
-					} catch (error) {console.log(error)}
-				}
-
-		/** arena display **/
-			/* displayContentArena */
-				function displayContentArena() {
-					try {
-						// no arena
-							if (!CONTENT || !CONTENT.arena || !ELEMENTS.gametable.canvas.element) {
-								return
-							}
-
-						// clear old sidebar
-							var listingElements = Array.from(ELEMENTS.content.objects.list.querySelectorAll(".arena-object"))
-							for (var i in listingElements) {
-								if (!CONTENT.arena.objects[listingElements[i].id.replace("arena-object-", "")]) {
-									listingElements[i].remove()
-								}
-							}
-
-						// clear old targeting
-							var arenaObjectKeys = Object.keys(CONTENT.arena.objects)
-							var targetingOptions = Array.from(ELEMENTS.character.settings.recipient.arena.querySelectorAll("option"))
-							for (var i in targetingOptions) {
-								if (!arenaObjectKeys.find(function(o) { return CONTENT.arena.objects[o].characterId == targetingOptions[i].value })) {
-									targetingOptions[i].remove()
-								}
-							}
-
-						// update sidebar
-							for (var i in CONTENT.arena.objects) {
-								displayContentArenaObjectListing(CONTENT.arena.objects[i])
-							}
-
-						// sort objects
-							var sortedKeys = Object.keys(CONTENT.arena.objects) || []
-								sortedKeys = sortedKeys.sort(function(a, b) {
-									return CONTENT.arena.objects[a].z - CONTENT.arena.objects[b].z
-								})
-
-						// update images
-							var unloadedCount = 0
-							for (var i in sortedKeys) {
-								var key = sortedKeys[i]
-								var imageURL = CONTENT.arena.objects[key].image
-								if (!imageURL) {
-									continue
-								}
-
-								if (!ELEMENTS.gametable.canvas.images[key]) {
-									ELEMENTS.gametable.canvas.images[key] = document.createElement("img")
-								}
-
-								if (ELEMENTS.gametable.canvas.images[key].getAttribute("src") !== imageURL) {
-									unloadedCount++
-									ELEMENTS.gametable.canvas.images[key].src = imageURL
-									ELEMENTS.gametable.canvas.images[key].onload = ELEMENTS.gametable.canvas.images[key].onerror = function() {
-										unloadedCount--
-										if (!unloadedCount) { displayContentArenaCanvas(sortedKeys) }
-									}
-								}
-							}
-
-						// display canvas
-							if (!unloadedCount) { displayContentArenaCanvas(sortedKeys) }
-					} catch (error) {console.log(error)}
-				}
-
-			/* displayContentArenaObjectListing */
-				function displayContentArenaObjectListing(object) {
-					try {
-						// listing
-							var listing = ELEMENTS.content.objects.list.querySelector("#arena-object-" + object.id)
-
-						// create
-							if (!listing) {
-								// block
-									var listing = document.createElement("div")
-										listing.id = "arena-object-" + object.id
-										listing.className = "arena-object"
-									ELEMENTS.content.objects.list.appendChild(listing)
-
-								// inputs
-									// visible
-										var inputVisible = document.createElement("input")
-											inputVisible.className = "arena-object-visible"
-											inputVisible.setAttribute("property", "visible")
-											inputVisible.type = "checkbox"
-											inputVisible.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										listing.appendChild(inputVisible)
-
-									// z
-										var upButton = document.createElement("button")
-											upButton.className = "arena-object-up"
-											upButton.innerHTML = "&uarr;"
-											upButton.setAttribute("property", "z")
-											upButton.value = "1"
-											upButton.addEventListener(TRIGGERS.click, updateContentArenaObject)
-										listing.appendChild(upButton)
-
-										var downButton = document.createElement("button")
-											downButton.className = "arena-object-down"
-											downButton.innerHTML = "&darr;"
-											downButton.value = "-1"
-											downButton.setAttribute("property", "z")
-											downButton.addEventListener(TRIGGERS.click, updateContentArenaObject)
-										listing.appendChild(downButton)
-
-									// remove
-										var removeButton = document.createElement("button")
-											removeButton.className = "arena-object-remove"
-											removeButton.innerText = "x"
-											removeButton.addEventListener(TRIGGERS.click, removeContentArenaObject)
-										listing.appendChild(removeButton)
-
-									// text
-										var labelText = document.createElement("label")
-											labelText.className = "arena-object-label arena-object-text"
-										listing.appendChild(labelText)
-
-										var inputText = document.createElement("input")
-											inputText.className = "arena-object-input"
-											inputText.setAttribute("property", "text")
-											inputText.placeholder = "text"
-											inputText.type = "text"
-											inputText.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelText.appendChild(inputText)
-
-										var spanText = document.createElement("span")
-											spanText.className = "arena-object-label-text"
-											spanText.innerText = "text"
-										labelText.appendChild(spanText)
-
-									// x
-										var labelX = document.createElement("label")
-											labelX.className = "arena-object-label"
-										listing.appendChild(labelX)
-
-										var inputX = document.createElement("input")
-											inputX.className = "arena-object-input"
-											inputX.setAttribute("property", "x")
-											inputX.placeholder = "x"
-											inputX.step = 0.5
-											inputX.type = "number"
-											inputX.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelX.appendChild(inputX)
-
-										var spanX = document.createElement("span")
-											spanX.className = "arena-object-label-text"
-											spanX.innerText = "x"
-										labelX.appendChild(spanX)
-
-									// y
-										var labelY = document.createElement("label")
-											labelY.className = "arena-object-label"
-										listing.appendChild(labelY)
-
-										var inputY = document.createElement("input")
-											inputY.className = "arena-object-input"
-											inputY.setAttribute("property", "y")
-											inputY.placeholder = "y"
-											inputY.step = 0.5
-											inputY.type = "number"
-											inputY.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelY.appendChild(inputY)
-
-										var spanY = document.createElement("span")
-											spanY.className = "arena-object-label-text"
-											spanY.innerText = "y"
-										labelY.appendChild(spanY)
-
-									// width
-										var labelWidth = document.createElement("label")
-											labelWidth.className = "arena-object-label"
-										listing.appendChild(labelWidth)
-
-										var inputWidth = document.createElement("input")
-											inputWidth.className = "arena-object-input"
-											inputWidth.setAttribute("property", "width")
-											inputWidth.placeholder = "width"
-											inputWidth.step = 1
-											inputWidth.min = 0
-											inputWidth.type = "number"
-											inputWidth.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelWidth.appendChild(inputWidth)
-
-										var spanWidth = document.createElement("span")
-											spanWidth.className = "arena-object-label-text"
-											spanWidth.innerText = "width"
-										labelWidth.appendChild(spanWidth)
-
-									// height
-										var labelHeight = document.createElement("label")
-											labelHeight.className = "arena-object-label"
-										listing.appendChild(labelHeight)
-
-										var inputHeight = document.createElement("input")
-											inputHeight.className = "arena-object-input"
-											inputHeight.setAttribute("property", "height")
-											inputHeight.placeholder = "height"
-											inputHeight.step = 1
-											inputHeight.min = 0
-											inputHeight.type = "number"
-											inputHeight.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelHeight.appendChild(inputHeight)
-
-										var spanHeight = document.createElement("span")
-											spanHeight.className = "arena-object-label-text"
-											spanHeight.innerText = "height"
-										labelHeight.appendChild(spanHeight)
-
-									// corners
-										var labelCorners = document.createElement("label")
-											labelCorners.className = "arena-object-label"
-										listing.appendChild(labelCorners)
-
-										var inputCorners = document.createElement("input")
-											inputCorners.className = "arena-object-input"
-											inputCorners.setAttribute("property", "corners")
-											inputCorners.step = 1
-											inputCorners.min = 0
-											inputCorners.max = 50
-											inputCorners.type = "range"
-											inputCorners.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelCorners.appendChild(inputCorners)
-
-										var spanCorners = document.createElement("span")
-											spanCorners.className = "arena-object-label-text"
-											spanCorners.innerText = "corners"
-										labelCorners.appendChild(spanCorners)
-
-									// rotation
-										var labelRotation = document.createElement("label")
-											labelRotation.className = "arena-object-label"
-										listing.appendChild(labelRotation)
-
-										var inputRotation = document.createElement("input")
-											inputRotation.className = "arena-object-input"
-											inputRotation.setAttribute("property", "rotation")
-											inputRotation.step = 45
-											inputRotation.min = 0
-											inputRotation.max = 360
-											inputRotation.type = "range"
-											inputRotation.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelRotation.appendChild(inputRotation)
-
-										var spanRotation = document.createElement("span")
-											spanRotation.className = "arena-object-label-text"
-											spanRotation.innerText = "rotation"
-										labelRotation.appendChild(spanRotation)
-
-									// glow
-										var labelGlow = document.createElement("label")
-											labelGlow.className = "arena-object-label"
-										listing.appendChild(labelGlow)
-
-										var inputGlow = document.createElement("input")
-											inputGlow.className = "arena-object-input"
-											inputGlow.setAttribute("property", "glow")
-											inputGlow.step = 0.01
-											inputGlow.min = 0
-											inputGlow.type = "number"
-											inputGlow.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelGlow.appendChild(inputGlow)
-
-										var spanGlow = document.createElement("span")
-											spanGlow.className = "arena-object-label-text"
-											spanGlow.innerText = "glow"
-										labelGlow.appendChild(spanGlow)
-
-									// shadow
-										var labelShadow = document.createElement("label")
-											labelShadow.className = "arena-object-label"
-										listing.appendChild(labelShadow)
-
-										var inputShadow = document.createElement("input")
-											inputShadow.className = "arena-object-input"
-											inputShadow.setAttribute("property", "shadow")
-											inputShadow.type = "color"
-											inputShadow.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelShadow.appendChild(inputShadow)
-
-										var spanShadow = document.createElement("span")
-											spanShadow.className = "arena-object-label-text"
-											spanShadow.innerText = "shadow"
-										labelShadow.appendChild(spanShadow)
-
-									// opacity
-										var labelOpacity = document.createElement("label")
-											labelOpacity.className = "arena-object-label"
-										listing.appendChild(labelOpacity)
-
-										var inputOpacity = document.createElement("input")
-											inputOpacity.className = "arena-object-input"
-											inputOpacity.setAttribute("property", "opacity")
-											inputOpacity.step = 0.01
-											inputOpacity.min = 0
-											inputOpacity.max = 1
-											inputOpacity.type = "range"
-											inputOpacity.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelOpacity.appendChild(inputOpacity)
-
-										var spanOpacity = document.createElement("span")
-											spanOpacity.className = "arena-object-label-text"
-											spanOpacity.innerText = "opacity"
-										labelOpacity.appendChild(spanOpacity)
-
-									// color
-										var labelColor = document.createElement("label")
-											labelColor.className = "arena-object-label"
-										listing.appendChild(labelColor)
-
-										var inputColor = document.createElement("input")
-											inputColor.className = "arena-object-input"
-											inputColor.setAttribute("property", "color")
-											inputColor.type = "color"
-											inputColor.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelColor.appendChild(inputColor)
-
-										var spanColor = document.createElement("span")
-											spanColor.className = "arena-object-label-text"
-											spanColor.innerText = "color"
-										labelColor.appendChild(spanColor)
-
-									// image
-										var labelImage = document.createElement("label")
-											labelImage.className = "arena-object-label arena-object-image"
-										listing.appendChild(labelImage)
-
-										var inputImage = document.createElement("input")
-											inputImage.className = "arena-object-input"
-											inputImage.setAttribute("property", "image")
-											inputImage.placeholder = "image"
-											inputImage.type = "text"
-											inputImage.addEventListener(TRIGGERS.change, updateContentArenaObject)
-										labelImage.appendChild(inputImage)
-
-										var spanImage = document.createElement("span")
-											spanImage.className = "arena-object-label-text"
-											spanImage.innerText = "image"
-										labelImage.appendChild(spanImage)
-							}
-
-						// find
-							else {
-								var inputVisible = listing.querySelector("input[property='visible']")
-								var inputText = listing.querySelector("input[property='text']")
-								var inputX = listing.querySelector("input[property='x']")
-								var inputY = listing.querySelector("input[property='y']")
-								var inputWidth = listing.querySelector("input[property='width']")
-								var inputHeight = listing.querySelector("input[property='height']")
-								var inputCorners = listing.querySelector("input[property='corners']")
-								var inputRotation = listing.querySelector("input[property='rotation']")
-								var inputGlow = listing.querySelector("input[property='glow']")
-								var inputShadow = listing.querySelector("input[property='shadow']")
-								var inputOpacity = listing.querySelector("input[property='opacity']")
-								var inputColor = listing.querySelector("input[property='color']")
-								var inputImage = listing.querySelector("input[property='image']")
-								var inputCharacter = listing.querySelector("select[property='character']")
-							}
-
-						// set values
-							listing.style.order = object.z || 0
-							inputVisible.checked = object.visible || false
-							inputText.value = object.text || ""
-							inputX.value = object.x || 0
-							inputY.value = object.y || 0
-							inputWidth.value = object.width || 0
-							inputHeight.value = object.height || 0
-							inputCorners.value = object.corners || 0
-							inputRotation.value = object.rotation || 0
-							inputGlow.value = object.glow || 0
-							inputShadow.value = object.shadow || ELEMENTS.gametable.canvas.gridBackground
-							inputOpacity.value = object.opacity || 0
-							inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor
-							inputImage.value = object.image || ""
-							inputCharacter = object.character || "[none]"
-
-						// targeting
-							if (object.characterId) {
-								if (!ELEMENTS.character.settings.recipient.arena.querySelector("option[value='" + object.characterId + "']")) {
-									var targetOption = document.createElement("option")
-										targetOption.value = object.characterId
-										targetOption.innerText = object.text || "[?]"
-									ELEMENTS.character.settings.recipient.arena.appendChild(targetOption)
-								}
-							}
-					} catch (error) {console.log(error)}
-				}
-
-			/* displayContentArenaCanvas */
-				function displayContentArenaCanvas(sortedKeys) {
-					try {
-						// resize & clear canvas
-							FUNCTIONS.resizeCanvas(ELEMENTS.gametable.canvas.element)
-							FUNCTIONS.clearCanvas(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context)
-							FUNCTIONS.drawRectangle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, 0, 0, ELEMENTS.gametable.canvas.element.width, ELEMENTS.gametable.canvas.element.height, {color: ELEMENTS.gametable.canvas.gridBackground})
-							FUNCTIONS.translateCanvas(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, ELEMENTS.gametable.canvas.offsetX, ELEMENTS.gametable.canvas.offsetY)							
-
-						// loop through to display
-							for (var i in sortedKeys) {
-								displayContentArenaObject(CONTENT.arena.objects[sortedKeys[i]])
-							}
-
-						// display grid
-							displayContentArenaGrid()
-					} catch (error) {console.log(error)}
-				}
-
-			/* displayContentArenaObject */
-				function displayContentArenaObject(object) {
-					try {
-						// not visible?
-							if (!object.visible) {
-								return
-							}
-
-						// dimensions
-							var cellSize = Math.round(ELEMENTS.gametable.canvas.cellSize)
-							var x = (object.x - (object.width / 2)) * cellSize
-							var y = (object.y - (object.height / 2)) * cellSize
-							var rotateX = object.x * cellSize
-							var rotateY = ELEMENTS.gametable.canvas.element.height - object.y * cellSize
-							var width = object.width * cellSize
-							var height = object.height * cellSize
-							var options = {
-								color: object.color,
-								opacity: object.opacity,
-								rotation: 1 * object.rotation
-							}
-
-						// corners
-							var corners = Number(object.corners)
-							if (corners) {
-								var absoluteRadius = corners / 100 * (width + height) / 2
-								options.radii = {
-									topLeft: absoluteRadius,
-									topRight: absoluteRadius,
-									bottomRight: absoluteRadius,
-									bottomLeft: absoluteRadius
-								}
-							}
-
-						// shadow
-							if (object.glow) {
-								options.shadow = object.shadow
-								options.blur = cellSize * object.glow
-							}
-
-						// image
-							if (object.image) {
-								options.image = ELEMENTS.gametable.canvas.images[object.id]
-								FUNCTIONS.rotateCanvas(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, rotateX, rotateY, options.rotation, function() {
-									FUNCTIONS.drawImage(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, y, width, height, options)
-								})
-							}
-
-						// draw
-							else {
-								FUNCTIONS.rotateCanvas(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, rotateX, rotateY, options.rotation, function() {
-									FUNCTIONS.drawRectangle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, y, width, height, options)
-								})
-							}
-
-						// text
-							if (object.text) {
-								FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x + width / 2, y + height / 2, object.text, {color: ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow:ELEMENTS.gametable.canvas.gridBackground, size: cellSize / 2})
-							}
-					} catch (error) {console.log(error)}
-				}
-
-			/* displayContentArenaGrid */
-				function displayContentArenaGrid() {
-					try {
-						// move canvas
-							var halfWidth = Math.round(ELEMENTS.gametable.canvas.element.width / 2)
-							var halfHeight = Math.round(ELEMENTS.gametable.canvas.element.height / 2)
-
-						// edges
-							var pannedLeft = Math.round(-ELEMENTS.gametable.canvas.offsetX - halfWidth)
-							var pannedRight = Math.round(-ELEMENTS.gametable.canvas.offsetX + halfWidth)
-							var pannedBottom = Math.round(-ELEMENTS.gametable.canvas.offsetY - halfHeight)
-							var pannedTop = Math.round(-ELEMENTS.gametable.canvas.offsetY + halfHeight)
-
-						// based on zoom
-							var cellSize = Math.round(ELEMENTS.gametable.canvas.cellSize)
-
-						// x
-							for (var x = pannedLeft; x < pannedRight; x++) {
-								if (x % cellSize == 0) {
-									FUNCTIONS.drawLine(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, pannedBottom, x, pannedTop, {color: ELEMENTS.gametable.canvas.gridColor, opacity: 0.5})
-								}
-							}
-
-						// y
-							for (var y = pannedBottom; y < pannedTop; y++) {
-								if (y % cellSize == 0) {
-									FUNCTIONS.drawLine(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, pannedLeft, y, pannedRight, y, {color: ELEMENTS.gametable.canvas.gridColor, opacity: 0.5})
-								}
-							}
-
-						// origin
-							FUNCTIONS.drawCircle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, 0, 0, (ELEMENTS.gametable.canvas.cellSize / 4), {color: ELEMENTS.gametable.canvas.gridColor, opacity: 0.5})
-					} catch (error) {console.log(error)}
-				}
-
-		/** arena controls **/
-			/* calculateContentTurnOrder */
-				function calculateContentTurnOrder(event) {
-					try {
-						// post
-							var post = {
-								action: "createTurnOrder",
-								rollGroup: {
-									userId: USER ? USER.id : null,
-									gameId: GAME ? GAME.id : null,
-									contentId: CONTENT ? CONTENT.id : null
-								}
-							}
-
-						// validate
-							if (!post.rollGroup || !post.rollGroup.gameId) {
-								FUNCTIONS.showToast({success: false, message: "no game selected"})
-							}
-							if (!post.rollGroup || !post.rollGroup.contentId) {
-								FUNCTIONS.showToast({success: false, message: "no content selected"})
-							}
-
-						// send
-							SOCKET.send(JSON.stringify(post))
-					} catch (error) {console.log(error)}
-				}
-
-			/* zoomContentArena */
-				function zoomContentArena() {
-					try {
-						// get submitter
-							var modifier = Number(event.submitter.value) || 0
-							ELEMENTS.gametable.canvas.zoomPower = modifier ? (ELEMENTS.gametable.canvas.zoomPower * 4 + modifier * 4) / 4 : 0
-							ELEMENTS.gametable.canvas.cellSize = 50 * Math.pow(2, ELEMENTS.gametable.canvas.zoomPower)
-						
-						// redraw
-							displayContentArena()
-					} catch (error) {console.log(error)}
-				}
-
+		/** controls - arena **/
 			/* panContentArena */
 				function panContentArena(event) {
 					try {
@@ -5622,6 +5704,19 @@ window.onload = function() {
 						
 						// send
 							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* zoomContentArena */
+				function zoomContentArena() {
+					try {
+						// get submitter
+							var modifier = Number(event.submitter.value) || 0
+							ELEMENTS.gametable.canvas.zoomPower = modifier ? (ELEMENTS.gametable.canvas.zoomPower * 4 + modifier * 4) / 4 : 0
+							ELEMENTS.gametable.canvas.cellSize = 50 * Math.pow(2, ELEMENTS.gametable.canvas.zoomPower)
+						
+						// redraw
+							displayContentArena()
 					} catch (error) {console.log(error)}
 				}
 }

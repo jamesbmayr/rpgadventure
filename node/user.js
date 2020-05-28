@@ -328,7 +328,7 @@
 							}
 
 						// authenticate old password
-							if (CORE.hashRandom(REQUEST.post.user.oldPassword, REQUEST.user.salt) !== results.documents[0].secret.password) {
+							if (CORE.hashRandom(REQUEST.post.user.oldPassword, results.documents[0].secret.salt) !== results.documents[0].secret.password) {
 								callback({success: false, message: "old password is incorrect", recipients: [REQUEST.user.id]})
 								return
 							}
