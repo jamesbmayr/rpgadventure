@@ -528,7 +528,7 @@
 								"skill points": {name: "skill points", description: "Characters are awarded skill points throughout the course of a campaign by completing quests, visiting new places, successfully performing new skills, and more. Characters are also awarded skill points by overcoming opponents in some way - often  through combat or charisma. This is generally 1-3 skill points. \n\nA character may increase a statistic by 1 for 28 skill points, or increase a skill 1 level per skill point. \n\nThe maximum level at which a skill can be learned is +7. A character may also choose to learn specializations of a particular skill by selecting a more specific and limited field or aspect, to a maximum of +3, at a cost of 1 skill point per +1. \n\nA character may only learn or improve a skill that is plausible, given the circumstances; for example, a character cannot learn to swim while in the desert, even with the requisite skill points. Furthermore, a character may only increment a specific skill level by 1 point within a day. \n\nCharacters start with 28 skill points to distribute amongst starting skills. A GM may impose additional restrictions during character creation, such as a skill maximum of 4, to prevent unbalanced characters."},
 								"skills": {name: "skills", description: "Every skill is associated with a statistic; to perform a skill, the player must roll at or under the corresponding statistic + skill modifier on 1d20."},
 								"non-player characters (npcs)": {name: "non-player characters (npcs)", description: "Characters will interact with non-player characters, including other characters of playable races, real-world animals, and fantasy monsters. \n\nCreatures generally use an aggression skill when resisting handle animals attempts. \n\nSome creatures have special senses: infrared vision, night vision, infrasound, echolocation, internal compass. \n\nSome creatures also have special movement: fly. \n\nSome creatures also use special combat skills; in some cases, these could also cause a condition, such as sleep or paralysis, or inflict special damage, such as poison, infection, extreme cold, fire, or electricity: bite (nd6), slam (nd6), tusk (nd6), claws (nd6) x (number of claws), talons (nd6) x (number of talons). \n\nSome creatures also have special abilities: camoflauge: opponents at disadvantage on sight checks; temperature resistance: nullifies the effects of extreme heat and extreme cold. \n\nFinally, many creatures have natural armor that protects against nd6 physical damage."},
-								"charisma": {name: "charisma", description: "Opponents can also be defeated through charisma and diplomacy. Encounters usually involve several logic rolls in which the opponent must roll at or under its logic on 1d20 in order to avoid being swayed. \n\nCharacters may influence these encounters using skills which impact the logic rolls. Roll logic (with these skills) for each instance in which a character attempts to sway an opponent. \n\n(resister's logic + skill) - (influencer's skill)"},
+								"charisma": {name: "charisma", description: "Opponents can also be defeated through charisma and diplomacy. Encounters usually involve several logic rolls in which the opponent must roll at or under its logic on 1d20 in order to avoid being swayed. \n\nCharacters may influence these encounters using skills which impact the logic rolls. Roll logic (with these skills) for each instance in which a character attempts to sway an opponent. \n\n(resister's logic + skill) - (influencer's skill)\n\nThe influencer may also choose to use these skills to affect the resister with a psychological condition, which can last up to 10 minutes."},
 								"taming & training": {name: "taming & training", description: "Taming an animal uses handle animals as a charisma encounter (similar to persuade): the animal rolls under its logic to resist, but the target is lowered by the character's handle animals skill and the animal's training skill. (Note that at first, the animal will not have this training skill.) A character can attempt to tame the animal once a day. If the animal does not resist, it gains 1 point in this training skill, under its logic statistic, up to the skill maximum. \n\ntaming: fail (animal's logic + animal's aggression - animal's training - character's handle animals) \n\nOn a successful taming roll, the character can also attempt to train the animal to do a specific command. The animal does a logic + training check, now aided by the character's handle animals. If this training is successful, the animal gains 1 point in the specific skill being trained; this falls under the memory statistic. \n\ntraining: succeed (animal's logic + animal's training + character's handle animals) \n\nWhen the character wants the animal to obey a command, the player must roll a taming check as above. Then the animal must roll a check similar to training, using with the specific command as the skill: \n\n{command}: succeed (animal's memory + animal's {command skill} + character's handle animals)"},
 								"services": {name: "services", description: "Many NPCs will perform a service for a cost. This allows players who do not know a certain skill to exchange money for that skill to be performed on their behalf."},
 								"combat": {name: "combat", description: "In an armed conflict, the team with the member with the highest speed begins turn-based combat (unless one team is surprised by the other), but all actions in a 6-second round are considered to be simultaneous. Within each team, turn order is determined by speed. Each combatant can take one action per round; the most common actions are moving (with the run skill), attacking, dodging, using an item, or changing weapons. \n\nCharacters aim by making a 1d20 attempt on the dexterity-, strength-, or speed-based skill associated with their attack (melee, fencing, archery, missile aim, throw, kick, punch, or martial arts). \n\nIf the roll is a 1, the attack is focused on the opponent's head; on a 2 or 3, the attack is focused on the opponent's arms or legs. \n\nEach weapon or attack has a corresponding damage roll, of nd6. Armor and shields also have a damage blocking attribute: nd6 are rolled, and each die cancels all damage dice of the same value. (In other words, subtract the set of armor dice from the set of weapon dice.) \n\n[weapon nd6] \ [armor nd6] → [damage nd6] \n\nThe remaining damage is summed, then subtracted from the opponent's statistics; the opponent may choose how to distribute this damage, limited by the area of the attack's focus: \n\nDamage to the head (attack roll of 1) reduces logic, memory, and/or perception. Pass an immunity + pain tolerance check, or else be surprised and unable to act for 1 round. Damage to arms or legs (attack roll of 2 or 3) reduces strength, dexterity, speed, and/or immunity. Pass an immunity + pain tolerance check, or else be either disarmed (dropping held items) or immobilized (unable to run, dodge, etc.) for 1 round. All other damage (attack roll of 4 or more) can reduce any statistic. \n\nEach attack can also be avoided using speed and the dodge skill, each with an individual roll. A player who is dodging cannot take another action, except to move (ie, run)."},
@@ -756,6 +756,33 @@
 										dexterity: { martial_arts: 0, crafting: 3 },
 										immunity: { recover: 0 },
 										speed: { kick: 0, jump: 3, run: 2, swim: 3, dodge: 2 }
+									}
+								},
+								tiefling: {
+									info: {
+										age: 30,
+										height: 5,
+										weight: 150,
+										description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+										ability: "Tieflings are naturally resistant to extreme heat and fire damage, and can use their tail like a punch attack.",
+									},
+									statistics: {
+										perception: -1,
+										memory: -1,
+										logic: 1,
+										strength: -1,
+										dexterity: 1,
+										immunity: 1,
+										speed: 0
+									},
+									skills: {
+										perception: { sight: 4, sound: 7, scent: 7, taste: 4, touch: 6, night_vision: 3 },
+										memory: { lang_tiefling: 7 },
+										logic: { intimidate: 2 },
+										strength: { punch: 0, carry: 2, throw: 4 },
+										dexterity: { martial_arts: 0, sneak: 2 },
+										immunity: { recover: 0, temperature_resistance: 14 },
+										speed: { kick: 0, jump: 5, run: 3, swim: 0 }
 									}
 								},
 								goblin: {
@@ -1123,10 +1150,11 @@
 								],
 								memory: [
 									{name: "alchemy"}, {name: "astronomy"}, {name: "botany"}, {name: "cooking"}, {name: "facial_recognition"}, {name: "geography"}, {name: "geology"}, {name: "history"}, {name: "leatherworking"}, {name: "linguistics"}, {name: "lip_reading"}, {name: "medicine"}, {name: "metalworking"}, {name: "woodworking"}, {name: "voice_recognition"}, {name: "zoology"},
-									{name: "lang_human"}, {name: "lang_elf"}, {name: "lang_dwarf"}, {name: "lang_halfling"}, {name: "lang_gnome"}, {name: "lang_goblin"}, {name: "lang_orc"}, {name: "lang_bhios"}, {name: "lang_mellifax"}, {name: "lang_preas"}, {name: "lang_winge"}, {name: "lang_lizardfolk"}
+									{name: "lang_human"}, {name: "lang_elf"}, {name: "lang_dwarf"}, {name: "lang_halfling"}, {name: "lang_gnome"}, {name: "lang_tiefling"}, {name: "lang_goblin"}, {name: "lang_orc"}, {name: "lang_lizardfolk"}, {name: "lang_bhios"}, {name: "lang_mellifax"}, {name: "lang_preas"}, {name: "lang_winge"}
 								],
 								logic: [
-									{name: "evoke_emotion", charisma: true, counters: ["judge_character", "remain_calm"]}, {name: "game_playing"}, {name: "handle_animals", charisma: true, counters: ["judge_character", "aggression"]}, {name: "humor", charisma: true, counters: ["remain_calm"]}, {name: "intimidate", charisma: true, counters: ["remain_calm"]}, {name: "judge_character"}, {name: "mathematics"}, {name: "mechanics"}, {name: "pattern_recognition"}, {name: "persuade", charisma: true, counters:["judge_character"]}, {name: "remain_calm"}, {name: "seduce", charisma: true, counters:["judge_character", "remain_calm"]}, {name: "spatial_reasoning"},
+									{name: "evoke_emotion", charisma: true, counters: ["judge_character", "remain_calm"], conditions: ["alertness", "confusion", "determination", "exhaustion", "fear"]}, {name: "handle_animals", charisma: true, counters: ["judge_character", "aggression"], conditions: ["alertness", "determination", "fear"]}, {name: "humor", charisma: true, counters: ["remain_calm"], conditions: ["confusion"]}, {name: "intimidate", charisma: true, counters: ["remain_calm"], conditions: ["alertness", "fear", "surprise"]}, {name: "persuade", charisma: true, counters:["judge_character"], conditions: ["concentration", "confusion", "determination"]}, {name: "seduce", charisma: true, counters:["judge_character", "remain_calm"], conditions: ["confusion", "determination", "exhaustion"]},
+									{name: "game_playing"}, {name: "judge_character"}, {name: "mathematics"}, {name: "mechanics"}, {name: "pattern_recognition"}, {name: "remain_calm"}, {name: "spatial_reasoning"},
 									{name: "aggression", animals: true}, {name: "training", animals: true}
 								],
 								strength: [
@@ -1262,7 +1290,7 @@
 							return {
 								alertness: {
 									name: "alertness",
-									description: "Boosts physical attributes.",
+									description: "Boosts physical attributes. Can be caused by evoke emotion, intimidate, handle animals.",
 									effects: {
 										strength: {statistic: 2},
 										dexterity: {statistic: 2},
@@ -1293,11 +1321,20 @@
 								},
 								concentration: {
 									name: "concentration",
-									description: "Boosts mental attributes.",
+									description: "Boosts mental attributes. Can be caused by persuade.",
 									effects: {
+										perception: {statistic: 2},
 										memory: {statistic: 2},
-										logic: {statistic: 2},
-										perception: {statistic: 2}
+										logic: {statistic: 2}
+									}
+								},
+								confusion: {
+									name: "confusion",
+									description: "Reduces mental attributes. Can be caused by evoke emotion, humor, persuade, seduce.",
+									effects: {
+										perception: {statistic: -2},
+										memory: {statistic: -2},
+										logic: {statistic: -2}
 									}
 								},
 								darkness: {
@@ -1308,6 +1345,19 @@
 										strength: {melee: -10, archery: -10, throw: -10, punch: -10},
 										dexterity: {fencing: -10, knifing: -10, missile: -10, martial_arts: -10},
 										speed: {kick: -10}
+									}
+								},
+								determination: {
+									name: "determination",
+									description: "Boosts nearly all attributes. Can be caused by evoke emotion, persuade, seduce, handle animals.",
+									effects: {
+										perception: {statistic: 1},
+										memory: {statistic: 1},
+										logic: {statistic: 1},
+										strength: {statistic: 1},
+										dexterity: {statistic: 1},
+										immunity: {pain_tolerance: 5},
+										speed: {statistic: 1}
 									}
 								},
 								dual_wielding: {
@@ -1328,7 +1378,7 @@
 								},
 								exhaustion: {
 									name: "exhaustion",
-									description: "Roll sleep resistance before rolling a check for any other statistic. Unconscious in 1 week of no sleep or 1 week of no food.",
+									description: "Roll sleep resistance before rolling a check for any other statistic. Unconscious in 1 week of no sleep or 1 week of no food. Can be caused by evoke emotion, seduce.",
 									effects: {
 										strength: {statistic: -2},
 										dexterity: {statistic: -2},
@@ -1355,6 +1405,15 @@
 										skill: "pain_tolerance",
 										before: ["strength", "dexterity", "speed"],
 										d6: 1
+									}
+								},
+								fear: {
+									name: "fear",
+									description: "Reduces mental attributes but improves run ability. Roll remain calm or else unable to attack influencer. Can be caused by evoke emotion, intimidate, handle animals.",
+									effects: {
+										memory: {statistic: -2},
+										logic: {statistic: -2},
+										speed: {run: 2}
 									}
 								},
 								fog: {
@@ -1518,7 +1577,7 @@
 								},
 								surprise: {
 									name: "surprise",
-									description: "Roll remain calm or else unable to act for 1 round.",
+									description: "Roll remain calm or else unable to act for 1 round. Can be caused by intimidate.",
 								},
 								unconsciousness: {
 									name: "unconsciousness",
@@ -6746,7 +6805,7 @@
 									{
 										info: {
 											name: "human child",
-											demographics: { race: "human", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "human", age: 10, sex: "", height: 3.5, weight: 75 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
@@ -6774,7 +6833,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
 											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_human", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "pattern_recognition", maximum: 3, condition: 0 }] },
+											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "pattern_recognition", maximum: 3, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 5, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 2, condition: 0 }] },
 											immunity:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sleep_resistance", maximum: 2, condition: 0 }] },
@@ -6878,7 +6937,7 @@
 									{
 										info: {
 											name: "elf child",
-											demographics: { race: "elf", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "elf", age: 25, sex: "", height: 3.5, weight: 75 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
@@ -6906,7 +6965,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
 											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_elf", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }] },
+											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 2, condition: 0, d6: 2 }, { name: "sleep_resistance", maximum: 2, condition: 0 }] },
@@ -7010,7 +7069,7 @@
 									{
 										info: {
 											name: "dwarf child",
-											demographics: { race: "dwarf", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "dwarf", age: 15, sex: "", height: 3.5, weight: 75 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
@@ -7038,7 +7097,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }] },
+											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7142,7 +7201,7 @@
 									{
 										info: {
 											name: "halfling child",
-											demographics: { race: "halfling", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "halfling", age: 10, sex: "", height: 3, weight: 50 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
@@ -7170,7 +7229,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
 											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
+											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7199,7 +7258,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_gnome", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
-											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true }] },
+											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true, counters:["judge_character"] }] },
 											strength:   { maximum: 4, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7226,7 +7285,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_gnome", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true }] },
+											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true, counters:["judge_character"] }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7254,7 +7313,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_gnome", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true }] },
+											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true, counters:["judge_character"] }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "pain_tolerance", maximum: 5, condition: 0 }, { name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7274,14 +7333,14 @@
 									{
 										info: {
 											name: "gnome child",
-											demographics: { race: "gnome", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "gnome", age: 10, sex: "", height: 2.5, weight: 40 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_gnome", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "persuade", maximum: 2, condition: 0, charisma: true }] },
+											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "persuade", maximum: 2, condition: 0, charisma: true, counters:["judge_character"] }] },
 											strength:   { maximum: 3, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7302,11 +7361,143 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_gnome", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true }] },
+											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true, counters:["judge_character"] }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 3, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
+										},
+										items: [
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
+											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
+											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
+											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
+											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
+											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+										]
+									},
+
+								// tiefling
+									{
+										info: {
+											name: "tiefling smart",
+											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
+											description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+										},
+										statistics: {
+											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
+											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
+											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
+											dexterity:  { maximum: 7, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											immunity:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "temperature_resistance", maximum: 14, condition: 0, animals: true }] },
+											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
+										},
+										items: [
+											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
+											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
+											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
+											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
+											{name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+										]
+									},
+									{
+										info: {
+											name: "tiefling skilled",
+											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
+											description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+										},
+										statistics: {
+											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
+											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
+											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
+											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											immunity:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "temperature_resistance", maximum: 14, condition: 0, animals: true }] },
+											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
+										},
+										items: [
+											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
+											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
+											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
+											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
+											{name:"rope",count:1,weight:2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],fuel:2,materials:"string",cost:10,description:"10 feet; +5 climbing; helps with crafting",id:"vkafrmfqhqivchjp"},
+											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
+										]
+									},
+									{
+										info: {
+											name: "tiefling strong",
+											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
+											description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+										},
+										statistics: {
+											perception: { maximum: 6, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
+											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
+											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
+											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											immunity:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "pain_tolerance", maximum: 5, condition: 0 }, { name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "temperature_resistance", maximum: 14, condition: 0, animals: true }] },
+											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
+										},
+										items: [
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
+											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
+											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
+											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
+											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
+											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
+											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+										]
+									},
+									{
+										info: {
+											name: "tiefling child",
+											demographics: { race: "tiefling", age: 10, sex: "", height: 3.5, weight: 75 },
+											description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+										},
+										statistics: {
+											perception: { maximum: 4, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
+											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
+											strength:   { maximum: 4, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
+											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "temperature_resistance", maximum: 14, condition: 0, animals: true }] },
+											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
+										},
+										items: [
+											{name:"clothes",count:1,type:"armor",d6:1,weight:1,fuel:2,materials:"cloth",cost:10,description:" ",id:"rbxzkdzgldgzqlok"},
+											{name:"shoes",count:1,type:"armor",d6:1,weight:2,fuel:2,materials:"cloth",cost:10,description:" ",id:"kjlbatbkkevyzedf"},
+										]
+									},
+									{
+										info: {
+											name: "tiefling boss",
+											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
+											description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+										},
+										statistics: {
+											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
+											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "persuade", maximum: 7, condition: 0, charisma: true, counters:["judge_character"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
+											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
+											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "temperature_resistance", maximum: 14, condition: 0, animals: true }] },
+											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
 										},
 										items: [
 											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
@@ -7406,7 +7597,7 @@
 									{
 										info: {
 											name: "goblin child",
-											demographics: { race: "goblin", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "goblin", age: 10, sex: "", height: 3, weight: 50 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
@@ -7434,7 +7625,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
 											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }] },
+											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] },
 											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "alcohol_tolerance", maximum: 7, condition: 0 }, { name: "poison_resistance", maximum: 7, condition: 0 }, { name: "infection_resistance", maximum: 7, condition: 0 }, { name: "allergy_resistance", maximum: 7, condition: 0 }] },
@@ -7538,7 +7729,7 @@
 									{
 										info: {
 											name: "orc child",
-											demographics: { race: "orc", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "orc", age: 10, sex: "", height: 4.5, weight: 100 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
@@ -7566,7 +7757,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
 											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_orc", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }] },
+											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 7, condition: 0, d6: 3 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "melee", maximum: 3, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "fencing", maximum: 2, condition: 0, combat: true }] },
 											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7670,7 +7861,7 @@
 									{
 										info: {
 											name: "lizardfolk child",
-											demographics: { race: "lizardfolk", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "lizardfolk", age: 10, sex: "", height: 3.5, weight: 75 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
@@ -7698,7 +7889,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }] },
+											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 2, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 2, condition: 0 }] },
@@ -7802,7 +7993,7 @@
 									{
 										info: {
 											name: "bhios child",
-											demographics: { race: "bhios", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "bhios", age: 10, sex: "", height: 4, weight: 75 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
@@ -7830,7 +8021,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_bhios", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
+											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 3, condition: 0, d6: 3 }] },
@@ -7934,7 +8125,7 @@
 									{
 										info: {
 											name: "mellifax child",
-											demographics: { race: "mellifax", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "mellifax", age: 10, sex: "", height: 3, weight: 50 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
@@ -7962,7 +8153,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }] },
+											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
 											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 3, condition: 0 }] },
@@ -7991,7 +8182,7 @@
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_preas", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
-											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "handle_animals", maximum: 7, condition: 0, charisma: true }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true }] },
+											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "handle_animals", maximum: 7, condition: 0, charisma: true, counters: ["judge_character", "aggression"] }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true, counters: ["judge_character", "remain_calm"] }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 2, condition: 0 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8018,7 +8209,7 @@
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_preas", maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
-											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "handle_animals", maximum: 7, condition: 0, charisma: true }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true }] },
+											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "handle_animals", maximum: 7, condition: 0, charisma: true, counters: ["judge_character", "aggression"] }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true, counters: ["judge_character", "remain_calm"] }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 2, condition: 0 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8046,7 +8237,7 @@
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_preas", maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
-											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }, { name: "handle_animals", maximum: 7, condition: 0, charisma: true }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true }] },
+											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }, { name: "handle_animals", maximum: 7, condition: 0, charisma: true, counters: ["judge_character", "aggression"] }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true, counters: ["judge_character", "remain_calm"] }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 2, condition: 0 }] },
 											immunity:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "pain_tolerance", maximum: 5, condition: 0 }, { name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8066,14 +8257,14 @@
 									{
 										info: {
 											name: "preas child",
-											demographics: { race: "preas", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "preas", age: 10, sex: "", height: 4, weight: 75 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_preas", maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
-											logic:      { maximum: 3, damage: 0, condition: 0, skills: [{ name: "handle_animals", maximum: 7, condition: 0, charisma: true }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true }] },
+											logic:      { maximum: 3, damage: 0, condition: 0, skills: [{ name: "handle_animals", maximum: 7, condition: 0, charisma: true, counters: ["judge_character", "aggression"] }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true, counters: ["judge_character", "remain_calm"] }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 2, condition: 0 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8094,7 +8285,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
 											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_preas", maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
-											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "handle_animals", maximum: 7, condition: 0, charisma: true }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true }] },
+											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "handle_animals", maximum: 7, condition: 0, charisma: true, counters: ["judge_character", "aggression"] }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true, counters: ["judge_character", "remain_calm"] }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 2, condition: 0 }] },
 											immunity:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8198,7 +8389,7 @@
 									{
 										info: {
 											name: "winge child",
-											demographics: { race: "winge", age: 25, sex: "", height: 5.5, weight: 150 },
+											demographics: { race: "winge", age: 10, sex: "", height: 5, weight: 75 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
@@ -8226,7 +8417,7 @@
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_winge", maximum: 7, condition: 0 }] },
-											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "remain_calm", maximum: 3, condition: 0 }, { name: "spatial_reasoning", maximum: 2, condition: 0 }] },
+											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "remain_calm", maximum: 3, condition: 0 }, { name: "spatial_reasoning", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 2, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "defend", maximum: 14, condition: 0, d6: 1 }] },
@@ -8258,7 +8449,7 @@
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 6, condition: 0}] },
 										memory: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 6, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 3}] },
@@ -8294,7 +8485,7 @@
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 15, damage: 0, condition: 0, skills: [{name: "carry", maximum: 6, condition: 0}, {name: "throw", maximum: 3, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 3}] },
 										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
@@ -8366,7 +8557,7 @@
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 6, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 11, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}, {name: "tusk", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 9, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 3}] },
@@ -8384,7 +8575,7 @@
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 4, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 0, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 6}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}] },
@@ -8476,7 +8667,7 @@
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 4, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 4, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 6, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "sneak", maximum: 3, condition: 0}] },
 										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
@@ -8584,7 +8775,7 @@
 									statistics: {
 										perception: { maximum: 10, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}, {name: "infrasound", animals: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 6, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 15, damage: 0, condition: 0, skills: [{name: "carry", maximum: 10, condition: 0}, {name: "throw", maximum: 5, condition: 0, combat: true}, {name: "tusk", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 8, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 3}] },
@@ -8712,7 +8903,7 @@
 										statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 2, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 7, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "climb", maximum: 5, condition: 0}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
@@ -8730,7 +8921,7 @@
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 5, damage: 0, condition: 0, skills: [{name: "facial_recognition", maximum: 5, condition: 0}] },
-										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 5, condition: 0, combat: true}, {name: "climb", maximum: 5, condition: 0}, {name: "punch", combat: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 9, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
@@ -8748,7 +8939,7 @@
 										statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 5}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 3}] },
@@ -8766,7 +8957,7 @@
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 0, condition: 0}] },
 										memory: { maximum: 4, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 2, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 10, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}] },
@@ -8822,7 +9013,7 @@
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 6, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 6, condition: 0}, {name: "taste", unremovable: true, maximum: 4, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 4, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 5, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 3}] },
 										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
@@ -8896,7 +9087,7 @@
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 4, damage: 0, condition: 0, skills: [{name: "facial_recognition", maximum: 5, condition: 0}] },
-										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 4, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 5, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 9, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}] },
@@ -8914,7 +9105,7 @@
 										statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 4, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 10, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 6}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
@@ -9120,7 +9311,7 @@
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 4, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 15, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "tusk", animals: true, combat: true, maximum: 5, condition: 0, d6: 4}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 6}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 3}] },
@@ -9138,7 +9329,7 @@
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 1, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 7, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}] },
 										memory: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 6, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
@@ -9252,7 +9443,7 @@
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 1, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}, {name: "infrared_vision", animals: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 3, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 3, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 5, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 1, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}, {name: "posion_resistance", maximum: 7, condition: 0}] },
@@ -9272,7 +9463,7 @@
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 2, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 9, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}, {name: "posion_resistance", maximum: 7, condition: 0}] },
@@ -9310,7 +9501,7 @@
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 6, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 4, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 5, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 3}] },
 										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
@@ -9364,7 +9555,7 @@
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 3, condition: 0, charisma: true}] },
+										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 3, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 8, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "tusk", animals: true, combat: true, maximum: 5, condition: 0, d6: 4}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
@@ -9418,7 +9609,7 @@
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 4, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true}] },
+										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 5, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "sneak", maximum: 3, condition: 0}] },
 										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
