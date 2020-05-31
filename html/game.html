@@ -405,13 +405,22 @@
 				<div id="chat-messages"></div>
 				<form id="chat-send-form" method="post" action="javascript:;">
 					<select id="chat-send-sender">
-						<option id="chat-send-sender-anonymous" value="[anonymous]">[anonymous]</option>
-						<option id="chat-send-sender-user" value="[user]" selected>[user]</option>
-						<option id="chat-send-sender-character" value="[character]" disabled>[character]</option>
+						<optgroup id="chat-send-sender-special" label="special">
+							<option id="chat-send-sender-anonymous" value="[anonymous]">[anonymous]</option>
+						</optgroup>
+						<optgroup id="chat-send-sender-player" label="player">
+							<option id="chat-send-sender-user" value="[user]" selected>[user]</option>
+						</optgroup>
+						<optgroup id="chat-send-sender-selectedCharacter" label="character">
+							<option id="chat-send-sender-character" value="[character]" disabled>[character]</option>
+						</optgroup>
 					</select>
 					<div id="chat-send-arrow">&rarr;</div>
 					<select id="chat-send-recipients">
-						<option id="chat-send-recipients-all" value="[all]" selected>[everyone]</option>
+						<optgroup id="chat-send-recipients-special" label="special">
+							<option id="chat-send-recipients-all" value="[all]" selected>[everyone]</option>
+						</optgroup>
+						<optgroup id="chat-send-recipients-players" label="players"></optgroup>
 					</select>
 					<input type="text" id="chat-send-input" placeholder="type chat message" autocomplete="off" class="form-pair"/>
 					<button id="chat-send-button" class="form-pair">&rarr;</button>

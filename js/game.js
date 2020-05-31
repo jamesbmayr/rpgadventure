@@ -255,12 +255,19 @@ window.onload = function() {
 							},
 							statistics: {
 								perception: document.getElementById("character-perception"),
+								perceptionDisabled: document.getElementById("character-perception-disabled"),
 								memory: document.getElementById("character-memory"),
+								memoryDisabled: document.getElementById("character-memory-disabled"),
 								logic: document.getElementById("character-logic"),
+								logicDisabled: document.getElementById("character-logic-disabled"),
 								strength: document.getElementById("character-strength"),
+								strengthDisabled: document.getElementById("character-strength-disabled"),
 								dexterity: document.getElementById("character-dexterity"),
+								dexterityDisabled: document.getElementById("character-dexterity-disabled"),
 								immunity: document.getElementById("character-immunity"),
-								speed: document.getElementById("character-speed")
+								immunityDisabled: document.getElementById("character-immunity-disabled"),
+								speed: document.getElementById("character-speed"),
+								speedDisabled: document.getElementById("character-speed-disabled")
 							},
 							items: {
 								element: document.getElementById("character-items"),
@@ -291,7 +298,8 @@ window.onload = function() {
 								},
 								recipients: {
 									select: document.getElementById("chat-send-recipients"),
-									all: document.getElementById("chat-send-recipients-all")
+									all: document.getElementById("chat-send-recipients-all"),
+									players: document.getElementById("chat-send-recipients-players")
 								},
 								input: document.getElementById("chat-send-input"),
 								button: document.getElementById("chat-send-button"),
@@ -601,14 +609,17 @@ window.onload = function() {
 					try {
 						// get tool
 							var tool = event.target.value
-							if (event.forceSet) {
-								event.target.checked = true
-							}
 
 						// check for game
 							if ((tool == "character" || tool == "chat" || tool == "content") && !GAME) {
 								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								displayTool({target: ELEMENTS.tools.settingsRadio, forceSet: true})
 								return false
+							}
+
+						// force set
+							if (event.forceSet) {
+								event.target.checked = true
 							}
 
 						// switch
@@ -642,22 +653,31 @@ window.onload = function() {
 							}
 
 						// relist content
+							displayChatListSenders()
 							displayChatListRecipients()
-							displayGameList()
+							displayGameSettings()
 					} catch (error) {console.log(error)}
 				}
 
 		/** display **/
+			/* displayGameSettings */
+				function displayGameSettings() {
+					try {
+						// edit forms?
+							ELEMENTS.settings.game.clearChat.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
+							ELEMENTS.settings.game.clearRolls.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
+							ELEMENTS.settings.game.delete.gate.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
+
+						// list
+							displayGameList()
+					} catch (error) {console.log(error)}
+				}
+
 			/* displayGameList */
 				function displayGameList() {
 					try {
 						// close option?
 							ELEMENTS.settings.game.select.none.disabled = (GAME && GAME.id) ? false : true
-
-						// edit forms?
-							ELEMENTS.settings.game.clearChat.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
-							ELEMENTS.settings.game.clearRolls.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
-							ELEMENTS.settings.game.delete.gate.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
 
 						// remove extra games
 							var gameOptions = Array.from(ELEMENTS.settings.game.select.custom.querySelectorAll("option"))
@@ -670,24 +690,30 @@ window.onload = function() {
 
 						// custom games, from USER object
 							for (var g in USER.games) {
-								var game = USER.games[g]
-								var option = ELEMENTS.settings.game.select.custom.querySelector("option[value='" + game.id + "']")
-								if (option) {
-									option.innerText = game.name
-								}
-								else {
-									option = document.createElement("option")
-									option.value = game.id
-									option.innerText = game.name
-									ELEMENTS.settings.game.select.custom.appendChild(option)
-								}
+								// find game
+									var game = USER.games[g]
+									var option = ELEMENTS.settings.game.select.custom.querySelector("option[value='" + game.id + "']")
 
-								if (GAME && GAME.id == game.id) {
-									option.selected = true
-									ELEMENTS.settings.game.select.element.value = game.id
-									ELEMENTS.settings.game.select.element.className = "form-pair"
-									ELEMENTS.settings.game.input.setAttribute("visibility", false)
-								}
+								// rename
+									if (option) {
+										option.innerText = game.name
+									}
+
+								// create
+									else {
+										option = document.createElement("option")
+										option.value = game.id
+										option.innerText = game.name
+										ELEMENTS.settings.game.select.custom.appendChild(option)
+									}
+
+								// already open?
+									if (GAME && GAME.id == game.id) {
+										option.selected = true
+										ELEMENTS.settings.game.select.element.value = game.id
+										ELEMENTS.settings.game.select.element.className = "form-pair"
+										ELEMENTS.settings.game.input.setAttribute("visibility", false)
+									}
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -777,6 +803,7 @@ window.onload = function() {
 							}
 
 						// send socket request
+							ELEMENTS.settings.game.input.value = ""
 							SOCKET.send(JSON.stringify(post))
 					} catch (error) {console.log(error)}
 				}
@@ -794,6 +821,7 @@ window.onload = function() {
 
 						// clear game object
 							GAME = null
+							displayChatListSenders()
 							displayChatListRecipients()
 							ELEMENTS.stream.history.innerHTML = ""
 							ELEMENTS.chat.messages.innerHTML = ""
@@ -878,6 +906,7 @@ window.onload = function() {
 							}
 
 						// send socket request
+							ELEMENTS.settings.game.delete.gate.open = false
 							SOCKET.send(JSON.stringify(post))
 					} catch (error) {console.log(error)}
 				}
@@ -896,21 +925,14 @@ window.onload = function() {
 							}
 
 						// display
-							displayUser(user)
+							displayUserSettings(user)
 					} catch (error) {console.log(error)}
 				}
 
 		/** display **/
-			/* displayUser */
-				function displayUser(user) {
+			/* displayUserSettings */
+				function displayUserSettings(user) {
 					try {
-						// username
-							ELEMENTS.settings.user.name.input.value = USER.name
-
-						// password
-							ELEMENTS.settings.user.password.old.value = null
-							ELEMENTS.settings.user.password.new.value = null
-
 						// volume
 							ELEMENTS.settings.audio.volume.value = Math.max(0, Math.min(1, USER.settings.volume))
 							var audios = Array.from(ELEMENTS.body.querySelectorAll("audio"))
@@ -918,8 +940,15 @@ window.onload = function() {
 								audios[a].volume = Math.max(0, Math.min(1, volume))
 							}
 
-						// chat
-							ELEMENTS.chat.send.sender.user.innerText = user.name
+						// username
+							ELEMENTS.settings.user.name.input.value = USER.name
+
+						// password
+							ELEMENTS.settings.user.password.old.value = null
+							ELEMENTS.settings.user.password.new.value = null
+
+						// relist chat senders
+							displayChatListSenders()
 
 						// relist games
 							displayGameList()
@@ -1089,66 +1118,91 @@ window.onload = function() {
 							
 								// spacer
 									if (data.display.spacer) {
-										var spacerElement = document.createElement("div")
-											spacerElement.id = "roll-" + rollGroup.id + "-" + data.id
-											spacerElement.className = "spacer"
-											spacerElement.innerText = data.display.text
-										rollGroupElement.appendChild(spacerElement)
+										displayRollGroupCreateSpacer(rollGroupElement, rollGroup, data)
 									}
 
 								// d20
 									else if (data.display.success !== null && !data.display.dice.length) {
-										var label = document.createElement("label")
-											label.id = "roll-" + rollGroup.id + "-" + data.id
-										rollGroupElement.appendChild(label)
-
-										var text = document.createElement("span")
-											text.innerText = data.display.text
-										label.appendChild(text)
-
-										var d20 = document.createElement("div")
-											d20.className = "d20"
-											d20.innerText = data.display.total
-											d20.setAttribute("success", data.display.success)
-										label.prepend(d20)
+										displayRollGroupCreateD20(rollGroupElement, rollGroup, data)
 									}
 
 								// d6
 									else {
-										var label = document.createElement("label")
-											label.id = "roll-" + rollGroup.id + "-" + data.id
-										rollGroupElement.appendChild(label)
-
-										var text = document.createElement("span")
-											text.innerText = data.display.text
-										label.prepend(text)
-
-										var total = document.createElement("div")
-											total.className = "d6 total"
-											total.id = "roll-" + rollGroup.id + "-" + data.id + "-total"
-											total.innerText = data.display.total
-											total.setAttribute("type", data.display.type)
-										label.prepend(total)
-
-										var equals = document.createElement("div")
-											equals.className = "equals"
-											equals.innerHTML = "&rarr;"
-										label.prepend(equals)
-
-										for (var r in data.display.dice) {
-											var d6 = document.createElement("div")
-												d6.id = "roll-" + rollGroup.id + "-" + data.id + "-" + r
-												d6.className = "d6"
-												d6.setAttribute("counting", data.display.dice[r].counting)
-												d6.addEventListener(TRIGGERS.click, submitRollGroupUpdate)
-												d6.innerText = data.display.dice[r].number
-											label.prepend(d6)
-										}
+										displayRollGroupCreateD6(rollGroupElement, rollGroup, data)
 									}
 							}
 
 						// scroll
 							ELEMENTS.stream.history.scrollLeft = 1000000
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayRollGroupCreateSpacer */
+				function displayRollGroupCreateSpacer(rollGroupElement, rollGroup, data) {
+					try {
+						// element
+							var spacerElement = document.createElement("div")
+								spacerElement.id = "roll-" + rollGroup.id + "-" + data.id
+								spacerElement.className = "spacer"
+								spacerElement.innerText = data.display.text
+							rollGroupElement.appendChild(spacerElement)
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayRollGroupCreateD6 */
+				function displayRollGroupCreateD6(rollGroupElement, rollGroup, data) {
+					try {
+						// element
+							var label = document.createElement("label")
+								label.id = "roll-" + rollGroup.id + "-" + data.id
+							rollGroupElement.appendChild(label)
+
+							var text = document.createElement("span")
+								text.innerText = data.display.text
+							label.prepend(text)
+
+							var total = document.createElement("div")
+								total.className = "d6 total"
+								total.id = "roll-" + rollGroup.id + "-" + data.id + "-total"
+								total.innerText = data.display.total
+								total.setAttribute("type", data.display.type)
+							label.prepend(total)
+
+							var equals = document.createElement("div")
+								equals.className = "equals"
+								equals.innerHTML = "&rarr;"
+							label.prepend(equals)
+
+						// dice
+							for (var r in data.display.dice) {
+								var d6 = document.createElement("div")
+									d6.id = "roll-" + rollGroup.id + "-" + data.id + "-" + r
+									d6.className = "d6"
+									d6.setAttribute("counting", data.display.dice[r].counting)
+									d6.addEventListener(TRIGGERS.click, submitRollGroupUpdate)
+									d6.innerText = data.display.dice[r].number
+								label.prepend(d6)
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayRollGroupCreateD20 */
+				function displayRollGroupCreateD20(rollGroupElement, rollGroup, data) {
+					try {
+						// element
+							var label = document.createElement("label")
+								label.id = "roll-" + rollGroup.id + "-" + data.id
+							rollGroupElement.appendChild(label)
+
+							var text = document.createElement("span")
+								text.innerText = data.display.text
+							label.appendChild(text)
+
+							var d20 = document.createElement("div")
+								d20.className = "d20"
+								d20.innerText = data.display.total
+								d20.setAttribute("success", data.display.success)
+							label.prepend(d20)
 					} catch (error) {console.log(error)}
 				}
 
@@ -1172,23 +1226,30 @@ window.onload = function() {
 									}
 
 								// d20
-									else if (data.display.d == 20) {
+									else if (data.display.success !== null) {
 										continue
 									}
 
 								// d6
 									else {
-										// update total
-											var total = rollGroupElement.querySelector("#roll-" + rollGroup.id + "-" + data.id + "-total")
-												total.innerText = data.display.total
-
-										// update dice
-											for (var r in data.display.dice) {
-												var d6 = rollGroupElement.querySelector("#roll-" + rollGroup.id + "-" + data.id + "-" + r)
-													d6.setAttribute("counting", data.display.dice[r].counting)
-													d6.innerText = data.display.dice[r].number
-											}
+										displayRollGroupUpdateD6(rollGroupElement, rollGroup, data)
 									}
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayRollGroupUpdateD6 */
+				function displayRollGroupUpdateD6(rollGroupElement, rollGroup, data) {
+					try {
+						// update total
+							var total = rollGroupElement.querySelector("#roll-" + rollGroup.id + "-" + data.id + "-total")
+								total.innerText = data.display.total
+
+						// update dice
+							for (var r in data.display.dice) {
+								var d6 = rollGroupElement.querySelector("#roll-" + rollGroup.id + "-" + data.id + "-" + r)
+									d6.setAttribute("counting", data.display.dice[r].counting)
+									d6.innerText = data.display.dice[r].number
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -2000,13 +2061,16 @@ window.onload = function() {
 						// mode
 							var mode = event.target.value
 
+						// no character?
 							if (!CHARACTER && mode !== "settings") {
 								FUNCTIONS.showToast({success: false, message: "no character selected"})
 								return
 							}
 
+						// set mode
 							ELEMENTS.character.element.setAttribute("mode", mode)
 
+						// no character?
 							if (!CHARACTER) {
 								return
 							}
@@ -2105,10 +2169,8 @@ window.onload = function() {
 						// no game?
 							if (!GAME) {
 								ELEMENTS.character.settings.select.custom.innerHTML = ""
-								ELEMENTS.character.settings.recipient.characters.innerHTML = ""
-								ELEMENTS.character.settings.recipient.arena.innerHTML = ""
-								ELEMENTS.content.objects.characters.innerHTML = ""
-								ELEMENTS.content.objects.images.innerHTML = ""
+								displayCharacterListRecipients(characterList, null)
+								displayContentArenaObjectList(characterList, null)
 								return
 							}
 
@@ -2117,8 +2179,10 @@ window.onload = function() {
 								// character
 									var character = characterList[c]
 
-								// character select
+								// find character
 									var option = ELEMENTS.character.settings.select.custom.querySelector("option[value='" + character.id + "']")
+
+								// delete?
 									if (option && character.delete) {
 										if (ELEMENTS.character.settings.select.element.value == option.value) {
 											ELEMENTS.character.settings.select.element.value = ELEMENTS.character.settings.select.new.value
@@ -2127,9 +2191,13 @@ window.onload = function() {
 										}
 										option.remove()
 									}
+
+								// rename
 									else if (option) {
 										option.innerText = character.name
 									}
+
+								// create
 									else {
 										option = document.createElement("option")
 										option.value = character.id
@@ -2137,50 +2205,20 @@ window.onload = function() {
 										ELEMENTS.character.settings.select.custom.appendChild(option)
 									}
 
+								// already opened?
 									if (option && CHARACTER && CHARACTER.id == character.id) {
 										option.selected = true
 										ELEMENTS.character.settings.select.element.value = character.id
 										ELEMENTS.character.settings.select.element.className = "form-pair"
 										ELEMENTS.character.settings.select.templates.setAttribute("visibility", false)
 									}
-
-								// character targeting
-									var targetOption = ELEMENTS.character.settings.recipient.characters.querySelector("option[value='" + character.id + "']")
-									if (targetOption && character.delete) {
-										if (ELEMENTS.character.settings.recipient.select.value == targetOption.value) {
-											ELEMENTS.character.settings.recipient.select.value = ELEMENTS.character.settings.recipient.none.value
-										}
-										targetOption.remove()
-									}
-									else if (targetOption) {
-										targetOption.innerText = character.name
-									}
-									else {
-										targetOption = document.createElement("option")
-										targetOption.value = character.id
-										targetOption.innerText = character.name
-										ELEMENTS.character.settings.recipient.characters.appendChild(targetOption)
-									}
-
-								// arena content objects select
-									var contentOption = ELEMENTS.content.objects.characters.querySelector("option[value='" + character.id + "']")
-									if (contentOption && character.delete) {
-										if (ELEMENTS.content.objects.select.value == contentOption.value) {
-											ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
-										}
-										contentOption.remove()
-									}
-									else if (contentOption) {
-										contentOption.innerText = character.name
-									}
-									else {
-										contentOption = document.createElement("option")
-										contentOption.value = character.id
-										contentOption.innerText = character.name
-										contentOption.setAttribute("type", "character")
-										ELEMENTS.content.objects.characters.appendChild(contentOption)
-									}
 							}
+
+						// targeting
+							displayCharacterListRecipients(characterList, null)
+
+						// arena objects
+							displayContentArenaObjectList(characterList, null)
 					} catch (error) {console.log(error)}
 				}
 
@@ -2198,6 +2236,89 @@ window.onload = function() {
 							ELEMENTS.character.settings.select.templates.setAttribute("visibility", false)
 							ELEMENTS.character.settings.select.element.className = "form-pair"
 							return
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterListRecipients */
+				function displayCharacterListRecipients(characterList, contentList) {
+					try {
+						// no game
+							if (!GAME) {
+								ELEMENTS.character.settings.recipient.characters.innerHTML = ""
+								ELEMENTS.character.settings.recipient.arena.innerHTML = ""
+							}
+
+						// loop through characterList
+							for (var i in characterList) {
+								// find character
+									var character = characterList[i]
+									var targetOption = ELEMENTS.character.settings.recipient.characters.querySelector("option[value='" + character.id + "']")
+
+								// delete?
+									if (targetOption && character.delete) {
+										if (ELEMENTS.character.settings.recipient.select.value == targetOption.value) {
+											ELEMENTS.character.settings.recipient.select.value = ELEMENTS.character.settings.recipient.none.value
+										}
+										targetOption.remove()
+									}
+
+								// rename
+									else if (targetOption) {
+										targetOption.innerText = character.name
+									}
+
+								// create
+									else {
+										targetOption = document.createElement("option")
+										targetOption.value = character.id
+										targetOption.innerText = character.name
+										ELEMENTS.character.settings.recipient.characters.appendChild(targetOption)
+									}
+							}
+
+						// contentList? remove deleted objects
+							if (contentList) {
+								// get ids
+									var ids = Object.keys(contentList).map(function(k) {
+										return contentList[k].characterId || null
+									}) || []
+
+								// loop through existing options
+									var targetingOptions = Array.from(ELEMENTS.character.settings.recipient.arena.querySelectorAll("option"))
+									for (var i in targetingOptions) {
+										var targetOption = targetingOptions[i]
+										if (!ids.includes(targetOption.value)) {
+											if (ELEMENTS.character.settings.recipient.select.value == targetOption.value) {
+												ELEMENTS.character.settings.recipient.select.value = ELEMENTS.character.settings.recipient.none.value
+											}
+
+											targetOption.remove()
+										}
+									}
+							}
+
+						// loop through contentList
+							for (var i in contentList) {
+								if (contentList[i].characterId) {
+									// find character
+										var character = contentList[i]
+										var targetOption = ELEMENTS.character.settings.recipient.arena.querySelector("option[value='" + character.characterId + "']")
+
+									// rename
+										if (targetOption) {
+											targetOption.innerText = character.text
+										}
+
+									// create
+										else {
+											targetOption = document.createElement("option")
+											targetOption.value = character.characterId
+											targetOption.innerText = character.text || "[?]"
+											ELEMENTS.character.settings.recipient.arena.appendChild(targetOption)
+										}
+									
+								}
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -2229,9 +2350,7 @@ window.onload = function() {
 								ELEMENTS.character.element.setAttribute("mode", "settings")
 								ELEMENTS.character.settings.metadata.setAttribute("visibility", false)
 
-								ELEMENTS.chat.send.sender.character.disabled = true
-								ELEMENTS.chat.send.sender.character.innerText = ELEMENTS.chat.send.sender.character.value
-								ELEMENTS.chat.send.sender.select.value = ELEMENTS.chat.send.sender.user.value
+								displayChatListSenders()
 								return
 							}
 
@@ -2245,30 +2364,19 @@ window.onload = function() {
 							var mode = ELEMENTS.character.element.getAttribute("mode") || "play"
 
 						// conditions
-							displayCharacterConditions(CHARACTER, ELEMENTS.character.conditions.element)
+							displayCharacterConditions(CHARACTER)
 
 						// items
-							displayCharacterItems(CHARACTER, ELEMENTS.character.items.equipped, ELEMENTS.character.items.unequipped, mode == "items")
+							displayCharacterItems(CHARACTER, mode == "items")
 
 						// statistics
-							for (var i in CHARACTER.statistics) {
-								// statistic
-									var container = ELEMENTS.character.statistics[i]
-									displayCharacterStatistic(CHARACTER, container, i, mode == "edit")
-
-								// skills
-									container.querySelector(".skills-list").innerHTML = ""
-									for (var s in CHARACTER.statistics[i].skills) {
-										displayCharacterSkill(CHARACTER, container, i, CHARACTER.statistics[i].skills[s], mode == "edit")
-									}
-							}
+							displayCharacterStatistics(CHARACTER, mode == "edit")
 
 						// info
 							displayCharacterInfo(CHARACTER)
 
 						// chat
-							ELEMENTS.chat.send.sender.character.disabled = CHARACTER ? false : true
-							ELEMENTS.chat.send.sender.character.innerText = CHARACTER ? CHARACTER.info.name : ELEMENTS.chat.send.sender.character.value
+							displayChatListSenders()
 					} catch (error) {console.log(error)}
 				}
 
@@ -2337,6 +2445,24 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
+			/* displayCharacterStatistics */
+				function displayCharacterStatistics(character, enable) {
+					try {
+						// loop through statistics
+							for (var i in CHARACTER.statistics) {
+								// statistic
+									var container = ELEMENTS.character.statistics[i]
+									displayCharacterStatistic(CHARACTER, container, i, enable)
+
+								// skills
+									container.querySelector(".skills-list").innerHTML = ""
+									for (var s in CHARACTER.statistics[i].skills) {
+										displayCharacterSkill(CHARACTER, container, i, CHARACTER.statistics[i].skills[s], enable)
+									}
+							}
+					} catch (error) {console.log(error)}
+				}
+
 			/* displayCharacterStatistic */
 				function displayCharacterStatistic(character, container, statistic, enable) {
 					try {
@@ -2352,7 +2478,7 @@ window.onload = function() {
 							for (var o in options) {
 								options[o].removeAttribute("disabled")
 							}
-							ELEMENTS.character.statistics[statistic].querySelector("#character-" + statistic + "-disabled").selected = true
+							ELEMENTS.character.statistics[statistic + "Disabled"].selected = true
 					} catch (error) {console.log(error)}
 				}
 
@@ -2364,6 +2490,7 @@ window.onload = function() {
 								block.className = "skill"
 							container.querySelector(".skills-list").appendChild(block)
 
+						// remove?
 							if (skill.unremovable) {
 								block.className += " unremovable"
 							}
@@ -2390,66 +2517,70 @@ window.onload = function() {
 								name.className = "skill-name"
 							left.appendChild(name)
 
-							if (skill.d6 !== undefined) {
-								var d6 = document.createElement("input")
-									d6.type = "number"
-									d6.step = 1
-									d6.min = 0
-									if (!enable) {
-										d6.setAttribute("readonly", true)
-									}
-									d6.className = "d6 editable"
-									d6.placeholder = "d6"
-									d6.value = skill.d6
-									d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
-									d6.addEventListener(TRIGGERS.change, submitCharacterUpdateSkillUpdate)
-								name.appendChild(d6)
-							}
+							// d6?
+								if (skill.d6 !== undefined) {
+									var d6 = document.createElement("input")
+										d6.type = "number"
+										d6.step = 1
+										d6.min = 0
+										if (!enable) {
+											d6.setAttribute("readonly", true)
+										}
+										d6.className = "d6 editable"
+										d6.placeholder = "d6"
+										d6.value = skill.d6
+										d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
+										d6.addEventListener(TRIGGERS.change, submitCharacterUpdateSkillUpdate)
+									name.appendChild(d6)
+								}
 
-							var text = document.createElement("input")
-								text.className = "skill-name-text"
-								text.type = "text"
-								text.setAttribute("disabled", true)
-								text.value = skill.name.replace(/_/g, " ")
-							name.appendChild(text)
+							// text
+								var text = document.createElement("input")
+									text.className = "skill-name-text"
+									text.type = "text"
+									text.setAttribute("disabled", true)
+									text.value = skill.name.replace(/_/g, " ")
+								name.appendChild(text)
 
 						// right column
 							var right = document.createElement("div")
 								right.className = "column-right"
 							block.appendChild(right)
 
-							var maximum = document.createElement("input")
-								maximum.type = "number"
-								if (!enable) {
-									maximum.setAttribute("readonly", true)
-								}
-								maximum.className = "skill-maximum editable"
-								maximum.value = skill.maximum
-								maximum.placeholder = "↑"
-								maximum.addEventListener(TRIGGERS.change, submitCharacterUpdateSkillUpdate)
-							right.appendChild(maximum)
+							// numbers
+								var maximum = document.createElement("input")
+									maximum.type = "number"
+									if (!enable) {
+										maximum.setAttribute("readonly", true)
+									}
+									maximum.className = "skill-maximum editable"
+									maximum.value = skill.maximum
+									maximum.placeholder = "↑"
+									maximum.addEventListener(TRIGGERS.change, submitCharacterUpdateSkillUpdate)
+								right.appendChild(maximum)
 
-							var condition = document.createElement("input")
-								condition.type = "number"
-								condition.setAttribute("readonly", true)
-								condition.className = "skill-condition"
-								condition.value = Math.max(-99, Math.min(99, skill.condition)) || ""
-							right.appendChild(condition)
+								var condition = document.createElement("input")
+									condition.type = "number"
+									condition.setAttribute("readonly", true)
+									condition.className = "skill-condition"
+									condition.value = Math.max(-99, Math.min(99, skill.condition)) || ""
+								right.appendChild(condition)
 
-							var damage = document.createElement("input")
-								damage.type = "number"
-								damage.setAttribute("readonly", true)
-								damage.className = "skill-damage"
-								damage.value = ""
-							right.appendChild(damage)
+								var damage = document.createElement("input")
+									damage.type = "number"
+									damage.setAttribute("readonly", true)
+									damage.className = "skill-damage"
+									damage.value = ""
+								right.appendChild(damage)
 
-							var current = document.createElement("input")
-								current.type = "number"
-								current.setAttribute("readonly", true)
-								current.className = "skill-current d20"
-								current.value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition + skill.maximum + skill.condition)
-								current.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
-							right.appendChild(current)
+							// d20
+								var current = document.createElement("input")
+									current.type = "number"
+									current.setAttribute("readonly", true)
+									current.className = "skill-current d20"
+									current.value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition + skill.maximum + skill.condition)
+									current.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
+								right.appendChild(current)
 						
 						// disable in select
 							var option = ELEMENTS.character.statistics[statistic].querySelector("option[value=" + skill.name + "]")
@@ -2458,370 +2589,15 @@ window.onload = function() {
 				}
 
 			/* displayCharacterItems */
-				function displayCharacterItems(character, equipped, unequipped, enable) {
+				function displayCharacterItems(character, enable) {
 					try {
 						// clear
-							equipped.innerHTML   = ""
-							unequipped.innerHTML = ""
+							ELEMENTS.character.items.equipped.innerHTML   = ""
+							ELEMENTS.character.items.unequipped.innerHTML = ""
 
 						// loop through items
 							for (var i in character.items) {
-								// data
-									var item = character.items[i]
-
-								// block
-									var block = document.createElement("div")
-										block.className = "item " + (item.type || "miscellaneous")
-										block.id = item.id
-
-										if (item.equipped) {
-											equipped.prepend(block)
-										}
-										else {
-											unequipped.prepend(block)
-										}
-
-								// remove
-									var removeForm = document.createElement("form")
-										removeForm.className = "item-remove-form"
-										removeForm.setAttribute("method", "post")
-										removeForm.setAttribute("action", "javascript:;")
-										removeForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateItemDelete)
-									block.prepend(removeForm)
-
-									var remove = document.createElement("button")
-										remove.className = "item-remove"
-										remove.innerText = "x"
-									removeForm.prepend(remove)
-
-								// equip
-									var equipForm = document.createElement("form")
-										equipForm.className = "item-equip-form"
-										equipForm.setAttribute("method", "post")
-										equipForm.setAttribute("action", "javascript:;")
-										equipForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateItemEquip)
-									block.prepend(equipForm)
-
-									var equip = document.createElement("button")
-										equip.className = "item-equip"
-										equip.innerHTML = "&#x2713;"
-										if (item.equipped) {
-											equip.setAttribute("equipped", true)
-										}
-									equipForm.prepend(equip)
-
-								// name
-									var name = document.createElement("div")
-										name.className = "item-name"
-									block.appendChild(name)
-
-								// d6
-									var d6 = document.createElement("input")
-										d6.type = "number"
-										if (!enable) {
-											d6.setAttribute("readonly", true)
-										}
-										d6.step = 1
-										d6.min = 0
-										d6.className = "d6 editable"
-										d6.placeholder = "d6"
-										d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-										d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
-										d6.value = item.d6 || 0
-										if (!item.d6) {
-											d6.className += " d6-zero"
-										}
-									name.appendChild(d6)
-
-								// name text & count
-									var text = document.createElement("input")
-										text.type = "text"
-										if (!enable) {
-											text.setAttribute("readonly", true)
-										}
-										text.className = "item-name-text editable"
-										text.placeholder = "item"
-										text.value = item.name
-										text.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-									name.appendChild(text)
-
-									var count = document.createElement("input")
-										count.type = "number"
-										count.step = 1
-										count.min = 0
-										count.className = "item-count editable"
-										if (!enable) {
-											count.setAttribute("readonly", true)
-										}
-										count.placeholder = "#"
-										count.value = item.count
-										count.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-									name.appendChild(count)
-
-								// usage
-									if (item.usage) {
-										var usages = document.createElement("div")
-											usages.className = "item-usages"
-										block.appendChild(usages)
-
-										for (var u in item.usage) {
-											var usage = item.usage[u]
-											
-											if (usage.skill) {
-												var skill = character.statistics[usage.statistic].skills.find(function(skill) { return skill.name == usage.skill }) || {maximum: 0, condition: 0}
-											}
-
-											var usageElement = document.createElement("div")
-												usageElement.className = "item-usage"
-											usages.appendChild(usageElement)
-
-											var d6 = document.createElement("input")
-												d6.type = "number"
-												if (!enable) {
-													d6.setAttribute("readonly", true)
-												}
-												d6.step = 1
-												d6.min = 0
-												d6.className = "d6 editable"
-												if (skill.combat) {
-													d6.className += " combat"
-												}
-												d6.placeholder = "d6"
-												d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-												d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
-												d6.value = usage.d6 || 0
-											usageElement.appendChild(d6)
-
-											var select = document.createElement("select")
-												for (var s in RULES.skills) {
-													var optgroup = document.createElement("optgroup")
-														optgroup.label = s
-													select.appendChild(optgroup)
-
-													for (var k in RULES.skills[s]) {
-														var option = document.createElement("option")
-															option.value = RULES.skills[s][k].name
-															option.innerText = RULES.skills[s][k].name.replace(/_/g, " ")
-														optgroup.appendChild(option)
-													}
-												}
-												if (!enable) {
-													select.setAttribute("disabled", true)
-												}
-												select.className = "item-usage-skill editable"
-												select.placeholder = "skill"
-												select.value = usage.skill
-												select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-											usageElement.appendChild(select)
-
-											var d20 = document.createElement("input")
-												d20.type = "number"
-												d20.setAttribute("readonly", true)
-												d20.step = 1
-												d20.className = "d20"
-												d20.value = Math.max(0, character.statistics[usage.statistic].maximum + character.statistics[usage.statistic].damage + character.statistics[usage.statistic].condition + (usage.skill ? skill.maximum + skill.condition : 0) + (usage.modifier ? usage.modifier : 0))
-												d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
-											usageElement.appendChild(d20)
-										}
-									}
-
-								// conditions
-									if (item.conditions) {
-										var conditions = document.createElement("div")
-											conditions.className = "item-conditions"
-										block.appendChild(conditions)
-
-										for (var i in item.conditions) {
-											var condition = document.createElement("div")
-												condition.className = "item-condition"
-											conditions.append(condition)
-
-											var d6 = document.createElement("input")
-												d6.type = "number"
-												if (!enable) {
-													d6.setAttribute("readonly", true)
-												}
-												d6.step = 1
-												d6.min = 0
-												d6.className = "d6 editable"
-												d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-												d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
-												d6.value = item.conditions[i] || 0
-												d6.placeholder = "d6"
-											condition.appendChild(d6)
-
-											var select = document.createElement("select")
-												for (var c in RULES.conditions) {
-													var option = document.createElement("option")
-														option.innerText = c.replace(/_/g, " ")
-														option.value = c
-													select.appendChild(option)
-												}
-
-												if (!enable) {
-													select.setAttribute("disabled", true)
-												}
-												select.className = "item-condition-name editable"
-												select.value = i
-												select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-											condition.appendChild(select)
-
-											
-											if (!item.conditions[i]) {
-												select.className += " item-condition-remove"
-											}
-										}
-									}
-
-								// other info
-									// weight
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("input")
-											input.type = "number"
-											input.className = "item-info-input editable"
-											input.placeholder = "weight"
-											input.value = item.weight || 0
-											input.setAttribute("field", "weight")
-											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-											if (!enable) {
-												input.setAttribute("readonly", true)
-											}
-										label.appendChild(input)
-
-										var span = document.createElement("span")
-											span.className = "item-info-label-text"
-											span.innerText = "lbs"
-										label.appendChild(span)
-
-									// cost
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("input")
-											input.type = "number"
-											input.className = "item-info-input editable"
-											input.placeholder = "cost"
-											input.value = item.cost || 0
-											input.setAttribute("field", "cost")
-											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-											if (!enable) {
-												input.setAttribute("readonly", true)
-											}
-										label.appendChild(input)
-
-										var span = document.createElement("span")
-											span.className = "item-info-label-text"
-											span.innerText = "❑"
-										label.appendChild(span)
-
-									// fuel
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("input")
-											input.type = "number"
-											input.className = "item-info-input editable"
-											input.placeholder = "fuel"
-											input.value = item.fuel || 0
-											input.setAttribute("field", "fuel")
-											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-											if (!enable) {
-												input.setAttribute("readonly", true)
-											}
-										label.appendChild(input)
-
-										var span = document.createElement("span")
-											span.className = "item-info-label-text"
-											span.innerText = "d6 fuel"
-										label.appendChild(span)
-
-									// magnetic
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("select")
-											input.className = "item-info-input editable"
-											input.setAttribute("field", "magnetic")
-											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-											if (!enable) {
-												input.setAttribute("disabled", true)
-											}
-										label.appendChild(input)
-
-										var option = document.createElement("option")
-											option.value = false
-											option.innerText = "nonmagnetic"
-											if (!item.magnetic) { option.selected = true }
-										input.appendChild(option)
-
-										var option = document.createElement("option")
-											option.value = true
-											option.innerText = "magnetic"
-											if (item.magnetic) { option.selected = true }
-										input.appendChild(option)
-
-									// hands
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("input")
-											input.type = "number"
-											input.className = "item-info-input editable"
-											input.placeholder = "hands"
-											input.value = item.hands || 0
-											input.setAttribute("field", "hands")
-											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-											if (!enable) {
-												input.setAttribute("readonly", true)
-											}
-										label.appendChild(input)
-
-										var span = document.createElement("span")
-											span.className = "item-info-label-text"
-											span.innerText = "handed"
-										label.appendChild(span)
-
-									// materials
-										var label = document.createElement("label")
-											label.className = "item-info-label"
-										block.appendChild(label)
-
-										var input = document.createElement("input")
-											input.type = "text"
-											input.className = "item-info-input editable"
-											input.placeholder = "materials"
-											input.value = item.materials || ""
-											input.setAttribute("field", "materials")
-											input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-											if (!enable) {
-												input.setAttribute("readonly", true)
-											}
-										label.appendChild(input)
-
-								// description
-									var description = document.createElement("textarea")
-										if (!enable) {
-											description.setAttribute("readonly", true)
-										}
-										description.className = "item-description editable"
-										description.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
-										description.placeholder = "description"
-										description.value = ""
-									block.appendChild(description)
-									
-									if (item.weapons)      { description.value += " | for use with " + item.weapons.join(", ")}
-									if (item.recipe)       { description.value += " | recipe: " + JSON.stringify(item.recipe).replace(/{|}|"|:/g,"").replace(/,/g,", ")}
-									if (item.costPerPound) { description.value += " | cost per pound: " + item.costPerPound + "❑"}
-									if (item.description)  { description.value += " | " + item.description                    }
-
-									description.value = description.value.slice(3)
+								displayCharacterItem(character, character.items[i], enable)
 							}
 
 						// open all?
@@ -2832,15 +2608,371 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayCharacterConditions */
-				function displayCharacterConditions(character, container) {
+			/* displayCharacterItem */
+				function displayCharacterItem(character, item, enable) {
 					try {
-						// unset
-							var conditionElements = Array.from(container.querySelectorAll(".condition"))
-							for (var i in conditionElements) {
-								conditionElements[i].remove()
+						// block
+							var block = document.createElement("div")
+								block.className = "item " + (item.type || "miscellaneous")
+								block.id = item.id
+
+						// equipped?
+							if (item.equipped) {
+								ELEMENTS.character.items.equipped.prepend(block)
+							}
+							else {
+								ELEMENTS.character.items.unequipped.prepend(block)
 							}
 
+						// remove
+							var removeForm = document.createElement("form")
+								removeForm.className = "item-remove-form"
+								removeForm.setAttribute("method", "post")
+								removeForm.setAttribute("action", "javascript:;")
+								removeForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateItemDelete)
+							block.prepend(removeForm)
+
+							var remove = document.createElement("button")
+								remove.className = "item-remove"
+								remove.innerText = "x"
+							removeForm.prepend(remove)
+
+						// equip
+							var equipForm = document.createElement("form")
+								equipForm.className = "item-equip-form"
+								equipForm.setAttribute("method", "post")
+								equipForm.setAttribute("action", "javascript:;")
+								equipForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateItemEquip)
+							block.prepend(equipForm)
+
+							var equip = document.createElement("button")
+								equip.className = "item-equip"
+								equip.innerHTML = "&#x2713;"
+								if (item.equipped) {
+									equip.setAttribute("equipped", true)
+								}
+							equipForm.prepend(equip)
+
+						// name
+							var name = document.createElement("div")
+								name.className = "item-name"
+							block.appendChild(name)
+
+						// d6
+							var d6 = document.createElement("input")
+								d6.type = "number"
+								if (!enable) {
+									d6.setAttribute("readonly", true)
+								}
+								d6.step = 1
+								d6.min = 0
+								d6.className = "d6 editable"
+								d6.placeholder = "d6"
+								d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+								d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
+								d6.value = item.d6 || 0
+								if (!item.d6) {
+									d6.className += " d6-zero"
+								}
+							name.appendChild(d6)
+
+						// name text & count
+							var text = document.createElement("input")
+								text.type = "text"
+								if (!enable) {
+									text.setAttribute("readonly", true)
+								}
+								text.className = "item-name-text editable"
+								text.placeholder = "item"
+								text.value = item.name
+								text.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+							name.appendChild(text)
+
+							var count = document.createElement("input")
+								count.type = "number"
+								count.step = 1
+								count.min = 0
+								count.className = "item-count editable"
+								if (!enable) {
+									count.setAttribute("readonly", true)
+								}
+								count.placeholder = "#"
+								count.value = item.count
+								count.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+							name.appendChild(count)
+
+						// usage
+							if (item.usage) {
+								var usages = document.createElement("div")
+									usages.className = "item-usages"
+								block.appendChild(usages)
+
+								for (var u in item.usage) {
+									var usage = item.usage[u]
+									
+									if (usage.skill) {
+										var skill = character.statistics[usage.statistic].skills.find(function(skill) { return skill.name == usage.skill }) || {maximum: 0, condition: 0}
+									}
+
+									var usageElement = document.createElement("div")
+										usageElement.className = "item-usage"
+									usages.appendChild(usageElement)
+
+									var d6 = document.createElement("input")
+										d6.type = "number"
+										if (!enable) {
+											d6.setAttribute("readonly", true)
+										}
+										d6.step = 1
+										d6.min = 0
+										d6.className = "d6 editable"
+										if (skill.combat) {
+											d6.className += " combat"
+										}
+										d6.placeholder = "d6"
+										d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+										d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
+										d6.value = usage.d6 || 0
+									usageElement.appendChild(d6)
+
+									var select = document.createElement("select")
+										for (var s in RULES.skills) {
+											var optgroup = document.createElement("optgroup")
+												optgroup.label = s
+											select.appendChild(optgroup)
+
+											for (var k in RULES.skills[s]) {
+												var option = document.createElement("option")
+													option.value = RULES.skills[s][k].name
+													option.innerText = RULES.skills[s][k].name.replace(/_/g, " ")
+												optgroup.appendChild(option)
+											}
+										}
+										if (!enable) {
+											select.setAttribute("disabled", true)
+										}
+										select.className = "item-usage-skill editable"
+										select.placeholder = "skill"
+										select.value = usage.skill
+										select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+									usageElement.appendChild(select)
+
+									var d20 = document.createElement("input")
+										d20.type = "number"
+										d20.setAttribute("readonly", true)
+										d20.step = 1
+										d20.className = "d20"
+										d20.value = Math.max(0, character.statistics[usage.statistic].maximum + character.statistics[usage.statistic].damage + character.statistics[usage.statistic].condition + (usage.skill ? skill.maximum + skill.condition : 0) + (usage.modifier ? usage.modifier : 0))
+										d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
+									usageElement.appendChild(d20)
+								}
+							}
+
+						// conditions
+							if (item.conditions) {
+								var conditions = document.createElement("div")
+									conditions.className = "item-conditions"
+								block.appendChild(conditions)
+
+								for (var i in item.conditions) {
+									var condition = document.createElement("div")
+										condition.className = "item-condition"
+									conditions.append(condition)
+
+									var d6 = document.createElement("input")
+										d6.type = "number"
+										if (!enable) {
+											d6.setAttribute("readonly", true)
+										}
+										d6.step = 1
+										d6.min = 0
+										d6.className = "d6 editable"
+										d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+										d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
+										d6.value = item.conditions[i] || 0
+										d6.placeholder = "d6"
+									condition.appendChild(d6)
+
+									var select = document.createElement("select")
+										for (var c in RULES.conditions) {
+											var option = document.createElement("option")
+												option.innerText = c.replace(/_/g, " ")
+												option.value = c
+											select.appendChild(option)
+										}
+
+										if (!enable) {
+											select.setAttribute("disabled", true)
+										}
+										select.className = "item-condition-name editable"
+										select.value = i
+										select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+									condition.appendChild(select)
+
+									
+									if (!item.conditions[i]) {
+										select.className += " item-condition-remove"
+									}
+								}
+							}
+
+						// other info
+							// weight
+								var label = document.createElement("label")
+									label.className = "item-info-label"
+								block.appendChild(label)
+
+								var input = document.createElement("input")
+									input.type = "number"
+									input.className = "item-info-input editable"
+									input.placeholder = "weight"
+									input.value = item.weight || 0
+									input.setAttribute("field", "weight")
+									input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+									if (!enable) {
+										input.setAttribute("readonly", true)
+									}
+								label.appendChild(input)
+
+								var span = document.createElement("span")
+									span.className = "item-info-label-text"
+									span.innerText = "lbs"
+								label.appendChild(span)
+
+							// cost
+								var label = document.createElement("label")
+									label.className = "item-info-label"
+								block.appendChild(label)
+
+								var input = document.createElement("input")
+									input.type = "number"
+									input.className = "item-info-input editable"
+									input.placeholder = "cost"
+									input.value = item.cost || 0
+									input.setAttribute("field", "cost")
+									input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+									if (!enable) {
+										input.setAttribute("readonly", true)
+									}
+								label.appendChild(input)
+
+								var span = document.createElement("span")
+									span.className = "item-info-label-text"
+									span.innerText = "❑"
+								label.appendChild(span)
+
+							// fuel
+								var label = document.createElement("label")
+									label.className = "item-info-label"
+								block.appendChild(label)
+
+								var input = document.createElement("input")
+									input.type = "number"
+									input.className = "item-info-input editable"
+									input.placeholder = "fuel"
+									input.value = item.fuel || 0
+									input.setAttribute("field", "fuel")
+									input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+									if (!enable) {
+										input.setAttribute("readonly", true)
+									}
+								label.appendChild(input)
+
+								var span = document.createElement("span")
+									span.className = "item-info-label-text"
+									span.innerText = "d6 fuel"
+								label.appendChild(span)
+
+							// magnetic
+								var label = document.createElement("label")
+									label.className = "item-info-label"
+								block.appendChild(label)
+
+								var input = document.createElement("select")
+									input.className = "item-info-input editable"
+									input.setAttribute("field", "magnetic")
+									input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+									if (!enable) {
+										input.setAttribute("disabled", true)
+									}
+								label.appendChild(input)
+
+								var option = document.createElement("option")
+									option.value = false
+									option.innerText = "nonmagnetic"
+									if (!item.magnetic) { option.selected = true }
+								input.appendChild(option)
+
+								var option = document.createElement("option")
+									option.value = true
+									option.innerText = "magnetic"
+									if (item.magnetic) { option.selected = true }
+								input.appendChild(option)
+
+							// hands
+								var label = document.createElement("label")
+									label.className = "item-info-label"
+								block.appendChild(label)
+
+								var input = document.createElement("input")
+									input.type = "number"
+									input.className = "item-info-input editable"
+									input.placeholder = "hands"
+									input.value = item.hands || 0
+									input.setAttribute("field", "hands")
+									input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+									if (!enable) {
+										input.setAttribute("readonly", true)
+									}
+								label.appendChild(input)
+
+								var span = document.createElement("span")
+									span.className = "item-info-label-text"
+									span.innerText = "handed"
+								label.appendChild(span)
+
+							// materials
+								var label = document.createElement("label")
+									label.className = "item-info-label"
+								block.appendChild(label)
+
+								var input = document.createElement("input")
+									input.type = "text"
+									input.className = "item-info-input editable"
+									input.placeholder = "materials"
+									input.value = item.materials || ""
+									input.setAttribute("field", "materials")
+									input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+									if (!enable) {
+										input.setAttribute("readonly", true)
+									}
+								label.appendChild(input)
+
+						// description
+							var description = document.createElement("textarea")
+								if (!enable) {
+									description.setAttribute("readonly", true)
+								}
+								description.className = "item-description editable"
+								description.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+								description.placeholder = "description"
+								description.value = ""
+							block.appendChild(description)
+							
+							if (item.weapons)      { description.value += " | for use with " + item.weapons.join(", ")}
+							if (item.recipe)       { description.value += " | recipe: " + JSON.stringify(item.recipe).replace(/{|}|"|:/g,"").replace(/,/g,", ")}
+							if (item.costPerPound) { description.value += " | cost per pound: " + item.costPerPound + "❑"}
+							if (item.description)  { description.value += " | " + item.description}
+
+							description.value = description.value.slice(3)
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterConditions */
+				function displayCharacterConditions(character) {
+					try {
+						// unset
+							ELEMENTS.character.conditions.list.innerHTML = ""
 							var options = Array.from(ELEMENTS.character.conditions.select.querySelectorAll("option"))
 							for (var i in options) {
 								options[i].removeAttribute("disabled")
@@ -2848,50 +2980,54 @@ window.onload = function() {
 
 						// loop through
 							for (var i in character.info.status.conditions) {
-								// data
-									var condition = character.info.status.conditions[i]
-
-								// container
-									var conditionElement = document.createElement("div")
-										conditionElement.className = "condition"
-										conditionElement.setAttribute("value", condition.name)
-									ELEMENTS.character.conditions.list.prepend(conditionElement)
-
-								// name
-									var name = document.createElement("div")
-										name.className = "condition-name"
-										name.innerText = condition.name.replace(/_/g, " ")
-									conditionElement.appendChild(name)
-
-								// description
-									var description = document.createElement("div")
-										description.className = "condition-description"
-										description.innerText = condition.description || ""
-									conditionElement.appendChild(description)
-
-								// remove
-									var removeForm = document.createElement("form")
-										removeForm.className = "condition-remove-form"
-										removeForm.setAttribute("method", "post")
-										removeForm.setAttribute("action", "javascript:;")
-										removeForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateConditionDelete)
-									conditionElement.prepend(removeForm)
-
-									var remove = document.createElement("button")
-										remove.className = "condition-remove"
-										remove.innerText = "x"
-									removeForm.prepend(remove)
-
-								// disable in select
-									var conditionOption = ELEMENTS.character.conditions.select.querySelector("[value=" + condition.name + "]")
-									if (conditionOption) {
-										conditionOption.setAttribute("disabled", true)
-									}
+								displayCharacterCondition(character.info.status.conditions[i])
 							}
 
 						// disabled
 							ELEMENTS.character.conditions.disabled.setAttribute("disabled", true)
 							ELEMENTS.character.conditions.disabled.selected = true
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterCondition */
+				function displayCharacterCondition(condition) {
+					try {
+						// container
+							var conditionElement = document.createElement("div")
+								conditionElement.className = "condition"
+								conditionElement.setAttribute("value", condition.name)
+							ELEMENTS.character.conditions.list.prepend(conditionElement)
+
+						// name
+							var name = document.createElement("div")
+								name.className = "condition-name"
+								name.innerText = condition.name.replace(/_/g, " ")
+							conditionElement.appendChild(name)
+
+						// description
+							var description = document.createElement("div")
+								description.className = "condition-description"
+								description.innerText = condition.description || ""
+							conditionElement.appendChild(description)
+
+						// remove
+							var removeForm = document.createElement("form")
+								removeForm.className = "condition-remove-form"
+								removeForm.setAttribute("method", "post")
+								removeForm.setAttribute("action", "javascript:;")
+								removeForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateConditionDelete)
+							conditionElement.prepend(removeForm)
+
+							var remove = document.createElement("button")
+								remove.className = "condition-remove"
+								remove.innerText = "x"
+							removeForm.prepend(remove)
+
+						// disable in select
+							var conditionOption = ELEMENTS.character.conditions.select.querySelector("[value=" + condition.name + "]")
+							if (conditionOption) {
+								conditionOption.setAttribute("disabled", true)
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -3076,6 +3212,7 @@ window.onload = function() {
 							}
 
 						// send socket request
+							ELEMENTS.character.settings.delete.gate.open = false
 							SOCKET.send(JSON.stringify(post))
 					} catch (error) {console.log(error)}
 				}
@@ -3915,21 +4052,34 @@ window.onload = function() {
 				}
 
 		/** display **/
+			/* displayChatListSenders */
+				function displayChatListSenders() {
+					try {
+						// user name
+							ELEMENTS.chat.send.sender.user.innerText = USER.name
+
+						// no game?
+							if (!GAME || !CHARACTER) {
+								ELEMENTS.chat.send.sender.select.value = ELEMENTS.chat.send.sender.user.value
+								ELEMENTS.chat.send.sender.character.disabled = true
+								ELEMENTS.chat.send.sender.character.innerText = ELEMENTS.chat.send.sender.character.value
+								return
+							}
+
+						// character name
+							ELEMENTS.chat.send.sender.character.disabled = false
+							ELEMENTS.chat.send.sender.character.innerText = CHARACTER.info.name || ELEMENTS.chat.send.sender.character.value
+					} catch (error) {console.log(error)}
+				}
+
 			/* displayChatListRecipients */
 				function displayChatListRecipients() {
 					try {
 						// remove existing
-							var allValue = ELEMENTS.chat.send.recipients.all.value
-							var recipientsList = Array.from(ELEMENTS.chat.send.recipients.select.querySelectorAll("option"))
-							for (var i in recipientsList) {
-								if (recipientsList[i].value !== allValue) {
-									recipientsList[i].remove()
-								}
-							}
+							ELEMENTS.chat.send.recipients.players.innerHTML = ""
 
 						// no game?
 							if (!GAME) {
-								ELEMENTS.chat.send.sender.select.value = ELEMENTS.chat.send.sender.user.value
 								return
 							}
 
@@ -3939,7 +4089,7 @@ window.onload = function() {
 								var option = document.createElement("option")
 									option.innerText = GAME.users[i].name
 									option.value = GAME.users[i].id
-								ELEMENTS.chat.send.recipients.select.appendChild(option)
+								ELEMENTS.chat.send.recipients.players.appendChild(option)
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -4059,73 +4209,130 @@ window.onload = function() {
 
 						// arena
 							if (content.type == "arena") {
-								var messageDataContent = document.createElement("div")
-									messageDataContent.className = "content-chat-data"
-									messageDataContent.innerHTML = ""
-								messageElement.appendChild(messageDataContent)
+								displayChatContentArena(messageElement, content)
 								return
 							}
 
 						// text
 							if (content.type == "text") {
-								var messageDataContent = document.createElement("div")
-									messageDataContent.className = "content-chat-data"
-									messageDataContent.innerHTML = content.text
-								messageElement.appendChild(messageDataContent)
+								displayChatContentText(messageElement, content)
 								return
 							}
 
 						// image
 							if (content.type == "image") {
-								var messageDataContent = document.createElement("img")
-									messageDataContent.className = "content-chat-data content-image"
-									messageDataContent.src = content.url ? (content.url + (content.file ? ("?" + new Date().getTime()) : "")) : "#"
-								messageElement.appendChild(messageDataContent)
+								displayChatContentImage(messageElement, content)
 								return
 							}
 
 						// audio
 							if (content.type == "audio") {
-								var messageDataContent = document.createElement("audio")
-									messageDataContent.className = "content-chat-data content-audio"
-									messageDataContent.volume = USER.settings.volume || 0
-									messageDataContent.setAttribute("controls", true)
-								messageElement.appendChild(messageDataContent)
-
-								var fileType = content.url.slice(-3).toLowerCase()
-
-								var source = document.createElement("source")
-									source.src = content.url
-									source.setAttribute("type", "audio/" + (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg"))
-								messageDataContent.appendChild(source)
+								displayChatContentAudio(messageElement, content)
 								return
 							}
 
 						// embed
 							if (content.type == "embed") {
-								var messageDataContent = document.createElement("div")
-									messageDataContent.className = "content-chat-data"
-									if (content.code) {
-										messageDataContent.innerText = content.code
-									}
-									else if (content.url) {
-										messageDataContent.innerHTML = `<a target="_blank" href="` + content.url + `">` + content.url + `</a>`
-									}
-								messageElement.appendChild(messageDataContent)
+								displayChatContentEmbed(messageElement, content)
 								return
 							}
 
 						// component
 							if (content.type == "component") {
-								try {
-									var code = JSON.parse(content.code)
-								} catch (error) {
-									var code = {name: (content.text || "custom component"), type: "error", data: {error: "malformed JSON"}}
-								}
-
-								displayRulesSearchResult(code, ELEMENTS.chat.messages)
+								displayChatContentComponent(messageElement, content)
 								return
 							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayChatContentArena */
+				function displayChatContentArena(messageElement, content) {
+					try {
+						// element
+							var messageDataContent = document.createElement("div")
+								messageDataContent.className = "content-chat-data"
+								messageDataContent.innerHTML = ""
+							messageElement.appendChild(messageDataContent)
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayChatContentText */
+				function displayChatContentText(messageElement, content) {
+					try {
+						// element
+							var messageDataContent = document.createElement("div")
+								messageDataContent.className = "content-chat-data"
+								messageDataContent.innerHTML = content.text
+							messageElement.appendChild(messageDataContent)
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayChatContentImage */
+				function displayChatContentImage(messageElement, content) {
+					try {
+						// var url
+							var url = content.url ? (content.url + (content.file ? ("?" + new Date().getTime()) : "")) : "#"
+
+						// element
+							var messageDataContent = document.createElement("img")
+								messageDataContent.className = "content-chat-data content-image"
+								messageDataContent.src = url
+							messageElement.appendChild(messageDataContent)
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayChatContentAudio */
+				function displayChatContentAudio(messageElement, content) {
+					try {
+						// element
+							var messageDataContent = document.createElement("audio")
+								messageDataContent.className = "content-chat-data content-audio"
+								messageDataContent.volume = USER.settings.volume || 0
+								messageDataContent.setAttribute("controls", true)
+							messageElement.appendChild(messageDataContent)
+
+						// file
+							var fileType = content.url.slice(-3).toLowerCase()
+								fileType = (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg")
+							var source = document.createElement("source")
+								source.src = content.url
+								source.setAttribute("type", "audio/" + fileType)
+							messageDataContent.appendChild(source)
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayChatContentEmbed */
+				function displayChatContentEmbed(messageElement, content) {
+					try {
+						// element
+							var messageDataContent = document.createElement("div")
+								messageDataContent.className = "content-chat-data"
+							messageElement.appendChild(messageDataContent)
+
+						// code
+							if (content.code) {
+								messageDataContent.innerText = content.code
+							}
+
+						// embed
+							else if (content.url) {
+								messageDataContent.innerHTML = `<a target="_blank" href="` + content.url + `">` + content.url + `</a>`
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayChatContentComponent */
+				function displayChatContentComponent(messageElement, content) {
+					try {
+						// code
+							try {
+								var code = JSON.parse(content.code)
+							} catch (error) {
+								var code = {name: (content.text || "custom component"), type: "error", data: {error: "malformed JSON"}}
+							}
+
+						// display as search result
+							displayRulesSearchResult(code, ELEMENTS.chat.messages)
 					} catch (error) {console.log(error)}
 				}
 
@@ -4274,6 +4481,11 @@ window.onload = function() {
 
 						// gametable
 							displayContentGametable()
+
+						// arena? --> targeting
+							if (CONTENT && CONTENT.type == "arena") {
+								displayCharacterListRecipients(null, CONTENT.arena.objects)
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -4316,156 +4528,209 @@ window.onload = function() {
 
 						// arena
 							if (CONTENT.type == "arena") {
-								// content
-									var arena = ELEMENTS.gametable.element.querySelector(".content-arena")
-									if (!arena) {
-										// canvas
-											ELEMENTS.gametable.element.innerHTML = ""
-												arena = document.createElement("canvas")
-												arena.className = "content-arena"
-												arena.addEventListener(TRIGGERS.mousedown, grabContent)
-											ELEMENTS.gametable.element.appendChild(arena)
-
-										// panning
-											var directions = ["-y", "-y -x", "-x", "-x y", "y", "y x", "x", "x -y"]
-											for (var i in directions) {
-												var panningOverlay = document.createElement("div")
-													panningOverlay.setAttribute("directions", directions[i])
-													panningOverlay.className = "content-arena-panning"
-													panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
-													panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
-												ELEMENTS.gametable.element.appendChild(panningOverlay)
-											}
-									}
-
-								// update
-									ELEMENTS.gametable.canvas.element = arena
-									ELEMENTS.gametable.canvas.context = ELEMENTS.gametable.canvas.element.getContext("2d")
-									displayContentArena()
-									return
+								displayContentGametableArena()
+								return
 							}
 
 						// text
 							if (CONTENT.type == "text") {
-								// content
-									var text = ELEMENTS.gametable.element.querySelector(".content-text")
-									if (!text) {
-										// contenteditable
-											ELEMENTS.gametable.element.innerHTML = ""
-												text = document.createElement("div")
-												text.className = "content-text"
-												text.setAttribute("contenteditable", true)
-											ELEMENTS.gametable.element.appendChild(text)
-									}
-
-								// update
-									if (text.innerHTML !== CONTENT.text) {
-										text.innerHTML = CONTENT.text
-									}
-									return
-							}
+								displayContentGametableText()
+								return							}
 
 						// image
 							if (CONTENT.type == "image") {
-								// content
-									var image = ELEMENTS.gametable.element.querySelector(".content-image")
-									if (!image) {
-										// grabbable image
-											ELEMENTS.gametable.element.innerHTML = ""
-												image = document.createElement("img")
-												image.className = "content-image content-grabbable"
-												image.addEventListener(TRIGGERS.mousedown, grabContent)
-											ELEMENTS.gametable.element.appendChild(image)
-									}
-
-								// update
-									if (CONTENT.url) {
-										image.src = CONTENT.url + (CONTENT.file ? ("?" + new Date().getTime()) : "")
-									}
-
-								// zoom
-									if (!CONTENT.zoom) {
-										CONTENT.zoomPower = 0
-										CONTENT.zoom = 1
-									}
-									return
+								displayContentGametableImage()
+								return
 							}
 
 						// audio
 							if (CONTENT.type == "audio") {
-								// content
-									var audio = ELEMENTS.gametable.element.querySelector(".content-audio")
-									if (!audio) {
-										// audio player
-											ELEMENTS.gametable.element.innerHTML = ""
-												audio = document.createElement("audio")
-												audio.className = "content-audio"
-												audio.volume = USER.settings.volume || 0
-												audio.setAttribute("controls", true)
-											ELEMENTS.gametable.element.appendChild(audio)
-									}
-
-								// update
-									if (CONTENT.url) {
-										// remove old source
-											var source = audio.querySelector("source")
-											if (source) { source.remove() }
-
-										// add new source
-											var fileType = CONTENT.url.slice(-3).toLowerCase()
-												fileType = (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg")
-											var source = document.createElement("source")
-												source.setAttribute("type", "audio/" + fileType)
-												source.setAttribute("src", CONTENT.url)
-											audio.appendChild(source)
-									}
-									return
+								displayContentGametableAudio()
+								return
 							}
 
 						// embed
 							if (CONTENT.type == "embed") {
-								// code
-									if (CONTENT.code) {
-										var embed = ELEMENTS.gametable.element.querySelector("div.content-embed")
-										if (!embed) {
-											// embedded html
-												ELEMENTS.gametable.element.innerHTML = ""
-													embed = document.createElement("div")
-													embed.className = "content-embed"
-												ELEMENTS.gametable.element.appendChild(embed)
-										}
-
-										if (embed.innerHTML !== CONTENT.code) {
-											embed.innerHTML = CONTENT.code
-										}
-									}
-
-								// url
-									else if (CONTENT.url) {
-										var embed = ELEMENTS.gametable.element.querySelector("iframe.content-embed")
-										if (!embed) {
-											// iframe
-												ELEMENTS.gametable.element.innerHTML = ""
-													embed = document.createElement("iframe")
-													embed.className = "content-embed"
-													embed.setAttribute("frameborder", "none")
-												ELEMENTS.gametable.element.appendChild(embed)
-										}
-
-										if (embed.src !== CONTENT.url) {
-											embed.src = CONTENT.url
-										}
-									}
-
-								// neither
-									else {
-										ELEMENTS.gametable.element.innerHTML = ""
-									}
-									return
+								displayContentGametableEmbed()
+								return
 							}
 
 						// component
 							if (CONTENT.type == "component") {
+								ELEMENTS.gametable.element.innerHTML = ""
+								return
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentGametableArena */
+				function displayContentGametableArena() {
+					try {
+						// element
+							var arena = ELEMENTS.gametable.element.querySelector(".content-arena")
+
+						// new
+							if (!arena) {
+								// canvas
+									ELEMENTS.gametable.element.innerHTML = ""
+										arena = document.createElement("canvas")
+										arena.className = "content-arena"
+										arena.addEventListener(TRIGGERS.mousedown, grabContent)
+									ELEMENTS.gametable.element.appendChild(arena)
+
+								// panning
+									var directions = ["-y", "-y -x", "-x", "-x y", "y", "y x", "x", "x -y"]
+									for (var i in directions) {
+										var panningOverlay = document.createElement("div")
+											panningOverlay.setAttribute("directions", directions[i])
+											panningOverlay.className = "content-arena-panning"
+											panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
+											panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
+										ELEMENTS.gametable.element.appendChild(panningOverlay)
+									}
+							}
+
+						// save canvas / context
+							ELEMENTS.gametable.canvas.element = arena
+							ELEMENTS.gametable.canvas.context = ELEMENTS.gametable.canvas.element.getContext("2d")
+
+						// draw canvas
+							displayContentArena()
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentGametableText */
+				function displayContentGametableText() {
+					try {
+						// element
+							var text = ELEMENTS.gametable.element.querySelector(".content-text")
+
+						// new
+							if (!text) {
+								// contenteditable
+									ELEMENTS.gametable.element.innerHTML = ""
+										text = document.createElement("div")
+										text.className = "content-text"
+										text.setAttribute("contenteditable", true)
+									ELEMENTS.gametable.element.appendChild(text)
+							}
+
+						// update
+							if (text.innerHTML !== CONTENT.text) {
+								text.innerHTML = CONTENT.text
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentGametableImage */
+				function displayContentGametableImage() {
+					try {
+						// element
+							var image = ELEMENTS.gametable.element.querySelector(".content-image")
+
+						// new
+							if (!image) {
+								// grabbable image
+									ELEMENTS.gametable.element.innerHTML = ""
+										image = document.createElement("img")
+										image.className = "content-image content-grabbable"
+										image.addEventListener(TRIGGERS.mousedown, grabContent)
+									ELEMENTS.gametable.element.appendChild(image)
+							}
+
+						// update
+							if (CONTENT.url) {
+								image.src = CONTENT.url + (CONTENT.file ? ("?" + new Date().getTime()) : "")
+							}
+
+						// zoom
+							if (!CONTENT.zoom) {
+								CONTENT.zoomPower = 0
+								CONTENT.zoom = 1
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentGametableAudio */
+				function displayContentGametableAudio() {
+					try {
+						// element
+							var audio = ELEMENTS.gametable.element.querySelector(".content-audio")
+
+						// new
+							if (!audio) {
+								// audio player
+									ELEMENTS.gametable.element.innerHTML = ""
+										audio = document.createElement("audio")
+										audio.className = "content-audio"
+										audio.volume = USER.settings.volume || 0
+										audio.setAttribute("controls", true)
+									ELEMENTS.gametable.element.appendChild(audio)
+							}
+
+						// update
+							if (CONTENT.url) {
+								// remove old source
+									var source = audio.querySelector("source")
+									if (source) { source.remove() }
+
+								// add new source
+									var fileType = CONTENT.url.slice(-3).toLowerCase()
+										fileType = (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg")
+									var source = document.createElement("source")
+										source.setAttribute("type", "audio/" + fileType)
+										source.setAttribute("src", CONTENT.url)
+									audio.appendChild(source)
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentGametableEmbed */
+				function displayContentGametableEmbed() {
+					try {
+						// code
+							if (CONTENT.code) {
+								// element
+									var embed = ELEMENTS.gametable.element.querySelector("div.content-embed")
+
+								// new
+									if (!embed) {
+										// embedded html
+											ELEMENTS.gametable.element.innerHTML = ""
+												embed = document.createElement("div")
+												embed.className = "content-embed"
+											ELEMENTS.gametable.element.appendChild(embed)
+									}
+
+								// update
+									if (embed.innerHTML !== CONTENT.code) {
+										embed.innerHTML = CONTENT.code
+									}
+							}
+
+						// url
+							else if (CONTENT.url) {
+								// element
+									var embed = ELEMENTS.gametable.element.querySelector("iframe.content-embed")
+
+								// new
+									if (!embed) {
+										// iframe
+											ELEMENTS.gametable.element.innerHTML = ""
+												embed = document.createElement("iframe")
+												embed.className = "content-embed"
+												embed.setAttribute("frameborder", "none")
+											ELEMENTS.gametable.element.appendChild(embed)
+									}
+
+								// update
+									if (embed.src !== CONTENT.url) {
+										embed.src = CONTENT.url
+									}
+							}
+
+						// neither
+							else {
 								ELEMENTS.gametable.element.innerHTML = ""
 							}
 					} catch (error) {console.log(error)}
@@ -4494,59 +4759,43 @@ window.onload = function() {
 
 						// custom content, from list
 							for (var i in contentList) {
-								var content = contentList[i]
-								var option = ELEMENTS.content.choose.select.element.querySelector("option[value='" + content.id + "']")
-								if (option && content.delete) {
-									if (ELEMENTS.content.choose.select.element.value == option.value) {
-										ELEMENTS.content.choose.select.element.value = ELEMENTS.content.choose.select.new.value
+								// find content
+									var content = contentList[i]
+									var option = ELEMENTS.content.choose.select.element.querySelector("option[value='" + content.id + "']")
+
+								// delete?
+									if (option && content.delete) {
+										if (ELEMENTS.content.choose.select.element.value == option.value) {
+											ELEMENTS.content.choose.select.element.value = ELEMENTS.content.choose.select.new.value
+										}
+										option.remove()
+										continue
 									}
-									option.remove()
 
-									var contentOption = ELEMENTS.content.objects.images.querySelector("option[value='" + content.id + "']")
-									if (contentOption) {
-										contentOption.remove()
+								// rename
+									if (option) {
+										option.innerText = content.name
 									}
-									continue
-								}
 
-								if (option) {
-									option.innerText = content.name
-								}
-								else {
-									option = document.createElement("option")
-									option.value = content.id
-									option.innerText = content.name
-									ELEMENTS.content.choose.select[content.type].appendChild(option)
-								}
+								// create
+									else {
+										option = document.createElement("option")
+										option.value = content.id
+										option.innerText = content.name
+										ELEMENTS.content.choose.select[content.type].appendChild(option)
+									}
 
-								if (CONTENT && CONTENT.id == content.id) {
-									option.selected = true
-									ELEMENTS.content.choose.select.element.value = content.id
-									ELEMENTS.content.choose.select.element.className = "form-pair"
-									ELEMENTS.content.choose.types.element.setAttribute("visibility", false)
-								}
-
-								// arena
-									if (content.type == "image") {
-										var contentOption = ELEMENTS.content.objects.images.querySelector("option[value='" + content.id + "']")
-										if (contentOption && content.delete) {
-											if (ELEMENTS.content.objects.select.value == contentOption.value) {
-												ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
-											}
-											contentOption.remove()
-										}
-										else if (contentOption) {
-											contentOption.innerText = content.name
-										}
-										else {
-											contentOption = document.createElement("option")
-											contentOption.value = content.id
-											contentOption.innerText = content.name
-											contentOption.setAttribute("type", "content")
-											ELEMENTS.content.objects.images.appendChild(contentOption)
-										}
+								// already opened?
+									if (CONTENT && CONTENT.id == content.id) {
+										option.selected = true
+										ELEMENTS.content.choose.select.element.value = content.id
+										ELEMENTS.content.choose.select.element.className = "form-pair"
+										ELEMENTS.content.choose.types.element.setAttribute("visibility", false)
 									}
 							}
+
+						// arena objects
+							displayContentArenaObjectList(null, contentList)
 					} catch (error) {console.log(error)}
 				}
 
@@ -4576,20 +4825,11 @@ window.onload = function() {
 								return
 							}
 
-						// clear old targeting
-							var arenaObjectKeys = Object.keys(CONTENT.arena.objects)
-							var targetingOptions = Array.from(ELEMENTS.character.settings.recipient.arena.querySelectorAll("option"))
-							for (var i in targetingOptions) {
-								if (!arenaObjectKeys.find(function(o) { return CONTENT.arena.objects[o].characterId == targetingOptions[i].value })) {
-									targetingOptions[i].remove()
-								}
-							}
-						
 						// sidebar panel
 							displayContentArenaPanel()
 
 						// gametable
-							displayContentArenaGametable()
+							displayContentArenaImages()
 					} catch (error) {console.log(error)}
 				}
 
@@ -4607,6 +4847,83 @@ window.onload = function() {
 						// update sidebar
 							for (var i in CONTENT.arena.objects) {
 								displayContentArenaObjectListing(CONTENT.arena.objects[i])
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentArenaObjectList */
+				function displayContentArenaObjectList(characterList, contentList) {
+					try {
+						// no game?
+							if (!GAME) {
+								ELEMENTS.content.objects.characters.innerHTML = ""
+								ELEMENTS.content.objects.images.innerHTML = ""
+							}
+
+						// loop through characterList
+							for (var i in characterList) {
+								// find option
+									var character = characterList[i]
+									var contentOption = ELEMENTS.content.objects.characters.querySelector("option[value='" + character.id + "']")
+
+								// delete?
+									if (contentOption && character.delete) {
+										if (ELEMENTS.content.objects.select.value == contentOption.value) {
+											ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
+										}
+										contentOption.remove()
+									}
+
+								// rename
+									else if (contentOption) {
+										contentOption.innerText = character.name
+									}
+
+								// create
+									else {
+										contentOption = document.createElement("option")
+										contentOption.value = character.id
+										contentOption.innerText = character.name
+										contentOption.setAttribute("type", "character")
+										ELEMENTS.content.objects.characters.appendChild(contentOption)
+									}
+							}
+
+						// loop through contentList
+							for (var i in contentList) {
+								// only images
+									if (!contentList[i].delete && contentList[i].type !== "image") {
+										continue
+									}
+
+								// find option
+									var content = contentList[i]
+									var contentOption = ELEMENTS.content.objects.images.querySelector("option[value='" + content.id + "']")
+
+								// delete?
+									if (contentOption && content.delete) {
+										if (ELEMENTS.content.objects.select.value == contentOption.value) {
+											ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
+										}
+										contentOption.remove()
+									}
+									else if (content.delete) {
+										continue
+									}
+
+								// rename
+									else if (contentOption) {
+										contentOption.innerText = content.name
+									}
+
+								// create
+									else {
+										contentOption = document.createElement("option")
+										contentOption.value = content.id
+										contentOption.innerText = content.name
+										contentOption.setAttribute("type", "content")
+										ELEMENTS.content.objects.images.appendChild(contentOption)
+									}
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -4938,21 +5255,11 @@ window.onload = function() {
 							inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor
 							inputImage.value = object.image || ""
 							inputCharacter = object.character || "[none]"
-
-						// targeting
-							if (object.characterId) {
-								if (!ELEMENTS.character.settings.recipient.arena.querySelector("option[value='" + object.characterId + "']")) {
-									var targetOption = document.createElement("option")
-										targetOption.value = object.characterId
-										targetOption.innerText = object.text || "[?]"
-									ELEMENTS.character.settings.recipient.arena.appendChild(targetOption)
-								}
-							}
 					} catch (error) {console.log(error)}
 				}
 
-			/* displayContentArenaGametable */
-				function displayContentArenaGametable() {
+			/* displayContentArenaImages */
+				function displayContentArenaImages() {
 					try {
 						// sort objects
 							var sortedKeys = Object.keys(CONTENT.arena.objects) || []
@@ -4963,24 +5270,27 @@ window.onload = function() {
 						// update images
 							var unloadedCount = 0
 							for (var i in sortedKeys) {
-								var key = sortedKeys[i]
-								var imageURL = CONTENT.arena.objects[key].image
-								if (!imageURL) {
-									continue
-								}
-
-								if (!ELEMENTS.gametable.canvas.images[key]) {
-									ELEMENTS.gametable.canvas.images[key] = document.createElement("img")
-								}
-
-								if (ELEMENTS.gametable.canvas.images[key].getAttribute("src") !== imageURL) {
-									unloadedCount++
-									ELEMENTS.gametable.canvas.images[key].src = imageURL
-									ELEMENTS.gametable.canvas.images[key].onload = ELEMENTS.gametable.canvas.images[key].onerror = function() {
-										unloadedCount--
-										if (!unloadedCount) { displayContentArenaCanvas(sortedKeys) }
+								// get url
+									var key = sortedKeys[i]
+									var imageURL = CONTENT.arena.objects[key].image
+									if (!imageURL) {
+										continue
 									}
-								}
+
+								// new
+									if (!ELEMENTS.gametable.canvas.images[key]) {
+										ELEMENTS.gametable.canvas.images[key] = document.createElement("img")
+									}
+
+								// update src
+									if (ELEMENTS.gametable.canvas.images[key].getAttribute("src") !== imageURL) {
+										unloadedCount++
+										ELEMENTS.gametable.canvas.images[key].src = imageURL
+										ELEMENTS.gametable.canvas.images[key].onload = ELEMENTS.gametable.canvas.images[key].onerror = function() {
+											unloadedCount--
+											if (!unloadedCount) { displayContentArenaCanvas(sortedKeys) }
+										}
+									}
 							}
 
 						// display canvas
@@ -5383,6 +5693,7 @@ window.onload = function() {
 							}
 
 						// send socket request
+							ELEMENTS.content.delete.gate.open = false
 							SOCKET.send(JSON.stringify(post))
 					} catch (error) {console.log(error)}
 				}
