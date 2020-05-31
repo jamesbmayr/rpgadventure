@@ -3746,15 +3746,6 @@
 										description: "causes poison"
 									},
 									{
-										name: "reflective paint",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 1, g: 5, b: 4},
-										cost: 20,
-										description: "reflects different colors, depending on time heated; worn as war paint for +5 intimidate"
-									},
-									{
 										name: "power cell acid",
 										count: 1,
 										type: "potion",
@@ -3770,6 +3761,15 @@
 										recipe: {w: 10, r: 5, g: 2, b: 7},
 										cost: 28,
 										description: "causes 3d6 acid damage; conducts electricity; stores energy to power ancient technology"
+									},
+									{
+										name: "reflective paint",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										recipe: {w: 10, r: 1, g: 5, b: 4},
+										cost: 20,
+										description: "reflects different colors, depending on time heated; worn as war paint for +5 intimidate"
 									},
 									{
 										name: "resistance elixir",
@@ -4517,7 +4517,7 @@
 										],
 										materials: "leather",
 										cost: 100,
-										description: "from animal organs; mid-range sounds (musicianship)"
+										description: "from animal organs; mid-range sounds; range: 1000 ft"
 									},
 									{
 										name: "bass",
@@ -4534,7 +4534,7 @@
 										fuel: 3,
 										materials: "wood, string",
 										cost: 250,
-										description: "wood and string; mid-range to low-pitched sounds (musicianship)"
+										description: "wood and string; mid-range to low-pitched sounds; range: 250 ft"
 									},
 									{
 										name: "bassoon",
@@ -4551,7 +4551,7 @@
 										fuel: 2,
 										materials: "wood",
 										cost: 300,
-										description: "low-pitch to mid-range sounds (musicianship)"
+										description: "low-pitch to mid-range sounds; range: 250 ft"
 									},
 									{
 										name: "bell",
@@ -4567,7 +4567,7 @@
 										],
 										materials: "metal",
 										cost: 5,
-										description: "metal; ringing sound (musicianship)"
+										description: "metal; ringing sound; range: 500 ft"
 									},
 									{
 										name: "bird pipes",
@@ -4579,11 +4579,16 @@
 											{
 												statistic: "dexterity",
 												skill: "musicianship"
+											},
+											{
+												statistic: "logic",
+												skill: "handle_animals",
+												modifier: 5
 											}
 										],
 										materials: "wood",
 										cost: 10,
-										description: "wood or metal; to sound like a bird (musicianship); +5 handle animals for birds"
+										description: "wood or metal; to sound like a bird; +5 handle animals for birds; range: 250 ft"
 									},
 									{
 										name: "cello",
@@ -4600,7 +4605,7 @@
 										fuel: 3,
 										materials: "wood, string",
 										cost: 250,
-										description: "wood and string; mid-range to low-pitched sounds (musicianship)"
+										description: "wood and string; mid-range to low-pitched sounds; range: 250 ft"
 									},
 									{
 										name: "clarinet",
@@ -4617,7 +4622,7 @@
 										fuel: 1,
 										materials: "wood",
 										cost: 200,
-										description: "mid-range to high-pitched sounds (musicianship)"
+										description: "mid-range to high-pitched sounds; range: 500 ft"
 									},
 									{
 										name: "drum",
@@ -4633,7 +4638,7 @@
 										],
 										materials: "wood, leather",
 										cost: 10,
-										description: "unpitched sounds (musicianship)"
+										description: "unpitched sounds; range: 1000 ft"
 									},
 									{
 										name: "dulcimer",
@@ -4650,7 +4655,7 @@
 										fuel: 2,
 										materials: "wood, string",
 										cost: 150,
-										description: "string & wood; mid-range sounds (musicianship)"
+										description: "string & wood; mid-range sounds; range: 125 ft"
 									},
 									{
 										name: "flute",
@@ -4667,7 +4672,7 @@
 										magnetic: true,
 										materials: "metal",
 										cost: 65,
-										description: "high-pitched sounds (musicianship)"
+										description: "high-pitched sounds; range: 500 ft"
 									},
 									{
 										name: "gong",
@@ -4684,7 +4689,7 @@
 										magnetic: true,
 										materials: "metal",
 										cost: 80,
-										description: "low-pitched sounds (musicianship)"
+										description: "low-pitched sounds; range: 1000 ft"
 									},
 									{
 										name: "guitar",
@@ -4701,7 +4706,7 @@
 										fuel: 2,
 										materials: "wood, string",
 										cost: 50,
-										description: "mid-range sounds (musicianship)"
+										description: "mid-range sounds; range: 125 ft"
 									},
 									{
 										name: "harp",
@@ -4718,7 +4723,7 @@
 										fuel: 2,
 										materials: "wood, string",
 										cost: 150,
-										description: "mid-range sounds (musicianship)"
+										description: "mid-range sounds; range: 125 ft"
 									},
 									{
 										name: "horn instrument",
@@ -4734,7 +4739,7 @@
 										],
 										materials: "metal",
 										cost: 100,
-										description: "made from animal bone or brass; mid-range sounds (musicianship)"
+										description: "made from animal bone or brass; mid-range sounds; range: 500 ft"
 									},
 									{
 										name: "lute",
@@ -4751,7 +4756,7 @@
 										fuel: 2,
 										materials: "wood, string",
 										cost: 50,
-										description: "mid-range sounds (musicianship)"
+										description: "mid-range sounds; range: 125 ft"
 									},
 									{
 										name: "lyre",
@@ -4768,7 +4773,7 @@
 										fuel: 2,
 										materials: "wood, string",
 										cost: 150,
-										description: "mid-range sounds (musicianship)"
+										description: "mid-range sounds; range: 125 ft"
 									},
 									{
 										name: "oboe",
@@ -4785,7 +4790,7 @@
 										fuel: 1,
 										materials: "wood",
 										cost: 200,
-										description: "mid-range to high-pitched sounds (musicianship)"
+										description: "mid-range to high-pitched sounds; range: 500 ft"
 									},
 									{
 										name: "panflute",
@@ -4802,7 +4807,7 @@
 										fuel: 1,
 										materials: "wood",
 										cost: 35,
-										description: "high-pitched sounds (musicianship)"
+										description: "high-pitched sounds; range: 250 ft"
 									},
 									{
 										name: "shawm",
@@ -4819,7 +4824,7 @@
 										fuel: 1,
 										materials: "wood",
 										cost: 200,
-										description: "mid-range to high-pitched sounds (musicianship)"
+										description: "mid-range to high-pitched sounds; range: 500 ft"
 									},
 									{
 										name: "tambourine",
@@ -4835,7 +4840,23 @@
 										],
 										materials: "wood, metal",
 										cost: 25,
-										description: "unpitched sounds (musicianship)"
+										description: "unpitched sounds; range: 125 ft"
+									},
+									{
+										name: "trombone",
+										count: 1,
+										type: "instrument",
+										weight: 5,
+										hands: 2,
+										usage: [
+											{
+												statistic: "dexterity",
+												skill: "musicianship"
+											}
+										],
+										materials: "wood, metal",
+										cost: 200,
+										description: "made from brass; low-range sounds; range: 500 ft"
 									},
 									{
 										name: "viol",
@@ -4852,7 +4873,7 @@
 										fuel: 2,
 										materials: "wood, string",
 										cost: 150,
-										description: "wood and string; high-pitched to mid-range sounds (musicianship)"
+										description: "wood and string; high-pitched to mid-range sounds; range: 250 ft"
 									},
 									{
 										name: "viola",
@@ -4869,7 +4890,7 @@
 										fuel: 2,
 										materials: "wood, string",
 										cost: 150,
-										description: "wood and string; high-pitched to mid-range sounds (musicianship)"
+										description: "wood and string; high-pitched to mid-range sounds; range: 250 ft"
 									},
 									{
 										name: "violin",
@@ -4886,7 +4907,7 @@
 										fuel: 2,
 										materials: "wood, string",
 										cost: 150,
-										description: "wood and string; high-pitched to mid-range sounds (musicianship)"
+										description: "wood and string; high-pitched to mid-range sounds; range: 250 ft"
 									},
 									{
 										name: "whistle",
@@ -4902,7 +4923,7 @@
 										],
 										cost: 4,
 										materials: "metal",
-										description: "high-pitched sound (musicianship)"
+										description: "high-pitched sound; range: 500 ft"
 									},
 									{
 										name: "zither",
@@ -4919,7 +4940,7 @@
 										fuel: 2,
 										materials: "wood, string",
 										cost: 40,
-										description: "string & wood; mid-range sounds (musicianship)"
+										description: "string & wood; mid-range sounds; range: 125 ft"
 									}
 								],
 								miscellaneous: [
@@ -4940,6 +4961,15 @@
 										description: "mathematics +5"
 									},
 									{
+										name: "amulet",
+										count: 1,
+										weight: 0.1,
+										magnetic: true,
+										materials: "metal",
+										cost: 30,
+										description: " "
+									},
+									{
 										name: "astrolabe",
 										count: 1,
 										weight: 0.5,
@@ -4956,13 +4986,14 @@
 										description: "geography +5"
 									},
 									{
-										name: "amulet",
+										name: "atomizer",
 										count: 1,
-										weight: 0.1,
-										magnetic: true,
-										materials: "metal",
-										cost: 30,
-										description: " "
+										weight: 1,
+										d6: 1,
+										hands: 2,
+										materials: "glass, metal",
+										cost: 20,
+										description: "aerosolizes liquid, such as potions, into a spherical fog with a radius of 5 ft lasting 1d6 rounds"
 									},
 									{
 										name: "ball",
@@ -5016,6 +5047,21 @@
 										materials: "wool",
 										cost: 20,
 										description: "prevents extreme cold"
+									},
+									{
+										name: "bellows",
+										count: 1,
+										weight: 5,
+										hands: 2,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "melee"
+											}
+										],
+										materials: "wood, leather",
+										cost: 5,
+										description: "blasts air; can be used to project fluids, such as potions, in a 90-degree cone with a 10-ft radius"
 									},
 									{
 										name: "belt",
