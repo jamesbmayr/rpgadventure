@@ -373,6 +373,11 @@
 				width: calc(100% - 2 * (var(--medium-font-size) + 2 * var(--small-gap-size)));
 			}
 
+			.search-result form {
+				float: right;
+				width: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
+			}
+
 		/* data */
 			.search-result-data {
 				float: left;
@@ -478,9 +483,10 @@
 			z-index: 100;
 		}
 
-		#character-modes button {
+		#character-modes label {
 			width: calc(100% / 6);
 			background-color: var(--medium-gray);
+			vertical-align: text-bottom;
 		}
 
 		/* mode buttons */
@@ -913,15 +919,19 @@
 			}
 
 		/* remove */
-			#character:not([mode="edit"]) .skill-remove {
+			#character:not([mode="edit"]) .skill-remove-form {
 				display: none;
+			}
+
+			.skill-remove-form {
+				float: right;
+				height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
 			}
 
 			.skill-remove {
 				float: right;
 				text-align: center;
 				margin: 0;
-				margin-left: calc(100% - (var(--small-font-size) + 2 * var(--small-gap-size)));
 				color: var(--medium-green);
 				font-size: var(--medium-font-size);
 				height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
@@ -1184,14 +1194,20 @@
 			}
 
 		/* equip */
-			#character:not([mode="items"]) .item-equip {
+			#character:not([mode="items"]) .item-equip-form {
 				display: none;
+			}
+
+			.item-equip-form {
+				float: left;
+				width: 50%;
+				margin-bottom: var(--small-gap-size);
 			}
 
 			.item-equip {
 				float: left;
 				text-align: center;
-				margin: 0 calc(50% - (var(--small-font-size) + 2 * var(--small-gap-size))) var(--small-gap-size) 0;
+				margin: 0;
 				background-color: transparent;
 				color: var(--light-yellow);
 				font-size: var(--medium-font-size);
@@ -1213,14 +1229,20 @@
 			}
 
 		/* remove */
-			#character:not([mode="items"]) .item-remove {
+			#character:not([mode="items"]) .item-remove-form {
 				display: none;
+			}
+
+			.item-remove-form {
+				float: right;
+				width: 50%;
+				margin-bottom: var(--small-gap-size);
 			}
 
 			.item-remove {
 				float: right;
 				text-align: center;
-				margin: 0 0 var(--small-gap-size) calc(50% - (var(--small-font-size) + 2 * var(--small-gap-size)));
+				margin: 0;
 				background-color: transparent;
 				color: var(--light-yellow);
 				font-size: var(--medium-font-size);
@@ -1288,6 +1310,12 @@
 				-o-user-select: none;
 			}
 
+			.condition-remove-form {
+				float: right;
+				width: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+				height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+			}
+
 			.condition-remove {
 				float: right;
 				margin: 0;
@@ -1339,7 +1367,7 @@
 				display: none;
 			}
 
-			#character[mode="damage"] #character-info, #character[mode="damage"] .skills-list,#character[mode="damage"] #character-items-ellipsis,
+			#character[mode="damage"] #character-info, #character[mode="damage"] .skills-list, #character[mode="damage"] #character-items-ellipsis,
 			#character[mode="damage"] .item.weapon, #character[mode="damage"] .item.ammunition, #character[mode="damage"] .item.miscellaneous, #character[mode="damage"] .item.potion {
 				display: none;
 			}
@@ -1358,19 +1386,19 @@
 			}
 
 		/* input */
-			#character-damage input {
+			#character-damage-input {
 				font-size: var(--medium-font-size);
 				text-align: center;
 				color: var(--medium-red);
 				font-weight: bold;
 			}
 
-			#character-damage input::placeholder {
+			#character-damage-input::placeholder {
 				color: var(--medium-red);
 			}
 
 		/* recover */
-			#character-damage #character-info-recover {
+			#character-damage-recover {
 				margin-top: var(--small-gap-size);
 				background-color: var(--medium-gray);
 				color: var(--medium-green);
@@ -1533,6 +1561,10 @@
 			width: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)));
 		}
 
+		#content-send-form {
+			width: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
+		}
+
 		/* code */
 			#content[mode="arena"] #content-code-form, #content[mode="text"] #content-code-form, #content[mode="image"] #content-code-form, #content[mode="audio"] #content-code-form {
 				display: none;
@@ -1559,18 +1591,27 @@
 		}
 
 		/* zoom */
-			#content-controls-zoom-out {
+			#content-controls-zoom-out-form {
 				width: calc(100% / 3);
+			}
+
+			#content-controls-zoom-out-button {
 				border-radius: var(--border-radius) 0 0 var(--border-radius);
 			}
 
-			#content-controls-zoom-zero {
+			#content-controls-zoom-zero-form {
 				width: calc(100% / 3);
+			}
+
+			#content-controls-zoom-zero-button {
 				border-radius: 0 0 0 0;
 			}
 
-			#content-controls-zoom-in {
+			#content-controls-zoom-in-form {
 				width: calc(100% / 3);
+			}
+
+			#content-controls-zoom-in-button {
 				border-radius: 0 var(--border-radius) var(--border-radius) 0;
 			}
 
@@ -1579,18 +1620,27 @@
 				display: none;
 			}
 
-			#content-controls-pan-left {
+			#content-controls-pan-left-form {
 				width: calc(100% / 4);
+			}
+
+			#content-controls-pan-left-button {
 				border-radius: var(--border-radius) 0 0 var(--border-radius);
 			}
 
-			#content-controls-pan-up, #content-controls-pan-down {
+			#content-controls-pan-up-form, #content-controls-pan-down-form {
 				width: calc(100% / 4);
+			}
+
+			#content-controls-pan-up-button, #content-controls-pan-down-button {
 				border-radius: 0;
 			}
 
-			#content-controls-pan-right {
+			#content-controls-pan-right-form {
 				width: calc(100% / 4);
+			}
+
+			#content-controls-pan-right-button {
 				border-radius: 0 var(--border-radius) var(--border-radius) 0;
 			}
 
@@ -1668,8 +1718,12 @@
 			}
 
 		/* buttons */
-			.arena-object-up, .arena-object-down, .arena-object-remove {
+			.arena-object-up-form, .arena-object-down-form, .arena-object-remove-form {
 				width: calc(100% / 4);
+				height: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
+			}
+
+			.arena-object-up, .arena-object-down, .arena-object-remove {
 				height: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
 				font-size: var(--medium-font-size);
 				color: var(--light-gray);
@@ -1831,8 +1885,12 @@
 		}
 
 		.content-chat-name {
-			width: calc(100% - (var(--medium-font-size) + 4 * var(--small-gap-size)));
+			width: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)));
 			color: var(--medium-purple);
+		}
+
+		.content-chat-form {
+			width: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
 		}
 
 		.content-chat-data {

@@ -21,11 +21,29 @@
 		</section>
 		<section id="left" tool="settings">
 			<section id="tools">
-				<button class="tool nav-tab" id="tools-settings">&#x2699;</button>
-				<button class="tool nav-tab" id="tools-rules">&#x1f50e;</button>
-				<button class="tool nav-tab" id="tools-character">&#x1f464;</button>
-				<button class="tool nav-tab" id="tools-chat">&#x1f4ac;<span id="tools-chat-notification" visibility="false">&#x1f514;</span></button>
-				<button class="tool nav-tab" id="tools-content">&#x1f4dd;</button>
+				<form id="tools-form" method="post" action="javascript:;">
+					<label class="tool nav-tab pseudo-button" id="tools-settings">
+						<span>&#x2699;</span>
+						<input id="tools-settings-radio" type="radio" name="tool" value="settings"/>
+					</label>
+					<label class="tool nav-tab pseudo-button" id="tools-rules">
+						<span>&#x1f50e;</span>
+						<input id="tools-rules-radio" type="radio" name="tool" value="rules"/>
+					</label>
+					<label class="tool nav-tab pseudo-button" id="tools-character">
+						<span>&#x1f464;</span>
+						<input id="tools-character-radio" type="radio" name="tool" value="character"/>
+					</label>
+					<label class="tool nav-tab pseudo-button" id="tools-chat">
+						<span>&#x1f4ac;</span>
+						<span id="tools-chat-notification" visibility="false">&#x1f514;</span>
+						<input id="tools-chat-radio" type="radio" name="tool" value="chat"/>
+					</label>
+					<label class="tool nav-tab pseudo-button" id="tools-content" value="5">
+						<span>&#x1f4da;</span>
+						<input id="tools-content-radio" type="radio" name="tool" value="content"/>
+					</label>
+				</form>
 			</section>
 			<section id="settings">
 				<h2>settings</h2>
@@ -93,12 +111,32 @@
 			</section>
 			<section id="character" mode="settings">
 				<div id="character-modes">
-					<button class="mode nav-tab" id="character-modes-settings">&#x2699;</button>
-					<button class="mode nav-tab" id="character-modes-play">&#9860;</button>
-					<button class="mode nav-tab" id="character-modes-edit">&#9999;</button>
-					<button class="mode nav-tab" id="character-modes-items">&#9874;</button>
-					<button class="mode nav-tab" id="character-modes-conditions">&#9729;</button>
-					<button class="mode nav-tab" id="character-modes-damage">&#9760;</button>
+					<form id="character-modes-form" method="post" action="javascript:;">
+						<label class="mode nav-tab pseudo-button" id="character-modes-settings">
+							<span>&#x2699;</span>
+							<input id="character-modes-settings-radio" type="radio" name="mode" value="settings"/>
+						</label>
+						<label class="mode nav-tab pseudo-button" id="character-modes-play">
+							<span>&#x1f3b2;</span>
+							<input id="character-modes-play-radio" type="radio" name="mode" value="play"/>
+						</label>
+						<label class="mode nav-tab pseudo-button" id="character-modes-edit">
+							<span>&#x1f4dd;</span>
+							<input id="character-modes-edit-radio" type="radio" name="mode" value="edit"/>
+						</label>
+						<label class="mode nav-tab pseudo-button" id="character-modes-items">
+							<span>&#9874;</span>
+							<input id="character-modes-items-radio" type="radio" name="mode" value="items"/>
+						</label>
+						<label class="mode nav-tab pseudo-button" id="character-modes-conditions">
+							<span>&#x2728;</span>
+							<input id="character-modes-conditions-radio" type="radio" name="mode" value="conditions"/>
+						</label>
+						<label class="mode nav-tab pseudo-button" id="character-modes-damage">
+							<span>&#9760;</span>
+							<input id="character-modes-damage-radio" type="radio" name="mode" value="damage"/>
+						</label>
+					</form>
 				</div>
 				<div id="character-settings">
 					<div id="character-settings-main" class="subsection">
@@ -184,8 +222,10 @@
 						<div id="character-conditions-list"></div>
 					</div>
 					<div id="character-damage" class="section">
-						<input id="character-info-damage" type="number" step="1" placeholder="damage"/>
-						<button id="character-info-recover">recover</button>
+						<input id="character-damage-input" type="number" step="1" placeholder="damage"/>
+						<form id="character-damage-form" method="post" action="javascript:;">
+							<button id="character-damage-recover">recover</button>
+						</form>
 					</div>
 					<details id="character-info" class="section">
 						<summary>
@@ -193,7 +233,9 @@
 						</summary>
 						<input readonly class="editable" type="text" id="character-info-name-text" placeholder="name">
 						<div id="character-info-image">
-							<button id="character-info-image-reset" class="minor-button">x</button>
+							<form id="character-info-image-reset-form" method="post" action="javascript:;">
+								<button id="character-info-image-reset" class="minor-button">x</button>
+							</form>
 						</div>
 						<form id="character-info-image-form" method="post" action="javascript:;">
 							<input id="character-info-image-upload" type="file"/>
@@ -402,7 +444,9 @@
 				</form>
 				<div id="content-metadata" class="subsection">
 					<h3 id="content-metadata-header">content</h3>
-					<button id="content-send" class="minor-button">&#x1f4ac;</button>
+					<form id="content-send-form" method="post" action="javascript:;">
+						<button id="content-send-button" class="minor-button">&#x1f4ac;</button>
+					</form>
 					<form id="content-name-form" method="post" action="javascript:;">
 						<h4>name</h4>
 						<input type="text" id="content-name-input" placeholder="document name" autocomplete="off" class="form-pair"/>
@@ -447,19 +491,33 @@
 				</div>
 				<div id="content-controls" class="subsection">
 					<h3 id="content-controls-header">controls</h3>
-					<form id="content-controls-zoom-form" method="post" action="javascript:;">
+					<div id="content-controls-zoom">
 						<h4>zoom</h4>
-						<button id="content-controls-zoom-out" value="-0.25">-</button>
-						<button id="content-controls-zoom-zero" value="0">0</button>
-						<button id="content-controls-zoom-in" value="0.25">+</button>
-					</form>
-					<form id="content-controls-pan-form" method="post" action="javascript:;">
+						<form id="content-controls-zoom-out-form" method="post" action="javascript:;" value="-0.25">
+							<button id="content-controls-zoom-out-button">-</button>
+						</form>
+						<form id="content-controls-zoom-zero-form" method="post" action="javascript:;" value="0">
+							<button id="content-controls-zoom-zero-button">0</button>
+						</form>
+						<form id="content-controls-zoom-in-form" method="post" action="javascript:;" value="0.25">
+							<button id="content-controls-zoom-in-button">+</button>
+						</form>
+					</div>
+					<div id="content-controls-pan">
 						<h4>pan</h4>
-						<button id="content-controls-pan-left" value="-x">&larr;</button>
-						<button id="content-controls-pan-up" value="y">&uarr;</button>
-						<button id="content-controls-pan-down" value="-y">&darr;</button>
-						<button id="content-controls-pan-right" value="x">&rarr;</button>
-					</form>
+						<form id="content-controls-pan-left-form" method="post" action="javascript:;" value="x">
+							<button id="content-controls-pan-left-button">&larr;</button>
+						</form>
+						<form id="content-controls-pan-up-form" method="post" action="javascript:;" value="-y">
+							<button id="content-controls-pan-up-button">&uarr;</button>
+						</form>
+						<form id="content-controls-pan-down-form" method="post" action="javascript:;" value="y">
+							<button id="content-controls-pan-down-button">&darr;</button>
+						</form>
+						<form id="content-controls-pan-right-form" method="post" action="javascript:;" value="-x">
+							<button id="content-controls-pan-right-button">&rarr;</button>
+						</form>
+					</div>
 					<form id="content-controls-turn-form" method="post" action="javascript:;">
 						<h4>turn order</h4>
 						<button id="content-controls-turn-button">calculate turn order</button>
