@@ -528,7 +528,7 @@
 								"skill points": {name: "skill points", description: "Characters are awarded skill points throughout the course of a campaign by completing quests, visiting new places, successfully performing new skills, and more. Characters are also awarded skill points by overcoming opponents in some way - often  through combat or charisma. This is generally 1-3 skill points. \n\nA character may increase a statistic by 1 for 28 skill points, or increase a skill 1 level per skill point. \n\nThe maximum level at which a skill can be learned is +7. A character may also choose to learn specializations of a particular skill by selecting a more specific and limited field or aspect, to a maximum of +3, at a cost of 1 skill point per +1. \n\nA character may only learn or improve a skill that is plausible, given the circumstances; for example, a character cannot learn to swim while in the desert, even with the requisite skill points. Furthermore, a character may only increment a specific skill level by 1 point within a day. \n\nCharacters start with 28 skill points to distribute amongst starting skills. A GM may impose additional restrictions during character creation, such as a skill maximum of 4, to prevent unbalanced characters."},
 								"skills": {name: "skills", description: "Every skill is associated with a statistic; to perform a skill, the player must roll at or under the corresponding statistic + skill modifier on 1d20."},
 								"non-player characters (npcs)": {name: "non-player characters (npcs)", description: "Characters will interact with non-player characters, including other characters of playable races, real-world animals, and fantasy monsters. \n\nCreatures generally use an aggression skill when resisting handle animals attempts. \n\nSome creatures have special senses: infrared vision, night vision, infrasound, echolocation, internal compass. \n\nSome creatures also have special movement: fly. \n\nSome creatures also use special combat skills; in some cases, these could also cause a condition, such as sleep or paralysis, or inflict special damage, such as poison, infection, extreme cold, fire, or electricity: bite (nd6), slam (nd6), tusk (nd6), claws (nd6) x (number of claws), talons (nd6) x (number of talons). \n\nSome creatures also have special abilities: camoflauge: opponents at disadvantage on sight checks; temperature resistance: nullifies the effects of extreme heat and extreme cold. \n\nFinally, many creatures have natural armor that protects against nd6 physical damage."},
-								"charisma": {name: "charisma", description: "Opponents can also be defeated through charisma and diplomacy. Encounters usually involve several logic rolls in which the opponent must roll at or under its logic on 1d20 in order to avoid being swayed. \n\nCharacters may influence these encounters using skills which impact the logic rolls. Roll logic (with these skills) for each instance in which a character attempts to sway an opponent. \n\n(resister's logic + skill) - (influencer's skill)\n\nThe influencer may also choose to use these skills to affect the resister with a psychological condition, which can last up to 10 minutes."},
+								"charisma": {name: "charisma", description: "Opponents can also be defeated through charisma and diplomacy. Encounters usually involve several logic rolls in which the opponent must roll at or under its logic on 1d20 in order to avoid being swayed. \n\nCharacters may influence these encounters using skills which impact the logic rolls. Roll logic (with these skills) for each instance in which a character attempts to sway an opponent. \n\n(resister's logic + skill) - (influencer's skill)\n\nThe influencer may also choose to use these skills to affect the resister with a psychological condition, which can last up to 10 minutes.\n\nA character may also choose to affect itself for up to 10 minutes with one of the following psychological conditions intentionally using the meditation skill: alertness, concentration, determination, perceptiveness, rage."},
 								"taming & training": {name: "taming & training", description: "Taming an animal uses handle animals as a charisma encounter (similar to persuade): the animal rolls under its logic to resist, but the target is lowered by the character's handle animals skill and the animal's training skill. (Note that at first, the animal will not have this training skill.) A character can attempt to tame the animal once a day. If the animal does not resist, it gains 1 point in this training skill, under its logic statistic, up to the skill maximum. \n\ntaming: fail (animal's logic + animal's aggression - animal's training - character's handle animals) \n\nOn a successful taming roll, the character can also attempt to train the animal to do a specific command. The animal does a logic + training check, now aided by the character's handle animals. If this training is successful, the animal gains 1 point in the specific skill being trained; this falls under the memory statistic. \n\ntraining: succeed (animal's logic + animal's training + character's handle animals) \n\nWhen the character wants the animal to obey a command, the player must roll a taming check as above. Then the animal must roll a check similar to training, using with the specific command as the skill: \n\n{command}: succeed (animal's memory + animal's {command skill} + character's handle animals)"},
 								"services": {name: "services", description: "Many NPCs will perform a service for a cost. This allows players who do not know a certain skill to exchange money for that skill to be performed on their behalf."},
 								"combat": {name: "combat", description: "In an armed conflict, the team with the member with the highest speed begins turn-based combat (unless one team is surprised by the other), but all actions in a 6-second round are considered to be simultaneous. Within each team, turn order is determined by speed. Each combatant can take one action per round; the most common actions are moving (with the run skill), attacking, dodging, using an item, or changing weapons. \n\nCharacters aim by making a 1d20 attempt on the dexterity-, strength-, or speed-based skill associated with their attack (melee, fencing, archery, missile aim, throw, kick, punch, or martial arts). \n\nIf the roll is a 1, the attack is focused on the opponent's head; on a 2 or 3, the attack is focused on the opponent's arms or legs. \n\nEach weapon or attack has a corresponding damage roll, of nd6. Armor and shields also have a damage blocking attribute: nd6 are rolled, and each die cancels all damage dice of the same value. (In other words, subtract the set of armor dice from the set of weapon dice.) \n\n[weapon nd6] \ [armor nd6] → [damage nd6] \n\nThe remaining damage is summed, then subtracted from the opponent's statistics; the opponent may choose how to distribute this damage, limited by the area of the attack's focus: \n\nDamage to the head (attack roll of 1) reduces logic, memory, and/or perception. Pass an immunity + pain tolerance check, or else be surprised and unable to act for 1 round. Damage to arms or legs (attack roll of 2 or 3) reduces strength, dexterity, speed, and/or immunity. Pass an immunity + pain tolerance check, or else be either disarmed (dropping held items) or immobilized (unable to run, dodge, etc.) for 1 round. All other damage (attack roll of 4 or more) can reduce any statistic. \n\nEach attack can also be avoided using speed and the dodge skill, each with an individual roll. A player who is dodging cannot take another action, except to move (ie, run)."},
@@ -1154,7 +1154,7 @@
 								],
 								logic: [
 									{name: "evoke_emotion", charisma: true, counters: ["judge_character", "remain_calm"], conditions: ["alertness", "confusion", "determination", "exhaustion", "fear"]}, {name: "handle_animals", charisma: true, counters: ["judge_character", "aggression"], conditions: ["alertness", "determination", "fear"]}, {name: "humor", charisma: true, counters: ["remain_calm"], conditions: ["confusion"]}, {name: "intimidate", charisma: true, counters: ["remain_calm"], conditions: ["alertness", "fear", "surprise"]}, {name: "persuade", charisma: true, counters:["judge_character"], conditions: ["concentration", "confusion", "determination"]}, {name: "seduce", charisma: true, counters:["judge_character", "remain_calm"], conditions: ["confusion", "determination", "exhaustion"]},
-									{name: "game_playing"}, {name: "judge_character"}, {name: "mathematics"}, {name: "mechanics"}, {name: "pattern_recognition"}, {name: "remain_calm"}, {name: "spatial_reasoning"},
+									{name: "game_playing"}, {name: "judge_character"}, {name: "mathematics"}, {name: "mechanics"}, {name: "meditation", conditions: ["alertness", "concentration", "determination", "perceptiveness", "rage"]}, {name: "pattern_recognition"}, {name: "remain_calm"}, {name: "spatial_reasoning"},
 									{name: "aggression", animals: true}, {name: "training", animals: true}
 								],
 								strength: [
@@ -1290,7 +1290,7 @@
 							return {
 								alertness: {
 									name: "alertness",
-									description: "Boosts physical attributes. Can be caused by evoke emotion, intimidate, handle animals.",
+									description: "Boosts physical attributes. Can be caused by evoke emotion, intimidate, handle animals, meditation.",
 									effects: {
 										strength: {statistic: 2},
 										dexterity: {statistic: 2},
@@ -1321,7 +1321,7 @@
 								},
 								concentration: {
 									name: "concentration",
-									description: "Boosts mental attributes. Can be caused by persuade.",
+									description: "Boosts mental attributes. Can be caused by persuade, meditation.",
 									effects: {
 										perception: {statistic: 2},
 										memory: {statistic: 2},
@@ -1349,7 +1349,7 @@
 								},
 								determination: {
 									name: "determination",
-									description: "Boosts nearly all attributes. Can be caused by evoke emotion, persuade, seduce, handle animals.",
+									description: "Boosts nearly all attributes. Can be caused by evoke emotion, persuade, handle animals, meditation, seduce.",
 									effects: {
 										perception: {statistic: 1},
 										memory: {statistic: 1},
@@ -1513,7 +1513,7 @@
 								},
 								perceptiveness: {
 									name: "perceptiveness",
-									description: "Boosts perception and insight skills.",
+									description: "Boosts perception and insight skills. Can be caused by meditation.",
 									effects: {
 										perception: {statistic: 2},
 										memory: {facial_recognition: 2, voice_recognition: 2, lip_reading: 2},
@@ -1526,6 +1526,17 @@
 									immunity_check: {
 										skill: "poison_resistance",
 										d6: 2
+									}
+								},
+								rage: {
+									name: "rage",
+									description: "Boosts physical skills at the cost of mental skills. Can be caused by evoke emotion, handle animals, meditation.",
+									effects: {
+										perception: {statistic: -2},
+										memory: {statistic: -2},
+										logic: {statistic: -2},
+										strength: {statistic: 5},
+										speed: {statistic: 5}
 									}
 								},
 								resistance: {
@@ -1590,6 +1601,19 @@
 										dexterity: {statistic: -100},
 										immunity: {statistic: -100},
 										speed: {statistic: -100}
+									}
+								},
+								zombie_infection: {
+									name: "zombie_infection",
+									description: "An infected character is unable to use most tools, use any knowledge or language skills, or perform complex tasks and planning.",
+									effects: {
+										perception: {sound: 2, scent: 5, taste: -5, touch: -5},
+										memory: {statistic: -5},
+										logic: {statistic: -5, handle_animals: -10, humor: -10, persuade: -10, seduce: -10},
+										strength: {statistic: 2, archery: -10},
+										dexterity: {statistic: -5, fencing: -10, missile: -10},
+										immunity: {pain_tolerance: 10, poison_resistance: 10, sleep_resistance: 10},
+										speed: {statistic: -2}
 									}
 								}
 							}
@@ -5077,6 +5101,48 @@
 										materials: "leather",
 										cost: 5,
 										description: " "
+									},
+									{
+										name: "berry extract (red)",
+										count: 1,
+										weight: 0.01,
+										cost: 1,
+										description: "for potion-making (alchemy, medicine); they can be combined in specific combinations and diluted with 10 parts water to make potions; 2/3 part red"
+									},
+									{
+										name: "berry extract (yellow)",
+										count: 1,
+										weight: 0.01,
+										cost: 1,
+										description: "for potion-making (alchemy, medicine); they can be combined in specific combinations and diluted with 10 parts water to make potions; 1/3 part red, 1/3 part green"
+									},
+									{
+										name: "berry extract (green)",
+										count: 1,
+										weight: 0.01,
+										cost: 1,
+										description: "for potion-making (alchemy, medicine); they can be combined in specific combinations and diluted with 10 parts water to make potions; 2/3 part green"
+									},
+									{
+										name: "berry extract (cyan)",
+										count: 1,
+										weight: 0.01,
+										cost: 1,
+										description: "for potion-making (alchemy, medicine); they can be combined in specific combinations and diluted with 10 parts water to make potions; 1/3 part green, 1/3 part blue"
+									},
+									{
+										name: "berry extract (blue)",
+										count: 1,
+										weight: 0.01,
+										cost: 1,
+										description: "for potion-making (alchemy, medicine); they can be combined in specific combinations and diluted with 10 parts water to make potions; 2/3 part blue"
+									},
+									{
+										name: "berry extract (magenta)",
+										count: 1,
+										weight: 0.01,
+										cost: 1,
+										description: "for potion-making (alchemy, medicine); they can be combined in specific combinations and diluted with 10 parts water to make potions; 1/3 part blue, 1/3 part red"
 									},
 									{
 										name: "bit & bridle",
