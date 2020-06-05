@@ -66,7 +66,7 @@
 
 								// game
 									var game = results.documents[0]
-									callback({success: true, message: REQUEST.user.name + " created " + game.name, game: game, recipients: [REQUEST.user.id]})
+									callback({success: true, message: REQUEST.user.name + " created " + game.name, recipients: [REQUEST.user.id]})
 
 								// add to list of user's games
 									REQUEST.post.action = "updateUserGames"
@@ -141,7 +141,10 @@
 
 								// inform other players
 									var game = results.documents[0]
-									callback({success: true, message: REQUEST.user.name + " joined " + game.name, game: game, recipients: Object.keys(game.users)})
+									var ids = Object.keys(game.users)
+										ids = ids.filter(function(id) { return id !== REQUEST.user.id }) || []
+									callback({success: true, message: REQUEST.user.name + " joined " + game.name, game: game, recipients: ids})
+									callback({success: true, message: REQUEST.user.name + " joined " + game.name, recipients: [REQUEST.user.id]})
 
 								// add to list of user's games
 									REQUEST.post.action = "updateUserGames"
@@ -234,7 +237,7 @@
 								// inform other players
 									var game = results.documents[0]
 									callback({success: true, message: REQUEST.user.name + " left " + game.name, game: game, recipients: Object.keys(game.users)})
-									callback({success: true, message: REQUEST.user.name + " left " + game.name, game: null, content: null, character: null, recipients: [REQUEST.user.id]})
+									callback({success: true, message: REQUEST.user.name + " left " + game.name, recipients: [REQUEST.user.id]})
 
 								// unset current game
 									if (!REQUEST.post.stay) {
@@ -427,7 +430,7 @@
 											}) || []
 
 										// send update
-											callback({success: true, message: REQUEST.user.name + " deleted game " + game.name, game: {id: game.id, delete: true}, recipients: ids})
+											callback({success: true, message: REQUEST.user.name + " deleted game " + game.name, recipients: ids})
 
 										// update all users' games
 											for (var i in users) {
@@ -436,6 +439,8 @@
 													delete thatUser.games[game.id]
 													if (thatUser.gameId == game.id) {
 														thatUser.gameId = null
+														thatUser.characterId = null
+														thatUser.contentId = null
 													}
 													
 												// query
@@ -443,7 +448,7 @@
 														query.collection = "users"
 														query.command = "update"
 														query.filters = {id: thatUser.id}
-														query.document = {games: thatUser.games, gameId: thatUser.gameId}
+														query.document = {games: thatUser.games, gameId: thatUser.gameId, characterId: thatUser.characterId, contentId: thatUser.contentId}
 
 												// update
 													CORE.accessDatabase(query, function(results) {
@@ -458,7 +463,7 @@
 															delete updatedUser.secret
 
 														// return user
-															callback({success: true, user: updatedUser, location: "/", recipients: [updatedUser.id]})
+															callback({success: true, user: updatedUser, game: {id: null, delete: true}, location: "/", recipients: [updatedUser.id]})
 													})
 											}
 
@@ -471,11 +476,7 @@
 
 											// delete
 												CORE.accessDatabase(query, function(results) {
-													if (!results.success) {
-														results.recipients = [REQUEST.user.id]
-														callback(results)
-														return
-													}
+													return
 												})
 
 										// delete rolls
@@ -487,11 +488,7 @@
 
 											// delete
 												CORE.accessDatabase(query, function(results) {
-													if (!results.success) {
-														results.recipients = [REQUEST.user.id]
-														callback(results)
-														return
-													}
+													return
 												})
 
 										// delete content
@@ -503,11 +500,7 @@
 
 											// delete
 												CORE.accessDatabase(query, function(results) {
-													if (!results.success) {
-														results.recipients = [REQUEST.user.id]
-														callback(results)
-														return
-													}
+													return
 												})
 
 										// delete characters
@@ -519,11 +512,7 @@
 
 											// delete
 												CORE.accessDatabase(query, function(results) {
-													if (!results.success) {
-														results.recipients = [REQUEST.user.id]
-														callback(results)
-														return
-													}
+													return
 												})
 									})
 							})

@@ -570,7 +570,7 @@ window.onload = function() {
 					// character
 						// character
 							if (data.character) {
-								receiveCharacter(data.character, data.selectCharacter)
+								receiveCharacter(data.character)
 							}
 
 						// characterList
@@ -581,7 +581,7 @@ window.onload = function() {
 					// content
 						// content
 							if (data.content) {
-								receiveContent(data.content, data.selectContent)
+								receiveContent(data.content)
 							}
 
 						// contentList
@@ -637,29 +637,52 @@ window.onload = function() {
 			/* receiveGame */
 				function receiveGame(game) {
 					try {
-						// no GAME object
-							if (!GAME) {
-								GAME = {}
+						// selecting game?
+							if ((!GAME || GAME.id !== game.id) && (USER.gameId == game.id)) {
+								GAME = {id: USER.gameId}
 							}
 
-						// loop through game properties
-							for (var i in game) {
-								GAME[i] = game[i]
+						// current game?
+							if (GAME && GAME.id == game.id) {
+								GAME = game.delete ? null : game
 							}
 
-						// delete?
-							if (GAME.delete) {
-								GAME = {}
-							}
-
-						// relist content
-							displayChatListSenders()
-							displayChatListRecipients()
-							displayGameSettings()
+						// display
+							displayGame()
+							displayGameList()
 					} catch (error) {console.log(error)}
 				}
 
 		/** display **/
+			/* displayGame */
+				function displayGame() {
+					try {
+						// no game?
+							if (!GAME) {
+								// clear stream & chat
+									ELEMENTS.stream.history.innerHTML = ""
+									ELEMENTS.chat.messages.innerHTML = ""
+								
+								// clear content
+									CONTENT = null
+									displayContent()
+									displayContentList()
+
+								// clear character
+									CHARACTER = null
+									displayCharacter()
+									displayCharacterList()
+							}
+
+						// relist chat
+							displayChatListSenders()
+							displayChatListRecipients()
+
+						// display game settings
+							displayGameSettings()
+					} catch (error) {console.log(error)}
+				}
+
 			/* displayGameSettings */
 				function displayGameSettings() {
 					try {
@@ -667,9 +690,6 @@ window.onload = function() {
 							ELEMENTS.settings.game.clearChat.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
 							ELEMENTS.settings.game.clearRolls.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
 							ELEMENTS.settings.game.delete.gate.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
-
-						// list
-							displayGameList()
 					} catch (error) {console.log(error)}
 				}
 
@@ -706,14 +726,21 @@ window.onload = function() {
 										option.innerText = game.name
 										ELEMENTS.settings.game.select.custom.appendChild(option)
 									}
+							}
 
-								// already open?
-									if (GAME && GAME.id == game.id) {
-										option.selected = true
-										ELEMENTS.settings.game.select.element.value = game.id
-										ELEMENTS.settings.game.select.element.className = "form-pair"
-										ELEMENTS.settings.game.input.setAttribute("visibility", false)
-									}
+						// selected?
+							if (GAME && GAME.id) {
+								var selectedOption = ELEMENTS.settings.game.select.element.querySelector("option[value='" + GAME.id + "']")
+								if (selectedOption) {
+									ELEMENTS.settings.game.select.element.value = GAME.id
+									ELEMENTS.settings.game.select.element.className = "form-pair"
+									ELEMENTS.settings.game.input.setAttribute("visibility", false)
+								}
+							}
+							else {
+								ELEMENTS.settings.game.select.element.value = ELEMENTS.settings.game.select.search.value
+								ELEMENTS.settings.game.select.element.className = ""
+								ELEMENTS.settings.game.input.setAttribute("visibility", true)
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -818,23 +845,6 @@ window.onload = function() {
 									id: GAME.id || null
 								}
 							}
-
-						// clear game object
-							GAME = null
-							displayChatListSenders()
-							displayChatListRecipients()
-							ELEMENTS.stream.history.innerHTML = ""
-							ELEMENTS.chat.messages.innerHTML = ""
-						
-						// content
-							CONTENT = null
-							displayContent()
-							displayContentList()
-
-						// character
-							CHARACTER = null
-							displayCharacter()
-							displayCharacterList()
 						
 						// send
 							SOCKET.send(JSON.stringify(post))
@@ -1919,14 +1929,14 @@ window.onload = function() {
 	/*** CHARACTER ***/
 		/** receive **/
 			/* receiveCharacter */
-				function receiveCharacter(character, selectCharacter) {
+				function receiveCharacter(character) {
 					try {
 						// selecting character?
-							if (selectCharacter) {
-								CHARACTER = {id: selectCharacter}
+							if ((!CHARACTER || CHARACTER.id !== character.id) && (USER.characterId == character.id)) {
+								CHARACTER = {id: USER.characterId}
 							}
 
-						// current content?
+						// current character?
 							if (CHARACTER && CHARACTER.id == character.id) {
 								CHARACTER = character.delete ? null : character
 								displayCharacter()
@@ -2204,14 +2214,21 @@ window.onload = function() {
 										option.innerText = character.name
 										ELEMENTS.character.settings.select.custom.appendChild(option)
 									}
+							}
 
-								// already opened?
-									if (option && CHARACTER && CHARACTER.id == character.id) {
-										option.selected = true
-										ELEMENTS.character.settings.select.element.value = character.id
-										ELEMENTS.character.settings.select.element.className = "form-pair"
-										ELEMENTS.character.settings.select.templates.setAttribute("visibility", false)
-									}
+						// selected?
+							if (CHARACTER && CHARACTER.id) {
+								var selectedOption = ELEMENTS.character.settings.select.custom.querySelector("option[value='" + CHARACTER.id + "']")
+								if (selectedOption) {
+									ELEMENTS.character.settings.select.element.value = CHARACTER.id
+									ELEMENTS.character.settings.select.element.className = "form-pair"
+									ELEMENTS.character.settings.select.templates.setAttribute("visibility", false)
+								}
+							}
+							else {
+								ELEMENTS.character.settings.select.element.value = ELEMENTS.character.settings.select.new.value
+								ELEMENTS.character.settings.select.element.className = ""
+								ELEMENTS.character.settings.select.templates.setAttribute("visibility", true)
 							}
 
 						// targeting
@@ -4449,11 +4466,11 @@ window.onload = function() {
 	/*** CONTENT ***/
 		/** receive **/
 			/* receiveContent */
-				function receiveContent(content, selectContent) {
+				function receiveContent(content) {
 					try {
 						// selecting content?
-							if (selectContent) {
-								CONTENT = {id: selectContent}
+							if ((!CONTENT || CONTENT.id !== content.id) && (USER.contentId == content.id)) {
+								CONTENT = {id: USER.contentId}
 							}
 
 						// current content?
@@ -4784,15 +4801,23 @@ window.onload = function() {
 										option.innerText = content.name
 										ELEMENTS.content.choose.select[content.type].appendChild(option)
 									}
-
-								// already opened?
-									if (CONTENT && CONTENT.id == content.id) {
-										option.selected = true
-										ELEMENTS.content.choose.select.element.value = content.id
-										ELEMENTS.content.choose.select.element.className = "form-pair"
-										ELEMENTS.content.choose.types.element.setAttribute("visibility", false)
-									}
 							}
+
+						// selected?
+							if (CONTENT && CONTENT.id) {
+								var selectedOption = ELEMENTS.content.choose.select.element.querySelector("option[value='" + CONTENT.id + "']")
+								if (selectedOption) {
+									ELEMENTS.content.choose.select.element.value = CONTENT.id
+									ELEMENTS.content.choose.select.element.className = "form-pair"
+									ELEMENTS.content.choose.types.element.setAttribute("visibility", false)
+								}
+							}
+							else {
+								ELEMENTS.content.choose.select.element.value = ELEMENTS.content.choose.select.new.value
+								ELEMENTS.content.choose.select.element.className = ""
+								ELEMENTS.content.choose.types.element.setAttribute("visibility", true)
+							}
+
 
 						// arena objects
 							displayContentArenaObjectList(null, contentList)

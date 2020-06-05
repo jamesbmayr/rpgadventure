@@ -93,7 +93,7 @@
 							}]
 
 						// return character
-							callback({success: true, message: "created " + character.info.name, character: character, characterList: characterList, selectCharacter: character.id, recipients: [REQUEST.user.id]})
+							callback({success: true, message: "created " + character.info.name, characterList: characterList, recipients: [REQUEST.user.id]})
 
 						// add to list of user's characters
 							REQUEST.post.action = "updateUserCharacter"
@@ -138,8 +138,7 @@
 				// find
 					CORE.accessDatabase(query, function(results) {
 						if (!results.success) {
-							results.recipients = [REQUEST.user.id]
-							callback(results)
+							callback({success: false, message: "character not found", recipients: [REQUEST.user.id]})
 							return
 						}
 
@@ -156,7 +155,7 @@
 								name: character.info.name,
 								access: character.access
 							}]
-							callback({success: true, message: "opening " + character.info.name, character: character, characterList: characterList, selectCharacter: character.id, recipients: [REQUEST.user.id]})
+							callback({success: true, message: "opening " + character.info.name, characterList: characterList, recipients: [REQUEST.user.id]})
 
 						// set as user's current character
 							REQUEST.post.action = "updateUserCharacter"
@@ -182,7 +181,7 @@
 					}
 
 				// inform
-					callback({success: true, message: "closed character", selectCharacter: null, recipients: [REQUEST.user.id]})
+					callback({success: true, message: "closed character", recipients: [REQUEST.user.id]})
 
 				// unset current character
 					if (!REQUEST.post.character.stay) {
@@ -443,7 +442,7 @@
 								// pretend to have deleted character
 									if (character.access) {
 										var recipients = ids.filter(function(i) { return i !== character.access }) || []
-										callback({success: true, character: {id: character.id, delete: true}, characterList: [{id: character.id, delete: true}], message: REQUEST.user.name + " restricted access to " + character.info.name, recipients: recipients})
+										callback({success: true, characterList: [{id: character.id, delete: true}], message: REQUEST.user.name + " restricted access to " + character.info.name, recipients: recipients})
 
 										// unset characterId for other users
 											var ids = results.documents.filter(function(u) { return u.characterId == character.id && u.id !== character.access }) || []
@@ -468,7 +467,7 @@
 														delete user.secret
 
 													// return user + character
-														callback({success: true, user: user, recipients: [user.id]})
+														callback({success: true, user: user, character: {id: null, delete: true}, recipients: [user.id]})
 														return
 												})
 											}
@@ -741,7 +740,7 @@
 
 										// return character
 											var recipients = character.access ? [character.access] : ids
-											callback({success: true, character: {id: character.id, delete: true}, characterList: [{id: character.id, delete: true}], message: REQUEST.user.name + " deleted " + REQUEST.post.character.info.name, recipients: recipients})
+											callback({success: true, characterList: [{id: character.id, delete: true}], message: REQUEST.user.name + " deleted " + REQUEST.post.character.info.name, recipients: recipients})
 
 										// unset characterId for users
 											var ids = results.documents.filter(function(u) { return u.characterId == character.id }) || []
@@ -766,7 +765,7 @@
 														delete user.secret
 
 													// return user + character
-														callback({success: true, user: user, recipients: [user.id]})
+														callback({success: true, user: user, character: {id: null, delete: true}, recipients: [user.id]})
 														return
 												})
 											}

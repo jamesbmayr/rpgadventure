@@ -80,7 +80,7 @@
 							}]
 
 						// return content
-							callback({success: true, message: "created " + content.name, content: content, contentList: contentList, selectContent: content.id, recipients: [REQUEST.user.id]})
+							callback({success: true, message: "created " + content.name, contentList: contentList, recipients: [REQUEST.user.id]})
 
 						// set as user's current content
 							REQUEST.post.action = "updateUserContent"
@@ -125,8 +125,7 @@
 				// find
 					CORE.accessDatabase(query, function(results) {
 						if (!results.success) {
-							results.recipients = [REQUEST.user.id]
-							callback(results)
+							callback({success: false, message: "content not found", recipients: [REQUEST.user.id]})
 							return
 						}
 
@@ -144,7 +143,7 @@
 								name: content.name,
 								access: content.access
 							}]
-							callback({success: true, message: "opening " + content.name, content: content, contentList: contentList, selectContent: content.id, recipients: [REQUEST.user.id]})
+							callback({success: true, message: "opening " + content.name, contentList: contentList, recipients: [REQUEST.user.id]})
 
 						// set as user's current content
 							REQUEST.post.action = "updateUserContent"
@@ -170,7 +169,7 @@
 					}
 
 				// inform
-					callback({success: true, message: "closed content", selectContent: null, recipients: [REQUEST.user.id]})
+					callback({success: true, message: "closed content", recipients: [REQUEST.user.id]})
 
 				// unset current content
 					if (!REQUEST.post.content.stay) {
@@ -439,7 +438,7 @@
 								// pretend to have deleted content
 									if (content.access) {
 										var recipients = ids.filter(function(i) { return i !== content.access }) || []
-										callback({success: true, content: {id: content.id, delete: true}, contentList: [{id: content.id, delete: true}], message: REQUEST.user.name + " restricted access to " + content.name, recipients: recipients})
+										callback({success: true, contentList: [{id: content.id, delete: true}], message: REQUEST.user.name + " restricted access to " + content.name, recipients: recipients})
 
 										// unset contentId for other users
 											var ids = results.documents.filter(function(u) { return u.contentId == content.id && u.id !== content.access }) || []
@@ -463,8 +462,8 @@
 														var user = results.documents[0]
 														delete user.secret
 
-													// return user + character
-														callback({success: true, user: user, recipients: [user.id]})
+													// return user + content
+														callback({success: true, user: user, content: {id: null, delete: true}, recipients: [user.id]})
 														return
 												})
 											}
@@ -932,7 +931,7 @@
 
 										// return content
 											var recipients = content.access ? [content.access] : ids
-											callback({success: true, content: {id: content.id, delete: true}, contentList: [{id: content.id, delete: true}], message: REQUEST.user.name + " deleted " + REQUEST.post.content.name, recipients: recipients})
+											callback({success: true, contentList: [{id: content.id, delete: true}], message: REQUEST.user.name + " deleted " + REQUEST.post.content.name, recipients: recipients})
 
 										// unset contentId for users
 											var ids = results.documents.filter(function(u) { return u.contentId == content.id }) || []
@@ -956,8 +955,8 @@
 														var user = results.documents[0]
 														delete user.secret
 
-													// return user + character
-														callback({success: true, user: user, recipients: [user.id]})
+													// return user + content
+														callback({success: true, user: user, content: {id: null, delete: true}, recipients: [user.id]})
 														return
 												})
 											}

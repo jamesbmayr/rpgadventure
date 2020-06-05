@@ -446,7 +446,7 @@
 						query.collection = "users"
 						query.command = "update"
 						query.filters = {id: REQUEST.user.id}
-						query.document = {games: REQUEST.user.games, gameId: game ? game.id : null}
+						query.document = {games: REQUEST.user.games, gameId: game ? game.id : null, characterId: game ? REQUEST.user.characterId : null, contentId: game ? REQUEST.user.contentId : null}
 
 				// update
 					CORE.accessDatabase(query, function(results) {
@@ -460,8 +460,8 @@
 							REQUEST.user = results.documents[0]
 							delete REQUEST.user.secret
 
-						// return user
-							callback({success: true, user: REQUEST.user, recipients: [REQUEST.user.id]})
+						// return user + game
+							callback({success: true, user: REQUEST.user, game: game || {id: null, delete: true}, recipients: [REQUEST.user.id]})
 							return
 					})
 			}
@@ -510,7 +510,7 @@
 							delete REQUEST.user.secret
 
 						// return user + character
-							callback({success: true, user: REQUEST.user, recipients: [REQUEST.user.id]})
+							callback({success: true, user: REQUEST.user, character: character || {id: null, delete: true}, recipients: [REQUEST.user.id]})
 							return
 					})
 			}
@@ -558,8 +558,8 @@
 							REQUEST.user = results.documents[0]
 							delete REQUEST.user.secret
 
-						// return user + character
-							callback({success: true, user: REQUEST.user, recipients: [REQUEST.user.id]})
+						// return user + content
+							callback({success: true, user: REQUEST.user, content: content || {id: null, delete: true}, recipients: [REQUEST.user.id]})
 							return
 					})
 			}
