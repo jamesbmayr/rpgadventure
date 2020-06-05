@@ -432,37 +432,52 @@
 						return
 					}
 
-				// update list of user's games
-					var game = REQUEST.post.user.game
-					if (game) {
-						REQUEST.user.games[game.id] = {
-							id: game.id,
-							name: game.name
-						}
-					}
-
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "users"
-						query.command = "update"
+						query.command = "find"
 						query.filters = {id: REQUEST.user.id}
-						query.document = {games: REQUEST.user.games, gameId: game ? game.id : null, characterId: game ? REQUEST.user.characterId : null, contentId: game ? REQUEST.user.contentId : null}
 
-				// update
+				// user
 					CORE.accessDatabase(query, function(results) {
 						if (!results.success) {
-							results.recipients = [REQUEST.user.id]
-							callback(results)
+							callback({success: false, message: "unable to find user", recipients: [REQUEST.user.id]})
 							return
 						}
 
-						// get updated user
-							REQUEST.user = results.documents[0]
-							delete REQUEST.user.secret
+					// update list of user's games
+						var user = results.documents[0]
+						var game = REQUEST.post.user.game
+						if (game) {
+							user.games[game.id] = {
+								id: game.id,
+								name: game.name
+							}
+						}
 
-						// return user + game
-							callback({success: true, user: REQUEST.user, game: game || {id: null, delete: true}, recipients: [REQUEST.user.id]})
-							return
+						// query
+							var query = CORE.getSchema("query")
+								query.collection = "users"
+								query.command = "update"
+								query.filters = {id: REQUEST.user.id}
+								query.document = {games: user.games, gameId: game ? game.id : null, characterId: game ? user.characterId : null, contentId: game ? user.contentId : null}
+
+						// update
+							CORE.accessDatabase(query, function(results) {
+								if (!results.success) {
+									results.recipients = [REQUEST.user.id]
+									callback(results)
+									return
+								}
+
+								// get updated user
+									REQUEST.user = results.documents[0]
+									delete REQUEST.user.secret
+
+								// return user + game
+									callback({success: true, user: REQUEST.user, game: game || {id: null, delete: true}, recipients: [REQUEST.user.id]})
+									return
+							})
 					})
 			}
 			catch (error) {
