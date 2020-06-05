@@ -528,13 +528,13 @@
 								"skill points": {name: "skill points", description: "Characters are awarded skill points throughout the course of a campaign by completing quests, visiting new places, successfully performing new skills, and more. Characters are also awarded skill points by overcoming opponents in some way - often  through combat or charisma. This is generally 1-3 skill points. \n\nA character may increase a statistic by 1 for 28 skill points, or increase a skill 1 level per skill point. \n\nThe maximum level at which a skill can be learned is +7. A character may also choose to learn specializations of a particular skill by selecting a more specific and limited field or aspect, to a maximum of +3, at a cost of 1 skill point per +1. \n\nA character may only learn or improve a skill that is plausible, given the circumstances; for example, a character cannot learn to swim while in the desert, even with the requisite skill points. Furthermore, a character may only increment a specific skill level by 1 point within a day. \n\nCharacters start with 28 skill points to distribute amongst starting skills. A GM may impose additional restrictions during character creation, such as a skill maximum of 4, to prevent unbalanced characters."},
 								"skills": {name: "skills", description: "Every skill is associated with a statistic; to perform a skill, the player must roll at or under the corresponding statistic + skill modifier on 1d20."},
 								"non-player characters (npcs)": {name: "non-player characters (npcs)", description: "Characters will interact with non-player characters, including other characters of playable races, real-world animals, and fantasy monsters. \n\nCreatures generally use an aggression skill when resisting handle animals attempts. \n\nSome creatures have special senses: infrared vision, night vision, infrasound, echolocation, internal compass. \n\nSome creatures also have special movement: fly. \n\nSome creatures also use special combat skills; in some cases, these could also cause a condition, such as sleep or paralysis, or inflict special damage, such as poison, infection, extreme cold, fire, or electricity: bite (nd6), slam (nd6), tusk (nd6), claws (nd6) x (number of claws), talons (nd6) x (number of talons). \n\nSome creatures also have special abilities: camoflauge: opponents at disadvantage on sight checks; temperature resistance: nullifies the effects of extreme heat and extreme cold. \n\nFinally, many creatures have natural armor that protects against nd6 physical damage."},
-								"charisma": {name: "charisma", description: "Opponents can also be defeated through charisma and diplomacy. Encounters usually involve several logic rolls in which the opponent must roll at or under its logic on 1d20 in order to avoid being swayed. \n\nCharacters may influence these encounters using skills which impact the logic rolls. Roll logic (with these skills) for each instance in which a character attempts to sway an opponent. \n\n(resister's logic + skill) - (influencer's skill)\n\nThe influencer may also choose to use these skills to affect the resister with a psychological condition, which can last up to 10 minutes.\n\nA character may also choose to affect itself for up to 10 minutes with one of the following psychological conditions intentionally using the meditation skill: alertness, concentration, determination, perceptiveness, rage."},
+								"charisma": {name: "charisma", description: "Opponents can also be defeated through charisma and diplomacy. Encounters usually involve several logic rolls in which the opponent must roll at or under its logic on 1d20 in order to avoid being swayed. \n\nCharacters may influence these encounters using skills which impact the logic rolls. Roll logic (with these skills) for each instance in which a character attempts to sway an opponent. \n\n(resister's logic + skill) - (influencer's skill)\n\nThe influencer may also choose to use these skills to affect the resister with a psychological condition, which can last up to 10 minutes.\n\nA character may also choose to affect itself for up to 10 minutes with one of the following psychological conditions intentionally using the meditate skill: alertness, concentration, determination, perceptiveness, rage."},
 								"taming & training": {name: "taming & training", description: "Taming an animal uses handle animals as a charisma encounter (similar to persuade): the animal rolls under its logic to resist, but the target is lowered by the character's handle animals skill and the animal's training skill. (Note that at first, the animal will not have this training skill.) A character can attempt to tame the animal once a day. If the animal does not resist, it gains 1 point in this training skill, under its logic statistic, up to the skill maximum. \n\ntaming: fail (animal's logic + animal's aggression - animal's training - character's handle animals) \n\nOn a successful taming roll, the character can also attempt to train the animal to do a specific command. The animal does a logic + training check, now aided by the character's handle animals. If this training is successful, the animal gains 1 point in the specific skill being trained; this falls under the memory statistic. \n\ntraining: succeed (animal's logic + animal's training + character's handle animals) \n\nWhen the character wants the animal to obey a command, the player must roll a taming check as above. Then the animal must roll a check similar to training, using with the specific command as the skill: \n\n{command}: succeed (animal's memory + animal's {command skill} + character's handle animals)"},
 								"services": {name: "services", description: "Many NPCs will perform a service for a cost. This allows players who do not know a certain skill to exchange money for that skill to be performed on their behalf."},
 								"combat": {name: "combat", description: "In an armed conflict, the team with the member with the highest speed begins turn-based combat (unless one team is surprised by the other), but all actions in a 6-second round are considered to be simultaneous. Within each team, turn order is determined by speed. Each combatant can take one action per round; the most common actions are moving (with the run skill), attacking, dodging, using an item, or changing weapons. \n\nCharacters aim by making a 1d20 attempt on the dexterity-, strength-, or speed-based skill associated with their attack (melee, fencing, archery, missile aim, throw, kick, punch, or martial arts). \n\nIf the roll is a 1, the attack is focused on the opponent's head; on a 2 or 3, the attack is focused on the opponent's arms or legs. \n\nEach weapon or attack has a corresponding damage roll, of nd6. Armor and shields also have a damage blocking attribute: nd6 are rolled, and each die cancels all damage dice of the same value. (In other words, subtract the set of armor dice from the set of weapon dice.) \n\n[weapon nd6] \ [armor nd6] → [damage nd6] \n\nThe remaining damage is summed, then subtracted from the opponent's statistics; the opponent may choose how to distribute this damage, limited by the area of the attack's focus: \n\nDamage to the head (attack roll of 1) reduces logic, memory, and/or perception. Pass an immunity + pain tolerance check, or else be surprised and unable to act for 1 round. Damage to arms or legs (attack roll of 2 or 3) reduces strength, dexterity, speed, and/or immunity. Pass an immunity + pain tolerance check, or else be either disarmed (dropping held items) or immobilized (unable to run, dodge, etc.) for 1 round. All other damage (attack roll of 4 or more) can reduce any statistic. \n\nEach attack can also be avoided using speed and the dodge skill, each with an individual roll. A player who is dodging cannot take another action, except to move (ie, run)."},
 								"damage": {name: "damage", description: "Many forces can damage a character; damage is subtracted from a character's statistics. Damage to the head reduces logic, memory, and/or perception; other damage reduces strength, dexterity, speed, and/or immunity. A player may choose how damage is applied."},
 								"conditions": {name: "conditions", description: "Circumstances often affect a character's skills and statistics. These are generally temporary."},
-								"weapons": {name: "weapons", description: "Weapons each have an associated skill to determine a character's success in using them. They also have an attribute of nd6 corresponding to how much damage they deal. This ability decreases by one d6 per week of use, to a minimum of 1d6. Weapons can be repaired to full with the metalworking, woodworking, or other appropriate skill, with the right time and materials."},
+								"weapons": {name: "weapons", description: "Weapons each have an associated skill to determine a character's success in using them. They also have an attribute of nd6 corresponding to how much damage they deal. This ability decreases by one d6 per week of use, to a minimum of 1d6. Weapons can be repaired to full with the metalworking, woodworking, or other appropriate skill, with the right time and materials. Some weapons cause bleeding on a failed recover roll."},
 								"armor": {name: "armor", description: "Armor has an attribute of nd6 corresponding to how much damage it blocks. This ability decreases by one d6 per week of use, to a minimum of 1d6. Armor can be repaired to full with the metalworking, woodworking, leatherworking, or other appropriate skill, with the right time and materials."},
 								"potions": {name: "potions", description: "These items are brewed by mixing 10 parts water with red, green, and blue flower / mushroom extracts, or the crushed powder of cyan, magenta, and yellow gemstones, in the right proportions, and applying heat to create a chemical reaction. This requires alchemy, botany, geology, or medicine, as applicable."},
 								"puzzles": {name: "puzzles", description: "These items and encounters constitute real-world puzzles for players to solve. The game master is encouraged to supplement these with additional puzzles, especially ones with tangible in-game analogues. Within the world, characters still attempt to resolve these puzzles using the applicable skills."}
@@ -763,7 +763,7 @@
 										age: 30,
 										height: 5,
 										weight: 150,
-										description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+										description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
 										ability: "Tieflings are naturally resistant to extreme heat and fire damage, and can use their tail like a punch attack.",
 									},
 									statistics: {
@@ -1154,7 +1154,7 @@
 								],
 								logic: [
 									{name: "evoke_emotion", charisma: true, counters: ["judge_character", "remain_calm"], conditions: ["alertness", "confusion", "determination", "exhaustion", "fear"]}, {name: "handle_animals", charisma: true, counters: ["judge_character", "aggression"], conditions: ["alertness", "determination", "fear"]}, {name: "humor", charisma: true, counters: ["remain_calm"], conditions: ["confusion"]}, {name: "intimidate", charisma: true, counters: ["remain_calm"], conditions: ["alertness", "fear", "surprise"]}, {name: "persuade", charisma: true, counters:["judge_character"], conditions: ["concentration", "confusion", "determination"]}, {name: "seduce", charisma: true, counters:["judge_character", "remain_calm"], conditions: ["confusion", "determination", "exhaustion"]},
-									{name: "game_playing"}, {name: "judge_character"}, {name: "mathematics"}, {name: "mechanics"}, {name: "meditation", conditions: ["alertness", "concentration", "determination", "perceptiveness", "rage"]}, {name: "pattern_recognition"}, {name: "remain_calm"}, {name: "spatial_reasoning"},
+									{name: "game_playing"}, {name: "judge_character"}, {name: "mathematics"}, {name: "mechanics"}, {name: "meditate", conditions: ["alertness", "concentration", "determination", "perceptiveness", "rage"]}, {name: "pattern_recognition"}, {name: "remain_calm"}, {name: "spatial_reasoning"},
 									{name: "aggression", animals: true}, {name: "training", animals: true}
 								],
 								strength: [
@@ -1290,7 +1290,7 @@
 							return {
 								alertness: {
 									name: "alertness",
-									description: "Boosts physical attributes. Can be caused by evoke emotion, intimidate, handle animals, meditation.",
+									description: "Boosts physical attributes. Can be caused by evoke emotion, intimidate, handle animals, meditate.",
 									effects: {
 										strength: {statistic: 2},
 										dexterity: {statistic: 2},
@@ -1309,6 +1309,13 @@
 										before: ["perception", "memory", "logic", "strength", "dexterity", "speed"]
 									}
 								},
+								bleeding: {
+									name: "bleeding",
+									description: "Reduces recovery and protection against infection and poison.",
+									effects: {
+										immunity: {recover: -2, infection_resistance: -5, poison_resistance: -5}
+									}
+								},
 								blinding_light: {
 									name: "blinding_light",
 									description: "Impairs sight. -10 on skills where sight matters, such as combat.",
@@ -1321,7 +1328,7 @@
 								},
 								concentration: {
 									name: "concentration",
-									description: "Boosts mental attributes. Can be caused by persuade, meditation.",
+									description: "Boosts mental attributes. Can be caused by persuade, meditate.",
 									effects: {
 										perception: {statistic: 2},
 										memory: {statistic: 2},
@@ -1349,7 +1356,7 @@
 								},
 								determination: {
 									name: "determination",
-									description: "Boosts nearly all attributes. Can be caused by evoke emotion, persuade, handle animals, meditation, seduce.",
+									description: "Boosts nearly all attributes. Can be caused by evoke emotion, persuade, handle animals, meditate, seduce.",
 									effects: {
 										perception: {statistic: 1},
 										memory: {statistic: 1},
@@ -1513,7 +1520,7 @@
 								},
 								perceptiveness: {
 									name: "perceptiveness",
-									description: "Boosts perception and insight skills. Can be caused by meditation.",
+									description: "Boosts perception and insight skills. Can be caused by meditate.",
 									effects: {
 										perception: {statistic: 2},
 										memory: {facial_recognition: 2, voice_recognition: 2, lip_reading: 2},
@@ -1530,7 +1537,7 @@
 								},
 								rage: {
 									name: "rage",
-									description: "Boosts physical skills at the cost of mental skills. Can be caused by evoke emotion, handle animals, meditation.",
+									description: "Boosts physical skills at the cost of mental skills. Can be caused by evoke emotion, handle animals, meditate.",
 									effects: {
 										perception: {statistic: -2},
 										memory: {statistic: -2},
@@ -1706,6 +1713,7 @@
 												d6: 5
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 2,
 										hands: 1,
 										magnetic: true,
@@ -1742,6 +1750,7 @@
 												d6: 7
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 7,
 										hands: 2,
 										fuel: 4,
@@ -1828,6 +1837,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 2,
 										hands: 2,
 										materials: "leather, metal",
@@ -1885,6 +1895,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 1,
 										hands: 1,
 										magnetic: true,
@@ -1903,6 +1914,7 @@
 												d6: 7
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 5,
 										hands: 2,
 										magnetic: true,
@@ -1938,6 +1950,7 @@
 												d6: 7
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 5,
 										hands: 2,
 										magnetic: true,
@@ -1991,6 +2004,7 @@
 												d6: 7
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 5,
 										hands: 2,
 										magnetic: true,
@@ -2027,6 +2041,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 0.5,
 										hands: 1,
 										magnetic: true,
@@ -2068,6 +2083,7 @@
 												d6: 4
 											}	
 										],
+										conditions: {bleeding: 1},
 										weight: 3,
 										hands: 1,
 										fuel: 3,
@@ -2086,6 +2102,7 @@
 												d6: 4
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 3,
 										hands: 1,
 										magnetic: true,
@@ -2104,6 +2121,7 @@
 												d6: 4
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 1,
 										hands: 1,
 										magnetic: true,
@@ -2122,6 +2140,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 1,
 										hands: 1,
 										magnetic: true,
@@ -2175,6 +2194,7 @@
 												d6: 5
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 2,
 										hands: 1,
 										magnetic: true,
@@ -2193,6 +2213,7 @@
 												d6: 4
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 2,
 										hands: 1,
 										magnetic: true,
@@ -2233,6 +2254,7 @@
 												d6: 4
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 3,
 										hands: 1,
 										fuel: 3,
@@ -2251,6 +2273,7 @@
 												d6: 5
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 5,
 										hands: 1,
 										fuel: 3,
@@ -2309,6 +2332,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 1,
 										hands: 1,
 										magnetic: true,
@@ -2327,6 +2351,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 0.5,
 										hands: 1,
 										magnetic: true,
@@ -2399,6 +2424,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										weight: 0.5,
 										hands: 1,
 										fuel: 2,
@@ -2427,6 +2453,7 @@
 												d6: 2
 											}
 										],
+										conditions: {bleeding: 1},
 										materials: "wood, stone",
 										cost: 2,
 										description: "recoverable"
@@ -2468,6 +2495,7 @@
 												d6: 2
 											}
 										],
+										conditions: {bleeding: 1},
 										materials: "wood, stone",
 										cost: 2,
 										description: "recoverable"
@@ -2532,6 +2560,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										magnetic: true,
 										conditions: {loud_noise: 1, blinding_light: 1},
 										materials: "wood, metal",
@@ -2557,6 +2586,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 32,
@@ -2580,7 +2610,7 @@
 												d6: 3
 											}
 										],
-										conditions: {infection: 2},
+										conditions: {infection: 2, bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 20,
@@ -2604,6 +2634,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										fuel: 1,
 										hands: 1,
 										materials: "glass",
@@ -2628,7 +2659,7 @@
 												d6: 3
 											}
 										],
-										conditions: {loud_noise: 1, blinding_light: 1},
+										conditions: {loud_noise: 1, blinding_light: 1, bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 28,
@@ -2652,6 +2683,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 4,
@@ -2675,7 +2707,7 @@
 												d6: 3
 											}
 										],
-										conditions: {poison: 2},
+										conditions: {poison: 2, bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 28,
@@ -2699,7 +2731,7 @@
 												d6: 3
 											}
 										],
-										conditions: {sleep: 1},
+										conditions: {sleep: 1, bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 28,
@@ -2723,7 +2755,7 @@
 												d6: 3
 											}
 										],
-										conditions: {smoke: 2},
+										conditions: {smoke: 2, bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 20,
@@ -2747,7 +2779,7 @@
 												d6: 3
 											}
 										],
-										conditions: {blinding_light: 1},
+										conditions: {blinding_light: 1, bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 28,
@@ -3441,7 +3473,7 @@
 								],
 								potion: [
 									{
-										name: "alertness potion",
+										name: "elixir of alertness",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3451,7 +3483,7 @@
 										description: "ends sleep; causes alertness for 1d6 hours"
 									},
 									{
-										name: "antitoxin",
+										name: "elixir of antitoxicity",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3461,7 +3493,7 @@
 										description: "eliminates poison and paralysis"
 									},
 									{
-										name: "breathing elixir",
+										name: "elixir of breathholding",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3471,17 +3503,7 @@
 										description: "+10 hold breath for 1d6 hours"
 									},
 									{
-										name: "chill syrup",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 2, g: 2, b: 0},
-										conditions: {extreme_cold: 1, extreme_heat: 0},
-										cost: 8,
-										description: "causes extreme cold for 1d6 rounds, then cold for 1d6 hours"
-									},
-									{
-										name: "concentration elixir",
+										name: "elixir of concentration",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3491,7 +3513,275 @@
 										description: "ends sleep; causes concentration for 1d6 hours"
 									},
 									{
-										name: "electricity potion",
+										name: "elixir of confusion",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 5, g: 5, b: 2},
+										conditions: {confusion: 1},
+										cost: 24,
+										description: "causes confusion for 1d6 hours"
+									},
+									{
+										name: "elixir of determination",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										recipe: {w: 10, r: 2, g: 6, b: 6},
+										conditions: {determination: 1},
+										cost: 28,
+										description: "causes determination for 1d6 hours"
+									},
+									{
+										name: "elixir of exhaustion",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 4, g: 6, b: 2},
+										conditions: {exhaustion: 1},
+										cost: 24,
+										description: "causes exhaustion for 1d6 hours"
+									},
+									{
+										name: "elixir of fear",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 5, g: 1, b: 4},
+										conditions: {fear: 1},
+										cost: 24,
+										description: "causes fear for 1d6 hours"
+									},
+									{
+										name: "elixir of honesty",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										recipe: {w: 10, r: 5, g: 5, b: 4},
+										cost: 28,
+										description: "the drinker is unable to lie or bluff for 1d6 hours"
+									},
+									{
+										name: "elixir of inebriation",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										conditions: {inebriation: 1},
+										cost: 2,
+										description: "causes inebriation for 1d6 hours"
+									},
+									{
+										name: "elixir of immunity",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										recipe: {w: 10, r: 0, g: 2, b: 2},
+										conditions: {bleeding: 0, immunity_boost: 4},
+										cost: 8,
+										description: "causes immunity boost for 4d6 hours"
+									},
+									{
+										name: "elixir of lust",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										recipe: {w: 10, r: 4, g: 6, b: 4},
+										cost: 28,
+										description: "the drinker becomes lustful for 1d6 hours"
+									},
+									{
+										name: "elixir of night vision",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										d6: 2,
+										recipe: {w: 10, r: 1, g: 6, b: 7},
+										usage: [
+											{
+												statistic: "perception",
+												skill: "night_vision",
+												modifier: 10
+											}
+										],
+										cost: 28,
+										description: "+10 night vision for 2d6 hours"
+									},
+									{
+										name: "elixir of pain",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 4, g: 5, b: 1},
+										conditions: {minor_pain_body: 1, minor_pain_head: 1},
+										cost: 20,
+										description: "causes head pain and body pain for 1d6 rounds"
+									},
+									{
+										name: "elixir of pain relief",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										recipe: {w: 10, r: 0, g: 1, b: 0},
+										conditions: {pain_relief: 1},
+										cost: 2,
+										description: "causes pain relief for 1d6 hours"
+									},
+									{
+										name: "elixir of paralysis",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 6, g: 4, b: 4},
+										conditions: {paralysis_arms: 1, paralysis_legs: 1},
+										cost: 28,
+										description: "causes localized paralysis for 1d6 hours"
+									},
+									{
+										name: "elixir of perceptiveness",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										recipe: {w: 10, r: 1, g: 5, b: 6},
+										conditions: {sleep: 0, perceptiveness: 1},
+										cost: 24,
+										description: "causes perceptiveness for 1d6 hours"
+									},
+									{
+										name: "elixir of rage",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 1, g: 5, b: 6},
+										conditions: {rage: 1},
+										cost: 24,
+										description: "causes rage for 1d6 hours"
+									},
+									{
+										name: "elixir of resistance",
+										count: 1,
+										type: "armor",
+										d6: 1,
+										weight: 0.5,
+										recipe: {w: 10, r: 0, g: 4, b: 4},
+										conditions: {bleeding: 0, resistance: 4},
+										cost: 16,
+										description: "causes resistance for 4d6 hours"
+									},
+									{
+										name: "elixir of severe pain",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 7, g: 5, b: 2},
+										conditions: {severe_pain: 2},
+										cost: 28,
+										description: "causes severe pain for 2d6 rounds"
+									},
+									{
+										name: "elixir of silence",
+										count: 1,
+										type: "potion",
+										d6: 1,
+										weight: 0.5,
+										recipe: {w: 10, r: 5, g: 1, b: 6},
+										cost: 24,
+										description: "the drinker has no voice for 1d6 hours"
+									},
+									{
+										name: "elixir of sleep",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 6, g: 5, b: 1},
+										conditions: {sleep: 1},
+										cost: 24,
+										description: "causes sleep for 1d6 hours"
+									},
+									{
+										name: "elixir of strong pain relief",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										recipe: {w: 10, r: 0, g: 2, b: 0},
+										conditions: {pain_relief: 2},
+										cost: 4,
+										description: "causes pain relief for 2d6 hours"
+									},
+									{
+										name: "potion of acid",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										d6: 3,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 6, g: 2, b: 6},
+										cost: 28,
+										description: "causes 3d6 acid damage"
+									},
+									{
+										name: "potion of electricity",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3509,25 +3799,43 @@
 										description: "causes electricity"
 									},
 									{
-										name: "elixir of silence",
+										name: "potion of extreme cold",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
-										recipe: {w: 10, r: 5, g: 1, b: 6},
-										cost: 24,
-										description: "the drinker has no voice for 1d6 hours"
+										d6: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 2, g: 2, b: 0},
+										conditions: {extreme_cold: 1, extreme_heat: 0},
+										cost: 8,
+										description: "causes extreme cold for 1d6 rounds, then cold for 1d6 hours"
 									},
 									{
-										name: "expanding fizzle foam",
+										name: "potion of extreme heat",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
-										recipe: {w: 10, r: 2, g: 2, b: 4},
-										cost: 16,
-										description: "fizzles and foams and expands for 1d6 rounds"
+										d6: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 2, g: 0, b: 2},
+										conditions: {extreme_heat: 1, extreme_cold: 0},
+										cost: 8,
+										description: "causes extreme heat for 1d6 rounds, then heat for 1d6 hours"
 									},
 									{
-										name: "fire water",
+										name: "potion of fire",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3545,16 +3853,24 @@
 										description: "ignites and fuels fire 1d6 rounds"
 									},
 									{
-										name: "fizzle foam",
+										name: "potion of freezing",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
-										recipe: {w: 10, r: 1, g: 1, b: 2},
-										cost: 8,
-										description: "fizzles and foams for 1d6 rounds"
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 4, g: 4, b: 0},
+										conditions: {extreme_cold: 1, extreme_heat: 0, paralysis_arms: 1, paralysis_legs: 1},
+										cost: 16,
+										description: "causes extreme cold for 1d6 rounds, then cold for 1d6 hours; causes localized paralysis for 1d6 rounds"
 									},
 									{
-										name: "flashbang",
+										name: "potion of flashbang",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3572,24 +3888,7 @@
 										description: "causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares"
 									},
 									{
-										name: "freeze foam",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										usage: [
-											{
-												statistic: "strength",
-												skill: "throw",
-												d6: 3
-											}
-										],
-										recipe: {w: 10, r: 4, g: 4, b: 0},
-										conditions: {extreme_cold: 1, extreme_heat: 0, paralysis_arms: 1, paralysis_legs: 1},
-										cost: 16,
-										description: "causes extreme cold for 1d6 rounds, then cold for 1d6 hours; causes localized paralysis for 1d6 rounds"
-									},
-									{
-										name: "frostbang",
+										name: "potion of frostbang",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3606,27 +3905,18 @@
 										description: "causes loud noise and blinding light for 1d6 rounds; explosion causes extreme cold and full-body paralysis to 5-ft square and surrounding 5-ft squares for 1d6 rounds, then cold for 1d6 hours"
 									},
 									{
-										name: "glow goo",
+										name: "potion of healing",
 										count: 1,
-										type: "potion",
+										type: "healing",
 										weight: 0.5,
-										recipe: {w: 10, r: 2, g: 2, b: 2},
-										conditions: {darkness: 0},
-										cost: 12,
-										description: "creates light for 1d6 hours"
-									},
-									{
-										name: "immunity booster",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 0, g: 2, b: 2},
-										conditions: {immunity_boost: 4},
+										recipe: {w: 10, r: 0, g: 4, b: 0},
+										conditions: {bleeding: 0},
+										d6: 1,
 										cost: 8,
-										description: "causes immunity boost for 4d6 hours"
+										description: "removes 1d6 damage"
 									},
 									{
-										name: "infection potion",
+										name: "potion of infection",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3638,122 +3928,11 @@
 											}
 										],
 										conditions: {infection: 2},
-										cost: 28,
+										cost: 24,
 										description: "causes infection"
 									},
 									{
-										name: "insect repellent",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 2, g: 1, b: 1},
-										cost: 8,
-										description: "light fog that repels bugs for 2d6 hours"
-									},
-									{
-										name: "instant concrete",
-										count: 1,
-										type: "armor",
-										d6: 1,
-										weight: 0.5,
-										recipe: {w: 10, r: 4, g: 2, b: 6},
-										cost: 24,
-										description: "instantly hardens into a hard plaster that provides 1d6 armor"
-									},
-									{
-										name: "invisible ink",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 4, g: 4, b: 2},
-										cost: 20,
-										description: "use penmanship or drawing; writing only appears when heated"
-									},
-									{
-										name: "lust potion",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 4, g: 6, b: 4},
-										cost: 28,
-										description: "the drinker becomes lustful for 1d6 hours"
-									},
-									{
-										name: "nightvision potion",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 1, g: 6, b: 7},
-										conditions: {darkness: 0},
-										cost: 28,
-										description: "+10 night vision for 2d6 hours"
-									},
-									{
-										name: "pain killer",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 0, g: 1, b: 0},
-										conditions: {pain_relief: 1},
-										cost: 2,
-										description: "causes pain relief for 1d6 hours"
-									},
-									{
-										name: "pain potion",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										usage: [
-											{
-												statistic: "strength",
-												skill: "throw",
-												d6: 3
-											}
-										],
-										recipe: {w: 10, r: 4, g: 5, b: 1},
-										conditions: {minor_pain_body: 1, minor_pain_head: 1},
-										cost: 20,
-										description: "causes head pain and body pain for 1d6 rounds"
-									},
-									{
-										name: "paralysis potion",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										usage: [
-											{
-												statistic: "strength",
-												skill: "throw",
-												d6: 3
-											}
-										],
-										recipe: {w: 10, r: 6, g: 4, b: 4},
-										conditions: {paralysis_arms: 1, paralysis_legs: 1},
-										cost: 28,
-										description: "causes localized paralysis for 1d6 hours"
-									},
-									{
-										name: "perception potion",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 1, g: 5, b: 6},
-										conditions: {sleep: 0, perceptiveness: 1},
-										cost: 24,
-										description: "causes perceptiveness for 1d6 hours"
-									},
-									{
-										name: "perfume",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 1, g: 2, b: 1},
-										conditions: {noxious_odor: 0},
-										cost: 8,
-										description: "removes noxious odor; creates a pleasant scent for 1d6 hours"
-									},
-									{
-										name: "poison potion",
+										name: "potion of poison",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3770,7 +3949,36 @@
 										description: "causes poison"
 									},
 									{
-										name: "power cell acid",
+										name: "potion of strong healing",
+										count: 1,
+										type: "healing",
+										weight: 0.5,
+										recipe: {w: 10, r: 0, g: 7, b: 0},
+										conditions: {bleeding: 0},
+										d6: 2,
+										cost: 14,
+										description: "removes 2d6 damage"
+									},
+									{
+										name: "concoction of blinding light",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										d6: 2,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
+											}
+										],
+										recipe: {w: 10, r: 4, g: 4, b: 4},
+										conditions: {blinding_light: 1, darkness: 0},
+										cost: 24,
+										description: "creates blinding light for 1d6 rounds, then light for 2d6 hours"
+									},
+									{
+										name: "concoction of energy",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3787,123 +3995,67 @@
 										description: "causes 3d6 acid damage; conducts electricity; stores energy to power ancient technology"
 									},
 									{
-										name: "reflective paint",
+										name: "concoction of expanding foam",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
-										recipe: {w: 10, r: 1, g: 5, b: 4},
-										cost: 20,
-										description: "reflects different colors, depending on time heated; worn as war paint for +5 intimidate"
+										d6: 1,
+										recipe: {w: 10, r: 2, g: 2, b: 4},
+										cost: 16,
+										description: "fizzles and foams and expands for 1d6 rounds"
 									},
 									{
-										name: "resistance elixir",
+										name: "concoction of fizzling foam",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										d6: 1,
+										recipe: {w: 10, r: 1, g: 1, b: 2},
+										cost: 8,
+										description: "fizzles and foams for 1d6 rounds"
+									},
+									{
+										name: "concoction of light",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										d6: 1,
+										recipe: {w: 10, r: 2, g: 2, b: 2},
+										conditions: {darkness: 0},
+										cost: 12,
+										description: "creates light for 1d6 hours"
+									},
+									{
+										name: "concoction of insect repellent",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										d6: 2,
+										recipe: {w: 10, r: 2, g: 1, b: 1},
+										cost: 8,
+										description: "light fog that repels bugs for 2d6 hours"
+									},
+									{
+										name: "concoction of instant concrete",
 										count: 1,
 										type: "armor",
 										d6: 1,
 										weight: 0.5,
-										recipe: {w: 10, r: 0, g: 4, b: 4},
-										conditions: {resistance: 4},
-										cost: 16,
-										description: "causes resistance for 4d6 hours"
-									},
-									{
-										name: "severe pain killer",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 0, g: 2, b: 0},
-										conditions: {pain_relief: 2},
-										cost: 4,
-										description: "causes pain relief for 2d6 hours"
-									},
-									{
-										name: "severe pain potion",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										usage: [
-											{
-												statistic: "strength",
-												skill: "throw",
-												d6: 3
-											}
-										],
-										recipe: {w: 10, r: 7, g: 5, b: 2},
-										conditions: {severe_pain: 2},
-										cost: 28,
-										description: "causes severe pain for 2d6 rounds"
-									},
-									{
-										name: "sleep potion",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										usage: [
-											{
-												statistic: "strength",
-												skill: "throw",
-												d6: 3
-											}
-										],
-										recipe: {w: 10, r: 6, g: 5, b: 1},
-										conditions: {sleep: 1},
+										recipe: {w: 10, r: 4, g: 2, b: 6},
 										cost: 24,
-										description: "causes sleep for 1d6 hours"
+										description: "instantly hardens into a hard plaster that provides 1d6 armor"
 									},
 									{
-										name: "slip oil",
+										name: "concoction of invisible ink",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
-										recipe: {w: 10, r: 6, g: 4, b: 2},
-										cost: 24,
-										description: "items require a dexterity check to hold"
-									},
-									{
-										name: "smoke potion",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										usage: [
-											{
-												statistic: "strength",
-												skill: "throw",
-												d6: 3
-											}
-										],
-										recipe: {w: 10, r: 4, g: 2, b: 2},
-										conditions: {smoke: 2},
-										cost: 16,
-										description: "causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds"
-									},
-									{
-										name: "solvent acid",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										d6: 3,
-										usage: [
-											{
-												statistic: "strength",
-												skill: "throw",
-												d6: 3
-											}
-										],
-										recipe: {w: 10, r: 6, g: 2, b: 6},
-										cost: 28,
-										description: "causes 3d6 acid damage"
-									},
-									{
-										name: "sticky goo",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 4, g: 2, b: 4},
+										recipe: {w: 10, r: 4, g: 4, b: 2},
 										cost: 20,
-										description: "items stick together and require a strength check to separate"
+										description: "use penmanship or drawing; writing only appears when heated"
 									},
 									{
-										name: "stink potion",
+										name: "concoction of odor",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3920,56 +4072,43 @@
 										description: "causes noxious odor 2d6 rounds"
 									},
 									{
-										name: "strong healing elixir",
-										count: 1,
-										type: "healing",
-										weight: 0.5,
-										recipe: {w: 10, r: 0, g: 7, b: 0},
-										d6: 2,
-										cost: 14,
-										description: "removes 2d6 damage"
-									},
-									{
-										name: "superglow goo",
+										name: "concoction of perfume",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
-										recipe: {w: 10, r: 4, g: 4, b: 4},
-										conditions: {blinding_light: 1, darkness: 0},
-										cost: 24,
-										description: "creates blinding light for 1d6 rounds, then light for 2d6 hours"
-									},
-									{
-										name: "truth serum",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 5, g: 5, b: 4},
-										cost: 28,
-										description: "the drinker is unable to lie or bluff for 1d6 hours"
-									},
-									{
-										name: "warmth syrup",
-										count: 1,
-										type: "potion",
-										weight: 0.5,
-										recipe: {w: 10, r: 2, g: 0, b: 2},
-										conditions: {extreme_heat: 1, extreme_cold: 0},
-										cost: 8,
-										description: "causes extreme heat for 1d6 rounds, then heat for 1d6 hours"
-									},
-									{
-										name: "weak healing elixir",
-										count: 1,
-										type: "healing",
-										weight: 0.5,
-										recipe: {w: 10, r: 0, g: 4, b: 0},
 										d6: 1,
+										recipe: {w: 10, r: 1, g: 2, b: 1},
+										conditions: {noxious_odor: 0},
 										cost: 8,
-										description: "removes 1d6 damage"
+										description: "removes noxious odor; creates a pleasant scent for 1d6 hours"
 									},
 									{
-										name: "weakness elixir",
+										name: "concoction of reflectivity",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										usage: [
+											{
+												statistic: "logic",
+												skill: "intimidate",
+												modifier: 5
+											}
+										],
+										recipe: {w: 10, r: 1, g: 5, b: 4},
+										cost: 20,
+										description: "reflects different colors, depending on time heated; worn as war paint for +5 intimidate"
+									},
+									{
+										name: "concoction of slipperiness",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										recipe: {w: 10, r: 6, g: 4, b: 2},
+										cost: 24,
+										description: "items require a dexterity check to hold"
+									},
+									{
+										name: "concoction of smoke",
 										count: 1,
 										type: "potion",
 										weight: 0.5,
@@ -3980,10 +4119,19 @@
 												d6: 3
 											}
 										],
-										recipe: {w: 10, r: 4, g: 6, b: 2},
-										conditions: {exhaustion: 1},
-										cost: 24,
-										description: "causes exhaustion for 1d6 hours"
+										recipe: {w: 10, r: 4, g: 2, b: 2},
+										conditions: {smoke: 2},
+										cost: 16,
+										description: "causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds"
+									},
+									{
+										name: "concoction of stickiness",
+										count: 1,
+										type: "potion",
+										weight: 0.5,
+										recipe: {w: 10, r: 4, g: 2, b: 4},
+										cost: 20,
+										description: "items stick together and require a strength check to separate"
 									}
 								],
 								food: [
@@ -5291,6 +5439,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										materials: "metal",
 										cost: 10,
 										description: "on a failed sneak through a 5-ft square covered in caltops, causes 3d6 damage"
@@ -5629,6 +5778,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										materials: "glass",
 										cost: 5,
 										description: "shatters on impact"
@@ -5947,6 +6097,7 @@
 												d6: 3,
 											}
 										],
+										conditions: {bleeding: 1},
 										materials: "metal",
 										cost: 10,
 										description: "on a failed sneak through a 5-ft square covered in caltops, causes 3d6 damage"
@@ -6066,17 +6217,16 @@
 											{
 												statistic: "memory",
 												skill: "geology"
-											}
-										],
-										hands: 1,
-										magnetic: true,
-										usage: [
+											},
 											{
 												statistic: "strength",
 												skill: "melee",
 												d6: 4
 											}
 										],
+										hands: 1,
+										magnetic: true,
+										conditions: {bleeding: 1},
 										materials: "metal",
 										cost: 25,
 										description: "used to break stones"
@@ -6118,6 +6268,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										materials: "metal",
 										cost: 50,
 										description: "+5 climb"
@@ -6346,6 +6497,7 @@
 												d6: 3
 											}
 										],
+										conditions: {bleeding: 1},
 										materials: "metal",
 										cost: 10,
 										description: " "
@@ -6539,7 +6691,7 @@
 												d6: 3
 											}
 										],
-										conditions: {paralysis_legs: 1, paralysis_arms: 1},
+										conditions: {paralysis_legs: 1, paralysis_arms: 1, bleeding: 1},
 										materials: "metal",
 										cost: 50,
 										description: "tension-triggered claw-like metal hunting trap causing 3d6 damage and possibly paralysis"
@@ -6851,7 +7003,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -6877,8 +7029,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -6904,14 +7056,14 @@
 											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 5, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -6952,14 +7104,14 @@
 											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 5, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -6983,7 +7135,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7009,8 +7161,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7036,14 +7188,14 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 5, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7084,14 +7236,14 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 5, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7115,7 +7267,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7141,8 +7293,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7168,14 +7320,14 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 2, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7216,14 +7368,14 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 2, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7247,7 +7399,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7273,8 +7425,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7300,14 +7452,14 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7348,14 +7500,14 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7379,7 +7531,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7405,8 +7557,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7432,14 +7584,14 @@
 											speed:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 3, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7480,14 +7632,14 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 3, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7496,7 +7648,7 @@
 										info: {
 											name: "tiefling smart",
 											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
-											description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+											description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
 											status: { points: 0, burden: 27, conditions: [], damage: 0 }
 										},
 										statistics: {
@@ -7511,7 +7663,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7523,7 +7675,7 @@
 										info: {
 											name: "tiefling skilled",
 											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
-											description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+											description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
 											status: { points: 0, burden: 24, conditions: [], damage: 0 }
 										},
 										statistics: {
@@ -7537,8 +7689,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7551,7 +7703,7 @@
 										info: {
 											name: "tiefling strong",
 											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
-											description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+											description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
 											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
 										},
 										statistics: {
@@ -7564,21 +7716,21 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
 										info: {
 											name: "tiefling child",
 											demographics: { race: "tiefling", age: 10, sex: "", height: 3.5, weight: 75 },
-											description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+											description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
 											status: { points: 0, burden: 3, conditions: [], damage: 0 }
 										},
 										statistics: {
@@ -7599,7 +7751,7 @@
 										info: {
 											name: "tiefling boss",
 											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
-											description: "Standard fantasy tiefling, with pinkish skin, two horns, nightvision, a prehensile tail, and a mysterious and tricky nature.",
+											description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
 											status: { points: 0, burden: 52, conditions: [], damage: 0 }
 										},
 										statistics: {
@@ -7612,14 +7764,14 @@
 											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7643,7 +7795,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7669,8 +7821,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7696,14 +7848,14 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7744,14 +7896,14 @@
 											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7775,7 +7927,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7801,8 +7953,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7828,14 +7980,14 @@
 											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 3, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7876,14 +8028,14 @@
 											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 3, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7907,7 +8059,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7933,8 +8085,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -7960,14 +8112,14 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8008,14 +8160,14 @@
 											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8039,7 +8191,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -8065,8 +8217,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -8092,14 +8244,14 @@
 											speed:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 3, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8140,14 +8292,14 @@
 											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 3, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8171,7 +8323,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -8197,8 +8349,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -8224,14 +8376,14 @@
 											speed:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8272,14 +8424,14 @@
 											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8303,7 +8455,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -8329,8 +8481,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -8356,14 +8508,14 @@
 											speed:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 4, condition: 0 }, { name: "jump", maximum: 3, condition: 0 }, { name: "swim", maximum: 4, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8404,14 +8556,14 @@
 											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 4, condition: 0 }, { name: "jump", maximum: 3, condition: 0 }, { name: "swim", maximum: 4, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8435,7 +8587,7 @@
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
 											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
-											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
+											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -8461,8 +8613,8 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
-											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
+											{name:"glass orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,conditions:{bleeding:1},materials:"glass",cost:4,description:"shatters on impact",id:"sbkuydbixlpqyats"},
+											{name:"short sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"grwjcuryhftbylps"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
@@ -8488,14 +8640,14 @@
 											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 4, condition: 0 }, { name: "jump", maximum: 2, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
-											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
+											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
 											{name:"long staff",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:6}],weight:6,hands:2,fuel:4,materials:"wood",cost:60,description:" ",id:"aunayoybjrwjejnn"},
 											{name:"wooden shield",count:1,type:"shield",d6:4,weight:10,fuel:3,hands:1,usage:[{statistic:"strength",skill:"melee",d6:3}],materials:"wood",cost:50,description:" ",id:"azwvgxetbvshdxtj"},
 											{name:"leather armor",count:1,type:"armor",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"smoke potion",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8536,14 +8688,14 @@
 											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 4, condition: 0 }, { name: "jump", maximum: 2, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
-											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
+											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
 											{name:"warhammer",count:1,type:"weapon",usage:[{statistic:"strength",skill:"melee",d6:7}],weight:6,hands:2,magnetic:true,materials:"leather, metal",cost:80,description:" ",id:"dzgovmpmngryoart"},
 											{name:"chainmail armor",count:1,type:"armor",d6:5,weight:25,magnetic:true,materials:"metal",cost:70,description:"conducts electricity",id:"cwmbegsjhgbqwosn"},
 											{name:"chainmail helmet",count:1,type:"armor",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"strong healing elixir",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									}
 							]
