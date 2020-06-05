@@ -3654,10 +3654,12 @@ window.onload = function() {
 						// regular add - loop through conditions
 							for (var i in CHARACTER.info.status.conditions) {
 								var condition = RULES.conditions[CHARACTER.info.status.conditions[i]]
-								for (var e in condition.effects) {
-									for (var s in condition.effects[e]) {
-										if (s == skill.name) {
-											CHARACTER.statistics[statistic].skills[CHARACTER.statistics[statistic].skills.length - 1].condition += condition.effects[e][s]
+								if (condition.effects) {
+									for (var e in condition.effects) {
+										for (var s in condition.effects[e]) {
+											if (s == skill.name) {
+												CHARACTER.statistics[statistic].skills[CHARACTER.statistics[statistic].skills.length - 1].condition += condition.effects[e][s]
+											}
 										}
 									}
 								}
@@ -3962,20 +3964,21 @@ window.onload = function() {
 							CHARACTER.info.status.conditions.push(condition)
 
 						// add effects
-							var effects = condition.effects
-							for (var i in effects) {
-								for (var j in effects[i]) {
-									if (j == "statistic") {
-										CHARACTER.statistics[i].condition += effects[i][j]
-									}
-									else {
-										var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
-										if (!skill) {
-											submitCharacterUpdateSkillCreate({skillName: j, statistic: i, fromConditions: true})
-											var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
+							if (condition.effects) {
+								for (var i in condition.effects) {
+									for (var j in condition.effects[i]) {
+										if (j == "statistic") {
+											CHARACTER.statistics[i].condition += condition.effects[i][j]
 										}
+										else {
+											var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
+											if (!skill) {
+												submitCharacterUpdateSkillCreate({skillName: j, statistic: i, fromConditions: true})
+												var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
+											}
 
-										skill.condition += effects[i][j]
+											skill.condition += condition.effects[i][j]
+										}
 									}
 								}
 							}
@@ -4315,12 +4318,14 @@ window.onload = function() {
 							messageElement.appendChild(messageDataContent)
 
 						// file
-							var fileType = content.url.slice(-3).toLowerCase()
-								fileType = (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg")
-							var source = document.createElement("source")
-								source.src = content.url
-								source.setAttribute("type", "audio/" + fileType)
-							messageDataContent.appendChild(source)
+							if (content.url) {
+								var fileType = content.url.slice(-3).toLowerCase()
+									fileType = (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg")
+								var source = document.createElement("source")
+									source.src = content.url
+									source.setAttribute("type", "audio/" + fileType)
+								messageDataContent.appendChild(source)
+							}
 					} catch (error) {console.log(error)}
 				}
 

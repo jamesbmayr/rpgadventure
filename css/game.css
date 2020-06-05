@@ -304,6 +304,7 @@
 
 	/** search **/
 		#rules-search-form {
+			position: -webkit-sticky;
 			position: sticky;
 			top: 0;
 			left: 0;
@@ -476,6 +477,7 @@
 
 	/** modes **/
 		#character-modes {
+			position: -webkit-sticky;
 			position: sticky;
 			width: 100%;
 			top: 0;
