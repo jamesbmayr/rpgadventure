@@ -935,19 +935,26 @@ window.onload = function() {
 							}
 
 						// display
-							displayUserSettings(user)
+							displayUserSettings()
 					} catch (error) {console.log(error)}
 				}
 
 		/** display **/
 			/* displayUserSettings */
-				function displayUserSettings(user) {
+				function displayUserSettings() {
 					try {
+						// no user?
+							if (!USER) {
+								return false
+							}
+
 						// volume
-							ELEMENTS.settings.audio.volume.value = Math.max(0, Math.min(1, USER.settings.volume))
-							var audios = Array.from(ELEMENTS.body.querySelectorAll("audio"))
-							for (var a in audios) {
-								audios[a].volume = Math.max(0, Math.min(1, volume))
+							if (USER.settings) {
+								ELEMENTS.settings.audio.volume.value = Math.max(0, Math.min(1, USER.settings.volume))
+								var audios = Array.from(ELEMENTS.body.querySelectorAll("audio"))
+								for (var a in audios) {
+									audios[a].volume = Math.max(0, Math.min(1, USER.settings.volume))
+								}
 							}
 
 						// username
@@ -2620,7 +2627,6 @@ window.onload = function() {
 						// open all?
 							if (enable) {
 								ELEMENTS.character.items.element.setAttribute("open", true)
-								event.preventDefault()
 							}
 					} catch (error) {console.log(error)}
 				}
