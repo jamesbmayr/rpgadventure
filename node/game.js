@@ -49,6 +49,7 @@
 									id: REQUEST.user.id,
 									name: REQUEST.user.name
 								}
+								game.allUsers = [REQUEST.user.id]
 
 						// query
 							var query = CORE.getSchema("query")
@@ -112,10 +113,42 @@
 
 				// find
 					CORE.accessDatabase(query, function(results) {
-						if (!results.success) {
-							callback({success: false, message: "no game found", recipients: [REQUEST.user.id]})
-							return
-						}
+						// not found
+							if (!results.success) {
+								// callback
+									callback({success: false, message: "no game found", recipients: [REQUEST.user.id]})
+
+								// game is in user's list?
+									if (REQUEST.user.games[REQUEST.post.game.id]) {
+										// remove from user
+											delete REQUEST.user.games[REQUEST.post.game.id]
+									
+										// query
+											var query = CORE.getSchema("query")
+												query.collection = "users"
+												query.command = "update"
+												query.filters = {id: REQUEST.user.id}
+												query.document = {games: REQUEST.user.games}
+
+										// update
+											CORE.accessDatabase(query, function(results) {
+												if (!results.success) {
+													results.recipients = [REQUEST.user.id]
+													callback(results)
+													return
+												}
+
+												// get updated user
+													REQUEST.user = results.documents[0]
+													delete REQUEST.user.secret
+
+												// send update
+													callback({success: true, user: REQUEST.user, recipients: [REQUEST.user.id]})
+											})
+									}
+
+								return
+							}
 
 						// join game
 							var game = results.documents[0]
@@ -123,13 +156,16 @@
 									id: REQUEST.user.id, 
 									name: REQUEST.user.name
 								}
+								if (!game.allUsers.includes(REQUEST.user.id)) {
+									game.allUsers.push(REQUEST.user.id)
+								}
 
 						// query
 							var query = CORE.getSchema("query")
 								query.collection = "games"
 								query.command = "update"
 								query.filters = {id: game.id}
-								query.document = {users: game.users}
+								query.document = {users: game.users, allUsers: game.allUsers}
 
 						// update
 							CORE.accessDatabase(query, function(results) {
@@ -409,40 +445,35 @@
 									return
 								}
 
-								// query
-									var query = CORE.getSchema("query")
-										query.collection = "users"
-										query.command = "find"
-										query.filters = {gameId: REQUEST.post.game.id}
+								// remove game from all users who have ever opened it
+									for (var i in game.allUsers) {
+										// query
+											var query = CORE.getSchema("query")
+												query.collection = "users"
+												query.command = "find"
+												query.filters = {id: game.allUsers[i]}
 
-								// find
-									CORE.accessDatabase(query, function(results) {
-										if (!results.success) {
-											results.recipients = [REQUEST.user.id]
-											callback(results)
-											return
-										}
+										// find
+											CORE.accessDatabase(query, function(results) {
+												if (!results.success) {
+													return
+												}
 
-										// ids
-											var users = results.documents
-											var ids = results.documents.map(function(u) {
-												return u.id
-											}) || []
-
-										// send update
-											callback({success: true, message: REQUEST.user.name + " deleted game " + game.name, recipients: ids})
-
-										// update all users' games
-											for (var i in users) {
-												// remove game
-													var thatUser = users[i]
+												// remove game from user
+													var thatUser = results.documents[0]
 													delete thatUser.games[game.id]
+
+												// currently playing that game?
 													if (thatUser.gameId == game.id) {
+														var currentlyPlaying = true
 														thatUser.gameId = null
 														thatUser.characterId = null
 														thatUser.contentId = null
 													}
-													
+													else {
+														var currentlyPlaying = false
+													}
+
 												// query
 													var query = CORE.getSchema("query")
 														query.collection = "users"
@@ -462,59 +493,64 @@
 															var updatedUser = results.documents[0]
 															delete updatedUser.secret
 
-														// return user
-															callback({success: true, user: updatedUser, game: {id: null, delete: true}, location: "/", recipients: [updatedUser.id]})
+														// send update
+															if (currentlyPlaying) {
+																callback({success: true, user: updatedUser, game: {id: null, delete: true}, location: "/", recipients: [updatedUser.id]})
+															}
+															else {
+																callback({success: true, user: updatedUser, recipients: [updatedUser.id]})
+															}
 													})
-											}
+											})
+									}
 
-										// delete chats
-											// query
-												var query = CORE.getSchema("query")
-													query.collection = "chats"
-													query.command = "delete"
-													query.filters = {gameId: game.id}
+								// delete chats
+									// query
+										var query = CORE.getSchema("query")
+											query.collection = "chats"
+											query.command = "delete"
+											query.filters = {gameId: game.id}
 
-											// delete
-												CORE.accessDatabase(query, function(results) {
-													return
-												})
+									// delete
+										CORE.accessDatabase(query, function(results) {
+											return
+										})
 
-										// delete rolls
-											// query
-												var query = CORE.getSchema("query")
-													query.collection = "rolls"
-													query.command = "delete"
-													query.filters = {gameId: game.id}
+								// delete rolls
+									// query
+										var query = CORE.getSchema("query")
+											query.collection = "rolls"
+											query.command = "delete"
+											query.filters = {gameId: game.id}
 
-											// delete
-												CORE.accessDatabase(query, function(results) {
-													return
-												})
+									// delete
+										CORE.accessDatabase(query, function(results) {
+											return
+										})
 
-										// delete content
-											// query
-												var query = CORE.getSchema("query")
-													query.collection = "content"
-													query.command = "delete"
-													query.filters = {gameId: game.id}
+								// delete content
+									// query
+										var query = CORE.getSchema("query")
+											query.collection = "content"
+											query.command = "delete"
+											query.filters = {gameId: game.id}
 
-											// delete
-												CORE.accessDatabase(query, function(results) {
-													return
-												})
+									// delete
+										CORE.accessDatabase(query, function(results) {
+											return
+										})
 
-										// delete characters
-											// query
-												var query = CORE.getSchema("query")
-													query.collection = "characters"
-													query.command = "delete"
-													query.filters = {gameId: game.id}
+								// delete characters
+									// query
+										var query = CORE.getSchema("query")
+											query.collection = "characters"
+											query.command = "delete"
+											query.filters = {gameId: game.id}
 
-											// delete
-												CORE.accessDatabase(query, function(results) {
-													return
-												})
-									})
+									// delete
+										CORE.accessDatabase(query, function(results) {
+											return
+										})
 							})
 					})
 			}

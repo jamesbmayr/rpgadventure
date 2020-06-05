@@ -272,7 +272,8 @@
 								id: generateRandom(),
 								name: null,
 								userId: null,
-								users: {}
+								users: {},
+								allUsers: []
 							}
 						break
 
