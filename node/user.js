@@ -442,11 +442,7 @@
 					}
 
 				// game
-					var game = REQUEST.post.user.game
-					if (!game) {
-						callback({success: false, message: "invalid game object", recipients: [REQUEST.user.id]})
-						return
-					}
+					var game = REQUEST.post.user.game || null
 
 				// query
 					var query = CORE.getSchema("query")
@@ -463,10 +459,12 @@
 
 						// update list of user's games
 							var user = results.documents[0]
+							if (game) {
 								user.games[game.id] = {
 									id: game.id,
 									name: game.name
 								}
+							}
 
 						// query
 							var query = CORE.getSchema("query")
