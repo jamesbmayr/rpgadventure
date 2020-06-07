@@ -29,6 +29,11 @@
 						return
 					}
 
+				// gameId
+					var postRollGroup = REQUEST.post.rollGroup
+					var gameId = REQUEST.post.rollGroup.gameId
+					var characterId = REQUEST.post.rollGroup.characterId || null
+
 				// get character data?
 					var recipientIds = []
 					var characters = {}
@@ -44,7 +49,7 @@
 								var query = CORE.getSchema("query")
 									query.collection = "characters"
 									query.command = "find"
-									query.filters = {gameId: REQUEST.post.rollGroup.gameId}
+									query.filters = {gameId: gameId}
 
 							// find
 								CORE.accessDatabase(query, function(results) {
@@ -77,13 +82,13 @@
 						// rollGroup
 							var rollGroup = CORE.getSchema("rollGroup")
 								rollGroup.userId = REQUEST.user.id
-								rollGroup.gameId = REQUEST.post.rollGroup.gameId
-								rollGroup.characterId = REQUEST.post.rollGroup.characterId
+								rollGroup.gameId = gameId
+								rollGroup.characterId = characterId
 
 						// rolls
-							for (var i = 0; i < REQUEST.post.rollGroup.rolls.length; i++) {
+							for (var i = 0; i < postRollGroup.rolls.length; i++) {
 								// data
-									var data = REQUEST.post.rollGroup.rolls[i]
+									var data = postRollGroup.rolls[i]
 									var roll = CORE.getSchema("roll")
 									rollGroup.rolls.push(roll)
 
@@ -162,11 +167,11 @@
 
 												// then
 													if (data.ifSuccess && roll.display.success) {
-														REQUEST.post.rollGroup.rolls.push(data.ifSuccess)
+														postRollGroup.rolls.push(data.ifSuccess)
 														continue
 													}
 													if (data.ifFailure && !roll.display.success) {
-														REQUEST.post.rollGroup.rolls.push(data.ifFailure)
+														postRollGroup.rolls.push(data.ifFailure)
 														continue
 													}
 
@@ -205,7 +210,7 @@
 															}
 
 														// add to rolls
-															REQUEST.post.rollGroup.rolls.splice(i + 1, 0, {
+															postRollGroup.rolls.splice(i + 1, 0, {
 																type: "armor",
 																d: 6,
 																count: item.d6,
@@ -223,7 +228,7 @@
 															var defend = recipient.statistics.immunity.skills.find(function(s) { return s.name == "defend" }) || null
 															if (defend) {
 																// add to rolls
-																	REQUEST.post.rollGroup.rolls.splice(i + 1, 0, {
+																	postRollGroup.rolls.splice(i + 1, 0, {
 																		type: "healing",
 																		d: 6,
 																		count: defend.d6,
@@ -238,7 +243,7 @@
 
 												// spacer?
 													if (spacer) {
-														REQUEST.post.rollGroup.rolls.splice(i + 1, 0, {
+														postRollGroup.rolls.splice(i + 1, 0, {
 															spacer: true,
 															text: recipient.info.name
 														})
@@ -292,7 +297,7 @@
 									var query = CORE.getSchema("query")
 										query.collection = "users"
 										query.command = "find"
-										query.filters = {gameId: REQUEST.post.rollGroup.gameId}
+										query.filters = {gameId: gameId}
 
 								// find
 									CORE.accessDatabase(query, function(results) {
@@ -338,11 +343,15 @@
 						return
 					}
 
+				// gameId
+					var gameId = REQUEST.post.rollGroup.gameId
+					var contentId = REQUEST.post.rollGroup.contentId
+
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "content"
 						query.command = "find"
-						query.filters = {gameId: REQUEST.post.rollGroup.gameId, id: REQUEST.post.rollGroup.contentId}
+						query.filters = {gameId: gameId, id: contentId}
 
 				// find
 					CORE.accessDatabase(query, function(results) {
@@ -380,7 +389,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "characters"
 								query.command = "find"
-								query.filters = {gameId: REQUEST.post.rollGroup.gameId}
+								query.filters = {gameId: gameId}
 
 						// find
 							CORE.accessDatabase(query, function(results) {
@@ -420,7 +429,7 @@
 								// rollGroup
 									var rollGroup = CORE.getSchema("rollGroup")
 										rollGroup.userId = REQUEST.user.id
-										rollGroup.gameId = REQUEST.post.rollGroup.gameId
+										rollGroup.gameId = gameId
 
 									var roll = CORE.getSchema("roll")
 										roll.display.spacer = true
@@ -458,7 +467,7 @@
 											var query = CORE.getSchema("query")
 												query.collection = "users"
 												query.command = "find"
-												query.filters = {gameId: REQUEST.post.rollGroup.gameId}
+												query.filters = {gameId: gameId}
 
 										// find
 											CORE.accessDatabase(query, function(results) {
@@ -552,11 +561,14 @@
 						return
 					}
 
+				// index
+					var postRollGroup = REQUEST.post.rollGroup
+
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "rolls"
 						query.command = "find"
-						query.filters = {gameId: REQUEST.post.rollGroup.gameId, id: REQUEST.post.rollGroup.id}
+						query.filters = {gameId: postRollGroup.gameId, id: postRollGroup.id}
 
 				// find
 					CORE.accessDatabase(query, function(results) {
@@ -569,17 +581,17 @@
 						// get roll
 							var rollGroup = results.documents[0]
 							var roll = rollGroup.rolls.find(function(r) {
-								return r.id == REQUEST.post.rollGroup.rollId
+								return r.id == postRollGroup.rollId
 							})
 
 						// no roll?
-							if (!roll || !roll.display.dice[REQUEST.post.rollGroup.index]) {
+							if (!roll || !roll.display.dice[index]) {
 								callback({success: false, message: "dice not found", recipients: [REQUEST.user.id]})
 								return
 							}
 
 						// update die
-							roll.display.dice[REQUEST.post.rollGroup.index].counting = REQUEST.post.rollGroup.counting
+							roll.display.dice[postRollGroup.index].counting = postRollGroup.counting
 
 						// recalculate
 							var total = 0
@@ -594,7 +606,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "rolls"
 								query.command = "update"
-								query.filters = {gameId: REQUEST.post.rollGroup.gameId, id: REQUEST.post.rollGroup.id}
+								query.filters = {gameId: postRollGroup.gameId, id: postRollGroup.id}
 								query.document = rollGroup
 
 						// update
@@ -612,7 +624,7 @@
 									var query = CORE.getSchema("query")
 										query.collection = "users"
 										query.command = "find"
-										query.filters = {gameId: REQUEST.post.rollGroup.gameId}
+										query.filters = {gameId: postRollGroup.gameId}
 
 								// find
 									CORE.accessDatabase(query, function(results) {

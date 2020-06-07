@@ -341,7 +341,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "users"
 								query.command = "find"
-								query.filters = {gameId: REQUEST.post.content.gameId}
+								query.filters = {gameId: content.gameId}
 
 						// find
 							CORE.accessDatabase(query, function(results) {
@@ -416,7 +416,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "users"
 								query.command = "find"
-								query.filters = {gameId: REQUEST.post.content.gameId}
+								query.filters = {gameId: content.gameId}
 
 						// find
 							CORE.accessDatabase(query, function(results) {
@@ -527,7 +527,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "users"
 								query.command = "find"
-								query.filters = {gameId: REQUEST.post.content.gameId}
+								query.filters = {gameId: content.gameId}
 
 						// find
 							CORE.accessDatabase(query, function(results) {
@@ -577,6 +577,9 @@
 						return
 					}
 
+				// id
+					var contentId = REQUEST.post.content.id
+
 				// file type
 					var extension = REQUEST.post.content.file.name.split(".")
 						extension = extension[extension.length - 1]
@@ -588,7 +591,7 @@
 					}
 
 				// write file
-					CORE.accessFiles({command: "write", path: REQUEST.post.content.id + "." + extension, content: REQUEST.post.content.file.data, contentType: contentType, encoding: "binary"}, function(results) {
+					CORE.accessFiles({command: "write", path: contentId + "." + extension, content: REQUEST.post.content.file.data, contentType: contentType, encoding: "binary"}, function(results) {
 						if (!results.success || !results.path) {
 							results.recipients = [REQUEST.user.id]
 							callback(results)
@@ -599,8 +602,8 @@
 							var query = CORE.getSchema("query")
 								query.collection = "content"
 								query.command = "update"
-								query.filters = {id: REQUEST.post.content.id}
-								query.document = {url: results.path, file: REQUEST.post.content.id + "." + extension}
+								query.filters = {id: contentId}
+								query.document = {url: results.path, file: contentId + "." + extension}
 
 						// update
 							CORE.accessDatabase(query, function(results) {
@@ -623,7 +626,7 @@
 									var query = CORE.getSchema("query")
 										query.collection = "users"
 										query.command = "find"
-										query.filters = {gameId: REQUEST.post.content.gameId}
+										query.filters = {gameId: content.gameId}
 
 								// find
 									CORE.accessDatabase(query, function(results) {
@@ -665,6 +668,13 @@
 						query.command = "find"
 						query.filters = {id: REQUEST.post.content.id}
 
+				// objects
+					var arenaObjects = REQUEST.post.content.arena.objects || null
+					if (!arenaObjects) {
+						callback({success: false, message: "invalid arena object", recipients: [REQUEST.user.id]})
+						return
+					}
+
 				// find
 					CORE.accessDatabase(query, function(results) {
 						if (!results.success) {
@@ -682,114 +692,111 @@
 								return
 							}
 
-						// objects?
-							if (REQUEST.post.content.arena.objects) {
-								// new
-									if (REQUEST.post.content.arena.objects.new) {
-										var count = Object.keys(arena.objects).length
-										var object = CORE.getSchema("arenaObject")
-											object.z = count
-										arena.objects[object.id] = object
-										
-										if (REQUEST.post.content.arena.objects.new.characterId) {
-											// query
-												var query = CORE.getSchema("query")
-													query.collection = "characters"
-													query.command = "find"
-													query.filters = {id: REQUEST.post.content.arena.objects.new.characterId}
+						// new object
+							if (arenaObjects.new) {
+								var count = Object.keys(arena.objects).length
+								var object = CORE.getSchema("arenaObject")
+									object.z = count
+								arena.objects[object.id] = object
+								
+								if (arenaObjects.new.characterId) {
+									// query
+										var query = CORE.getSchema("query")
+											query.collection = "characters"
+											query.command = "find"
+											query.filters = {id: arenaObjects.new.characterId}
 
-											// find
-												CORE.accessDatabase(query, function(results) {
-													if (!results.success) {
-														saveArenaObject()
-														return
-													}
+									// find
+										CORE.accessDatabase(query, function(results) {
+											if (!results.success) {
+												saveArenaObject()
+												return
+											}
 
-													var character = results.documents[0]
-													object.characterId = character.id
-													object.image = character.info.image
-													object.text = character.info.name
-													saveArenaObject()
-													return
-												})
-											return
-										}
-										else if (REQUEST.post.content.arena.objects.new.contentId) {
-											// query
-												var query = CORE.getSchema("query")
-													query.collection = "content"
-													query.command = "find"
-													query.filters = {id: REQUEST.post.content.arena.objects.new.contentId}
-
-											// find
-												CORE.accessDatabase(query, function(results) {
-													if (!results.success) {
-														saveArenaObject()
-														return
-													}
-
-													var content = results.documents[0]
-													object.contentId = content.id
-													object.image = content.url
-													object.text = content.name
-													saveArenaObject()
-													return
-												})
-											return
-										}
-										else {
+											var character = results.documents[0]
+											object.characterId = character.id
+											object.image = character.info.image
+											object.text = character.info.name
 											saveArenaObject()
 											return
-										}
+										})
+									return
+								}
+								else if (arenaObjects.new.contentId) {
+									// query
+										var query = CORE.getSchema("query")
+											query.collection = "content"
+											query.command = "find"
+											query.filters = {id: arenaObjects.new.contentId}
+
+									// find
+										CORE.accessDatabase(query, function(results) {
+											if (!results.success) {
+												saveArenaObject()
+												return
+											}
+
+											var content = results.documents[0]
+											object.contentId = content.id
+											object.image = content.url
+											object.text = content.name
+											saveArenaObject()
+											return
+										})
+									return
+								}
+								else {
+									saveArenaObject()
+									return
+								}
+							}
+
+						// delete object
+							else if (arenaObjects.delete) {
+								for (var i in arenaObjects) {
+									if (arena.objects[i]) {
+										var z = arena.objects[i].z
+										delete arena.objects[i]
 									}
 
-								// delete
-									else if (REQUEST.post.content.arena.objects.delete) {
-										for (var i in REQUEST.post.content.arena.objects) {
-											if (arena.objects[i]) {
-												var z = arena.objects[i].z
-												delete arena.objects[i]
-											}
-
-											for (var j in arena.objects) {
-												if (arena.objects[j] >= z) {
-													arena.objects[j].z -= 1
-												}
-											}
+									for (var j in arena.objects) {
+										if (arena.objects[j] >= z) {
+											arena.objects[j].z -= 1
 										}
-										saveArenaObject()
-										return
-									} 
-
-								// update object
-									else {
-										var count = Object.keys(arena.objects).length
-										for (var i in REQUEST.post.content.arena.objects) {
-											if (arena.objects[i]) {
-												for (var j in REQUEST.post.content.arena.objects[i]) {
-													if (j == "z") {
-														var currentZ = arena.objects[i].z
-														var newZ = currentZ + Number(REQUEST.post.content.arena.objects[i][j])
-
-														if (newZ < 0 || newZ >= count) {
-															continue
-														}
-
-														var switchId = Object.keys(arena.objects).find(function(o) {
-															return arena.objects[o].z == newZ
-														})
-														arena.objects[switchId].z = currentZ
-														arena.objects[i].z = newZ
-														continue
-													}
-
-													arena.objects[i][j] = REQUEST.post.content.arena.objects[i][j]
-												}
-											}
-										}
-										saveArenaObject()
-										return
 									}
+								}
+								saveArenaObject()
+								return
+							} 
+
+						// update object
+							else {
+								var count = Object.keys(arena.objects).length
+								for (var i in arenaObjects) {
+									if (arena.objects[i]) {
+										for (var j in arenaObjects[i]) {
+											if (j == "z") {
+												var currentZ = arena.objects[i].z
+												var newZ = currentZ + Number(arenaObjects[i][j])
+
+												if (newZ < 0 || newZ >= count) {
+													continue
+												}
+
+												var switchId = Object.keys(arena.objects).find(function(o) {
+													return arena.objects[o].z == newZ
+												})
+												arena.objects[switchId].z = currentZ
+												arena.objects[i].z = newZ
+												continue
+											}
+
+											arena.objects[i][j] = arenaObjects[i][j]
+										}
+									}
+								}
+								saveArenaObject()
+								return
 							}
 
 						// save
@@ -822,7 +829,7 @@
 											var query = CORE.getSchema("query")
 												query.collection = "users"
 												query.command = "find"
-												query.filters = {gameId: REQUEST.post.content.gameId}
+												query.filters = {gameId: content.gameId}
 
 										// find
 											CORE.accessDatabase(query, function(results) {
@@ -931,7 +938,7 @@
 
 										// return content
 											var recipients = content.access ? [content.access] : ids
-											callback({success: true, contentList: [{id: content.id, delete: true}], message: REQUEST.user.name + " deleted " + REQUEST.post.content.name, recipients: recipients})
+											callback({success: true, contentList: [{id: content.id, delete: true}], message: REQUEST.user.name + " deleted " + content.name, recipients: recipients})
 
 										// unset contentId for users
 											var ids = results.documents.filter(function(u) { return u.contentId == content.id }) || []

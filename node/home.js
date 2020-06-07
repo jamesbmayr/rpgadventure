@@ -17,6 +17,9 @@
 						return
 					}
 
+				// password
+					var passwordAttempt = REQUEST.post.user.password
+
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "users"
@@ -32,7 +35,7 @@
 
 						// compare passwords
 							var salt = results.documents[0].secret.salt
-							if (CORE.hashRandom(REQUEST.post.user.password, salt) !== results.documents[0].secret.password) {
+							if (CORE.hashRandom(passwordAttempt, salt) !== results.documents[0].secret.password) {
 								callback({success: false, message: "invalid name or password"})
 								return
 							}

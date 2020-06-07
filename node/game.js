@@ -28,6 +28,9 @@
 						return
 					}
 
+				// game name
+					var gameName = REQUEST.post.game.name
+
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "games"
@@ -44,7 +47,7 @@
 						// create
 							var game = CORE.getSchema("game")
 								game.userId = REQUEST.user.id
-								game.name = REQUEST.post.game.name
+								game.name = gameName
 								game.users[REQUEST.user.id] = {
 									id: REQUEST.user.id,
 									name: REQUEST.user.name
@@ -105,11 +108,15 @@
 						return
 					}
 
+				// id
+					var gameId = REQUEST.post.game.id || null
+					var gameName = REQUEST.post.game.name || null
+
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "games"
 						query.command = "find"
-						query.filters = REQUEST.post.game.id ? {id: REQUEST.post.game.id} : {name: REQUEST.post.game.name}
+						query.filters = gameId ? {id: gameId} : {name: gameName}
 
 				// find
 					CORE.accessDatabase(query, function(results) {
@@ -119,9 +126,9 @@
 									callback({success: false, message: "no game found", recipients: [REQUEST.user.id]})
 
 								// game is in user's list?
-									if (REQUEST.user.games[REQUEST.post.game.id]) {
+									if (REQUEST.user.games[gameId]) {
 										// remove from user
-											delete REQUEST.user.games[REQUEST.post.game.id]
+											delete REQUEST.user.games[gameId]
 									
 										// query
 											var query = CORE.getSchema("query")
@@ -359,7 +366,7 @@
 									var query = CORE.getSchema("query")
 										query.collection = "users"
 										query.command = "find"
-										query.filters = {gameId: REQUEST.post.game.id}
+										query.filters = {gameId: game.id}
 
 								// find
 									CORE.accessDatabase(query, function(results) {
@@ -435,7 +442,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "games"
 								query.command = "delete"
-								query.filters = {id: REQUEST.post.game.id, userId: REQUEST.user.id}
+								query.filters = {id: game.id, userId: REQUEST.user.id}
 
 						// delete
 							CORE.accessDatabase(query, function(results) {

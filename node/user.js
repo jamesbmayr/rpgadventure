@@ -199,11 +199,19 @@
 						return
 					}
 
+				// name
+					var oldName = REQUEST.user.name
+					var newName = REQUEST.post.user.name
+					if (!newName || newName == oldName) {
+						callback({success: false, message: "invalid name", recipients: [REQUEST.user.id]})
+						return
+					}
+
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "users"
 						query.command = "find"
-						query.filters = {name: REQUEST.post.user.name}
+						query.filters = {name: newName}
 
 				// find
 					CORE.accessDatabase(query, function(results) {
@@ -212,15 +220,12 @@
 							return
 						}
 
-						// old
-							var oldName = REQUEST.user.name
-
 						// query
 							var query = CORE.getSchema("query")
 								query.collection = "users"
 								query.command = "update"
 								query.filters = {id: REQUEST.user.id}
-								query.document = {name: REQUEST.post.user.name}
+								query.document = {name: newName}
 
 						// update
 							CORE.accessDatabase(query, function(results) {
@@ -255,16 +260,16 @@
 
 												// change game users
 													var game = results.documents[0]
-													game.users[REQUEST.user.id] = {
-														id: REQUEST.user.id,
-														name: REQUEST.user.name
-													}
+														game.users[REQUEST.user.id] = {
+															id: REQUEST.user.id,
+															name: REQUEST.user.name
+														}
 
 												// query
 													var query = CORE.getSchema("query")
 														query.collection = "games"
 														query.command = "update"
-														query.filters = {id: REQUEST.user.gameId}
+														query.filters = {id: game.id}
 														query.document = {users: game.users}
 
 												// update
@@ -278,7 +283,7 @@
 														// send message to all users
 															var game = results.documents[0]
 															var recipients = Object.keys(game.users).filter(function(i) { return i !== REQUEST.user.id })
-															callback({success: true, message: oldName + " is now " + REQUEST.user.name, game: game, recipients: recipients})
+															callback({success: true, message: oldName + " is now " + newName, game: game, recipients: recipients})
 													})
 											})
 									}
@@ -307,6 +312,10 @@
 						return
 					}
 
+				// password
+					var newPassword = REQUEST.post.user.newPassword
+					var oldPassword = REQUEST.post.user.oldPassword
+
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "users"
@@ -328,7 +337,7 @@
 							}
 
 						// authenticate old password
-							if (CORE.hashRandom(REQUEST.post.user.oldPassword, results.documents[0].secret.salt) !== results.documents[0].secret.password) {
+							if (CORE.hashRandom(oldPassword, results.documents[0].secret.salt) !== results.documents[0].secret.password) {
 								callback({success: false, message: "old password is incorrect", recipients: [REQUEST.user.id]})
 								return
 							}
@@ -341,7 +350,7 @@
 								query.collection = "users"
 								query.command = "update"
 								query.filters = {id: REQUEST.user.id}
-								query.document = {secret: {salt: salt, password: CORE.hashRandom(REQUEST.post.user.newPassword, salt)}}
+								query.document = {secret: {salt: salt, password: CORE.hashRandom(newPassword, salt)}}
 
 						// update
 							CORE.accessDatabase(query, function(results) {
@@ -432,6 +441,13 @@
 						return
 					}
 
+				// game
+					var game = REQUEST.post.user.game
+					if (!game) {
+						callback({success: false, message: "invalid game object", recipients: [REQUEST.user.id]})
+						return
+					}
+
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "users"
@@ -445,15 +461,12 @@
 							return
 						}
 
-					// update list of user's games
-						var user = results.documents[0]
-						var game = REQUEST.post.user.game
-						if (game) {
-							user.games[game.id] = {
-								id: game.id,
-								name: game.name
-							}
-						}
+						// update list of user's games
+							var user = results.documents[0]
+								user.games[game.id] = {
+									id: game.id,
+									name: game.name
+								}
 
 						// query
 							var query = CORE.getSchema("query")

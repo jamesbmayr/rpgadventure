@@ -29,22 +29,22 @@
 						chat.gameId = REQUEST.post.chat.gameId
 						chat.recipientId = REQUEST.post.chat.recipientId || null
 
-						// regular message
-							if (REQUEST.post.chat.display.sender && REQUEST.post.chat.display.time && REQUEST.post.chat.display.text) {
-								chat.display.sender = REQUEST.post.chat.display.sender
-								chat.display.time = REQUEST.post.chat.display.time
-								chat.display.text = REQUEST.post.chat.display.text
-							}
+				// regular message
+					if (REQUEST.post.chat.display.sender && REQUEST.post.chat.display.time && REQUEST.post.chat.display.text) {
+						chat.display.sender = REQUEST.post.chat.display.sender
+						chat.display.time = REQUEST.post.chat.display.time
+						chat.display.text = REQUEST.post.chat.display.text
+					}
 
-						// search results
-							else if (REQUEST.post.chat.display.data) {
-								chat.display.data = REQUEST.post.chat.display.data
-							}
+				// search results
+					else if (REQUEST.post.chat.display.data) {
+						chat.display.data = REQUEST.post.chat.display.data
+					}
 
-						// content share
-							else if (REQUEST.post.chat.display.content) {
-								chat.display.content = REQUEST.post.chat.display.content
-							}
+				// content share
+					else if (REQUEST.post.chat.display.content) {
+						chat.display.content = REQUEST.post.chat.display.content
+					}
 
 				// query
 					var query = CORE.getSchema("query")
@@ -61,13 +61,13 @@
 						}
 
 						// chats
-							var chat = [results.documents[0]]
+							var chats = [results.documents[0]]
 
 						// query
 							var query = CORE.getSchema("query")
 								query.collection = "users"
 								query.command = "find"
-								query.filters = {gameId: REQUEST.post.chat.gameId}
+								query.filters = {gameId: chats[0].gameId}
 
 						// find
 							CORE.accessDatabase(query, function(results) {
@@ -80,8 +80,8 @@
 								var ids = results.documents.map(function(u) {
 									return u.id
 								}) || []
-								var recipients = chat[0].recipientId ? [REQUEST.user.id, chat[0].recipientId] : ids
-								callback({success: true, chat: chat, recipients: recipients})
+								var recipients = chats[0].recipientId ? [REQUEST.user.id, chats[0].recipientId] : ids
+								callback({success: true, chat: chats, recipients: recipients})
 								return
 							})
 					})
