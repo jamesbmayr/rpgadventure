@@ -192,27 +192,30 @@
 								// add to list of user's games
 									REQUEST.post.action = "updateUserGames"
 									REQUEST.post.user = {game: game}
-									USER.updateOne(REQUEST, callback)
+									USER.updateOne(REQUEST, function(data) {
+										// join
+											callback(data)
 
-								// load chats
-									REQUEST.post.action = "readChats"
-									REQUEST.post.chat = {gameId: game.id}
-									CHAT.readAll(REQUEST, callback)
+										// load chats
+											REQUEST.post.action = "readChats"
+											REQUEST.post.chat = {gameId: game.id}
+											CHAT.readAll(REQUEST, callback)
 
-								// load rolls
-									REQUEST.post.action = "readRolls"
-									REQUEST.post.rollGroup = {gameId: game.id}
-									ROLL.readAll(REQUEST, callback)
+										// load rolls
+											REQUEST.post.action = "readRolls"
+											REQUEST.post.rollGroup = {gameId: game.id}
+											ROLL.readAll(REQUEST, callback)
 
-								// load characters
-									REQUEST.post.action = "readCharacters"
-									REQUEST.post.character = {gameId: game.id}
-									CHARACTER.readAll(REQUEST, callback)
+										// load characters
+											REQUEST.post.action = "readCharacters"
+											REQUEST.post.character = {gameId: game.id}
+											CHARACTER.readAll(REQUEST, callback)
 
-								// load content
-									REQUEST.post.action = "readContent"
-									REQUEST.post.content = {gameId: game.id}
-									CONTENT.readAll(REQUEST, callback)
+										// load content
+											REQUEST.post.action = "readContent"
+											REQUEST.post.content = {gameId: game.id}
+											CONTENT.readAll(REQUEST, callback)
+									})
 							})
 					})
 			}
