@@ -103,7 +103,7 @@
 			</section>
 			<section id="rules">
 				<form id="rules-search-form" method="post" action="javascript:;" class="subsection">
-					<input type="text" id="rules-search-input" placeholder="search rules" class="form-pair"/>
+					<input type="text" id="rules-search-input" placeholder="search rules" class="form-pair" autocomplete="off"/>
 					<button id="rules-search-button" class="form-pair">&#x1f50e;</button>
 				</form>
 				<div id="rules-results"></div>
@@ -216,9 +216,15 @@
 				</div>
 				<div id="character-content">
 					<div id="character-conditions" class="section">
-						<select id="character-conditions-select">
-							<option id="character-conditions-disabled" disabled selected>+ condition</option>
-						</select>
+						<div id="character-conditions-search" class="option-search">
+							<input autocomplete="off" placeholder="conditions" class="option-search-input"/>
+							<button class="option-search-cancel minor-button">x</button>
+							<div class="option-search-results"></div>
+							<form id="character-conditions-search-form" method="post" action="javascript:;" class="option-search-form">
+								<select id="character-conditions-select" class="option-search-select"></select>
+								<button class="option-search-button">&rarr;</button>
+							</form>
+						</div>
 						<div id="character-conditions-list"></div>
 					</div>
 					<div id="character-damage" class="section">
@@ -283,9 +289,15 @@
 							</div>
 						</summary>
 						<div class="skills-list"></div>
-						<select id="character-perception-select">
-							<option id="character-perception-disabled" disabled selected>+ skill</option>
-						</select>
+						<div id="character-perception-search" class="option-search">
+							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
+							<button class="option-search-cancel minor-button">x</button>
+							<div class="option-search-results"></div>
+							<form id="character-perception-search-form" method="post" action="javascript:;" class="option-search-form">
+								<select id="character-perception-select" class="option-search-select"></select>
+								<button class="option-search-button">&rarr;</button>
+							</form>
+						</div>
 					</details>
 					<details id="character-memory" class="statistic section">
 						<summary>
@@ -300,9 +312,15 @@
 							</div>
 						</summary>
 						<div class="skills-list"></div>
-						<select id="character-memory-select">
-							<option id="character-memory-disabled" disabled selected>+ skill</option>
-						</select>
+						<div id="character-memory-search" class="option-search">
+							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
+							<button class="option-search-cancel minor-button">x</button>
+							<div class="option-search-results"></div>
+							<form id="character-memory-search-form" method="post" action="javascript:;" class="option-search-form">
+								<select id="character-memory-select" class="option-search-select"></select>
+								<button class="option-search-button">&rarr;</button>
+							</form>
+						</div>
 					</details>
 					<details id="character-logic" class="statistic section">
 						<summary>
@@ -317,9 +335,15 @@
 							</div>
 						</summary>
 						<div class="skills-list"></div>
-						<select id="character-logic-select">
-							<option id="character-logic-disabled" disabled selected>+ skill</option>
-						</select>
+						<div id="character-logic-search" class="option-search">
+							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
+							<button class="option-search-cancel minor-button">x</button>
+							<div class="option-search-results"></div>
+							<form id="character-logic-search-form" method="post" action="javascript:;" class="option-search-form">
+								<select id="character-logic-select" class="option-search-select"></select>
+								<button class="option-search-button">&rarr;</button>
+							</form>
+						</div>
 					</details>
 					<details id="character-strength" class="statistic section">
 						<summary>
@@ -334,9 +358,15 @@
 							</div>
 						</summary>
 						<div class="skills-list"></div>
-						<select id="character-strength-select">
-							<option id="character-strength-disabled" disabled selected>+ skill</option>
-						</select>
+						<div id="character-strength-search" class="option-search">
+							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
+							<button class="option-search-cancel minor-button">x</button>
+							<div class="option-search-results"></div>
+							<form id="character-strength-search-form" method="post" action="javascript:;" class="option-search-form">
+								<select id="character-strength-select" class="option-search-select"></select>
+								<button class="option-search-button">&rarr;</button>
+							</form>
+						</div>
 					</details>
 					<details id="character-dexterity" class="statistic section">
 						<summary>
@@ -351,9 +381,15 @@
 							</div>
 						</summary>
 						<div class="skills-list"></div>
-						<select id="character-dexterity-select">
-							<option id="character-dexterity-disabled" disabled selected>+ skill</option>
-						</select>
+						<div id="character-dexterity-search" class="option-search">
+							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
+							<button class="option-search-cancel minor-button">x</button>
+							<div class="option-search-results"></div>
+							<form id="character-dexterity-search-form" method="post" action="javascript:;" class="option-search-form">
+								<select id="character-dexterity-select" class="option-search-select"></select>
+								<button class="option-search-button">&rarr;</button>
+							</form>
+						</div>
 					</details>
 					<details id="character-immunity" class="statistic section">
 						<summary>
@@ -368,9 +404,15 @@
 							</div>
 						</summary>
 						<div class="skills-list"></div>
-						<select id="character-immunity-select">
-							<option id="character-immunity-disabled" disabled selected>+ skill</option>
-						</select>
+						<div id="character-immunity-search" class="option-search">
+							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
+							<button class="option-search-cancel minor-button">x</button>
+							<div class="option-search-results"></div>
+							<form id="character-immunity-search-form" method="post" action="javascript:;" class="option-search-form">
+								<select id="character-immunity-select" class="option-search-select"></select>
+								<button class="option-search-button">&rarr;</button>
+							</form>
+						</div>
 					</details>
 					<details id="character-speed" class="statistic section">
 						<summary>
@@ -385,13 +427,25 @@
 							</div>
 						</summary>
 						<div class="skills-list"></div>
-						<select id="character-speed-select">
-							<option id="character-speed-disabled" disabled selected>+ skill</option>
-						</select>
+						<div id="character-speed-search" class="option-search">
+							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
+							<button class="option-search-cancel minor-button">x</button>
+							<div class="option-search-results"></div>
+							<form id="character-speed-search-form" method="post" action="javascript:;" class="option-search-form">
+								<select id="character-speed-select" class="option-search-select"></select>
+								<button class="option-search-button">&rarr;</button>
+							</form>
+						</div>
 					</details>
-					<select id="character-items-select">
-						<option id="character-items-disabled" disabled selected>+ item</option>
-					</select>
+					<div id="character-items-search" class="option-search">
+						<input autocomplete="off" placeholder="items" class="option-search-input"/>
+						<button class="option-search-cancel minor-button">x</button>
+						<div class="option-search-results"></div>
+						<form id="character-items-search-form" method="post" action="javascript:;" class="option-search-form">
+							<select id="character-items-select" class="option-search-select"></select>
+							<button class="option-search-button">&rarr;</button>
+						</form>
+					</div>
 					<details id="character-items" class="section">
 						<summary>
 							<div id="character-items-equipped"></div>
@@ -456,6 +510,9 @@
 					<form id="content-send-form" method="post" action="javascript:;">
 						<button id="content-send-button" class="minor-button">&#x1f4ac;</button>
 					</form>
+					<form id="content-add-form" method="post" action="javascript:;">
+						<button id="content-add-button" class="minor-button">&#x1f464;</button>
+					</form>
 					<form id="content-name-form" method="post" action="javascript:;">
 						<h4>name</h4>
 						<input type="text" id="content-name-input" placeholder="document name" autocomplete="off" class="form-pair"/>
@@ -474,6 +531,15 @@
 						<textarea id="content-code-input" placeholder="enter code here" autocomplete="off" class="form-pair"></textarea>
 						<button id="content-code-button" class="form-pair">&rarr;</button>
 					</form>
+					<div id="content-component-code-help">
+						<div>Enter JSON describing a custom component. These fields are required to add this to a character:</div>
+						<ul>
+							<li><code>"addable"</code>: <code>true</code></li>
+							<li><code>"name"</code>: string</li>
+							<li><code>"type"</code>: <code>"race"</code>, <code>"skill"</code>, <code>"item"</code>, or <code>"condition"</code></li>
+							<li><code>"data"</code>: object containing applicable properties</li>
+						</ul>
+					</div>
 					<form id="content-url-form" method="post" action="javascript:;">
 						<h4>url</h4>
 						<input type="text" id="content-url-input" placeholder="url" autocomplete="off" class="form-pair"/>

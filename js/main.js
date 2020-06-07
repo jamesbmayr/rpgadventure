@@ -5,10 +5,10 @@ window.addEventListener("load", function() {
 
 		/* triggers */
 			if ((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent)) {
-				window.TRIGGERS = {click: "touchstart", mousedown: "touchstart", mousemove: "touchmove", mouseup: "touchend", submit: "submit", change: "change", resize: "resize", mouseenter: "touchstart", mouseleave: "touchend"}
+				window.TRIGGERS = {click: "touchstart", mousedown: "touchstart", mousemove: "touchmove", mouseup: "touchend", submit: "submit", change: "change", input: "input", focus: "focus", blur: "blur", resize: "resize", mouseenter: "touchstart", mouseleave: "touchend"}
 			}
 			else {
-				window.TRIGGERS = {click:      "click", mousedown:  "mousedown", mousemove: "mousemove", mouseup:  "mouseup", submit: "submit", change: "change", resize: "resize", mouseenter: "mouseenter", mouseleave: "mouseleave"}
+				window.TRIGGERS = {click:      "click", mousedown:  "mousedown", mousemove: "mousemove", mouseup:  "mouseup", submit: "submit", change: "change", input: "input", focus: "focus", blur: "blur", resize: "resize", mouseenter: "mouseenter", mouseleave: "mouseleave"}
 			}
 
 		/* defaults */
@@ -91,6 +91,102 @@ window.addEventListener("load", function() {
 						window.TOASTTIME = setTimeout(function() {
 							window.TOAST.setAttribute("visibility", false)
 						}, 5000)
+				} catch (error) {console.log(error)}
+			}
+
+		/* searchSelect */
+			window.FUNCTIONS.searchSelect = searchSelect
+			function searchSelect(event) {
+				try {
+					// elements
+						var componentElement = event.target.closest(".option-search")
+						var resultsElement = componentElement.querySelector(".option-search-results")
+						var selectElement = componentElement.querySelector(".option-search-select")
+						if (!resultsElement || !selectElement) {
+							return false
+						}
+
+					// search
+						var searchText = event.target.value.trim().toLowerCase()
+						if (!searchText.length) {
+							var showAll = true
+						}
+
+					// search
+						var results = []
+						var options = Array.from(selectElement.querySelectorAll("option"))
+						for (var i in options) {
+							if (showAll || options[i].value.toLowerCase().includes(searchText)) {
+								results.push({value: options[i].value, text: options[i].innerText, disabled: options[i].disabled})
+							}
+						}
+
+					// no results
+						if (!results.length) {
+							resultsElement.innerText = ""
+							return
+						}
+
+					// results
+						resultsElement.innerHTML = ""
+						for (var i in results) {
+							// option
+								var option = document.createElement("div")
+									option.className = "option-search-result"
+									option.setAttribute("disabled", results[i].disabled)
+									option.innerText = results[i].text
+									option.setAttribute("value", results[i].value)
+									option.addEventListener(TRIGGERS.click, selectOption)
+								resultsElement.appendChild(option)
+						}
+				} catch (error) {console.log(error)}
+			}
+
+		/* selectOption */
+			window.FUNCTIONS.selectOption = selectOption
+			function selectOption(event) {
+				try {
+					// elements
+						var componentElement = event.target.closest(".option-search")
+						var inputElement = componentElement.querySelector(".option-search-input")
+						var resultsElement = componentElement.querySelector(".option-search-results")
+						var selectElement = componentElement.querySelector(".option-search-select")
+						var buttonElement = componentElement.querySelector(".option-search-button")
+						if (!inputElement || !resultsElement || !selectElement || !buttonElement) {
+							return false
+						}
+
+					// value
+						var value = event.target.getAttribute("value")
+						if (!value) {
+							return false
+						}
+
+					// reset search
+						resultsElement.innerHTML = ""
+						inputElement.value = ""
+
+					// set select
+						selectElement.value = value
+						buttonElement.click()
+				} catch (error) {console.log(error)}
+			}
+
+		/* cancelSearch */
+			window.FUNCTIONS.cancelSearch = cancelSearch
+			function cancelSearch(event) {
+				try {
+					// elements
+						var componentElement = event.target.closest(".option-search")
+						var inputElement = componentElement.querySelector(".option-search-input")
+						var resultsElement = componentElement.querySelector(".option-search-results")
+						if (!inputElement || !resultsElement) {
+							return false
+						}
+
+					// reset search
+						resultsElement.innerHTML = ""
+						inputElement.value = ""
 				} catch (error) {console.log(error)}
 			}
 

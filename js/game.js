@@ -255,33 +255,26 @@ window.onload = function() {
 							},
 							statistics: {
 								perception: document.getElementById("character-perception"),
-								perceptionDisabled: document.getElementById("character-perception-disabled"),
 								memory: document.getElementById("character-memory"),
-								memoryDisabled: document.getElementById("character-memory-disabled"),
 								logic: document.getElementById("character-logic"),
-								logicDisabled: document.getElementById("character-logic-disabled"),
 								strength: document.getElementById("character-strength"),
-								strengthDisabled: document.getElementById("character-strength-disabled"),
-								dexterity: document.getElementById("character-dexterity"),
-								dexterityDisabled: document.getElementById("character-dexterity-disabled"),
+								dexterity: document.getElementById("character-dexterity"),								
 								immunity: document.getElementById("character-immunity"),
-								immunityDisabled: document.getElementById("character-immunity-disabled"),
-								speed: document.getElementById("character-speed"),
-								speedDisabled: document.getElementById("character-speed-disabled")
+								speed: document.getElementById("character-speed")
 							},
 							items: {
 								element: document.getElementById("character-items"),
+								form: document.getElementById("character-items-search-form"),
 								select: document.getElementById("character-items-select"),
-								disabled: document.getElementById("character-items-disabled"),
 								equipped: document.getElementById("character-items-equipped"),
 								unequipped: document.getElementById("character-items-unequipped"),
 							},
 							conditions: {
 								element: document.getElementById("character-conditions"),
 								list: document.getElementById("character-conditions-list"),
-								select: document.getElementById("character-conditions-select"),
-								disabled: document.getElementById("character-conditions-disabled"),
-							},
+								form: document.getElementById("character-conditions-search-form"),
+								select: document.getElementById("character-conditions-select")
+							}
 						}
 
 					// chat
@@ -311,6 +304,9 @@ window.onload = function() {
 							element: document.getElementById("content"),
 							send: {
 								form: document.getElementById("content-send-form")
+							},
+							add: {
+								form: document.getElementById("content-add-form")
 							},
 							choose: {
 								form: document.getElementById("content-choose-form"),
@@ -451,9 +447,9 @@ window.onload = function() {
 						ELEMENTS.character.info.imageResetForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImageDelete)
 						ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateInfo) })
 						ELEMENTS.character.content.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, submitCharacterUpdateStatistic) })
-						ELEMENTS.character.content.querySelectorAll(".statistic select").forEach(function(select) { select.addEventListener(TRIGGERS.change, submitCharacterUpdateSkillCreate) })
-						ELEMENTS.character.items.select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemCreate)
-						ELEMENTS.character.conditions.select.addEventListener(TRIGGERS.change, submitCharacterUpdateConditionCreate)
+						ELEMENTS.character.content.querySelectorAll(".statistic .option-search-form").forEach(function(form) { form.addEventListener(TRIGGERS.submit, submitCharacterUpdateSkillCreate) })
+						ELEMENTS.character.items.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateItemCreate)
+						ELEMENTS.character.conditions.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateConditionCreate)
 						ELEMENTS.character.damage.input.addEventListener(TRIGGERS.change, submitCharacterUpdateDamage)
 						ELEMENTS.character.damage.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateRecover)
 						ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateDamageStatistic) })
@@ -464,6 +460,7 @@ window.onload = function() {
 					// content
 						ELEMENTS.content.choose.select.element.addEventListener(TRIGGERS.change, displayContentListSelection)
 						ELEMENTS.content.choose.form.addEventListener(TRIGGERS.submit, submitContentRead)
+						ELEMENTS.content.add.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateRules)
 						ELEMENTS.content.send.form.addEventListener(TRIGGERS.submit, submitChatCreateContent)
 						ELEMENTS.content.name.form.addEventListener(TRIGGERS.submit, submitContentUpdateName)
 						ELEMENTS.content.access.form.addEventListener(TRIGGERS.submit, submitContentUpdateAccess)
@@ -485,6 +482,17 @@ window.onload = function() {
 						ELEMENTS.content.controls.turn.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateTurnOrder)
 						ELEMENTS.content.objects.form.addEventListener(TRIGGERS.submit, submitContentArenaObjectCreate)
 						window.addEventListener(TRIGGERS.resize, displayContentArena)
+
+					// select search
+						var selectSearchInputs = Array.from(ELEMENTS.body.querySelectorAll(".option-search-input"))
+							selectSearchInputs.forEach(function(element) {
+								element.addEventListener(TRIGGERS.input, FUNCTIONS.searchSelect)
+								element.addEventListener(TRIGGERS.focus, FUNCTIONS.searchSelect)
+							})
+						var selectSearchCancels = Array.from(ELEMENTS.body.querySelectorAll(".option-search-cancel"))
+							selectSearchCancels.forEach(function(element) {
+								element.addEventListener(TRIGGERS.click, FUNCTIONS.cancelSearch)
+							})
 				} catch (error) {console.log(error)}
 			}
 
@@ -1687,6 +1695,9 @@ window.onload = function() {
 								displayRulesSearchResult(resultsList[r], ELEMENTS.rules.results)
 							}
 
+						// scroll to top
+							ELEMENTS.rules.element.scrollTop = 0
+
 						// lose focus
 							ELEMENTS.rules.search.input.blur()
 							ELEMENTS.rules.search.button.blur()
@@ -1706,7 +1717,7 @@ window.onload = function() {
 						// name
 							var resultName = document.createElement("h3")
 								resultName.className = "search-result-name"
-								resultName.innerText = result.name.replace(/_/gi, " ")
+								resultName.innerText = (result.name || "?").replace(/_/gi, " ")
 							resultElement.appendChild(resultName)
 
 						// send to chat
@@ -2047,6 +2058,7 @@ window.onload = function() {
 											var option = document.createElement("option")
 												option.value = RULES.items[i][j].name
 												option.innerText = RULES.items[i][j].name
+												option.setAttribute("category", i)
 											optgroup.appendChild(option)
 										}
 									}
@@ -2079,8 +2091,13 @@ window.onload = function() {
 							var mode = event.target.value
 
 						// no character?
-							if (!CHARACTER && mode !== "settings") {
-								FUNCTIONS.showToast({success: false, message: "no character selected"})
+							if (!CHARACTER) {
+								ELEMENTS.character.element.setAttribute("mode", "settings")
+								ELEMENTS.character.modes.settingsRadio.checked = true
+
+								if (mode !== "settings") {
+									FUNCTIONS.showToast({success: false, message: "no character selected"})
+								}
 								return
 							}
 
@@ -2371,9 +2388,8 @@ window.onload = function() {
 					try {
 						// no character?
 							if (!CHARACTER) {
-								ELEMENTS.character.element.setAttribute("mode", "settings")
 								ELEMENTS.character.settings.metadata.setAttribute("visibility", false)
-
+								displayCharacterMode({target: ELEMENTS.character.modes.settingsRadio, forceSet: true})
 								displayChatListSenders()
 								return
 							}
@@ -2502,7 +2518,6 @@ window.onload = function() {
 							for (var o in options) {
 								options[o].removeAttribute("disabled")
 							}
-							ELEMENTS.character.statistics[statistic + "Disabled"].selected = true
 					} catch (error) {console.log(error)}
 				}
 
@@ -3005,10 +3020,6 @@ window.onload = function() {
 							for (var i in character.info.status.conditions) {
 								displayCharacterCondition(character.info.status.conditions[i])
 							}
-
-						// disabled
-							ELEMENTS.character.conditions.disabled.setAttribute("disabled", true)
-							ELEMENTS.character.conditions.disabled.selected = true
 					} catch (error) {console.log(error)}
 				}
 
@@ -3574,9 +3585,21 @@ window.onload = function() {
 								return
 							}
 
-						// get data
-							var resultElement = event.target.closest(".search-result")
-							var result = JSON.parse(resultElement.getAttribute("data") || "{}")
+						// custom component
+							if (event.target.id == "content-add-form") {
+								var code = ELEMENTS.content.code.input.value || ""
+								try {
+									var result = JSON.parse(code.trim())
+								} catch (error) {
+									FUNCTIONS.showToast({success: false, message: "invalid component code"})
+								}
+							}
+
+						// get data from search result
+							else {
+								var resultElement = event.target.closest(".search-result")
+								var result = JSON.parse(resultElement.getAttribute("data") || "{}")
+							}
 
 						// race
 							if (result.type == "race") {
@@ -3611,10 +3634,11 @@ window.onload = function() {
 			/* submitCharacterUpdateSkillCreate */
 				function submitCharacterUpdateSkillCreate(event) {
 					try {
-						// from dropdown
+						// from dropdown (search)
 							if (event.target) {
-								var skillName = event.target.value.replace(/\s/g, "_")
-								var statistic = event.target.id.replace("character-", "").replace("-select", "")
+								var select = event.target.querySelector("select")
+								var skillName = select.value.replace(/\s/g, "_")
+								var statistic = select.id.replace("character-", "").replace("-select", "")
 							}
 
 						// from conditions
@@ -3748,10 +3772,11 @@ window.onload = function() {
 			/* submitCharacterUpdateItemCreate */
 				function submitCharacterUpdateItemCreate(event) {
 					try {
-						// from dropdown
+						// from dropdown (search)
 							if (event.target) {
-								var name = event.target.value
-								var category = event.target.querySelector("[value='" + event.target.value + "']").parentNode.label
+								var name = ELEMENTS.character.items.select.value
+								var option = ELEMENTS.character.items.select.querySelector("option[value='" + name + "']")
+								var category = option.getAttribute("category")
 								var item = FUNCTIONS.duplicateObject(RULES.items[category].find(function(i) {
 									return i.name == name
 								}))
@@ -3942,9 +3967,9 @@ window.onload = function() {
 			/* submitCharacterUpdateConditionCreate	*/
 				function submitCharacterUpdateConditionCreate(event) {
 					try {
-						// from dropdown
+						// from dropdown (search)
 							if (event.target) {
-								var conditionName = event.target.value
+								var conditionName = ELEMENTS.character.conditions.select.value
 								var condition = RULES.conditions[conditionName] || {name: conditionName}
 							}
 
