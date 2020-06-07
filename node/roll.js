@@ -561,7 +561,7 @@
 						return
 					}
 
-				// index
+				// postRollGroup
 					var postRollGroup = REQUEST.post.rollGroup
 
 				// query
@@ -585,7 +585,7 @@
 							})
 
 						// no roll?
-							if (!roll || !roll.display.dice[index]) {
+							if (!roll || !roll.display.dice[postRollGroup.index]) {
 								callback({success: false, message: "dice not found", recipients: [REQUEST.user.id]})
 								return
 							}
