@@ -366,6 +366,7 @@
 							return {
 								id: generateRandom(),
 								time: new Date().getTime(),
+								userId: null,
 								characterId: null,
 								contentId: null,
 								text: null,

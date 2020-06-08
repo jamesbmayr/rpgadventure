@@ -697,6 +697,7 @@
 								var count = Object.keys(arena.objects).length
 								var object = CORE.getSchema("arenaObject")
 									object.z = count
+									object.userId = REQUEST.user.id
 								arena.objects[object.id] = object
 								
 								if (arenaObjects.new.characterId) {
@@ -754,10 +755,12 @@
 						// delete object
 							else if (arenaObjects.delete) {
 								for (var i in arenaObjects) {
-									if (arena.objects[i]) {
-										var z = arena.objects[i].z
-										delete arena.objects[i]
+									if (!arena.objects[i]) {
+										continue
 									}
+									
+									var z = arena.objects[i].z
+									delete arena.objects[i]
 
 									for (var j in arena.objects) {
 										if (arena.objects[j] >= z) {

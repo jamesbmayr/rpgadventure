@@ -151,13 +151,19 @@
 									<option id="character-settings-select-new" value="[new]" selected>[new character]</option>
 								</optgroup>
 							</select>
-							<select id="character-settings-select-templates" class="form-pair">
+							<button id="character-settings-select-button" class="form-pair" visibility="false">&rarr;</button>
+						</form>
+						<div id="character-settings-select-search" class="option-search">
+							<input autocomplete="off" placeholder="templates" class="option-search-input form-pair"/>
+							<button id="character-settings-select-search-button" class="option-search-button form-pair">&rarr;</button>
+							<button class="option-search-cancel minor-button" visibility="false">x</button>
+							<div class="option-search-results"></div>
+							<select id="character-settings-select-templates" class="option-search-select">
 								<optgroup label="blank">
 									<option id="character-settings-select-blank" value="[template-blank]" selected>[blank template]</option>
 								</optgroup>
 							</select>
-							<button id="character-settings-select-button" class="form-pair">&rarr;</button>
-						</form>
+						</div>
 					</div>
 					<div id="character-settings-metadata" class="subsection" visibility="false">
 						<form id="character-settings-access-form" method="post" action="javascript:;">
@@ -196,7 +202,7 @@
 								<option id="character-settings-rng-d20" value="20">d20</option>
 								<option id="character-settings-rng-d100" value="100">d100</option>
 							</select>
-							<input id="character-settings-rng-label" type="text" placeholder="label" class="form-pair"/>
+							<input id="character-settings-rng-label" type="text" placeholder="label" class="form-pair" autocomplete="off"/>
 							<button id="character-settings-rng-button" class="form-pair">&rarr;</button>
 						</form>
 					</div>
@@ -217,13 +223,11 @@
 				<div id="character-content">
 					<div id="character-conditions" class="section">
 						<div id="character-conditions-search" class="option-search">
-							<input autocomplete="off" placeholder="conditions" class="option-search-input"/>
-							<button class="option-search-cancel minor-button">x</button>
+							<input autocomplete="off" placeholder="+ condition" class="option-search-input"/>
+							<button class="option-search-cancel minor-button" visibility="false">x</button>
 							<div class="option-search-results"></div>
-							<form id="character-conditions-search-form" method="post" action="javascript:;" class="option-search-form">
-								<select id="character-conditions-select" class="option-search-select"></select>
-								<button class="option-search-button">&rarr;</button>
-							</form>
+							<select id="character-conditions-select" class="option-search-select"></select>
+							<button id="character-conditions-search-button" class="option-search-button">&rarr;</button>
 						</div>
 						<div id="character-conditions-list"></div>
 					</div>
@@ -290,13 +294,11 @@
 						</summary>
 						<div class="skills-list"></div>
 						<div id="character-perception-search" class="option-search">
-							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
-							<button class="option-search-cancel minor-button">x</button>
+							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+							<button class="option-search-cancel minor-button" visibility="false">x</button>
 							<div class="option-search-results"></div>
-							<form id="character-perception-search-form" method="post" action="javascript:;" class="option-search-form">
-								<select id="character-perception-select" class="option-search-select"></select>
-								<button class="option-search-button">&rarr;</button>
-							</form>
+							<select id="character-perception-select" class="option-search-select"></select>
+							<button class="option-search-button">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-memory" class="statistic section">
@@ -313,13 +315,11 @@
 						</summary>
 						<div class="skills-list"></div>
 						<div id="character-memory-search" class="option-search">
-							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
-							<button class="option-search-cancel minor-button">x</button>
+							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+							<button class="option-search-cancel minor-button" visibility="false">x</button>
 							<div class="option-search-results"></div>
-							<form id="character-memory-search-form" method="post" action="javascript:;" class="option-search-form">
-								<select id="character-memory-select" class="option-search-select"></select>
-								<button class="option-search-button">&rarr;</button>
-							</form>
+							<select id="character-memory-select" class="option-search-select"></select>
+							<button class="option-search-button">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-logic" class="statistic section">
@@ -336,13 +336,11 @@
 						</summary>
 						<div class="skills-list"></div>
 						<div id="character-logic-search" class="option-search">
-							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
-							<button class="option-search-cancel minor-button">x</button>
+							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+							<button class="option-search-cancel minor-button" visibility="false">x</button>
 							<div class="option-search-results"></div>
-							<form id="character-logic-search-form" method="post" action="javascript:;" class="option-search-form">
-								<select id="character-logic-select" class="option-search-select"></select>
-								<button class="option-search-button">&rarr;</button>
-							</form>
+							<select id="character-logic-select" class="option-search-select"></select>
+							<button class="option-search-button">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-strength" class="statistic section">
@@ -359,13 +357,11 @@
 						</summary>
 						<div class="skills-list"></div>
 						<div id="character-strength-search" class="option-search">
-							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
-							<button class="option-search-cancel minor-button">x</button>
+							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+							<button class="option-search-cancel minor-button" visibility="false">x</button>
 							<div class="option-search-results"></div>
-							<form id="character-strength-search-form" method="post" action="javascript:;" class="option-search-form">
-								<select id="character-strength-select" class="option-search-select"></select>
-								<button class="option-search-button">&rarr;</button>
-							</form>
+							<select id="character-strength-select" class="option-search-select"></select>
+							<button class="option-search-button">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-dexterity" class="statistic section">
@@ -382,13 +378,11 @@
 						</summary>
 						<div class="skills-list"></div>
 						<div id="character-dexterity-search" class="option-search">
-							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
-							<button class="option-search-cancel minor-button">x</button>
+							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+							<button class="option-search-cancel minor-button" visibility="false">x</button>
 							<div class="option-search-results"></div>
-							<form id="character-dexterity-search-form" method="post" action="javascript:;" class="option-search-form">
-								<select id="character-dexterity-select" class="option-search-select"></select>
-								<button class="option-search-button">&rarr;</button>
-							</form>
+							<select id="character-dexterity-select" class="option-search-select"></select>
+							<button class="option-search-button">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-immunity" class="statistic section">
@@ -405,13 +399,11 @@
 						</summary>
 						<div class="skills-list"></div>
 						<div id="character-immunity-search" class="option-search">
-							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
-							<button class="option-search-cancel minor-button">x</button>
+							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+							<button class="option-search-cancel minor-button" visibility="false">x</button>
 							<div class="option-search-results"></div>
-							<form id="character-immunity-search-form" method="post" action="javascript:;" class="option-search-form">
-								<select id="character-immunity-select" class="option-search-select"></select>
-								<button class="option-search-button">&rarr;</button>
-							</form>
+							<select id="character-immunity-select" class="option-search-select"></select>
+							<button class="option-search-button">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-speed" class="statistic section">
@@ -428,23 +420,19 @@
 						</summary>
 						<div class="skills-list"></div>
 						<div id="character-speed-search" class="option-search">
-							<input autocomplete="off" placeholder="skills" class="option-search-input"/>
-							<button class="option-search-cancel minor-button">x</button>
+							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+							<button class="option-search-cancel minor-button" visibility="false">x</button>
 							<div class="option-search-results"></div>
-							<form id="character-speed-search-form" method="post" action="javascript:;" class="option-search-form">
-								<select id="character-speed-select" class="option-search-select"></select>
-								<button class="option-search-button">&rarr;</button>
-							</form>
+							<select id="character-speed-select" class="option-search-select"></select>
+							<button class="option-search-button">&rarr;</button>
 						</div>
 					</details>
 					<div id="character-items-search" class="option-search">
-						<input autocomplete="off" placeholder="items" class="option-search-input"/>
-						<button class="option-search-cancel minor-button">x</button>
+						<input autocomplete="off" placeholder="+ item" class="option-search-input"/>
+						<button class="option-search-cancel minor-button" visibility="false">x</button>
 						<div class="option-search-results"></div>
-						<form id="character-items-search-form" method="post" action="javascript:;" class="option-search-form">
-							<select id="character-items-select" class="option-search-select"></select>
-							<button class="option-search-button">&rarr;</button>
-						</form>
+						<select id="character-items-select" class="option-search-select"></select>
+						<button id="character-items-search-button" class="option-search-button">&rarr;</button>
 					</div>
 					<details id="character-items" class="section">
 						<summary>

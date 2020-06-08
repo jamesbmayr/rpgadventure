@@ -75,12 +75,18 @@ window.onload = function() {
 						}
 						ELEMENTS.gametable = {
 							element: document.getElementById("gametable"),
+							focus: false,
 							grabbed: null,
+							selected: null,
 							canvas: {
 								element: null,
 								context: null,
 								offsetX: 0,
 								offsetY: 0,
+								cursorX: null,
+								cursorY: null,
+								measureStartX: null,
+								measureStartY: null,
 								zoomPower: 0,
 								panLoops: {},
 								cellSize: 50,
@@ -180,8 +186,11 @@ window.onload = function() {
 									upload: document.getElementById("character-settings-select-upload"),
 									none: document.getElementById("character-settings-select-none"),
 									new: document.getElementById("character-settings-select-new"),
+									button: document.getElementById("character-settings-select-button"),
 									templates: document.getElementById("character-settings-select-templates"),
-									blank: document.getElementById("character-settings-select-blank")
+									blank: document.getElementById("character-settings-select-blank"),
+									search: document.getElementById("character-settings-select-search"),
+									searchButton: document.getElementById("character-settings-select-search-button")
 								},
 								upload: document.getElementById("character-settings-upload"),
 								metadata: document.getElementById("character-settings-metadata"),
@@ -264,16 +273,16 @@ window.onload = function() {
 							},
 							items: {
 								element: document.getElementById("character-items"),
-								form: document.getElementById("character-items-search-form"),
+								searchButton: document.getElementById("character-items-search-button"),
 								select: document.getElementById("character-items-select"),
 								equipped: document.getElementById("character-items-equipped"),
 								unequipped: document.getElementById("character-items-unequipped"),
 							},
 							conditions: {
 								element: document.getElementById("character-conditions"),
-								list: document.getElementById("character-conditions-list"),
-								form: document.getElementById("character-conditions-search-form"),
-								select: document.getElementById("character-conditions-select")
+								searchButton: document.getElementById("character-conditions-search-button"),
+								select: document.getElementById("character-conditions-select"),
+								list: document.getElementById("character-conditions-list")
 							}
 						}
 
@@ -419,6 +428,9 @@ window.onload = function() {
 					// tools
 						ELEMENTS.tools.form.addEventListener(TRIGGERS.change, displayTool)
 
+					// gametable
+						ELEMENTS.body.addEventListener(TRIGGERS.keydown, nudgeContentArenaObject)
+
 					// settings
 						ELEMENTS.settings.game.select.element.addEventListener(TRIGGERS.change, displayGameListSelection)
 						ELEMENTS.settings.game.form.addEventListener(TRIGGERS.submit, submitGameRead)
@@ -437,6 +449,7 @@ window.onload = function() {
 						ELEMENTS.character.modes.form.addEventListener(TRIGGERS.change, displayCharacterMode)
 						ELEMENTS.character.settings.select.element.addEventListener(TRIGGERS.change, displayCharacterListSelection)
 						ELEMENTS.character.settings.select.form.addEventListener(TRIGGERS.submit, submitCharacterRead)
+						ELEMENTS.character.settings.select.searchButton.addEventListener(TRIGGERS.click, submitCharacterRead)
 						ELEMENTS.character.settings.download.form.addEventListener(TRIGGERS.submit, displayCharacterDownload)
 						ELEMENTS.character.settings.access.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateAccess)
 						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, submitCharacterCreateDuplicate)
@@ -447,9 +460,9 @@ window.onload = function() {
 						ELEMENTS.character.info.imageResetForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImageDelete)
 						ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateInfo) })
 						ELEMENTS.character.content.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, submitCharacterUpdateStatistic) })
-						ELEMENTS.character.content.querySelectorAll(".statistic .option-search-form").forEach(function(form) { form.addEventListener(TRIGGERS.submit, submitCharacterUpdateSkillCreate) })
-						ELEMENTS.character.items.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateItemCreate)
-						ELEMENTS.character.conditions.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateConditionCreate)
+						ELEMENTS.character.content.querySelectorAll(".statistic .option-search-button").forEach(function(form) { form.addEventListener(TRIGGERS.click, submitCharacterUpdateSkillCreate) })
+						ELEMENTS.character.items.searchButton.addEventListener(TRIGGERS.click, submitCharacterUpdateItemCreate)
+						ELEMENTS.character.conditions.searchButton.addEventListener(TRIGGERS.click, submitCharacterUpdateConditionCreate)
 						ELEMENTS.character.damage.input.addEventListener(TRIGGERS.change, submitCharacterUpdateDamage)
 						ELEMENTS.character.damage.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateRecover)
 						ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateDamageStatistic) })
@@ -2246,13 +2259,15 @@ window.onload = function() {
 								if (selectedOption) {
 									ELEMENTS.character.settings.select.element.value = CHARACTER.id
 									ELEMENTS.character.settings.select.element.className = "form-pair"
-									ELEMENTS.character.settings.select.templates.setAttribute("visibility", false)
+									ELEMENTS.character.settings.select.search.setAttribute("visibility", false)
+									ELEMENTS.character.settings.select.button.setAttribute("visibility", true)
 								}
 							}
 							else {
 								ELEMENTS.character.settings.select.element.value = ELEMENTS.character.settings.select.new.value
 								ELEMENTS.character.settings.select.element.className = ""
-								ELEMENTS.character.settings.select.templates.setAttribute("visibility", true)
+								ELEMENTS.character.settings.select.search.setAttribute("visibility", true)
+								ELEMENTS.character.settings.select.button.setAttribute("visibility", false)
 							}
 
 						// targeting
@@ -2268,14 +2283,16 @@ window.onload = function() {
 					try {
 						// reveal
 							if (ELEMENTS.character.settings.select.element.value == ELEMENTS.character.settings.select.new.value) {
-								ELEMENTS.character.settings.select.templates.setAttribute("visibility", true)
 								ELEMENTS.character.settings.select.element.className = ""
+								ELEMENTS.character.settings.select.search.setAttribute("visibility", true)
+								ELEMENTS.character.settings.select.button.setAttribute("visibility", false)
 								return
 							}
 
 						// hide
-							ELEMENTS.character.settings.select.templates.setAttribute("visibility", false)
 							ELEMENTS.character.settings.select.element.className = "form-pair"
+							ELEMENTS.character.settings.select.search.setAttribute("visibility", false)
+							ELEMENTS.character.settings.select.button.setAttribute("visibility", true)
 							return
 					} catch (error) {console.log(error)}
 				}
@@ -3636,7 +3653,7 @@ window.onload = function() {
 					try {
 						// from dropdown (search)
 							if (event.target) {
-								var select = event.target.querySelector("select")
+								var select = event.target.closest(".option-search").querySelector(".option-search-select")
 								var skillName = select.value.replace(/\s/g, "_")
 								var statistic = select.id.replace("character-", "").replace("-select", "")
 							}
@@ -3677,7 +3694,7 @@ window.onload = function() {
 
 						// regular add - loop through conditions
 							for (var i in CHARACTER.info.status.conditions) {
-								var condition = RULES.conditions[CHARACTER.info.status.conditions[i]]
+								var condition = CHARACTER.info.status.conditions[i]
 								if (condition.effects) {
 									for (var e in condition.effects) {
 										for (var s in condition.effects[e]) {
@@ -4576,7 +4593,13 @@ window.onload = function() {
 						// no content?
 							if (!CONTENT || !CONTENT.type) {
 								ELEMENTS.gametable.element.innerHTML = ""
+								ELEMENTS.gametable.selected = ELEMENTS.gametable.grabbed = null
 								return
+							}
+
+						// selection
+							if (CONTENT.type !== "arena") {
+								ELEMENTS.gametable.selected = ELEMENTS.gametable.grabbed = null
 							}
 
 						// arena
@@ -4588,7 +4611,8 @@ window.onload = function() {
 						// text
 							if (CONTENT.type == "text") {
 								displayContentGametableText()
-								return							}
+								return
+							}
 
 						// image
 							if (CONTENT.type == "image") {
@@ -4628,7 +4652,11 @@ window.onload = function() {
 									ELEMENTS.gametable.element.innerHTML = ""
 										arena = document.createElement("canvas")
 										arena.className = "content-arena"
-										arena.addEventListener(TRIGGERS.mousedown, grabContent)
+										arena.setAttribute("tabindex", 1)
+										arena.addEventListener(TRIGGERS.mouseenter, focusContentArena)
+										arena.addEventListener(TRIGGERS.mouseleave, blurContentArena)
+										arena.addEventListener(TRIGGERS.rightclick, measureContentArena)
+										arena.addEventListener(TRIGGERS.mousedown, grabContentArena)
 									ELEMENTS.gametable.element.appendChild(arena)
 
 								// panning
@@ -4992,6 +5020,11 @@ window.onload = function() {
 			/* displayContentArenaObjectListing */
 				function displayContentArenaObjectListing(object) {
 					try {
+						// not owned
+							if (CONTENT.userId !== USER.id && object.userId !== USER.id && (!CHARACTER || object.characterId !== CHARACTER.id)) {
+								return
+							}
+
 						// listing
 							var listing = ELEMENTS.content.objects.list.querySelector("#arena-object-" + object.id)
 
@@ -5001,6 +5034,7 @@ window.onload = function() {
 									var listing = document.createElement("div")
 										listing.id = "arena-object-" + object.id
 										listing.className = "arena-object"
+										listing.addEventListener(TRIGGERS.click, selectContentArenaObject)
 									ELEMENTS.content.objects.list.appendChild(listing)
 
 								// inputs
@@ -5301,6 +5335,7 @@ window.onload = function() {
 							}
 
 						// set values
+							listing.setAttribute("selected", ELEMENTS.gametable.selected && ELEMENTS.gametable.selected.arenaObject.id == object.id)
 							listing.style.order = object.z || 0
 							inputVisible.checked = object.visible || false
 							inputText.value = object.text || ""
@@ -5373,6 +5408,9 @@ window.onload = function() {
 								displayContentArenaObject(CONTENT.arena.objects[sortedKeys[i]])
 							}
 
+						// measure
+							displayContentArenaRuler()
+
 						// display grid
 							displayContentArenaGrid()
 					} catch (error) {console.log(error)}
@@ -5437,6 +5475,45 @@ window.onload = function() {
 							if (object.text) {
 								FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x + width / 2, y + height / 2, object.text, {color: ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow:ELEMENTS.gametable.canvas.gridBackground, size: cellSize / 2})
 							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentArenaRuler */
+				function displayContentArenaRuler() {
+					try {
+						// validate
+							if (ELEMENTS.gametable.canvas.measureStartX === null || ELEMENTS.gametable.canvas.measureStartY === null || ELEMENTS.gametable.canvas.cursorX === null || ELEMENTS.gametable.canvas.cursorY === null) {
+								return
+							}
+
+						// cellSize
+							var cellSize = Math.round(ELEMENTS.gametable.canvas.cellSize)
+
+						// snap
+							var startX = ELEMENTS.gametable.canvas.measureStartX
+							var startY = ELEMENTS.gametable.canvas.measureStartY
+							var endX = Math.round(ELEMENTS.gametable.canvas.cursorX * 2) / 2
+							var endY = Math.round(ELEMENTS.gametable.canvas.cursorY * 2) / 2
+
+						// distance
+							var distance = Math.round(Math.pow(Math.pow(startX - endX, 2) + Math.pow(startY - endY, 2), (1 / 2)))
+								distance = distance + " (" + (distance * 5) + ")"
+
+						// scale
+							startX = startX * cellSize
+							startY = startY * cellSize
+							endX = endX  * cellSize
+							endY = endY * cellSize
+
+						// midpoint
+							var midX = (startX + endX) / 2
+							var midY = (startY + endY) / 2
+
+						// line
+							FUNCTIONS.drawLine(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, startX, startY, endX, endY, {color: ELEMENTS.gametable.canvas.gridColor, opacity: 1, border: cellSize / 10})
+
+						// text
+							FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, midX, midY, distance, {color: ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow:ELEMENTS.gametable.canvas.gridBackground, size: cellSize / 2})
 					} catch (error) {console.log(error)}
 				}
 
@@ -5793,6 +5870,7 @@ window.onload = function() {
 							}
 
 						// send socket request
+							ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
 							SOCKET.send(JSON.stringify(post))
 							FUNCTIONS.showToast({success: true, message: "object added"})
 					} catch (error) {console.log(error)}
@@ -5834,7 +5912,7 @@ window.onload = function() {
 								FUNCTIONS.showToast({success: false, message: "no property updated"})
 								return
 							}
-							post.content.arena.objects[id][property] = (event.target.type == "checkbox") ? event.target.checked : event.target.value || event.target.getAttribute("value")
+							post.content.arena.objects[id][property] = (event.target.type == "checkbox") ? !event.target.checked : (event.target.value || event.target.getAttribute("value"))
 
 						// send socket request
 							SOCKET.send(JSON.stringify(post))
@@ -5892,6 +5970,12 @@ window.onload = function() {
 						// prevent default
 							event.preventDefault()
 
+						// arena
+							if (CONTENT.arena) {
+								grabContentArena(event)
+								return
+							}
+
 						// grabbing style
 							ELEMENTS.body.setAttribute("grabbing", true)
 
@@ -5899,12 +5983,6 @@ window.onload = function() {
 							var cursor = {
 								x: (event.touches ? event.touches[0].clientX : event.clientX),
 								y: (event.touches ? event.touches[0].clientY : event.clientY)
-							}
-
-						// arena
-							if (CONTENT.type == "arena") {
-								grabContentArenaObject(cursor)
-								return
 							}
 
 						// get center
@@ -5928,8 +6006,19 @@ window.onload = function() {
 			/* moveContent */
 				function moveContent(event) {
 					try {
+						// no content
+							if (!CONTENT) {
+								return
+							}
+
+						// arena
+							if (CONTENT.arena) {
+								moveContentArena(event)
+								return
+							}
+
 						// nothing grabbed
-							if (!CONTENT || !ELEMENTS.gametable.grabbed) {
+							if (!ELEMENTS.gametable.grabbed) {
 								return false
 							}
 
@@ -5937,12 +6026,6 @@ window.onload = function() {
 							var cursor = {
 								x: (event.touches ? event.touches[0].clientX : event.clientX),
 								y: (event.touches ? event.touches[0].clientY : event.clientY)
-							}
-
-						// arena
-							if (ELEMENTS.gametable.grabbed.arenaObject) {
-								moveContentArenaObject(cursor)
-								return
 							}
 
 						// calculate offset
@@ -5967,8 +6050,8 @@ window.onload = function() {
 							}
 
 						// arena
-							if (ELEMENTS.gametable.grabbed && ELEMENTS.gametable.grabbed.arenaObject) {
-								ungrabContentArenaObject()
+							if (CONTENT && CONTENT.arena) {
+								ungrabContentArena()
 								return
 							}
 
@@ -5986,7 +6069,7 @@ window.onload = function() {
 							}
 
 						// arena
-							if (CONTENT.type == "arena") {
+							if (CONTENT.arena) {
 								zoomContentArena(event)
 								return
 							}
@@ -6002,6 +6085,330 @@ window.onload = function() {
 				}
 
 		/** controls - arena **/
+			/* selectContentArenaObject */
+				function selectContentArenaObject(event) {
+					try {
+						// no content or canvas?
+							if (!CONTENT || !ELEMENTS.gametable.canvas.element) {
+								return
+							}
+
+						// no side bar?
+							if (!event.target || !event.target.closest("#content")) {
+								return
+							}
+
+						// get listing
+							var listing = event.target.closest(".arena-object")
+							if (!listing) {
+								return
+							}
+
+						// get id
+							var id = listing.id.replace("arena-object-", "")
+							if (!id) {
+								return
+							}
+
+						// get object
+							var arenaObject = CONTENT.arena.objects[id]
+							if (!arenaObject) {
+								return
+							}
+
+						// set selection
+							ELEMENTS.gametable.selected = {
+								arenaObject: CONTENT.arena.objects[id]
+							}
+						
+						// redisplay
+							displayContentArenaPanel()
+					} catch (error) {console.log(error)}
+				}
+
+			/* focusContentArena */
+				function focusContentArena(event) {
+					try {
+						// no content
+							if (!CONTENT || !ELEMENTS.gametable.canvas.element) {
+								ELEMENTS.gametable.focus = false
+								return
+							}
+
+						// select
+							ELEMENTS.gametable.focus = true
+					} catch (error) {console.log(error)}
+				}
+
+			/* blurContentArena */
+				function blurContentArena(event) {
+					try {
+						// unselect
+							ELEMENTS.gametable.focus = false
+					} catch (error) {console.log(error)}
+				}
+
+			/* getContentArenaCoordinates */
+				function getContentArenaCoordinates(event) {
+					try {
+						// validate
+							if (!event || !ELEMENTS.gametable.canvas.element) {
+								return null
+							}
+
+						// cursor
+							var cursor = {
+								x: (event.touches ? event.touches[0].clientX : event.clientX),
+								y: (event.touches ? event.touches[0].clientY : event.clientY)
+							}
+
+						// get center
+							var rectangle = ELEMENTS.gametable.canvas.element.getBoundingClientRect()
+							var center = {
+								x: (rectangle.left + (rectangle.width / 2)),
+								y: (rectangle.top + (rectangle.height / 2))
+							}
+
+						// get offset
+							var actualOffset = {
+								x: cursor.x - center.x,
+								y: cursor.y - center.y
+							}
+
+						// get coordinates
+							var cellSize = Math.round(ELEMENTS.gametable.canvas.cellSize)
+							var coordinates = {
+								x: (actualOffset.x - Number(ELEMENTS.gametable.canvas.offsetX)) / cellSize,
+								y: (actualOffset.y + Number(ELEMENTS.gametable.canvas.offsetY)) / cellSize * -1,
+							}
+
+						// return
+							return coordinates
+					} catch (error) {console.log(error)}
+				}
+
+			/* grabContentArena */
+				function grabContentArena(event) {
+					try {
+						// no content
+							if (!CONTENT || !CONTENT.arena || !ELEMENTS.gametable.canvas.element) {
+								return
+							}
+
+						// prevent default / rightclick
+							event.preventDefault()
+							if (event.which > 1) {
+								return
+							}
+
+						// grabbing style
+							ELEMENTS.body.setAttribute("grabbing", true)
+
+						// coordinates
+							var coordinates = getContentArenaCoordinates(event)
+							if (!coordinates) {
+								return
+							}
+							ELEMENTS.gametable.canvas.cursorX = coordinates.x
+							ELEMENTS.gametable.canvas.cursorY = coordinates.y
+
+						// sort keys
+							var sortedKeys = Object.keys(CONTENT.arena.objects) || null
+							if (!sortedKeys) {
+								return
+							}
+							sortedKeys = sortedKeys.sort(function(a, b) {
+								return CONTENT.arena.objects[b].z - CONTENT.arena.objects[a].z
+							})
+
+						// loop through to find top-most object
+							for (var i in sortedKeys) {
+								var arenaObject = CONTENT.arena.objects[sortedKeys[i]]
+								if (!arenaObject.visible) { continue }
+								if (!(CONTENT.userId == USER.id || arenaObject.userId == USER.id || (CHARACTER && arenaObject.characterId == CHARACTER.id))) { continue }
+
+								var xRadius = (arenaObject.width / 2)
+								var yRadius = (arenaObject.height / 2)
+
+								var top = Number(arenaObject.y) + yRadius
+								var right = Number(arenaObject.x) + xRadius
+								var bottom = Number(arenaObject.y) - yRadius
+								var left = Number(arenaObject.x) - xRadius
+
+								if ((left <= ELEMENTS.gametable.canvas.cursorX && ELEMENTS.gametable.canvas.cursorX <= right)
+								 && (bottom <= ELEMENTS.gametable.canvas.cursorY && ELEMENTS.gametable.canvas.cursorY <= top)) {
+									ELEMENTS.gametable.grabbed = {
+										arenaObject: arenaObject
+									}
+									selectContentArenaObject({target: document.querySelector("#arena-object-" + arenaObject.id)})
+									return
+								}
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* measureContentArena */
+				function measureContentArena(event) {
+					try {
+						// no content
+							if (!CONTENT || !CONTENT.arena || !ELEMENTS.gametable.canvas.element) {
+								return
+							}
+
+						// prevent default
+							event.preventDefault()
+
+						// coordinates
+							var coordinates = getContentArenaCoordinates(event)
+							if (!coordinates) {
+								return
+							}
+							ELEMENTS.gametable.canvas.cursorX = coordinates.x
+							ELEMENTS.gametable.canvas.cursorY = coordinates.y
+
+						// snap
+							ELEMENTS.gametable.canvas.measureStartX = Math.round(coordinates.x * 2) / 2
+							ELEMENTS.gametable.canvas.measureStartY = Math.round(coordinates.y * 2) / 2
+					} catch (error) {console.log(error)}
+				}
+
+			/* moveContentArena */
+				function moveContentArena(event) {
+					try {
+						// no content
+							if (!CONTENT || !CONTENT.arena || !ELEMENTS.gametable.canvas.element) {
+								return
+							}
+
+						// coordinates
+							var coordinates = getContentArenaCoordinates(event)
+							if (!coordinates) {
+								return
+							}
+							ELEMENTS.gametable.canvas.cursorX = coordinates.x
+							ELEMENTS.gametable.canvas.cursorY = coordinates.y
+
+						// grabbed?
+							if (ELEMENTS.gametable.grabbed && ELEMENTS.gametable.grabbed.arenaObject) {
+								ELEMENTS.gametable.grabbed.arenaObject.x = Math.round(coordinates.x * 2) / 2
+								ELEMENTS.gametable.grabbed.arenaObject.y = Math.round(coordinates.y * 2) / 2
+								displayContentArena()
+								return
+							}
+
+						// redisplay
+							if (ELEMENTS.gametable.canvas.measureStartX !== null && ELEMENTS.gametable.canvas.measureStartY !== null) {
+								displayContentArenaImages()
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* ungrabContentArena */
+				function ungrabContentArena() {
+					try {
+						// no content
+							if (!CONTENT || !CONTENT.arena || !ELEMENTS.gametable.canvas.element) {
+								ELEMENTS.gametable.canvas.measureStartX = null
+								ELEMENTS.gametable.canvas.measureStartY = null
+								ELEMENTS.gametable.canvas.cursorX = null
+								ELEMENTS.gametable.canvas.cursorY = null
+								ELEMENTS.gametable.grabbed = null
+								ELEMENTS.gametable.selected = null
+								ELEMENTS.gametable.focus = false
+								return
+							}
+
+						// stop measuring
+							if (ELEMENTS.gametable.canvas.measureStartX !== null || ELEMENTS.gametable.canvas.measureStartY !== null) {
+								var wasMeasuring = true
+								ELEMENTS.gametable.canvas.measureStartX = null
+								ELEMENTS.gametable.canvas.measureStartY = null
+							}
+
+						// no grabbed content
+							if (!ELEMENTS.gametable.grabbed || !ELEMENTS.gametable.grabbed.arenaObject) {
+								ELEMENTS.gametable.grabbed = null
+								if (wasMeasuring) {
+									displayContentArenaImages()
+								}
+								return
+							}
+
+						// post
+							var post = {
+								action: "updateContentData",
+								content: {
+									id: CONTENT.id,
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									arena: {
+										objects: {}
+									}
+								}
+							}
+
+						// snap object
+							var arenaObject = ELEMENTS.gametable.grabbed.arenaObject
+							post.content.arena.objects[arenaObject.id] = {
+								x: Math.round(arenaObject.x * 2) / 2,
+								y: Math.round(arenaObject.y * 2) / 2
+							}
+
+						// unselect
+							ELEMENTS.gametable.grabbed = null
+						
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* nudgeContentArenaObject */
+				function nudgeContentArenaObject(event) {
+					try {
+						// no content
+							if (!CONTENT || !ELEMENTS.gametable.focus || !ELEMENTS.gametable.selected || !ELEMENTS.gametable.selected.arenaObject) {
+								return
+							}
+
+						// keycode
+							if (event.which == 37) { // left
+								ELEMENTS.gametable.selected.arenaObject.x += -1
+							}
+							else if (event.which == 38) { // up
+								ELEMENTS.gametable.selected.arenaObject.y += 1
+							}
+							else if (event.which == 39) { // right
+								ELEMENTS.gametable.selected.arenaObject.x += 1
+							}
+							else if (event.which == 40) { // down
+								ELEMENTS.gametable.selected.arenaObject.y += -1
+							}
+
+						// post
+							var post = {
+								action: "updateContentData",
+								content: {
+									id: CONTENT.id,
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									arena: {
+										objects: {}
+									}
+								}
+							}
+
+						// snap object
+							var arenaObject = ELEMENTS.gametable.selected.arenaObject
+							post.content.arena.objects[arenaObject.id] = {
+								x: Math.round(arenaObject.x * 2) / 2,
+								y: Math.round(arenaObject.y * 2) / 2
+							}
+						
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
 			/* panContentArena */
 				function panContentArena(event) {
 					try {
@@ -6050,138 +6457,6 @@ window.onload = function() {
 								clearInterval(ELEMENTS.gametable.canvas.panLoops[direction])
 								delete ELEMENTS.gametable.canvas.panLoops[direction]
 							}
-					} catch (error) {console.log(error)}
-				}
-
-			/* grabContentArenaObject */
-				function grabContentArenaObject(cursor) {
-					try {
-						// no content or canvas?
-							if (!CONTENT || !ELEMENTS.gametable.canvas.element) {
-								return
-							}
-
-						// get center
-							var rectangle = ELEMENTS.gametable.canvas.element.getBoundingClientRect()
-							var center = {
-								x: (rectangle.left + (rectangle.width / 2)),
-								y: (rectangle.top + (rectangle.height / 2))
-							}
-
-						// get offset
-							var actualOffset = {
-								x: cursor.x - center.x,
-								y: cursor.y - center.y
-							}
-
-						// get coordinates
-							var cellSize = Math.round(ELEMENTS.gametable.canvas.cellSize)
-							var coordinates = {
-								x: (actualOffset.x - Number(ELEMENTS.gametable.canvas.offsetX)) / cellSize,
-								y: (actualOffset.y + Number(ELEMENTS.gametable.canvas.offsetY)) / cellSize * -1,
-							}
-
-						// sort keys
-							var sortedKeys = Object.keys(CONTENT.arena.objects) || []
-								sortedKeys = sortedKeys.sort(function(a, b) {
-									return CONTENT.arena.objects[b].z - CONTENT.arena.objects[a].z
-								})
-
-						// loop through to find top-most object
-							for (var i in sortedKeys) {
-								var arenaObject = CONTENT.arena.objects[sortedKeys[i]]
-								if (!arenaObject.visible) { continue }
-
-								var xRadius = (arenaObject.width / 2)
-								var yRadius = (arenaObject.height / 2)
-
-								var top = Number(arenaObject.y) + yRadius
-								var right = Number(arenaObject.x) + xRadius
-								var bottom = Number(arenaObject.y) - yRadius
-								var left = Number(arenaObject.x) - xRadius
-
-								if ((left <= coordinates.x && coordinates.x <= right)
-								 && (bottom <= coordinates.y && coordinates.y <= top)) {
-									ELEMENTS.gametable.grabbed = {
-										arenaObject: arenaObject
-									}
-									return
-								}
-							}
-					} catch (error) {console.log(error)}
-				}
-
-			/* moveContentArenaObject */
-				function moveContentArenaObject(cursor) {
-					try {
-						// no content or canvas?
-							if (!CONTENT || !ELEMENTS.gametable.canvas.element) {
-								return
-							}
-
-						// get center
-							var rectangle = ELEMENTS.gametable.canvas.element.getBoundingClientRect()
-							var center = {
-								x: (rectangle.left + (rectangle.width / 2)),
-								y: (rectangle.top + (rectangle.height / 2))
-							}
-
-						// get offset
-							var actualOffset = {
-								x: cursor.x - center.x,
-								y: cursor.y - center.y
-							}
-
-						// get coordinates
-							var cellSize = Math.round(ELEMENTS.gametable.canvas.cellSize)
-							var coordinates = {
-								x: (actualOffset.x - ELEMENTS.gametable.canvas.offsetX) / cellSize,
-								y: (actualOffset.y + ELEMENTS.gametable.canvas.offsetY) / cellSize * -1,
-							}
-
-						// get object
-							var arenaObject = ELEMENTS.gametable.grabbed.arenaObject
-								arenaObject.x = Math.round(coordinates.x * 2) / 2
-								arenaObject.y = Math.round(coordinates.y * 2) / 2
-
-						// display
-							displayContentArena()
-					} catch (error) {console.log(error)}
-				}
-
-			/* ungrabContentArenaObject */
-				function ungrabContentArenaObject() {
-					try {
-						// no content
-							if (!CONTENT || !ELEMENTS.gametable.grabbed || !ELEMENTS.gametable.grabbed.arenaObject) {
-								return
-							}
-
-						// post
-							var post = {
-								action: "updateContentData",
-								content: {
-									id: CONTENT.id,
-									userId: USER ? USER.id : null,
-									gameId: GAME ? GAME.id : null,
-									arena: {
-										objects: {}
-									}
-								}
-							}
-
-						// snap object
-							var arenaObject = ELEMENTS.gametable.grabbed.arenaObject
-							post.content.arena.objects[arenaObject.id] = {
-								x: Math.round(arenaObject.x * 2) / 2,
-								y: Math.round(arenaObject.y * 2) / 2
-							}
-
-						// unselect
-							ELEMENTS.gametable.grabbed = null
-						
-						// send
-							SOCKET.send(JSON.stringify(post))
 					} catch (error) {console.log(error)}
 				}
 

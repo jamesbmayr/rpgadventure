@@ -4,11 +4,33 @@ window.addEventListener("load", function() {
 			window.FUNCTIONS = window.FUNCTIONS || {}
 
 		/* triggers */
+			window.TRIGGERS = {
+				submit: "submit",
+				change: "change",
+				input: "input",
+				focus: "focus",
+				blur: "blur",
+				resize: "resize",
+				keydown: "keydown",
+				keyup: "keyup"
+			}
 			if ((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent)) {
-				window.TRIGGERS = {click: "touchstart", mousedown: "touchstart", mousemove: "touchmove", mouseup: "touchend", submit: "submit", change: "change", input: "input", focus: "focus", blur: "blur", resize: "resize", mouseenter: "touchstart", mouseleave: "touchend"}
+				window.TRIGGERS.click = "touchstart"
+				window.TRIGGERS.mousedown = "touchstart"
+				window.TRIGGERS.mousemove = "touchmove"
+				window.TRIGGERS.mouseup = "touchend"
+				window.TRIGGERS.mouseenter = "touchstart"
+				window.TRIGGERS.mouseleave = "touchend"
+				window.TRIGGERS.rightclick = "contextmenu"
 			}
 			else {
-				window.TRIGGERS = {click:      "click", mousedown:  "mousedown", mousemove: "mousemove", mouseup:  "mouseup", submit: "submit", change: "change", input: "input", focus: "focus", blur: "blur", resize: "resize", mouseenter: "mouseenter", mouseleave: "mouseleave"}
+				window.TRIGGERS.click = "click"
+				window.TRIGGERS.mousedown = "mousedown"
+				window.TRIGGERS.mousemove = "mousemove"
+				window.TRIGGERS.mouseup = "mouseup"
+				window.TRIGGERS.mouseenter = "mouseenter"
+				window.TRIGGERS.mouseleave = "mouseleave"
+				window.TRIGGERS.rightclick = "contextmenu"
 			}
 
 		/* defaults */
@@ -94,15 +116,21 @@ window.addEventListener("load", function() {
 				} catch (error) {console.log(error)}
 			}
 
+	/*** search ***/
 		/* searchSelect */
 			window.FUNCTIONS.searchSelect = searchSelect
 			function searchSelect(event) {
 				try {
 					// elements
 						var componentElement = event.target.closest(".option-search")
+						if (!componentElement) {
+							return false
+						}
+
 						var resultsElement = componentElement.querySelector(".option-search-results")
 						var selectElement = componentElement.querySelector(".option-search-select")
-						if (!resultsElement || !selectElement) {
+						var cancelElement = componentElement.querySelector(".option-search-cancel")
+						if (!resultsElement || !selectElement || !cancelElement) {
 							return false
 						}
 
@@ -131,14 +159,19 @@ window.addEventListener("load", function() {
 						resultsElement.innerHTML = ""
 						for (var i in results) {
 							// option
-								var option = document.createElement("div")
-									option.className = "option-search-result"
-									option.setAttribute("disabled", results[i].disabled)
-									option.innerText = results[i].text
-									option.setAttribute("value", results[i].value)
-									option.addEventListener(TRIGGERS.click, selectOption)
-								resultsElement.appendChild(option)
+								var button = document.createElement("button")
+									button.className = "option-search-result"
+									if (results[i].disabled) {
+										button.setAttribute("disabled", true)
+									}
+									button.innerText = results[i].text
+									button.value = results[i].value
+									button.addEventListener(TRIGGERS.click, selectOption)
+								resultsElement.appendChild(button)
 						}
+
+					// show x
+						cancelElement.setAttribute("visibility", true)
 				} catch (error) {console.log(error)}
 			}
 
@@ -148,16 +181,21 @@ window.addEventListener("load", function() {
 				try {
 					// elements
 						var componentElement = event.target.closest(".option-search")
+						if (!componentElement) {
+							return false
+						}
+
 						var inputElement = componentElement.querySelector(".option-search-input")
 						var resultsElement = componentElement.querySelector(".option-search-results")
 						var selectElement = componentElement.querySelector(".option-search-select")
 						var buttonElement = componentElement.querySelector(".option-search-button")
-						if (!inputElement || !resultsElement || !selectElement || !buttonElement) {
+						var cancelElement = componentElement.querySelector(".option-search-cancel")
+						if (!inputElement || !resultsElement || !selectElement || !buttonElement || !cancelElement) {
 							return false
 						}
 
 					// value
-						var value = event.target.getAttribute("value")
+						var value = event.target.value
 						if (!value) {
 							return false
 						}
@@ -165,6 +203,7 @@ window.addEventListener("load", function() {
 					// reset search
 						resultsElement.innerHTML = ""
 						inputElement.value = ""
+						cancelElement.setAttribute("visibility", false)
 
 					// set select
 						selectElement.value = value
@@ -178,15 +217,21 @@ window.addEventListener("load", function() {
 				try {
 					// elements
 						var componentElement = event.target.closest(".option-search")
+						if (!componentElement) {
+							return false
+						}
+
 						var inputElement = componentElement.querySelector(".option-search-input")
 						var resultsElement = componentElement.querySelector(".option-search-results")
-						if (!inputElement || !resultsElement) {
+						var cancelElement = componentElement.querySelector(".option-search-cancel")
+						if (!inputElement || !resultsElement || !cancelElement) {
 							return false
 						}
 
 					// reset search
 						resultsElement.innerHTML = ""
 						inputElement.value = ""
+						cancelElement.setAttribute("visibility", false)
 				} catch (error) {console.log(error)}
 			}
 

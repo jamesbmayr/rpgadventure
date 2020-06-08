@@ -533,6 +533,15 @@
 			padding: var(--medium-gap-size);
 		}
 
+		/* selection */
+			#character-settings-select-search-button {
+				display: inline-block;
+			}
+
+			#character-settings-select-search .option-search-cancel {
+				margin-right: calc(var(--medium-font-size) + 4 * var(--small-gap-size));
+			}
+
 		/* rng */
 			#character-settings-rng-count {
 				width: calc(25% - 2 * (var(--border-size) + var(--small-gap-size)));
@@ -819,6 +828,7 @@
 		/* skill top level */
 			.skills-list {
 				float: left;
+				width: 100%;
 			}
 
 			.skill {
@@ -960,7 +970,7 @@
 				pointer-events: all;
 			}
 
-			.statistic .option-search input, .statistic .option-search div {
+			.statistic .option-search input, .statistic .option-search button {
 				color: var(--medium-green);
 			}
 
@@ -1271,7 +1281,7 @@
 				pointer-events: all;
 			}
 
-			#character-items-search input, #character-items-search div {
+			#character-items-search input, #character-items-search button {
 				color: var(--medium-yellow);
 			}
 
@@ -1365,7 +1375,7 @@
 				pointer-events: all;
 			}
 
-			#character-conditions-search input, #character-conditions-search div {
+			#character-conditions-search input, #character-conditions-search button {
 				color: var(--medium-blue);
 			}
 
@@ -1651,7 +1661,7 @@
 			}
 
 		/* pan */
-			#content[mode="image"] #content-controls-pan-form {
+			#content[mode="image"] #content-controls-pan {
 				display: none;
 			}
 
@@ -1706,6 +1716,10 @@
 				width: calc(100% - 2 * var(--small-gap-size));
 			}
 
+			.arena-object[selected=true] {
+				box-shadow: 0 0 calc(2 * var(--shadow-size)) var(--dark-blue);
+			}
+
 		/* label */
 			.arena-object-label {
 				float: left;
@@ -1748,7 +1762,7 @@
 				height: var(--small-font-size);
 			}
 
-			.arena-object-label:last-child() {
+			.arena-object-image {
 				margin-bottom: 0;
 			}
 
