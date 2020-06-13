@@ -1742,6 +1742,7 @@ window.onload = function() {
 
 							var resultSend = document.createElement("button")
 								resultSend.className = "search-result-send minor-button"
+								resultSend.title = "send to chat"
 								resultSend.innerHTML = "&#x1f4ac;"
 							resultSendForm.appendChild(resultSend)
 
@@ -1755,6 +1756,7 @@ window.onload = function() {
 
 								var resultAdd = document.createElement("button")
 									resultAdd.className = "search-result-add minor-button"
+									resultAdd.title = "add to character"
 									resultAdd.innerHTML = "&#x1f464;"
 								resultAddForm.appendChild(resultAdd)
 							}
@@ -2455,7 +2457,7 @@ window.onload = function() {
 							}
 
 						// damage
-							ELEMENTS.character.damage.input.value = CHARACTER.info.status.damage
+							ELEMENTS.character.damage.input.value = CHARACTER.info.status.damage || null
 
 						// demographics
 							for (var i in CHARACTER.info.demographics) {
@@ -2560,6 +2562,7 @@ window.onload = function() {
 
 								var remove = document.createElement("button")
 									remove.className = "skill-remove"
+									remove.title = "remove skill"
 									remove.innerText = "x"
 								removeForm.appendChild(remove)
 							}
@@ -2689,6 +2692,7 @@ window.onload = function() {
 
 							var remove = document.createElement("button")
 								remove.className = "item-remove"
+								remove.title = "remove item"
 								remove.innerText = "x"
 							removeForm.prepend(remove)
 
@@ -2702,6 +2706,7 @@ window.onload = function() {
 
 							var equip = document.createElement("button")
 								equip.className = "item-equip"
+								equip.title = "toggle equipped"
 								equip.innerHTML = "&#x2713;"
 								if (item.equipped) {
 									equip.setAttribute("equipped", true)
@@ -3071,6 +3076,7 @@ window.onload = function() {
 
 							var remove = document.createElement("button")
 								remove.className = "condition-remove"
+								remove.title = "remove condition"
 								remove.innerText = "x"
 							removeForm.prepend(remove)
 
@@ -4272,6 +4278,7 @@ window.onload = function() {
 
 							var messageButton = document.createElement("button")
 								messageButton.className = "content-chat-button minor-button"
+								messageButton.title = "open content"
 								messageButton.innerHTML = "&#x1f4da;"
 							messageForm.appendChild(messageButton)
 
@@ -5058,6 +5065,7 @@ window.onload = function() {
 
 										var upButton = document.createElement("button")
 											upButton.className = "arena-object-up"
+											upButton.title = "raise object"
 											upButton.innerHTML = "&uarr;"
 										upForm.appendChild(upButton)
 
@@ -5072,6 +5080,7 @@ window.onload = function() {
 
 										var downButton = document.createElement("button")
 											downButton.className = "arena-object-down"
+											downButton.title = "lower object"
 											downButton.innerHTML = "&darr;"
 										downForm.appendChild(downButton)
 
@@ -5085,6 +5094,7 @@ window.onload = function() {
 
 										var removeButton = document.createElement("button")
 											removeButton.className = "arena-object-remove"
+											removeButton.title = "remove object"
 											removeButton.innerText = "x"
 										removeForm.appendChild(removeButton)
 

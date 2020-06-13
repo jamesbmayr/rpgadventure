@@ -225,7 +225,7 @@
 /*** tools ***/
 	/** top level **/
 		#tools {
-			height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+			height: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
 		}
 
 	/** tabs **/
@@ -236,7 +236,7 @@
 		/* notification */
 			#tools-chat-notification {
 				float: right;
-				margin-right: calc(50% - var(--small-gap-size));
+				margin-right: calc(50% - var(--medium-gap-size));
 				height: 0;
 				width: 0;
 				font-size: calc(var(--small-font-size) / 2);
@@ -246,10 +246,10 @@
 /*** settings ***/
 	/** top level **/
 		#settings {
-			top: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+			top: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
 			width: calc(100% - 2 * var(--medium-gap-size));
 			padding: var(--medium-gap-size);
-			height: calc(100% - (var(--small-font-size) + 2 * var(--small-gap-size)) - (2 * var(--medium-gap-size)));
+			height: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)) - (2 * var(--medium-gap-size)));
 		}
 
 		#left:not([tool="settings"]) #settings {
@@ -289,8 +289,8 @@
 /*** rules ***/
 	/** top level **/
 		#rules {
-			top: calc(var(--small-font-size) + 2 * var(--small-gap-size));
-			height: calc(100% - (var(--small-font-size) + 2 * var(--small-gap-size)));
+			top: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
+			height: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)));
 		}
 
 		#left:not([tool="rules"]) #rules {
@@ -454,8 +454,8 @@
 /*** character ***/
 	/** top level **/
 		#character {
-			top: calc(var(--small-font-size) + 2 * var(--small-gap-size));
-			height: calc(100% - (var(--small-font-size) + 2 * var(--small-gap-size)));
+			top: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
+			height: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)));
 			font-size: 0;
 			user-select: none;
 			-webkit-user-select: none;
@@ -481,7 +481,7 @@
 			position: sticky;
 			width: 100%;
 			top: 0;
-			height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+			height: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
 			z-index: 100;
 		}
 
@@ -974,6 +974,11 @@
 				color: var(--medium-green);
 			}
 
+			.statistic .option-search input::placeholder {
+				color: var(--medium-green);
+				font-weight: bold;
+			}
+
 	/** items **/
 		/* top level */
 			#character[mode="items"] {
@@ -981,31 +986,55 @@
 			}
 
 			#character-items {
-				padding: var(--medium-gap-size) 0 var(--medium-gap-size) 0;
+				padding: 0;
+				border: 0;
 			}
 
 			#character[mode="items"] #character-items {
 				padding-top: 0;
 			}
 
-		/* ellipsis */
+		/* equipped */
+			#character-items-equipped-header {
+				padding: var(--large-gap-size) 0 var(--large-gap-size) 0;
+			}
+
+			#character-items-equipped {
+				padding: 0;
+			}
+
+			#character-items-equipped .item:last-child {
+				margin-bottom: var(--medium-gap-size);
+			}
+
+		/* unequipped */
 			#character-items summary {
 				pointer-events: none;
 			}
 
-			#character-items-ellipsis {
+			#character-items-unequipped-header {
 				float: left;
 				width: 100%;
-				text-align: center;
-				font-size: var(--huge-font-size);
-				height: var(--huge-font-size);
-				padding: 0 0 var(--large-font-size) 0;
-				color: var(--medium-gray);
 				pointer-events: all;
+				padding: var(--large-gap-size) 0 var(--large-gap-size) 0;
 			}
 
-			#character-items-ellipsis:hover, #character-items-ellipsis:focus {
+			#character-items-unequipped {
+				float: left;
+				width: 100%;
+				padding: 0;
+			}
+
+			#character-items-unequipped-header:hover, #character-items-unequipped-header:focus {
 				text-shadow: 0 0 var(--shadow-size) var(--medium-gray);
+			}
+
+			#character[mode="items"] #character-items-unequipped .item:first-child {
+				margin-top: var(--medium-gap-size);
+			}
+
+			#character-items-unequipped .item:last-child {
+				margin-bottom: var(--medium-gap-size);
 			}
 
 		/* item name */
@@ -1197,7 +1226,7 @@
 			}
 
 		/* editing */
-			#character[mode="items"] .section:not(#character-items), #character[mode="items"] #character-items-ellipsis {
+			#character[mode="items"] .section:not(#character-items), #character[mode="items"] #character-items-equipped-header, #character[mode="items"] #character-items-unequipped-header {
 				display: none;
 			}
 
@@ -1282,7 +1311,12 @@
 			}
 
 			#character-items-search input, #character-items-search button {
-				color: var(--medium-yellow);
+				color: var(--dark-yellow);
+			}
+
+			#character-items-search input::placeholder {
+				color: var(--dark-yellow);
+				font-weight: bold;
 			}
 
 	/** conditions **/
@@ -1379,14 +1413,14 @@
 				color: var(--medium-blue);
 			}
 
+			#character-conditions-search input::placeholder {
+				color: var(--medium-blue);
+				font-weight: bold;
+			}
+
 	/** damage **/
 		/* top level */
 			#character:not([mode="damage"]) #character-damage {
-				display: none;
-			}
-
-			#character[mode="damage"] #character-info, #character[mode="damage"] .skills-list, #character[mode="damage"] #character-items-ellipsis,
-			#character[mode="damage"] .item.weapon, #character[mode="damage"] .item.ammunition, #character[mode="damage"] .item.miscellaneous, #character[mode="damage"] .item.potion {
 				display: none;
 			}
 
@@ -1403,6 +1437,20 @@
 				border-bottom: var(--border-size) solid var(--medium-gray);
 			}
 
+		/* other sections */
+			#character[mode="damage"] #character-info, #character[mode="damage"] .skills-list {
+				display: none;
+			}
+
+			#character[mode="damage"] #character-items-equipped-header, #character[mode="damage"] #character-items-unequipped-header, 
+			#character[mode="damage"] .item:not(.healing) {
+				display: none;
+			}
+
+			#character[mode="damage"] #character-items-equipped .item:first-child, #character[mode="damage"] #character-items-unequipped .item:first-child {
+				margin-top: var(--medium-gap-size);
+			}
+
 		/* input */
 			#character-damage-input {
 				font-size: var(--medium-font-size);
@@ -1413,6 +1461,7 @@
 
 			#character-damage-input::placeholder {
 				color: var(--medium-red);
+				font-weight: bold;
 			}
 
 		/* recover */
@@ -1426,8 +1475,8 @@
 /*** chat ***/
 	/** top level **/
 		#chat {
-			top: calc(var(--small-font-size) + 2 * var(--small-gap-size));
-			height: calc(100% - (var(--small-font-size) + 2 * var(--small-gap-size)));
+			top: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
+			height: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)));
 			background-color: var(--light-gray);
 			overflow: hidden;
 		}
@@ -1554,10 +1603,10 @@
 /*** content ***/
 	/** top level **/
 		#content {
-			top: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+			top: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
 			width: calc(100% - 2 * var(--medium-gap-size));
 			padding: var(--medium-gap-size);
-			height: calc(100% - (var(--small-font-size) + 2 * var(--small-gap-size)) - (2 * var(--medium-gap-size)));
+			height: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)) - (2 * var(--medium-gap-size)));
 			overflow-x: hidden;
 			overflow-y: scroll;
 		}

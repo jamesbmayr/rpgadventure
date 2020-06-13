@@ -9500,7 +9500,7 @@
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 6, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
-										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}, {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}] },
+										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "sneak", maximum: 5, condition: 0}] },
 										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}] },
 										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }

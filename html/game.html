@@ -22,24 +22,24 @@
 		<section id="left" tool="settings">
 			<section id="tools">
 				<form id="tools-form" method="post" action="javascript:;" autocomplete="off">
-					<label class="tool nav-tab pseudo-button" id="tools-settings">
+					<label class="tool nav-tab pseudo-button" id="tools-settings" title="settings">
 						<span>&#x2699;</span>
 						<input id="tools-settings-radio" type="radio" name="tool" value="settings" checked/>
 					</label>
-					<label class="tool nav-tab pseudo-button" id="tools-rules">
+					<label class="tool nav-tab pseudo-button" id="tools-rules" title="rules">
 						<span>&#x1f50e;</span>
 						<input id="tools-rules-radio" type="radio" name="tool" value="rules"/>
 					</label>
-					<label class="tool nav-tab pseudo-button" id="tools-character">
+					<label class="tool nav-tab pseudo-button" id="tools-character" title="character">
 						<span>&#x1f464;</span>
 						<input id="tools-character-radio" type="radio" name="tool" value="character"/>
 					</label>
-					<label class="tool nav-tab pseudo-button" id="tools-chat">
+					<label class="tool nav-tab pseudo-button" id="tools-chat" title="chat">
 						<span>&#x1f4ac;</span>
 						<span id="tools-chat-notification" visibility="false">&#x1f514;</span>
 						<input id="tools-chat-radio" type="radio" name="tool" value="chat"/>
 					</label>
-					<label class="tool nav-tab pseudo-button" id="tools-content" value="5">
+					<label class="tool nav-tab pseudo-button" id="tools-content" value="5" title="content">
 						<span>&#x1f4da;</span>
 						<input id="tools-content-radio" type="radio" name="tool" value="content"/>
 					</label>
@@ -59,18 +59,18 @@
 							</optgroup>
 						</select>
 						<input id="settings-game-input" type="text" placeholder="game name" class="form-pair" autocomplete="off" visibility="true"/>
-						<button id="settings-game-button" class="form-pair">&rarr;</button>
+						<button id="settings-game-button" class="form-pair" title="submit">&rarr;</button>
 					</form>
 					<form id="settings-game-clearChat-form" method="post" action="javascript:;" visibility="false">
-						<button id="settings-game-clearChat-button">clear chat</button>
+						<button id="settings-game-clearChat-button" title="clear chat">clear chat</button>
 					</form>
 					<form id="settings-game-clearRolls-form" method="post" action="javascript:;" visibility="false">
-						<button id="settings-game-clearRolls-button">clear rolls</button>
+						<button id="settings-game-clearRolls-button" title="clear rolls">clear rolls</button>
 					</form>
 					<details id="settings-game-delete-gate" class="delete-gate" visibility="false">
 						<summary>delete game</summary>
 						<form id="settings-game-delete-form" method="post" action="javascript:;">
-							<button id="settings-game-delete-button">confirm delete</button>
+							<button id="settings-game-delete-button" title="delete">confirm delete</button>
 						</form>
 					</details>
 				</div>
@@ -86,25 +86,25 @@
 					<form id="settings-user-name-form" method="post" action="javascript:;">
 						<h4>change name</h4>
 						<input id="settings-user-name-input" type="text" placeholder="name" class="form-pair" autocomplete="off"/>
-						<button id="settings-user-name-button" class="form-pair">&rarr;</button>
+						<button id="settings-user-name-button" class="form-pair" title="change name">&rarr;</button>
 					</form>
 					<form id="settings-user-password-form" method="post" action="javascript:;">
 						<h4>change password</h4>
 						<input id="settings-user-password-input-old" type="password" placeholder="old password" autocomplete="off"/>
 						<input id="settings-user-password-input-new" type="password" placeholder="new password" class="form-pair" autocomplete="off"/>
-						<button id="settings-user-password-button" class="form-pair">&rarr;</button>
+						<button id="settings-user-password-button" class="form-pair" title="change password">&rarr;</button>
 					</form>
 				</div>
 				<div id="settings-auth" class="subsection">
 					<form id="settings-auth-signout-form" method="post" action="javascript:;">
-						<button id="settings-auth-signout-button">sign out</button>
+						<button id="settings-auth-signout-button" title="sign out">sign out</button>
 					</form>
 				</div>
 			</section>
 			<section id="rules">
 				<form id="rules-search-form" method="post" action="javascript:;" class="subsection">
 					<input type="text" id="rules-search-input" placeholder="search rules" class="form-pair" autocomplete="off"/>
-					<button id="rules-search-button" class="form-pair">&#x1f50e;</button>
+					<button id="rules-search-button" class="form-pair" title="search">&#x1f50e;</button>
 				</form>
 				<div id="rules-results"></div>
 				<a id="rules-link" target="_blank" href="<script node>getAsset('rules-doc')</script>node>">[explore rules guide]</a>
@@ -112,27 +112,27 @@
 			<section id="character" mode="settings">
 				<div id="character-modes">
 					<form id="character-modes-form" method="post" action="javascript:;" autocomplete="off">
-						<label class="mode nav-tab pseudo-button" id="character-modes-settings">
+						<label class="mode nav-tab pseudo-button" id="character-modes-settings" title="settings">
 							<span>&#x2699;</span>
 							<input id="character-modes-settings-radio" type="radio" name="mode" value="settings" checked/>
 						</label>
-						<label class="mode nav-tab pseudo-button" id="character-modes-play">
+						<label class="mode nav-tab pseudo-button" id="character-modes-play" title="play">
 							<span>&#x1f3b2;</span>
 							<input id="character-modes-play-radio" type="radio" name="mode" value="play"/>
 						</label>
-						<label class="mode nav-tab pseudo-button" id="character-modes-edit">
+						<label class="mode nav-tab pseudo-button" id="character-modes-edit" title="edit">
 							<span>&#x1f4dd;</span>
 							<input id="character-modes-edit-radio" type="radio" name="mode" value="edit"/>
 						</label>
-						<label class="mode nav-tab pseudo-button" id="character-modes-items">
+						<label class="mode nav-tab pseudo-button" id="character-modes-items" title="items">
 							<span>&#9874;</span>
 							<input id="character-modes-items-radio" type="radio" name="mode" value="items"/>
 						</label>
-						<label class="mode nav-tab pseudo-button" id="character-modes-conditions">
+						<label class="mode nav-tab pseudo-button" id="character-modes-conditions" title="conditions">
 							<span>&#x2728;</span>
 							<input id="character-modes-conditions-radio" type="radio" name="mode" value="conditions"/>
 						</label>
-						<label class="mode nav-tab pseudo-button" id="character-modes-damage">
+						<label class="mode nav-tab pseudo-button" id="character-modes-damage" title="damage">
 							<span>&#9760;</span>
 							<input id="character-modes-damage-radio" type="radio" name="mode" value="damage"/>
 						</label>
@@ -151,12 +151,12 @@
 									<option id="character-settings-select-new" value="[new]" selected>[new character]</option>
 								</optgroup>
 							</select>
-							<button id="character-settings-select-button" class="form-pair" visibility="false">&rarr;</button>
+							<button id="character-settings-select-button" class="form-pair" visibility="false" title="submit">&rarr;</button>
 						</form>
 						<div id="character-settings-select-search" class="option-search">
 							<input autocomplete="off" placeholder="templates" class="option-search-input form-pair"/>
-							<button id="character-settings-select-search-button" class="option-search-button form-pair">&rarr;</button>
-							<button class="option-search-cancel minor-button" visibility="false">x</button>
+							<button id="character-settings-select-search-button" class="option-search-button form-pair" title="submit">&rarr;</button>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 							<div class="option-search-results"></div>
 							<select id="character-settings-select-templates" class="option-search-select">
 								<optgroup label="blank">
@@ -172,19 +172,19 @@
 								<option id="character-settings-access-select-all" value="[all]">[all]</option>
 								<option id="character-settings-access-select-me" value="[me]" selected>[me]</option>
 							</select>
-							<button id="character-settings-access-button" class="form-pair">&rarr;</button>
+							<button id="character-settings-access-button" class="form-pair" title="edit access">&rarr;</button>
 						</form>
 						<form id="character-settings-download-form" method="post" action="javascript:;">
 							<h4>file</h4>
-							<button id="character-settings-download-button">download</button>
+							<button id="character-settings-download-button" title="download">download</button>
 						</form>
 						<form id="character-settings-duplicate-form" method="post" action="javascript:;">
-							<button id="character-settings-duplicate-button">duplicate</button>
+							<button id="character-settings-duplicate-button" title="duplicate">duplicate</button>
 						</form>
 						<details id="character-settings-delete-gate" class="delete-gate">
 							<summary>delete?</summary>
 							<form id="character-settings-delete-form" method="post" action="javascript:;">
-								<button id="character-settings-delete-button">confirm delete</button>
+								<button id="character-settings-delete-button" title="delete">confirm delete</button>
 							</form>
 						</details>
 					</div>
@@ -203,7 +203,7 @@
 								<option id="character-settings-rng-d100" value="100">d100</option>
 							</select>
 							<input id="character-settings-rng-label" type="text" placeholder="label" class="form-pair" autocomplete="off"/>
-							<button id="character-settings-rng-button" class="form-pair">&rarr;</button>
+							<button id="character-settings-rng-button" class="form-pair" title="roll dice">&rarr;</button>
 						</form>
 					</div>
 					<div id="character-settings-recipient" class="subsection">
@@ -224,17 +224,17 @@
 					<div id="character-conditions" class="section">
 						<div id="character-conditions-search" class="option-search">
 							<input autocomplete="off" placeholder="+ condition" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false">x</button>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 							<div class="option-search-results"></div>
 							<select id="character-conditions-select" class="option-search-select"></select>
-							<button id="character-conditions-search-button" class="option-search-button">&rarr;</button>
+							<button id="character-conditions-search-button" class="option-search-button" title="submit">&rarr;</button>
 						</div>
 						<div id="character-conditions-list"></div>
 					</div>
 					<div id="character-damage" class="section">
-						<input id="character-damage-input" type="number" step="1" placeholder="damage"/>
+						<input id="character-damage-input" type="number" step="1" placeholder="health"/>
 						<form id="character-damage-form" method="post" action="javascript:;">
-							<button id="character-damage-recover">recover</button>
+							<button id="character-damage-recover" title="recover">recover</button>
 						</form>
 					</div>
 					<details id="character-info" class="section">
@@ -244,17 +244,17 @@
 						<input readonly class="editable" type="text" id="character-info-name-text" placeholder="name">
 						<div id="character-info-image">
 							<form id="character-info-image-reset-form" method="post" action="javascript:;">
-								<button id="character-info-image-reset" class="minor-button">x</button>
+								<button id="character-info-image-reset" class="minor-button" title="remove image">x</button>
 							</form>
 						</div>
 						<form id="character-info-image-form" method="post" action="javascript:;">
 							<input id="character-info-image-upload" type="file"/>
-							<button id="character-info-image-button">upload image</button>
+							<button id="character-info-image-button" title="upload image">upload image</button>
 						</form>
 						<div id="character-info-demographics">
 							<div class="column-left">
 								<label>race<select disabled class="editable" type="text" id="character-info-race" dir="rtl">
-									<option id="character-info-race-disabled" disabled selected>...</option>
+									<option id="character-info-race-disabled" disabled selected>race</option>
 								</select></label>
 								<label>sex<input readonly class="editable" type="text" id="character-info-sex"></label>
 								<label>age<input readonly class="editable" type="number" step="1" min="0" id="character-info-age" placeholder="y"></label>
@@ -295,10 +295,10 @@
 						<div class="skills-list"></div>
 						<div id="character-perception-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false">x</button>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 							<div class="option-search-results"></div>
 							<select id="character-perception-select" class="option-search-select"></select>
-							<button class="option-search-button">&rarr;</button>
+							<button class="option-search-button" title="submit">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-memory" class="statistic section">
@@ -316,10 +316,10 @@
 						<div class="skills-list"></div>
 						<div id="character-memory-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false">x</button>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 							<div class="option-search-results"></div>
 							<select id="character-memory-select" class="option-search-select"></select>
-							<button class="option-search-button">&rarr;</button>
+							<button class="option-search-button" title="submit">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-logic" class="statistic section">
@@ -337,10 +337,10 @@
 						<div class="skills-list"></div>
 						<div id="character-logic-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false">x</button>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 							<div class="option-search-results"></div>
 							<select id="character-logic-select" class="option-search-select"></select>
-							<button class="option-search-button">&rarr;</button>
+							<button class="option-search-button" title="submit">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-strength" class="statistic section">
@@ -358,10 +358,10 @@
 						<div class="skills-list"></div>
 						<div id="character-strength-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false">x</button>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 							<div class="option-search-results"></div>
 							<select id="character-strength-select" class="option-search-select"></select>
-							<button class="option-search-button">&rarr;</button>
+							<button class="option-search-button" title="submit">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-dexterity" class="statistic section">
@@ -379,10 +379,10 @@
 						<div class="skills-list"></div>
 						<div id="character-dexterity-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false">x</button>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 							<div class="option-search-results"></div>
 							<select id="character-dexterity-select" class="option-search-select"></select>
-							<button class="option-search-button">&rarr;</button>
+							<button class="option-search-button" title="submit">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-immunity" class="statistic section">
@@ -400,10 +400,10 @@
 						<div class="skills-list"></div>
 						<div id="character-immunity-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false">x</button>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 							<div class="option-search-results"></div>
 							<select id="character-immunity-select" class="option-search-select"></select>
-							<button class="option-search-button">&rarr;</button>
+							<button class="option-search-button" title="submit">&rarr;</button>
 						</div>
 					</details>
 					<details id="character-speed" class="statistic section">
@@ -421,23 +421,24 @@
 						<div class="skills-list"></div>
 						<div id="character-speed-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false">x</button>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 							<div class="option-search-results"></div>
 							<select id="character-speed-select" class="option-search-select"></select>
-							<button class="option-search-button">&rarr;</button>
+							<button class="option-search-button" title="submit">&rarr;</button>
 						</div>
 					</details>
 					<div id="character-items-search" class="option-search">
 						<input autocomplete="off" placeholder="+ item" class="option-search-input"/>
-						<button class="option-search-cancel minor-button" visibility="false">x</button>
+						<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 						<div class="option-search-results"></div>
 						<select id="character-items-select" class="option-search-select"></select>
-						<button id="character-items-search-button" class="option-search-button">&rarr;</button>
+						<button id="character-items-search-button" class="option-search-button" title="submit">&rarr;</button>
 					</div>
 					<details id="character-items" class="section">
 						<summary>
-							<div id="character-items-equipped"></div>
-							<div id="character-items-ellipsis">...</div>
+							<h3 id="character-items-equipped-header">equipped items</h3>
+							<div id="character-items-equipped" class="subsection"></div>
+							<h3 id="character-items-unequipped-header">unequipped items</h3>
 						</summary>
 						<div id="character-items-unequipped"></div>
 					</details>
@@ -465,7 +466,7 @@
 						<optgroup id="chat-send-recipients-players" label="players"></optgroup>
 					</select>
 					<input type="text" id="chat-send-input" placeholder="type chat message" autocomplete="off" class="form-pair"/>
-					<button id="chat-send-button" class="form-pair">&rarr;</button>
+					<button id="chat-send-button" class="form-pair" title="send message">&rarr;</button>
 				</form>
 			</section>
 			<section id="content" mode="none">
@@ -491,20 +492,20 @@
 						<option id="content-choose-types-embed" value="embed">embed</option>
 						<option id="content-choose-types-component" value="component">component</option>
 					</select>
-					<button id="content-choose-button" class="form-pair">&rarr;</button>
+					<button id="content-choose-button" class="form-pair" title="submit">&rarr;</button>
 				</form>
 				<div id="content-metadata" class="subsection">
 					<h3 id="content-metadata-header">content</h3>
 					<form id="content-send-form" method="post" action="javascript:;">
-						<button id="content-send-button" class="minor-button">&#x1f4ac;</button>
+						<button id="content-send-button" class="minor-button" title="send to chat">&#x1f4ac;</button>
 					</form>
 					<form id="content-add-form" method="post" action="javascript:;">
-						<button id="content-add-button" class="minor-button">&#x1f464;</button>
+						<button id="content-add-button" class="minor-button" title="add to character">&#x1f464;</button>
 					</form>
 					<form id="content-name-form" method="post" action="javascript:;">
 						<h4>name</h4>
 						<input type="text" id="content-name-input" placeholder="document name" autocomplete="off" class="form-pair"/>
-						<button id="content-name-button" class="form-pair">&rarr;</button>
+						<button id="content-name-button" class="form-pair" title="edit name">&rarr;</button>
 					</form>
 					<form id="content-access-form" method="post" action="javascript:;">
 						<h4>access</h4>
@@ -512,12 +513,12 @@
 							<option id="content-access-select-all" value="[all]">[all]</option>
 							<option id="content-access-select-me" value="[me]" selected>[me]</option>
 						</select>
-						<button id="content-access-button" class="form-pair">&rarr;</button>
+						<button id="content-access-button" class="form-pair" title="edit access">&rarr;</button>
 					</form>
 					<form id="content-code-form" method="post" action="javascript:;">
 						<h4>code</h4>
 						<textarea id="content-code-input" placeholder="enter code here" autocomplete="off" class="form-pair"></textarea>
-						<button id="content-code-button" class="form-pair">&rarr;</button>
+						<button id="content-code-button" class="form-pair" title="edit code">&rarr;</button>
 					</form>
 					<div id="content-component-code-help">
 						<div>Enter JSON describing a custom component. These fields are required to add this to a character:</div>
@@ -531,24 +532,24 @@
 					<form id="content-url-form" method="post" action="javascript:;">
 						<h4>url</h4>
 						<input type="text" id="content-url-input" placeholder="url" autocomplete="off" class="form-pair"/>
-						<button id="content-url-button" class="form-pair">&rarr;</button>
+						<button id="content-url-button" class="form-pair" title="edit url">&rarr;</button>
 					</form>
 					<form id="content-data-form" method="post" action="javascript:;">
 						<h4>data</h4>
-						<button id="content-data-button">save content &rarr;</button>
+						<button id="content-data-button" title="save content">save content &rarr;</button>
 					</form>
 					<form id="content-upload-form" method="post" action="javascript:;" enctype="multipart/form-data">
 						<input type="file" id="content-upload-input"/>
-						<button id="content-upload-button">upload</button>
+						<button id="content-upload-button" title="upload">upload</button>
 					</form>
 					<form id="content-duplicate-form" method="post" action="javascript:;">
 						<h4>file</h4>
-						<button id="content-duplicate-button">duplicate</button>
+						<button id="content-duplicate-button" title="duplicate">duplicate</button>
 					</form>
 					<details id="content-delete-gate" class="delete-gate">
 						<summary>delete?</summary>
 						<form id="content-delete-form" method="post" action="javascript:;">
-							<button id="content-delete-button">confirm delete</button>
+							<button id="content-delete-button" title="delete">confirm delete</button>
 						</form>
 					</details>
 				</div>
@@ -557,33 +558,33 @@
 					<div id="content-controls-zoom">
 						<h4>zoom</h4>
 						<form id="content-controls-zoom-out-form" method="post" action="javascript:;" value="-0.25">
-							<button id="content-controls-zoom-out-button">-</button>
+							<button id="content-controls-zoom-out-button" title="zoom out">-</button>
 						</form>
 						<form id="content-controls-zoom-zero-form" method="post" action="javascript:;" value="0">
-							<button id="content-controls-zoom-zero-button">0</button>
+							<button id="content-controls-zoom-zero-button" title="zoom reset">0</button>
 						</form>
 						<form id="content-controls-zoom-in-form" method="post" action="javascript:;" value="0.25">
-							<button id="content-controls-zoom-in-button">+</button>
+							<button id="content-controls-zoom-in-button" title="zoom in">+</button>
 						</form>
 					</div>
 					<div id="content-controls-pan">
 						<h4>pan</h4>
 						<form id="content-controls-pan-left-form" method="post" action="javascript:;" value="x">
-							<button id="content-controls-pan-left-button">&larr;</button>
+							<button id="content-controls-pan-left-button" title="pan left">&larr;</button>
 						</form>
 						<form id="content-controls-pan-up-form" method="post" action="javascript:;" value="-y">
-							<button id="content-controls-pan-up-button">&uarr;</button>
+							<button id="content-controls-pan-up-button" title="pan up">&uarr;</button>
 						</form>
 						<form id="content-controls-pan-down-form" method="post" action="javascript:;" value="y">
-							<button id="content-controls-pan-down-button">&darr;</button>
+							<button id="content-controls-pan-down-button" title="pan down">&darr;</button>
 						</form>
 						<form id="content-controls-pan-right-form" method="post" action="javascript:;" value="-x">
-							<button id="content-controls-pan-right-button">&rarr;</button>
+							<button id="content-controls-pan-right-button" title="pan right">&rarr;</button>
 						</form>
 					</div>
 					<form id="content-controls-turn-form" method="post" action="javascript:;">
 						<h4>turn order</h4>
-						<button id="content-controls-turn-button">calculate turn order</button>
+						<button id="content-controls-turn-button" title="turn order">calculate turn order</button>
 					</form>
 				</div>
 				<div id="content-objects" class="subsection">
@@ -596,7 +597,7 @@
 							<optgroup id="content-objects-select-characters" label="characters"></optgroup>
 							<optgroup id="content-objects-select-images" label="images"></optgroup>
 						</select>
-						<button id="content-objects-button" class="form-pair">&rarr;</button>
+						<button id="content-objects-button" class="form-pair" title="add object">&rarr;</button>
 					</form>
 					<div id="content-objects-list"></div>
 				</div>

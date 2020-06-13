@@ -592,8 +592,8 @@
 	/* nav-tab */
 		.nav-tab {
 			float: left;
-			height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
-			font-size: var(--small-font-size);
+			height: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
+			font-size: var(--medium-font-size);
 			border-radius: 0;
 			margin: 0;
 			background-color: var(--dark-gray);
