@@ -986,7 +986,7 @@
 										speed: 0
 									},
 									skills: {
-										perception: { sight: 6, sound: 7, scent: 7, taste: 4, touch: 4, night_vision: 2 },
+										perception: { sight: 6, sound: 7, scent: 7, taste: 4, touch: 4 },
 										memory: { lang_winge: 7 },
 										logic: { remain_calm: 3, spatial_reasoning: 2 },
 										strength: { punch: 0, carry: 5, throw: 2 },
