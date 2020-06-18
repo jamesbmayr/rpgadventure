@@ -46,6 +46,10 @@
 			width: 0 !important;
 		}
 
+		* {
+			scrollbar-width: none;
+		}
+
 	/* sections */
 		section {
 			position: absolute;

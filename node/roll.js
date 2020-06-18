@@ -103,21 +103,26 @@
 									else if (data.target !== undefined) {
 										// charisma?
 											if (data.charisma && data.recipient && characters[data.recipient]) {
-												// original skill value
+												// get characters
 													var influencer = characters[rollGroup.characterId]
+													var recipient = characters[data.recipient]
+
+												// original skill value
 													var charismaSkill = influencer.statistics.logic.skills.find(function(s) { return s.name == data.text.replace(/\s/gi, "_") })
 													if (!charismaSkill) {
 														continue
 													}
 													var originalSkillValue = Math.max(0, charismaSkill.maximum + charismaSkill.condition)
+
+												// halflings cancel influencer bonuses
+													if (recipient.info.demographics.race == "halfling") {
+														originalSkillValue = 0
+													}
 												
 												// description
 													roll.display.d = data.d
 													roll.display.text = data.text
 													roll.display.total = "(" + originalSkillValue + ")"
-
-												// recipient
-													var recipient = characters[data.recipient]
 
 												// spacer
 													var spacer = CORE.getSchema("roll")
@@ -127,6 +132,11 @@
 
 												// logic
 													var counterLogic = Math.max(0, recipient.statistics.logic.maximum + recipient.statistics.logic.damage + recipient.statistics.logic.condition)
+
+												// gnomes cancel recipient skills
+													if (influencer.info.demographics.race == "gnome") {
+														data.counters = data.counters.includes("aggression") ? ["aggression"] : []
+													}
 
 												// find best counter skill
 													var counterSkillName = null
@@ -202,6 +212,7 @@
 													var spacer = false
 
 												// equipped armor
+													var armor = null
 													for (var k in recipient.items) {
 														// item
 															var item = recipient.items[k]
@@ -209,12 +220,24 @@
 																continue
 															}
 
+														// better armor
+															if (!armor || item.d6 > armor.d6) {
+																armor = item
+															}
+
+														// body armor
+															if (item.d6 == armor.d6 && item.armorType == "body" && armor.armorType !== "body") {
+																armor = item
+															}
+													}
+
+													if (armor) {
 														// add to rolls
 															postRollGroup.rolls.splice(i + 1, 0, {
 																type: "armor",
 																d: 6,
-																count: item.d6,
-																text: item.name,
+																count: armor.d6,
+																text: armor.name,
 																countering: roll.id
 															})
 
