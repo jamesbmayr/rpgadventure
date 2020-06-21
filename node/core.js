@@ -5643,7 +5643,7 @@
 										usage: [
 											{
 												statistic: "strength",
-												skill: "astronomy",
+												skill: "carry",
 												modifier: 5
 											},
 											{
