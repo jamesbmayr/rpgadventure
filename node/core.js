@@ -728,9 +728,9 @@
 										memory: { lang_halfling: 7 },
 										logic: { remain_calm: 2 },
 										strength: { punch: 0, carry: 2, throw: 3, climb: 2 },
-										dexterity: { martial_arts: 0, sneak: 3 },
+										dexterity: { martial_arts: 0 },
 										immunity: { recover: 0 },
-										speed: { kick: 0, jump: 4, run: 3, swim: 2 }
+										speed: { kick: 0, jump: 4, run: 3, swim: 2, sneak: 3 }
 									}
 								},
 								gnome: {
@@ -782,9 +782,9 @@
 										memory: { lang_tiefling: 7 },
 										logic: { intimidate: 2 },
 										strength: { punch: 0, carry: 2, throw: 4 },
-										dexterity: { martial_arts: 0, sneak: 2 },
+										dexterity: { martial_arts: 0 },
 										immunity: { recover: 0, temperature_resistance: 14 },
-										speed: { kick: 0, jump: 5, run: 3, swim: 0 }
+										speed: { kick: 0, jump: 5, run: 3, swim: 0, sneak: 2 }
 									}
 								},
 								goblin: {
@@ -809,9 +809,9 @@
 										memory: { lang_goblin: 7 },
 										logic: {},
 										strength: { punch: 0, carry: 1, throw: 4 },
-										dexterity: { martial_arts: 0, sneak: 2, ride_animals: 3 },
+										dexterity: { martial_arts: 0, ride_animals: 3 },
 										immunity: { recover: 0, poison_resistance: 7, infection_resistance: 7, allergy_resistance: 7, alcohol_tolerance: 7 },
-										speed: { kick: 0, jump: 4, run: 2, swim: 3 }
+										speed: { kick: 0, jump: 4, run: 2, swim: 3, sneak: 2 }
 									}
 								},
 								orc: {
@@ -875,9 +875,9 @@
 										memory: { lang_lizardfolk: 7 },
 										logic: {},
 										strength: { punch: 0, carry: 1, throw: 1 },
-										dexterity: { martial_arts: 0, sneak: 3 },
+										dexterity: { martial_arts: 0 },
 										immunity: { recover: 2, poison_resistance: 2 },
-										speed: { kick: 0, jump: 5, run: 2, swim: 5 }
+										speed: { kick: 0, jump: 5, run: 2, swim: 5, sneak: 3 }
 									}
 								},
 								bhios: {
@@ -936,9 +936,9 @@
 										memory: { lang_mellifax: 7 },
 										logic: {},
 										strength: { punch: 0, carry: 1, throw: 4 },
-										dexterity: { martial_arts: 0, sneak: 2 },
+										dexterity: { martial_arts: 0 },
 										immunity: { recover: 0, poison_resistance: 3 },
-										speed: { kick: 0, jump: 5, run: 3, swim: 1, dodge: 2, fly: 10 }
+										speed: { kick: 0, jump: 5, run: 3, swim: 1, dodge: 2, fly: 10, sneak: 2 }
 									}
 								},
 								preas: {
@@ -1137,9 +1137,9 @@
 								memory: "All knowledge accumulated, including languages, trades, and knowledge of specific fields. Some useful applications are alchemy, botany, medicine, and metalworking. This corresponds to the hippocampus.",
 								logic: "Figuring things out, learning, and recognizing patterns, from making maps with spatial reasoning, to remaining calm in resisting surprise and opponents' charisma. This corresponds to the cerebrum.",
 								strength: "Upper body strength. A character’s carrying capacity, climbing ability, and throwing distance and accuracy are governed by this statistic, as is effectiveness in melee combat. This corresponds to the torso and arm muscles.",
-								dexterity: "Hand-eye coordination, fine motor skills, and balance. This is key when aiming and fencing in combat, riding an animal, sneaking around, crafting, and in performance art. This corresponds to the wrist and hand muscles.",
+								dexterity: "Hand-eye coordination, fine motor skills, and balance. This is key when aiming and fencing in combat, riding an animal, using sleight of hand, crafting, and in performance art. This corresponds to the wrist and hand muscles.",
 								immunity: "Natural defenses against injury, infection, hunger and thirst, heat and cold, pain, and more. This also correlates to the rate of recovery following combat, infection, and poison. This corresponds to the immune, cardiovascular, and respiratory systems.",
-								speed: "Lower body strength, including jumping, running, and swimming. This also determines turn order, the ability to dodge, and distance a character can move during combat. This corresponds to the leg and feet muscles."
+								speed: "Lower body strength, including jumping, running, and swimming. This also determines turn order, the ability to dodge and sneak, and distance a character can move during combat. This corresponds to the leg and feet muscles."
 							}
 						break
 
@@ -1164,7 +1164,7 @@
 									{name: "bite", combat: true, animals: true, d6: 4}, {name: "slam", combat: true, animals: true, d6: 4}, {name: "tusk", combat: true, animals: true, d6: 4}
 								],
 								dexterity: [
-									{name: "catch"}, {name: "crafting"}, {name: "drawing"}, {name: "escape_bonds"}, {name: "fencing", combat: true}, {name: "knifing", combat: true}, {name: "lock_picking"}, {name: "martial_arts", combat: true, d6: 2, unremovable: true}, {name: "missile", combat: true}, {name: "musicianship"}, {name: "penmanship"}, {name: "performance"}, {name: "ride_animals"}, {name: "sneak"},
+									{name: "catch"}, {name: "crafting"}, {name: "drawing"}, {name: "escape_bonds"}, {name: "fencing", combat: true}, {name: "knifing", combat: true}, {name: "lock_picking"}, {name: "martial_arts", combat: true, d6: 2, unremovable: true}, {name: "missile", combat: true}, {name: "musicianship"}, {name: "penmanship"}, {name: "performance"}, {name: "ride_animals"}, {name: "sleight_of_hand"},
 									{name: "claws", combat: true, animals: true, d6: 3}, {name: "talons", combat: true, animals: true, d6: 2}
 								],
 								immunity: [
@@ -1172,7 +1172,7 @@
 									{name: "defend", animals: true, d6: 0}, {name: "temperature_resistance", animals: true}
 								],
 								speed: [
-									{name: "dodge"}, {name: "jump", unremovable: true}, {name: "kick", combat: true, d6: 2, unremovable: true}, {name: "run", unremovable: true}, {name: "swim", unremovable: true},
+									{name: "dance"}, {name: "dodge"}, {name: "jump", unremovable: true}, {name: "kick", combat: true, d6: 2, unremovable: true}, {name: "run", unremovable: true}, {name: "sneak"}, {name: "swim", unremovable: true},
 									{name: "fly", animals: true}
 								]
 							}
@@ -1381,8 +1381,8 @@
 									name: "encumbrance",
 									description: "Caused by carrying weight meeting or exceeding maximum carrying capacity.",
 									effects: {
-										dexterity: {statistic: -2, sneak: -2},
-										speed: {statistic: -2, run: -2, swim: -5}
+										dexterity: {statistic: -2},
+										speed: {statistic: -2, run: -2, swim: -5, sneak: -2}
 									}
 								},
 								exhaustion: {
@@ -7452,9 +7452,9 @@
 											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
-											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
+											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
-											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }] }
+											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }, { name: "sneak", maximum: 3, condition: 0 }] }
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
@@ -7479,9 +7479,9 @@
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
-											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
+											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
-											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }] }
+											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }, { name: "sneak", maximum: 3, condition: 0 }] }
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
@@ -7507,9 +7507,9 @@
 											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "archery", maximum: 5, condition: 0 }, { name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
-											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
+											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pain_tolerance", maximum: 5, condition: 0 }, { name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
-											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }] }
+											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }, { name: "sneak", maximum: 3, condition: 0 }] }
 										},
 										items: [
 											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
@@ -7534,9 +7534,9 @@
 											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 3, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
-											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
+											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
-											speed:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }] }
+											speed:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }, { name: "sneak", maximum: 3, condition: 0 }] }
 										},
 										items: [
 											{name:"clothes",count:1,type:"armor",armorType:"body",d6:1,weight:1,fuel:2,materials:"cloth",cost:10,description:" ",id:"rbxzkdzgldgzqlok"},
@@ -7555,9 +7555,9 @@
 											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
-											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
+											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
-											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }] }
+											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 2, condition: 0 }, { name: "sneak", maximum: 3, condition: 0 }] }
 										},
 										items: [
 											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
@@ -7716,9 +7716,9 @@
 											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 7, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 7, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "temperature_resistance", maximum: 14, condition: 0, animals: true }] },
-											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
+											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
@@ -7743,9 +7743,9 @@
 											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "temperature_resistance", maximum: 14, condition: 0, animals: true }] },
-											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
+											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
@@ -7771,9 +7771,9 @@
 											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "pain_tolerance", maximum: 5, condition: 0 }, { name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "temperature_resistance", maximum: 14, condition: 0, animals: true }] },
-											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
+											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
@@ -7798,9 +7798,9 @@
 											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
 											strength:   { maximum: 4, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "temperature_resistance", maximum: 14, condition: 0, animals: true }] },
-											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
+											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"clothes",count:1,type:"armor",armorType:"body",d6:1,weight:1,fuel:2,materials:"cloth",cost:10,description:" ",id:"rbxzkdzgldgzqlok"},
@@ -7819,9 +7819,9 @@
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "persuade", maximum: 7, condition: 0, charisma: true, counters:["judge_character"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "temperature_resistance", maximum: 14, condition: 0, animals: true }] },
-											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }] }
+											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 0, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
@@ -7848,9 +7848,9 @@
 											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "alcohol_tolerance", maximum: 7, condition: 0 }, { name: "poison_resistance", maximum: 7, condition: 0 }, { name: "infection_resistance", maximum: 7, condition: 0 }, { name: "allergy_resistance", maximum: 7, condition: 0 }] },
-											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
+											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
@@ -7875,9 +7875,9 @@
 											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "alcohol_tolerance", maximum: 7, condition: 0 }, { name: "poison_resistance", maximum: 7, condition: 0 }, { name: "infection_resistance", maximum: 7, condition: 0 }, { name: "allergy_resistance", maximum: 7, condition: 0 }] },
-											speed:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
+											speed:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
@@ -7903,9 +7903,9 @@
 											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "pain_tolerance", maximum: 5, condition: 0 }, { name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "alcohol_tolerance", maximum: 7, condition: 0 }, { name: "poison_resistance", maximum: 7, condition: 0 }, { name: "infection_resistance", maximum: 7, condition: 0 }, { name: "allergy_resistance", maximum: 7, condition: 0 }] },
-											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
+											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
@@ -7930,9 +7930,9 @@
 											memory:     { maximum: 3, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 3, damage: 0, condition: 0, skills: [] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "alcohol_tolerance", maximum: 7, condition: 0 }, { name: "poison_resistance", maximum: 7, condition: 0 }, { name: "infection_resistance", maximum: 7, condition: 0 }, { name: "allergy_resistance", maximum: 7, condition: 0 }] },
-											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
+											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"clothes",count:1,type:"armor",armorType:"body",d6:1,weight:1,fuel:2,materials:"cloth",cost:10,description:" ",id:"rbxzkdzgldgzqlok"},
@@ -7951,9 +7951,9 @@
 											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }] },
 											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "alcohol_tolerance", maximum: 7, condition: 0 }, { name: "poison_resistance", maximum: 7, condition: 0 }, { name: "infection_resistance", maximum: 7, condition: 0 }, { name: "allergy_resistance", maximum: 7, condition: 0 }] },
-											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }] }
+											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 4, condition: 0 }, { name: "swim", maximum: 3, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
@@ -8112,9 +8112,9 @@
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
-											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
+											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 2, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 2, condition: 0 }] },
-											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }] }
+											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }, { name: "sneak", maximum: 3, condition: 0 }] }
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
@@ -8139,9 +8139,9 @@
 											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
-											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
+											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 2, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 2, condition: 0 }] },
-											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }] }
+											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }, { name: "sneak", maximum: 3, condition: 0 }] }
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
@@ -8167,9 +8167,9 @@
 											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
-											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
+											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "pain_tolerance", maximum: 5, condition: 0 }, { name: "recover", unremovable: true, maximum: 2, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 2, condition: 0 }] },
-											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }] }
+											speed:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }, { name: "sneak", maximum: 3, condition: 0 }] }
 										},
 										items: [
 											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
@@ -8194,9 +8194,9 @@
 											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [] },
 											strength:   { maximum: 4, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
-											dexterity:  { maximum: 4, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
+											dexterity:  { maximum: 4, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 2, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 2, condition: 0 }] },
-											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }] }
+											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }, { name: "sneak", maximum: 3, condition: 0 }] }
 										},
 										items: [
 											{name:"clothes",count:1,type:"armor",armorType:"body",d6:1,weight:1,fuel:2,materials:"cloth",cost:10,description:" ",id:"rbxzkdzgldgzqlok"},
@@ -8215,9 +8215,9 @@
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
-											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 3, condition: 0 }] },
+											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 2, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 2, condition: 0 }] },
-											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }] }
+											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 2, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 5, condition: 0 }, { name: "sneak", maximum: 3, condition: 0 }] }
 										},
 										items: [
 											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
@@ -8376,9 +8376,9 @@
 											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 3, condition: 0 }] },
-											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
+											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
@@ -8403,9 +8403,9 @@
 											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 3, condition: 0 }] },
-											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
+											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
@@ -8431,9 +8431,9 @@
 											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "pain_tolerance", maximum: 5, condition: 0 }, { name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 3, condition: 0 }] },
-											speed:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
+											speed:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"axe",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:5},{statistic:"strength",skill:"throw",d6:5}],weight:2,hands:1,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:50,description:" ",id:"yeqfovhaquvlzuus"},
@@ -8458,9 +8458,9 @@
 											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [] },
 											strength:   { maximum: 3, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 3, condition: 0 }] },
-											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
+											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"clothes",count:1,type:"armor",armorType:"body",d6:1,weight:1,fuel:2,materials:"cloth",cost:10,description:" ",id:"rbxzkdzgldgzqlok"},
@@ -8479,9 +8479,9 @@
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
-											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "sneak", maximum: 2, condition: 0 }] },
+											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
 											immunity:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "poison_resistance", maximum: 3, condition: 0 }] },
-											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }] }
+											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 3, condition: 0 }, { name: "jump", maximum: 5, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }, { name: "fly", maximum: 10, condition: 0 }, { name: "dodge", maximum: 2, condition: 0 }, { name: "sneak", maximum: 2, condition: 0 }] }
 										},
 										items: [
 											{name:"long sword",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"fencing",d6:7}],weight:5,hands:2,magnetic:true,conditions:{bleeding:1},materials:"leather, metal",cost:80,description:" ",id:"ystexytmmlneqixo"},
@@ -8993,9 +8993,9 @@
 										memory: { maximum: 4, damage: 0, condition: 0, skills: [] },
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 6, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
-										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "sneak", maximum: 3, condition: 0}] },
+										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
-										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 5, condition: 0}] }
+										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 5, condition: 0}, {name: "sneak", maximum: 3, condition: 0}] }
 									},
 									items: []
 								},
@@ -9029,9 +9029,9 @@
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 8, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
-										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "sneak", maximum: 5, condition: 0}] },
+										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [, {name: "sneak", maximum: 5, condition: 0}] },
 										immunity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
-										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 4}] }
+										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 4}, {name: "sneak", maximum: 5, condition: 0}] }
 									},
 									items: []
 								},
@@ -9173,9 +9173,9 @@
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 3, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
-										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sneak", maximum: 5, condition: 0}] },
+										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}] },
-										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 5, condition: 0}] }
+										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 5, condition: 0}, {name: "sneak", maximum: 5, condition: 0}] }
 									},
 									items: []
 								},
@@ -9449,9 +9449,9 @@
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 1, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}] },
-										dexterity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sneak", maximum: 5, condition: 0}] },
+										dexterity: { maximum: 5, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "infection_resistance", maximum: 5, condition: 0}] },
-										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
+										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "sneak", maximum: 5, condition: 0}] }
 									},
 									items: [
 										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":2},cost:0,description:"causes 2d6 unblockable infection damage",id:"hhrbglxfcyohzhov"}
@@ -9559,9 +9559,9 @@
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}] },
-										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "sneak", maximum: 5, condition: 0}] },
+										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}] },
-										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
+										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "sneak", maximum: 5, condition: 0}] }
 									},
 									items: []
 								},
@@ -9577,9 +9577,9 @@
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 4, damage: 0, condition: 0, skills: [{name: "carry", maximum: 4, condition: 0}, {name: "throw", maximum: 3, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}] },
-										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 2}, {name: "sneak", maximum: 3, condition: 0}] },
+										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 2}] },
 										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "infection_resistance", maximum: 5, condition: 0}] },
-										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
+										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "sneak", maximum: 3, condition: 0}] }
 									},
 									items: [
 										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":2},cost:0,description:"causes 2d6 unblockable infection damage",id:"hhrbglxfcyohzhov"}
@@ -9597,9 +9597,9 @@
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 4, damage: 0, condition: 0, skills: [{name: "carry", maximum: 1, condition: 0}, {name: "throw", maximum: 1, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}] },
-										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 2}, {name: "sneak", maximum: 3, condition: 0}] },
+										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 2}] },
 										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "infection_resistance", maximum: 5, condition: 0}] },
-										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
+										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "sneak", maximum: 3, condition: 0}] }
 									},
 									items: [
 										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":2},cost:0,description:"causes 2d6 unblockable infection damage",id:"hhrbglxfcyohzhov"}
@@ -9899,9 +9899,9 @@
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 1, condition: 0, combat: true}, {name: "climb", maximum: 5, condition: 0}, {name: "bite", animals: true, combat: true, maximum: 5, condition: 0, d6: 3}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 3}] },
-										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "sneak", maximum: 3, condition: 0}] },
+										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}] },
-										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
+										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "sneak", maximum: 3, condition: 0}] }
 									},
 									items: []
 								},
@@ -9935,9 +9935,9 @@
 										memory: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 5, maximum: 5, condition: 0}] },
-										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "sneak", maximum: 3, condition: 0}] },
+										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 2}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
-										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
+										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 7, condition: 0}, {name: "sneak", maximum: 3, condition: 0}] }
 									},
 									items: []
 								}
@@ -10544,7 +10544,7 @@
 								{
 									name: "guard",
 									tasks: [
-										{name: "spy (per day)", cost: 20, skills: [{statistic: "dexterity", name: "sneak"}, {statistic: "memory", name: "lip_reading"}, {statistic: "memory", name: "facial_recognition"}, {statistic: "dexterity", name: "lock_picking"}]},
+										{name: "spy (per day)", cost: 20, skills: [{statistic: "speed", name: "sneak"}, {statistic: "memory", name: "lip_reading"}, {statistic: "memory", name: "facial_recognition"}, {statistic: "dexterity", name: "lock_picking"}]},
 										{name: "protection (per day)", cost: 10, skills: [{statistic: "strength", name: "melee"}, {statistic: "dexterity", name: "fencing"}, {statistic: "dexterity", name: "missile"}]},
 										{name: "protection (per night)", cost: 10, skills: [{statistic: "strength", name: "melee"}, {statistic: "dexterity", name: "fencing"}, {statistic: "dexterity", name: "missile"}, {statistic: "immunity", name: "sleep_resistance"}]}
 									]
@@ -10569,9 +10569,9 @@
 									tasks: [
 										{name: "game", cost: 20, skills: [{statistic: "logic", name: "game_playing"}]},
 										{name: "music", cost: 20, skills: [{statistic: "dexterity", name: "performance"}, {statistic: "dexterity", name: "musicianship"}]},
-										{name: "acrobatics", cost: 20, skills: [{statistic: "dexterity", name: "performance"}, {statistic: "dexterity", name: "escape_bonds"}, {statistic: "dexterity", name: "sneak"}]},
-										{name: "dance", cost: 20, skills: [{statistic: "dexterity", name: "performance"}, {statistic: "dexterity", name: "sneak"}]},
-										{name: "magic", cost: 20, skills: [{statistic: "dexterity", name: "performance"}, {statistic: "dexterity", name: "escape_bonds"}, {statistic: "dexterity", name: "sneak"}]},
+										{name: "acrobatics", cost: 20, skills: [{statistic: "dexterity", name: "performance"}, {statistic: "dexterity", name: "escape_bonds"}, {statistic: "speed", name: "dance"}]},
+										{name: "dance", cost: 20, skills: [{statistic: "dexterity", name: "performance"}, {statistic: "speed", name: "dance"}]},
+										{name: "magic", cost: 20, skills: [{statistic: "dexterity", name: "performance"}, {statistic: "dexterity", name: "escape_bonds"}, {statistic: "dexterity", name: "sleight_of_hand"}]},
 										{name: "acting", cost: 20, skills: [{statistic: "dexterity", name: "performance"}, {statistic: "logic", name: "humor"}, {statistic: "logic", name: "evoke_emotion"}]},
 									]
 								},
