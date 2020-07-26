@@ -1160,7 +1160,7 @@
 									{name: "aggression", animals: true}, {name: "training", animals: true}
 								],
 								strength: [
-									{name: "archery", combat: true}, {name: "block"}, {name: "carry", unremovable: true}, {name: "climb"}, {name: "fishing"}, {name: "melee", combat: true}, {name: "punch", combat: true, d6: 2, unremovable: true}, {name: "throw", combat: true, unremovable: true},
+									{name: "archery", combat: true}, {name: "block"}, {name: "carry", unremovable: true}, {name: "climb"}, {name: "fishing"}, {name: "melee", combat: true}, {name: "punch", combat: true, d6: 2, unremovable: true}, {name: "throw", combat: true, unremovable: true}, {name: "wrestle"},
 									{name: "bite", combat: true, animals: true, d6: 4}, {name: "slam", combat: true, animals: true, d6: 4}, {name: "tusk", combat: true, animals: true, d6: 4}
 								],
 								dexterity: [
