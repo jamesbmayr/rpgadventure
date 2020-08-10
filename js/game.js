@@ -1595,13 +1595,23 @@ window.onload = function() {
 								ifFailure: {
 									type: "healing",
 									d: 6,
-									count: 1,
+									count: 0,
 									text: "recover"
 								}
 							})
 
 						// post
 							submitRollGroupCreate(rolls)
+
+						// increase each damaged stat by 1
+							for (var i in CHARACTER.statistics) {
+								if (CHARACTER.statistics[i].damage < 0) {
+									CHARACTER.statistics[i].damage++
+								}
+							}
+
+						// post
+							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
 
