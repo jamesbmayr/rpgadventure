@@ -2479,9 +2479,6 @@ window.onload = function() {
 								ELEMENTS.character.info[i].value = CHARACTER.info.demographics[i]
 							}
 
-						// carrying
-							ELEMENTS.character.info.burden.value = CHARACTER.info.status.burden
-
 						// points
 							ELEMENTS.character.info.points.value = CHARACTER.info.status.points
 
@@ -2505,7 +2502,9 @@ window.onload = function() {
 							ELEMENTS.character.info.carry.value = Math.max(0, ((CHARACTER.statistics.strength.maximum + CHARACTER.statistics.strength.damage + CHARACTER.statistics.strength.condition) + (carry.maximum + carry.condition)) * 10)
 							ELEMENTS.character.info.throw.value = Math.max(0, ((CHARACTER.statistics.strength.maximum + CHARACTER.statistics.strength.damage + CHARACTER.statistics.strength.condition) + (thro.maximum  + thro.condition )) * 10)
 
-							if (CHARACTER.info.status.burden > ELEMENTS.character.info.carry.value) {
+						// carrying
+							ELEMENTS.character.info.burden.value = CHARACTER.items.length ? (CHARACTER.items.reduce(function(a, b) { return a + ((b.weight || 0) * (b.count || 0)) }, 0) || 0) : 0
+							if (ELEMENTS.character.info.burden.value > ELEMENTS.character.info.carry.value) {
 								ELEMENTS.character.info.burden.setAttribute("overburdened", true)
 							}
 							else {
@@ -3825,9 +3824,6 @@ window.onload = function() {
 							item.id = FUNCTIONS.generateRandom()
 							CHARACTER.items.push(item)
 
-						// update burden
-							CHARACTER.info.status.burden += ((item.weight || 0) * (item.count || 0))
-
 						// save
 							submitCharacterUpdate(CHARACTER)
 					}
@@ -3983,9 +3979,6 @@ window.onload = function() {
 						// remove item
 							for (var i = 0; i < CHARACTER.items.length; i++) {
 								if (CHARACTER.items[i].id == id) {
-									// update burden
-										CHARACTER.info.status.burden -= (CHARACTER.items[i].weight * CHARACTER.items[i].count)
-
 									// remove
 										CHARACTER.items.splice(i, 1)
 										break

@@ -558,7 +558,6 @@
 									description: " ",
 									status: {
 										points: 28,
-										burden: 0,
 										conditions: [],
 										damage: 0
 									}
@@ -2748,7 +2747,7 @@
 										count: 1,
 										type: "ammunition",
 										weapons: ["sling", "bomb", "stonebow", "gauss pistol"],
-										weight: 0.5,
+										weight: 0.2,
 										d6: 3,
 										usage: [
 											{
@@ -2773,7 +2772,7 @@
 										count: 1,
 										type: "ammunition",
 										weapons: ["sling", "bomb", "stonebow", "gauss pistol"],
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "dexterity",
@@ -2797,7 +2796,7 @@
 										count: 1,
 										type: "ammunition",
 										weapons: ["sling", "bomb", "stonebow", "gauss pistol"],
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "dexterity",
@@ -2822,7 +2821,7 @@
 										count: 1,
 										type: "ammunition",
 										weapons: ["sling", "bomb", "stonebow", "gauss pistol"],
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "dexterity",
@@ -2870,7 +2869,7 @@
 										count: 1,
 										type: "ammunition",
 										weapons: ["sling", "bomb", "stonebow", "gauss pistol"],
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "dexterity",
@@ -2894,7 +2893,7 @@
 										count: 1,
 										type: "ammunition",
 										weapons: ["sling", "bomb", "stonebow", "gauss pistol"],
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "dexterity",
@@ -2918,7 +2917,7 @@
 										count: 1,
 										type: "ammunition",
 										weapons: ["sling", "bomb", "stonebow", "gauss pistol"],
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "dexterity",
@@ -2942,7 +2941,7 @@
 										count: 1,
 										type: "ammunition",
 										weapons: ["sling", "bomb", "stonebow", "gauss pistol"],
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "dexterity",
@@ -3014,7 +3013,7 @@
 										count: 1,
 										type: "ammunition",
 										weapons: ["sling", "bomb", "stonebow", "gauss pistol"],
-										weight: 0.5,
+										weight: 0.1,
 										usage: [
 											{
 												statistic: "dexterity",
@@ -3061,7 +3060,7 @@
 										count: 1,
 										type: "ammunition",
 										weapons: ["sling", "bomb", "stonebow", "gauss pistol"],
-										weight: 0.5,
+										weight: 0.1,
 										usage: [
 											{
 												statistic: "dexterity",
@@ -3692,7 +3691,7 @@
 										name: "elixir of alertness",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 2, g: 6, b: 4},
 										conditions: {sleep: 0, alertness: 1},
 										cost: 24,
@@ -3702,7 +3701,7 @@
 										name: "elixir of antitoxicity",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 6, b: 6},
 										conditions: {poison: 0, paralysis_arms: 0, paralysis_legs: 0},
 										cost: 24,
@@ -3712,7 +3711,7 @@
 										name: "elixir of breathholding",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 2, g: 5, b: 7},
 										conditions: {asphyxiation: 0},
 										cost: 28,
@@ -3722,7 +3721,7 @@
 										name: "elixir of concentration",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 2, g: 4, b: 6},
 										conditions: {sleep: 0, concentration: 1},
 										cost: 24,
@@ -3732,7 +3731,7 @@
 										name: "elixir of confusion",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -3749,7 +3748,7 @@
 										name: "elixir of determination",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 2, g: 6, b: 6},
 										conditions: {determination: 1},
 										cost: 28,
@@ -3759,7 +3758,7 @@
 										name: "elixir of exhaustion",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -3776,7 +3775,7 @@
 										name: "elixir of fear",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -3793,7 +3792,7 @@
 										name: "elixir of honesty",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 5, g: 5, b: 4},
 										cost: 28,
 										description: "the drinker is unable to lie or bluff for 1d6 hours"
@@ -3802,7 +3801,7 @@
 										name: "elixir of inebriation",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										conditions: {inebriation: 1},
 										cost: 2,
 										description: "causes inebriation for 1d6 hours"
@@ -3811,7 +3810,7 @@
 										name: "elixir of immunity",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 2, b: 2},
 										conditions: {bleeding: 0, immunity_boost: 4},
 										cost: 8,
@@ -3821,7 +3820,7 @@
 										name: "elixir of lust",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 4, g: 6, b: 4},
 										cost: 28,
 										description: "the drinker becomes lustful for 1d6 hours"
@@ -3830,7 +3829,7 @@
 										name: "elixir of night vision",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 2,
 										recipe: {w: 10, r: 1, g: 6, b: 7},
 										usage: [
@@ -3847,7 +3846,7 @@
 										name: "elixir of pain",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -3864,7 +3863,7 @@
 										name: "elixir of pain relief",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 1, b: 0},
 										conditions: {pain_relief: 1},
 										cost: 2,
@@ -3874,7 +3873,7 @@
 										name: "elixir of paralysis",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -3891,7 +3890,7 @@
 										name: "elixir of perceptiveness",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 1, g: 5, b: 6},
 										conditions: {sleep: 0, perceptiveness: 1},
 										cost: 24,
@@ -3901,7 +3900,7 @@
 										name: "elixir of rage",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -3919,7 +3918,7 @@
 										count: 1,
 										type: "armor",
 										d6: 1,
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 4, b: 4},
 										conditions: {bleeding: 0, resistance: 4},
 										cost: 16,
@@ -3929,7 +3928,7 @@
 										name: "elixir of severe pain",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -3947,7 +3946,7 @@
 										count: 1,
 										type: "potion",
 										d6: 1,
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 5, g: 1, b: 6},
 										cost: 24,
 										description: "the drinker has no voice for 1d6 hours"
@@ -3956,7 +3955,7 @@
 										name: "elixir of sleep",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -3973,7 +3972,7 @@
 										name: "elixir of strong pain relief",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 2, b: 0},
 										conditions: {pain_relief: 2},
 										cost: 4,
@@ -3983,7 +3982,7 @@
 										name: "potion of acid",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 3,
 										usage: [
 											{
@@ -4000,7 +3999,7 @@
 										name: "potion of electricity",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 2,
 										usage: [
 											{
@@ -4018,7 +4017,7 @@
 										name: "potion of extreme cold",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 1,
 										usage: [
 											{
@@ -4036,7 +4035,7 @@
 										name: "potion of extreme heat",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 1,
 										usage: [
 											{
@@ -4054,7 +4053,7 @@
 										name: "potion of fire",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -4072,7 +4071,7 @@
 										name: "potion of freezing",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -4089,7 +4088,7 @@
 										name: "potion of flashbang",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -4107,7 +4106,7 @@
 										name: "potion of frostbang",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -4124,7 +4123,7 @@
 										name: "potion of healing",
 										count: 1,
 										type: "healing",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 4, b: 0},
 										conditions: {bleeding: 0},
 										d6: 1,
@@ -4135,7 +4134,7 @@
 										name: "potion of infection",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -4151,7 +4150,7 @@
 										name: "potion of poison",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -4168,7 +4167,7 @@
 										name: "potion of strong healing",
 										count: 1,
 										type: "healing",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 7, b: 0},
 										conditions: {bleeding: 0},
 										d6: 2,
@@ -4179,7 +4178,7 @@
 										name: "concoction of blinding light",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 2,
 										usage: [
 											{
@@ -4197,7 +4196,7 @@
 										name: "concoction of energy",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 3,
 										usage: [
 											{
@@ -4214,7 +4213,7 @@
 										name: "concoction of expanding foam",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 1,
 										recipe: {w: 10, r: 2, g: 2, b: 4},
 										cost: 16,
@@ -4224,7 +4223,7 @@
 										name: "concoction of fizzling foam",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 1,
 										recipe: {w: 10, r: 1, g: 1, b: 2},
 										cost: 8,
@@ -4234,7 +4233,7 @@
 										name: "concoction of light",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 1,
 										recipe: {w: 10, r: 2, g: 2, b: 2},
 										conditions: {darkness: 0},
@@ -4245,7 +4244,7 @@
 										name: "concoction of insect repellent",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 2,
 										recipe: {w: 10, r: 2, g: 1, b: 1},
 										cost: 8,
@@ -4256,7 +4255,7 @@
 										count: 1,
 										type: "armor",
 										d6: 1,
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 4, g: 2, b: 6},
 										cost: 24,
 										description: "instantly hardens into a hard plaster that provides 1d6 armor"
@@ -4265,7 +4264,7 @@
 										name: "concoction of invisible ink",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 4, g: 4, b: 2},
 										cost: 20,
 										description: "use penmanship or drawing; writing only appears when heated"
@@ -4274,7 +4273,7 @@
 										name: "concoction of odor",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -4291,7 +4290,7 @@
 										name: "concoction of perfume",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										d6: 1,
 										recipe: {w: 10, r: 1, g: 2, b: 1},
 										conditions: {noxious_odor: 0},
@@ -4302,7 +4301,7 @@
 										name: "concoction of reflectivity",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "logic",
@@ -4318,7 +4317,7 @@
 										name: "concoction of slipperiness",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 6, g: 4, b: 2},
 										cost: 24,
 										description: "items require a dexterity check to hold"
@@ -4327,7 +4326,7 @@
 										name: "concoction of smoke",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										usage: [
 											{
 												statistic: "strength",
@@ -4344,7 +4343,7 @@
 										name: "concoction of stickiness",
 										count: 1,
 										type: "potion",
-										weight: 0.5,
+										weight: 0.2,
 										recipe: {w: 10, r: 4, g: 2, b: 4},
 										cost: 20,
 										description: "items stick together and require a strength check to separate"
@@ -6571,7 +6570,7 @@
 									{
 										name: "rock",
 										count: 1,
-										weight: 0.5,
+										weight: 0.1,
 										usage: [
 											{
 												statistic: "strength",
@@ -7230,7 +7229,7 @@
 											name: "human smart",
 											demographics: { race: "human", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
@@ -7243,7 +7242,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -7257,7 +7256,7 @@
 											name: "human skilled",
 											demographics: { race: "human", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
@@ -7285,7 +7284,7 @@
 											name: "human strong",
 											demographics: { race: "human", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
@@ -7304,7 +7303,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7312,7 +7311,7 @@
 											name: "human child",
 											demographics: { race: "human", age: 10, sex: "", height: 3.5, weight: 75 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
@@ -7333,7 +7332,7 @@
 											name: "human boss",
 											demographics: { race: "human", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "The standard homo sapiens sapiens, these farmers, craftsmen, and traders are swift and smart, obligatory tool-users, and motivated by self-interest and often the well-being of friends and family.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
@@ -7351,8 +7350,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7362,7 +7361,7 @@
 											name: "elf smart",
 											demographics: { race: "elf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -7375,7 +7374,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -7389,7 +7388,7 @@
 											name: "elf skilled",
 											demographics: { race: "elf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -7417,7 +7416,7 @@
 											name: "elf strong",
 											demographics: { race: "elf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -7436,7 +7435,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7444,7 +7443,7 @@
 											name: "elf child",
 											demographics: { race: "elf", age: 25, sex: "", height: 3.5, weight: 75 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -7465,7 +7464,7 @@
 											name: "elf boss",
 											demographics: { race: "elf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy elf, with a long lifespan, pointy ears, tall build, precision dexterity, mysticism, and knowledge of nature.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -7483,8 +7482,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7494,7 +7493,7 @@
 											name: "dwarf smart",
 											demographics: { race: "dwarf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7507,7 +7506,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -7521,7 +7520,7 @@
 											name: "dwarf skilled",
 											demographics: { race: "dwarf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 6, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7549,7 +7548,7 @@
 											name: "dwarf strong",
 											demographics: { race: "dwarf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7568,7 +7567,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7576,7 +7575,7 @@
 											name: "dwarf child",
 											demographics: { race: "dwarf", age: 15, sex: "", height: 3.5, weight: 75 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 6, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7597,7 +7596,7 @@
 											name: "dwarf boss",
 											demographics: { race: "dwarf", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy dwarf, with short stature, powerful strength, and an affinity for geology, masonry, and war.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -7615,8 +7614,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7626,7 +7625,7 @@
 											name: "halfling smart",
 											demographics: { race: "halfling", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -7639,7 +7638,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -7653,7 +7652,7 @@
 											name: "halfling skilled",
 											demographics: { race: "halfling", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -7681,7 +7680,7 @@
 											name: "halfling strong",
 											demographics: { race: "halfling", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -7700,7 +7699,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7708,7 +7707,7 @@
 											name: "halfling child",
 											demographics: { race: "halfling", age: 10, sex: "", height: 3, weight: 50 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -7729,7 +7728,7 @@
 											name: "halfling boss",
 											demographics: { race: "halfling", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy halfling/hobbit, with pointy ears, hairy feet, half height, and a love of food, gardening, music, and simple pleasures.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -7747,8 +7746,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7758,7 +7757,7 @@
 											name: "gnome smart",
 											demographics: { race: "gnome", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7771,7 +7770,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -7785,7 +7784,7 @@
 											name: "gnome skilled",
 											demographics: { race: "gnome", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7813,7 +7812,7 @@
 											name: "gnome strong",
 											demographics: { race: "gnome", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7832,7 +7831,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7840,7 +7839,7 @@
 											name: "gnome child",
 											demographics: { race: "gnome", age: 10, sex: "", height: 2.5, weight: 40 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7861,7 +7860,7 @@
 											name: "gnome boss",
 											demographics: { race: "gnome", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy gnome, with earth tones and short builds, long beards and pointy hats, and a focus on trickery, illusion, and crafting.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -7879,8 +7878,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7890,7 +7889,7 @@
 											name: "tiefling smart",
 											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
 											description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -7903,7 +7902,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -7917,7 +7916,7 @@
 											name: "tiefling skilled",
 											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
 											description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -7945,7 +7944,7 @@
 											name: "tiefling strong",
 											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
 											description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 6, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -7964,7 +7963,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7972,7 +7971,7 @@
 											name: "tiefling child",
 											demographics: { race: "tiefling", age: 10, sex: "", height: 3.5, weight: 75 },
 											description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 4, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -7993,7 +7992,7 @@
 											name: "tiefling boss",
 											demographics: { race: "tiefling", age: 25, sex: "", height: 5, weight: 150 },
 											description: "Standard fantasy tiefling, with pinkish skin, two horns, night vision, a prehensile tail, and a mysterious and tricky nature.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
@@ -8011,8 +8010,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8022,7 +8021,7 @@
 											name: "goblin smart",
 											demographics: { race: "goblin", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -8035,7 +8034,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -8049,7 +8048,7 @@
 											name: "goblin skilled",
 											demographics: { race: "goblin", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -8077,7 +8076,7 @@
 											name: "goblin strong",
 											demographics: { race: "goblin", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -8096,7 +8095,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8104,7 +8103,7 @@
 											name: "goblin child",
 											demographics: { race: "goblin", age: 10, sex: "", height: 3, weight: 50 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -8125,7 +8124,7 @@
 											name: "goblin boss",
 											demographics: { race: "goblin", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy goblins, with small frames, dark red or yellow skin, low intelligence, and a crass, lowly standard of living.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -8143,8 +8142,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8154,7 +8153,7 @@
 											name: "orc smart",
 											demographics: { race: "orc", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -8167,7 +8166,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -8181,7 +8180,7 @@
 											name: "orc skilled",
 											demographics: { race: "orc", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -8209,7 +8208,7 @@
 											name: "orc strong",
 											demographics: { race: "orc", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -8228,7 +8227,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8236,7 +8235,7 @@
 											name: "orc child",
 											demographics: { race: "orc", age: 10, sex: "", height: 4.5, weight: 100 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -8257,7 +8256,7 @@
 											name: "orc boss",
 											demographics: { race: "orc", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy orcs, with large bodies covered in rough, dark-colored skin, a warlike temperament and preference for violence.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
@@ -8275,8 +8274,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8286,7 +8285,7 @@
 											name: "lizardfolk smart",
 											demographics: { race: "lizardfolk", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
@@ -8299,7 +8298,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -8313,7 +8312,7 @@
 											name: "lizardfolk skilled",
 											demographics: { race: "lizardfolk", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
@@ -8341,7 +8340,7 @@
 											name: "lizardfolk strong",
 											demographics: { race: "lizardfolk", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
@@ -8360,7 +8359,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8368,7 +8367,7 @@
 											name: "lizardfolk child",
 											demographics: { race: "lizardfolk", age: 10, sex: "", height: 3.5, weight: 75 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
@@ -8389,7 +8388,7 @@
 											name: "lizardfolk boss",
 											demographics: { race: "lizardfolk", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
@@ -8407,8 +8406,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8418,7 +8417,7 @@
 											name: "bhios smart",
 											demographics: { race: "bhios", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8431,7 +8430,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -8445,7 +8444,7 @@
 											name: "bhios skilled",
 											demographics: { race: "bhios", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8473,7 +8472,7 @@
 											name: "bhios strong",
 											demographics: { race: "bhios", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8492,7 +8491,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8500,7 +8499,7 @@
 											name: "bhios child",
 											demographics: { race: "bhios", age: 10, sex: "", height: 4, weight: 75 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8521,7 +8520,7 @@
 											name: "bhios boss",
 											demographics: { race: "bhios", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "These forest-dwelling hominins are logical, passionate, and well-spoken. They’ve adapted to a mostly peaceful and democratic existence, if technologically stagnant.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8539,8 +8538,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8550,7 +8549,7 @@
 											name: "mellifax smart",
 											demographics: { race: "mellifax", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
@@ -8563,7 +8562,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -8577,7 +8576,7 @@
 											name: "mellifax skilled",
 											demographics: { race: "mellifax", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
@@ -8605,7 +8604,7 @@
 											name: "mellifax strong",
 											demographics: { race: "mellifax", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
@@ -8624,7 +8623,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8632,7 +8631,7 @@
 											name: "mellifax child",
 											demographics: { race: "mellifax", age: 10, sex: "", height: 3, weight: 50 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
@@ -8653,7 +8652,7 @@
 											name: "mellifax boss",
 											demographics: { race: "mellifax", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Between three and four feet tall, these fairy folk are small, but clever. A secluded people, living in underground forest hives, they are often driven by racial ties, and have a close bond and deep understanding of nature.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
@@ -8671,8 +8670,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8682,7 +8681,7 @@
 											name: "preas smart",
 											demographics: { race: "preas", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8695,7 +8694,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -8709,7 +8708,7 @@
 											name: "preas skilled",
 											demographics: { race: "preas", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8737,7 +8736,7 @@
 											name: "preas strong",
 											demographics: { race: "preas", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8756,7 +8755,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8764,7 +8763,7 @@
 											name: "preas child",
 											demographics: { race: "preas", age: 10, sex: "", height: 4, weight: 75 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8785,7 +8784,7 @@
 											name: "preas boss",
 											demographics: { race: "preas", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tradition and clan loyalty hold first priority for this dark-purple-skinned people, but a connection with animal life is close behind. They have developed a symbiotic relationship with dozens of forest, mountain, and plains creatures.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
@@ -8803,8 +8802,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8814,7 +8813,7 @@
 											name: "winge smart",
 											demographics: { race: "winge", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
-											status: { points: 0, burden: 27, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -8827,7 +8826,7 @@
 										},
 										items: [
 											{name:"stonebow",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"missile"}],weight:3,hands:2,fuel:2,materials:"wood, string, metal",cost:70,description:"range: 50 ft",id:"lwxxxnluronoevbx"},
-											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.5,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
+											{name:"rock orb",count:10,type:"ammunition",weapons:["sling","bomb","stonebow","gauss pistol"],weight:0.1,usage:[{statistic:"dexterity",skill:"missile",d6:3},{statistic:"strength",skill:"throw",d6:3}],hands:1,materials:"stone",cost:1,description:" ",id:"blcgrpuidapffjvr"},
 											{name:"dagger",count:1,type:"weapon",usage:[{statistic:"dexterity",skill:"knifing",d6:3},{statistic:"strength",skill:"throw",d6:3}],weight:1,hands:1,magnetic:true,conditions:{bleeding:1},materials:"metal",cost:10,description:" ",id:"zexbxnhhkntluxke"},
 											{name:"leather armor",count:1,type:"armor",armorType:"body",d6:3,weight:10,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:25,description:"prevents extreme cold",id:"tbaficbwxbgfsmvr"},
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
@@ -8841,7 +8840,7 @@
 											name: "winge skilled",
 											demographics: { race: "winge", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
-											status: { points: 0, burden: 24, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -8869,7 +8868,7 @@
 											name: "winge strong",
 											demographics: { race: "winge", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
-											status: { points: 0, burden: 33.5, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -8888,7 +8887,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"concoction of smoke",count:1,type:"potion",weight:0.5,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8896,7 +8895,7 @@
 											name: "winge child",
 											demographics: { race: "winge", age: 10, sex: "", height: 5, weight: 75 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
-											status: { points: 0, burden: 3, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -8917,7 +8916,7 @@
 											name: "winge boss",
 											demographics: { race: "winge", age: 25, sex: "", height: 5.5, weight: 150 },
 											description: "Tall, strong, and mean, these orange-skinned warriors are bound by a strict code of honor which values ability above all. Their civilization is driven by conquest and power, and has unparalleled knowledge of geology and chemistry.",
-											status: { points: 0, burden: 52, conditions: [], damage: 0 }
+											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
@@ -8935,8 +8934,8 @@
 											{name:"chainmail helmet",count:1,type:"armor",armorType:"head",d6:5,weight:5,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wkthclgbkefjqqud"},
 											{name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:5,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:5,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
-											{name:"potion of strong healing",count:1,type:"healing",weight:0.5,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{name:"potion of flashbang",count:1,type:"potion",weight:0.5,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
+											{name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
+											{name:"potion of flashbang",count:1,type:"potion",weight:0.2,"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares",id:"qsgqgreexyztuwmy"}
 										]
 									}
 							]
@@ -8949,7 +8948,7 @@
 										name: "alligator",
 										demographics: { race: "alligator", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 6, condition: 0}] },
@@ -8967,7 +8966,7 @@
 										name: "bat",
 										demographics: { race: "bat", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 0, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 6, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}, {name: "echolocation", maximum: 10, condition: 0, animals: true}] },
@@ -8985,7 +8984,7 @@
 										name: "bear",
 										demographics: { race: "bear", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -9003,7 +9002,7 @@
 										name: "bear cub",
 										demographics: { race: "bear", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -9021,7 +9020,7 @@
 										name: "beaver",
 										demographics: { race: "beaver", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -9039,7 +9038,7 @@
 										name: "bird",
 										demographics: { race: "bird", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 10, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}, {name: "internal_compass", animals: true, maximum: 5, condition: 0}] },
@@ -9057,7 +9056,7 @@
 										name: "boar",
 										demographics: { race: "boar", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 6, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -9075,7 +9074,7 @@
 										name: "buffalo",
 										demographics: { race: "buffalo", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 4, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 0, condition: 0}] },
@@ -9093,7 +9092,7 @@
 										name: "bugs",
 										demographics: { race: "bugs", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}, {name: "infrared_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9113,7 +9112,7 @@
 										name: "cat",
 										demographics: { race: "cat", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9131,7 +9130,7 @@
 										name: "camel",
 										demographics: { race: "camel", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 10, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 7, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 0, condition: 0}] },
@@ -9149,7 +9148,7 @@
 										name: "chicken",
 										demographics: { race: "chicken", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 0, condition: 0}] },
@@ -9167,7 +9166,7 @@
 										name: "coyote",
 										demographics: { race: "coyote", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 4, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9185,7 +9184,7 @@
 										name: "cow",
 										demographics: { race: "cow", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -9203,7 +9202,7 @@
 										name: "deer",
 										demographics: { race: "deer", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 10, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9221,7 +9220,7 @@
 										name: "dog",
 										demographics: { race: "dog", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -9239,7 +9238,7 @@
 										name: "dolphin",
 										demographics: { race: "dolphin", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 										statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}, {name: "echolocation", maximum: 10, condition: 0, animals: true}] },
@@ -9257,7 +9256,7 @@
 										name: "duck",
 										demographics: { race: "duck", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 										statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}, {name: "internal_compass", animals: true, maximum: 5, condition: 0}] },
@@ -9275,7 +9274,7 @@
 										name: "elephant",
 										demographics: { race: "elephant", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 10, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}, {name: "infrasound", animals: true, maximum: 5, condition: 0}] },
@@ -9293,7 +9292,7 @@
 										name: "falcon",
 										demographics: { race: "falcon", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 10, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 7, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -9311,7 +9310,7 @@
 										name: "fish",
 										demographics: { race: "fish", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 1, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}, {name: "infrared_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9329,7 +9328,7 @@
 										name: "flamingo",
 										demographics: { race: "flamingo", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 1, condition: 0}, {name: "scent", unremovable: true, maximum: 1, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -9347,7 +9346,7 @@
 										name: "fox",
 										demographics: { race: "fox", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9365,7 +9364,7 @@
 										name: "frog",
 										demographics: { race: "frog", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 4, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}, {name: "infrared_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9385,7 +9384,7 @@
 										name: "giraffe",
 										demographics: { race: "giraffe", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -9403,7 +9402,7 @@
 										name: "goat",
 										demographics: { race: "goat", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 										statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -9421,7 +9420,7 @@
 										name: "gorilla",
 										demographics: { race: "gorilla", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -9439,7 +9438,7 @@
 										name: "hippo",
 										demographics: { race: "hippo", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 										statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -9457,7 +9456,7 @@
 										name: "horse",
 										demographics: { race: "horse", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 0, condition: 0}] },
@@ -9475,7 +9474,7 @@
 										name: "jellyfish",
 										demographics: { race: "jellyfish", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 2, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: -7, condition: 0}, {name: "sound", unremovable: true, maximum: -7, condition: 0}, {name: "scent", unremovable: true, maximum: 1, condition: 0}, {name: "taste", unremovable: true, maximum: -7, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -9495,7 +9494,7 @@
 										name: "kangaroo",
 										demographics: { race: "kangaroo", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -9513,7 +9512,7 @@
 										name: "lion",
 										demographics: { race: "lion", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 6, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 6, condition: 0}, {name: "taste", unremovable: true, maximum: 4, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9531,7 +9530,7 @@
 										name: "lizard",
 										demographics: { race: "lizard", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 0, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -9551,7 +9550,7 @@
 										name: "llama",
 										demographics: { race: "llama", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 4, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 0, condition: 0}] },
@@ -9569,7 +9568,7 @@
 										name: "lobster",
 										demographics: { race: "lobster", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 1, condition: 0}, {name: "sound", unremovable: true, maximum: 1, condition: 0}, {name: "scent", unremovable: true, maximum: 1, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -9587,7 +9586,7 @@
 										name: "monkey",
 										demographics: { race: "monkey", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -9605,7 +9604,7 @@
 										name: "moose",
 										demographics: { race: "moose", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 										statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 4, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -9623,7 +9622,7 @@
 										name: "mouse",
 										demographics: { race: "mouse", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9643,7 +9642,7 @@
 										name: "octopus",
 										demographics: { race: "octopus", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}, {name: "camouflage", animals: true, maximum: 15, condition: 0}] },
@@ -9661,7 +9660,7 @@
 										name: "otter",
 										demographics: { race: "otter", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -9679,7 +9678,7 @@
 										name: "owl",
 										demographics: { race: "owl", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 7, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}, {name: "night_vision", animals: true, maximum: 10, condition: 0}] },
@@ -9697,7 +9696,7 @@
 										name: "panda",
 										demographics: { race: "panda", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 0, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 7, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -9715,7 +9714,7 @@
 										name: "pig",
 										demographics: { race: "pig", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -9733,7 +9732,7 @@
 										name: "rabbit",
 										demographics: { race: "rabbit", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 6, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -9751,7 +9750,7 @@
 										name: "raccoon",
 										demographics: { race: "raccoon", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9771,7 +9770,7 @@
 										name: "rat",
 										demographics: { race: "rat", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9791,7 +9790,7 @@
 										name: "ray",
 										demographics: { race: "ray", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 0, condition: 0}, {name: "sound", unremovable: true, maximum: 0, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -9811,7 +9810,7 @@
 										name: "rhino",
 										demographics: { race: "rhino", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 4, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -9829,7 +9828,7 @@
 										name: "shark",
 										demographics: { race: "shark", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 1, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 7, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}] },
@@ -9847,7 +9846,7 @@
 										name: "sheep",
 										demographics: { race: "sheep", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 0, condition: 0}] },
@@ -9865,7 +9864,7 @@
 										name: "silverfish (giant)",
 										demographics: { race: "silverfish (giant)", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 10, condition: 0}] },
@@ -9885,7 +9884,7 @@
 										name: "silverfish hatchling (giant)",
 										demographics: { race: "silverfish (giant)", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 10, condition: 0}] },
@@ -9905,7 +9904,7 @@
 										name: "skunk",
 										demographics: { race: "skunk", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -9925,7 +9924,7 @@
 										name: "sloth",
 										demographics: { race: "sloth", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}] },
@@ -9943,7 +9942,7 @@
 										name: "snake",
 										demographics: { race: "snake", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 1, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}, {name: "infrared_vision", animals: true, maximum: 5, condition: 0}] },
@@ -9963,7 +9962,7 @@
 										name: "spider (giant)",
 										demographics: { race: "spider (giant)", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}] },
@@ -9983,7 +9982,7 @@
 										name: "squirrel",
 										demographics: { race: "squirrel", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -10001,7 +10000,7 @@
 										name: "tiger",
 										demographics: { race: "tiger", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 6, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
@@ -10019,7 +10018,7 @@
 										name: "turtle",
 										demographics: { race: "turtle", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 4, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -10037,7 +10036,7 @@
 										name: "vulture",
 										demographics: { race: "vulture", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 7, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 0, condition: 0}] },
@@ -10055,7 +10054,7 @@
 										name: "walrus",
 										demographics: { race: "walrus", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -10073,7 +10072,7 @@
 										name: "weasel",
 										demographics: { race: "weasel", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 4, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 6, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -10091,7 +10090,7 @@
 										name: "whale",
 										demographics: { race: "whale", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 10, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 0, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}, {name: "infrasound", animals: true, maximum: 10, condition: 0}] },
@@ -10109,7 +10108,7 @@
 										name: "wolf",
 										demographics: { race: "wolf", age: 0, sex: "", height: 0, weight: 0 },
 										description: "",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 },
+										status: { points: 0, conditions: [], damage: 0 },
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 4, condition: 0}, {name: "night_vision", animals: true, maximum: 5, condition: 0}] },
@@ -10132,7 +10131,7 @@
 										name: "alaxior",
 										demographics: { race: "alaxior", age: 0, sex: "", height: 0, weight: 0 },
 										description: "The alaxior is a is a large, carnivorous, aquatic invertebrate capable of tremendous destruction. This shark is about 10 feet long and 3 feet wide, swimming at up to 100 feet per second. The alaxior is an apex predator with an average lifespan is 5 years, and an annual offspring production of roughly a dozen eggs. Though the animal is not very intelligent, its 200-plus razor-sharp teeth can rip even the strongest material to pieces. Additionally, alaxiors can poison enemies with two lateral venom-emitting claw-fins - this poison causes the prey to suffocate as blood cells burst within minutes.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 5, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 1, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 7, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}] },
@@ -10152,7 +10151,7 @@
 										name: "ambird",
 										demographics: { race: "ambird", age: 0, sex: "", height: 0, weight: 0 },
 										description: "This orange-yellow avian is a bird of prey, swooping in from high altitudes to scoop small mammals from the plains. Ambirds are temperature resistant against both extreme cold and extreme heat, using their unusual feathers to thermoregulate in all climates, and even to survive fire for a short time. These birds generally live in small groups and mate once a year by migrating in a seemingly random direction.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 10, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -10170,7 +10169,7 @@
 										name: "amphibiphant",
 										demographics: { race: "amphibiphant", age: 0, sex: "", height: 0, weight: 0 },
 										description: "Amphibiphants are gigantic amphibians the size of elephants. They possess wet skin, like frogs, and have long salamander-like tails, but their round heads feature tusks and a trunk, and their legs are rough and elephantine. They are usually found near lakes and savannahs. These creatures often jump, shaking the ground. Their preferred food includes tree leaves, as well as small birds and large insects, which they capture with their sticky, fast-flicking tongues.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}] },
@@ -10188,7 +10187,7 @@
 										name: "blunikaurn",
 										demographics: { race: "blunikaurn", age: 0, sex: "", height: 0, weight: 0 },
 										description: "Blunikaurns are horse-like creatures with hooves, a tail, and a snouted face. Blunikaurns also possess a metallic horn protruding from their foreheads, and their skin is predominantly blue. These electrically unstable animals are constantly creating an electric charge within their bodies - this charge can be transmitted on contact. Blunikaurns are incredibly fast runners, using this electricity to increase their speed far beyond traditional horses, but this ability wears them out quickly, so a blunikaurn must constantly be replenishing its saline content. These strong creatures are intelligent and less docile than horses, but when tamed provide an excellent traveling companion.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 7, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 0, condition: 0}] },
@@ -10208,7 +10207,7 @@
 										name: "craven",
 										demographics: { race: "craven", age: 0, sex: "", height: 0, weight: 0 },
 										description: "Shimmering, reflective silver feathers cover this small corvid bird. Its intelligence allows it to use rudimentary tools and even learn commands; it is omnivorous and likes to collect things for its small flock, which nests near settlements and in moderate forests.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 7, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -10228,7 +10227,7 @@
 										name: "dhogris",
 										demographics: { race: "dhogris", age: 0, sex: "", height: 0, weight: 0 },
 										description: "These canine creatures come in many breeds, but most often appear similar to huskies and wolves. Their light blue fur and dark blue teeth are their most visible differentiators from normal tundra canines, but their ability to drain heat from enemies by biting them makes them far more effective as fighting dogs. These animals can be trained and commanded, but in the wild, they are vicious and aggressive.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 6, condition: 0}, {name: "sound", unremovable: true, maximum: 6, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -10248,7 +10247,7 @@
 										name: "eezapan",
 										demographics: { race: "eezapan", age: 0, sex: "", height: 0, weight: 0 },
 										description: "The eezapan is a three-horned monkey with near-human intelligence. Eezapans do not have tails, but, sprouting from their foreheads, they have three conical grey or brown horns that they use to attack enemies. These horns exude a toxin that can cause temporary confusion and disorientation in those it touches. The eezapan is strong and large, generally covered in gray or brown hair. Eezapans are possessive jungle creatures that live in small clans.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -10268,7 +10267,7 @@
 										name: "electrite",
 										demographics: { race: "electrite", age: 0, sex: "", height: 0, weight: 0 },
 										description: "The electrite is a land snake often found in jungles and swamps with an electric ability similar to an electric eel. These creatures range in size and color, from garden snakes to cobras, and what they lack in mercy and tolerance, they make up for in cunning and patience.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 1, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -10288,7 +10287,7 @@
 										name: "ellish",
 										demographics: { race: "ellish", age: 0, sex: "", height: 0, weight: 0 },
 										description: "An ellish is similar to a jellyfish in its overall appearance. However, an ellish is somewhat larger, with a circumference of three feet, and has a long compound eye around its entire body at its equator. The ellish’s tentacles are electrically charged, so the creature emits a small shock into its enemies.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 2, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 7, condition: 0}, {name: "sound", unremovable: true, maximum: 0, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -10308,7 +10307,7 @@
 										name: "falump",
 										demographics: { race: "falump", age: 0, sex: "", height: 0, weight: 0 },
 										description: "Seemingly harmless creatures, falumps resemble large rodents, with large, humped, furry backs, often gray-purple in color. They walk on all fours, but their entire underbelly is an enormous, oval-shaped, small-toothed mouth. With an incredibly fast metabolism, falumps are able to eat quickly and continuously, storing energy in a chemically efficient syrup in specialized veins. When a falump dies, it rapidly disintegrates, leaving a dark, gooey substance with healing properties.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 7, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -10326,7 +10325,7 @@
 										name: "fegragite",
 										demographics: { race: "fegragite", age: 0, sex: "", height: 0, weight: 0 },
 										description: "A fegragite is a short monster with a thick aluminum shell around three sides of its body. A single, spherical, compound eye lies at the top of a short, retractable stalk protruding from its head. The head itself is an eared mass of fur with a mouth and nose, and it rests, neckless, above its dark, furry body. It is a bipedal animal, and all four of its limbs are coated with an alloy of iron. The creature possesses the ability to charge this iron to create magnetic limbs, and can change the polarity of these limbs almost instantaneously, allowing it to move objects magnetically. The beast eats both organic material and metals. The animal also has an excellent sense of direction because ions in its brain align with the electromagnetic field.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}, {name: "internal_compass", animals: true, maximum: 10, condition: 0}] },
@@ -10344,7 +10343,7 @@
 										name: "fylete",
 										demographics: { race: "fylete", age: 0, sex: "", height: 0, weight: 0 },
 										description: "A fylete is a rainforest creature, a white-furred winged animal with four thin, clawed limbs. Fyletes have large triangular ears near the back of their short-snouted and circular-eyed faces. Their vocal chords are capable of producing a wide range of sounds, and they have often been known to produce deconstructive sound waves in response to what they hear, rendering their environment silent. They have long, dexterous tails and are fast-moving, especially as they leap and glide from tree to tree.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 1, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -10364,7 +10363,7 @@
 										name: "grithers",
 										demographics: { race: "grithers", age: 0, sex: "", height: 0, weight: 0 },
 										description: "Grithers are tiny fungi that grow in furry mats, decomposing plants and animal flesh - before the host has actually died. Grithers are able to camouflage with their surroundings, changing their pigments almost immediately, so they are nearly impossible to see.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 0, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 0, condition: 0}, {name: "sound", unremovable: true, maximum: 0, condition: 0}, {name: "scent", unremovable: true, maximum: 0, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}] },
@@ -10384,7 +10383,7 @@
 										name: "kangarasis",
 										demographics: { race: "kangarasis", age: 0, sex: "", height: 0, weight: 0 },
 										description: "Kangarasi are plains marsupials with feathery wings, which they use to jump high and glide for short distances. These creatures have long tails, small front paw-claws with opposable digits, a snouted face with tall ears, a furry body, a large tongue, two long hind feet capable of great jumps, and pouches. Kangarasi also have advanced intelligence and vocal chords, and are usually very friendly. ",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -10402,7 +10401,7 @@
 										name: "mimicat",
 										demographics: { race: "mimicat", age: 0, sex: "", height: 0, weight: 0 },
 										description: "These desert animals have thin, tan and brown-spotted fur covering their long, slender bodies. Unlike most felines, their complex vocal cords are capable of producing human-like sounds, and they often mimic the sounds they hear. They have pointed ears and sharp claws, as well as long, split tails.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 12, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -10420,7 +10419,7 @@
 										name: "narwalrus",
 										demographics: { race: "narwalrus", age: 0, sex: "", height: 0, weight: 0 },
 										description: "This coastal creature lives in icy climates and preys on fish and birds alike. Its long, plump body is covered in rough, gray skin, with a long tail, two back legs, and two front flipper-fin-claws. The narwalrus has a large, hairy face with tusks and a long horn coming from its forehead.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -10438,7 +10437,7 @@
 										name: "nocrid",
 										demographics: { race: "nocrid", age: 0, sex: "", height: 0, weight: 0 },
 										description: "A nocrid is a small, six-legged, clawed lizard that lives in rainforests. Usually a dark gray or black color, nocrids have a sharp-spiked spine. It is cold-blooded, but moves very quickly, communicating with a complex system of color-changing scales that the creature can cause to glow. Nocrids can also produce a dark gas through pores in their scales, impeding vision. They frequently attack with their short, sharp tails.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 7, condition: 0}, {name: "sound", unremovable: true, maximum: 0, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -10458,7 +10457,7 @@
 										name: "opterix",
 										demographics: { race: "opterix", age: 0, sex: "", height: 0, weight: 0 },
 										description: "Opterixes are six-foot tall flightless birds. The wings are large and thin, and come out of the creature’s sides instead of the back, but can be folded up close to the bird. At the top tips of each wing are three-fingered claws, with a fourth opposable digit, and the bird's talon-like feet feature a similar arrangement. An opterix is blue or purple in color, and has a long orange beak. Opterixes are able to communicate with one another telepathically by transmitting radio signals from their brains. These slow-moving creatures tend to keep to themselves or live in small groups.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 7, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 2, condition: 0}] },
@@ -10476,7 +10475,7 @@
 										name: "picay",
 										demographics: { race: "picay", age: 0, sex: "", height: 0, weight: 0 },
 										description: "A small, green or blue feathered bird with fast flight, the picay is a friendly creature commonly used as a messenger bird. This is because the picay has a photographic memory and can repeat complex sounds - including long segments of human speech. Picays are weak and evasive animals capable of nearly harmless clawing attacks.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 12, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}, {name: "internal_compass", animals: true, maximum: 5, condition: 0}] },
@@ -10494,7 +10493,7 @@
 										name: "pigneous",
 										demographics: { race: "pigneous", age: 0, sex: "", height: 0, weight: 0 },
 										description: "This armor-plated pig monster is often found in mountainous regions, where it feasts on any food it can find. The pigneous can exude fire from its mouth and smoke from its flared nostrils, which combines with its heavy body and hard hooves to constitute a dangerous - and aggressive - wild boar.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 3, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 6, condition: 0}] },
@@ -10515,7 +10514,7 @@
 										name: "rhinostrich",
 										demographics: { race: "rhinostrich", age: 0, sex: "", height: 0, weight: 0 },
 										description: "A rhinosctrich has a spheroid body of flesh, covered in bluish-purple and pink feathers. It has a puffy feather tail as well, but a leathery, rough tail protrudes from this. The creature has long, thin, hollow-boned legs, which widen to gray hooves at the bottom. A rhinostrich aksi has two fluffy upper limbs - stubby little wings - but it is far too heavy to fly. Its head is a coarse, gray, snouted face with a horn coming from the tip of its yellow beak, two eyes surrounded by feathers, and wide nostrils on the beak-horn. Drooping from this head are two long, gray ears drooping. Rhinostriches are agile creatures, and they often charge at enemies, though they are herbivorous.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 4, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -10533,7 +10532,7 @@
 										name: "scaw",
 										demographics: { race: "scaw", age: 0, sex: "", height: 0, weight: 0 },
 										description: "Small, annoying birds, these leaf-eaters frequently attack farms - and farmers. Although not very intelligent or strong, scaws are known to be fast and vicious. They are brown, feathered, scraggly avians with short, jagged-edged beaks and three-toed talons. Capable of long, fast flight, with their three-foot wingspan these egg-laying animals generally live for three years.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 7, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 0, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -10551,7 +10550,7 @@
 										name: "scorpicrab",
 										demographics: { race: "scorpicrab", age: 0, sex: "", height: 0, weight: 0 },
 										description: "A combination of a crab and a scorpion, this dog-sized armored beetle has four legs but no wings. It is gray in color and has two compound eyes at the front of its long, shelled head. In addition to its thin, plated legs, the scorpicrabs two front claws are venomous scythes, like the tail of a scorpion - a tail it lacks. Scorpicrabs usually live in swampy areas, and they generally attack anything that moves.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 2, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -10571,7 +10570,7 @@
 										name: "tentaroc",
 										demographics: { race: "tentaroc", age: 0, sex: "", height: 0, weight: 0 },
 										description: "This tentacled bird is a large coastal creature feasting on fish and other sea animals. Its eight long, turquoise, suction-cupped tentacles come together at a plump, feathered, yellow and white avian body, complete with a beaked head and solid black eyes.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 2, condition: 0}, {name: "scent", unremovable: true, maximum: 3, condition: 0}, {name: "taste", unremovable: true, maximum: 2, condition: 0}, {name: "touch", unremovable: true, maximum: 7, condition: 0}] },
@@ -10589,7 +10588,7 @@
 										name: "ticocrag",
 										demographics: { race: "ticocrag", age: 0, sex: "", height: 0, weight: 0 },
 										description: "This is a metal machine of legend, a bipedal automaton with metal, electrified syringe-tipped arms and solid, magnetic legs. Standing at about 15 feet, the Ticocrag is humanoid, with a rounded metal head featuring large yellow glowing eyes.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 10, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 7, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: -14, condition: 0}, {name: "taste", unremovable: true, maximum: -14, condition: 0}, {name: "touch", unremovable: true, maximum: -14, condition: 0}] },
@@ -10610,7 +10609,7 @@
 										name: "varishnap",
 										demographics: { race: "varishnap", age: 0, sex: "", height: 0, weight: 0 },
 										description: "This a desert pack animal resembles a large, hairy mule, with a single camel-like hump. Varishnaps require little food and water, preferring to eat cactus and other water-storing desert plants using baleen-whale-like teeth to filter out needles. Varishnaps are extremely strong with natural defenses due to their thick coats of ruffled fur, and can attack using their ram-like tusks.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 6, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 5, condition: 0}, {name: "scent", unremovable: true, maximum: 2, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -10628,7 +10627,7 @@
 										name: "velocigon",
 										demographics: { race: "velocigon", age: 0, sex: "", height: 0, weight: 0 },
 										description: "Velocigons have the five-foot, scaly reptilian body, long tail, clawing forearms, and sharp teeth of a velociraptor. Additionally, they breathe fire. Velocigons are fast-moving pack hunters with near-human intelligence, and they can use simple tools by utilizing the opposable digits on their two forearms. This creature is carnivorous and violent, and can communicate using a complex array of sounds.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 11, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 4, condition: 0}, {name: "scent", unremovable: true, maximum: 6, condition: 0}, {name: "taste", unremovable: true, maximum: 3, condition: 0}, {name: "touch", unremovable: true, maximum: 3, condition: 0}] },
@@ -10649,7 +10648,7 @@
 										name: "yirth",
 										demographics: { race: "yirth", age: 0, sex: "", height: 0, weight: 0 },
 										description: "This grizzly bear-like monster has dark brown fur and six limbs - including two ordinary hind limbs with claws, and four insectoid forearms. These hard, green, large, insect-like scythes are subdivided into a pair of pincers, and below that, a pair of sharp blades. The creature has two green antennae coming from the top of its furry head, and its mouth is simply a large hole lined with spikes. Yirths are immensely strong and have defensive plating running down their spines. They are omnivorous beasts that prefer to live in hills and forests near water.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 9, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 5, condition: 0}, {name: "sound", unremovable: true, maximum: 7, condition: 0}, {name: "scent", unremovable: true, maximum: 7, condition: 0}, {name: "taste", unremovable: true, maximum: 5, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
@@ -10667,7 +10666,7 @@
 										name: "zlumb",
 										demographics: { race: "zlumb", age: 0, sex: "", height: 0, weight: 0 },
 										description: "The zlumb is a large feathered sphere with four short feathered legs underneath. It has a bump in the top of its body containing its brain, and from this lump protrude feeling antennae, compound eyes, and nostrils. The animal excretes, from a scent gland on this lump, a gas with a sweet smell that attracts animals - and puts them to sleep. At this point, the zlumb crawls over them and uses its long, straw-like organ on its underside to suck the blood from its prey. Zlumbs are egg-laying creatures that produce ostrich-size eggs every season. They mate by producing airborne pollen.",
-										status: { points: 0, burden: 0, conditions: [], damage: 0 }
+										status: { points: 0, conditions: [], damage: 0 }
 									},
 									statistics: {
 										perception: { maximum: 8, damage: 0, condition: 0, skills: [{name: "sight", unremovable: true, maximum: 3, condition: 0}, {name: "sound", unremovable: true, maximum: 1, condition: 0}, {name: "scent", unremovable: true, maximum: 5, condition: 0}, {name: "taste", unremovable: true, maximum: 1, condition: 0}, {name: "touch", unremovable: true, maximum: 5, condition: 0}] },
