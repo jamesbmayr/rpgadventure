@@ -11072,7 +11072,7 @@
 					if (data.command == "write") {
 						// get s3
 							var s3 = new AWS.S3()
-							var base64data = Buffer.from(data.content, "binary")
+							var base64data = Buffer.from(data.content, "base64")
 							var options = {
 								Bucket: ENVIRONMENT.storage_bucket,
 								Body: base64data,
