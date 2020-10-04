@@ -2503,7 +2503,7 @@ window.onload = function() {
 							ELEMENTS.character.info.throw.value = Math.max(0, ((CHARACTER.statistics.strength.maximum + CHARACTER.statistics.strength.damage + CHARACTER.statistics.strength.condition) + (thro.maximum  + thro.condition )) * 10)
 
 						// carrying
-							ELEMENTS.character.info.burden.value = CHARACTER.items.length ? (CHARACTER.items.reduce(function(a, b) { return a + ((b.weight || 0) * (b.count || 0)) }, 0) || 0) : 0
+							ELEMENTS.character.info.burden.value = Math.round((CHARACTER.items.length ? (CHARACTER.items.reduce(function(a, b) { return a + ((b.weight || 0) * (b.count || 0)) }, 0) || 0) : 0) * 100) / 100
 							if (ELEMENTS.character.info.burden.value > ELEMENTS.character.info.carry.value) {
 								ELEMENTS.character.info.burden.setAttribute("overburdened", true)
 							}

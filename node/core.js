@@ -6469,7 +6469,7 @@
 									{
 										name: "pitons (spikes)",
 										count: 10,
-										weight: 10,
+										weight: 1,
 										hands: 1,
 										magnetic: true,
 										usage: [
