@@ -4687,6 +4687,15 @@ window.onload = function() {
 									for (var i in directions) {
 										var panningOverlay = document.createElement("div")
 											panningOverlay.setAttribute("directions", directions[i])
+											panningOverlay.setAttribute("multiplier", 1)
+											panningOverlay.className = "content-arena-panning"
+											panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
+											panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
+										ELEMENTS.gametable.element.appendChild(panningOverlay)
+
+										var panningOverlay = document.createElement("div")
+											panningOverlay.setAttribute("directions", directions[i])
+											panningOverlay.setAttribute("multiplier", 2)
 											panningOverlay.className = "content-arena-panning"
 											panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
 											panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
@@ -6508,14 +6517,15 @@ window.onload = function() {
 			/* startPanningContentArena */
 				function startPanningContentArena(event) {
 					try {
-						// get direction
+						// get direction & multiplier
 							var directions = event.target.getAttribute("directions").split(/\s/gi)
+							var multiplier = Number(event.target.getAttribute("multiplier"))
 
 						// start loops
 							for (var i in directions) {
 								var direction = directions[i]
 								ELEMENTS.gametable.canvas.panLoops[direction] = setInterval(function(direction) {
-									panContentArena({target: {value: direction, distance: 0.1}})
+									panContentArena({target: {value: direction, distance: 0.1 * multiplier}})
 								}, 10, direction)
 							}
 					} catch (error) {console.log(error)}
