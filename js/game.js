@@ -5369,27 +5369,25 @@ window.onload = function() {
 								var inputOpacity = listing.querySelector("input[property='opacity']")
 								var inputColor = listing.querySelector("input[property='color']")
 								var inputImage = listing.querySelector("input[property='image']")
-								var inputCharacter = listing.querySelector("select[property='character']")
 							}
 
 						// set values
 							listing.setAttribute("selected", ELEMENTS.gametable.selected && ELEMENTS.gametable.selected.arenaObject.id == object.id)
-							listing.style.order = object.z || 0
-							inputLocked.checked = object.locked || false
-							inputVisible.checked = object.visible || false
-							inputText.value = object.text || ""
-							inputX.value = object.x || 0
-							inputY.value = object.y || 0
-							inputWidth.value = object.width || 0
-							inputHeight.value = object.height || 0
-							inputCorners.value = object.corners || 0
-							inputRotation.value = object.rotation || 0
-							inputGlow.value = object.glow || 0
-							inputShadow.value = object.shadow || ELEMENTS.gametable.canvas.gridBackground
-							inputOpacity.value = object.opacity || 0
-							inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor
-							inputImage.value = object.image || ""
-							inputCharacter = object.character || "[none]"
+							if (listing.style.order 	!= object.z) { 			listing.style.order = object.z || 0 }
+							if (inputLocked.checked 	!= object.locked) { 	inputLocked.checked = object.locked || false }
+							if (inputVisible.checked 	!= object.visible) { 	inputVisible.checked = object.visible || false }
+							if (inputText.value 		!= object.text) { 		inputText.value = object.text || "" }
+							if (inputX.value 			!= object.x) { 			inputX.value = object.x || 0 }
+							if (inputY.value 			!= object.y) { 			inputY.value = object.y || 0 }
+							if (inputWidth.value 		!= object.width) { 		inputWidth.value = object.width || 0 }
+							if (inputHeight.value 		!= object.height) { 	inputHeight.value = object.height || 0 }
+							if (inputCorners.value 		!= object.corners) { 	inputCorners.value = object.corners || 0 }
+							if (inputRotation.value 	!= object.rotation) { 	inputRotation.value = object.rotation || 0 }
+							if (inputGlow.value 		!= object.glow) { 		inputGlow.value = object.glow || 0 }
+							if (inputShadow.value 		!= object.shadow) { 	inputShadow.value = object.shadow || ELEMENTS.gametable.canvas.gridBackground }
+							if (inputOpacity.value 		!= object.opacity) { 	inputOpacity.value = object.opacity || 0 }
+							if (inputColor.value 		!= object.color) { 		inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor }
+							if (inputImage.value 		!= object.image) { 		inputImage.value = object.image || "" }
 					} catch (error) {console.log(error)}
 				}
 
