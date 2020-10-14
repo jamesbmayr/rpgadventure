@@ -370,6 +370,7 @@
 								userId: null,
 								characterId: null,
 								contentId: null,
+								locked: false,
 								text: null,
 								visible: true,
 								x: 0,

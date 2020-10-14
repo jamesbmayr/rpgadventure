@@ -5064,6 +5064,14 @@ window.onload = function() {
 									ELEMENTS.content.objects.list.appendChild(listing)
 
 								// inputs
+									// locked
+										var inputLocked = document.createElement("input")
+											inputLocked.className = "arena-object-locked"
+											inputLocked.setAttribute("property", "locked")
+											inputLocked.type = "checkbox"
+											inputLocked.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										listing.appendChild(inputLocked)
+
 									// visible
 										var inputVisible = document.createElement("input")
 											inputVisible.className = "arena-object-visible"
@@ -5085,7 +5093,7 @@ window.onload = function() {
 										var upButton = document.createElement("button")
 											upButton.className = "arena-object-up"
 											upButton.title = "raise object"
-											upButton.innerHTML = "&uarr;"
+											upButton.innerHTML = "&#x1f53c;"
 										upForm.appendChild(upButton)
 
 										var downForm = document.createElement("form")
@@ -5100,7 +5108,7 @@ window.onload = function() {
 										var downButton = document.createElement("button")
 											downButton.className = "arena-object-down"
 											downButton.title = "lower object"
-											downButton.innerHTML = "&darr;"
+											downButton.innerHTML = "&#x1f53d;"
 										downForm.appendChild(downButton)
 
 									// remove
@@ -5347,6 +5355,7 @@ window.onload = function() {
 
 						// find
 							else {
+								var inputLocked = listing.querySelector("input[property='locked']")
 								var inputVisible = listing.querySelector("input[property='visible']")
 								var inputText = listing.querySelector("input[property='text']")
 								var inputX = listing.querySelector("input[property='x']")
@@ -5366,6 +5375,7 @@ window.onload = function() {
 						// set values
 							listing.setAttribute("selected", ELEMENTS.gametable.selected && ELEMENTS.gametable.selected.arenaObject.id == object.id)
 							listing.style.order = object.z || 0
+							inputLocked.checked = object.locked || false
 							inputVisible.checked = object.visible || false
 							inputText.value = object.text || ""
 							inputX.value = object.x || 0
@@ -5943,6 +5953,12 @@ window.onload = function() {
 							}
 							post.content.arena.objects[id][property] = (event.target.type == "checkbox") ? !event.target.checked : (event.target.value || event.target.getAttribute("value"))
 
+						// locked
+							if (property !== "locked" && CONTENT.arena.objects[id].locked) {
+								FUNCTIONS.showToast({success: false, message: "arena object locked"})
+								return
+							}
+
 						// send socket request
 							SOCKET.send(JSON.stringify(post))
 							FUNCTIONS.showToast({success: true, message: "object updated"})
@@ -5980,6 +5996,12 @@ window.onload = function() {
 								return
 							}
 							post.content.arena.objects[id] = true
+
+						// locked
+							if (CONTENT.arena.objects[id].locked) {
+								FUNCTIONS.showToast({success: false, message: "arena object locked"})
+								return
+							}
 
 						// send socket request
 							SOCKET.send(JSON.stringify(post))
@@ -6266,6 +6288,12 @@ window.onload = function() {
 
 								if ((left <= ELEMENTS.gametable.canvas.cursorX && ELEMENTS.gametable.canvas.cursorX <= right)
 								 && (bottom <= ELEMENTS.gametable.canvas.cursorY && ELEMENTS.gametable.canvas.cursorY <= top)) {
+								 	// locked
+										if (arenaObject.locked) {
+											FUNCTIONS.showToast({success: false, message: "arena object locked"})
+											return
+										}
+
 									ELEMENTS.gametable.grabbed = {
 										arenaObject: arenaObject
 									}
@@ -6319,6 +6347,13 @@ window.onload = function() {
 
 						// grabbed?
 							if (ELEMENTS.gametable.grabbed && ELEMENTS.gametable.grabbed.arenaObject) {
+								// locked
+									if (CONTENT.arena.objects[ELEMENTS.gametable.grabbed.arenaObject.id].locked) {
+										ELEMENTS.gametable.grabbed = null
+										FUNCTIONS.showToast({success: false, message: "arena object locked"})
+										return
+									}
+
 								ELEMENTS.gametable.grabbed.arenaObject.x = Math.round(coordinates.x * 2) / 2
 								ELEMENTS.gametable.grabbed.arenaObject.y = Math.round(coordinates.y * 2) / 2
 								displayContentArena()
@@ -6383,6 +6418,13 @@ window.onload = function() {
 								y: Math.round(arenaObject.y * 2) / 2
 							}
 
+						// locked
+							if (CONTENT.arena.objects[ELEMENTS.gametable.grabbed.arenaObject.id].locked) {
+								ELEMENTS.gametable.grabbed = null
+								FUNCTIONS.showToast({success: false, message: "arena object locked"})
+								return
+							}
+
 						// unselect
 							ELEMENTS.gametable.grabbed = null
 						
@@ -6398,6 +6440,13 @@ window.onload = function() {
 							if (!CONTENT || !ELEMENTS.gametable.focus || !ELEMENTS.gametable.selected || !ELEMENTS.gametable.selected.arenaObject) {
 								return
 							}
+
+						// locked
+							if (CONTENT.arena.objects[ELEMENTS.gametable.selected.arenaObject.id].locked) {
+								FUNCTIONS.showToast({success: false, message: "arena object locked"})
+								return
+							}
+
 
 						// keycode
 							if (event.which == 37) { // left
