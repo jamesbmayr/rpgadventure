@@ -11342,6 +11342,11 @@
 
 					// insert
 						if (query.command == "insert") {
+							// prevent duplicate _id
+								if (query.document._id) {
+									delete query.document._id
+								}
+
 							// execute query
 								db.collection(query.collection).insertOne(query.document, function (error, results) {
 									// error
