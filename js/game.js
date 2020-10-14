@@ -4243,6 +4243,13 @@ window.onload = function() {
 								messageName.innerText = message.display.sender
 							messageLeft.appendChild(messageName)
 
+							if (message.display.recipient) {
+								var messageRecipient = document.createElement("div")
+									messageRecipient.className = "chat-message-recipient"
+									messageRecipient.innerHTML = "&rarr; " + message.display.recipient
+								messageLeft.appendChild(messageRecipient)
+							}
+
 							var messageTime = document.createElement("div")
 								messageTime.className = "chat-message-time"
 								messageTime.innerText = new Date(message.display.time).toLocaleTimeString()
@@ -4434,6 +4441,7 @@ window.onload = function() {
 									recipientId: ELEMENTS.chat.send.recipients.select.value,
 									display: {
 										sender: ELEMENTS.chat.send.sender.select.value,
+										recipient: ELEMENTS.chat.send.recipients.select.querySelector("option[value='" + ELEMENTS.chat.send.recipients.select.value + "']").innerText,
 										time: new Date().getTime(),
 										text: ELEMENTS.chat.send.input.value
 									}

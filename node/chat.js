@@ -32,6 +32,7 @@
 				// regular message
 					if (REQUEST.post.chat.display.sender && REQUEST.post.chat.display.time && REQUEST.post.chat.display.text) {
 						chat.display.sender = REQUEST.post.chat.display.sender
+						chat.display.recipient = chat.recipientId ? (REQUEST.post.chat.display.recipient || "") : null
 						chat.display.time = REQUEST.post.chat.display.time
 						chat.display.text = REQUEST.post.chat.display.text
 					}

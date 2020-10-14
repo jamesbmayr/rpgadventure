@@ -1539,6 +1539,15 @@
 				hyphens: auto;
 			}
 
+			.chat-message-recipient {
+				width: 100%;
+				color: var(--medium-gray);
+				font-size: var(--small-font-size);
+				word-break: break-word;
+				text-align: right;
+				hyphens: auto;
+			}
+
 			.chat-message-time {
 				float: left;
 				width: 100%;

@@ -287,6 +287,7 @@
 								recipientId: null,
 								display: {
 									sender: null,
+									recipient: null,
 									time: null,
 									text: null
 								}
