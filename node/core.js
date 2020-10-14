@@ -1550,7 +1550,7 @@
 								},
 								resistance: {
 									name: "resistance",
-									description: "Boost recovery and immunity against infection and poison. Roll an additional 1d6 armor against physical attacks.", // ???
+									description: "Boost recovery and immunity against infection and poison. Roll an additional 1d6 armor against physical attacks.",
 									effects: {
 										immunity: {recover: 5, infection_resistance: 5, poison_resistance: 5, alcohol_tolerance: 5}
 									}

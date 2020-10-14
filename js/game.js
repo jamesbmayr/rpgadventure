@@ -8,7 +8,9 @@ window.onload = function() {
 			var USER = window.USER || null
 			var GAME = window.GAME || null
 			var CHARACTER = window.CHARACTER || null
+			var CHARACTERLIST = window.CHARACTERLIST || null
 			var CONTENT = window.CONTENT || null
+			var CONTENTLIST = window.CONTENTLIST || null
 			var SOCKET = window.SOCKET = null
 			var SOCKETCHECK = null
 
@@ -595,7 +597,7 @@ window.onload = function() {
 							}
 
 						// characterList
-							if (data.characterList) {
+							if (data.characterList && FUNCTIONS.isDifferent(CHARACTERLIST, data.characterList)) {
 								displayCharacterList(data.characterList)
 							}
 
@@ -606,7 +608,7 @@ window.onload = function() {
 							}
 
 						// contentList
-							if (data.contentList) {
+							if (data.contentList && FUNCTIONS.isDifferent(CONTENTLIST, data.contentList)) {
 								displayContentList(data.contentList)
 							}
 
@@ -2222,6 +2224,9 @@ window.onload = function() {
 			/* displayCharacterList */
 				function displayCharacterList(characterList) {
 					try {
+						// characterList?
+							if (characterList) { CHARACTERLIST = characterList }
+
 						// close option?
 							ELEMENTS.character.settings.select.none.disabled = (CHARACTER && CHARACTER.id) ? false : true
 
@@ -4830,6 +4835,9 @@ window.onload = function() {
 			/* displayContentList */
 				function displayContentList(contentList) {
 					try {
+						// contentList?
+							if (contentList) { CONTENTLIST = contentList }
+
 						// close option?
 							ELEMENTS.content.choose.select.none.disabled = (CONTENT && CONTENT.id) ? false : true
 							if (!CONTENT) {

@@ -51,6 +51,24 @@ window.addEventListener("load", function() {
 				} catch (error) {console.log(error)}
 			}
 
+		/* isDifferent */
+			window.FUNCTIONS.isDifferent = isDifferent
+			function isDifferent(data1, data2) {
+				try {
+					if (typeof data1 !== typeof data2) {
+						return true
+					}
+					if ((typeof data1 == "string" || typeof data1 == "number" || typeof data1 == "boolean") && data1 !== data2) {
+						return true
+					}
+					if (typeof data1 == "object" && JSON.stringify(data1) !== JSON.stringify(data2)) {
+						return true
+					}
+
+					return false
+				} catch (error) {console.log(error)}
+			}
+
 	/*** tools ***/
 		/* duplicateObject */
 			window.FUNCTIONS.duplicateObject = duplicateObject
