@@ -358,6 +358,7 @@
 
 						case "arena":
 							return {
+								signals: {},
 								objects: {}
 							}
 						break
@@ -385,6 +386,15 @@
 								opacity: 1,
 								color: colors["light-gray"],
 								image: null
+							}
+						break
+
+						case "arenaSignal":
+							return {
+								id: generateRandom(),
+								x: null,
+								y: null,
+								expiration: new Date().getTime() + 500
 							}
 						break
 

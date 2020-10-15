@@ -670,7 +670,8 @@
 
 				// objects
 					var arenaObjects = REQUEST.post.content.arena.objects || null
-					if (!arenaObjects) {
+					var signal = REQUEST.post.content.arena.signal || null
+					if (!arenaObjects && !signal) {
 						callback({success: false, message: "invalid arena object", recipients: [REQUEST.user.id]})
 						return
 					}
@@ -692,8 +693,19 @@
 								return
 							}
 
+						// signal
+							if (signal) {
+								var arenaSignal = CORE.getSchema("arenaSignal")
+									arenaSignal.x = Number(signal.x) || 0
+									arenaSignal.y = Number(signal.y) || 0
+								arena.signals[arenaSignal.id] = arenaSignal
+
+								saveArenaObject()
+								return
+							}
+
 						// new object
-							if (arenaObjects.new) {
+							else if (arenaObjects.new) {
 								var count = Object.keys(arena.objects).length
 								var object = CORE.getSchema("arenaObject")
 									object.z = count
@@ -804,6 +816,14 @@
 
 						// save
 							function saveArenaObject() {
+								// signals
+									var now = new Date().getTime()
+									for (var i in arena.signals) {
+										if (arena.signals[i].expiration < now) {
+											delete arena.signals[i]
+										}
+									}
+
 								// query
 									var query = CORE.getSchema("query")
 										query.collection = "content"

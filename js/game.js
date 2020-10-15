@@ -5454,6 +5454,9 @@ window.onload = function() {
 								displayContentArenaObject(CONTENT.arena.objects[sortedKeys[i]])
 							}
 
+						// signal
+							displayContentArenaSignals()
+
 						// measure
 							displayContentArenaRuler()
 
@@ -5520,6 +5523,51 @@ window.onload = function() {
 						// text
 							if (object.text) {
 								FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x + width / 2, y + height / 2, object.text, {color: ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow:ELEMENTS.gametable.canvas.gridBackground, size: cellSize / 2})
+							}
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentArenaSignals */
+				function displayContentArenaSignals(partOfLoop) {
+					try {
+						// no signals
+							if (!Object.keys(CONTENT.arena.signals)) {
+								return
+							}
+
+						// non-expired signals?
+							var signals = []
+							var now = new Date().getTime()
+							for (var i in CONTENT.arena.signals) {
+								if (CONTENT.arena.signals[i].expiration - now > 0) {
+									signals.push(CONTENT.arena.signals[i])
+								}
+							}
+
+						// dimensions
+							if (signals.length) {
+								var cellSize = Math.round(ELEMENTS.gametable.canvas.cellSize)
+						
+								for (var i in signals) {
+									var timeRemaining = signals[i].expiration - now
+									if (timeRemaining > 0) {
+										var x = signals[i].x * cellSize
+										var y = signals[i].y * cellSize
+										var radius = timeRemaining
+										FUNCTIONS.drawCircle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x, y, radius, {border: 2, color: "white"})
+									}
+								}
+
+								setTimeout(function() {
+									displayContentArenaSignals(true)
+								}, 10)
+
+								return
+							}
+
+						// from loop?
+							else if (partOfLoop) {
+								displayContentArena()
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -6016,6 +6064,35 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
+			/* submitContentArenaSignal */
+				function submitContentArenaSignal(coordinates) {
+					try {
+						// coordinates
+							if (isNaN(coordinates.x) || isNaN(coordinates.y)) {
+								return
+							}
+
+						// new object
+							var post = {
+								action: "updateContentData",
+								content: {
+									id: CONTENT.id,
+									userId: USER ? USER.id : null,
+									gameId: GAME ? GAME.id : null,
+									arena: {
+										signal: {
+											x: coordinates.x,
+											y: coordinates.y
+										}
+									}
+								}
+							}
+
+						// send socket request
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
 		/** controls **/
 			/* grabContent */
 				function grabContent(event) {
@@ -6259,9 +6336,6 @@ window.onload = function() {
 								return
 							}
 
-						// grabbing style
-							ELEMENTS.body.setAttribute("grabbing", true)
-
 						// coordinates
 							var coordinates = getContentArenaCoordinates(event)
 							if (!coordinates) {
@@ -6269,6 +6343,15 @@ window.onload = function() {
 							}
 							ELEMENTS.gametable.canvas.cursorX = coordinates.x
 							ELEMENTS.gametable.canvas.cursorY = coordinates.y
+
+						// shift-click --> signal
+							if (event.shiftKey) {
+								submitContentArenaSignal(coordinates)
+								return
+							}
+
+						// grabbing style
+							ELEMENTS.body.setAttribute("grabbing", true)
 
 						// sort keys
 							var sortedKeys = Object.keys(CONTENT.arena.objects) || null
@@ -6301,10 +6384,15 @@ window.onload = function() {
 											return
 										}
 
-									ELEMENTS.gametable.grabbed = {
-										arenaObject: arenaObject
-									}
-									selectContentArenaObject({target: document.querySelector("#arena-object-" + arenaObject.id)})
+									// grab
+										ELEMENTS.gametable.grabbed = {
+											arenaObject: arenaObject
+										}
+
+									// scroll to listing
+										var listing = document.querySelector("#arena-object-" + arenaObject.id)
+										ELEMENTS.content.element.scrollTop = listing.offsetTop - 5
+										selectContentArenaObject({target: listing})
 									return
 								}
 							}
@@ -6361,10 +6449,11 @@ window.onload = function() {
 										return
 									}
 
-								ELEMENTS.gametable.grabbed.arenaObject.x = Math.round(coordinates.x * 2) / 2
-								ELEMENTS.gametable.grabbed.arenaObject.y = Math.round(coordinates.y * 2) / 2
-								displayContentArena()
-								return
+								// move
+									ELEMENTS.gametable.grabbed.arenaObject.x = Math.round(coordinates.x * 2) / 2
+									ELEMENTS.gametable.grabbed.arenaObject.y = Math.round(coordinates.y * 2) / 2
+									displayContentArena()
+									return
 							}
 
 						// redisplay
