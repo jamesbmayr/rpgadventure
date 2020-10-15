@@ -695,6 +695,8 @@
 
 						// signal
 							if (signal) {
+								if (!arena.signals) { arena.signals = {} }
+									
 								var arenaSignal = CORE.getSchema("arenaSignal")
 									arenaSignal.x = Number(signal.x) || 0
 									arenaSignal.y = Number(signal.y) || 0
