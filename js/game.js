@@ -11,6 +11,7 @@ window.onload = function() {
 			var CHARACTERLIST = window.CHARACTERLIST || null
 			var CONTENT = window.CONTENT || null
 			var CONTENTLIST = window.CONTENTLIST || null
+			var SIGNALS = window.SIGNALS || {}
 			var SOCKET = window.SOCKET = null
 			var SOCKETCHECK = null
 
@@ -5454,14 +5455,34 @@ window.onload = function() {
 								displayContentArenaObject(CONTENT.arena.objects[sortedKeys[i]])
 							}
 
-						// signal
-							displayContentArenaSignals()
-
 						// measure
 							displayContentArenaRuler()
 
 						// display grid
 							displayContentArenaGrid()
+
+						// signals
+							if (CONTENT.arena && CONTENT.arena.signals) {
+								for (var i in SIGNALS) {
+									if (!CONTENT.arena.signals[i]) {
+										delete SIGNALS[i]
+									}
+								}
+
+								var now = new Date().getTime()
+								var expiration = now + 500
+								for (var i in CONTENT.arena.signals) {
+									if (!SIGNALS[i] && CONTENT.arena.signals[i].expiration > now) {
+										SIGNALS[i] = {
+											x: CONTENT.arena.signals[i].x,
+											y: CONTENT.arena.signals[i].y,
+											expiration: expiration
+										}
+									}
+								}
+
+								displayContentArenaSignals()
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -5531,16 +5552,16 @@ window.onload = function() {
 				function displayContentArenaSignals(partOfLoop) {
 					try {
 						// no signals
-							if (!CONTENT.arena.signals || !Object.keys(CONTENT.arena.signals)) {
+							if (!SIGNALS || !Object.keys(SIGNALS)) {
 								return
 							}
 
 						// non-expired signals?
 							var signals = []
 							var now = new Date().getTime()
-							for (var i in CONTENT.arena.signals) {
-								if (CONTENT.arena.signals[i].expiration - now > 0) {
-									signals.push(CONTENT.arena.signals[i])
+							for (var i in SIGNALS) {
+								if (SIGNALS[i].expiration - now > 0) {
+									signals.push(SIGNALS[i])
 								}
 							}
 
@@ -5567,7 +5588,7 @@ window.onload = function() {
 
 						// from loop?
 							else if (partOfLoop) {
-								displayContentArena()
+								displayContentArenaImages()
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -6556,6 +6577,9 @@ window.onload = function() {
 							}
 							else if (event.which == 40) { // down
 								ELEMENTS.gametable.selected.arenaObject.y += -1
+							}
+							else {
+								return
 							}
 
 						// post
