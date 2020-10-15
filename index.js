@@ -413,6 +413,7 @@
 	/* routeSocket */
 		function routeSocket(REQUEST) {
 			try {
+				console.log(REQUEST.post)
 				switch (REQUEST.post.action) {
 					// user
 						// update
