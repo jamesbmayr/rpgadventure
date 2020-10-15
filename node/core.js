@@ -394,7 +394,7 @@
 								id: generateRandom(),
 								x: null,
 								y: null,
-								expiration: new Date().getTime() + 500
+								expiration: new Date().getTime() + 1000
 							}
 						break
 
@@ -11321,7 +11321,9 @@
 						if (error) {
 							logError(error)
 							callback({success: false, message: error})
-							client.close()
+							try {
+								client.close()
+							} catch (error) {}
 							return
 						}
 

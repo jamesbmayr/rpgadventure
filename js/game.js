@@ -5531,7 +5531,7 @@ window.onload = function() {
 				function displayContentArenaSignals(partOfLoop) {
 					try {
 						// no signals
-							if (!Object.keys(CONTENT.arena.signals)) {
+							if (!CONTENT.arena.signals || !Object.keys(CONTENT.arena.signals)) {
 								return
 							}
 
