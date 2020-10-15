@@ -6558,12 +6558,16 @@ window.onload = function() {
 								return
 							}
 
+						// not arrow
+							if (![37, 38, 39, 40].includes(event.which)) {
+								return
+							}
+
 						// locked
 							if (CONTENT.arena.objects[ELEMENTS.gametable.selected.arenaObject.id].locked) {
 								FUNCTIONS.showToast({success: false, message: "arena object locked"})
 								return
 							}
-
 
 						// keycode
 							if (event.which == 37) { // left
@@ -6577,9 +6581,6 @@ window.onload = function() {
 							}
 							else if (event.which == 40) { // down
 								ELEMENTS.gametable.selected.arenaObject.y += -1
-							}
-							else {
-								return
 							}
 
 						// post
