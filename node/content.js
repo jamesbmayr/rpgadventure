@@ -760,6 +760,22 @@
 										})
 									return
 								}
+								else if (arenaObjects.new.id) {
+									// don't overwrite new values
+										delete arenaObjects.new.id
+										delete arenaObjects.new.time
+										delete arenaObjects.new.z
+										delete arenaObjects.new.userId
+
+									// set all other values
+										for (var i in arenaObjects.new) {
+											object[i] = arenaObjects.new[i]
+										}
+
+									// save
+										saveArenaObject()
+										return
+								}
 								else {
 									saveArenaObject()
 									return
@@ -777,7 +793,7 @@
 									delete arena.objects[i]
 
 									for (var j in arena.objects) {
-										if (arena.objects[j] >= z) {
+										if (arena.objects[j].z >= z) {
 											arena.objects[j].z -= 1
 										}
 									}
