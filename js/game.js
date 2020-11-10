@@ -5400,21 +5400,21 @@ window.onload = function() {
 						// set values
 							var activeElement = document.activeElement
 							listing.setAttribute("selected", ELEMENTS.gametable.selected && ELEMENTS.gametable.selected.arenaObject.id == object.id)
-							if (listing.style.order 										!= object.z) { 			listing.style.order = object.z || 0 }
-							if (inputLocked != activeElement && 	inputLocked.checked 	!= object.locked) { 	inputLocked.checked = object.locked || false }
-							if (inputVisible != activeElement && 	inputVisible.checked 	!= object.visible) { 	inputVisible.checked = object.visible || false }
-							if (inputText != activeElement && 		inputText.value 		!= object.text) { 		inputText.value = object.text || "" }
-							if (inputX != activeElement && 			inputX.value 			!= object.x) { 			inputX.value = object.x || 0 }
-							if (inputY != activeElement && 			inputY.value 			!= object.y) { 			inputY.value = object.y || 0 }
-							if (inputWidth != activeElement && 		inputWidth.value 		!= object.width) { 		inputWidth.value = object.width || 0 }
-							if (inputHeight != activeElement && 	inputHeight.value 		!= object.height) { 	inputHeight.value = object.height || 0 }
-							if (inputCorners != activeElement && 	inputCorners.value 		!= object.corners) { 	inputCorners.value = object.corners || 0 }
-							if (inputRotation != activeElement && 	inputRotation.value 	!= object.rotation) { 	inputRotation.value = object.rotation || 0 }
-							if (inputGlow != activeElement && 		inputGlow.value 		!= object.glow) { 		inputGlow.value = object.glow || 0 }
-							if (inputShadow != activeElement && 	inputShadow.value 		!= object.shadow) { 	inputShadow.value = object.shadow || ELEMENTS.gametable.canvas.gridBackground }
-							if (inputOpacity != activeElement && 	inputOpacity.value 		!= object.opacity) { 	inputOpacity.value = object.opacity || 0 }
-							if (inputColor != activeElement && 		inputColor.value 		!= object.color) { 		inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor }
-							if (inputImage != activeElement && 		inputImage.value 		!= object.image) { 		inputImage.value = object.image || "" }
+							if (listing.style.order 										!== object.z) { 			listing.style.order = object.z || 0 }
+							if (inputLocked != activeElement && 	inputLocked.checked 	!== object.locked) { 		inputLocked.checked = object.locked || false }
+							if (inputVisible != activeElement && 	inputVisible.checked 	!== object.visible) { 		inputVisible.checked = object.visible || false }
+							if (inputText != activeElement && 		inputText.value 		!== object.text) { 			inputText.value = object.text || "" }
+							if (inputX != activeElement && 			inputX.value 			!== object.x) { 			inputX.value = object.x || 0 }
+							if (inputY != activeElement && 			inputY.value 			!== object.y) { 			inputY.value = object.y || 0 }
+							if (inputWidth != activeElement && 		inputWidth.value 		!== object.width) { 		inputWidth.value = object.width || 0 }
+							if (inputHeight != activeElement && 	inputHeight.value 		!== object.height) { 		inputHeight.value = object.height || 0 }
+							if (inputCorners != activeElement && 	inputCorners.value 		!== object.corners) { 		inputCorners.value = object.corners || 0 }
+							if (inputRotation != activeElement && 	inputRotation.value 	!== object.rotation) { 		inputRotation.value = object.rotation || 0 }
+							if (inputGlow != activeElement && 		inputGlow.value 		!== object.glow) { 			inputGlow.value = object.glow || 0 }
+							if (inputShadow != activeElement && 	inputShadow.value 		!== object.shadow) { 		inputShadow.value = object.shadow || ELEMENTS.gametable.canvas.gridBackground }
+							if (inputOpacity != activeElement && 	inputOpacity.value 		!== object.opacity) { 		inputOpacity.value = object.opacity || 0 }
+							if (inputColor != activeElement && 		inputColor.value 		!== object.color) { 		inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor }
+							if (inputImage != activeElement && 		inputImage.value 		!== object.image) { 		inputImage.value = object.image || "" }
 					} catch (error) {console.log(error)}
 				}
 
