@@ -5401,8 +5401,8 @@ window.onload = function() {
 							var activeElement = document.activeElement
 							listing.setAttribute("selected", ELEMENTS.gametable.selected && ELEMENTS.gametable.selected.arenaObject.id == object.id)
 							if (listing.style.order 										!== object.z) { 			listing.style.order = object.z || 0 }
-							if (inputLocked != activeElement && 	inputLocked.checked 	!== object.locked) { 		inputLocked.checked = object.locked || false }
-							if (inputVisible != activeElement && 	inputVisible.checked 	!== object.visible) { 		inputVisible.checked = object.visible || false }
+							if (									inputLocked.checked 	!== object.locked) { 		inputLocked.checked = object.locked || false }
+							if (									inputVisible.checked 	!== object.visible) { 		inputVisible.checked = object.visible || false }
 							if (inputText != activeElement && 		inputText.value 		!== object.text) { 			inputText.value = object.text || "" }
 							if (inputX != activeElement && 			inputX.value 			!== object.x) { 			inputX.value = object.x || 0 }
 							if (inputY != activeElement && 			inputY.value 			!== object.y) { 			inputY.value = object.y || 0 }
