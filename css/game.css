@@ -659,7 +659,6 @@
 			#character-info-demographics input {
 				float: right;
 				width: calc(6 * var(--small-font-size));
-				padding: var(--small-gap-size) 0;
 				margin: 0;
 				height: var(--small-font-size);
 				font-size: var(--small-font-size);
@@ -668,9 +667,13 @@
 				overflow: hidden;
 			}
 
+			#character-info-demographics input[readonly=true] {
+				padding: var(--small-gap-size) 0;
+			}
+
 			select#character-info-race {
 				float: right;
-				width: calc(6 * var(--small-font-size) + 2 * var(--border-size));
+				width: calc(6 * var(--small-font-size) + 2 * var(--border-size) + 2 * var(--small-gap-size));
 				padding: var(--small-gap-size);
 				height: calc(var(--small-font-size) + 2 * (var(--border-size) + var(--small-gap-size)));
 				margin: 0;
@@ -680,9 +683,13 @@
 				line-height: 1;
 			}
 
+			select#character-info-race[readonly=true] {
+				padding: var(--small-gap-size) 0;
+			}
+
 			input#character-info-sex {
 				padding: var(--small-gap-size);
-				width: calc(6 * var(--small-font-size) - 2 * var(--small-gap-size));
+				width: calc(6 * var(--small-font-size));
 			}
 
 		/* abilities */

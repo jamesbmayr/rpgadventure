@@ -1718,7 +1718,7 @@ window.onload = function() {
 
 						// spit out results
 							for (var r in resultsList) {
-								displayRulesSearchResult(resultsList[r], ELEMENTS.rules.results)
+								displayRulesSearchResult(resultsList[r])
 							}
 
 						// scroll to top
@@ -1731,14 +1731,22 @@ window.onload = function() {
 				}
 
 			/* displayRulesSearchResult */
-				function displayRulesSearchResult(result, parent) {
+				function displayRulesSearchResult(result, message_id) {
 					try {
 						// element
 							var resultElement = document.createElement("div")
 								resultElement.className = "search-result"
 								resultElement.setAttribute("type", result.type)
 								resultElement.setAttribute("data", JSON.stringify(result))
-							parent.appendChild(resultElement)
+
+						// search tool or chat tool?
+							if (message_id) {
+								resultElement.id = message_id
+								ELEMENTS.chat.messages.appendChild(resultElement)
+							}
+							else {
+								ELEMENTS.rules.results.appendChild(resultElement)
+							}
 
 						// name
 							var resultName = document.createElement("h3")
@@ -4187,7 +4195,7 @@ window.onload = function() {
 
 						// loop through messages
 							for (var i in messages) {
-								// already exists?
+								// already exists
 									if (ELEMENTS.chat.messages.querySelector("#chat-" + messages[i].id)) {
 										continue
 									}
@@ -4195,18 +4203,18 @@ window.onload = function() {
 								// search result
 									if (messages[i].display.data) {
 										newMessages = true
-										displayRulesSearchResult(messages[i].display.data, ELEMENTS.chat.messages)
+										displayRulesSearchResult(messages[i].display.data, messages[i].id)
 										continue
 									}
 
 								// content
 									if (messages[i].display.content) {
 										newMessages = true
-										displayChatContent(messages[i].display.content)
+										displayChatContent(messages[i])
 										continue
 									}
 
-								// new
+								// chat message
 									newMessages = true
 									displayChatMessage(messages[i])
 							}
@@ -4267,17 +4275,18 @@ window.onload = function() {
 				}
 
 			/* displayChatContent */
-				function displayChatContent(content) {
+				function displayChatContent(message) {
 					try {
 						// validate
-							if (!content) {
+							if (!message || !message.display || !message.display.content) {
 								return
 							}
+							var content = message.display.content
 
 						// element
 							var messageElement = document.createElement("div")
 								messageElement.className = "content-chat"
-								messageElement.id = "chat-" + content.id
+								messageElement.id = "chat-" + message.id
 							ELEMENTS.chat.messages.appendChild(messageElement)
 							
 						// name
@@ -4427,7 +4436,7 @@ window.onload = function() {
 							}
 
 						// display as search result
-							displayRulesSearchResult(code, ELEMENTS.chat.messages)
+							displayRulesSearchResult(code, messageElement.id + "-data")
 					} catch (error) {console.log(error)}
 				}
 
@@ -4683,6 +4692,7 @@ window.onload = function() {
 										arena.addEventListener(TRIGGERS.mouseleave, blurContentArena)
 										arena.addEventListener(TRIGGERS.rightclick, measureContentArena)
 										arena.addEventListener(TRIGGERS.mousedown, grabContentArena)
+										arena.addEventListener(TRIGGERS.scroll, zoomContentArena)
 									ELEMENTS.gametable.element.appendChild(arena)
 
 								// panning
@@ -5264,7 +5274,7 @@ window.onload = function() {
 
 										var spanCorners = document.createElement("span")
 											spanCorners.className = "arena-object-label-text"
-											spanCorners.innerText = "corners"
+											spanCorners.innerText = "roundness"
 										labelCorners.appendChild(spanCorners)
 
 									// rotation
@@ -5295,9 +5305,10 @@ window.onload = function() {
 										var inputGlow = document.createElement("input")
 											inputGlow.className = "arena-object-input"
 											inputGlow.setAttribute("property", "glow")
-											inputGlow.step = 0.01
+											inputGlow.step = 0.05
 											inputGlow.min = 0
-											inputGlow.type = "number"
+											inputGlow.max = 1
+											inputGlow.type = "range"
 											inputGlow.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
 										labelGlow.appendChild(inputGlow)
 
@@ -5368,7 +5379,7 @@ window.onload = function() {
 										var inputImage = document.createElement("input")
 											inputImage.className = "arena-object-input"
 											inputImage.setAttribute("property", "image")
-											inputImage.placeholder = "image"
+											inputImage.placeholder = "image url"
 											inputImage.type = "text"
 											inputImage.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
 										labelImage.appendChild(inputImage)
@@ -6743,8 +6754,17 @@ window.onload = function() {
 			/* zoomContentArena */
 				function zoomContentArena(event) {
 					try {
-						// get target
-							var modifier = Number(event.target.value || event.target.getAttribute("value")) || 0
+						// scroll wheel?
+							if (event.wheelDelta) {
+								var modifier = (event.wheelDelta > 0) ? 0.25 : -0.25
+							}
+
+						// button?
+							else {
+								var modifier = Number(event.target.value || event.target.getAttribute("value")) || 0
+							}
+
+						// set zoom & cellsize
 							ELEMENTS.gametable.canvas.zoomPower = modifier ? (ELEMENTS.gametable.canvas.zoomPower * 4 + modifier * 4) / 4 : 0
 							ELEMENTS.gametable.canvas.cellSize = 50 * Math.pow(2, ELEMENTS.gametable.canvas.zoomPower)
 						

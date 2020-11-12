@@ -12,7 +12,8 @@ window.addEventListener("load", function() {
 				blur: "blur",
 				resize: "resize",
 				keydown: "keydown",
-				keyup: "keyup"
+				keyup: "keyup",
+				scroll: "wheel"
 			}
 			if ((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent)) {
 				window.TRIGGERS.click = "touchstart"

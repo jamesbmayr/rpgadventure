@@ -359,21 +359,49 @@
 						return
 					}
 
-				// on connect - save connection & fetch game / character
+				// on connect - save connection & fetch game / character / content
 					CONNECTIONS[REQUEST.user.id] = REQUEST.connection
 					sendSocketData({success: true, message: "connected", recipients: [REQUEST.user.id]})
-					if (REQUEST.user.gameId) {
-						REQUEST.post = {game: {id: REQUEST.user.gameId}}
-						GAME.readOne(REQUEST, sendSocketData)
-					}
-					if (REQUEST.user.characterId) {
-						REQUEST.post = {character: {id: REQUEST.user.characterId, gameId: REQUEST.user.gameId}}
-						CHARACTER.readOne(REQUEST, sendSocketData)
-					}
-					if (REQUEST.user.contentId) {
-						REQUEST.post = {content: {id: REQUEST.user.contentId, gameId: REQUEST.user.gameId}}
-						CONTENT.readOne(REQUEST, sendSocketData)
-					}
+
+					// in a game?
+						if (REQUEST.user.gameId) {
+							// get all other data before character / content
+								var properties = {
+									game: false,
+									characterList: false,
+									contentList: false,
+									character: false,
+									content: false
+								}
+
+							// get game
+								REQUEST.post = {game: {id: REQUEST.user.gameId}}
+								GAME.readOne(REQUEST, function(data) {
+									// update properties
+										for (var i in properties) {
+											if (data[i] != undefined) {
+												properties[i] = true
+											}
+										}
+
+									// send data
+										sendSocketData(data)
+
+									// load character, if applicable
+										if (REQUEST.user.characterId && properties.game && properties.characterList && !properties.character) {
+											properties.character = true
+											REQUEST.post = {character: {id: REQUEST.user.characterId, gameId: REQUEST.user.gameId}}
+											CHARACTER.readOne(REQUEST, sendSocketData)
+										}
+
+									// load content, if applicable
+										if (REQUEST.user.contentId && properties.game && properties.contentList && !properties.content) {
+											properties.content = true
+											REQUEST.post = {content: {id: REQUEST.user.contentId, gameId: REQUEST.user.gameId}}
+											CONTENT.readOne(REQUEST, sendSocketData)
+										}
+								})
+						}
 
 				// on close
 					REQUEST.connection.on("close", function (reasonCode, description) {
@@ -586,7 +614,7 @@
 	/* sendSocketData */
 		function sendSocketData(data) {
 			try {
-				// hunt down errors
+				// prevent sending to no one (such as telling an empty room that you're leaving)
 					if (!data.recipients) {
 						return
 					}
