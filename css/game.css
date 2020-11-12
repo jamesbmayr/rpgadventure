@@ -809,6 +809,7 @@
 				padding: var(--small-gap-size);
 				margin: var(--medium-gap-size) var(--small-gap-size) var(--medium-gap-size) 0;
 				font-weight: bold;
+				text-align: center;
 			}
 
 			.statistic-maximum {
@@ -905,6 +906,7 @@
 				padding: var(--small-gap-size);
 				margin: 0 var(--small-gap-size) 0 0;
 				font-weight: bold;
+				text-align: center;
 			}
 
 			.skill-maximum {
