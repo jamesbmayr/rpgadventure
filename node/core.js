@@ -542,7 +542,7 @@
 								"skill points": {name: "skill points", description: "Characters are awarded skill points throughout the course of a campaign by completing quests, visiting new places, successfully performing new skills, and more. Characters are also awarded skill points by overcoming opponents in some way - often  through combat or charisma. This is generally 1-3 skill points. \n\nA character may increase a statistic by 1 for 28 skill points, or increase a skill 1 level per skill point. \n\nThe maximum level at which a skill can be learned is +7. A character may also choose to learn specializations of a particular skill by selecting a more specific and limited field or aspect, to a maximum of +3, at a cost of 1 skill point per +1. \n\nA character may only learn or improve a skill that is plausible, given the circumstances; for example, a character cannot learn to swim while in the desert, even with the requisite skill points. Furthermore, a character may only increment a specific skill level by 1 point within a day. \n\nCharacters start with 28 skill points to distribute amongst starting skills. A GM may impose additional restrictions during character creation, such as a skill maximum of 4, to prevent unbalanced characters."},
 								"skills": {name: "skills", description: "Every skill is associated with a statistic; to perform a skill, the player must roll at or under the corresponding statistic + skill modifier on 1d20."},
 								"non-player characters (npcs)": {name: "non-player characters (npcs)", description: "Characters will interact with non-player characters, including other characters of playable races, real-world animals, and fantasy monsters. \n\nCreatures generally use an aggression skill when resisting handle animals attempts. \n\nSome creatures have special senses: infrared vision, night vision, infrasound, echolocation, internal compass. \n\nSome creatures also have special movement: fly. \n\nSome creatures also use special combat skills; in some cases, these could also cause a condition, such as sleep or paralysis, or inflict special damage, such as poison, infection, extreme cold, fire, or electricity: bite (nd6), slam (nd6), tusk (nd6), claws (nd6) x (number of claws), talons (nd6) x (number of talons). \n\nSome creatures also have special abilities: camoflauge: opponents at disadvantage on sight checks; temperature resistance: nullifies the effects of extreme heat and extreme cold. \n\nFinally, many creatures have natural armor that protects against nd6 physical damage."},
-								"charisma": {name: "charisma", description: "Opponents can also be defeated through charisma and diplomacy. Encounters usually involve several logic rolls in which the opponent must roll at or under its logic on 1d20 in order to avoid being swayed. \n\nCharacters may influence these encounters using skills which impact the logic rolls. Roll logic (with these skills) for each instance in which a character attempts to sway an opponent. \n\n(resister's logic + skill) - (influencer's skill)\n\nThe influencer may also choose to use these skills to affect the resister with a psychological condition, which can last up to 10 minutes.\n\nA character may also choose to affect itself for up to 10 minutes with one of the following psychological conditions intentionally using the meditate skill: alertness, concentration, determination, perceptiveness, rage."},
+								"charisma": {name: "charisma", description: "Opponents can also be defeated through charisma and diplomacy. Encounters usually involve several logic rolls in which the opponent must roll at or under its logic on 1d20 in order to avoid being swayed. \n\nCharacters may influence these encounters using skills which impact the logic rolls. Roll logic (with these skills) for each instance in which a character attempts to sway an opponent. \n\n(resister's logic + skill) - (influencer's skill)\n\nThe influencer may also choose to use these skills to affect the resister with a psychological condition, which lasts for 1 combat or 10 non-combat minutes.\n\nA character may also choose to affect itself for 1 combat or 10 non-combat minutes with one of the following psychological conditions intentionally using the meditate skill: alertness, concentration, determination, perceptiveness, rage."},
 								"taming & training": {name: "taming & training", description: "Taming an animal uses handle animals as a charisma encounter (similar to persuade): the animal rolls under its logic to resist, but the target is lowered by the character's handle animals skill and the animal's training skill. (Note that at first, the animal will not have this training skill.) A character can attempt to tame the animal once a day. If the animal does not resist, it gains 1 point in this training skill, under its logic statistic, up to the skill maximum. \n\ntaming: fail (animal's logic + animal's aggression - animal's training - character's handle animals) \n\nOn a successful taming roll, the character can also attempt to train the animal to do a specific command. The animal does a logic + training check, now aided by the character's handle animals. If this training is successful, the animal gains 1 point in the specific skill being trained; this falls under the memory statistic. \n\ntraining: succeed (animal's logic + animal's training + character's handle animals) \n\nWhen the character wants the animal to obey a command, the player must roll a taming check as above. Then the animal must roll a check similar to training, using with the specific command as the skill: \n\n{command}: succeed (animal's memory + animal's {command skill} + character's handle animals)"},
 								"services": {name: "services", description: "Many NPCs will perform a service for a cost. This allows players who do not know a certain skill to exchange money for that skill to be performed on their behalf."},
 								"combat": {name: "combat", description: "In an armed conflict, the team with the member with the highest speed begins turn-based combat (unless one team is surprised by the other), but all actions in a 6-second round are considered to be simultaneous. Within each team, turn order is determined by speed. Each combatant can take one action per round; the most common actions are moving (with the run skill), attacking, dodging, using an item, or changing weapons. \n\nCharacters aim by making a 1d20 attempt on the dexterity-, strength-, or speed-based skill associated with their attack (melee, fencing, archery, missile aim, throw, kick, punch, or martial arts). \n\nIf the roll is a 1, the attack is focused on the opponent's head; on a 2 or 3, the attack is focused on the opponent's arms or legs. \n\nEach weapon or attack has a corresponding damage roll, of nd6. Armor and shields also have a damage blocking attribute: nd6 are rolled, and each die cancels all damage dice of the same value. (In other words, subtract the set of armor dice from the set of weapon dice.) \n\n[weapon nd6] \ [armor nd6] → [damage nd6] \n\nThe remaining damage is summed, then subtracted from the opponent's statistics; the opponent may choose how to distribute this damage, limited by the area of the attack's focus: \n\nDamage to the head (attack roll of 1) reduces logic, memory, and/or perception. Pass an immunity + pain tolerance check, or else be surprised and unable to act for 1 round. Damage to arms or legs (attack roll of 2 or 3) reduces strength, dexterity, speed, and/or immunity. Pass an immunity + pain tolerance check, or else be either disarmed (dropping held items) or immobilized (unable to run, dodge, etc.) for 1 round. All other damage (attack roll of 4 or more) can reduce any statistic. \n\nEach attack can also be avoided using speed and the dodge skill, each with an individual roll. A player who is dodging cannot take another action, except to move (ie, run)."},
@@ -870,7 +870,7 @@
 										height: 5,
 										weight: 150,
 										description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-										ability: "Lizardfolk can camouflage in any setting, giving opponents a -14 on sight checks.",
+										ability: "Lizardfolk can camouflage in any setting, giving opponents a -14 on sight checks, and can use their tail like a punch attack.",
 									},
 									statistics: {
 										perception: 1,
@@ -1247,7 +1247,7 @@
 									blockable: true,
 									description: [
 										"immunity check to resist pain",
-										"dexterity check to put out flames",
+										"dexterity or speed check to put out flames",
 										"fuel determines burn duration; if flammable, reduces item nd6 by 1"
 									]
 								},
@@ -1257,26 +1257,6 @@
 									blockable: true,
 									description: [
 										"must be thrown or used as a melee weapon"
-									]
-								},
-								infection: {
-									name: "infection",
-									d6: 2,
-									blockable: false,
-									description: [
-										"immunity check to resist infection",
-										"immunity check to resist infection during recover",
-										"prevents recovery"
-									]
-								},
-								poison: {
-									name: "poison",
-									d6: 2,
-									blockable: false,
-									description: [
-										"immunity check to resist poison",
-										"immunity check to resist poison during recover",
-										"prevents recovery"
 									]
 								},
 								trap: {
@@ -1325,9 +1305,9 @@
 								},
 								bleeding: {
 									name: "bleeding",
-									description: "Reduces recovery and protection against infection and poison.",
+									description: "Reduces protection against infection and poison. While bleeding, armor nd6 is reduced by 1.",
 									effects: {
-										immunity: {recover: -2, infection_resistance: -5, poison_resistance: -5}
+										immunity: {infection_resistance: -5, poison_resistance: -5}
 									}
 								},
 								blinding_light: {
@@ -1360,12 +1340,12 @@
 								},
 								darkness: {
 									name: "darkness",
-									description: "Impairs sight. -10 on skills where sight matters, such as combat.",
+									description: "Impairs sight. -5 on skills where sight matters, such as combat.",
 									effects: {
-										perception: {sight: -10},
-										strength: {melee: -10, archery: -10, throw: -10, punch: -10},
-										dexterity: {fencing: -10, knifing: -10, missile: -10, martial_arts: -10},
-										speed: {kick: -10}
+										perception: {sight: -5},
+										strength: {melee: -5, archery: -5, throw: -5, punch: -5},
+										dexterity: {fencing: -5, knifing: -5, missile: -5, martial_arts: -5},
+										speed: {kick: -5}
 									}
 								},
 								determination: {
@@ -1381,12 +1361,22 @@
 										speed: {statistic: 1}
 									}
 								},
+								dim_lighting: {
+									name: "dim lighting",
+									description: "Impairs sight. -3 on skills where sight matters, such as combat.",
+									effects: {
+										perception: {sight: -3},
+										strength: {melee: -3, archery: -3, throw: -3, punch: -3},
+										dexterity: {fencing: -3, knifing: -3, missile: -3, martial_arts: -3},
+										speed: {kick: -3}
+									}
+								},
 								dual_wielding: {
 									name: "dual_wielding",
 									description: "Impairs dexterity & strength. Caused by using two weapons or using a weapon with a shield.",
 									effects: {
-										dexterity: {statistic: -5},
-										strength: {statistic: -5}
+										strength: {melee: -5, archery: -5, throw: -5, punch: -5},
+										dexterity: {fencing: -5, knifing: -5, missile: -5, martial_arts: -5}
 									}
 								},
 								encumbrance: {
@@ -1441,10 +1431,10 @@
 									name: "fog",
 									description: "Impairs sight. -5 on skills where sight matters, such as combat.",
 									effects: {
-										perception: {sight: -5},
-										strength: {melee: -5, archery: -5, throw: -5, punch: -5},
-										dexterity: {fencing: -5, knifing: -5, missile: -5, martial_arts: -5},
-										speed: {kick: -5} 
+										perception: {sight: -3},
+										strength: {melee: -3, archery: -3, throw: -3, punch: -3},
+										dexterity: {fencing: -3, knifing: -3, missile: -3, martial_arts: -3},
+										speed: {kick: -3} 
 									}	
 								},
 								immunity_boost: {
@@ -1458,7 +1448,7 @@
 									name: "inebriation",
 									description: "Impairs perception. Roll alcohol tolerance before rolling a check for any other statistic.",
 									effects: {
-										perception: {statistic: -10},
+										perception: {sight: -5, sound: -3, scent: -3, taste: -3, touch: -3},
 									},
 									immunity_check: {
 										skill: "alcohol_tolerance",
@@ -1468,23 +1458,28 @@
 								infection: {
 									name: "infection",
 									description: "Roll infection resistance during each recover attempt until a successful check. Unable to recover.",
-									immunity_check: {
-										skill: "infection_resistance",
-										d6: 2
+									effects: {
+										perception: {statistic: -2},
+										memory: {statistic: -2},
+										logic: {statistic: -2},
+										strength: {statistic: -2},
+										dexterity: {statistic: -2},
+										immunity: {statistic: -2},
+										speed: {statistic: -2}
 									}
 								},
 								liquid_barrier: {
 									name: "liquid_barrier",
 									description: "Impairs sound.",
 									effects: {
-										perception: {sound: -10}
+										perception: {sound: -5}
 									}
 								},
 								loud_noise: {
 									name: "loud_noise",
 									description: "Impairs sound.",
 									effects: {
-										perception: {sound: -10}
+										perception: {sound: -5}
 									}
 								},
 								minor_pain_body: {
@@ -1507,7 +1502,7 @@
 									name: "noxious_odor",
 									description: "Smells bad.",
 									effects: {
-										perception: {scent: -10}
+										perception: {scent: -5}
 									}
 								},
 								pain_relief: {
@@ -1521,15 +1516,15 @@
 									name: "paralysis_arms",
 									description: "Impairs dexterity & strength.",
 									effects: {
-										dexterity: {statistic: -10},
-										strength: {statistic: -10}
+										dexterity: {statistic: -5},
+										strength: {statistic: -5}
 									}
 								},
 								paralysis_legs: {
 									name: "paralysis_legs",
 									description: "Impairs speed.",
 									effects: {
-										speed: {statistic: -10}
+										speed: {statistic: -5}
 									}
 								},
 								perceptiveness: {
@@ -1541,23 +1536,57 @@
 										logic: {judge_character: 2, pattern_recognition: 2}
 									}
 								},
-								poison: {
-									name: "poison",
-									description: "Roll poison resistance during each recover attempt until a successful check. Unable to recover.",
-									immunity_check: {
-										skill: "poison_resistance",
-										d6: 2
+								poison_tier_0: {
+									name: "poison (tier 0)",
+									description: "Roll poison resistance each round or else the penalty progresses to the next stage, capping at -3 to all statistics."
+								},
+								poison_tier_1: {
+									name: "poison (tier 1)",
+									description: "Roll poison resistance each round or else the penalty progresses to the next stage, capping at -3 to all statistics.",
+									effects: {
+										perception: {statistic: -1},
+										memory: {statistic: -1},
+										logic: {statistic: -1},
+										strength: {statistic: -1},
+										dexterity: {statistic: -1},
+										immunity: {statistic: -1},
+										speed: {statistic: -1}
+									}
+								},
+								poison_tier_2: {
+									name: "poison (tier 2)",
+									description: "Roll poison resistance each round or else the penalty progresses to the next stage, capping at -3 to all statistics.",
+									effects: {
+										perception: {statistic: -2},
+										memory: {statistic: -2},
+										logic: {statistic: -2},
+										strength: {statistic: -2},
+										dexterity: {statistic: -2},
+										immunity: {statistic: -2},
+										speed: {statistic: -2}
+									}
+								},
+								poison_tier_3: {
+									name: "poison (tier 3)",
+									description: "Roll poison resistance each round or else the penalty progresses to the next stage, capping at -3 to all statistics.",
+									effects: {
+										perception: {statistic: -3},
+										memory: {statistic: -3},
+										logic: {statistic: -3},
+										strength: {statistic: -3},
+										dexterity: {statistic: -3},
+										immunity: {statistic: -3},
+										speed: {statistic: -3}
 									}
 								},
 								rage: {
 									name: "rage",
 									description: "Boosts physical skills at the cost of mental skills. Can be caused by evoke emotion, handle animals, meditate.",
 									effects: {
-										perception: {statistic: -2},
 										memory: {statistic: -2},
 										logic: {statistic: -2},
-										strength: {statistic: 5},
-										speed: {statistic: 5}
+										strength: {statistic: 3},
+										speed: {statistic: 3}
 									}
 								},
 								resistance: {
@@ -1583,7 +1612,7 @@
 										before: ["memory", "logic", "strength", "dexterity", "speed"]
 									},
 									effects: {
-										perception: {statistic: -10, sight: -5}
+										perception: {sight: -10, sound: -5, scent: -2, taste: -2, touch: -5}
 									}
 								},
 								smoke: {
@@ -1604,7 +1633,7 @@
 									name: "solid_barrier",
 									description: "Impairs sound.",
 									effects: {
-										perception: {sound: -10}
+										perception: {sound: -5}
 									}
 								},
 								surprise: {
@@ -2728,7 +2757,7 @@
 												d6: 1
 											}
 										],
-										conditions: {infection: 2},
+										conditions: {infection: 1},
 										hands: 1,
 										materials: "wood",
 										cost: 25,
@@ -2797,7 +2826,7 @@
 												d6: 3
 											}
 										],
-										conditions: {infection: 2, bleeding: 1},
+										conditions: {infection: 1, bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 20,
@@ -2894,7 +2923,7 @@
 												d6: 3
 											}
 										],
-										conditions: {poison: 2, bleeding: 1},
+										conditions: {poison: 1, bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 28,
@@ -3014,7 +3043,7 @@
 												d6: 1
 											}
 										],
-										conditions: {poison: 2},
+										conditions: {poison: 1},
 										hands: 1,
 										materials: "wood",
 										cost: 25,
@@ -4154,7 +4183,7 @@
 												d6: 3
 											}
 										],
-										conditions: {infection: 2},
+										conditions: {infection: 1},
 										cost: 24,
 										description: "causes infection"
 									},
@@ -4171,7 +4200,7 @@
 											}
 										],
 										recipe: {w: 10, r: 6, g: 2, b: 4},
-										conditions: {poison: 2},
+										conditions: {poison: 1},
 										cost: 24,
 										description: "causes poison"
 									},
@@ -5694,7 +5723,7 @@
 										conditions: {darkness: 0},
 										materials: "wax",
 										cost: 1,
-										description: "burns for 2 hours; negates darkness"
+										description: "burns for 2 hours; negates darkness; range: 20-ft circle"
 									},
 									{
 										name: "candle flashlight",
@@ -5705,7 +5734,7 @@
 										magnetic: true,
 										materials: "metal",
 										cost: 3,
-										description: "focuses candlelight; push up as candle burns for 2 hours; negates darkness"
+										description: "focuses candlelight; push up as candle burns for 2 hours; negates darkness; range: 40-ft 90-degree arc"
 									},
 									{
 										name: "cauldron",
@@ -6913,7 +6942,7 @@
 										fuel: 2,
 										materials: "wood, leather",
 										cost: 2,
-										description: "fuels fire 2 hours; negates darkness"
+										description: "fuels fire 2 hours; negates darkness; range: 40-ft circle"
 									},
 									{
 										name: "totem",
@@ -9116,7 +9145,7 @@
 										speed: { maximum: 1, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 0, condition: 0}, {name: "fly", maximum: 10, condition: 0, animals: true}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":2},cost:0,description:"causes 2d6 unblockable poison damage",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9388,7 +9417,7 @@
 										speed: { maximum: 3, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":2},cost:0,description:"causes 2d6 unblockable poison damage",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9554,7 +9583,7 @@
 										speed: { maximum: 3, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":2},cost:0,description:"causes 2d6 unblockable poison damage",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9646,7 +9675,7 @@
 										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "sneak", maximum: 5, condition: 0}] }
 									},
 									items: [
-										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":2},cost:0,description:"causes 2d6 unblockable infection damage",id:"hhrbglxfcyohzhov"}
+										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":1},cost:0,description:"causes infection",id:"hhrbglxfcyohzhov"}
 									]
 								},
 								{
@@ -9774,7 +9803,7 @@
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "sneak", maximum: 3, condition: 0}] }
 									},
 									items: [
-										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":2},cost:0,description:"causes 2d6 unblockable infection damage",id:"hhrbglxfcyohzhov"}
+										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":1},cost:0,description:"causes infection",id:"hhrbglxfcyohzhov"}
 									]
 								},
 								{
@@ -9794,7 +9823,7 @@
 										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "sneak", maximum: 3, condition: 0}] }
 									},
 									items: [
-										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":2},cost:0,description:"causes 2d6 unblockable infection damage",id:"hhrbglxfcyohzhov"}
+										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":1},cost:0,description:"causes infection",id:"hhrbglxfcyohzhov"}
 									]
 								},
 								{
@@ -9888,7 +9917,7 @@
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 2, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 2, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":2},cost:0,description:"causes 2d6 unblockable poison damage",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9908,7 +9937,7 @@
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 1, condition: 0}, {name: "run", maximum: 4, condition: 0}, {name: "swim", maximum: 1, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":2},cost:0,description:"causes 2d6 unblockable poison damage",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9966,7 +9995,7 @@
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":2},cost:0,description:"causes 2d6 unblockable poison damage",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9986,7 +10015,7 @@
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 0, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":2},cost:0,description:"causes 2d6 unblockable poison damage",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -10155,7 +10184,7 @@
 										speed: { maximum: 2, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 0, condition: 0}, {name: "swim", maximum: 20, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":2},cost:0,description:"causes 2d6 unblockable poison damage","id":"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison","id":"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -10387,7 +10416,7 @@
 										speed: { maximum: 0, damage: 0, condition: 0, skills: [{name: "jump", maximum: 0, condition: 0}, {name: "run", maximum: 0, condition: 0}, {name: "swim", maximum: 0, condition: 0}] }
 									},
 									items: [
-										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":2},cost:0,description:"causes 2d6 unblockable infection damage","id":"hhrbglxfcyohzhov"}
+										{name:"infection",count:0,type:"potion",weight:0,equipped:true,conditions:{"infection":1},cost:0,description:"causes infection","id":"hhrbglxfcyohzhov"}
 									]
 								},
 								{
@@ -10574,7 +10603,7 @@
 										speed: { maximum: 6, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":2},cost:0,description:"causes 2d6 unblockable poison damage","id":"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison","id":"vnqvnpmsmsluxieu"}
 									]
 								},
 								{

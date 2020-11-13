@@ -34,48 +34,30 @@
 					var gameId = REQUEST.post.rollGroup.gameId
 					var characterId = REQUEST.post.rollGroup.characterId || null
 
-				// get character data?
-					var recipientIds = []
-					var characters = {}
-					for (var i = 0; i < REQUEST.post.rollGroup.rolls.length; i++) {
-						if (REQUEST.post.rollGroup.rolls[i].recipient) {
-							recipientIds.push(REQUEST.post.rollGroup.rolls[i].recipient)
-						}
-					}
+				// query
+					var query = CORE.getSchema("query")
+						query.collection = "characters"
+						query.command = "find"
+						query.filters = {gameId: gameId}
 
-					// recipients?
-						if (recipientIds.length) {
-							// query
-								var query = CORE.getSchema("query")
-									query.collection = "characters"
-									query.command = "find"
-									query.filters = {gameId: gameId}
-
-							// find
-								CORE.accessDatabase(query, function(results) {
-									if (!results.success) {
-										results.recipients = [REQUEST.user.id]
-										callback(results)
-										return
-									}
-
-									// characters
-										var characters = {}
-										for (var i in results.documents) {
-											characters[results.documents[i].id] = results.documents[i]
-										}
-
-									// move on
-										createRolls(characters)
-										return
-								})
-						}
-
-					// no targets
-						else {
-							createRolls(characters)
+				// find
+					CORE.accessDatabase(query, function(results) {
+						if (!results.success) {
+							results.recipients = [REQUEST.user.id]
+							callback(results)
 							return
 						}
+
+						// characters
+							var characters = {}
+							for (var i in results.documents) {
+								characters[results.documents[i].id] = results.documents[i]
+							}
+
+						// move on
+							createRolls(characters)
+							return
+					})
 
 				// create rolls
 					function createRolls(characters) {
@@ -195,6 +177,11 @@
 											roll.display.d = data.d
 											roll.display.text = data.text
 											roll.display.type = data.type
+
+										// bleeding? (reduces armor nd6 by 1)
+											if (data.type == "armor" && characters[rollGroup.characterId].info.status.conditions.find(function(condition) { return condition.name == "bleeding" })) {
+												data.count = Math.max(0, data.count - 1)
+											}
 
 										// roll
 											roll.display.total = 0

@@ -6756,7 +6756,7 @@ window.onload = function() {
 					try {
 						// scroll wheel?
 							if (event.wheelDelta) {
-								var modifier = (event.wheelDelta > 0) ? 0.25 : -0.25
+								var modifier = (event.wheelDelta > 0) ? 0.125 : -0.125
 							}
 
 						// button?
