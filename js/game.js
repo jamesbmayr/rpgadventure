@@ -3182,7 +3182,7 @@ window.onload = function() {
 									}
 							}
 						
-						// find in user
+						// load existing character
 							else {
 								var post = {
 									action: "readCharacter",
@@ -6376,12 +6376,12 @@ window.onload = function() {
 					try {
 						// no content
 							if (!CONTENT || !ELEMENTS.gametable.canvas.element) {
-								ELEMENTS.gametable.focus = false
+								ELEMENTS.gametable.canvas.element.blur()
 								return
 							}
 
 						// select
-							ELEMENTS.gametable.focus = true
+							ELEMENTS.gametable.canvas.element.focus()
 					} catch (error) {console.log(error)}
 				}
 
@@ -6389,7 +6389,7 @@ window.onload = function() {
 				function blurContentArena(event) {
 					try {
 						// unselect
-							ELEMENTS.gametable.focus = false
+							ELEMENTS.gametable.canvas.element.blur()
 					} catch (error) {console.log(error)}
 				}
 
@@ -6442,7 +6442,7 @@ window.onload = function() {
 
 						// prevent default / rightclick
 							event.preventDefault()
-							if (event.which > 1) {
+							if (event.which > 1 || event.ctrlKey) {
 								return
 							}
 
@@ -6459,9 +6459,6 @@ window.onload = function() {
 								submitContentArenaSignal(coordinates)
 								return
 							}
-
-						// grabbing style
-							ELEMENTS.body.setAttribute("grabbing", true)
 
 						// sort keys
 							var sortedKeys = Object.keys(CONTENT.arena.objects) || null
@@ -6488,6 +6485,29 @@ window.onload = function() {
 
 								if ((left <= ELEMENTS.gametable.canvas.cursorX && ELEMENTS.gametable.canvas.cursorX <= right)
 								 && (bottom <= ELEMENTS.gametable.canvas.cursorY && ELEMENTS.gametable.canvas.cursorY <= top)) {
+								 	// meta-click --> load character
+										if (event.metaKey) {
+											// not a character
+												if (!arenaObject.characterId) {
+													FUNCTIONS.showToast({success: false, message: "arena object is not a character"})
+													return
+												}
+											
+											// open character
+												var post = {
+													action: "readCharacter",
+													character: {
+														userId: USER ? USER.id : null,
+														gameId: GAME ? GAME.id : null,
+														id: arenaObject.characterId
+													}
+												}
+
+												SOCKET.send(JSON.stringify(post))
+												displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
+												return
+										}
+
 								 	// locked
 										if (arenaObject.locked) {
 											FUNCTIONS.showToast({success: false, message: "arena object locked"})
@@ -6498,6 +6518,9 @@ window.onload = function() {
 										ELEMENTS.gametable.grabbed = {
 											arenaObject: arenaObject
 										}
+
+									// grabbing style
+										ELEMENTS.body.setAttribute("grabbing", true)
 
 									// scroll to listing
 										var listing = document.querySelector("#arena-object-" + arenaObject.id)
@@ -6584,7 +6607,7 @@ window.onload = function() {
 								ELEMENTS.gametable.canvas.cursorY = null
 								ELEMENTS.gametable.grabbed = null
 								ELEMENTS.gametable.selected = null
-								ELEMENTS.gametable.focus = false
+								ELEMENTS.gametable.canvas.element.blur()
 								return
 							}
 
@@ -6643,7 +6666,7 @@ window.onload = function() {
 				function nudgeContentArenaObject(event) {
 					try {
 						// no content
-							if (!CONTENT || !ELEMENTS.gametable.focus || !ELEMENTS.gametable.selected || !ELEMENTS.gametable.selected.arenaObject) {
+							if (!CONTENT || !ELEMENTS.gametable.selected || !ELEMENTS.gametable.selected.arenaObject || document.activeElement !== ELEMENTS.gametable.canvas.element) {
 								return
 							}
 
@@ -6756,7 +6779,10 @@ window.onload = function() {
 					try {
 						// scroll wheel?
 							if (event.wheelDelta) {
-								var modifier = (event.wheelDelta > 0) ? 0.125 : -0.125
+								var modifier = (event.wheelDelta > 0) ? 0.0625 : -0.0625
+							}
+							else if (event.deltaY) {
+								var modifier = (event.deltaY < 0) ? 0.0625 : -0.0625
 							}
 
 						// button?
@@ -6764,9 +6790,23 @@ window.onload = function() {
 								var modifier = Number(event.target.value || event.target.getAttribute("value")) || 0
 							}
 
+						// get current offset
+							var currentOffsetCellsX = ELEMENTS.gametable.canvas.offsetX / ELEMENTS.gametable.canvas.cellSize
+							var currentOffsetCellsY = ELEMENTS.gametable.canvas.offsetY / ELEMENTS.gametable.canvas.cellSize
+
 						// set zoom & cellsize
 							ELEMENTS.gametable.canvas.zoomPower = modifier ? (ELEMENTS.gametable.canvas.zoomPower * 4 + modifier * 4) / 4 : 0
 							ELEMENTS.gametable.canvas.cellSize = 50 * Math.pow(2, ELEMENTS.gametable.canvas.zoomPower)
+
+						// recenter
+							if (modifier) {
+								ELEMENTS.gametable.canvas.offsetX = currentOffsetCellsX * ELEMENTS.gametable.canvas.cellSize
+								ELEMENTS.gametable.canvas.offsetY = currentOffsetCellsY * ELEMENTS.gametable.canvas.cellSize
+							}
+							else {
+								ELEMENTS.gametable.canvas.offsetX = 0
+								ELEMENTS.gametable.canvas.offsetY = 0
+							}
 						
 						// redraw
 							displayContentArena()

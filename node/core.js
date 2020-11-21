@@ -1256,6 +1256,7 @@
 									d6: 3,
 									blockable: true,
 									description: [
+										"weight determines damage: small: 1d6; medium: 2d6; large: 3d6",
 										"must be thrown or used as a melee weapon"
 									]
 								},
@@ -2923,7 +2924,7 @@
 												d6: 3
 											}
 										],
-										conditions: {poison: 1, bleeding: 1},
+										conditions: {poison_tier_0: 1, bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 28,
@@ -3043,7 +3044,7 @@
 												d6: 1
 											}
 										],
-										conditions: {poison: 1},
+										conditions: {poison_tier_0: 1},
 										hands: 1,
 										materials: "wood",
 										cost: 25,
@@ -3744,7 +3745,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 6, b: 6},
-										conditions: {poison: 0, paralysis_arms: 0, paralysis_legs: 0},
+										conditions: {poison_tier_0: 0, paralysis_arms: 0, paralysis_legs: 0},
 										cost: 24,
 										description: "eliminates poison and paralysis"
 									},
@@ -4200,7 +4201,7 @@
 											}
 										],
 										recipe: {w: 10, r: 6, g: 2, b: 4},
-										conditions: {poison: 1},
+										conditions: {poison_tier_0: 1},
 										cost: 24,
 										description: "causes poison"
 									},
@@ -5432,7 +5433,7 @@
 											{
 												statistic: "strength",
 												skill: "throw",
-												d6: 3
+												d6: 2
 											}
 										],
 										materials: "wood, leather, metal",
@@ -5499,7 +5500,7 @@
 											{
 												statistic: "strength",
 												skill: "melee",
-												d6: 3
+												d6: 2
 											}
 										],
 										materials: "leather",
@@ -6032,7 +6033,7 @@
 											{
 												statistic: "strength",
 												skill: "melee",
-												d6: 3
+												d6: 2
 											}
 										],
 										conditions: {bleeding: 1},
@@ -6873,7 +6874,7 @@
 											{
 												statistic: "strength",
 												skill: "melee",
-												d6: 3
+												d6: 2
 											}
 										],
 										weight: 3,
@@ -6978,7 +6979,7 @@
 											{
 												statistic: "strength",
 												skill: "melee",
-												d6: 3
+												d6: 2
 											}
 										],
 										materials: "wood, cloth",
@@ -7258,6 +7259,15 @@
 										"The GM can use query parameters (x, y, minPieceSize, maxPieceSize, splitProbability) to customize the puzzle."
 									]
 								},
+								{
+									name: "hexagon tangram",
+									url: "https://jamesmayr.com/hexagonplacer",
+									steps: [
+										"Within the world, characters encounter a fractured object, such as pieces of stained glass or tiles, which can be sorted back together using spatial reasoning or pattern recognition.",
+										"Players can use this simulation to solve a randomly generated hexagonal tangram puzzle by clicking to select and dragging to move pieces such that they all fit within the hexagonal grid.",
+										"The GM can use query parameters (x, y, z, minPieceSize, maxPieceSize) to customize the puzzle."
+									]
+								}
 							]
 						break
 
@@ -9145,7 +9155,7 @@
 										speed: { maximum: 1, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 0, condition: 0}, {name: "fly", maximum: 10, condition: 0, animals: true}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison_tier_0":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9417,7 +9427,7 @@
 										speed: { maximum: 3, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison_tier_0":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9583,7 +9593,7 @@
 										speed: { maximum: 3, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison_tier_0":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9917,7 +9927,7 @@
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 2, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 2, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison_tier_0":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9937,7 +9947,7 @@
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 1, condition: 0}, {name: "run", maximum: 4, condition: 0}, {name: "swim", maximum: 1, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison_tier_0":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -9995,7 +10005,7 @@
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison_tier_0":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -10015,7 +10025,7 @@
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 0, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison_tier_0":1},cost:0,description:"causes poison",id:"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -10184,7 +10194,7 @@
 										speed: { maximum: 2, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 0, condition: 0}, {name: "swim", maximum: 20, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison","id":"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison_tier_0":1},cost:0,description:"causes poison","id":"vnqvnpmsmsluxieu"}
 									]
 								},
 								{
@@ -10603,7 +10613,7 @@
 										speed: { maximum: 6, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: [
-										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison":1},cost:0,description:"causes poison","id":"vnqvnpmsmsluxieu"}
+										{name:"poison",count:0,type:"potion",weight:0,equipped:true,conditions:{"poison_tier_0":1},cost:0,description:"causes poison","id":"vnqvnpmsmsluxieu"}
 									]
 								},
 								{

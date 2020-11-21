@@ -1781,6 +1781,15 @@
 				display: none;
 			}
 
+		/* mouse */
+			#content:not([mode="arena"]) #content-controls-mouse {
+				display: none;
+			}
+
+			#content-controls-mouse li {
+				list-style-type: circle !important;
+			}
+
 	/** arena objects **/
 		#content:not([mode="arena"]) #content-objects {
 			display: none;
@@ -1929,6 +1938,7 @@
 				float: left;
 				width: 100%;
 				height: 100%;
+				outline: none !important;
 			}
 
 			.content-arena-panning {
