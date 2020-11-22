@@ -270,6 +270,11 @@ window.addEventListener("load", function() {
 							return false
 						}
 
+					// related target?
+						if (event.relatedTarget && componentElement == event.relatedTarget.closest(".option-search")) {
+							return false
+						}
+
 						var inputElement = componentElement.querySelector(".option-search-input")
 						var resultsElement = componentElement.querySelector(".option-search-results")
 						var cancelElement = componentElement.querySelector(".option-search-cancel")

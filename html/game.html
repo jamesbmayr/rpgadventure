@@ -138,32 +138,28 @@
 				</div>
 				<div id="character-settings">
 					<div id="character-settings-main" class="subsection">
-						<h3>selection</h3>
-						<form id="character-settings-form" method="post" action="javascript:;">
+						<div id="character-settings-select-search" class="option-search">
 							<input id="character-settings-upload" type="file"/>
-							<select id="character-settings-select">
+							<input autocomplete="off" placeholder="select character..." class="option-search-input"/>
+							<button id="character-settings-select-search-button" class="option-search-button" title="submit">&rarr;</button>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<div class="option-search-results"></div>
+							<select id="character-settings-select" class="option-search-select">
 								<optgroup label="game characters" id="character-settings-select-custom"></optgroup>
 								<optgroup label="other" id="character-settings-select-other">
 									<option id="character-settings-select-none" value="[none]" disabled>[close character]</option>
 									<option id="character-settings-select-upload" value="[upload]">[upload character]</option>
-									<option id="character-settings-select-new" value="[new]" selected>[new character]</option>
-								</optgroup>
-							</select>
-							<button id="character-settings-select-button" class="form-pair" visibility="false" title="submit">&rarr;</button>
-						</form>
-						<div id="character-settings-select-search" class="option-search">
-							<input autocomplete="off" placeholder="templates" class="option-search-input form-pair"/>
-							<button id="character-settings-select-search-button" class="option-search-button form-pair" title="submit">&rarr;</button>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							<div class="option-search-results"></div>
-							<select id="character-settings-select-templates" class="option-search-select">
-								<optgroup label="blank">
-									<option id="character-settings-select-blank" value="[template-blank]" selected>[blank template]</option>
+									<option id="character-settings-select-new" value="[template-blank]" selected>[blank template]</option>
 								</optgroup>
 							</select>
 						</div>
 					</div>
 					<div id="character-settings-metadata" class="subsection" visibility="false">
+						<h3>character</h3>
+						<form id="character-settings-name-form" method="post" action="javascript:;">
+							<h4>name</h4>
+							<input id="character-settings-name-input">
+						</form>
 						<form id="character-settings-access-form" method="post" action="javascript:;">
 							<h4>access</h4>
 							<select id="character-settings-access-select">
@@ -468,7 +464,6 @@
 			</section>
 			<section id="content" mode="none">
 				<div id="content-choose-search" class="option-search subsection">
-					<h3>selection</h3>
 					<input autocomplete="off" placeholder="select content..." class="option-search-input"/>
 					<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 					<button id="content-choose-search-button" class="option-search-button" title="submit">&rarr;</button>

@@ -537,15 +537,6 @@
 			padding: var(--medium-gap-size);
 		}
 
-		/* selection */
-			#character-settings-select-search-button {
-				display: inline-block;
-			}
-
-			#character-settings-select-search .option-search-cancel {
-				margin-right: calc(var(--medium-font-size) + 4 * var(--small-gap-size));
-			}
-
 		/* rng */
 			#character-settings-rng-count {
 				width: calc(25% - 2 * (var(--border-size) + var(--small-gap-size)));

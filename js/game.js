@@ -183,20 +183,20 @@ window.onload = function() {
 							settings: {
 								element: document.getElementById("character-settings"),
 								select: {
-									form: document.getElementById("character-settings-form"),
 									element: document.getElementById("character-settings-select"),
 									custom: document.getElementById("character-settings-select-custom"),
 									upload: document.getElementById("character-settings-select-upload"),
 									none: document.getElementById("character-settings-select-none"),
 									new: document.getElementById("character-settings-select-new"),
-									button: document.getElementById("character-settings-select-button"),
-									templates: document.getElementById("character-settings-select-templates"),
-									blank: document.getElementById("character-settings-select-blank"),
 									search: document.getElementById("character-settings-select-search"),
 									searchButton: document.getElementById("character-settings-select-search-button")
 								},
 								upload: document.getElementById("character-settings-upload"),
 								metadata: document.getElementById("character-settings-metadata"),
+								name: {
+									form: document.getElementById("character-settings-name-form"),
+									input: document.getElementById("character-settings-name-input")
+								},
 								access: {
 									form: document.getElementById("character-settings-access-form"),
 									select: {
@@ -449,10 +449,9 @@ window.onload = function() {
 
 					// character
 						ELEMENTS.character.modes.form.addEventListener(TRIGGERS.change, displayCharacterMode)
-						ELEMENTS.character.settings.select.element.addEventListener(TRIGGERS.change, displayCharacterListSelection)
-						ELEMENTS.character.settings.select.form.addEventListener(TRIGGERS.submit, submitCharacterRead)
 						ELEMENTS.character.settings.select.searchButton.addEventListener(TRIGGERS.click, submitCharacterRead)
 						ELEMENTS.character.settings.download.form.addEventListener(TRIGGERS.submit, displayCharacterDownload)
+						ELEMENTS.character.settings.name.input.addEventListener(TRIGGERS.change, submitCharacterUpdateName)
 						ELEMENTS.character.settings.access.select.element.addEventListener(TRIGGERS.change, submitCharacterUpdateAccess)
 						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, submitCharacterCreateDuplicate)
 						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, submitCharacterDelete)
@@ -502,6 +501,7 @@ window.onload = function() {
 							selectSearchInputs.forEach(function(element) {
 								element.addEventListener(TRIGGERS.input, FUNCTIONS.searchSelect)
 								element.addEventListener(TRIGGERS.focus, FUNCTIONS.searchSelect)
+								element.addEventListener(TRIGGERS.blur, FUNCTIONS.cancelSearch)
 							})
 						var selectSearchCancels = Array.from(ELEMENTS.body.querySelectorAll(".option-search-cancel"))
 							selectSearchCancels.forEach(function(element) {
@@ -2006,7 +2006,7 @@ window.onload = function() {
 						// NPCs
 							var optgroup = document.createElement("optgroup")
 								optgroup.label = "NPCs"
-							ELEMENTS.character.settings.select.templates.appendChild(optgroup)
+							ELEMENTS.character.settings.select.element.appendChild(optgroup)
 
 							for (var n in RULES.npcs) {
 								var option = document.createElement("option")
@@ -2018,7 +2018,7 @@ window.onload = function() {
 						// animals
 							var optgroup = document.createElement("optgroup")
 								optgroup.label = "animals"
-							ELEMENTS.character.settings.select.templates.appendChild(optgroup)
+							ELEMENTS.character.settings.select.element.appendChild(optgroup)
 
 							for (var a in RULES.animals) {
 								var option = document.createElement("option")
@@ -2030,7 +2030,7 @@ window.onload = function() {
 						// creatures
 							var optgroup = document.createElement("optgroup")
 								optgroup.label = "creatures"
-							ELEMENTS.character.settings.select.templates.appendChild(optgroup)
+							ELEMENTS.character.settings.select.element.appendChild(optgroup)
 
 							for (var c in RULES.creatures) {
 								var option = document.createElement("option")
@@ -2255,11 +2255,6 @@ window.onload = function() {
 
 								// delete?
 									if (option && character.delete) {
-										if (ELEMENTS.character.settings.select.element.value == option.value) {
-											ELEMENTS.character.settings.select.element.value = ELEMENTS.character.settings.select.new.value
-											ELEMENTS.character.settings.select.element.className = ""
-											ELEMENTS.character.settings.select.templates.setAttribute("visibility", true)
-										}
 										option.remove()
 									}
 
@@ -2277,47 +2272,11 @@ window.onload = function() {
 									}
 							}
 
-						// selected?
-							if (CHARACTER && CHARACTER.id) {
-								var selectedOption = ELEMENTS.character.settings.select.custom.querySelector("option[value='" + CHARACTER.id + "']")
-								if (selectedOption) {
-									ELEMENTS.character.settings.select.element.value = CHARACTER.id
-									ELEMENTS.character.settings.select.element.className = "form-pair"
-									ELEMENTS.character.settings.select.search.setAttribute("visibility", false)
-									ELEMENTS.character.settings.select.button.setAttribute("visibility", true)
-								}
-							}
-							else {
-								ELEMENTS.character.settings.select.element.value = ELEMENTS.character.settings.select.new.value
-								ELEMENTS.character.settings.select.element.className = ""
-								ELEMENTS.character.settings.select.search.setAttribute("visibility", true)
-								ELEMENTS.character.settings.select.button.setAttribute("visibility", false)
-							}
-
 						// targeting
 							displayCharacterListRecipients(characterList, null)
 
 						// arena objects
 							displayContentArenaObjectList(characterList, null)
-					} catch (error) {console.log(error)}
-				}
-
-			/* displayCharacterListSelection */
-				function displayCharacterListSelection(event) {
-					try {
-						// reveal
-							if (ELEMENTS.character.settings.select.element.value == ELEMENTS.character.settings.select.new.value) {
-								ELEMENTS.character.settings.select.element.className = ""
-								ELEMENTS.character.settings.select.search.setAttribute("visibility", true)
-								ELEMENTS.character.settings.select.button.setAttribute("visibility", false)
-								return
-							}
-
-						// hide
-							ELEMENTS.character.settings.select.element.className = "form-pair"
-							ELEMENTS.character.settings.select.search.setAttribute("visibility", false)
-							ELEMENTS.character.settings.select.button.setAttribute("visibility", true)
-							return
 					} catch (error) {console.log(error)}
 				}
 
@@ -2467,6 +2426,7 @@ window.onload = function() {
 						// name
 							ELEMENTS.character.info.name.innerText = CHARACTER.info.name
 							ELEMENTS.character.info.nameText.value = CHARACTER.info.name
+							ELEMENTS.character.settings.name.input.value = CHARACTER.info.name
 
 						// image
 							if (character.info.image) {
@@ -3143,41 +3103,38 @@ window.onload = function() {
 						// new
 							else if (value == ELEMENTS.character.settings.select.new.value) {
 								// blank template
-									if (ELEMENTS.character.settings.select.templates.value == ELEMENTS.character.settings.select.blank.value) {
-										var post = {
-											action: "createCharacter",
-											character: {
-												userId: USER ? USER.id : null,
-												gameId: GAME ? GAME.id : null,
-												template: {
-													type: null,
-													name: null
-												}
+									var post = {
+										action: "createCharacter",
+										character: {
+											userId: USER ? USER.id : null,
+											gameId: GAME ? GAME.id : null,
+											template: {
+												type: null,
+												name: null
 											}
 										}
 									}
+							}
 
-								// new from template
-									else {
-										var value = ELEMENTS.character.settings.select.templates.value
-										var directory = value.slice(1,value.length - 1).split("-")
-										var post = {
-											action: "createCharacter",
-											character: {
-												userId: USER ? USER.id : null,
-												gameId: GAME ? GAME.id : null,
-												template: {
-													type: directory[1],
-													name: directory[2]
-												}
-											}
-										}
-
-										if (!post.character.template.type || !post.character.template.name) {
-											FUNCTIONS.showToast({success: false, message: "invalid template selection"})
-											return
+						// new from template
+							else if (value[0] == "[" && value[value.length - 1] == "]") {
+								var directory = value.slice(1,value.length - 1).split("-")
+								var post = {
+									action: "createCharacter",
+									character: {
+										userId: USER ? USER.id : null,
+										gameId: GAME ? GAME.id : null,
+										template: {
+											type: directory[1],
+											name: directory[2]
 										}
 									}
+								}
+
+								if (!post.character.template.type || !post.character.template.name) {
+									FUNCTIONS.showToast({success: false, message: "invalid template selection"})
+									return
+								}
 							}
 						
 						// load existing character
