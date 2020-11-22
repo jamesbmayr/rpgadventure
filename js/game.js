@@ -59,7 +59,15 @@ window.onload = function() {
 
 					// special
 						ELEMENTS.stream = {
-							history: document.getElementById("stream-history")
+							history: document.getElementById("stream-history"),
+							rng: {
+								element: document.getElementById("rng"),
+								form: document.getElementById("rng-form"),
+								count: document.getElementById("rng-count"),
+								d: document.getElementById("rng-d"),
+								label: document.getElementById("rng-label"),
+								button: document.getElementById("rng-button")
+							},
 						}
 						ELEMENTS.tools = {
 							element: document.getElementById("tools"),
@@ -220,13 +228,6 @@ window.onload = function() {
 								delete: {
 									gate: document.getElementById("character-settings-delete-gate"),
 									form: document.getElementById("character-settings-delete-form")
-								},
-								rng: {
-									form: document.getElementById("character-settings-rng-form"),
-									count: document.getElementById("character-settings-rng-count"),
-									d: document.getElementById("character-settings-rng-d"),
-									label: document.getElementById("character-settings-rng-label"),
-									button: document.getElementById("character-settings-rng-button")
 								},
 								recipient: {
 									form: document.getElementById("character-settings-recipient-form"),
@@ -431,6 +432,9 @@ window.onload = function() {
 		/* attachListeners */
 			function attachListeners() {
 				try {
+					// stream
+						ELEMENTS.stream.rng.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateCustom)
+
 					// tools
 						ELEMENTS.tools.form.addEventListener(TRIGGERS.change, displayTool)
 
@@ -460,7 +464,6 @@ window.onload = function() {
 						ELEMENTS.character.settings.access.select.element.addEventListener(TRIGGERS.change, submitCharacterUpdateAccess)
 						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, submitCharacterCreateDuplicate)
 						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, submitCharacterDelete)
-						ELEMENTS.character.settings.rng.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateCustom)
 						ELEMENTS.character.content.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20) })
 						ELEMENTS.character.info.imageForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImage)
 						ELEMENTS.character.info.imageResetForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImageDelete)
@@ -688,6 +691,7 @@ window.onload = function() {
 							if (!GAME) {
 								// clear stream & chat
 									ELEMENTS.stream.history.innerHTML = ""
+									ELEMENTS.stream.rng.element.setAttribute("visibility", false)
 									ELEMENTS.chat.messages.innerHTML = ""
 								
 								// clear content
@@ -699,6 +703,9 @@ window.onload = function() {
 									CHARACTER = null
 									displayCharacter()
 									displayCharacterList()
+							}
+							else {
+								ELEMENTS.stream.rng.element.setAttribute("visibility", true)
 							}
 
 						// relist chat
@@ -1629,13 +1636,13 @@ window.onload = function() {
 						// spacer
 							rolls.push({
 								spacer: true,
-								text: CHARACTER ? CHARACTER.info.name : "environment"
+								text: CHARACTER && CHARACTER.info ? CHARACTER.info.name : "environment"
 							})
 
 						// add to history
-							var d = Math.max(2, ELEMENTS.character.settings.rng.d.value || 6)
-							var count = Math.max(1, ELEMENTS.character.settings.rng.count.value)
-							var text = (ELEMENTS.character.settings.rng.label.value || "?") + " (" + count + "d" + d + ")" 
+							var d = Math.max(2, ELEMENTS.stream.rng.d.value || 6)
+							var count = Math.max(1, ELEMENTS.stream.rng.count.value)
+							var text = (ELEMENTS.stream.rng.label.value || "?") + " (" + count + "d" + d + ")" 
 							rolls.push({
 								type: "environment",
 								d: d,

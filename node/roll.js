@@ -43,8 +43,7 @@
 				// find
 					CORE.accessDatabase(query, function(results) {
 						if (!results.success) {
-							results.recipients = [REQUEST.user.id]
-							callback(results)
+							createRolls({})
 							return
 						}
 

@@ -18,6 +18,23 @@
 			<section id="stream">
 				<div id="stream-history"></div>
 			</section>
+			<div id="rng" visibility="false">
+				<form id="rng-form" method="post" action="javascript:;">
+					<input id="rng-count" type="number" placeholder="#" min="1" step="1" value="1"/>
+					<select id="rng-d">
+						<option id="rng-d2" value="2">d2</option>
+						<option id="rng-d4" value="4">d4</option>
+						<option id="rng-d6" value="6" selected>d6</option>
+						<option id="rng-d8" value="8">d8</option>
+						<option id="rng-d10" value="10">d10</option>
+						<option id="rng-d12" value="12">d12</option>
+						<option id="rng-d20" value="20">d20</option>
+						<option id="rng-d100" value="100">d100</option>
+					</select>
+					<button id="rng-button" title="roll dice">&#x1f3b2;</button>
+					<input id="rng-label" type="text" placeholder="label" autocomplete="off"/>
+				</form>
+			</div>
 		</section>
 		<section id="left" tool="settings">
 			<section id="tools">
@@ -182,24 +199,6 @@
 								<button id="character-settings-delete-button" title="delete">confirm delete</button>
 							</form>
 						</details>
-					</div>
-					<div id="character-settings-rng" class="subsection">
-						<h3 id="character-settings-rng-header">rng</h3>
-						<form id="character-settings-rng-form" method="post" action="javascript:;">
-							<input id="character-settings-rng-count" type="number" placeholder="count" min="1" step="1"/>
-							<select id="character-settings-rng-d">
-								<option id="character-settings-rng-d2" value="2">d2</option>
-								<option id="character-settings-rng-d4" value="4">d4</option>
-								<option id="character-settings-rng-d6" value="6">d6</option>
-								<option id="character-settings-rng-d8" value="8">d8</option>
-								<option id="character-settings-rng-d10" value="10">d10</option>
-								<option id="character-settings-rng-d12" value="12">d12</option>
-								<option id="character-settings-rng-d20" value="20">d20</option>
-								<option id="character-settings-rng-d100" value="100">d100</option>
-							</select>
-							<input id="character-settings-rng-label" type="text" placeholder="label" class="form-pair" autocomplete="off"/>
-							<button id="character-settings-rng-button" class="form-pair" title="roll dice">&#x1f3b2;</button>
-						</form>
 					</div>
 					<div id="character-settings-recipient" class="subsection">
 						<h3 id="character-settings-recipient-header">targeting</h3>
