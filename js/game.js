@@ -411,7 +411,7 @@ window.onload = function() {
 								}
 							},
 							objects: {
-								form: document.getElementById("content-objects-form"),
+								searchButton: document.getElementById("content-objects-search-button"),
 								select: document.getElementById("content-objects-select"),
 								blank: document.getElementById("content-objects-select-blank"),
 								characters: document.getElementById("content-objects-select-characters"),
@@ -494,7 +494,7 @@ window.onload = function() {
 						ELEMENTS.content.controls.pan.down.form.addEventListener(TRIGGERS.submit, panContentArena)
 						ELEMENTS.content.controls.pan.right.form.addEventListener(TRIGGERS.submit, panContentArena)
 						ELEMENTS.content.controls.turn.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateTurnOrder)
-						ELEMENTS.content.objects.form.addEventListener(TRIGGERS.submit, submitContentArenaObjectCreate)
+						ELEMENTS.content.objects.searchButton.addEventListener(TRIGGERS.click, submitContentArenaObjectCreate)
 						window.addEventListener(TRIGGERS.resize, displayContentArena)
 
 					// select search

@@ -1807,6 +1807,10 @@
 			display: none;
 		}
 
+		#content-objects-search {
+			margin-bottom: var(--medium-gap-size);
+		}
+
 		/* list */
 			#content-objects-list {
 				display: flex;

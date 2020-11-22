@@ -594,16 +594,19 @@
 				</div>
 				<div id="content-objects" class="subsection">
 					<h3 id="content-objects-header">objects</h3>
-					<form id="content-objects-form" method="post" action="javascript:;">
-						<select id="content-objects-select" class="form-pair">
+					<div id="content-objects-search" class="option-search">
+						<input autocomplete="off" placeholder="add object..." class="option-search-input"/>
+						<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						<button id="content-objects-search-button" class="option-search-button" title="submit">&rarr;</button>
+						<div class="option-search-results"></div>
+						<select id="content-objects-select" class="option-search-select">
 							<optgroup label="other">
 								<option id="content-objects-select-blank" value="[blank object]" selected>[blank object]</option>
 							</optgroup>
 							<optgroup id="content-objects-select-characters" label="characters"></optgroup>
 							<optgroup id="content-objects-select-images" label="images"></optgroup>
 						</select>
-						<button id="content-objects-button" class="form-pair" title="add object">&rarr;</button>
-					</form>
+					</div>
 					<div id="content-objects-list"></div>
 				</div>
 			</section>
