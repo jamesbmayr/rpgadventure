@@ -262,6 +262,22 @@
 		}
 
 	/** game **/
+		#settings-game-search-button {
+			float: left;
+			display: block;
+			line-height: 1.5;
+		}
+
+		#settings-game-search-cancel {
+			margin-right: calc(var(--medium-font-size) + 4 * var(--small-gap-size));
+		}
+
+		#settings-game-name-input[disabled] {
+			background-color: var(--medium-gray);
+			color: var(--light-gray);
+			cursor: not-allowed;
+		}
+
 		#settings-game-delete-button {
 			background-color: var(--medium-red);
 		}
@@ -552,6 +568,10 @@
 			#character-settings-rng-label {
 				width: calc(50% - 2 * (var(--border-size) + var(--small-gap-size)) - (var(--medium-font-size) + 4 * var(--small-gap-size)));
 				border-radius: 0;
+			}
+
+			#character-settings-rng-button {
+				line-height: 1.5;
 			}
 
 	/** content **/

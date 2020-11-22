@@ -23,60 +23,38 @@
 						callback({success: false, message: "no game object", recipients: [REQUEST.user.id]})
 						return
 					}
-					if (!REQUEST.post.game.name) {
-						callback({success: false, message: "no game name", recipients: [REQUEST.user.id]})
-						return
-					}
 
-				// game name
-					var gameName = REQUEST.post.game.name
+				// create
+					var game = CORE.getSchema("game")
+						game.userId = REQUEST.user.id
+						game.users[REQUEST.user.id] = {
+							id: REQUEST.user.id,
+							name: REQUEST.user.name
+						}
+						game.allUsers = [REQUEST.user.id]
 
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "games"
-						query.command = "find"
-						query.filters = {name: REQUEST.post.game.name}
+						query.command = "insert"
+						query.document = game
 
-				// find
+				// insert
 					CORE.accessDatabase(query, function(results) {
-						if (results.success && results.count) {
-							callback({success: false, message: "name in use", recipients: [REQUEST.user.id]})
+						if (!results.success) {
+							results.recipients = [REQUEST.user.id]
+							callback(results)
 							return
 						}
 
-						// create
-							var game = CORE.getSchema("game")
-								game.userId = REQUEST.user.id
-								game.name = gameName
-								game.users[REQUEST.user.id] = {
-									id: REQUEST.user.id,
-									name: REQUEST.user.name
-								}
-								game.allUsers = [REQUEST.user.id]
+						// game
+							var game = results.documents[0]
+							callback({success: true, message: REQUEST.user.name + " created game " + game.name, recipients: [REQUEST.user.id]})
 
-						// query
-							var query = CORE.getSchema("query")
-								query.collection = "games"
-								query.command = "insert"
-								query.document = game
-
-						// insert
-							CORE.accessDatabase(query, function(results) {
-								if (!results.success) {
-									results.recipients = [REQUEST.user.id]
-									callback(results)
-									return
-								}
-
-								// game
-									var game = results.documents[0]
-									callback({success: true, message: REQUEST.user.name + " created " + game.name, recipients: [REQUEST.user.id]})
-
-								// add to list of user's games
-									REQUEST.post.action = "updateUserGames"
-									REQUEST.post.user = {game: game}
-									USER.updateOne(REQUEST, callback)
-							})
+						// add to list of user's games
+							REQUEST.post.action = "updateUserGames"
+							REQUEST.post.user = {game: game}
+							USER.updateOne(REQUEST, callback)
 					})
 			}
 			catch (error) {
@@ -110,7 +88,7 @@
 
 				// id
 					var gameId = REQUEST.post.game.id || null
-					var gameName = REQUEST.post.game.name || null
+					var gameName = REQUEST.post.game.name ? REQUEST.post.game.name.trim() || null : null
 
 				// query
 					var query = CORE.getSchema("query")
@@ -319,7 +297,11 @@
 					}
 
 				// action
-					if (REQUEST.post.action == "clearGameChat") {
+					if (REQUEST.post.action == "updateGameName") {
+						updateName(REQUEST, callback)
+						return
+					}
+					else if (REQUEST.post.action == "clearGameChat") {
 						var collection = "chats"
 					}
 					else if (REQUEST.post.action == "clearGameRolls") {
@@ -393,6 +375,138 @@
 												callback({success: true, message: REQUEST.user.name + " cleared all rolls", roll: {delete: true}, recipients: ids})	
 											}
 											return
+									})
+							})
+					})
+			}
+			catch (error) {
+				CORE.logError(error)
+				callback({success: false, message: "unable to " + arguments.callee.name})
+			}
+		}
+
+	/* updateName */
+		module.exports.updateName = updateName
+		function updateName(REQUEST, callback) {
+			try {
+				// authenticated?
+					if (!REQUEST.user || !REQUEST.user.id) {
+						callback({success: false, message: "not signed in"})
+						return
+					}
+
+				// validate
+					if (!REQUEST.post.game || !REQUEST.post.game.id) {
+						callback({success: false, message: "no game object", recipients: [REQUEST.user.id]})
+						return
+					}
+
+				// game name
+					var gameName = REQUEST.post.game.name.trim()
+
+				// query
+					var query = CORE.getSchema("query")
+						query.collection = "games"
+						query.command = "find"
+						query.filters = {name: REQUEST.post.game.name}
+
+				// find
+					CORE.accessDatabase(query, function(results) {
+						if (results.success && results.count) {
+							callback({success: false, message: "name in use", recipients: [REQUEST.user.id]})
+							return
+						}
+
+						// query
+							var query = CORE.getSchema("query")
+								query.collection = "games"
+								query.command = "find"
+								query.filters = {id: REQUEST.post.game.id}
+
+						// find
+							CORE.accessDatabase(query, function(results) {
+								if (!results.success) {
+									results.recipients = [REQUEST.user.id]
+									callback(results)
+									return
+								}
+
+								// validate
+									var game = results.documents[0]
+									if (game.userId !== REQUEST.user.id) {
+										callback({success: false, message: "only the game creator may rename the game", recipients: [REQUEST.user.id]})
+										return
+									}
+
+								// query
+									var query = CORE.getSchema("query")
+										query.collection = "games"
+										query.command = "update"
+										query.filters = {id: game.id, userId: REQUEST.user.id}
+										query.document = {name: gameName}
+
+								// update
+									CORE.accessDatabase(query, function(results) {
+										if (!results.success) {
+											results.recipients = [REQUEST.user.id]
+											callback(results)
+											return
+										}
+
+										// game
+											var game = results.documents[0]
+
+										// query
+											var query = CORE.getSchema("query")
+												query.collection = "users"
+												query.command = "find"
+												query.filters = {gameId: game.id}
+										
+										// find
+											CORE.accessDatabase(query, function(results) {
+												if (!results.success) {
+													results.recipients = [REQUEST.user.id]
+													callback(results)
+													return
+												}
+
+												// ids
+													var users = results.documents
+													var ids = results.documents.map(function(u) {
+														return u.id
+													}) || []
+
+												// update games
+													for (var i in users) {
+														// games
+															var games = users[i].games
+																games[game.id].name = game.name
+
+														// query
+															var query = CORE.getSchema("query")
+																query.collection = "users"
+																query.command = "update"
+																query.filters = {id: users[i].id}
+																query.document = {games: games}
+
+														// update
+															CORE.accessDatabase(query, function(results) {
+																if (!results.success) {
+																	results.recipients = [REQUEST.user.id]
+																	callback(results)
+																	return
+																}
+
+																// get updated user
+																	var updatedUser = results.documents[0]
+																	delete updatedUser.secret
+
+																// send update
+																	callback({success: true, message: REQUEST.user.name + " renamed the game to " + game.name, game: game, user: updatedUser, recipients: [updatedUser.id]})
+																	return
+															})
+													}
+											})
 									})
 							})
 					})

@@ -104,7 +104,8 @@ window.onload = function() {
 							element: document.getElementById("settings"),
 							game: {
 								element: document.getElementById("settings-game"),
-								form: document.getElementById("settings-game-form"),
+								search: document.getElementById("settings-game-search"),
+								input: document.getElementById("settings-game-search-input"),
 								select: {
 									element: document.getElementById("settings-game-select"),
 									custom: document.getElementById("settings-game-select-custom"),
@@ -112,7 +113,11 @@ window.onload = function() {
 									new: document.getElementById("settings-game-select-new"),
 									search: document.getElementById("settings-game-select-search")
 								},
-								input: document.getElementById("settings-game-input"),
+								searchButton: document.getElementById("settings-game-search-button"),
+								name: {
+									form: document.getElementById("settings-game-name-form"),
+									input: document.getElementById("settings-game-name-input"),
+								},
 								clearChat: {
 									form: document.getElementById("settings-game-clearChat-form"),
 									button: document.getElementById("settings-game-clearChat-button"),
@@ -127,11 +132,11 @@ window.onload = function() {
 									button: document.getElementById("settings-game-delete-button")
 								}
 							},
-							audio: {
-								volume: document.getElementById("settings-audio-volume")
-							},
 							user: {
 								element: document.getElementById("settings-user"),
+								audio: {
+									volume: document.getElementById("settings-audio-volume")
+								},
 								name: {
 									form: document.getElementById("settings-user-name-form"),
 									input: document.getElementById("settings-user-name-input")
@@ -433,12 +438,12 @@ window.onload = function() {
 						ELEMENTS.body.addEventListener(TRIGGERS.keydown, nudgeContentArenaObject)
 
 					// settings
-						ELEMENTS.settings.game.select.element.addEventListener(TRIGGERS.change, displayGameListSelection)
-						ELEMENTS.settings.game.form.addEventListener(TRIGGERS.submit, submitGameRead)
+						ELEMENTS.settings.game.searchButton.addEventListener(TRIGGERS.click, submitGameRead)
+						ELEMENTS.settings.game.name.input.addEventListener(TRIGGERS.change, submitGameUpdateName)
 						ELEMENTS.settings.game.clearChat.form.addEventListener(TRIGGERS.submit, submitGameUpdateChatDelete)
 						ELEMENTS.settings.game.clearRolls.form.addEventListener(TRIGGERS.submit, submitGameUpdateRollsDelete)
 						ELEMENTS.settings.game.delete.form.addEventListener(TRIGGERS.submit, submitGameDelete)
-						ELEMENTS.settings.audio.volume.addEventListener(TRIGGERS.change, submitUserUpdateVolume)
+						ELEMENTS.settings.user.audio.volume.addEventListener(TRIGGERS.change, submitUserUpdateVolume)
 						ELEMENTS.settings.user.name.input.addEventListener(TRIGGERS.change, submitUserUpdateName)
 						ELEMENTS.settings.user.password.old.addEventListener(TRIGGERS.change, submitUserUpdatePassword)
 						ELEMENTS.settings.user.password.new.addEventListener(TRIGGERS.change, submitUserUpdatePassword)
@@ -708,6 +713,16 @@ window.onload = function() {
 			/* displayGameSettings */
 				function displayGameSettings() {
 					try {
+						// name
+							ELEMENTS.settings.game.name.form.setAttribute("visibility", (GAME && GAME.id) ? true : false)
+							ELEMENTS.settings.game.name.input.value = (GAME && GAME.id) ? GAME.name : null
+							if (!GAME || !GAME.id || GAME.userId !== USER.id) {
+								ELEMENTS.settings.game.name.input.setAttribute("disabled", true)
+							}
+							else {
+								ELEMENTS.settings.game.name.input.removeAttribute("disabled")
+							}
+
 						// edit forms?
 							ELEMENTS.settings.game.clearChat.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
 							ELEMENTS.settings.game.clearRolls.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
@@ -750,43 +765,8 @@ window.onload = function() {
 									}
 							}
 
-						// selected?
-							if (GAME && GAME.id) {
-								var selectedOption = ELEMENTS.settings.game.select.element.querySelector("option[value='" + GAME.id + "']")
-								if (selectedOption) {
-									ELEMENTS.settings.game.select.element.value = GAME.id
-									ELEMENTS.settings.game.select.element.className = "form-pair"
-									ELEMENTS.settings.game.input.setAttribute("visibility", false)
-								}
-							}
-							else {
-								ELEMENTS.settings.game.select.element.value = ELEMENTS.settings.game.select.search.value
-								ELEMENTS.settings.game.select.element.className = ""
-								ELEMENTS.settings.game.input.setAttribute("visibility", true)
-							}
-					} catch (error) {console.log(error)}
-				}
-
-			/* displayGameListSelection */
-				function displayGameListSelection(event) {
-					try {
-						// reveal
-							if (ELEMENTS.settings.game.select.element.value == ELEMENTS.settings.game.select.search.value) {
-								ELEMENTS.settings.game.input.setAttribute("visibility", true)
-								ELEMENTS.settings.game.select.element.className = ""
-								return
-							}
-							
-							if (ELEMENTS.settings.game.select.element.value == ELEMENTS.settings.game.select.new.value) {
-								ELEMENTS.settings.game.input.setAttribute("visibility", true)
-								ELEMENTS.settings.game.select.element.className = ""
-								return
-							}
-
-						// hide
-							ELEMENTS.settings.game.input.setAttribute("visibility", false)
-							ELEMENTS.settings.game.select.element.className = "form-pair"
-							return
+						// unselected
+							ELEMENTS.settings.game.select.element.value = null
 					} catch (error) {console.log(error)}
 				}
 
@@ -796,11 +776,28 @@ window.onload = function() {
 					try {
 						// select value
 							var value = ELEMENTS.settings.game.select.element.value
+							ELEMENTS.settings.game.select.element.value = null
 
-						// none
+						// none --> close
 							if (value == ELEMENTS.settings.game.select.none.value) {
 								submitGameUnread()
 								return
+							}
+
+						// no value --> search
+							if (!value) {
+								var post = {
+									action: "readGame",
+									game: {
+										id: null,
+										name: ELEMENTS.settings.game.input.value.trim()
+									}
+								}
+
+								if (!post.game.name) {
+									FUNCTIONS.showToast({success: false, message: "no game name"})
+									return
+								}
 							}
 
 						// create
@@ -809,34 +806,13 @@ window.onload = function() {
 									action: "createGame",
 									game: {
 										id: null,
-										name: ELEMENTS.settings.game.input.value
+										name: null
 									}
-								}
-
-								if (!post.game.name) {
-									FUNCTIONS.showToast({success: false, message: "no game name"})
-									return
-								}
-							}
-
-						// search
-							else if (value == ELEMENTS.settings.game.select.search.value) {
-								var post = {
-									action: "readGame",
-									game: {
-										id: null,
-										name: ELEMENTS.settings.game.input.value
-									}
-								}
-
-								if (!post.game.name) {
-									FUNCTIONS.showToast({success: false, message: "no game name"})
-									return
 								}
 							}
 
 						// selection
-							else {
+							else if (value) {
 								var post = {
 									action: "readGame",
 									game: {
@@ -852,7 +828,7 @@ window.onload = function() {
 							}
 
 						// send socket request
-							ELEMENTS.settings.game.input.value = ""
+							ELEMENTS.settings.game.input.value = null
 							SOCKET.send(JSON.stringify(post))
 					} catch (error) {console.log(error)}
 				}
@@ -868,6 +844,34 @@ window.onload = function() {
 								}
 							}
 						
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitGameUpdateName */
+				function submitGameUpdateName(event) {
+					try {
+						// post
+							var post = {
+								action: "updateGameName",
+								game: {
+									id: GAME ? GAME.id : null,
+									userId: USER ? USER.id : null,
+									name: ELEMENTS.settings.game.name.input.value || null
+								}
+							}
+
+						// validate
+							if (!post.game || !post.game.id) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+							if (!post.game.name) {
+								FUNCTIONS.showToast({success: false, message: "no game name"})
+								return
+							}
+
 						// send
 							SOCKET.send(JSON.stringify(post))
 					} catch (error) {console.log(error)}
@@ -972,7 +976,7 @@ window.onload = function() {
 
 						// volume
 							if (USER.settings) {
-								ELEMENTS.settings.audio.volume.value = Math.max(0, Math.min(1, USER.settings.volume))
+								ELEMENTS.settings.user.audio.volume.value = Math.max(0, Math.min(1, USER.settings.volume))
 								var audios = Array.from(ELEMENTS.body.querySelectorAll("audio"))
 								for (var a in audios) {
 									audios[a].volume = Math.max(0, Math.min(1, USER.settings.volume))

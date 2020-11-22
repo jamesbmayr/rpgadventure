@@ -477,6 +477,7 @@
 							break
 
 						// update
+							case "updateGameName":
 							case "clearGameChat":
 							case "clearGameRolls":
 								try {

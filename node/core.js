@@ -270,7 +270,7 @@
 						case "game":
 							return {
 								id: generateRandom(),
-								name: null,
+								name: generateRandom(),
 								userId: null,
 								users: {},
 								allUsers: []
