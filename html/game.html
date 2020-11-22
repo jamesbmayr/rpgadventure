@@ -82,18 +82,25 @@
 						<h4>name</h4>
 						<input id="settings-game-name-input" disabled>
 					</form>
-					<form id="settings-game-clearChat-form" method="post" action="javascript:;" visibility="false">
-						<button id="settings-game-clearChat-button" title="clear chat">clear chat</button>
+					<form id="settings-game-players" visibility="false">
+						<h4>players</h4>
+						<ul id="settings-game-players-list"></ul>
 					</form>
-					<form id="settings-game-clearRolls-form" method="post" action="javascript:;" visibility="false">
-						<button id="settings-game-clearRolls-button" title="clear rolls">clear rolls</button>
-					</form>
-					<details id="settings-game-delete-gate" class="delete-gate" visibility="false">
-						<summary>delete game</summary>
-						<form id="settings-game-delete-form" method="post" action="javascript:;">
-							<button id="settings-game-delete-button" title="delete">confirm delete</button>
+					<div id="settings-game-data" visibility="false">
+						<h4>data</h4>
+						<form id="settings-game-clearChat-form" method="post" action="javascript:;">
+							<button id="settings-game-clearChat-button" title="clear chat">clear chat</button>
 						</form>
-					</details>
+						<form id="settings-game-clearRolls-form" method="post" action="javascript:;">
+							<button id="settings-game-clearRolls-button" title="clear rolls">clear rolls</button>
+						</form>
+						<details id="settings-game-delete-gate" class="delete-gate">
+							<summary>delete game</summary>
+							<form id="settings-game-delete-form" method="post" action="javascript:;">
+								<button id="settings-game-delete-button" title="delete">confirm delete</button>
+							</form>
+						</details>
+					</div>
 				</div>
 				<div id="settings-user" class="subsection">
 					<h3>user</h3>

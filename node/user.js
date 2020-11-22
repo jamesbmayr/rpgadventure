@@ -282,7 +282,7 @@
 
 														// send message to all users
 															var game = results.documents[0]
-															var recipients = Object.keys(game.users).filter(function(i) { return i !== REQUEST.user.id })
+															var recipients = Object.keys(game.users)
 															callback({success: true, message: oldName + " is now " + newName, game: game, recipients: recipients})
 													})
 											})

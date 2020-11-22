@@ -351,6 +351,10 @@
 			cursor: not-allowed;
 		}
 
+		#settings-game-players-list li {
+			list-style-type: circle !important;
+		}
+
 		#settings-game-delete-button {
 			background-color: var(--medium-red);
 		}
@@ -368,6 +372,18 @@
 			float: left;
 			height: var(--medium-font-size);
 			margin: var(--small-gap-size);
+		}
+
+	/** user **/
+		#settings-user-password-input-old {
+			margin-bottom: 0;
+			border-bottom: 0;
+			border-radius: var(--border-radius) var(--border-radius) 0 0;
+		}
+
+		#settings-user-password-input-new {
+			margin-top: 0;
+			border-radius: 0 0 var(--border-radius) var(--border-radius);	
 		}
 
 	/** sign out **/

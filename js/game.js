@@ -126,6 +126,13 @@ window.onload = function() {
 									form: document.getElementById("settings-game-name-form"),
 									input: document.getElementById("settings-game-name-input"),
 								},
+								players: {
+									element: document.getElementById("settings-game-players"),
+									list: document.getElementById("settings-game-players-list")
+								},
+								data: {
+									element: document.getElementById("settings-game-data")
+								},
 								clearChat: {
 									form: document.getElementById("settings-game-clearChat-form"),
 									button: document.getElementById("settings-game-clearChat-button"),
@@ -705,7 +712,8 @@ window.onload = function() {
 									displayCharacterList()
 							}
 							else {
-								ELEMENTS.stream.rng.element.setAttribute("visibility", true)
+								// rng
+									ELEMENTS.stream.rng.element.setAttribute("visibility", true)
 							}
 
 						// relist chat
@@ -720,20 +728,41 @@ window.onload = function() {
 			/* displayGameSettings */
 				function displayGameSettings() {
 					try {
-						// name
-							ELEMENTS.settings.game.name.form.setAttribute("visibility", (GAME && GAME.id) ? true : false)
-							ELEMENTS.settings.game.name.input.value = (GAME && GAME.id) ? GAME.name : null
-							if (!GAME || !GAME.id || GAME.userId !== USER.id) {
+						// no game
+							if (!GAME || !GAME.id) {
+								ELEMENTS.settings.game.name.form.setAttribute("visibility", false)
 								ELEMENTS.settings.game.name.input.setAttribute("disabled", true)
-							}
-							else {
-								ELEMENTS.settings.game.name.input.removeAttribute("disabled")
+								ELEMENTS.settings.game.players.element.setAttribute("visibility", false)
+								ELEMENTS.settings.game.data.element.setAttribute("visibility", false)
+								return
 							}
 
-						// edit forms?
-							ELEMENTS.settings.game.clearChat.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
-							ELEMENTS.settings.game.clearRolls.form.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
-							ELEMENTS.settings.game.delete.gate.setAttribute("visibility", (GAME && GAME.id && GAME.userId == USER.id) ? true : false)
+						// owned by another player
+							if (GAME.userId !== USER.id) {
+								ELEMENTS.settings.game.name.form.setAttribute("visibility", true)
+								ELEMENTS.settings.game.name.input.setAttribute("disabled", true)
+								ELEMENTS.settings.game.name.input.value = GAME.name
+								ELEMENTS.settings.game.players.element.setAttribute("visibility", true)
+								ELEMENTS.settings.game.data.element.setAttribute("visibility", false)
+							}
+
+						// owned by this player
+							else {
+								ELEMENTS.settings.game.name.form.setAttribute("visibility", true)
+								ELEMENTS.settings.game.name.input.removeAttribute("disabled")
+								ELEMENTS.settings.game.name.input.value = GAME.name
+								ELEMENTS.settings.game.players.element.setAttribute("visibility", true)
+								ELEMENTS.settings.game.data.element.setAttribute("visibility", true)
+							}
+
+						// show player names
+							ELEMENTS.settings.game.players.list.innerHTML = ""
+							for (var i in GAME.users) {
+								var playerElement = document.createElement("li")
+									playerElement.className = "settings-game-players-listing"
+									playerElement.innerText = GAME.users[i].name
+								ELEMENTS.settings.game.players.list.appendChild(playerElement)
+							}
 					} catch (error) {console.log(error)}
 				}
 
