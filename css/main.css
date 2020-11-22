@@ -472,6 +472,26 @@
 			border-bottom: var(--border-size) solid var(--medium-gray);
 		}
 
+		.option-search-group {
+			display: block;
+			float: left;
+			width: 100%;
+		}
+
+		.option-search-group-label {
+			display: block;
+			float: left;
+			width: 100%;
+			cursor: default;
+			font-size: var(--small-font-size);
+			text-transform: uppercase;
+			background-color: var(--medium-gray);
+			color: var(--light-gray);
+			pointer-events: none;
+			padding: var(--medium-gap-size);
+			font-weight: bold;
+		}
+
 		.option-search-result {
 			display: block;
 			float: left;

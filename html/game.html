@@ -85,14 +85,12 @@
 					<h3>user</h3>
 					<form id="settings-user-name-form" method="post" action="javascript:;">
 						<h4>change name</h4>
-						<input id="settings-user-name-input" type="text" placeholder="name" class="form-pair" autocomplete="off"/>
-						<button id="settings-user-name-button" class="form-pair" title="change name">&rarr;</button>
+						<input id="settings-user-name-input" type="text" placeholder="name" autocomplete="off"/>
 					</form>
 					<form id="settings-user-password-form" method="post" action="javascript:;">
 						<h4>change password</h4>
 						<input id="settings-user-password-input-old" type="password" placeholder="old password" autocomplete="off"/>
-						<input id="settings-user-password-input-new" type="password" placeholder="new password" class="form-pair" autocomplete="off"/>
-						<button id="settings-user-password-button" class="form-pair" title="change password">&rarr;</button>
+						<input id="settings-user-password-input-new" type="password" placeholder="new password"autocomplete="off"/>
 					</form>
 				</div>
 				<div id="settings-auth" class="subsection">
@@ -168,11 +166,10 @@
 					<div id="character-settings-metadata" class="subsection" visibility="false">
 						<form id="character-settings-access-form" method="post" action="javascript:;">
 							<h4>access</h4>
-							<select id="character-settings-access-select" class="form-pair">
+							<select id="character-settings-access-select">
 								<option id="character-settings-access-select-all" value="[all]">[all]</option>
 								<option id="character-settings-access-select-me" value="[me]" selected>[me]</option>
 							</select>
-							<button id="character-settings-access-button" class="form-pair" title="edit access">&rarr;</button>
 						</form>
 						<form id="character-settings-download-form" method="post" action="javascript:;">
 							<h4>file</h4>
@@ -466,34 +463,34 @@
 						<optgroup id="chat-send-recipients-players" label="players"></optgroup>
 					</select>
 					<input type="text" id="chat-send-input" placeholder="type chat message" autocomplete="off" class="form-pair"/>
-					<button id="chat-send-button" class="form-pair" title="send message">&rarr;</button>
+					<button id="chat-send-button" class="form-pair" title="send message">&#x1f4ac;</button>
 				</form>
 			</section>
 			<section id="content" mode="none">
-				<form id="content-choose-form" method="post" action="javascript:;" class="subsection">
+				<div id="content-choose-search" class="option-search subsection">
 					<h3>selection</h3>
-					<select id="content-choose-select">
+					<input autocomplete="off" placeholder="select content..." class="option-search-input"/>
+					<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+					<button id="content-choose-search-button" class="option-search-button" title="submit">&rarr;</button>
+					<div class="option-search-results"></div>
+					<select id="content-choose-select" class="option-search-select">
+						<optgroup id="content-choose-select-other" label="other">
+							<option id="content-choose-select-none" value="[none]" disabled>[close document]</option>
+							<option id="content-choose-select-new-arena" value="[new arena]">[new arena]</option>
+							<option id="content-choose-select-new-text" value="[new text]">[new text]</option>
+							<option id="content-choose-select-new-image" value="[new image]">[new image]</option>
+							<option id="content-choose-select-new-audio" value="[new audio]">[new audio]</option>
+							<option id="content-choose-select-new-embed" value="[new embed]">[new embed]</option>
+							<option id="content-choose-select-new-component" value="[new component]">[new component]</option>
+						</optgroup>
 						<optgroup id="content-choose-select-arena" label="arena"></optgroup>
 						<optgroup id="content-choose-select-text" label="text"></optgroup>
 						<optgroup id="content-choose-select-image" label="image"></optgroup>
 						<optgroup id="content-choose-select-audio" label="audio"></optgroup>
 						<optgroup id="content-choose-select-embed" label="embed"></optgroup>
 						<optgroup id="content-choose-select-component" label="component"></optgroup>
-						<optgroup id="content-choose-select-other" label="other">
-							<option id="content-choose-select-none" value="[none]" disabled>[close document]</option>
-							<option id="content-choose-select-new" value="[new]" selected>[new document]</option>
-						</optgroup>
 					</select>
-					<select id="content-choose-types" class="form-pair" visibility="true">
-						<option id="content-choose-types-arena" value="arena" selected>arena</option>
-						<option id="content-choose-types-text" value="text" selected>text</option>
-						<option id="content-choose-types-image" value="image">image</option>
-						<option id="content-choose-types-audio" value="audio">audio</option>
-						<option id="content-choose-types-embed" value="embed">embed</option>
-						<option id="content-choose-types-component" value="component">component</option>
-					</select>
-					<button id="content-choose-button" class="form-pair" title="submit">&rarr;</button>
-				</form>
+				</div>
 				<div id="content-metadata" class="subsection">
 					<h3 id="content-metadata-header">content</h3>
 					<form id="content-send-form" method="post" action="javascript:;">
@@ -504,21 +501,18 @@
 					</form>
 					<form id="content-name-form" method="post" action="javascript:;">
 						<h4>name</h4>
-						<input type="text" id="content-name-input" placeholder="document name" autocomplete="off" class="form-pair"/>
-						<button id="content-name-button" class="form-pair" title="edit name">&rarr;</button>
+						<input type="text" id="content-name-input" placeholder="document name" autocomplete="off"/>
 					</form>
 					<form id="content-access-form" method="post" action="javascript:;">
 						<h4>access</h4>
-						<select id="content-access-select" class="form-pair">
+						<select id="content-access-select">
 							<option id="content-access-select-all" value="[all]">[all]</option>
 							<option id="content-access-select-me" value="[me]" selected>[me]</option>
 						</select>
-						<button id="content-access-button" class="form-pair" title="edit access">&rarr;</button>
 					</form>
 					<form id="content-code-form" method="post" action="javascript:;">
 						<h4>code</h4>
-						<textarea id="content-code-input" placeholder="enter code here" autocomplete="off" class="form-pair"></textarea>
-						<button id="content-code-button" class="form-pair" title="edit code">&rarr;</button>
+						<textarea id="content-code-input" placeholder="enter code here" autocomplete="off"></textarea>
 					</form>
 					<div id="content-component-code-help">
 						<div>Enter JSON describing a custom component. These fields are required to add this to a character:</div>
@@ -531,8 +525,7 @@
 					</div>
 					<form id="content-url-form" method="post" action="javascript:;">
 						<h4>url</h4>
-						<input type="text" id="content-url-input" placeholder="url" autocomplete="off" class="form-pair"/>
-						<button id="content-url-button" class="form-pair" title="edit url">&rarr;</button>
+						<input type="text" id="content-url-input" placeholder="url" autocomplete="off"/>
 					</form>
 					<form id="content-data-form" method="post" action="javascript:;">
 						<h4>data</h4>

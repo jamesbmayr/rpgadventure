@@ -378,10 +378,10 @@
 								return
 							}
 
-						// get arena objects with associated character ids
+						// get arena objects with associated character ids if visible
 							var turnOrder = []
 							for (var i in content.arena.objects) {
-								if (content.arena.objects[i].characterId) {
+								if (content.arena.objects[i].characterId && content.arena.objects[i].visible) {
 									turnOrder.push({
 										id: content.arena.objects[i].characterId,
 										name: content.arena.objects[i].text || null

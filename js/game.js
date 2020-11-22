@@ -321,26 +321,24 @@ window.onload = function() {
 								form: document.getElementById("content-add-form")
 							},
 							choose: {
-								form: document.getElementById("content-choose-form"),
+								searchButton: document.getElementById("content-choose-search-button"),
 								select: {
 									element: document.getElementById("content-choose-select"),
 									none: document.getElementById("content-choose-select-none"),
-									new: document.getElementById("content-choose-select-new"),
+									new: {
+										arena: document.getElementById("content-choose-select-new-arena"),
+										text: document.getElementById("content-choose-select-new-text"),
+										image: document.getElementById("content-choose-select-new-image"),
+										audio: document.getElementById("content-choose-select-new-audio"),
+										embed: document.getElementById("content-choose-select-new-embed"),
+										component: document.getElementById("content-choose-select-new-component")
+									},
 									arena: document.getElementById("content-choose-select-arena"),
 									text: document.getElementById("content-choose-select-text"),
 									image: document.getElementById("content-choose-select-image"),
 									audio: document.getElementById("content-choose-select-audio"),
 									embed: document.getElementById("content-choose-select-embed"),
 									component: document.getElementById("content-choose-select-component"),
-								},
-								types: {
-									element: document.getElementById("content-choose-types"),
-									arena: document.getElementById("content-choose-types-arena"),
-									text: document.getElementById("content-choose-types-text"),
-									image: document.getElementById("content-choose-types-image"),
-									audio: document.getElementById("content-choose-types-audio"),
-									embed: document.getElementById("content-choose-types-embed"),
-									component: document.getElementById("content-choose-types-component")
 								}
 							},
 							name: {
@@ -441,8 +439,9 @@ window.onload = function() {
 						ELEMENTS.settings.game.clearRolls.form.addEventListener(TRIGGERS.submit, submitGameUpdateRollsDelete)
 						ELEMENTS.settings.game.delete.form.addEventListener(TRIGGERS.submit, submitGameDelete)
 						ELEMENTS.settings.audio.volume.addEventListener(TRIGGERS.change, submitUserUpdateVolume)
-						ELEMENTS.settings.user.name.form.addEventListener(TRIGGERS.submit, submitUserUpdateName)
-						ELEMENTS.settings.user.password.form.addEventListener(TRIGGERS.submit, submitUserUpdatePassword)
+						ELEMENTS.settings.user.name.input.addEventListener(TRIGGERS.change, submitUserUpdateName)
+						ELEMENTS.settings.user.password.old.addEventListener(TRIGGERS.change, submitUserUpdatePassword)
+						ELEMENTS.settings.user.password.new.addEventListener(TRIGGERS.change, submitUserUpdatePassword)
 						ELEMENTS.settings.auth.signout.form.addEventListener(TRIGGERS.submit, submitUserUpdateSignout)
 
 					// rules
@@ -454,7 +453,7 @@ window.onload = function() {
 						ELEMENTS.character.settings.select.form.addEventListener(TRIGGERS.submit, submitCharacterRead)
 						ELEMENTS.character.settings.select.searchButton.addEventListener(TRIGGERS.click, submitCharacterRead)
 						ELEMENTS.character.settings.download.form.addEventListener(TRIGGERS.submit, displayCharacterDownload)
-						ELEMENTS.character.settings.access.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateAccess)
+						ELEMENTS.character.settings.access.select.element.addEventListener(TRIGGERS.change, submitCharacterUpdateAccess)
 						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, submitCharacterCreateDuplicate)
 						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, submitCharacterDelete)
 						ELEMENTS.character.settings.rng.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateCustom)
@@ -474,14 +473,13 @@ window.onload = function() {
 						ELEMENTS.chat.send.form.addEventListener(TRIGGERS.submit, submitChatCreate)
 
 					// content
-						ELEMENTS.content.choose.select.element.addEventListener(TRIGGERS.change, displayContentListSelection)
-						ELEMENTS.content.choose.form.addEventListener(TRIGGERS.submit, submitContentRead)
+						ELEMENTS.content.choose.searchButton.addEventListener(TRIGGERS.click, submitContentRead)
 						ELEMENTS.content.add.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateRules)
 						ELEMENTS.content.send.form.addEventListener(TRIGGERS.submit, submitChatCreateContent)
-						ELEMENTS.content.name.form.addEventListener(TRIGGERS.submit, submitContentUpdateName)
-						ELEMENTS.content.access.form.addEventListener(TRIGGERS.submit, submitContentUpdateAccess)
-						ELEMENTS.content.code.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
-						ELEMENTS.content.url.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
+						ELEMENTS.content.name.input.addEventListener(TRIGGERS.change, submitContentUpdateName)
+						ELEMENTS.content.access.select.addEventListener(TRIGGERS.change, submitContentUpdateAccess)
+						ELEMENTS.content.code.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
+						ELEMENTS.content.url.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
 						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
 						ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, submitContentUpdateFile)
 						ELEMENTS.content.duplicate.form.addEventListener(TRIGGERS.submit, submitContentCreateDuplicate)
@@ -2364,7 +2362,7 @@ window.onload = function() {
 							if (contentList) {
 								// get ids
 									var ids = Object.keys(contentList).map(function(k) {
-										return contentList[k].characterId || null
+										return contentList[k].visible ? (contentList[k].characterId || null) : null
 									}) || []
 
 								// loop through existing options
@@ -2383,7 +2381,7 @@ window.onload = function() {
 
 						// loop through contentList
 							for (var i in contentList) {
-								if (contentList[i].characterId) {
+								if (contentList[i].characterId && contentList[i].visible) {
 									// find character
 										var character = contentList[i]
 										var targetOption = ELEMENTS.character.settings.recipient.arena.querySelector("option[value='" + character.characterId + "']")
@@ -4873,7 +4871,6 @@ window.onload = function() {
 							if (!CONTENT) {
 								ELEMENTS.content.choose.select.element.value = ELEMENTS.content.choose.select.new.value
 							}
-							displayContentListSelection()
 
 						// no game?
 							if (!GAME) {
@@ -4920,36 +4917,15 @@ window.onload = function() {
 								var selectedOption = ELEMENTS.content.choose.select.element.querySelector("option[value='" + CONTENT.id + "']")
 								if (selectedOption) {
 									ELEMENTS.content.choose.select.element.value = CONTENT.id
-									ELEMENTS.content.choose.select.element.className = "form-pair"
-									ELEMENTS.content.choose.types.element.setAttribute("visibility", false)
 								}
 							}
 							else {
 								ELEMENTS.content.choose.select.element.value = ELEMENTS.content.choose.select.new.value
-								ELEMENTS.content.choose.select.element.className = ""
-								ELEMENTS.content.choose.types.element.setAttribute("visibility", true)
 							}
 
 
 						// arena objects
 							displayContentArenaObjectList(null, contentList)
-					} catch (error) {console.log(error)}
-				}
-
-			/* displayContentListSelection */
-				function displayContentListSelection(event) {
-					try {
-						// reveal
-							if (ELEMENTS.content.choose.select.element.value == ELEMENTS.content.choose.select.new.value) {
-								ELEMENTS.content.choose.types.element.setAttribute("visibility", true)
-								ELEMENTS.content.choose.select.element.className = ""
-								return
-							}
-
-						// hide
-							ELEMENTS.content.choose.types.element.setAttribute("visibility", false)
-							ELEMENTS.content.choose.select.element.className = "form-pair"
-							return
 					} catch (error) {console.log(error)}
 				}
 
@@ -5729,19 +5705,64 @@ window.onload = function() {
 							}
 
 						// create
-							else if (value == ELEMENTS.content.choose.select.new.value) {
+							else if (value == ELEMENTS.content.choose.select.new.arena.value) {
 								var post = {
 									action: "createContent",
 									content: {
 										userId: USER ? USER.id : null,
 										gameId: GAME ? GAME.id : null,
-										type: ELEMENTS.content.choose.types.element.value
+										type: "arena"
 									}
 								}
-
-								if (!post.content.type) {
-									FUNCTIONS.showToast({success: false, message: "invalid content type"})
-									return
+							}
+							else if (value == ELEMENTS.content.choose.select.new.text.value) {
+								var post = {
+									action: "createContent",
+									content: {
+										userId: USER ? USER.id : null,
+										gameId: GAME ? GAME.id : null,
+										type: "text"
+									}
+								}
+							}
+							else if (value == ELEMENTS.content.choose.select.new.image.value) {
+								var post = {
+									action: "createContent",
+									content: {
+										userId: USER ? USER.id : null,
+										gameId: GAME ? GAME.id : null,
+										type: "image"
+									}
+								}
+							}
+							else if (value == ELEMENTS.content.choose.select.new.audio.value) {
+								var post = {
+									action: "createContent",
+									content: {
+										userId: USER ? USER.id : null,
+										gameId: GAME ? GAME.id : null,
+										type: "audio"
+									}
+								}
+							}
+							else if (value == ELEMENTS.content.choose.select.new.embed.value) {
+								var post = {
+									action: "createContent",
+									content: {
+										userId: USER ? USER.id : null,
+										gameId: GAME ? GAME.id : null,
+										type: "embed"
+									}
+								}
+							}
+							else if (value == ELEMENTS.content.choose.select.new.component.value) {
+								var post = {
+									action: "createContent",
+									content: {
+										userId: USER ? USER.id : null,
+										gameId: GAME ? GAME.id : null,
+										type: "component"
+									}
 								}
 							}
 

@@ -277,7 +277,7 @@
 
 		#settings-audio-volume {
 			float: left;
-			height: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
+			height: var(--medium-font-size);
 			margin: var(--small-gap-size);
 		}
 
@@ -312,6 +312,10 @@
 			width: calc(100% - 2 * var(--medium-gap-size));
 			background-color: var(--light-gray);
 			box-shadow: 0 0 var(--shadow-size) var(--medium-gray);
+		}
+
+		#rules-search-button {
+			line-height: 1.5;
 		}
 
 	/** link **/
@@ -1000,7 +1004,7 @@
 			}
 
 			#character[mode="items"] #character-items {
-				padding-top: 0;
+				padding-top: var(--small-gap-size);
 			}
 
 		/* equipped */
@@ -1010,6 +1014,10 @@
 
 			#character-items-equipped {
 				padding: 0;
+			}
+
+			#character-items-equipped .item:first-child {
+				margin-top: 0;
 			}
 
 			#character-items-equipped .item:last-child {
@@ -1635,6 +1643,10 @@
 			background-color: var(--light-gray);
 			border-top: var(--border-size) solid var(--medium-gray);
 			box-shadow: 0 0 var(--shadow-size) var(--medium-gray);
+		}
+
+		#chat-send-button {
+			line-height: 1.5;
 		}
 
 /*** content ***/

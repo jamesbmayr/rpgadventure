@@ -161,21 +161,38 @@ window.addEventListener("load", function() {
 
 					// search
 						var results = []
+						var groups = []
 						var options = Array.from(selectElement.querySelectorAll("option"))
 						for (var i in options) {
-							if (showAll || options[i].value.toLowerCase().includes(searchText)) {
-								results.push({value: options[i].value, text: options[i].innerText, disabled: options[i].disabled})
+							if (showAll || options[i].innerText.toLowerCase().includes(searchText)) {
+								var group = (options[i].parentNode == selectElement ? null : options[i].parentNode.getAttribute("label") || null)
+								results.push({value: options[i].value, text: options[i].innerText, disabled: options[i].disabled, group: group})
+								if (group && !groups.includes(group)) {
+									groups.push(group)
+								}
 							}
 						}
 
 					// no results
+						resultsElement.innerHTML = ""
 						if (!results.length) {
-							resultsElement.innerText = ""
 							return
 						}
 
+					// groups
+						for (var i in groups) {
+							var groupElement = document.createElement("div")
+								groupElement.className = "option-search-group"
+								groupElement.setAttribute("label", groups[i])
+							resultsElement.appendChild(groupElement)
+
+							var label = document.createElement("label")
+								label.className = "option-search-group-label"
+								label.innerHTML = groups[i]
+							groupElement.appendChild(label)
+						}
+
 					// results
-						resultsElement.innerHTML = ""
 						for (var i in results) {
 							// option
 								var button = document.createElement("button")
@@ -186,7 +203,20 @@ window.addEventListener("load", function() {
 									button.innerText = results[i].text
 									button.value = results[i].value
 									button.addEventListener(TRIGGERS.click, selectOption)
-								resultsElement.appendChild(button)
+
+							// append
+								if (results[i].group) {
+									var parent = resultsElement.querySelector(".option-search-group[label='" + results[i].group + "']")
+									if (parent) {
+										parent.appendChild(button)
+									}
+									else {
+										resultsElement.appendChild(button)
+									}
+								}
+								else {
+									resultsElement.appendChild(button)
+								}
 						}
 
 					// show x
