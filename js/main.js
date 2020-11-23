@@ -56,6 +56,9 @@ window.addEventListener("load", function() {
 			window.FUNCTIONS.isDifferent = isDifferent
 			function isDifferent(data1, data2) {
 				try {
+					if ((data1 === null && data2 === undefined) || (data1 === undefined && data2 === null)) {
+						return false
+					}
 					if (typeof data1 !== typeof data2) {
 						return true
 					}
@@ -270,8 +273,14 @@ window.addEventListener("load", function() {
 							return false
 						}
 
-					// related target?
-						if (event.relatedTarget && componentElement == event.relatedTarget.closest(".option-search")) {
+					// cancel button or other element within search?
+						if (event.target.className.includes("option-search-cancel")) {
+							// continue
+						}
+						else if (event.relatedTarget && componentElement == event.relatedTarget.closest(".option-search")) {
+							return false
+						}
+						else if (event.explicitOriginalTarget && (componentElement == event.explicitOriginalTarget.parentNode || componentElement == event.explicitOriginalTarget.parentNode.closest(".option-search"))) {
 							return false
 						}
 

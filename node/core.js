@@ -202,12 +202,15 @@
 						case "css":
 						case "csv":
 						case "html":
-						case "js":
 							return "text/" + extension
 						break
 
 						case "md":
 							return "text/html"
+						break
+
+						case "js":
+							return "text/javascript"
 						break
 
 						case "txt":
@@ -10936,7 +10939,7 @@
 				// get
 					if (REQUEST.method == "GET") {
 						return  {
-							"Set-Cookie": ("session=" + REQUEST.session.id + "; expires=" + (new Date(new Date().getTime() + ENVIRONMENT.cookieLength).toUTCString()) + "; path=/; domain=" + ENVIRONMENT.domain),
+							"Set-Cookie": ("session=" + REQUEST.session.id + "; expires=" + (new Date(new Date().getTime() + ENVIRONMENT.cookieLength).toUTCString()) + "; path=/; domain=" + ENVIRONMENT.domain) + "; SameSite=Lax",
 							"Content-Type": "text/html; charset=utf-8"
 						}
 					}

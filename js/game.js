@@ -2279,6 +2279,7 @@ window.onload = function() {
 
 						// no game?
 							if (!GAME) {
+								CHARACTERLIST = null
 								ELEMENTS.character.settings.select.custom.innerHTML = ""
 								displayCharacterListRecipients(characterList, null)
 								displayContentArenaObjectList(characterList, null)
@@ -4871,6 +4872,7 @@ window.onload = function() {
 
 						// no game?
 							if (!GAME) {
+								CONTENTLIST = null
 								ELEMENTS.content.choose.select.arena.innerHTML = ""
 								ELEMENTS.content.choose.select.text.innerHTML = ""
 								ELEMENTS.content.choose.select.image.innerHTML = ""

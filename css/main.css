@@ -146,7 +146,11 @@
 			font-family: var(--font-0);
 		}
 
-		input:focus {
+		input:invalid {
+			box-shadow: none;
+		}
+
+		input:focus, input:invalid:focus {
 			box-shadow: 0 0 var(--shadow-size) var(--medium-gray);
 		}
 
@@ -505,6 +509,7 @@
 			margin: 0;
 			background-color: transparent;
 			color: var(--medium-gray);
+			pointer-events: all;
 		}
 
 		.option-search-result[disabled=true] {
