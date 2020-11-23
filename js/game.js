@@ -235,14 +235,6 @@ window.onload = function() {
 								delete: {
 									gate: document.getElementById("character-settings-delete-gate"),
 									form: document.getElementById("character-settings-delete-form")
-								},
-								recipient: {
-									form: document.getElementById("character-settings-recipient-form"),
-									select: document.getElementById("character-settings-recipient-select"),
-									none: document.getElementById("character-settings-recipient-none"),
-									environment: document.getElementById("character-settings-recipient-environment"),
-									characters: document.getElementById("character-settings-recipient-characters"),
-									arena: document.getElementById("character-settings-recipient-arena")
 								}
 							},
 							info: {
@@ -299,6 +291,14 @@ window.onload = function() {
 								searchButton: document.getElementById("character-conditions-search-button"),
 								select: document.getElementById("character-conditions-select"),
 								list: document.getElementById("character-conditions-list")
+							},
+							recipient: {
+								form: document.getElementById("character-recipient-form"),
+								select: document.getElementById("character-recipient-select"),
+								none: document.getElementById("character-recipient-none"),
+								environment: document.getElementById("character-recipient-environment"),
+								characters: document.getElementById("character-recipient-characters"),
+								arena: document.getElementById("character-recipient-arena")
 							}
 						}
 
@@ -782,9 +782,18 @@ window.onload = function() {
 							}
 
 						// custom games, from USER object
-							for (var g in USER.games) {
+							var gameList = []
+							if (USER.games) {
+								for (var g in USER.games) {
+									gameList.push(USER.games[g])
+								}
+								gameList.sort(function(a, b) {
+									return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1
+								})
+							}
+							for (var g in gameList) {
 								// find game
-									var game = USER.games[g]
+									var game = gameList[g]
 									var option = ELEMENTS.settings.game.select.custom.querySelector("option[value='" + game.id + "']")
 
 								// rename
@@ -1435,7 +1444,7 @@ window.onload = function() {
 								d: 20,
 								target: Number(event.target.value),
 								text: skill ? skill.name.replace(/_/g, " ") : statistic ? statistic : item ? item.name : "",
-								recipient: ELEMENTS.character.settings.recipient.select.value || null
+								recipient: ELEMENTS.character.recipient.select.value || null
 							}
 
 						// charisma
@@ -1599,7 +1608,7 @@ window.onload = function() {
 								d: 6,
 								count: count,
 								text: condition ? condition : item ? item.name : skill ? skill.name.replace(/_/g, " ") : statistic ? statistic : "",
-								recipient: ELEMENTS.character.settings.recipient.select.value || null
+								recipient: ELEMENTS.character.recipient.select.value || null
 							})
 
 						// post
@@ -1677,7 +1686,7 @@ window.onload = function() {
 								d: d,
 								count: count,
 								text: text,
-								recipient: ELEMENTS.character.settings.recipient.select.value || null
+								recipient: ELEMENTS.character.recipient.select.value || null
 							})
 
 						// post
@@ -2131,7 +2140,7 @@ window.onload = function() {
 										if (!container.querySelector("option[value='" + RULES.items[i][j].name + "']")) {
 											var option = document.createElement("option")
 												option.value = RULES.items[i][j].name
-												option.innerText = RULES.items[i][j].name
+												option.innerText = RULES.items[i][j].name + " (" + ((RULES.items[i][j].cost * RULES.items[i][j].count) || (RULES.items[i][j].costPerPound * RULES.items[i][j].weight * RULES.items[i][j].count) || "?") + "❑)"
 												option.setAttribute("category", i)
 											optgroup.appendChild(option)
 										}
@@ -2198,7 +2207,7 @@ window.onload = function() {
 							})
 
 						// disable selects
-							ELEMENTS.character.content.querySelectorAll("select").forEach(function(select) {
+							ELEMENTS.character.content.querySelectorAll("select:not(.always-editable").forEach(function(select) {
 								select.setAttribute("disabled", true)
 							})
 
@@ -2207,6 +2216,9 @@ window.onload = function() {
 								// close info & items
 									ELEMENTS.character.info.element.removeAttribute("open")
 									ELEMENTS.character.items.element.removeAttribute("open")
+									ELEMENTS.character.content.querySelectorAll("details.item").forEach(function(details) {
+										details.removeAttribute("open")
+									})
 							}
 
 						// edit
@@ -2247,6 +2259,9 @@ window.onload = function() {
 
 								// open items
 									ELEMENTS.character.items.element.setAttribute("open", true)
+									ELEMENTS.character.content.querySelectorAll("details.item").forEach(function(details) {
+										details.setAttribute("open", true)
+									})
 							}
 
 						// conditions
@@ -2287,6 +2302,11 @@ window.onload = function() {
 							}
 
 						// custom characters, from USER object
+							if (characterList) {
+								characterList.sort(function(a, b) {
+									return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1
+								})
+							}
 							for (var c in characterList) {
 								// character
 									var character = characterList[c]
@@ -2326,20 +2346,20 @@ window.onload = function() {
 					try {
 						// no game
 							if (!GAME) {
-								ELEMENTS.character.settings.recipient.characters.innerHTML = ""
-								ELEMENTS.character.settings.recipient.arena.innerHTML = ""
+								ELEMENTS.character.recipient.characters.innerHTML = ""
+								ELEMENTS.character.recipient.arena.innerHTML = ""
 							}
 
 						// loop through characterList
 							for (var i in characterList) {
 								// find character
 									var character = characterList[i]
-									var targetOption = ELEMENTS.character.settings.recipient.characters.querySelector("option[value='" + character.id + "']")
+									var targetOption = ELEMENTS.character.recipient.characters.querySelector("option[value='" + character.id + "']")
 
 								// delete?
 									if (targetOption && character.delete) {
-										if (ELEMENTS.character.settings.recipient.select.value == targetOption.value) {
-											ELEMENTS.character.settings.recipient.select.value = ELEMENTS.character.settings.recipient.none.value
+										if (ELEMENTS.character.recipient.select.value == targetOption.value) {
+											ELEMENTS.character.recipient.select.value = ELEMENTS.character.recipient.none.value
 										}
 										targetOption.remove()
 									}
@@ -2354,7 +2374,7 @@ window.onload = function() {
 										targetOption = document.createElement("option")
 										targetOption.value = character.id
 										targetOption.innerText = character.name
-										ELEMENTS.character.settings.recipient.characters.appendChild(targetOption)
+										ELEMENTS.character.recipient.characters.appendChild(targetOption)
 									}
 							}
 
@@ -2366,12 +2386,12 @@ window.onload = function() {
 									}) || []
 
 								// loop through existing options
-									var targetingOptions = Array.from(ELEMENTS.character.settings.recipient.arena.querySelectorAll("option"))
+									var targetingOptions = Array.from(ELEMENTS.character.recipient.arena.querySelectorAll("option"))
 									for (var i in targetingOptions) {
 										var targetOption = targetingOptions[i]
 										if (!ids.includes(targetOption.value)) {
-											if (ELEMENTS.character.settings.recipient.select.value == targetOption.value) {
-												ELEMENTS.character.settings.recipient.select.value = ELEMENTS.character.settings.recipient.none.value
+											if (ELEMENTS.character.recipient.select.value == targetOption.value) {
+												ELEMENTS.character.recipient.select.value = ELEMENTS.character.recipient.none.value
 											}
 
 											targetOption.remove()
@@ -2384,7 +2404,7 @@ window.onload = function() {
 								if (contentList[i].characterId && contentList[i].visible) {
 									// find character
 										var character = contentList[i]
-										var targetOption = ELEMENTS.character.settings.recipient.arena.querySelector("option[value='" + character.characterId + "']")
+										var targetOption = ELEMENTS.character.recipient.arena.querySelector("option[value='" + character.characterId + "']")
 
 									// rename
 										if (targetOption) {
@@ -2396,7 +2416,7 @@ window.onload = function() {
 											targetOption = document.createElement("option")
 											targetOption.value = character.characterId
 											targetOption.innerText = character.text || "[?]"
-											ELEMENTS.character.settings.recipient.arena.appendChild(targetOption)
+											ELEMENTS.character.recipient.arena.appendChild(targetOption)
 										}
 									
 								}
@@ -2464,6 +2484,12 @@ window.onload = function() {
 			/* displayCharacterInfo */
 				function displayCharacterInfo(character) {
 					try {
+						// current field?
+							var currentField = document.activeElement
+							if (currentField.closest("#character-info")) {
+								var currentFieldId = currentField.id
+							}
+
 						// name
 							ELEMENTS.character.info.name.innerText = CHARACTER.info.name
 							ELEMENTS.character.info.nameText.value = CHARACTER.info.name
@@ -2523,12 +2549,30 @@ window.onload = function() {
 							else {
 								ELEMENTS.character.info.burden.removeAttribute("overburdened")
 							}
+
+						// currentField ?
+							if (currentFieldId) {
+								document.querySelector("#" + currentFieldId).focus()
+							}
 					} catch (error) {console.log(error)}
 				}
 
 			/* displayCharacterStatistics */
 				function displayCharacterStatistics(character, enable) {
 					try {
+						// current statistic
+							var currentStatistic = document.activeElement.closest(".statistic")
+							if (currentStatistic) {
+								var currentStatisticId = currentStatistic.id
+								var currentSkill = document.activeElement.closest(".skill")
+								if (!currentSkill) {
+									var currentStatisticType = document.activeElement.className.includes("statistic-damage") ? "statistic-damage" : "statistic-maximum"
+								}
+								else {
+									var currentSkillId = currentSkill.querySelector(".skill-name-text").value
+								}
+							}
+
 						// loop through statistics
 							for (var i in CHARACTER.statistics) {
 								// statistic
@@ -2540,6 +2584,18 @@ window.onload = function() {
 									for (var s in CHARACTER.statistics[i].skills) {
 										displayCharacterSkill(CHARACTER, container, i, CHARACTER.statistics[i].skills[s], enable)
 									}
+							}
+
+						// currentStatistic?
+							if (currentStatisticId && currentStatisticType) {
+								document.querySelector("#" + currentStatisticId + " ." + currentStatisticType).focus()
+							}
+							else if (currentStatisticId && currentSkillId) {
+								var refocusSkills = Array.from(document.querySelectorAll("#" + currentStatisticId + " .skill-name-text"))
+								var refocusSkill = refocusSkills.find(function(element) { return element.value == currentSkillId }) || null
+								if (refocusSkill) {
+									refocusSkill.closest(".skill").querySelector(".skill-maximum").focus()
+								}
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -2636,7 +2692,7 @@ window.onload = function() {
 									}
 									maximum.className = "skill-maximum editable"
 									maximum.value = skill.maximum
-									maximum.placeholder = "↑"
+									maximum.placeholder = "#"
 									maximum.addEventListener(TRIGGERS.change, submitCharacterUpdateSkillUpdate)
 								right.appendChild(maximum)
 
@@ -2672,11 +2728,21 @@ window.onload = function() {
 			/* displayCharacterItems */
 				function displayCharacterItems(character, enable) {
 					try {
+						// current item
+							var currentItem = document.activeElement.closest(".item")
+							if (currentItem) {
+								var currentItemId = currentItem.id
+								var currentItemField = document.activeElement.getAttribute("field")	
+							}
+						
 						// clear
 							ELEMENTS.character.items.equipped.innerHTML   = ""
 							ELEMENTS.character.items.unequipped.innerHTML = ""
 
 						// loop through items
+							character.items.sort(function(a, b) {
+								return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1
+							})
 							for (var i in character.items) {
 								displayCharacterItem(character, character.items[i], enable)
 							}
@@ -2684,6 +2750,11 @@ window.onload = function() {
 						// open all?
 							if (enable) {
 								ELEMENTS.character.items.element.setAttribute("open", true)
+							}
+
+						// currentItem?
+							if (currentItemId && currentItemField) {
+								document.querySelector("#" + currentItemId + " [field='" + currentItemField + "']").focus()
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -2695,6 +2766,9 @@ window.onload = function() {
 							var block = document.createElement("details")
 								block.className = "item " + (item.type || "miscellaneous")
 								block.id = item.id
+							if (enable) {
+								block.setAttribute("open", true)
+							}
 
 						// summary
 							var summary = document.createElement("summary")
@@ -2703,10 +2777,10 @@ window.onload = function() {
 
 						// equipped?
 							if (item.equipped) {
-								ELEMENTS.character.items.equipped.prepend(block)
+								ELEMENTS.character.items.equipped.append(block)
 							}
 							else {
-								ELEMENTS.character.items.unequipped.prepend(block)
+								ELEMENTS.character.items.unequipped.append(block)
 							}
 
 						// remove
@@ -2754,6 +2828,7 @@ window.onload = function() {
 								d6.step = 1
 								d6.min = 0
 								d6.className = "d6 editable"
+								d6.setAttribute("field", "d6")
 								d6.placeholder = "d6"
 								d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
 								d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
@@ -2770,6 +2845,7 @@ window.onload = function() {
 									text.setAttribute("readonly", true)
 								}
 								text.className = "item-name-text editable"
+								text.setAttribute("field", "name")
 								text.placeholder = "item"
 								text.value = item.name
 								text.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
@@ -2780,6 +2856,7 @@ window.onload = function() {
 								count.step = 1
 								count.min = 0
 								count.className = "item-count editable always-editable"
+								count.setAttribute("field", "count")
 								count.placeholder = "#"
 								count.value = item.count
 								count.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
@@ -2814,6 +2891,7 @@ window.onload = function() {
 											d6.className += " combat"
 										}
 										d6.placeholder = "d6"
+										d6.setAttribute("field", "skills-" + u + "-d6")
 										d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
 										d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
 										d6.value = usage.d6 || 0
@@ -2836,6 +2914,7 @@ window.onload = function() {
 											select.setAttribute("disabled", true)
 										}
 										select.className = "item-usage-skill editable"
+										select.setAttribute("field", "skills-" + u + "-name")
 										select.placeholder = "skill"
 										select.value = usage.skill
 										select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
@@ -2858,6 +2937,7 @@ window.onload = function() {
 									conditions.className = "item-conditions"
 								block.appendChild(conditions)
 
+								var index = 0
 								for (var i in item.conditions) {
 									var condition = document.createElement("div")
 										condition.className = "item-condition"
@@ -2871,6 +2951,7 @@ window.onload = function() {
 										d6.step = 1
 										d6.min = 0
 										d6.className = "d6 editable"
+										d6.setAttribute("field", "conditions-" + index + "-d6")
 										d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
 										d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
 										d6.value = item.conditions[i] || 0
@@ -2889,6 +2970,7 @@ window.onload = function() {
 											select.setAttribute("disabled", true)
 										}
 										select.className = "item-condition-name editable"
+										select.setAttribute("field", "conditions-" + index + "-name")
 										select.value = i
 										select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
 									condition.appendChild(select)
@@ -2897,6 +2979,8 @@ window.onload = function() {
 									if (!item.conditions[i]) {
 										select.className += " item-condition-remove"
 									}
+
+									index++
 								}
 							}
 
@@ -3038,6 +3122,7 @@ window.onload = function() {
 									description.setAttribute("readonly", true)
 								}
 								description.className = "item-description editable"
+								description.setAttribute("field", "description")
 								description.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
 								description.placeholder = "description"
 								description.value = ""
@@ -3063,6 +3148,9 @@ window.onload = function() {
 							}
 
 						// loop through
+							character.info.status.conditions.sort(function(a, b) {
+								return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1
+							})
 							for (var i in character.info.status.conditions) {
 								displayCharacterCondition(character.info.status.conditions[i])
 							}
@@ -3076,7 +3164,7 @@ window.onload = function() {
 							var conditionElement = document.createElement("div")
 								conditionElement.className = "condition"
 								conditionElement.setAttribute("value", condition.name)
-							ELEMENTS.character.conditions.list.prepend(conditionElement)
+							ELEMENTS.character.conditions.list.append(conditionElement)
 
 						// name
 							var name = document.createElement("div")
@@ -4574,7 +4662,7 @@ window.onload = function() {
 					try {
 						// no content?
 							if (!CONTENT) {
-								ELEMENTS.character.settings.recipient.arena.innerHTML = ""
+								ELEMENTS.character.recipient.arena.innerHTML = ""
 							}
 
 						// sidebar panel
@@ -4883,6 +4971,11 @@ window.onload = function() {
 							}
 
 						// custom content, from list
+							if (contentList) {
+								contentList.sort(function(a, b) {
+									return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1
+								})
+							}
 							for (var i in contentList) {
 								// find content
 									var content = contentList[i]

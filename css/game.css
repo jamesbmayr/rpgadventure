@@ -1081,7 +1081,6 @@
 
 			#character-items {
 				padding: 0;
-				border: 0;
 			}
 
 			#character[mode="items"] #character-items {
@@ -1588,6 +1587,11 @@
 				color: var(--medium-green);
 				text-overflow: ellipsis;
 			}
+
+	/** targeting **/
+		#character:not([mode="play"]) #character-recipient {
+			display: none;
+		}
 
 /*** chat ***/
 	/** top level **/

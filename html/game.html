@@ -207,19 +207,6 @@
 							</form>
 						</details>
 					</div>
-					<div id="character-settings-recipient" class="subsection">
-						<h3 id="character-settings-recipient-header">targeting</h3>
-						<form id="character-settings-recipient-form" method="post" action="javascript:;">
-							<select id="character-settings-recipient-select">
-								<optgroup label="other">
-									<option id="character-settings-recipient-none" value="">[none]</option>
-									<option id="character-settings-recipient-environment" value="[environment]">[environment]</option>
-								</optgroup>
-								<optgroup id="character-settings-recipient-characters" label="characters"></optgroup>
-								<optgroup id="character-settings-recipient-arena" label="arena"></optgroup>
-							</select>
-						</form>
-					</div>
 				</div>
 				<div id="character-content">
 					<div id="character-conditions" class="section">
@@ -287,7 +274,7 @@
 								<div class="statistic-name">perception</div>
 							</div>
 							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
 								<input readonly type="number" step="1" class="statistic-condition">
 								<input readonly type="number" step="1" class="statistic-damage">
 								<input readonly type="number" step="1" class="statistic-current d20">
@@ -308,7 +295,7 @@
 								<div class="statistic-name">memory</div>
 							</div>
 							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
 								<input readonly type="number" step="1" class="statistic-condition">
 								<input readonly type="number" step="1" class="statistic-damage">
 								<input readonly type="number" step="1" class="statistic-current d20">
@@ -329,7 +316,7 @@
 								<div class="statistic-name">logic</div>
 							</div>
 							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
 								<input readonly type="number" step="1" class="statistic-condition">
 								<input readonly type="number" step="1" class="statistic-damage">
 								<input readonly type="number" step="1" class="statistic-current d20">
@@ -350,7 +337,7 @@
 								<div class="statistic-name">strength</div>
 							</div>
 							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
 								<input readonly type="number" step="1" class="statistic-condition">
 								<input readonly type="number" step="1" class="statistic-damage">
 								<input readonly type="number" step="1" class="statistic-current d20">
@@ -371,7 +358,7 @@
 								<div class="statistic-name">dexterity</div>
 							</div>
 							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
 								<input readonly type="number" step="1" class="statistic-condition">
 								<input readonly type="number" step="1" class="statistic-damage">
 								<input readonly type="number" step="1" class="statistic-current d20">
@@ -392,7 +379,7 @@
 								<div class="statistic-name">immunity</div>
 							</div>
 							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
 								<input readonly type="number" step="1" class="statistic-condition">
 								<input readonly type="number" step="1" class="statistic-damage">
 								<input readonly type="number" step="1" class="statistic-current d20">
@@ -413,7 +400,7 @@
 								<div class="statistic-name">speed</div>
 							</div>
 							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="↑">
+								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
 								<input readonly type="number" step="1" class="statistic-condition">
 								<input readonly type="number" step="1" class="statistic-damage">
 								<input readonly type="number" step="1" class="statistic-current d20">
@@ -443,6 +430,19 @@
 						</summary>
 						<div id="character-items-unequipped"></div>
 					</details>
+					<div id="character-recipient" class="subsection">
+						<h3 id="character-recipient-header">targeting</h3>
+						<form id="character-recipient-form" method="post" action="javascript:;">
+							<select id="character-recipient-select" class="editable always-editable">
+								<optgroup label="other">
+									<option id="character-recipient-none" value="">[none]</option>
+									<option id="character-recipient-environment" value="[environment]">[environment]</option>
+								</optgroup>
+								<optgroup id="character-recipient-characters" label="characters"></optgroup>
+								<optgroup id="character-recipient-arena" label="arena"></optgroup>
+							</select>
+						</form>
+					</div>
 				</div>
 			</section>
 			<section id="chat">
