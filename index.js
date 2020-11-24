@@ -367,6 +367,7 @@
 						if (REQUEST.user.gameId) {
 							// get all other data before character / content
 								var properties = {
+									user: false,
 									game: false,
 									characterList: false,
 									contentList: false,
@@ -388,14 +389,14 @@
 										sendSocketData(data)
 
 									// load character, if applicable
-										if (REQUEST.user.characterId && properties.game && properties.characterList && !properties.character) {
+										if (REQUEST.user.characterId && properties.user && properties.game && properties.characterList && !properties.character) {
 											properties.character = true
 											REQUEST.post = {character: {id: REQUEST.user.characterId, gameId: REQUEST.user.gameId}}
 											CHARACTER.readOne(REQUEST, sendSocketData)
 										}
 
 									// load content, if applicable
-										if (REQUEST.user.contentId && properties.game && properties.contentList && !properties.content) {
+										if (REQUEST.user.contentId && properties.user && properties.game && properties.contentList && !properties.content) {
 											properties.content = true
 											REQUEST.post = {content: {id: REQUEST.user.contentId, gameId: REQUEST.user.gameId}}
 											CONTENT.readOne(REQUEST, sendSocketData)
@@ -478,6 +479,7 @@
 
 						// update
 							case "updateGameName":
+							case "updateGameBanUser":
 							case "clearGameChat":
 							case "clearGameRolls":
 								try {
@@ -629,6 +631,9 @@
 
 				// loop through recipients
 					for (var r in recipients) {
+						if (!recipients[r]) {
+							continue
+						}
 						try {
 							var connection = CONNECTIONS[recipients[r]]
 							if (connection) {

@@ -264,13 +264,17 @@
 															id: REQUEST.user.id,
 															name: REQUEST.user.name
 														}
+														game.allUsers[REQUEST.user.id] = {
+															id: REQUEST.user.id,
+															name: REQUEST.user.name
+														}
 
 												// query
 													var query = CORE.getSchema("query")
 														query.collection = "games"
 														query.command = "update"
 														query.filters = {id: game.id}
-														query.document = {users: game.users}
+														query.document = {users: game.users, allUsers: game.allUsers}
 
 												// update
 													CORE.accessDatabase(query, function(results) {

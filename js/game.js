@@ -130,6 +130,10 @@ window.onload = function() {
 									element: document.getElementById("settings-game-players"),
 									list: document.getElementById("settings-game-players-list")
 								},
+								banned: {
+									element: document.getElementById("settings-game-banned"),
+									list: document.getElementById("settings-game-banned-list")
+								},
 								data: {
 									element: document.getElementById("settings-game-data")
 								},
@@ -450,6 +454,7 @@ window.onload = function() {
 
 					// settings
 						ELEMENTS.settings.game.searchButton.addEventListener(TRIGGERS.click, submitGameRead)
+						ELEMENTS.settings.game.input.addEventListener(TRIGGERS.keydown, submitGameRead)
 						ELEMENTS.settings.game.name.input.addEventListener(TRIGGERS.change, submitGameUpdateName)
 						ELEMENTS.settings.game.clearChat.form.addEventListener(TRIGGERS.submit, submitGameUpdateChatDelete)
 						ELEMENTS.settings.game.clearRolls.form.addEventListener(TRIGGERS.submit, submitGameUpdateRollsDelete)
@@ -722,6 +727,7 @@ window.onload = function() {
 
 						// display game settings
 							displayGameSettings()
+							displayGamePlayers()
 					} catch (error) {console.log(error)}
 				}
 
@@ -733,6 +739,7 @@ window.onload = function() {
 								ELEMENTS.settings.game.name.form.setAttribute("visibility", false)
 								ELEMENTS.settings.game.name.input.setAttribute("disabled", true)
 								ELEMENTS.settings.game.players.element.setAttribute("visibility", false)
+								ELEMENTS.settings.game.banned.element.setAttribute("visibility", false)
 								ELEMENTS.settings.game.data.element.setAttribute("visibility", false)
 								return
 							}
@@ -743,6 +750,7 @@ window.onload = function() {
 								ELEMENTS.settings.game.name.input.setAttribute("disabled", true)
 								ELEMENTS.settings.game.name.input.value = GAME.name
 								ELEMENTS.settings.game.players.element.setAttribute("visibility", true)
+								ELEMENTS.settings.game.banned.element.setAttribute("visibility", false)
 								ELEMENTS.settings.game.data.element.setAttribute("visibility", false)
 							}
 
@@ -752,16 +760,83 @@ window.onload = function() {
 								ELEMENTS.settings.game.name.input.removeAttribute("disabled")
 								ELEMENTS.settings.game.name.input.value = GAME.name
 								ELEMENTS.settings.game.players.element.setAttribute("visibility", true)
+								ELEMENTS.settings.game.banned.element.setAttribute("visibility", true)
 								ELEMENTS.settings.game.data.element.setAttribute("visibility", true)
 							}
+					} catch (error) {console.log(error)}
+				}
 
-						// show player names
+			/* displayGamePlayers */
+				function displayGamePlayers() {
+					try {
+						// clear
 							ELEMENTS.settings.game.players.list.innerHTML = ""
-							for (var i in GAME.users) {
+							ELEMENTS.settings.game.banned.list.innerHTML = ""
+
+						// no game
+							if (!GAME || !GAME.id) {
+								return
+							}
+
+						// show players
+							var sortedPlayers = Object.keys(GAME.allUsers).sort()
+							for (var i in sortedPlayers) {
 								var playerElement = document.createElement("li")
 									playerElement.className = "settings-game-players-listing"
-									playerElement.innerText = GAME.users[i].name
 								ELEMENTS.settings.game.players.list.appendChild(playerElement)
+
+								var playerIndicator = document.createElement("span")
+									playerIndicator.className = "settings-game-players-listing-indicator"
+									playerIndicator.innerHTML = GAME.users[sortedPlayers[i]] ? "&#x1f4bb;" : "&#x1f4a4;"
+								playerElement.appendChild(playerIndicator)
+
+								var playerName = document.createElement("span")
+									playerName.className = "settings-game-players-listing-name"
+									playerName.innerText = GAME.allUsers[sortedPlayers[i]].name
+								playerElement.appendChild(playerName)
+
+								if (GAME.userId == USER.id && GAME.allUsers[sortedPlayers[i]].id !== GAME.userId) {
+									var flagButton = document.createElement("button")
+										flagButton.className = "settings-game-players-listing-flag minor-button"
+										flagButton.innerHTML = "&#x1f6a9;"
+										flagButton.value = GAME.allUsers[sortedPlayers[i]].id
+										flagButton.addEventListener(TRIGGERS.click, submitGameUpdateBanUser)
+									playerElement.appendChild(flagButton)
+								}
+							}
+
+						// banned users
+							if (GAME.userId == USER.id) {
+								// 1+ banned
+									if (Object.keys(GAME.bannedUsers).length) {
+										var sortedBanned = Object.keys(GAME.bannedUsers).sort()
+										for (var i in sortedBanned) {
+											var playerElement = document.createElement("li")
+												playerElement.className = "settings-game-players-listing"
+											ELEMENTS.settings.game.banned.list.appendChild(playerElement)
+
+											var playerIndicator = document.createElement("span")
+												playerIndicator.className = "settings-game-players-listing-indicator"
+											playerElement.appendChild(playerIndicator)
+
+											var playerName = document.createElement("span")
+												playerName.className = "settings-game-players-listing-name"
+												playerName.innerText = GAME.bannedUsers[sortedBanned[i]].name
+											playerElement.appendChild(playerName)
+
+											var flagButton = document.createElement("button")
+												flagButton.className = "settings-game-players-listing-flag minor-button"
+												flagButton.innerHTML = "&#x2705;"
+												flagButton.value = GAME.bannedUsers[sortedBanned[i]].id
+												flagButton.addEventListener(TRIGGERS.click, submitGameUpdateBanUser)
+											playerElement.appendChild(flagButton)
+										}
+									}
+
+								// 0 banned
+									else {
+										ELEMENTS.settings.game.banned.list.innerHTML = "<i>no banned players</i>"
+									}
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -787,9 +862,6 @@ window.onload = function() {
 								for (var g in USER.games) {
 									gameList.push(USER.games[g])
 								}
-								gameList.sort(function(a, b) {
-									return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1
-								})
 							}
 							for (var g in gameList) {
 								// find game
@@ -819,6 +891,13 @@ window.onload = function() {
 			/* submitGameRead */
 				function submitGameRead(event) {
 					try {
+						// keyboard
+							if (event.key) {
+								if (!(event.key.toLowerCase() == "enter" || event.which == 13)) {
+									return false
+								}
+							}
+
 						// select value
 							var value = ELEMENTS.settings.game.select.element.value
 							ELEMENTS.settings.game.select.element.value = null
@@ -914,6 +993,35 @@ window.onload = function() {
 							}
 							if (!post.game.name) {
 								FUNCTIONS.showToast({success: false, message: "no game name"})
+								return
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitGameUpdateBanUser */
+				function submitGameUpdateBanUser(event) {
+					try {
+						// post
+							var post = {
+								action: "updateGameBanUser",
+								game: {
+									id: GAME ? GAME.id : null,
+									userId: USER ? USER.id : null,
+									ban: event.target.closest("#settings-game-players") ? true : false,
+									banUserId: event.target.value || null
+								}
+							}
+
+						// validate
+							if (!post.game || !post.game.id) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+							if (!post.game.banUserId) {
+								FUNCTIONS.showToast({success: false, message: "no user selected"})
 								return
 							}
 
@@ -2112,14 +2220,47 @@ window.onload = function() {
 						for (var i in RULES.skills) {
 							var container = ELEMENTS.character.statistics[i].querySelector("select")
 
-							for (var j in RULES.skills[i]) {
-								if (!container.querySelector("option[value=" + RULES.skills[i][j].name + "]")) {
-									var option = document.createElement("option")
-										option.value = RULES.skills[i][j].name
-										option.innerText = RULES.skills[i][j].name.replace(/_/g, " ")
-									container.appendChild(option)
+							// optgroups
+								var optgroupCharacters = document.createElement("optgroup")
+									optgroupCharacters.setAttribute("label", "characters")
+								container.appendChild(optgroupCharacters)
+
+								if (i == "memory") {
+									var optgroupLanguage = document.createElement("optgroup")
+										optgroupLanguage.setAttribute("label", "language")
+									container.appendChild(optgroupLanguage)
 								}
-							}
+
+								if (i == "logic") {
+									var optgroupCharisma = document.createElement("optgroup")
+										optgroupCharisma.setAttribute("label", "charisma")
+									container.appendChild(optgroupCharisma)
+								}
+
+								var optgroupCreatures = document.createElement("optgroup")
+									optgroupCreatures.setAttribute("label", "creatures")
+								container.appendChild(optgroupCreatures)
+
+							// loop through skills
+								for (var j in RULES.skills[i]) {
+									if (!container.querySelector("option[value=" + RULES.skills[i][j].name + "]")) {
+										var option = document.createElement("option")
+											option.value = RULES.skills[i][j].name
+											option.innerText = RULES.skills[i][j].name.replace(/_/g, " ")
+										if (RULES.skills[i][j].animals) {
+											optgroupCreatures.appendChild(option)
+										}
+										else if (RULES.skills[i][j].language) {
+											optgroupLanguage.appendChild(option)
+										}
+										else if (RULES.skills[i][j].charisma) {
+											optgroupCharisma.appendChild(option)
+										}
+										else {
+											optgroupCharacters.appendChild(option)
+										}
+									}
+								}
 						}
 					} catch (error) {console.log(error)}
 				}
@@ -2187,42 +2328,36 @@ window.onload = function() {
 						// set mode
 							ELEMENTS.character.element.setAttribute("mode", mode)
 
-						// no character?
-							if (!CHARACTER) {
-								return
-							}
-
 						// forceSet?
 							if (event.forceSet) {
 								event.target.checked = true
 							}
 
-						// close up inputs
-							ELEMENTS.character.content.querySelectorAll(".editable:not(.always-editable)").forEach(function(input) {
-								input.setAttribute("readonly", true)
-							})
-
-							ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
-								input.setAttribute("readonly", true)
-							})
-
-						// disable selects
-							ELEMENTS.character.content.querySelectorAll("select:not(.always-editable").forEach(function(select) {
-								select.setAttribute("disabled", true)
-							})
-
 						// play
 							if (mode == "play") {
-								// close info & items
+								// close info
 									ELEMENTS.character.info.element.removeAttribute("open")
+
+								// close items
 									ELEMENTS.character.items.element.removeAttribute("open")
 									ELEMENTS.character.content.querySelectorAll("details.item").forEach(function(details) {
 										details.removeAttribute("open")
 									})
+
+								// close up inputs
+									ELEMENTS.character.content.querySelectorAll(".editable:not(.always-editable)").forEach(function(input) {
+										input.setAttribute("readonly", true)
+									})
+									ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
+										input.setAttribute("readonly", true)
+									})
+									ELEMENTS.character.content.querySelectorAll("select:not(.always-editable").forEach(function(select) {
+										select.setAttribute("disabled", true)
+									})
 							}
 
 						// edit
-							if (mode == "edit") {
+							else if (mode == "edit") {
 								// open info
 									ELEMENTS.character.info.element.setAttribute("open", true)
 
@@ -2236,6 +2371,9 @@ window.onload = function() {
 									ELEMENTS.character.content.querySelectorAll(".statistic input.editable").forEach(function(input) {
 										input.removeAttribute("readonly")
 									})
+									ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
+										input.setAttribute("readonly", true)
+									})
 
 								// skills
 									ELEMENTS.character.content.querySelectorAll(".statistic select").forEach(function(select) {
@@ -2246,6 +2384,15 @@ window.onload = function() {
 						// items
 							else if (mode == "items") {
 								// items
+									ELEMENTS.character.items.element.setAttribute("open", true)
+									ELEMENTS.character.items.select.removeAttribute("disabled")
+
+								// open items
+									ELEMENTS.character.content.querySelectorAll("details.item").forEach(function(details) {
+										details.setAttribute("open", true)
+									})
+
+								// fields
 									ELEMENTS.character.content.querySelectorAll(".item .editable").forEach(function(input) {
 										input.removeAttribute("readonly")
 									})
@@ -2253,27 +2400,37 @@ window.onload = function() {
 									ELEMENTS.character.content.querySelectorAll(".item select.editable").forEach(function(select) {
 										select.removeAttribute("disabled")
 									})
-
-								// items select
-									ELEMENTS.character.items.select.removeAttribute("disabled")
-
-								// open items
-									ELEMENTS.character.items.element.setAttribute("open", true)
-									ELEMENTS.character.content.querySelectorAll("details.item").forEach(function(details) {
-										details.setAttribute("open", true)
-									})
 							}
 
 						// conditions
 							else if (mode == "conditions") {
 								// conditions select
 									ELEMENTS.character.conditions.select.removeAttribute("disabled")
+
+								// close up inputs
+									ELEMENTS.character.content.querySelectorAll(".editable:not(.always-editable)").forEach(function(input) {
+										input.setAttribute("readonly", true)
+									})
+									ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
+										input.setAttribute("readonly", true)
+									})
+									ELEMENTS.character.content.querySelectorAll("select:not(.always-editable").forEach(function(select) {
+										select.setAttribute("disabled", true)
+									})
 							}
 
 						// damage
 							else if (mode == "damage") {
 								// open items
 									ELEMENTS.character.items.element.setAttribute("open", true)
+
+								// close up inputs
+									ELEMENTS.character.content.querySelectorAll(".editable:not(.always-editable)").forEach(function(input) {
+										input.setAttribute("readonly", true)
+									})
+									ELEMENTS.character.content.querySelectorAll("select:not(.always-editable").forEach(function(select) {
+										select.setAttribute("disabled", true)
+									})
 
 								// statistics
 									ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
@@ -2302,11 +2459,6 @@ window.onload = function() {
 							}
 
 						// custom characters, from USER object
-							if (characterList) {
-								characterList.sort(function(a, b) {
-									return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1
-								})
-							}
 							for (var c in characterList) {
 								// character
 									var character = characterList[c]
@@ -2566,10 +2718,11 @@ window.onload = function() {
 								var currentStatisticId = currentStatistic.id
 								var currentSkill = document.activeElement.closest(".skill")
 								if (!currentSkill) {
-									var currentStatisticType = document.activeElement.className.includes("statistic-damage") ? "statistic-damage" : "statistic-maximum"
+									var currentStatisticType = document.activeElement.className.includes("statistic-maximum") ? "statistic-maximum" : "statistic-damage"
 								}
 								else {
 									var currentSkillId = currentSkill.querySelector(".skill-name-text").value
+									var currentSkillType = document.activeElement.className.includes("skill-maximum") ? "skill-maximum" : "d6"
 								}
 							}
 
@@ -2590,11 +2743,11 @@ window.onload = function() {
 							if (currentStatisticId && currentStatisticType) {
 								document.querySelector("#" + currentStatisticId + " ." + currentStatisticType).focus()
 							}
-							else if (currentStatisticId && currentSkillId) {
+							else if (currentStatisticId && currentSkillId && currentSkillType) {
 								var refocusSkills = Array.from(document.querySelectorAll("#" + currentStatisticId + " .skill-name-text"))
 								var refocusSkill = refocusSkills.find(function(element) { return element.value == currentSkillId }) || null
 								if (refocusSkill) {
-									refocusSkill.closest(".skill").querySelector(".skill-maximum").focus()
+									refocusSkill.closest(".skill").querySelector("." + currentSkillType).focus()
 								}
 							}
 					} catch (error) {console.log(error)}
@@ -4971,11 +5124,6 @@ window.onload = function() {
 							}
 
 						// custom content, from list
-							if (contentList) {
-								contentList.sort(function(a, b) {
-									return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1
-								})
-							}
 							for (var i in contentList) {
 								// find content
 									var content = contentList[i]

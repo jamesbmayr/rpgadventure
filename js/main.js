@@ -196,6 +196,9 @@ window.addEventListener("load", function() {
 						}
 
 					// results
+						results.sort(function(a, b) {
+							return (a.text.toLowerCase() < b.text.toLowerCase()) ? -1 : 1
+						})
 						for (var i in results) {
 							// option
 								var button = document.createElement("button")

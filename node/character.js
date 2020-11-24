@@ -23,83 +23,106 @@
 						return
 					}
 
-				// upload or template?
-					if (REQUEST.post.character.info && REQUEST.post.character.statistics) {
-						var character = CORE.getSchema("character")
-
-						for (var i in REQUEST.post.character) {
-							character[i] = REQUEST.post.character[i]
-						}
-
-						character.info.name = "Copy of " + character.info.name
-					}
-					else if (!REQUEST.post.character.template) {
-						callback({success: false, message: "no character template", recipients: [REQUEST.user.id]})
-						return
-					}
-					else if (!REQUEST.post.character.template.type) {
-						var character = CORE.getSchema("character")
-					}
-					else {
-						// template validation
-							var templates = CORE.getAsset(REQUEST.post.character.template.type)
-							if (REQUEST.post.character.template.type && !templates) {
-								callback({success: false, message: "invalid character template type", recipients: [REQUEST.user.id]})
-								return
-							}
-							if (!REQUEST.post.character.template.name) {
-								callback({success: false, message: "invalid character template name", recipients: [REQUEST.user.id]})
-								return
-							}
-
-						// find
-							var original = templates.find(function(c) {
-								return c.info && c.info.name == REQUEST.post.character.template.name
-							})
-							if (!original) {
-								callback({success: false, message: "invalid character template name", recipients: [REQUEST.user.id]})
-								return
-							}
-						
-							var character = CORE.duplicateObject(original)
-					}
-
-				// assign
-					character.id = CORE.generateRandom()
-					character.userId = REQUEST.user.id
-					character.gameId = REQUEST.post.character.gameId
-					character.access = REQUEST.user.id
-
 				// query
 					var query = CORE.getSchema("query")
-						query.collection = "characters"
-						query.command = "insert"
-						query.document = character
+						query.collection = "games"
+						query.command = "find"
+						query.filters = {id: REQUEST.post.character.gameId}
 
-				// insert
+				// find
 					CORE.accessDatabase(query, function(results) {
 						if (!results.success) {
-							results.recipients = [REQUEST.user.id]
-							callback(results)
+							callback({success: false, message: "game not found", recipients: [REQUEST.user.id]})
 							return
 						}
 
-						// character
-							var character = results.documents[0]
-							var characterList = [{
-								id: character.id,
-								name: character.info.name,
-								access: character.access
-							}]
+						// get game creator
+							var gameUserId = results.documents[0].userId
 
-						// return character
-							callback({success: true, message: "created " + character.info.name, characterList: characterList, recipients: [REQUEST.user.id]})
+						// upload or template?
+							if (REQUEST.post.character.info && REQUEST.post.character.statistics) {
+								var character = CORE.getSchema("character")
 
-						// add to list of user's characters
-							REQUEST.post.action = "updateUserCharacter"
-							REQUEST.post.user = {character: character}
-							USER.updateOne(REQUEST, callback)
-							return
+								for (var i in REQUEST.post.character) {
+									character[i] = REQUEST.post.character[i]
+								}
+
+								character.info.name = "Copy of " + character.info.name
+							}
+							else if (!REQUEST.post.character.template) {
+								callback({success: false, message: "no character template", recipients: [REQUEST.user.id]})
+								return
+							}
+							else if (!REQUEST.post.character.template.type) {
+								var character = CORE.getSchema("character")
+							}
+							else {
+								// template validation
+									var templates = CORE.getAsset(REQUEST.post.character.template.type)
+									if (REQUEST.post.character.template.type && !templates) {
+										callback({success: false, message: "invalid character template type", recipients: [REQUEST.user.id]})
+										return
+									}
+									if (!REQUEST.post.character.template.name) {
+										callback({success: false, message: "invalid character template name", recipients: [REQUEST.user.id]})
+										return
+									}
+
+								// find
+									var original = templates.find(function(c) {
+										return c.info && c.info.name == REQUEST.post.character.template.name
+									})
+									if (!original) {
+										callback({success: false, message: "invalid character template name", recipients: [REQUEST.user.id]})
+										return
+									}
+								
+									var character = CORE.duplicateObject(original)
+							}
+
+						// assign
+							character.id = CORE.generateRandom()
+							character.userId = REQUEST.user.id
+							character.gameId = REQUEST.post.character.gameId
+							character.gameUserId = gameUserId
+							character.access = REQUEST.user.id
+
+						// query
+							var query = CORE.getSchema("query")
+								query.collection = "characters"
+								query.command = "insert"
+								query.document = character
+
+						// insert
+							CORE.accessDatabase(query, function(results) {
+								if (!results.success) {
+									results.recipients = [REQUEST.user.id]
+									callback(results)
+									return
+								}
+
+								// character
+									var character = results.documents[0]
+									var characterList = [{
+										id: character.id,
+										name: character.info.name,
+										access: character.access
+									}]
+
+								// return character
+									callback({success: true, message: "created " + character.info.name, characterList: characterList, recipients: [REQUEST.user.id]})
+
+								// game creator is different?
+									if (character.gameUserId !== REQUEST.user.id) {
+										callback({success: true, characterList: characterList, recipients: [character.gameUserId]})
+									}
+
+								// add to list of user's characters
+									REQUEST.post.action = "updateUserCharacter"
+									REQUEST.post.user = {character: character}
+									USER.updateOne(REQUEST, callback)
+									return
+							})
 					})
 			}
 			catch (error) {
@@ -144,8 +167,10 @@
 
 						// no access
 							if (results.documents[0].access && results.documents[0].access !== REQUEST.user.id) {
-								callback({success: false, message: "no access", recipients: [REQUEST.user.id]})
-								return
+								if (!results.documents[0].gameUserId || results.documents[0].gameUserId !== REQUEST.user.id) {
+									callback({success: false, message: "no access", recipients: [REQUEST.user.id]})
+									return
+								}
 							}
 
 						// return character
@@ -216,6 +241,7 @@
 						callback({success: false, message: "no game selected", recipients: [REQUEST.user.id]})
 						return
 					}
+
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "characters"
@@ -227,7 +253,7 @@
 						// filter characters
 							var characters = results.documents || []
 								characters = characters.filter(function(i) {
-									return !i.access || (i.access == REQUEST.user.id)
+									return !i.access || (i.access == REQUEST.user.id) || (i.gameUserId && i.gameUserId == REQUEST.user.id)
 								}) || []
 							var characterList = characters.map(function(i) {
 								return {
@@ -362,7 +388,7 @@
 									}) || []
 
 								// return character
-									var recipients = character.access ? [character.access] : ids
+									var recipients = character.access ? (character.access == character.gameUserId ? [character.access] : [character.access, character.gameUserId]) : ids
 									callback({success: true, message: REQUEST.user.name + " renamed character to " + character.info.name, character: character, characterList: characterList, recipients: recipients})
 							})
 					})
@@ -436,16 +462,16 @@
 									}) || []
 
 								// return character
-									var recipients = character.access ? [character.access] : ids
+									var recipients = character.access ? (character.access == character.gameUserId ? [character.access] : [character.access, character.gameUserId]) : ids
 									callback({success: true, message: REQUEST.user.name + " changed access to " + character.info.name, character: character, characterList: characterList, recipients: recipients})
 
 								// pretend to have deleted character
 									if (character.access) {
-										var recipients = ids.filter(function(i) { return i !== character.access }) || []
+										var recipients = ids.filter(function(i) { return i !== character.access && i !== character.gameUserId }) || []
 										callback({success: true, characterList: [{id: character.id, delete: true}], message: REQUEST.user.name + " restricted access to " + character.info.name, recipients: recipients})
 
 										// unset characterId for other users
-											var ids = results.documents.filter(function(u) { return u.characterId == character.id && u.id !== character.access }) || []
+											var ids = results.documents.filter(function(u) { return u.characterId == character.id && u.id !== character.access && u.id !== character.gameUserId }) || []
 											if (!ids.length) { return }
 											ids = ids.map(function(u) { return u.id }) || []
 											if (!ids.length) { return }
@@ -550,7 +576,7 @@
 									}) || []
 
 								// return character
-									var recipients = character.access ? [character.access] : ids
+									var recipients = ids
 									callback({success: true, message: character.info.name + " updated", character: character, characterList: characterList, recipients: recipients})
 							})
 					})
@@ -649,7 +675,7 @@
 											}) || []
 
 										// return character
-											var recipients = character.access ? [character.access] : ids
+											var recipients = ids
 											callback({success: true, character: character, characterList: characterList, recipients: recipients})
 											return
 
@@ -739,7 +765,7 @@
 											}) || []
 
 										// return character
-											var recipients = character.access ? [character.access] : ids
+											var recipients = character.access ? (character.access == character.gameUserId ? [character.access] : [character.access, character.gameUserId]) : ids
 											callback({success: true, characterList: [{id: character.id, delete: true}], message: REQUEST.user.name + " deleted " + REQUEST.post.character.info.name, recipients: recipients})
 
 										// unset characterId for users

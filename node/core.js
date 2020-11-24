@@ -276,7 +276,8 @@
 								name: generateRandom(),
 								userId: null,
 								users: {},
-								allUsers: []
+								allUsers: {},
+								bannedUsers: {},
 							}
 						break
 
@@ -336,6 +337,7 @@
 								character.id = generateRandom()
 								character.gameId = null
 								character.userId = null
+								character.gameUserId = null
 								character.access = null
 								character.image = null
 								character.file = null
@@ -348,6 +350,7 @@
 								time: new Date().getTime(),
 								gameId: null,
 								userId: null,
+								gameUserId: null,
 								access: null,
 								type: null,
 								name: null,
@@ -1005,7 +1008,7 @@
 										logic: { remain_calm: 3, spatial_reasoning: 2 },
 										strength: { punch: 0, carry: 5, throw: 2 },
 										dexterity: { martial_arts: 2 },
-										immunity: { recover: 0, defend: 14 },
+										immunity: { recover: 0, defend: 21 },
 										speed: { kick: 0, jump: 2, run: 4, swim: 1 }
 									},
 									d6changes: [
@@ -1166,7 +1169,7 @@
 								],
 								memory: [
 									{name: "alchemy"}, {name: "astronomy"}, {name: "botany"}, {name: "cooking"}, {name: "facial_recognition"}, {name: "geography"}, {name: "geology"}, {name: "history"}, {name: "leatherworking"}, {name: "linguistics"}, {name: "lip_reading"}, {name: "medicine"}, {name: "metalworking"}, {name: "survival"}, {name: "woodworking"}, {name: "voice_recognition"}, {name: "zoology"},
-									{name: "lang_human"}, {name: "lang_elf"}, {name: "lang_dwarf"}, {name: "lang_halfling"}, {name: "lang_gnome"}, {name: "lang_tiefling"}, {name: "lang_goblin"}, {name: "lang_orc"}, {name: "lang_lizardfolk"}, {name: "lang_bhios"}, {name: "lang_mellifax"}, {name: "lang_preas"}, {name: "lang_winge"}
+									{name: "lang_human", language: true}, {name: "lang_elf", language: true}, {name: "lang_dwarf", language: true}, {name: "lang_halfling", language: true}, {name: "lang_gnome", language: true}, {name: "lang_tiefling", language: true}, {name: "lang_goblin", language: true}, {name: "lang_orc", language: true}, {name: "lang_lizardfolk", language: true}, {name: "lang_bhios", language: true}, {name: "lang_mellifax", language: true}, {name: "lang_preas", language: true}, {name: "lang_winge", language: true}
 								],
 								logic: [
 									{name: "evoke_emotion", charisma: true, counters: ["judge_character", "remain_calm"], conditions: ["alertness", "confusion", "determination", "exhaustion", "fear"]}, {name: "handle_animals", charisma: true, counters: ["judge_character", "aggression"], conditions: ["alertness", "determination", "fear"]}, {name: "humor", charisma: true, counters: ["remain_calm"], conditions: ["confusion"]}, {name: "intimidate", charisma: true, counters: ["remain_calm"], conditions: ["alertness", "fear", "surprise"]}, {name: "persuade", charisma: true, counters:["judge_character"], conditions: ["concentration", "confusion", "determination"]}, {name: "seduce", charisma: true, counters:["judge_character", "remain_calm"], conditions: ["confusion", "determination", "exhaustion"]},
@@ -7300,7 +7303,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
-											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_human", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name:  "lang_human", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "pattern_recognition", maximum: 3, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 5, condition: 0, combat: true }] },
 											dexterity:  { maximum: 7, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 2, condition: 0 }] },
@@ -7327,7 +7330,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_human", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_human", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 3, condition: 0 }, { name: "spatial_reasoning", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 5, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 2, condition: 0 }] },
@@ -7355,7 +7358,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_human", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_human", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }, { name: "pattern_recognition", maximum: 3, condition: 0 }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 5, condition: 0, combat: true }] },
 											dexterity:  { maximum: 7, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 2, condition: 0 }] },
@@ -7382,7 +7385,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
-											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_human", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_human", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 3, condition: 0 }] },
 											strength:   { maximum: 3, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 5, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 2, condition: 0 }] },
@@ -7403,7 +7406,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }] },
-											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_human", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_human", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "pattern_recognition", maximum: 3, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 5, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 2, condition: 0 }] },
@@ -7432,7 +7435,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
-											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_elf", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_elf", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 7, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7459,7 +7462,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
-											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_elf", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_elf", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7487,7 +7490,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
-											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_elf", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_elf", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7514,7 +7517,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_elf", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_elf", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [] },
 											strength:   { maximum: 3, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7535,7 +7538,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 10, condition: 0 }, { name: "sound", unremovable: true, maximum: 10, condition: 0 }, { name: "scent", unremovable: true, maximum: 10, condition: 0 }, { name: "taste", unremovable: true, maximum: 10, condition: 0 }, { name: "touch", unremovable: true, maximum: 10, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
-											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_elf", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_elf", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7564,7 +7567,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
@@ -7591,7 +7594,7 @@
 										},
 										statistics: {
 											perception: { maximum: 6, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
@@ -7619,7 +7622,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
@@ -7646,7 +7649,7 @@
 										},
 										statistics: {
 											perception: { maximum: 6, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 3, damage: 0, condition: 0, skills: [] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
@@ -7667,7 +7670,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 4, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_dwarf", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
@@ -7696,7 +7699,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
-											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_halfling", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7723,7 +7726,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
-											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_halfling", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7751,7 +7754,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
-											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_halfling", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "archery", maximum: 5, condition: 0 }, { name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7778,7 +7781,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_halfling", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 3, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7799,7 +7802,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 5, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
-											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_halfling", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_halfling", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7828,7 +7831,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_gnome", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_gnome", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true, counters:["judge_character"] }] },
 											strength:   { maximum: 4, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
@@ -7855,7 +7858,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_gnome", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_gnome", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true, counters:["judge_character"] }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
@@ -7883,7 +7886,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_gnome", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_gnome", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true, counters:["judge_character"] }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
@@ -7910,7 +7913,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_gnome", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_gnome", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "persuade", maximum: 2, condition: 0, charisma: true, counters:["judge_character"] }] },
 											strength:   { maximum: 3, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
@@ -7931,7 +7934,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_gnome", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_gnome", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "persuade", maximum: 2, condition: 0, charisma: true, counters:["judge_character"] }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "crafting", maximum: 3, condition: 0 }] },
@@ -7960,7 +7963,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
-											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 7, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -7987,7 +7990,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
-											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8015,7 +8018,7 @@
 										},
 										statistics: {
 											perception: { maximum: 6, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8042,7 +8045,7 @@
 										},
 										statistics: {
 											perception: { maximum: 4, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
-											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
 											strength:   { maximum: 4, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8063,7 +8066,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 6, condition: 0 }, { name: "night_vision", maximum: 3, condition: 0, animals: true }] },
-											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_tiefling", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "persuade", maximum: 7, condition: 0, charisma: true, counters:["judge_character"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"] }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8092,7 +8095,7 @@
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_goblin", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }] },
@@ -8119,7 +8122,7 @@
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_goblin", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }] },
@@ -8147,7 +8150,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_goblin", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }] },
@@ -8174,7 +8177,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 3, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 3, damage: 0, condition: 0, skills: [{ name: "lang_goblin", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 3, damage: 0, condition: 0, skills: [] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }] },
@@ -8195,7 +8198,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 4, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 3, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_goblin", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_goblin", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 7, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 3, condition: 0 }] },
@@ -8224,7 +8227,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_orc", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_orc", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 7, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "melee", maximum: 3, condition: 0, combat: true }] },
 											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "fencing", maximum: 2, condition: 0, combat: true }] },
@@ -8251,7 +8254,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_orc", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_orc", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 5, condition: 0, d6: 3 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "melee", maximum: 3, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8279,7 +8282,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_orc", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_orc", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 5, condition: 0, d6: 3 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "melee", maximum: 3, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "fencing", maximum: 2, condition: 0, combat: true }] },
@@ -8306,7 +8309,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 3, damage: 0, condition: 0, skills: [{ name: "lang_orc", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 3, damage: 0, condition: 0, skills: [{ name: "lang_orc", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 3, damage: 0, condition: 0, skills: [] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 3 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "melee", maximum: 3, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "fencing", maximum: 2, condition: 0, combat: true }] },
@@ -8327,7 +8330,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }, { name: "night_vision", maximum: 2, condition: 0, animals: true }] },
-											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_orc", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 7, damage: 0, condition: 0, skills: [{ name: "lang_orc", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 7, condition: 0, d6: 3 }, { name: "carry", maximum: 4, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "melee", maximum: 3, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "fencing", maximum: 2, condition: 0, combat: true }] },
@@ -8356,7 +8359,7 @@
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
-											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8383,7 +8386,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8411,7 +8414,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
 											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8438,7 +8441,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
-											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [] },
 											strength:   { maximum: 4, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
 											dexterity:  { maximum: 4, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8459,7 +8462,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", maximum: 14, condition: 0}] },
-											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 1, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8488,7 +8491,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_bhios", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_bhios", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8515,7 +8518,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_bhios", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_bhios", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8543,7 +8546,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_bhios", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_bhios", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "archery", maximum: 5, condition: 0 }, { name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8570,7 +8573,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_bhios", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_bhios", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 4, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 4, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8591,7 +8594,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 6, condition: 0 }, { name: "scent", unremovable: true, maximum: 5, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_bhios", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_bhios", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "remain_calm", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 2, condition: 0 }, { name: "throw", maximum: 3, condition: 0, combat: true }, { name: "climb", maximum: 2, condition: 0 }] },
 											dexterity:  { maximum: 8, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8620,7 +8623,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
-											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8647,7 +8650,7 @@
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8675,7 +8678,7 @@
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8702,7 +8705,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
-											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [] },
 											strength:   { maximum: 3, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8723,7 +8726,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 3, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 7, condition: 0 }] },
-											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_mellifax", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 8, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 4, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }] },
@@ -8752,7 +8755,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_preas", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
+											memory:     { maximum: 10, damage: 0, condition: 0, skills: [{ name: "lang_preas", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "handle_animals", maximum: 10, condition: 0, charisma: true, counters: ["judge_character", "aggression"] }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true, counters: ["judge_character", "remain_calm"] }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 2, condition: 0 }] },
@@ -8779,7 +8782,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_preas", maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_preas", language: true, maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "handle_animals", maximum: 10, condition: 0, charisma: true, counters: ["judge_character", "aggression"] }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true, counters: ["judge_character", "remain_calm"] }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 2, condition: 0 }] },
@@ -8807,7 +8810,7 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_preas", maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_preas", language: true, maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 5, condition: 0 }, { name: "handle_animals", maximum: 10, condition: 0, charisma: true, counters: ["judge_character", "aggression"] }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true, counters: ["judge_character", "remain_calm"] }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 2, condition: 0 }] },
@@ -8834,7 +8837,7 @@
 										},
 										statistics: {
 											perception: { maximum: 7, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_preas", maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
+											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_preas", language: true, maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
 											logic:      { maximum: 3, damage: 0, condition: 0, skills: [{ name: "handle_animals", maximum: 10, condition: 0, charisma: true, counters: ["judge_character", "aggression"] }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true, counters: ["judge_character", "remain_calm"] }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 2, condition: 0 }] },
@@ -8855,7 +8858,7 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 7, condition: 0 }, { name: "sound", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", unremovable: true, maximum: 6, condition: 0 }, { name: "taste", unremovable: true, maximum: 5, condition: 0 }, { name: "touch", unremovable: true, maximum: 5, condition: 0 }] },
-											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_preas", maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
+											memory:     { maximum: 9, damage: 0, condition: 0, skills: [{ name: "lang_preas", language: true, maximum: 7, condition: 0 }, { name: "facial_recognition", maximum: 3, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "handle_animals", maximum: 10, condition: 0, charisma: true, counters: ["judge_character", "aggression"] }, { name: "evoke_emotion", maximum: 2, condition: 0, charisma: true, counters: ["judge_character", "remain_calm"] }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 1, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "ride_animals", maximum: 2, condition: 0 }] },
@@ -8884,11 +8887,11 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
-											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_winge", maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_winge", language: true, maximum: 7, condition: 0 }, { name: "medicine", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "mechanics", maximum: 5, condition: 0 }, { name: "remain_calm", maximum: 3, condition: 0 }, { name: "spatial_reasoning", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 6, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "knifing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, m2ximum: 0, condition: 0, d6: 2 }] },
-											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 1}, { name: "defend", maximum: 14, condition: 0, d6: 1 }] },
+											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 1}, { name: "defend", maximum: 21, condition: 0, d6: 1 }] },
 											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 4, condition: 0 }, { name: "jump", maximum: 2, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
@@ -8911,11 +8914,11 @@
 										},
 										statistics: {
 											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
-											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_winge", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 6, damage: 0, condition: 0, skills: [{ name: "lang_winge", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", maximum: 5, condition: 0 }, { name: "remain_calm", maximum: 3, condition: 0 }, { name: "spatial_reasoning", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 10, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "escape_bonds", maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 2, condition: 0, d6: 2 }] },
-											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 1}, { name: "defend", maximum: 14, condition: 0, d6: 1 }] },
+											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 1}, { name: "defend", maximum: 21, condition: 0, d6: 1 }] },
 											speed:      { maximum: 6, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 4, condition: 0 }, { name: "jump", maximum: 2, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
@@ -8939,11 +8942,11 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
-											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_winge", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_winge", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 3, condition: 0 }, { name: "spatial_reasoning", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 5, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 5, damage: 0, condition: 0, skills: [{ name: "missile", combat: true, maximum: 5, condition: 0 }, { name: "fencing", combat: true, maximum: 5, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 2, condition: 0, d6: 2 }] },
-											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pain_tolerance", maximum: 5, condition: 0 }, { name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 1}, { name: "defend", maximum: 14, condition: 0, d6: 1 }] },
+											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "pain_tolerance", maximum: 5, condition: 0 }, { name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 1}, { name: "defend", maximum: 21, condition: 0, d6: 1 }] },
 											speed:      { maximum: 10, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 4, condition: 0 }, { name: "jump", maximum: 2, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
@@ -8966,11 +8969,11 @@
 										},
 										statistics: {
 											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
-											memory:     { maximum: 3, damage: 0, condition: 0, skills: [{ name: "lang_winge", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 3, damage: 0, condition: 0, skills: [{ name: "lang_winge", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [{ name: "remain_calm", maximum: 3, condition: 0 }, { name: "spatial_reasoning", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 4, damage: 0, condition: 0, skills: [{ name: "martial_arts", combat: true, unremovable: true, maximum: 2, condition: 0, d6: 2 }] },
-											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 1}, { name: "defend", maximum: 14, condition: 0, d6: 1 }] },
+											immunity:   { maximum: 6, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 1}, { name: "defend", maximum: 21, condition: 0, d6: 1 }] },
 											speed:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 4, condition: 0 }, { name: "jump", maximum: 2, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
@@ -8987,11 +8990,11 @@
 										},
 										statistics: {
 											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", unremovable: true, maximum: 7, condition: 0 }, { name: "scent", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", unremovable: true, maximum: 4, condition: 0 }, { name: "touch", unremovable: true, maximum: 4, condition: 0 }] },
-											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_winge", maximum: 7, condition: 0 }] },
+											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_winge", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", maximum: 7, condition: 0 }, { name: "remain_calm", maximum: 3, condition: 0 }, { name: "spatial_reasoning", maximum: 2, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", combat: true, maximum: 7, condition: 0 }, { name: "punch", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", maximum: 5, condition: 0 }, { name: "throw", maximum: 2, condition: 0, combat: true }] },
 											dexterity:  { maximum: 9, damage: 0, condition: 0, skills: [{ name: "fencing", combat: true, maximum: 7, condition: 0 }, { name: "martial_arts", combat: true, unremovable: true, maximum: 2, condition: 0, d6: 2 }] },
-											immunity:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 1}, { name: "defend", maximum: 14, condition: 0, d6: 1 }] },
+											immunity:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "recover", unremovable: true, maximum: 0, condition: 0, d6: 1}, { name: "defend", maximum: 21, condition: 0, d6: 1 }] },
 											speed:      { maximum: 9, damage: 0, condition: 0, skills: [{ name: "kick", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "run", maximum: 4, condition: 0 }, { name: "jump", maximum: 2, condition: 0 }, { name: "swim", maximum: 1, condition: 0 }] }
 										},
 										items: [
@@ -9023,7 +9026,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 6, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 3}] },
+										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 3}] },
 										speed: { maximum: 2, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: []
@@ -9059,7 +9062,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 15, damage: 0, condition: 0, skills: [{name: "carry", maximum: 6, condition: 0}, {name: "throw", maximum: 3, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 3}] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 6, condition: 0}, {name: "swim", maximum: 5, condition: 0}] }
 									},
 									items: []
@@ -9077,7 +9080,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 2, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 2}] },
-										immunity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 2, condition: 0}, {name: "run", maximum: 4, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -9095,7 +9098,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 5, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 5, condition: 0}] }
 									},
 									items: []
@@ -9131,7 +9134,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 11, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}, {name: "tusk", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 9, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 3}] },
+										immunity: { maximum: 9, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 3}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 4, condition: 0}] }
 									},
 									items: []
@@ -9149,7 +9152,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 6}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 2}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -9205,7 +9208,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}, {name: "metabolism", maximum: 7, condition: 0}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}, {name: "metabolism", maximum: 7, condition: 0}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 4}] }
 									},
 									items: []
@@ -9241,7 +9244,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 6, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 5, condition: 0}, {name: "sneak", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -9259,7 +9262,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 8, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 4}] }
 									},
 									items: []
@@ -9277,7 +9280,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 8, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [, {name: "sneak", maximum: 5, condition: 0}] },
-										immunity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 4}, {name: "sneak", maximum: 5, condition: 0}] }
 									},
 									items: []
@@ -9295,7 +9298,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 6, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 1, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: []
@@ -9313,7 +9316,7 @@
 										logic: { maximum: 5, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 6, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 5, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 2}] },
 										speed: { maximum: 2, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 0, condition: 0}, {name: "swim", maximum: 10, condition: 0}] }
 									},
 									items: []
@@ -9349,7 +9352,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 15, damage: 0, condition: 0, skills: [{name: "carry", maximum: 10, condition: 0}, {name: "throw", maximum: 5, condition: 0, combat: true}, {name: "tusk", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 8, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 3}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 3}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 5, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 4}] }
 									},
 									items: []
@@ -9459,7 +9462,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 7, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 4}] }
 									},
 									items: []
@@ -9477,7 +9480,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 7, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "climb", maximum: 5, condition: 0}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -9495,7 +9498,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 5, condition: 0, combat: true}, {name: "climb", maximum: 5, condition: 0}, {name: "punch", combat: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 9, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 9, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -9513,7 +9516,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 5}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 3}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 3}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -9531,7 +9534,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 2, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 10, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}] },
+										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 2}] },
 										speed: { maximum: 12, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 5, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 5}] }
 									},
 									items: []
@@ -9569,7 +9572,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 3, condition: 0, combat: true}] },
 										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 10, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 5}] }
 									},
 									items: []
@@ -9587,7 +9590,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 5, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 3}] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 5, condition: 0}] }
 									},
 									items: []
@@ -9605,7 +9608,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}, {name: "posion_resistance", maximum: 7, condition: 0}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}, {name: "posion_resistance", maximum: 7, condition: 0}] },
 										speed: { maximum: 3, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: [
@@ -9625,7 +9628,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 8, damage: 0, condition: 0, skills: [{name: "carry", maximum: 10, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 4}] }
 									},
 									items: []
@@ -9643,7 +9646,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 3, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 2}] },
-										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}] },
+										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 2}] },
 										speed: { maximum: 2, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: []
@@ -9679,7 +9682,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 10, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 6}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -9771,7 +9774,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 5, damage: 0, condition: 0, skills: [{name: "carry", maximum: 4, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 3, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -9789,7 +9792,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 7, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 5, condition: 0}] }
 									},
 									items: []
@@ -9885,7 +9888,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 15, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "tusk", animals: true, combat: true, maximum: 5, condition: 0, d6: 4}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 6}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 3}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 3}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -9903,7 +9906,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 6, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 2, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 0, condition: 0}, {name: "swim", maximum: 10, condition: 0}] }
 									},
 									items: []
@@ -9921,7 +9924,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 5, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", maximum: 5, condition: 0, combat: true, d6: 4}] }
 									},
 									items: []
@@ -9939,7 +9942,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 7, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}, {name: "posion_resistance", maximum: 7, condition: 0}] },
+										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 2}, {name: "posion_resistance", maximum: 7, condition: 0}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 2, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 2, condition: 0}] }
 									},
 									items: [
@@ -9959,7 +9962,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 7, damage: 0, condition: 0, skills: [{name: "carry", maximum: 1, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 7, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}, {name: "posion_resistance", maximum: 7, condition: 0}] },
+										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}, {name: "posion_resistance", maximum: 7, condition: 0}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 1, condition: 0}, {name: "run", maximum: 4, condition: 0}, {name: "swim", maximum: 1, condition: 0}] }
 									},
 									items: [
@@ -10017,7 +10020,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 3, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 5, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 1, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}, {name: "posion_resistance", maximum: 7, condition: 0}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}, {name: "posion_resistance", maximum: 7, condition: 0}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: [
@@ -10037,7 +10040,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 2, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 9, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}, {name: "posion_resistance", maximum: 7, condition: 0}] },
+										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}, {name: "posion_resistance", maximum: 7, condition: 0}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 0, condition: 0}] }
 									},
 									items: [
@@ -10075,7 +10078,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 5, maximum: 5, condition: 0}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [{name: "claws", maximum: 5, condition: 0, combat: true, animals: true, d6: 3}] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: []
@@ -10093,7 +10096,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 2}] },
 										speed: { maximum: 3, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 1, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: []
@@ -10129,7 +10132,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}, {name: "intimidate", maximum: 3, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 8, damage: 0, condition: 0, skills: [{name: "carry", maximum: 2, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "tusk", animals: true, combat: true, maximum: 5, condition: 0, d6: 4}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 3, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 1, condition: 0}, {name: "swim", maximum: 10, condition: 0}] }
 									},
 									items: []
@@ -10165,7 +10168,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 15, damage: 0, condition: 0, skills: [{name: "carry", maximum: 10, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", animals: true, combat: true, maximum: 5, condition: 0, d6: 6}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 4}, {name: "temperature_resistance", animals: true, maximum: 10, condition: 0}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 4}, {name: "temperature_resistance", animals: true, maximum: 10, condition: 0}] },
 										speed: { maximum: 3, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 0, condition: 0}, {name: "swim", maximum: 10, condition: 0}] }
 									},
 									items: []
@@ -10183,7 +10186,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}, {name: "intimidate", maximum: 5, condition: 0, charisma: true, counters: ["remain_calm"]}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 5, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 14, condition: 0, animals: true, d6: 1}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", maximum: 21, condition: 0, animals: true, d6: 1}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 7, condition: 0}, {name: "sneak", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -10206,7 +10209,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 6, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [{name: "claws", combat: true, animals: true, maximum: 5, condition: 0, d6: 2}] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 3}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}, {name: "poison_resistance", maximum: 7, condition: 0}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 3}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}, {name: "poison_resistance", maximum: 7, condition: 0}] },
 										speed: { maximum: 2, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 0, condition: 0}, {name: "swim", maximum: 20, condition: 0}] }
 									},
 									items: [
@@ -10226,7 +10229,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "talons", combat: true, animals: true, maximum: 5, condition: 0, d6: 2}] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 10, condition: 0}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 10, condition: 0}] },
 										speed: { maximum: 4, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 0, condition: 0}, {name: "fly", animals: true, maximum: 10, condition: 0}] }
 									},
 									items: []
@@ -10244,7 +10247,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 15, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", combat: true, animals: true, maximum: 5, condition: 0, d6: 5}, {name: "tusk", combat: true, animals: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 8, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 2}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 2}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 7, condition: 0}] }
 									},
 									items: []
@@ -10262,7 +10265,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "tusk", combat: true, animals: true, maximum: 5, condition: 0, d6: 3}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 2}] },
+										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 2}] },
 										speed: { maximum: 12, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", combat: true, maximum: 5, condition: 0, d6: 4}] }
 									},
 									items: [
@@ -10302,7 +10305,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 10, condition: 0}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 10, condition: 0}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 5, condition: 0}] }
 									},
 									items: [
@@ -10322,7 +10325,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 5, condition: 0, combat: true}, {name: "slam", combat: true, animals: true, maximum: 5, condition: 0, d6: 4}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 9, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}] },
 										speed: { maximum: 9, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: [
@@ -10342,7 +10345,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 5, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", combat: true, animals: true, maximum: 5, condition: 0, d6: 3}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 4, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 2}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 2}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 5, condition: 0}] }
 									},
 									items: [
@@ -10382,7 +10385,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 5, condition: 0, d6: 2}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 5, condition: 0, d6: 2}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 0, condition: 0}] }
 									},
 									items: []
@@ -10400,7 +10403,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 4, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 4}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 4}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 0, condition: 0}] }
 									},
 									items: []
@@ -10418,7 +10421,7 @@
 										logic: { maximum: 2, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 3, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 3, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}, {name: "climb", maximum: 10, condition: 0}] },
 										dexterity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "claws", combat: true, animals: true, maximum: 5, condition: 0, d6: 2}] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}] },
 										speed: { maximum: 6, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: [
@@ -10458,7 +10461,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 5, condition: 0}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 5, condition: 0, combat: true}] },
 										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "claws", combat: true, animals: true, maximum: 5, condition: 0, d6: 2}] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 10, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "fly", animals: true, maximum: 5, condition: 0}, {name: "kick", combat: true, maximum: 5, condition: 0, d6: 5}] }
 									},
 									items: []
@@ -10476,7 +10479,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 6, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "climb", maximum: 5, condition: 0}] },
 										dexterity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "claws", combat: true, animals: true, maximum: 5, condition: 0, d6: 3}] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}] },
 										speed: { maximum: 9, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -10494,7 +10497,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 8, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "tusk", combat: true, animals: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 10, condition: 0}] }
 									},
 									items: []
@@ -10512,7 +10515,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [{name: "claws", combat: true, animals: true, maximum: 5, condition: 0, d6: 2}] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 0, condition: 0}] }
 									},
 									items: [
@@ -10568,7 +10571,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 11, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", combat: true, animals: true, maximum: 5, condition: 0, d6: 3}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 9, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 3}, {name: "temperature_resistance", animals: true, maximum: 10, condition: 0}] },
+										immunity: { maximum: 9, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 3}, {name: "temperature_resistance", animals: true, maximum: 10, condition: 0}] },
 										speed: { maximum: 7, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}, {name: "kick", combat: true, maximum: 5, condition: 0, d6: 3}] }
 									},
 									items: [
@@ -10589,7 +10592,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "slam", combat: true, animals: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 2, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 2}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 2}] },
 										speed: { maximum: 9, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -10625,7 +10628,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 7, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [{name: "claws", combat: true, animals: true, maximum: 5, condition: 0, d6: 2}] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 3}, {name: "poison_resistance", maximum: 7, condition: 0}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 3}, {name: "poison_resistance", maximum: 7, condition: 0}] },
 										speed: { maximum: 6, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: [
@@ -10645,7 +10648,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 7, damage: 0, condition: 0, skills: [{name: "carry", maximum: 3, condition: 0}, {name: "throw", maximum: 5, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 3, maximum: 5, condition: 0}, {name: "slam", combat: true, animals: true, maximum: 5, condition: 0, d6: 4}] },
 										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}] },
 										speed: { maximum: 5, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 5, condition: 0}, {name: "swim", maximum: 10, condition: 0}] }
 									},
 									items: []
@@ -10663,7 +10666,7 @@
 										logic: { maximum: 10, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 100, condition: 0}] },
 										strength: { maximum: 15, damage: 0, condition: 0, skills: [{name: "punch", maximum: 5, condition: 0, d6: 6}, {name: "carry", maximum: 10, condition: 0}, {name: "throw", maximum: 7, condition: 0, combat: true}] },
 										dexterity: { maximum: 10, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 15, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 6}] },
+										immunity: { maximum: 15, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 6}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 0, condition: 0}] }
 									},
 									items: [
@@ -10684,7 +10687,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 10, condition: 0}] },
 										strength: { maximum: 12, damage: 0, condition: 0, skills: [{name: "carry", maximum: 7, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, {name: "tusk", combat: true, animals: true, maximum: 5, condition: 0, d6: 5}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 3}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 7, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 3}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -10702,7 +10705,7 @@
 										logic: { maximum: 4, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 10, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 5, condition: 0, combat: true}, , {name: "bite", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "claws", combat: true, animals: true, maximum: 5, condition: 0, d6: 3}] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 10, condition: 0}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 2}, {name: "temperature_resistance", animals: true, maximum: 10, condition: 0}] },
 										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", maximum: 7, condition: 0}, {name: "run", maximum: 10, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: [
@@ -10723,7 +10726,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 15, damage: 0, condition: 0, skills: [{name: "carry", maximum: 5, condition: 0}, {name: "throw", maximum: 5, condition: 0, combat: true}, {name: "bite", combat: true, animals: true, d6: 4, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 6, damage: 0, condition: 0, skills: [{name: "claws", combat: true, animals: true, maximum: 5, condition: 0, d6: 3}] },
-										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 3}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 10, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 3}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 10, damage: 0, condition: 0, skills: [{name: "jump", maximum: 5, condition: 0}, {name: "run", maximum: 7, condition: 0}, {name: "swim", maximum: 3, condition: 0}] }
 									},
 									items: []
@@ -10741,7 +10744,7 @@
 										logic: { maximum: 3, damage: 0, condition: 0, skills: [{name: "aggression", animals: true, maximum: 15, condition: 0}] },
 										strength: { maximum: 5, damage: 0, condition: 0, skills: [{name: "carry", maximum: 0, condition: 0}, {name: "throw", maximum: 0, condition: 0, combat: true}, , {name: "bite", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
-										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 14, condition: 0, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
+										immunity: { maximum: 8, damage: 0, condition: 0, skills: [{name: "recover", maximum: 0, condition: 0, d6: 1}, {name: "defend", animals: true, maximum: 21, condition: 0, d6: 1}, {name: "temperature_resistance", animals: true, maximum: 5, condition: 0}] },
 										speed: { maximum: 6, damage: 0, condition: 0, skills: [{name: "jump", maximum: 3, condition: 0}, {name: "run", maximum: 3, condition: 0}, {name: "swim", maximum: 0, condition: 0}] }
 									},
 									items: [

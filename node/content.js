@@ -28,65 +28,88 @@
 						return
 					}
 
-				// create new content fresh
-					if (REQUEST.post.content.name) {
-						var content = CORE.getSchema("content")
-
-						for (var i in REQUEST.post.content) {
-							if (i !== "id") {
-								content[i] = REQUEST.post.content[i]
-							}
-						}
-
-						content.name = "Copy of " + content.name
-					}
-
-				// create content from template
-					else {
-						var content = CORE.getSchema("content")
-							content.type = REQUEST.post.content.type
-							content.name = "unnamed " + content.type
-						if (content.type == "arena") {
-							content.arena = CORE.getSchema("arena")
-						}
-					}
-
-				// assign
-					content.userId = REQUEST.user.id
-					content.gameId = REQUEST.post.content.gameId
-					content.access = REQUEST.user.id
-
 				// query
 					var query = CORE.getSchema("query")
-						query.collection = "content"
-						query.command = "insert"
-						query.document = content
+						query.collection = "games"
+						query.command = "find"
+						query.filters = {id: REQUEST.post.content.gameId}
 
-				// insert
+				// find
 					CORE.accessDatabase(query, function(results) {
 						if (!results.success) {
-							results.recipients = [REQUEST.user.id]
-							callback(results)
+							callback({success: false, message: "game not found", recipients: [REQUEST.user.id]})
 							return
 						}
 
-						// content
-							var content = results.documents[0]
-							var contentList = [{
-								id: content.id,
-								type: content.type,
-								name: content.name,
-								access: content.access
-							}]
+						// get game creator
+							var gameUserId = results.documents[0].userId
 
-						// return content
-							callback({success: true, message: "created " + content.name, contentList: contentList, recipients: [REQUEST.user.id]})
+						// create new content fresh
+							if (REQUEST.post.content.name) {
+								var content = CORE.getSchema("content")
 
-						// set as user's current content
-							REQUEST.post.action = "updateUserContent"
-							REQUEST.post.user = {content: content}
-							USER.updateOne(REQUEST, callback)
-							return
+								for (var i in REQUEST.post.content) {
+									if (i !== "id") {
+										content[i] = REQUEST.post.content[i]
+									}
+								}
+
+								content.name = "Copy of " + content.name
+							}
+
+						// create content from template
+							else {
+								var content = CORE.getSchema("content")
+									content.type = REQUEST.post.content.type
+									content.name = "unnamed " + content.type
+								if (content.type == "arena") {
+									content.arena = CORE.getSchema("arena")
+								}
+							}
+
+						// assign
+							content.userId = REQUEST.user.id
+							content.gameId = REQUEST.post.content.gameId
+							content.gameUserId = gameUserId
+							content.access = REQUEST.user.id
+
+						// query
+							var query = CORE.getSchema("query")
+								query.collection = "content"
+								query.command = "insert"
+								query.document = content
+
+						// insert
+							CORE.accessDatabase(query, function(results) {
+								if (!results.success) {
+									results.recipients = [REQUEST.user.id]
+									callback(results)
+									return
+								}
+
+								// content
+									var content = results.documents[0]
+									var contentList = [{
+										id: content.id,
+										type: content.type,
+										name: content.name,
+										access: content.access
+									}]
+
+								// return content
+									callback({success: true, message: "created " + content.name, contentList: contentList, recipients: [REQUEST.user.id]})
+
+								// game creator is different?
+									if (content.gameUserId !== REQUEST.user.id) {
+										callback({success: true, contentList: contentList, recipients: [content.gameUserId]})
+									}
+
+								// set as user's current content
+									REQUEST.post.action = "updateUserContent"
+									REQUEST.post.user = {content: content}
+									USER.updateOne(REQUEST, callback)
+									return
+							})
 					})
 			}
 			catch (error) {
@@ -131,8 +154,10 @@
 
 						// no access
 							if (results.documents[0].access && results.documents[0].access !== REQUEST.user.id) {
-								callback({success: false, message: "no access", recipients: [REQUEST.user.id]})
-								return
+								if (!results.documents[0].gameUserId || results.documents[0].gameUserId !== REQUEST.user.id) {
+									callback({success: false, message: "no access", recipients: [REQUEST.user.id]})
+									return
+								}
 							}
 
 						// return content
@@ -216,7 +241,7 @@
 						// filter content
 							var content = results.documents || []
 								content = content.filter(function(i) {
-									return !i.access || (i.access == REQUEST.user.id)
+									return !i.access || (i.access == REQUEST.user.id) || (i.gameUserId && i.gameUserId == REQUEST.user.id)
 								}) || []
 							var contentList = content.map(function(i) {
 								return {
@@ -357,7 +382,7 @@
 									}) || []
 
 								// return content
-									var recipients = content.access ? [content.access] : ids
+									var recipients = content.access ? (content.access == content.gameUserId ? [content.access] : [content.access, content.gameUserId]) : ids
 									callback({success: true, message: REQUEST.user.name + " renamed content to " + content.name, content: content, contentList: contentList, recipients: recipients})
 							})
 					})
@@ -432,16 +457,16 @@
 									}) || []
 
 								// return content
-									var recipients = content.access ? [content.access] : ids
+									var recipients = content.access ? (content.access == content.gameUserId ? [content.access] : [content.access, content.gameUserId]) : ids
 									callback({success: true, message: REQUEST.user.name + " changed access to " + content.name, content: content, contentList: contentList, recipients: recipients})
 
 								// pretend to have deleted content
 									if (content.access) {
-										var recipients = ids.filter(function(i) { return i !== content.access }) || []
+										var recipients = ids.filter(function(i) { return i !== content.access && i !== content.gameUserId }) || []
 										callback({success: true, contentList: [{id: content.id, delete: true}], message: REQUEST.user.name + " restricted access to " + content.name, recipients: recipients})
 
 										// unset contentId for other users
-											var ids = results.documents.filter(function(u) { return u.contentId == content.id && u.id !== content.access }) || []
+											var ids = results.documents.filter(function(u) { return u.contentId == content.id && u.id !== content.access && u.id !== content.gameUserId }) || []
 											if (!ids.length) { return }
 											ids = ids.map(function(u) { return u.id }) || []
 											if (!ids.length) { return }
@@ -545,7 +570,7 @@
 									}) || []
 
 								// return content
-									var recipients = content.access ? [content.access] : ids
+									var recipients = ids
 									callback({success: true, content: content, contentList: contentList, recipients: recipients})
 									return
 							})
@@ -644,7 +669,7 @@
 											}) || []
 
 										// return content
-											var recipients = content.access ? [content.access] : ids
+											var recipients = ids
 											callback({success: true, content: content, contentList: contentList, recipients: recipients})
 											return
 									})
@@ -888,7 +913,7 @@
 													}) || []
 
 												// return content
-													var recipients = content.access ? [content.access] : ids
+													var recipients = ids
 													callback({success: true, content: content, contentList: contentList, recipients: recipients})
 													return
 											})
@@ -978,7 +1003,7 @@
 											}) || []
 
 										// return content
-											var recipients = content.access ? [content.access] : ids
+											var recipients = content.access ? (content.access == content.gameUserId ? [content.access] : [content.access, content.gameUserId]) : ids
 											callback({success: true, contentList: [{id: content.id, delete: true}], message: REQUEST.user.name + " deleted " + content.name, recipients: recipients})
 
 										// unset contentId for users

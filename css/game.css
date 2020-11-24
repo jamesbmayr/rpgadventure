@@ -132,6 +132,7 @@
 			vertical-align: top;
 			text-align: center;
 			padding: var(--small-gap-size);
+			white-space: nowrap;
 		}
 
 		#stream-history div:last-child label {
@@ -336,29 +337,75 @@
 		}
 
 	/** game **/
-		#settings-game-search-button {
-			float: left;
-			display: block;
-			line-height: 1.5;
-		}
+		/* search */
+			#settings-game-search-button {
+				float: left;
+				display: block;
+				line-height: 1.5;
+			}
 
-		#settings-game-search-cancel {
-			margin-right: calc(var(--medium-font-size) + 4 * var(--small-gap-size));
-		}
+			#settings-game-search-cancel {
+				margin-right: calc(var(--medium-font-size) + 4 * var(--small-gap-size));
+			}
 
-		#settings-game-name-input[disabled] {
-			background-color: var(--medium-gray);
-			color: var(--light-gray);
-			cursor: not-allowed;
-		}
+			#settings-game-name-input[disabled] {
+				background-color: var(--medium-gray);
+				color: var(--light-gray);
+				cursor: not-allowed;
+			}
 
-		#settings-game-players-list li {
-			list-style-type: circle !important;
-		}
+		/* players */
+			#settings-game-players-list {
+				padding: var(--medium-gap-size) 0 0 0;
+			}
 
-		#settings-game-delete-button {
-			background-color: var(--medium-red);
-		}
+			#settings-game-banned-list {
+				padding: var(--medium-gap-size) 0 0 0;
+			}
+
+			.settings-game-players-listing {
+				display: block;
+				height: calc(var(--medium-font-size));
+				width: 100%;
+				padding: var(--small-gap-size) 0;
+			}
+
+			.settings-game-players-listing-name {
+				float: left;
+				display: inline-block;
+				height: var(--medium-font-size);
+				width: calc(var(--panel-size) - 2 * (var(--large-gap-size) + var(--small-gap-size)) - 2 * var(--medium-gap-size));
+				font-size: var(--medium-font-size);
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				padding: 0;
+			}
+
+			.settings-game-players-listing-indicator {
+				float: left;
+				margin-right: var(--small-gap-size);
+				font-size: var(--small-font-size);
+				height: calc(var(--medium-font-size));
+				width: calc(var(--large-gap-size));
+				padding: 0;
+				text-align: middle;
+			}
+
+			.settings-game-players-listing-flag {
+				display: inline-block;
+				font-size: var(--small-font-size);
+				height: var(--medium-font-size);
+				width: var(--large-gap-size);
+				margin: 0;
+				margin-left: var(--small-gap-size);
+				padding: 0;
+			}
+
+		/* clears */
+			#settings-game-delete-button {
+				background-color: var(--medium-red);
+			}
 
 	/** audio **/
 		#settings-audio-label {
