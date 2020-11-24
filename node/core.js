@@ -5764,7 +5764,7 @@
 										hands: 1,
 										magnetic: true,
 										materials: "metal",
-										cost: 10,
+										cost: 1,
 										costPerPound: 1,
 										description: "per foot; conducts electricity; arm bindings cause arm paralysis; leg bindings cause leg paralysis"
 									},
