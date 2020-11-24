@@ -2695,7 +2695,7 @@ window.onload = function() {
 
 						// carrying
 							ELEMENTS.character.info.burden.value = Math.round((CHARACTER.items.length ? (CHARACTER.items.reduce(function(a, b) { return a + ((b.weight || 0) * (b.count || 0)) }, 0) || 0) : 0) * 100) / 100
-							if (ELEMENTS.character.info.burden.value > ELEMENTS.character.info.carry.value) {
+							if (Number(ELEMENTS.character.info.burden.value) > Number(ELEMENTS.character.info.carry.value)) {
 								ELEMENTS.character.info.burden.setAttribute("overburdened", true)
 							}
 							else {
