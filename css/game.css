@@ -2041,27 +2041,24 @@
 			}
 
 		/* special fields */
-			.arena-object-visible, .arena-object-locked  {
-				width: calc(100% / 4 - var(--large-gap-size));
-				margin-left: var(--large-gap-size);
+			.arena-object-visible-label, .arena-object-locked-label {
+				float: left;
+				height: calc(var(--medium-font-size));
+				width: calc(100% / 4 - 2 * var(--large-gap-size));
+				text-align: center;
+				padding: var(--small-gap-size) var(--large-gap-size);
 			}
 
-			.arena-object-visible:before {
-				float: left;
-				line-height: 1.5;
-				content: '\01f441';
-				color: var(--light-gray);
-				font-size: var(--small-font-size);
-				margin-left: var(--medium-gap-size);
+			.arena-object-visible, .arena-object-locked {
+				width: var(--large-gap-size);
+				margin: 0 var(--small-gap-size);
 			}
 
-			.arena-object-locked:before {
+			.arena-object-visible-label span, .arena-object-locked-label span {
 				float: left;
-				line-height: 1.5;
-				content: '\01f512';
-				color: var(--light-gray);
-				font-size: var(--small-font-size);
-				margin-left: var(--medium-gap-size);
+				height: 100%;
+				line-height: 1.25;
+				cursor: pointer;
 			}
 
 			.arena-object-text, .arena-object-image {

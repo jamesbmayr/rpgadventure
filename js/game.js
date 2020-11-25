@@ -799,6 +799,7 @@ window.onload = function() {
 									var flagButton = document.createElement("button")
 										flagButton.className = "settings-game-players-listing-flag minor-button"
 										flagButton.innerHTML = "&#x1f6a9;"
+										flagButton.title = "ban player"
 										flagButton.value = GAME.allUsers[sortedPlayers[i]].id
 										flagButton.addEventListener(TRIGGERS.click, submitGameUpdateBanUser)
 									playerElement.appendChild(flagButton)
@@ -827,6 +828,7 @@ window.onload = function() {
 											var flagButton = document.createElement("button")
 												flagButton.className = "settings-game-players-listing-flag minor-button"
 												flagButton.innerHTML = "&#x2705;"
+												flagButton.title = "unban player"
 												flagButton.value = GAME.bannedUsers[sortedBanned[i]].id
 												flagButton.addEventListener(TRIGGERS.click, submitGameUpdateBanUser)
 											playerElement.appendChild(flagButton)
@@ -5303,20 +5305,40 @@ window.onload = function() {
 
 								// inputs
 									// locked
+										var labelLocked = document.createElement("label")
+											labelLocked.className = "arena-object-locked-label"
+										listing.appendChild(labelLocked)
+
+										var spanLocked = document.createElement("span")
+											spanLocked.innerHTML = "&#x1f512;"
+											spanLocked.title = "lock"
+										labelLocked.appendChild(spanLocked)
+
 										var inputLocked = document.createElement("input")
 											inputLocked.className = "arena-object-locked"
 											inputLocked.setAttribute("property", "locked")
 											inputLocked.type = "checkbox"
+											inputLocked.title = "lock"
 											inputLocked.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
-										listing.appendChild(inputLocked)
+										labelLocked.appendChild(inputLocked)
 
 									// visible
+										var labelVisible = document.createElement("label")
+											labelVisible.className = "arena-object-visible-label"
+										listing.appendChild(labelVisible)
+
+										var spanVisible = document.createElement("span")
+											spanVisible.innerHTML = "&#x1f441;"
+											spanVisible.title = "visibility"
+										labelVisible.appendChild(spanVisible)
+
 										var inputVisible = document.createElement("input")
 											inputVisible.className = "arena-object-visible"
 											inputVisible.setAttribute("property", "visible")
 											inputVisible.type = "checkbox"
+											inputVisible.title = "visibility"
 											inputVisible.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
-										listing.appendChild(inputVisible)
+										labelVisible.appendChild(inputVisible)
 
 									// z
 										var upForm = document.createElement("form")

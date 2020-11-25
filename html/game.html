@@ -40,7 +40,7 @@
 			<section id="tools">
 				<form id="tools-form" method="post" action="javascript:;" autocomplete="off">
 					<label class="tool nav-tab pseudo-button" id="tools-settings" title="settings">
-						<span>&#x2699;</span>
+						<span>&#x1f39b;</span>
 						<input id="tools-settings-radio" type="radio" name="tool" value="settings" checked/>
 					</label>
 					<label class="tool nav-tab pseudo-button" id="tools-rules" title="rules">
@@ -57,7 +57,7 @@
 						<input id="tools-chat-radio" type="radio" name="tool" value="chat"/>
 					</label>
 					<label class="tool nav-tab pseudo-button" id="tools-content" value="5" title="content">
-						<span>&#x1f4da;</span>
+						<span>&#x1f5fa;</span>
 						<input id="tools-content-radio" type="radio" name="tool" value="content"/>
 					</label>
 				</form>
@@ -71,11 +71,11 @@
 						<button id="settings-game-search-cancel" class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 						<div class="option-search-results"></div>
 						<select id="settings-game-select" class="option-search-select">
-							<optgroup label="my games" id="settings-game-select-custom"></optgroup>
-							<optgroup label="other" id="settings-game-select-other">
+							<optgroup label="..." id="settings-game-select-other">
 								<option id="settings-game-select-none" value="[none]" disabled>[close game]</option>
 								<option id="settings-game-select-new" value="[new]">[new game]</option>
 							</optgroup>
+							<optgroup label="my games" id="settings-game-select-custom"></optgroup>
 						</select>
 					</div>
 					<form id="settings-game-name-form" method="post" action="javascript:;" visibility="false">
@@ -141,7 +141,7 @@
 				<div id="character-modes">
 					<form id="character-modes-form" method="post" action="javascript:;" autocomplete="off">
 						<label class="mode nav-tab pseudo-button" id="character-modes-settings" title="settings">
-							<span>&#x2699;</span>
+							<span>&#x1f39b;</span>
 							<input id="character-modes-settings-radio" type="radio" name="mode" value="settings" checked/>
 						</label>
 						<label class="mode nav-tab pseudo-button" id="character-modes-play" title="play">
@@ -153,7 +153,7 @@
 							<input id="character-modes-edit-radio" type="radio" name="mode" value="edit"/>
 						</label>
 						<label class="mode nav-tab pseudo-button" id="character-modes-items" title="items">
-							<span>&#9874;</span>
+							<span>&#x1f392;</span>
 							<input id="character-modes-items-radio" type="radio" name="mode" value="items"/>
 						</label>
 						<label class="mode nav-tab pseudo-button" id="character-modes-conditions" title="conditions">
@@ -161,7 +161,7 @@
 							<input id="character-modes-conditions-radio" type="radio" name="mode" value="conditions"/>
 						</label>
 						<label class="mode nav-tab pseudo-button" id="character-modes-damage" title="damage">
-							<span>&#9760;</span>
+							<span>&#x1f480;</span>
 							<input id="character-modes-damage-radio" type="radio" name="mode" value="damage"/>
 						</label>
 					</form>
@@ -175,12 +175,12 @@
 							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 							<div class="option-search-results"></div>
 							<select id="character-settings-select" class="option-search-select">
-								<optgroup label="game characters" id="character-settings-select-custom"></optgroup>
-								<optgroup label="other" id="character-settings-select-other">
+								<optgroup label="..." id="character-settings-select-other">
 									<option id="character-settings-select-none" value="[none]" disabled>[close character]</option>
 									<option id="character-settings-select-upload" value="[upload]">[upload character]</option>
-									<option id="character-settings-select-new" value="[template-blank]" selected>[blank template]</option>
+									<option id="character-settings-select-new" value="[template-blank]" selected>[new blank character]</option>
 								</optgroup>
+								<optgroup label="my characters" id="character-settings-select-custom"></optgroup>
 							</select>
 						</div>
 					</div>
@@ -438,12 +438,12 @@
 						<h3 id="character-recipient-header">targeting</h3>
 						<form id="character-recipient-form" method="post" action="javascript:;">
 							<select id="character-recipient-select" class="editable always-editable">
-								<optgroup label="other">
+								<optgroup label="...">
 									<option id="character-recipient-none" value="">[none]</option>
 									<option id="character-recipient-environment" value="[environment]">[environment]</option>
 								</optgroup>
-								<optgroup id="character-recipient-characters" label="characters"></optgroup>
-								<optgroup id="character-recipient-arena" label="arena"></optgroup>
+								<optgroup id="character-recipient-characters" label="MY CHARACTERS"></optgroup>
+								<optgroup id="character-recipient-arena" label="ARENA"></optgroup>
 							</select>
 						</form>
 					</div>
@@ -453,22 +453,22 @@
 				<div id="chat-messages"></div>
 				<form id="chat-send-form" method="post" action="javascript:;">
 					<select id="chat-send-sender">
-						<optgroup id="chat-send-sender-special" label="special">
+						<optgroup id="chat-send-sender-special" label="...">
 							<option id="chat-send-sender-anonymous" value="[anonymous]">[anonymous]</option>
 						</optgroup>
-						<optgroup id="chat-send-sender-player" label="player">
+						<optgroup id="chat-send-sender-player" label="PLAYER">
 							<option id="chat-send-sender-user" value="[user]" selected>[user]</option>
 						</optgroup>
-						<optgroup id="chat-send-sender-selectedCharacter" label="character">
+						<optgroup id="chat-send-sender-selectedCharacter" label="CHARACTER">
 							<option id="chat-send-sender-character" value="[character]" disabled>[character]</option>
 						</optgroup>
 					</select>
 					<div id="chat-send-arrow">&rarr;</div>
 					<select id="chat-send-recipients">
-						<optgroup id="chat-send-recipients-special" label="special">
+						<optgroup id="chat-send-recipients-special" label="...">
 							<option id="chat-send-recipients-all" value="[all]" selected>[everyone]</option>
 						</optgroup>
-						<optgroup id="chat-send-recipients-players" label="players"></optgroup>
+						<optgroup id="chat-send-recipients-players" label="PLAYERS"></optgroup>
 					</select>
 					<input type="text" id="chat-send-input" placeholder="type chat message" autocomplete="off" class="form-pair"/>
 					<button id="chat-send-button" class="form-pair" title="send message">&#x1f4ac;</button>
@@ -481,14 +481,14 @@
 					<button id="content-choose-search-button" class="option-search-button" title="submit"></button>
 					<div class="option-search-results"></div>
 					<select id="content-choose-select" class="option-search-select">
-						<optgroup id="content-choose-select-other" label="other">
-							<option id="content-choose-select-none" value="[none]" disabled>[close document]</option>
+						<optgroup id="content-choose-select-other" label="...">
+							<option id="content-choose-select-none" value="[none]" disabled>[close content]</option>
 							<option id="content-choose-select-new-arena" value="[new arena]">[new arena]</option>
-							<option id="content-choose-select-new-text" value="[new text]">[new text]</option>
-							<option id="content-choose-select-new-image" value="[new image]">[new image]</option>
 							<option id="content-choose-select-new-audio" value="[new audio]">[new audio]</option>
-							<option id="content-choose-select-new-embed" value="[new embed]">[new embed]</option>
 							<option id="content-choose-select-new-component" value="[new component]">[new component]</option>
+							<option id="content-choose-select-new-embed" value="[new embed]">[new embed]</option>
+							<option id="content-choose-select-new-image" value="[new image]">[new image]</option>
+							<option id="content-choose-select-new-text" value="[new text]">[new text]</option>
 						</optgroup>
 						<optgroup id="content-choose-select-arena" label="arena"></optgroup>
 						<optgroup id="content-choose-select-text" label="text"></optgroup>
@@ -607,11 +607,11 @@
 						<button id="content-objects-search-button" class="option-search-button" title="submit"></button>
 						<div class="option-search-results"></div>
 						<select id="content-objects-select" class="option-search-select">
-							<optgroup label="other">
-								<option id="content-objects-select-blank" value="[blank object]" selected>[blank object]</option>
+							<optgroup label="...">
+								<option id="content-objects-select-blank" value="[blank object]" selected>[new object]</option>
 							</optgroup>
-							<optgroup id="content-objects-select-characters" label="characters"></optgroup>
-							<optgroup id="content-objects-select-images" label="images"></optgroup>
+							<optgroup id="content-objects-select-characters" label="my characters"></optgroup>
+							<optgroup id="content-objects-select-images" label="my images"></optgroup>
 						</select>
 					</div>
 					<div id="content-objects-list"></div>
