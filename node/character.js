@@ -531,6 +531,15 @@
 						return
 					}
 
+				// ??? - TEMPORARY - backfill skill.statistic - ???
+					for (var i in REQUEST.post.character.statistics) {
+						for (var j in REQUEST.post.character.statistics[i].skills) {
+							if (!REQUEST.post.character.statistics[i].skills[j].statistic) {
+								REQUEST.post.character.statistics[i].skills[j].statistic = i
+							}
+						}
+					}
+
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "characters"
