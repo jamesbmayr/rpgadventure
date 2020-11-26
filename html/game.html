@@ -239,9 +239,10 @@
 								<button id="character-info-image-reset" class="minor-button" title="remove image">x</button>
 							</form>
 						</div>
-						<form id="character-info-image-form" method="post" action="javascript:;" visibility="false">
-							<input id="character-info-image-upload" type="file"/>
-							<button id="character-info-image-button" title="upload image">upload image</button>
+						<form id="character-info-image-form" method="post" action="javascript:;">
+							<input readonly class="editable" type="text" id="character-info-image-input" autocomplete="off" placeholder="image url"/>
+							<!-- <input id="character-info-image-upload" type="file" visibility="false"/>
+							<button id="character-info-image-button" title="upload image" visibility="false">upload image</button> -->
 						</form>
 						<div id="character-info-demographics">
 							<div class="column-left">
@@ -545,10 +546,10 @@
 						<h4>data</h4>
 						<button id="content-data-button" title="save content">save content</button>
 					</form>
-					<form id="content-upload-form" method="post" action="javascript:;" enctype="multipart/form-data" visibility="false">
+					<!-- <form id="content-upload-form" method="post" action="javascript:;" enctype="multipart/form-data" visibility="false">
 						<input type="file" id="content-upload-input"/>
 						<button id="content-upload-button" title="upload">upload</button>
-					</form>
+					</form> -->
 					<form id="content-duplicate-form" method="post" action="javascript:;">
 						<h4>file</h4>
 						<button id="content-duplicate-button" title="duplicate">duplicate</button>

@@ -252,6 +252,7 @@ window.onload = function() {
 								imageReset: document.getElementById("character-info-image-reset"),
 								imageResetForm: document.getElementById("character-info-image-reset-form"),
 								imageForm: document.getElementById("character-info-image-form"),
+								imageInput: document.getElementById("character-info-image-input"),
 								imageUpload: document.getElementById("character-info-image-upload"),
 								burden: document.getElementById("character-info-burden"),
 								points: document.getElementById("character-info-points"),
@@ -489,7 +490,8 @@ window.onload = function() {
 						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, submitCharacterCreateDuplicate)
 						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, submitCharacterDelete)
 						ELEMENTS.character.content.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20) })
-						ELEMENTS.character.info.imageForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImage)
+						// ELEMENTS.character.info.imageForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImage)
+						ELEMENTS.character.info.imageInput.addEventListener(TRIGGERS.change, submitCharacterUpdateImage)
 						ELEMENTS.character.info.imageResetForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImageDelete)
 						ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateInfo) })
 						ELEMENTS.character.content.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, submitCharacterUpdateStatistic) })
@@ -512,7 +514,7 @@ window.onload = function() {
 						ELEMENTS.content.code.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
 						ELEMENTS.content.url.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
 						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
-						ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, submitContentUpdateFile)
+						// ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, submitContentUpdateFile)
 						ELEMENTS.content.duplicate.form.addEventListener(TRIGGERS.submit, submitContentCreateDuplicate)
 						ELEMENTS.content.delete.form.addEventListener(TRIGGERS.submit, submitContentDelete)
 						ELEMENTS.content.code.searchButton.addEventListener(TRIGGERS.click, submitContentComponentSearch)
@@ -2646,10 +2648,12 @@ window.onload = function() {
 
 						// image
 							if (character.info.image) {
+								ELEMENTS.character.info.imageInput.value = character.info.image
 								ELEMENTS.character.info.image.style.backgroundImage = "url(" + character.info.image + (character.info.file ? ("?" + new Date().getTime()) : "") + ")"
 								ELEMENTS.character.info.image.setAttribute("visibility", true)
 							}
 							else {
+								ELEMENTS.character.info.imageInput.value = ""
 								ELEMENTS.character.info.image.style.backgroundImage = ""
 								ELEMENTS.character.info.image.setAttribute("visibility", false)
 							}
@@ -3625,51 +3629,59 @@ window.onload = function() {
 			/* submitCharacterUpdateImage */
 				function submitCharacterUpdateImage(event) {
 					try {
-						ELEMENTS.character.info.imageUpload.click()
-						ELEMENTS.character.info.imageUpload.addEventListener(TRIGGERS.change, function(event) {
-							if (ELEMENTS.character.info.imageUpload.value && ELEMENTS.character.info.imageUpload.value.length) {
-								// start reading
-									var file = ELEMENTS.character.info.imageUpload.files[0]
-									var reader = new FileReader()
-										reader.readAsBinaryString(file)
-
-								// end reading
-									reader.onload = function(event) {
-										try {
-											// parse character
-												var post = {
-													action: "uploadCharacterImage",
-													character: CHARACTER
-												}
-												
-												post.character.file = {
-													name: file.name,
-													data: event.target.result
-												}
-
-											// validate
-												if (!post.character.id) {
-													FUNCTIONS.showToast({success: false, message: "no character selected"})
-													return
-												}
-												if (!post.character.file || !post.character.file.name || !post.character.file.data) {
-													FUNCTIONS.showToast({success: false, message: "no image uploaded"})
-													return
-												}
-
-											// send socket request
-												FUNCTIONS.sendPost(post, function(response) {
-													FUNCTIONS.showToast(response)
-												})
-										}
-										catch (error) {
-											console.log(error)
-											FUNCTIONS.showToast({success: false, message: "unable to read image"})
-											return
-										}
-									}
+						// url
+							if (event.target.id == ELEMENTS.character.info.imageInput.id) {
+								CHARACTER.info.image = event.target.value
+								submitCharacterUpdate(CHARACTER)
+								return
 							}
-						})
+
+						// upload
+							ELEMENTS.character.info.imageUpload.click()
+							ELEMENTS.character.info.imageUpload.addEventListener(TRIGGERS.change, function(event) {
+								if (ELEMENTS.character.info.imageUpload.value && ELEMENTS.character.info.imageUpload.value.length) {
+									// start reading
+										var file = ELEMENTS.character.info.imageUpload.files[0]
+										var reader = new FileReader()
+											reader.readAsBinaryString(file)
+
+									// end reading
+										reader.onload = function(event) {
+											try {
+												// parse character
+													var post = {
+														action: "uploadCharacterImage",
+														character: CHARACTER
+													}
+													
+													post.character.file = {
+														name: file.name,
+														data: event.target.result
+													}
+
+												// validate
+													if (!post.character.id) {
+														FUNCTIONS.showToast({success: false, message: "no character selected"})
+														return
+													}
+													if (!post.character.file || !post.character.file.name || !post.character.file.data) {
+														FUNCTIONS.showToast({success: false, message: "no image uploaded"})
+														return
+													}
+
+												// send socket request
+													FUNCTIONS.sendPost(post, function(response) {
+														FUNCTIONS.showToast(response)
+													})
+											}
+											catch (error) {
+												console.log(error)
+												FUNCTIONS.showToast({success: false, message: "unable to read image"})
+												return
+											}
+										}
+								}
+							})
 					} catch (error) {console.log(error)}
 				}
 
@@ -4461,7 +4473,7 @@ window.onload = function() {
 
 						// one message, and it's a sound?
 							if (messages && messages.length == 1 && messages[0].display.content && messages[0].display.content.type == "audio") {
-								var parent = ELEMENTS.chat.messages.querySelector("#chat-" + messages[0].display.content.id)
+								var parent = ELEMENTS.chat.messages.querySelector("#chat-" + messages[0].id)
 									parent.querySelector("audio").play()
 							}
 
@@ -4998,25 +5010,28 @@ window.onload = function() {
 									ELEMENTS.gametable.element.innerHTML = ""
 										image = document.createElement("img")
 										image.className = "content-image content-grabbable"
-										image.style.height = "auto"
-										image.style.width = "auto"
 										image.addEventListener(TRIGGERS.mousedown, grabContent)
 									ELEMENTS.gametable.element.appendChild(image)
 							}
 
+						// reset
+							image.src = ""
+							image.style.height = "auto"
+							image.style.width = "auto"
+
+							var rect = ELEMENTS.gametable.element.getBoundingClientRect()
+							image.style.top = (rect.height / 2) + "px"
+							image.style.left = (rect.width / 2) + "px"
+
 						// update
 							if (CONTENT.url) {
 								image.src = CONTENT.url + (CONTENT.file ? ("?" + new Date().getTime()) : "")
-								image.style.height = "auto"
-								image.style.width = "auto"
+								image.addEventListener("load", function() {
+									var rect = image.getBoundingClientRect()
+										image.setAttribute("data-width", rect.width)
+										image.setAttribute("data-height", rect.height)
+								})
 							}
-
-						// height/width
-							image.addEventListener("load", function() {
-								var rect = image.getBoundingClientRect()
-									image.setAttribute("data-width", rect.width)
-									image.setAttribute("data-height", rect.height)
-							})
 
 						// zoom
 							CONTENT.zoomPower = 0
@@ -5041,12 +5056,13 @@ window.onload = function() {
 									ELEMENTS.gametable.element.appendChild(audio)
 							}
 
+						// remove old source
+							var source = audio.querySelector("source")
+							if (source) { source.remove() }
+							audio.load()
+
 						// update
 							if (CONTENT.url) {
-								// remove old source
-									var source = audio.querySelector("source")
-									if (source) { source.remove() }
-
 								// add new source
 									var fileType = CONTENT.url.slice(-3).toLowerCase()
 										fileType = (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg")
@@ -5054,6 +5070,7 @@ window.onload = function() {
 										source.setAttribute("type", "audio/" + fileType)
 										source.setAttribute("src", CONTENT.url)
 									audio.appendChild(source)
+									audio.load()
 							}
 					} catch (error) {console.log(error)}
 				}

@@ -763,8 +763,9 @@
 				display: none;
 			}
 
-			#character:not([mode="edit"]) #character-info-image-form {
+			#character:not([mode="edit"]) #character-info-image-form, #character:not([mode="edit"]) #character-info-image-reset-form {
 				display: none;
+				pointer-events: none;
 			}
 
 		/* demographics */

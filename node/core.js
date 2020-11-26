@@ -1902,7 +1902,7 @@
 										hands: 2,
 										materials: "metal",
 										cost: 40,
-										description: "adds to punch damage; 5d6 hand armor"
+										description: "adds to punch damage; provides hand armor"
 									},
 									{
 										name: "claws",
@@ -2523,7 +2523,7 @@
 										hands: 0,
 										materials: "leather, metal",
 										cost: 60,
-										description: "adds to kick damage; 7d6 feet armor"
+										description: "adds to kick damage; provides feet armor"
 									},
 									{
 										name: "stonebow",
@@ -2661,6 +2661,7 @@
 												d6: 4
 											}
 										],
+										conditions: {loud_noise: 1},
 										weight: 3,
 										hands: 1,
 										fuel: 2,
@@ -5868,7 +5869,7 @@
 									{
 										name: "crochet hook",
 										count: 1,
-										weight: 0.05,
+										weight: 0.025,
 										hands: 1,
 										usage: [
 											{
@@ -5929,7 +5930,7 @@
 										d6: 2,
 										materials: "metal",
 										cost: 40,
-										description: "2d6 head armor"
+										description: "provides head armor"
 									},
 									{
 										name: "cup",
@@ -6781,6 +6782,22 @@
 										materials: "wax",
 										cost: 5,
 										description: "heated to seal containers, like envelopes and bottles"
+									},
+									{
+										name: "sewing needle",
+										count: 1,
+										weight: 0.025,
+										hands: 1,
+										usage: [
+											{
+												statistic: "dexterity",
+												skill: "crafting"
+											}
+										],
+										magnetic: true,
+										materials: "metal",
+										cost: 1,
+										description: "used in crafting"
 									},
 									{
 										name: "sextant",
