@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="/game.css"/>
 		<script src="/main.js"></script>
 		<script src="/game.js"></script>
-		<script>window.RULES = <script node>JSON.stringify(getAsset("rules"))</script>node></script>
+		<script>window.RULES = <script node>var RULES = getAsset("rules"); JSON.stringify(RULES)</script>node></script>
 		<script>window.USER = <script node>REQUEST.user ? JSON.stringify(REQUEST.user) : "null"</script>node></script>
 	</head>
 	<body>
@@ -522,13 +522,20 @@
 						<textarea id="content-code-input" placeholder="enter code here" autocomplete="off"></textarea>
 					</form>
 					<div id="content-component-code-help">
-						<div>Enter JSON describing a custom component. These fields are required to add this to a character:</div>
-						<ul>
-							<li><code>"addable"</code>: <code>true</code></li>
-							<li><code>"name"</code>: string</li>
-							<li><code>"type"</code>: <code>"race"</code>, <code>"skill"</code>, <code>"item"</code>, or <code>"condition"</code></li>
-							<li><code>"data"</code>: object containing applicable properties</li>
-						</ul>
+						<div id="content-component-code-help-instructions">Enter JSON for a custom component. See samples:</div>
+						<div id="content-component-code-options-search" class="option-search">
+							<input autocomplete="off" placeholder="search race, skill, condition, item..." class="option-search-input"/>
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<button id="content-component-code-search-button" class="option-search-button" title="submit"></button>
+							<div class="option-search-results"></div>
+							<select id="content-component-code-select" class="option-search-select">
+								<optgroup id="content-component-code-select-races" label="races"></optgroup>
+								<optgroup id="content-component-code-select-skills" label="skills"></optgroup>
+								<optgroup id="content-component-code-select-conditions" label="conditions"></optgroup>
+								<optgroup id="content-component-code-select-items" label="items"></optgroup>
+							</select>
+						</div>
+						<pre id="content-component-code-sample"></pre>
 					</div>
 					<form id="content-url-form" method="post" action="javascript:;">
 						<h4>url</h4>
@@ -591,7 +598,7 @@
 						<li><b>click</b>: select object</li>
 						<li><b>click & drag</b>: move object to new location</li>
 						<li><b>click & arrows</b>: move object in direction</li>
-						<li><b>command/windows-click</b>: load character</li>
+						<li><b>alt/option-click</b>: load character</li>
 						<br>
 						<li><b>mouse at edge</b>: pan in direction</li>
 						<li><b>scroll</b>: zoom in & out</li>

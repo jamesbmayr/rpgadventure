@@ -1822,13 +1822,25 @@
 
 		#content-component-code-help {
 			float: left;
-			width: calc(100% - 2 * var(--small-gap-size));
+			width: 100%;
 			font-size: var(--small-font-size);
-			padding: var(--small-gap-size);
+			margin-top: var(--medium-gap-size);
+			padding: var(--small-gap-size) 0;
 		}
 
-		#content-component-code-help div {
+		#content-component-code-help-instructions {
 			font-style: oblique;
+		}
+
+		#content-component-code-sample {
+			float: left;
+			width: calc(100% - 2 * var(--small-gap-size));
+			margin: var(--small-gap-size) 0;
+			background-color: var(--dark-gray);
+			color: var(--light-gray);
+			padding: var(--small-gap-size);
+			border-radius: var(--border-radius);
+			overflow: scroll;
 		}
 
 		/* add */
@@ -2233,8 +2245,8 @@
 				top: 50%;
 				left: 50%;
 				transform: translateX(-50%) translateY(-50%);
-				zoom: 1;
 				cursor: grab;
+				transform-origin: center;
 			}
 
 		/* other */

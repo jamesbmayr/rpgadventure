@@ -203,7 +203,6 @@
 		}
 
 		input[type=checkbox] {
-			zoom: 0.9;
 			background-color: var(--light-gray);
 			color: var(--medium-gray);
 			cursor: pointer;

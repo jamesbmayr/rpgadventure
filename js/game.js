@@ -32,6 +32,9 @@ window.onload = function() {
 						displayCharacterListConditions()
 						displayCharacterListItems()
 
+					// content code list
+						displayContentListSamples()
+
 					// listeners
 						attachListeners()
 
@@ -371,7 +374,16 @@ window.onload = function() {
 							code: {
 								form: document.getElementById("content-code-form"),
 								input: document.getElementById("content-code-input"),
-								button: document.getElementById("content-code-button")
+								button: document.getElementById("content-code-button"),
+								select: document.getElementById("content-component-code-select"),
+								searchButton: document.getElementById("content-component-code-search-button"),
+								sample: document.getElementById("content-component-code-sample"),
+								search: {
+									races: document.getElementById("content-component-code-select-races"),
+									skills: document.getElementById("content-component-code-select-skills"),
+									conditions: document.getElementById("content-component-code-select-conditions"),
+									items: document.getElementById("content-component-code-select-items")
+								}
 							},
 							url: {
 								form: document.getElementById("content-url-form"),
@@ -503,6 +515,7 @@ window.onload = function() {
 						ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, submitContentUpdateFile)
 						ELEMENTS.content.duplicate.form.addEventListener(TRIGGERS.submit, submitContentCreateDuplicate)
 						ELEMENTS.content.delete.form.addEventListener(TRIGGERS.submit, submitContentDelete)
+						ELEMENTS.content.code.searchButton.addEventListener(TRIGGERS.click, submitContentComponentSearch)
 						ELEMENTS.body.addEventListener(TRIGGERS.mousemove, moveContent)
 						ELEMENTS.body.addEventListener(TRIGGERS.mouseup, ungrabContent)
 						ELEMENTS.content.controls.zoom.in.form.addEventListener(TRIGGERS.submit, zoomContent)
@@ -1908,7 +1921,7 @@ window.onload = function() {
 						// name
 							var resultName = document.createElement("h3")
 								resultName.className = "search-result-name"
-								resultName.innerText = (result.name || "?").replace(/_/gi, " ")
+								resultName.innerText = (result.data.name || (result.data.info ? result.data.info.name : "?") || "?").replace(/_/gi, " ")
 							resultElement.appendChild(resultName)
 
 						// send to chat
@@ -2007,8 +2020,7 @@ window.onload = function() {
 								for (var o in RULES.overviews) {
 									if (o.includes(searchText) || o.includes(similarSearchText)) {
 										var result = FUNCTIONS.duplicateObject(RULES.overviews[o])
-										delete result.name
-										resultsList.push({name: o, type: "overview", data: result})
+										resultsList.push({type: "overview", data: result})
 									}
 								}
 
@@ -2016,7 +2028,7 @@ window.onload = function() {
 								for (var r in RULES.races) {
 									if (r.includes(searchText) || r.includes(similarSearchText)) {
 										var result = FUNCTIONS.duplicateObject(RULES.races[r])
-										resultsList.push({name: r, type: "race", data: result, addable: true})
+										resultsList.push({type: "race", data: result, addable: true})
 									}
 								}
 
@@ -2024,19 +2036,18 @@ window.onload = function() {
 								for (var c in RULES.classes) {
 									if (c.includes(searchText) || c.includes(similarSearchText)) {
 										var result = FUNCTIONS.duplicateObject(RULES.classes[c])
-										resultsList.push({name: c, type: "class", data: result})
+										resultsList.push({type: "class", data: result})
 									}
 								}
 
 							// statistics
 								for (var s in RULES.statistics) {
 									if (s.includes(searchText) || s.includes(similarSearchText)) {
-										var description = FUNCTIONS.duplicateObject(RULES.statistics[s])
-										var skills = FUNCTIONS.duplicateObject(RULES.skills[s]).map(function(k) {
-											return k.name
-										})
-										var result = {description: description, skills: skills}
-										resultsList.push({name: s, type: "statistic", data: result})
+										var result = FUNCTIONS.duplicateObject(RULES.statistics[s])
+											result.skills = FUNCTIONS.duplicateObject(RULES.skills[s]).map(function(k) {
+												return k.name
+											})
+										resultsList.push({type: "statistic", data: result})
 									}
 								}
 
@@ -2044,11 +2055,8 @@ window.onload = function() {
 								for (var s in RULES.skills) {
 									for (var i in RULES.skills[s]) {
 										if (RULES.skills[s][i].name.includes(searchText) || RULES.skills[s][i].name.includes(similarSearchText)) {
-											var name = RULES.skills[s][i].name
 											var result = FUNCTIONS.duplicateObject(RULES.skills[s][i])
-												result.statistic = s
-											delete result.name
-											resultsList.push({name: name, type: "skill", data: result, addable: true})
+											resultsList.push({type: "skill", data: result, addable: true})
 										}
 									}
 								}
@@ -2057,7 +2065,7 @@ window.onload = function() {
 								for (var d in RULES.damage) {
 									if (d.includes(searchText) || d.includes(similarSearchText)) {
 										var result = FUNCTIONS.duplicateObject(RULES.damage[d])
-										resultsList.push({name: d, type: "damage", data: result})
+										resultsList.push({type: "damage", data: result})
 									}
 								}
 
@@ -2065,8 +2073,7 @@ window.onload = function() {
 								for (var c in RULES.conditions) {
 									if (c.includes(searchText) || c.includes(similarSearchText)) {
 										var result = FUNCTIONS.duplicateObject(RULES.conditions[c])
-										delete result.name
-										resultsList.push({name: c, type: "condition", data: result, addable: true})
+										resultsList.push({type: "condition", data: result, addable: true})
 									}
 								}
 
@@ -2075,8 +2082,7 @@ window.onload = function() {
 									for (var j in RULES.items[i]) {
 										if (RULES.items[i][j].name && (RULES.items[i][j].name.includes(searchText) || RULES.items[i][j].name.includes(similarSearchText))) {
 											var result = FUNCTIONS.duplicateObject(RULES.items[i][j])
-											delete result.name
-											resultsList.push({name: RULES.items[i][j].name, type: "item", data: result, addable: true})
+											resultsList.push({type: "item", data: result, addable: true})
 										}
 									}
 								}
@@ -2085,9 +2091,7 @@ window.onload = function() {
 								for (var p in RULES.puzzles) {
 									if (RULES.puzzles[p].name.includes(searchText) || RULES.puzzles[p].name.includes(similarSearchText)) {
 										var result = FUNCTIONS.duplicateObject(RULES.puzzles[p])
-										var name = result.name
-										delete result.name
-										resultsList.push({name: name, type: "puzzle", data: result})
+										resultsList.push({type: "puzzle", data: result})
 									}
 								}
 
@@ -2095,9 +2099,7 @@ window.onload = function() {
 								for (var n in RULES.npcs) {
 									if (RULES.npcs[n].info.name.includes(searchText) || RULES.npcs[n].info.name.includes(similarSearchText)) {
 										var result = FUNCTIONS.duplicateObject(RULES.npcs[n])
-										var name = result.info.name
-										delete result.info.name
-										resultsList.push({name: name, type: "npc", data: result})
+										resultsList.push({type: "npc", data: result})
 									}
 								}
 
@@ -2105,9 +2107,7 @@ window.onload = function() {
 								for (var a in RULES.animals) {
 									if (RULES.animals[a].info.name.includes(searchText) || RULES.animals[a].info.name.includes(similarSearchText)) {
 										var result = FUNCTIONS.duplicateObject(RULES.animals[a])
-										var name = result.info.name
-										delete result.info.name
-										resultsList.push({name: name, type: "npc", data: result})
+										resultsList.push({type: "npc", data: result})
 									}
 								}
 
@@ -2115,9 +2115,7 @@ window.onload = function() {
 								for (var c in RULES.creatures) {
 									if (RULES.creatures[c].info.name.includes(searchText) || RULES.creatures[c].info.name.includes(similarSearchText)) {
 										var result = FUNCTIONS.duplicateObject(RULES.creatures[c])
-										var name = result.info.name
-										delete result.info.name
-										resultsList.push({name: name, type: "npc", data: result})
+										resultsList.push({type: "npc", data: result})
 									}
 								}
 
@@ -2125,10 +2123,7 @@ window.onload = function() {
 								for (var s in RULES.services) {
 									if (RULES.services[s].name.includes(searchText) || RULES.services[s].name.includes(similarSearchText)) {
 										var result = FUNCTIONS.duplicateObject(RULES.services[s])
-										var name = result.name
-										delete result.name
-										result = result.tasks
-										resultsList.push({name: name, type: "service", data: result})
+										resultsList.push({type: "service", data: result})
 									}
 								}
 
@@ -3879,6 +3874,7 @@ window.onload = function() {
 									var result = JSON.parse(code.trim())
 								} catch (error) {
 									FUNCTIONS.showToast({success: false, message: "invalid component code"})
+									return
 								}
 							}
 
@@ -3888,30 +3884,36 @@ window.onload = function() {
 								var result = JSON.parse(resultElement.getAttribute("data") || "{}")
 							}
 
+						// result
+							if (!result || !result.data) {
+								FUNCTIONS.showToast({success: false, message: "invalid component data"})
+								return
+							}
+
 						// race
 							if (result.type == "race") {
-								submitCharacterUpdateRace(result)
+								submitCharacterUpdateRace(result.data)
 								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
 								displayCharacterMode({target: ELEMENTS.character.modes.editRadio, forceSet: true})
 							}
 							
 						// skill
 							else if (result.type == "skill") {
-								submitCharacterUpdateSkillCreate(result)
+								submitCharacterUpdateSkillCreate(result.data)
 								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
 								displayCharacterMode({target: ELEMENTS.character.modes.editRadio, forceSet: true})
 							}
 
 						// item
 							else if (result.type == "item") {
-								submitCharacterUpdateItemCreate(result)
+								submitCharacterUpdateItemCreate(result.data)
 								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
 								displayCharacterMode({target: ELEMENTS.character.modes.itemsRadio, forceSet: true})
 							}
 
 						// condition
 							else if (result.type == "condition") {
-								submitCharacterUpdateConditionCreate(result)
+								submitCharacterUpdateConditionCreate(result.data)
 								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
 								displayCharacterMode({target: ELEMENTS.character.modes.conditionsRadio, forceSet: true})
 							}
@@ -3937,9 +3939,8 @@ window.onload = function() {
 						// from search result
 							else {
 								var skillName = event.name
-								var statistic = event.data.statistic
-								var skill = event.data
-									skill.name = skillName
+								var statistic = event.statistic
+								var skill = event
 							}
 
 						// already have it?
@@ -4071,8 +4072,7 @@ window.onload = function() {
 
 						// from search result
 							else {
-								var item = event.data
-									item.name = event.name
+								var item = event
 							}
 
 						// add to items
@@ -4256,9 +4256,7 @@ window.onload = function() {
 
 						// from search result
 							else {
-								var conditionName = event.name
-								var condition = event.data
-									condition.name = conditionName
+								var condition = event
 							}
 
 						// already there?
@@ -4526,6 +4524,7 @@ window.onload = function() {
 							var messageElement = document.createElement("div")
 								messageElement.className = "content-chat"
 								messageElement.id = "chat-" + message.id
+								messageElement.setAttribute("content-id", content.id)
 							ELEMENTS.chat.messages.appendChild(messageElement)
 							
 						// name
@@ -4545,7 +4544,7 @@ window.onload = function() {
 							var messageButton = document.createElement("button")
 								messageButton.className = "content-chat-button minor-button"
 								messageButton.title = "open content"
-								messageButton.innerHTML = "&#x1f4da;"
+								messageButton.innerHTML = "&#x1f5fa;"
 							messageForm.appendChild(messageButton)
 
 						// arena
@@ -4999,6 +4998,8 @@ window.onload = function() {
 									ELEMENTS.gametable.element.innerHTML = ""
 										image = document.createElement("img")
 										image.className = "content-image content-grabbable"
+										image.style.height = "auto"
+										image.style.width = "auto"
 										image.addEventListener(TRIGGERS.mousedown, grabContent)
 									ELEMENTS.gametable.element.appendChild(image)
 							}
@@ -5006,13 +5007,20 @@ window.onload = function() {
 						// update
 							if (CONTENT.url) {
 								image.src = CONTENT.url + (CONTENT.file ? ("?" + new Date().getTime()) : "")
+								image.style.height = "auto"
+								image.style.width = "auto"
 							}
 
+						// height/width
+							image.addEventListener("load", function() {
+								var rect = image.getBoundingClientRect()
+									image.setAttribute("data-width", rect.width)
+									image.setAttribute("data-height", rect.height)
+							})
+
 						// zoom
-							if (!CONTENT.zoom) {
-								CONTENT.zoomPower = 0
-								CONTENT.zoom = 1
-							}
+							CONTENT.zoomPower = 0
+							CONTENT.zoom = 1
 					} catch (error) {console.log(error)}
 				}
 
@@ -5168,6 +5176,51 @@ window.onload = function() {
 
 						// arena objects
 							displayContentArenaObjectList(null, contentList)
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayContentListSamples */
+				function displayContentListSamples() {
+					try {
+						// races
+							var container = ELEMENTS.content.code.search.races
+							for (var i in RULES.races) {
+								var option = document.createElement("option")
+									option.value = "race-" + i
+									option.innerText = i
+								container.appendChild(option)
+							}
+
+						// skills
+							var container = ELEMENTS.content.code.search.skills
+							for (var i in RULES.skills) {
+								for (var j in RULES.skills[i]) {
+									var option = document.createElement("option")
+										option.value = "skill-" + i + "-" + RULES.skills[i][j].name
+										option.innerText = RULES.skills[i][j].name.replace(/_/g," ")
+									container.appendChild(option)
+								}
+							}
+
+						// conditions
+							var container = ELEMENTS.content.code.search.conditions
+							for (var i in RULES.conditions) {
+								var option = document.createElement("option")
+									option.value = "condition-" + i
+									option.innerText = i.replace(/_/g," ")
+								container.appendChild(option)
+							}
+
+						// items
+							var container = ELEMENTS.content.code.search.items
+							for (var i in RULES.items) {
+								for (var j in RULES.items[i]) {
+									var option = document.createElement("option")
+										option.value = "item-" + i + "-" + RULES.items[i][j].name
+										option.innerText = RULES.items[i][j].name.replace(/_/g," ")
+									container.appendChild(option)
+								}
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -6049,7 +6102,7 @@ window.onload = function() {
 				function submitContentReadChat(event) {
 					try {
 						// select value
-							var value = event.target.closest(".content-chat").id.replace("chat-", "")
+							var value = event.target.closest(".content-chat").getAttribute("content-id")
 
 						// selection
 							var post = {
@@ -6064,6 +6117,57 @@ window.onload = function() {
 						// send socket request
 							SOCKET.send(JSON.stringify(post))
 							displayTool({target: ELEMENTS.tools.contentRadio, forceSet: true})
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitContentComponentSearch */
+				function submitContentComponentSearch(event) {
+					try {
+						// identify value
+							var value = ELEMENTS.content.code.select.value.split("-")
+							var type = value.shift()
+							var name = value.join("-")
+
+						// invalid search
+							if (!name || !type || !["race", "skill", "condition", "item"].includes(type)) {
+								return false
+							}
+
+						// find in rules
+							if (type == "race") {
+								var sample = FUNCTIONS.duplicateObject(RULES.races[name])
+							}
+							else if (type == "skill") {
+									name = name.split("-")
+								var statistic = name.shift()
+									name = name.join("-")
+								var sample = FUNCTIONS.duplicateObject(RULES.skills[statistic].find(function(i) { return i.name == name }))
+									sample.statistic = statistic
+							}
+							else if (type == "condition") {
+								var sample = FUNCTIONS.duplicateObject(RULES.conditions[name])
+							}
+							else if (type == "item") {
+									name = name.split("-")
+								var category = name.shift()
+									name = name.join("-")
+								var sample = FUNCTIONS.duplicateObject(RULES.items[category].find(function(i) { return i.name == name }))
+							}
+
+						// sample?
+							if (!sample) {
+								return false
+							}
+
+						// reformat
+							sample = {
+								addable: true,
+								type: type,
+								data: sample
+							}
+
+						// populate pre
+							ELEMENTS.content.code.sample.innerText = JSON.stringify(sample, null, 2)
 					} catch (error) {console.log(error)}
 				}
 
@@ -6517,8 +6621,8 @@ window.onload = function() {
 							ELEMENTS.gametable.grabbed = {
 								element: event.target,
 								grabOffset: {
-									x: (cursor.x - center.x * CONTENT.zoom),
-									y: (cursor.y - center.y * CONTENT.zoom)
+									x: (cursor.x - center.x),
+									y: (cursor.y - center.y)
 								}
 							}
 					} catch (error) {console.log(error)}
@@ -6557,8 +6661,8 @@ window.onload = function() {
 							}
 						
 						// move content
-							ELEMENTS.gametable.grabbed.element.style.left = (offset.x - parentRectangle.left) / CONTENT.zoom + "px"
-							ELEMENTS.gametable.grabbed.element.style.top = (offset.y - parentRectangle.top) / CONTENT.zoom + "px"
+							ELEMENTS.gametable.grabbed.element.style.left = (offset.x - parentRectangle.left) + "px"
+							ELEMENTS.gametable.grabbed.element.style.top = (offset.y - parentRectangle.top) + "px"
 					} catch (error) {console.log(error)}
 				}
 
@@ -6601,7 +6705,18 @@ window.onload = function() {
 							CONTENT.zoom = Math.pow(2, CONTENT.zoomPower)
 						
 						// set zoom
-							ELEMENTS.gametable.element.querySelector(".content-grabbable").style.zoom = CONTENT.zoom
+							var contentElement = ELEMENTS.gametable.element.querySelector(".content-grabbable")
+							var width = Number(contentElement.getAttribute("data-width"))
+							var height = Number(contentElement.getAttribute("data-height"))
+							contentElement.style.width  = (width  * CONTENT.zoom) + "px"
+							contentElement.style.height = (height * CONTENT.zoom) + "px"
+
+						// recenter?
+							if (modifier == 0) {
+								var parentRectangle = ELEMENTS.gametable.element.getBoundingClientRect()
+								contentElement.style.left = (parentRectangle.width / 2) + "px"
+								contentElement.style.top = (parentRectangle.height / 2) + "px"
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -6768,8 +6883,8 @@ window.onload = function() {
 
 								if ((left <= ELEMENTS.gametable.canvas.cursorX && ELEMENTS.gametable.canvas.cursorX <= right)
 								 && (bottom <= ELEMENTS.gametable.canvas.cursorY && ELEMENTS.gametable.canvas.cursorY <= top)) {
-								 	// meta-click --> load character
-										if (event.metaKey) {
+								 	// alt-click --> load character
+										if (event.altKey) {
 											// not a character
 												if (!arenaObject.characterId) {
 													FUNCTIONS.showToast({success: false, message: "arena object is not a character"})
