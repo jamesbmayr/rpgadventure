@@ -50,6 +50,7 @@ rpgadventure
 |   |- game.js (createOne; readOne, unreadOne; updateOne, updateName, updateBanUser, updateClearChatOrRolls; deleteOne)
 |   |- home.js (signIn, signOut)
 |   |- roll.js (createOne; readAll; updateOne)
+|   |- rules.js (getRule)
 |   |- session.js (createOne; readOne; updateOne)
 |   |- user.js (createOne; readOneSelf; updateOne, updateName, updatePassword, updateSettings, updateGame, updateCharacter, updateContent; deleteOne)
 |

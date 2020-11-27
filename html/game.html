@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="/game.css"/>
 		<script src="/main.js"></script>
 		<script src="/game.js"></script>
-		<script>window.RULES = <script node>var RULES = getAsset("rules"); JSON.stringify(RULES)</script>node></script>
+		<script>window.RULES = <script node>JSON.stringify(getAsset("rules"))</script>node></script>
 		<script>window.USER = <script node>REQUEST.user ? JSON.stringify(REQUEST.user) : "null"</script>node></script>
 	</head>
 	<body>
