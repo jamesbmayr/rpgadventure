@@ -2679,6 +2679,9 @@ window.onload = function() {
 							if (CHARACTER.info.demographics.race && RULES.races[CHARACTER.info.demographics.race]) {
 								ELEMENTS.character.info.raceAbility.value = RULES.races[CHARACTER.info.demographics.race].info.ability
 							}
+							else {
+								ELEMENTS.character.info.raceAbility.value = ""
+							}
 
 						// abilities
 							var run   = CHARACTER.statistics.speed.skills.find(   function(skill) { return skill.name == "run"  }) || {maximum: 0, condition: 0}

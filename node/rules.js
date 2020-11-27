@@ -6896,7 +6896,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -7028,7 +7028,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -7160,7 +7160,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -7292,7 +7292,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -7424,7 +7424,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -7556,7 +7556,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -7688,7 +7688,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -7820,7 +7820,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -7952,7 +7952,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -8084,7 +8084,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -8216,7 +8216,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -8348,7 +8348,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
@@ -8480,7 +8480,7 @@
 											{name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:0.1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
+											{name:"rope",count:10,weight:0.2,usage:[{statistic:"strength",skill:"climb",modifier:5},{statistic:"dexterity",skill:"crafting"}],conditions:{paralysis_arms:1,paralysis_legs:1},fuel:2,materials:"hemp",cost:1,costPerPound:5,description:"per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis",id:"vkafrmfqhqivchjp"},
 											{name:"spyglass",count:1,weight:1,hands:1,usage:[{statistic:"perception",skill:"sight",modifier:10},{statistic:"dexterity",skill:"missile",modifier:5}],materials:"wood, metal, glass",cost:35,description:"for viewing far distances (+10 sight) and accuracy with aim (+5 missile)",id:"hhozcolalgovetay"},
 										]
 									},
