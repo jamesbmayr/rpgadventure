@@ -1665,6 +1665,7 @@
 			height: calc(100% - 2 * var(--medium-gap-size) - (var(--border-size) + 2 * (var(--medium-font-size) + 5 * var(--small-gap-size)) + 2 * var(--medium-gap-size)));
 			overflow-x: hidden;
 			overflow-y: scroll;
+			scroll-behavior: smooth;
 		}
 
 		#chat-messages .search-result-send {
@@ -1681,7 +1682,6 @@
 				margin-bottom: var(--medium-gap-size);
 				background-color: var(--light-gray);
 				color: var(--medium-gray);
-				overflow: hidden;
 			}
 
 			.chat-message:last-child {
@@ -1748,6 +1748,15 @@
 
 			.chat-secret .chat-message-left {
 				width: calc(var(--edge-size) - var(--small-gap-size) - var(--small-gap-size));
+			}
+
+			.chat-message-image {
+				display: block;
+				width: 100%;
+				height: auto;
+				margin-top: var(--small-gap-size);
+				background: transparent;
+				border-radius: var(--border-radius);
 			}
 
 	/** form **/

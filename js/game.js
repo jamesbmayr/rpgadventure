@@ -15,6 +15,11 @@ window.onload = function() {
 			var SOCKET = window.SOCKET = null
 			var SOCKETCHECK = null
 
+		/* regex */
+			var PROTOCOLREGEX = /^(http|https|rtsp|ftp):\/\//i
+			var URLREGEX = /((?:(http|https|rtsp|ftp):\/\/(?:(?:[a-z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-f0-9]{2})){1,64}(?:\:(?:[a-z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-f0-9]{2})){1,25})?\@)?)?((?:(?:[a-z0-9][a-z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-f0-9]{2}))*)?(?:\b|$)/gi
+			var IMAGEURLREGEX = /\.(jpeg|jpg|png|svg|gif|tiff|tif|bmp|iso|webp)(\?.*)?(\#.*)?$/i
+
 		/* initiateApp */
 			initiateApp()
 			function initiateApp() {
@@ -682,9 +687,10 @@ window.onload = function() {
 						// switch
 							ELEMENTS.structure.left.setAttribute("tool", tool)
 
-						// chat notification
+						// chat notification & scroll
 							if (tool == "chat") {
 								ELEMENTS.tools.notification.setAttribute("visibility", false)
+								ELEMENTS.chat.messages.scrollTop = ELEMENTS.chat.messages.scrollHeight
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -1346,7 +1352,7 @@ window.onload = function() {
 							}
 
 						// scroll
-							ELEMENTS.stream.history.scrollLeft = 1000000
+							ELEMENTS.stream.history.scrollLeft = ELEMENTS.stream.history.scrollWidth
 					} catch (error) {console.log(error)}
 				}
 
@@ -4472,7 +4478,7 @@ window.onload = function() {
 							}
 
 						// scroll
-							ELEMENTS.chat.messages.scrollTop = 1000000
+							ELEMENTS.chat.messages.scrollTop = ELEMENTS.chat.messages.scrollHeight
 
 						// one message, and it's a sound?
 							if (messages && messages.length == 1 && messages[0].display.content && messages[0].display.content.type == "audio") {
@@ -4519,10 +4525,22 @@ window.onload = function() {
 							messageLeft.appendChild(messageTime)
 
 						// text
+							var messageImages = []
 							var messageText = document.createElement("div")
 								messageText.className = "chat-message-text"
-								messageText.innerText = message.display.text
+								messageText.innerHTML = message.display.text.replace(URLREGEX, function(url) {
+									if (IMAGEURLREGEX.test(url)) { messageImages.push(url) }
+									return "<a target='_blank' href='" + (PROTOCOLREGEX.test(url) ? "" : "http://") + url + "'>" + url + "</a>"
+								})
 							messageElement.appendChild(messageText)
+
+						// images
+							for (var i in messageImages) {
+								var messageImage = document.createElement("img")
+									messageImage.className = "chat-message-image"
+									messageImage.src = (PROTOCOLREGEX.test(messageImages[i]) ? "" : "http://") + messageImages[i]
+								messageText.append(messageImage)
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -5014,6 +5032,7 @@ window.onload = function() {
 										image = document.createElement("img")
 										image.className = "content-image content-grabbable"
 										image.addEventListener(TRIGGERS.mousedown, grabContent)
+										image.addEventListener(TRIGGERS.scroll, zoomContent)
 									ELEMENTS.gametable.element.appendChild(image)
 							}
 
@@ -6719,8 +6738,18 @@ window.onload = function() {
 								return
 							}
 
-						// get target
-							var modifier = Number(event.target.value || event.target.getAttribute("value")) || 0
+						// scroll wheel?
+							if (event.wheelDelta) {
+								var modifier = (event.wheelDelta > 0) ? 0.0625 : -0.0625
+							}
+							else if (event.deltaY) {
+								var modifier = (event.deltaY < 0) ? 0.0625 : -0.0625
+							}
+
+						// button?
+							else {
+								var modifier = Number(event.target.value || event.target.getAttribute("value")) || 0
+							}
 							CONTENT.zoomPower = modifier ? (CONTENT.zoomPower * 4 + modifier * 4) / 4 : 0
 							CONTENT.zoom = Math.pow(2, CONTENT.zoomPower)
 						
