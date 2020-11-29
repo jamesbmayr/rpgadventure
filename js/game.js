@@ -3186,6 +3186,19 @@ window.onload = function() {
 										select.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
 									usageElement.appendChild(select)
 
+									var modifier = document.createElement("input")
+										modifier.type = "number"
+										if (!enable) {
+											modifier.setAttribute("readonly", true)
+										}
+										modifier.step = 1
+										modifier.className = "item-usage-modifier editable"
+										modifier.placeholder = "#"
+										modifier.setAttribute("field", "skills-" + u + "-modifier")
+										modifier.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+										modifier.value = usage.modifier || 0
+									usageElement.appendChild(modifier)
+
 									var d20 = document.createElement("input")
 										d20.type = "number"
 										d20.setAttribute("readonly", true)
@@ -4290,6 +4303,16 @@ window.onload = function() {
 								}
 								else {
 									item.d6 = Number(event.target.value)
+								}
+							}
+
+						// modifier
+							else if (event.target.className.includes("item-usage-modifier")) {
+								if (event.target.closest(".item-usage")) {
+									var usages = event.target.closest(".item-usages")
+									var usage = event.target.closest(".item-usage")
+									var index = Array.prototype.indexOf.call(usages.children, usage)
+									item.usage[index].modifier = Number(event.target.value)
 								}
 							}
 
