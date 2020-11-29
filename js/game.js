@@ -2656,10 +2656,12 @@ window.onload = function() {
 							}
 
 						// loop through fields
-							for (var i in character.arenaPresets) {
-								var field = ELEMENTS.character.settings.arenaPresets.querySelector("input[property='" + i + "']")
-								if (field) {
-									field.value = character.arenaPresets[i]
+							var presets = character.arenaPresets || {}
+							var fields = Array.from(ELEMENTS.character.settings.arenaPresets.querySelectorAll("input"))
+							for (var i in fields) {
+								var property = fields[i].getAttribute("property")
+								if (property) {
+									fields[i].value = presets[property] || (fields[i].type == "number" || fields[i].type == "range" ? 0 : null)
 								}
 							}
 
@@ -2679,6 +2681,11 @@ window.onload = function() {
 							FUNCTIONS.clearCanvas(canvas, context)
 							FUNCTIONS.drawRectangle(canvas, context, 0, 0, canvas.width, canvas.height, {color: ELEMENTS.gametable.canvas.gridBackground})
 							FUNCTIONS.translateCanvas(canvas, context, 0, 0)
+
+						// presets
+							if (!character.arenaPresets) {
+								return
+							}
 
 						// dimensions
 							var cellSize = 50
