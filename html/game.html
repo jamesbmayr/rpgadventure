@@ -211,6 +211,53 @@
 							</form>
 						</details>
 					</div>
+					<div id="character-settings-arena-presets" class="subsection" visibility="false">
+						<h3>arena object presets</h3>
+						<div class="arena-object">
+							<label class="arena-object-label arena-object-image">
+								<input class="arena-object-input" property="image" placeholder="image url" type="text">
+								<span class="arena-object-label-text">image</span>
+							</label>
+							<label class="arena-object-label arena-object-empty"></label>
+							<label class="arena-object-label">
+								<input class="arena-object-input" property="opacity" step="0.01" min="0" max="1" type="range" value="1">
+								<span class="arena-object-label-text">opacity</span>
+							</label>
+							<label class="arena-object-label">
+								<input class="arena-object-input" property="color" type="color" value="#ffffff">
+								<span class="arena-object-label-text">color</span>
+							</label>
+							<label class="arena-object-label">
+								<input class="arena-object-input" property="glow" step="0.05" min="0" max="1" type="range" value="0">
+								<span class="arena-object-label-text">glow</span>
+							</label>
+							<label class="arena-object-label">
+								<input class="arena-object-input" property="shadow" type="color" value="#000000">
+								<span class="arena-object-label-text">shadow</span>
+							</label>
+							<label class="arena-object-label">
+								<input class="arena-object-input" property="corners" step="1" min="0" max="50" type="range" value="0">
+								<span class="arena-object-label-text">roundness</span>
+							</label>
+							<label class="arena-object-label">
+								<input class="arena-object-input" property="rotation" step="45" min="0" max="360" type="range" value="0">
+								<span class="arena-object-label-text">rotation</span>
+							</label>
+							<label class="arena-object-label arena-object-text">
+								<input class="arena-object-input" property="text" placeholder="text" type="text"><span class="arena-object-label-text">text</span>
+							</label>
+							<label class="arena-object-label arena-object-empty"></label>
+							<label class="arena-object-label">
+								<input class="arena-object-input" property="textSize" step="0.1" min="0" max="10" type="range" value="1">
+								<span class="arena-object-label-text">text size</span>
+							</label>
+							<label class="arena-object-label">
+								<input class="arena-object-input" property="textColor" type="color" value="#ffffff">
+								<span class="arena-object-label-text">text color</span>
+							</label>
+						</div>
+						<canvas id="character-settings-arena-preview"></canvas>
+					</div>
 				</div>
 				<div id="character-content">
 					<div id="character-conditions" class="section">
@@ -597,13 +644,14 @@
 					<div id="content-controls-mouse">
 						<h4>mouse</h4>
 						<li><b>click</b>: select object</li>
+						<li><b>shift-click</b>: select multiple objects</li>
 						<li><b>click & drag</b>: move object to new location</li>
 						<li><b>click & arrows</b>: move object in direction</li>
-						<li><b>alt/option-click</b>: load character</li>
+						<li><b>double-click</b>: load character</li>
 						<br>
 						<li><b>mouse at edge</b>: pan in direction</li>
 						<li><b>scroll</b>: zoom in & out</li>
-						<li><b>shift-click</b>: signal location</li>
+						<li><b>alt/option-click</b>: signal location</li>
 						<li><b>ctrl/right-click & drag</b>: measure distance</li>
 					</div>
 				</div>

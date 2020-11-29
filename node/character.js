@@ -76,8 +76,12 @@
 										callback({success: false, message: "invalid character template name", recipients: [REQUEST.user.id]})
 										return
 									}
-								
-									var character = CORE.duplicateObject(original)
+									
+									var character = CORE.getSchema("character")
+									var duplicate = CORE.duplicateObject(original)
+									for (var i in duplicate) {
+										character[i] = duplicate[i]
+									}
 							}
 
 						// assign

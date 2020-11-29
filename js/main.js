@@ -13,7 +13,9 @@ window.addEventListener("load", function() {
 				resize: "resize",
 				keydown: "keydown",
 				keyup: "keyup",
-				scroll: "wheel"
+				scroll: "wheel",
+				rightclick: "contextmenu",
+				doubleclick: "dblclick"
 			}
 			if ((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent)) {
 				window.TRIGGERS.click = "touchstart"
@@ -22,7 +24,6 @@ window.addEventListener("load", function() {
 				window.TRIGGERS.mouseup = "touchend"
 				window.TRIGGERS.mouseenter = "touchstart"
 				window.TRIGGERS.mouseleave = "touchend"
-				window.TRIGGERS.rightclick = "contextmenu"
 			}
 			else {
 				window.TRIGGERS.click = "click"
@@ -31,15 +32,14 @@ window.addEventListener("load", function() {
 				window.TRIGGERS.mouseup = "mouseup"
 				window.TRIGGERS.mouseenter = "mouseenter"
 				window.TRIGGERS.mouseleave = "mouseleave"
-				window.TRIGGERS.rightclick = "contextmenu"
 			}
 
 		/* defaults */
-			document.addEventListener("dblclick", function(event) {
+			document.addEventListener(TRIGGERS.doubleclick, function(event) {
 				event.preventDefault()
 			})
 
-			document.addEventListener("contextmenu", function(event) {
+			document.addEventListener(TRIGGERS.rightclick, function(event) {
 				event.preventDefault()
 			})
 
@@ -363,11 +363,13 @@ window.addEventListener("load", function() {
 		/* translateCanvas */
 			window.FUNCTIONS.translateCanvas = translateCanvas
 			function translateCanvas(canvas, context, offsetX, offsetY) {
-				// move canvas
-					var halfWidth = Math.round(canvas.width / 2)
-					var halfHeight = Math.round(canvas.height / 2)
-					context.translate(halfWidth, -halfHeight)
-					context.translate(offsetX, -offsetY)
+				try {
+					// move canvas
+						var halfWidth = Math.round(canvas.width / 2)
+						var halfHeight = Math.round(canvas.height / 2)
+						context.translate(halfWidth, -halfHeight)
+						context.translate(offsetX, -offsetY)
+				} catch (error) {console.log(error)}
 			}
 
 		/* rotateCanvas */
@@ -392,7 +394,7 @@ window.addEventListener("load", function() {
 						context.translate(x, y)
 						context.rotate(-degrees * Math.PI / 180)
 						context.translate(-x, -y)
-				} catch (error) {}
+				} catch (error) {console.log(error)}
 			}
 
 		/* drawLine */
@@ -440,7 +442,7 @@ window.addEventListener("load", function() {
 							context.closePath()
 							context.fill()
 						}
-				} catch (error) {}
+				} catch (error) {console.log(error)}
 			}
 
 		/* drawRectangle */
@@ -532,7 +534,7 @@ window.addEventListener("load", function() {
 					// variables
 						options = options || {}
 						context.textBaseline = options.baseline || "middle"
-						context.font         = (options.style ? options.style + " " : "") + (options.size || 20) + "px " + (options.font || "sans-serif")
+						context.font         = (options.style ? options.style + " " : "") + (options.size || 0) + "px " + (options.font || "sans-serif")
 						context.fillStyle    = options.color || "transparent"
 						context.textAlign    = options.alignment || "center"
 						context.shadowBlur   = options.blur ? options.blur : 0
@@ -541,6 +543,6 @@ window.addEventListener("load", function() {
 
 					// draw
 						context.fillText((text || ""), x, canvas.height - y)
-				} catch (error) {}
+				} catch (error) {console.log(error)}
 			}
 })

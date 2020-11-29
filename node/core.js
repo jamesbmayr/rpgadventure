@@ -353,6 +353,19 @@
 								character.access = null
 								character.image = null
 								character.file = null
+								character.arenaPresets = getSchema("arenaObject")
+									delete character.arenaPresets.id
+									delete character.arenaPresets.time
+									delete character.arenaPresets.userId
+									delete character.arenaPresets.characterId
+									delete character.arenaPresets.contentId
+									delete character.arenaPresets.locked
+									delete character.arenaPresets.visible
+									delete character.arenaPresets.x
+									delete character.arenaPresets.y
+									delete character.arenaPresets.z
+									delete character.arenaPresets.width
+									delete character.arenaPresets.height
 							return character
 						break
 
@@ -390,8 +403,10 @@
 								characterId: null,
 								contentId: null,
 								locked: false,
-								text: null,
 								visible: true,
+								text: null,
+								textColor: colors["light-gray"],
+								textSize: 1,
 								x: 0,
 								y: 0,
 								z: 0,

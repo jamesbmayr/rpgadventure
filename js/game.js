@@ -247,7 +247,9 @@ window.onload = function() {
 								delete: {
 									gate: document.getElementById("character-settings-delete-gate"),
 									form: document.getElementById("character-settings-delete-form")
-								}
+								},
+								arenaPresets: document.getElementById("character-settings-arena-presets"),
+								arenaPreview: document.getElementById("character-settings-arena-preview")
 							},
 							info: {
 								element: document.getElementById("character-info"),
@@ -494,6 +496,7 @@ window.onload = function() {
 						ELEMENTS.character.settings.access.select.element.addEventListener(TRIGGERS.change, submitCharacterUpdateAccess)
 						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, submitCharacterCreateDuplicate)
 						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, submitCharacterDelete)
+						ELEMENTS.character.settings.arenaPresets.querySelectorAll("input").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
 						ELEMENTS.character.content.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20) })
 						// ELEMENTS.character.info.imageForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImage)
 						ELEMENTS.character.info.imageInput.addEventListener(TRIGGERS.change, submitCharacterUpdateImage)
@@ -2607,6 +2610,7 @@ window.onload = function() {
 						// no character?
 							if (!CHARACTER) {
 								ELEMENTS.character.settings.metadata.setAttribute("visibility", false)
+								ELEMENTS.character.settings.arenaPresets.setAttribute("visibility", false)
 								displayCharacterMode({target: ELEMENTS.character.modes.settingsRadio, forceSet: true})
 								displayChatListSenders()
 								return
@@ -2617,6 +2621,10 @@ window.onload = function() {
 							ELEMENTS.character.settings.access.select.element.value = CHARACTER.access ? ELEMENTS.character.settings.access.select.me.value : ELEMENTS.character.settings.access.select.all.value
 							ELEMENTS.character.settings.access.form.setAttribute("visibility", (CHARACTER && CHARACTER.id && CHARACTER.userId == USER.id) ? true : false)
 							ELEMENTS.character.settings.delete.gate.setAttribute("visibility", (CHARACTER && CHARACTER.id && CHARACTER.userId == USER.id) ? true : false)
+
+						// arena object
+							ELEMENTS.character.settings.arenaPresets.setAttribute("visibility", true)
+							displayCharacterArenaPresets(CHARACTER)
 
 						// mode
 							var mode = ELEMENTS.character.element.getAttribute("mode") || "play"
@@ -2635,6 +2643,101 @@ window.onload = function() {
 
 						// chat
 							displayChatListSenders()
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterArenaPresets */
+				function displayCharacterArenaPresets(character) {
+					try {
+						// current field?
+							var currentField = document.activeElement
+							if (currentField.closest("#character-settings-arena-presets")) {
+								var currentFieldProperty = currentField.getAttribute("property")
+							}
+
+						// loop through fields
+							for (var i in character.arenaPresets) {
+								var field = ELEMENTS.character.settings.arenaPresets.querySelector("input[property='" + i + "']")
+								if (field) {
+									field.value = character.arenaPresets[i]
+								}
+							}
+
+						// currentField ?
+							if (currentFieldProperty) {
+								document.querySelector("input[property='" + currentFieldProperty + "']").focus()
+							}
+
+						// get canvas
+							var canvas = ELEMENTS.character.settings.arenaPreview
+							var rect = window.getComputedStyle(canvas)
+								canvas.height = rect.height.replace("px","")
+								canvas.width = rect.width.replace("px","")
+							var context = canvas.getContext("2d")
+
+						// clear & background
+							FUNCTIONS.clearCanvas(canvas, context)
+							FUNCTIONS.drawRectangle(canvas, context, 0, 0, canvas.width, canvas.height, {color: ELEMENTS.gametable.canvas.gridBackground})
+							FUNCTIONS.translateCanvas(canvas, context, 0, 0)
+
+						// dimensions
+							var cellSize = 50
+							var x = -cellSize / 2
+							var y = -cellSize / 2
+							var rotateX = 0
+							var rotateY = canvas.height
+							var width = cellSize
+							var height = cellSize
+							var options = {
+								color: character.arenaPresets.color,
+								opacity: 1,
+								rotation: 1 * (character.arenaPresets.rotation || 0)
+							}
+
+						// corners
+							var corners = Number(character.arenaPresets.corners)
+							if (corners) {
+								var absoluteRadius = corners / 100 * (width + height) / 2
+								options.radii = {
+									topLeft: absoluteRadius,
+									topRight: absoluteRadius,
+									bottomRight: absoluteRadius,
+									bottomLeft: absoluteRadius
+								}
+							}
+
+						// shadow
+							if (character.arenaPresets.glow) {
+								options.shadow = character.arenaPresets.shadow
+								options.blur = cellSize * character.arenaPresets.glow
+							}
+
+						// image
+							if (character.arenaPresets.image) {
+								var image = document.createElement("img")
+									image.src = character.arenaPresets.image
+									image.onload = image.onerror = function() {
+										options.image = image
+										FUNCTIONS.rotateCanvas(canvas, context, rotateX, rotateY, character.arenaPresets.rotation, function() {
+											FUNCTIONS.drawImage(canvas, context, x, y, width, height, options)
+										})
+
+										if (character.arenaPresets.text) {
+											FUNCTIONS.drawText(canvas, context, x + width / 2, y + height / 2, character.arenaPresets.text, {color: character.arenaPresets.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: (character.arenaPresets.textSize || 0) * cellSize / 2})
+										}
+									}
+							}
+
+						// draw
+							else {
+								FUNCTIONS.rotateCanvas(canvas, context, rotateX, rotateY, character.arenaPresets.rotation, function() {
+									FUNCTIONS.drawRectangle(canvas, context, x, y, width, height, options)
+								})
+
+								if (character.arenaPresets.text) {
+									FUNCTIONS.drawText(canvas, context, x + width / 2, y + height / 2, character.arenaPresets.text, {color: character.arenaPresets.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: (character.arenaPresets.textSize || 0) * cellSize / 2})
+								}
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -3635,12 +3738,42 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
+			/* submitCharacterUpdateArenaPresets */
+				function submitCharacterUpdateArenaPresets(event) {
+					try {
+						// no preset?
+							if (!CHARACTER.arenaPresets) {
+								CHARACTER.arenaPresets = {}
+							}
+
+						// property
+							var property = event.target.getAttribute("property")
+							if (["opacity", "glow", "corners", "rotation", "textSize"].includes(property)) {
+								var value = Number(event.target.value) || 0
+							}
+							else {
+								var value = event.target.value
+							}
+
+						// image?
+							if (property == "image") {
+								CHARACTER.info.image = value
+							}
+
+						// update
+							CHARACTER.arenaPresets[property] = value
+							submitCharacterUpdate(CHARACTER)
+					} catch (error) {console.log(error)}
+				}
+
 			/* submitCharacterUpdateImage */
 				function submitCharacterUpdateImage(event) {
 					try {
 						// url
 							if (event.target.id == ELEMENTS.character.info.imageInput.id) {
 								CHARACTER.info.image = event.target.value
+								if (!CHARACTER.arenaPresets) { CHARACTER.arenaPresets = {} }
+								CHARACTER.arenaPresets.image = event.target.value
 								submitCharacterUpdate(CHARACTER)
 								return
 							}
@@ -3699,6 +3832,8 @@ window.onload = function() {
 					try {
 						// change image
 							CHARACTER.info.image = null
+							if (!CHARACTER.arenaPresets) { CHARACTER.arenaPresets = {} }
+							CHARACTER.arenaPresets.image = null
 
 						// save
 							submitCharacterUpdate(CHARACTER)
@@ -4835,6 +4970,7 @@ window.onload = function() {
 						// current content?
 							if (CONTENT && CONTENT.id == content.id) {
 								CONTENT = content.delete ? null : content
+								window.CONTENT = CONTENT
 								displayContent()
 							}
 
@@ -4962,6 +5098,7 @@ window.onload = function() {
 										arena.addEventListener(TRIGGERS.mouseenter, focusContentArena)
 										arena.addEventListener(TRIGGERS.mouseleave, blurContentArena)
 										arena.addEventListener(TRIGGERS.rightclick, measureContentArena)
+										arena.addEventListener(TRIGGERS.doubleclick, grabContentArena)
 										arena.addEventListener(TRIGGERS.mousedown, grabContentArena)
 										arena.addEventListener(TRIGGERS.scroll, zoomContentArena)
 									ELEMENTS.gametable.element.appendChild(arena)
@@ -5491,24 +5628,6 @@ window.onload = function() {
 											removeButton.innerText = "x"
 										removeForm.appendChild(removeButton)
 
-									// text
-										var labelText = document.createElement("label")
-											labelText.className = "arena-object-label arena-object-text"
-										listing.appendChild(labelText)
-
-										var inputText = document.createElement("input")
-											inputText.className = "arena-object-input"
-											inputText.setAttribute("property", "text")
-											inputText.placeholder = "text"
-											inputText.type = "text"
-											inputText.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
-										labelText.appendChild(inputText)
-
-										var spanText = document.createElement("span")
-											spanText.className = "arena-object-label-text"
-											spanText.innerText = "text"
-										labelText.appendChild(spanText)
-
 									// x
 										var labelX = document.createElement("label")
 											labelX.className = "arena-object-label"
@@ -5587,6 +5706,102 @@ window.onload = function() {
 											spanHeight.innerText = "height"
 										labelHeight.appendChild(spanHeight)
 
+									// image
+										var labelImage = document.createElement("label")
+											labelImage.className = "arena-object-label arena-object-image"
+										listing.appendChild(labelImage)
+
+										var inputImage = document.createElement("input")
+											inputImage.className = "arena-object-input"
+											inputImage.setAttribute("property", "image")
+											inputImage.placeholder = "image url"
+											inputImage.type = "text"
+											inputImage.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelImage.appendChild(inputImage)
+
+										var spanImage = document.createElement("span")
+											spanImage.className = "arena-object-label-text"
+											spanImage.innerText = "image"
+										labelImage.appendChild(spanImage)
+
+										var labelEmpty = document.createElement("label")
+											labelEmpty.className = "arena-object-label arena-object-empty"
+										listing.appendChild(labelEmpty)
+
+									// opacity
+										var labelOpacity = document.createElement("label")
+											labelOpacity.className = "arena-object-label"
+										listing.appendChild(labelOpacity)
+
+										var inputOpacity = document.createElement("input")
+											inputOpacity.className = "arena-object-input"
+											inputOpacity.setAttribute("property", "opacity")
+											inputOpacity.step = 0.01
+											inputOpacity.min = 0
+											inputOpacity.max = 1
+											inputOpacity.type = "range"
+											inputOpacity.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelOpacity.appendChild(inputOpacity)
+
+										var spanOpacity = document.createElement("span")
+											spanOpacity.className = "arena-object-label-text"
+											spanOpacity.innerText = "opacity"
+										labelOpacity.appendChild(spanOpacity)
+
+									// color
+										var labelColor = document.createElement("label")
+											labelColor.className = "arena-object-label"
+										listing.appendChild(labelColor)
+
+										var inputColor = document.createElement("input")
+											inputColor.className = "arena-object-input"
+											inputColor.setAttribute("property", "color")
+											inputColor.type = "color"
+											inputColor.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelColor.appendChild(inputColor)
+
+										var spanColor = document.createElement("span")
+											spanColor.className = "arena-object-label-text"
+											spanColor.innerText = "color"
+										labelColor.appendChild(spanColor)
+
+									// glow
+										var labelGlow = document.createElement("label")
+											labelGlow.className = "arena-object-label"
+										listing.appendChild(labelGlow)
+
+										var inputGlow = document.createElement("input")
+											inputGlow.className = "arena-object-input"
+											inputGlow.setAttribute("property", "glow")
+											inputGlow.step = 0.05
+											inputGlow.min = 0
+											inputGlow.max = 1
+											inputGlow.type = "range"
+											inputGlow.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelGlow.appendChild(inputGlow)
+
+										var spanGlow = document.createElement("span")
+											spanGlow.className = "arena-object-label-text"
+											spanGlow.innerText = "glow"
+										labelGlow.appendChild(spanGlow)
+
+									// shadow
+										var labelShadow = document.createElement("label")
+											labelShadow.className = "arena-object-label"
+										listing.appendChild(labelShadow)
+
+										var inputShadow = document.createElement("input")
+											inputShadow.className = "arena-object-input"
+											inputShadow.setAttribute("property", "shadow")
+											inputShadow.type = "color"
+											inputShadow.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelShadow.appendChild(inputShadow)
+
+										var spanShadow = document.createElement("span")
+											spanShadow.className = "arena-object-label-text"
+											spanShadow.innerText = "shadow"
+										labelShadow.appendChild(spanShadow)
+
 									// corners
 										var labelCorners = document.createElement("label")
 											labelCorners.className = "arena-object-label"
@@ -5627,97 +5842,64 @@ window.onload = function() {
 											spanRotation.innerText = "rotation"
 										labelRotation.appendChild(spanRotation)
 
-									// glow
-										var labelGlow = document.createElement("label")
-											labelGlow.className = "arena-object-label"
-										listing.appendChild(labelGlow)
+									// text
+										var labelText = document.createElement("label")
+											labelText.className = "arena-object-label arena-object-text"
+										listing.appendChild(labelText)
 
-										var inputGlow = document.createElement("input")
-											inputGlow.className = "arena-object-input"
-											inputGlow.setAttribute("property", "glow")
-											inputGlow.step = 0.05
-											inputGlow.min = 0
-											inputGlow.max = 1
-											inputGlow.type = "range"
-											inputGlow.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
-										labelGlow.appendChild(inputGlow)
+										var inputText = document.createElement("input")
+											inputText.className = "arena-object-input"
+											inputText.setAttribute("property", "text")
+											inputText.placeholder = "text"
+											inputText.type = "text"
+											inputText.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelText.appendChild(inputText)
 
-										var spanGlow = document.createElement("span")
-											spanGlow.className = "arena-object-label-text"
-											spanGlow.innerText = "glow"
-										labelGlow.appendChild(spanGlow)
+										var spanText = document.createElement("span")
+											spanText.className = "arena-object-label-text"
+											spanText.innerText = "text"
+										labelText.appendChild(spanText)
 
-									// shadow
-										var labelShadow = document.createElement("label")
-											labelShadow.className = "arena-object-label"
-										listing.appendChild(labelShadow)
+										var labelEmpty = document.createElement("label")
+											labelEmpty.className = "arena-object-label arena-object-empty"
+										listing.appendChild(labelEmpty)
 
-										var inputShadow = document.createElement("input")
-											inputShadow.className = "arena-object-input"
-											inputShadow.setAttribute("property", "shadow")
-											inputShadow.type = "color"
-											inputShadow.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
-										labelShadow.appendChild(inputShadow)
+									// textSize
+										var labelTextSize = document.createElement("label")
+											labelTextSize.className = "arena-object-label"
+										listing.appendChild(labelTextSize)
 
-										var spanShadow = document.createElement("span")
-											spanShadow.className = "arena-object-label-text"
-											spanShadow.innerText = "shadow"
-										labelShadow.appendChild(spanShadow)
+										var inputTextSize = document.createElement("input")
+											inputTextSize.className = "arena-object-input"
+											inputTextSize.setAttribute("property", "textSize")
+											inputTextSize.step = 0.1
+											inputTextSize.min = 0
+											inputTextSize.max = 10
+											inputTextSize.type = "range"
+											inputTextSize.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelTextSize.appendChild(inputTextSize)
 
-									// opacity
-										var labelOpacity = document.createElement("label")
-											labelOpacity.className = "arena-object-label"
-										listing.appendChild(labelOpacity)
+										var spanTextSize = document.createElement("span")
+											spanTextSize.className = "arena-object-label-text"
+											spanTextSize.innerText = "text size"
+										labelTextSize.appendChild(spanTextSize)
 
-										var inputOpacity = document.createElement("input")
-											inputOpacity.className = "arena-object-input"
-											inputOpacity.setAttribute("property", "opacity")
-											inputOpacity.step = 0.01
-											inputOpacity.min = 0
-											inputOpacity.max = 1
-											inputOpacity.type = "range"
-											inputOpacity.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
-										labelOpacity.appendChild(inputOpacity)
+									// textColor
+										var labelTextColor = document.createElement("label")
+											labelTextColor.className = "arena-object-label"
+										listing.appendChild(labelTextColor)
 
-										var spanOpacity = document.createElement("span")
-											spanOpacity.className = "arena-object-label-text"
-											spanOpacity.innerText = "opacity"
-										labelOpacity.appendChild(spanOpacity)
+										var inputTextColor = document.createElement("input")
+											inputTextColor.className = "arena-object-input"
+											inputTextColor.setAttribute("property", "textColor")
+											inputTextColor.type = "color"
+											inputTextColor.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelTextColor.appendChild(inputTextColor)
 
-									// color
-										var labelColor = document.createElement("label")
-											labelColor.className = "arena-object-label"
-										listing.appendChild(labelColor)
-
-										var inputColor = document.createElement("input")
-											inputColor.className = "arena-object-input"
-											inputColor.setAttribute("property", "color")
-											inputColor.type = "color"
-											inputColor.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
-										labelColor.appendChild(inputColor)
-
-										var spanColor = document.createElement("span")
-											spanColor.className = "arena-object-label-text"
-											spanColor.innerText = "color"
-										labelColor.appendChild(spanColor)
-
-									// image
-										var labelImage = document.createElement("label")
-											labelImage.className = "arena-object-label arena-object-image"
-										listing.appendChild(labelImage)
-
-										var inputImage = document.createElement("input")
-											inputImage.className = "arena-object-input"
-											inputImage.setAttribute("property", "image")
-											inputImage.placeholder = "image url"
-											inputImage.type = "text"
-											inputImage.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
-										labelImage.appendChild(inputImage)
-
-										var spanImage = document.createElement("span")
-											spanImage.className = "arena-object-label-text"
-											spanImage.innerText = "image"
-										labelImage.appendChild(spanImage)
+										var spanTextColor = document.createElement("span")
+											spanTextColor.className = "arena-object-label-text"
+											spanTextColor.innerText = "text color"
+										labelTextColor.appendChild(spanTextColor)
 							}
 
 						// find
@@ -5725,6 +5907,8 @@ window.onload = function() {
 								var inputLocked = listing.querySelector("input[property='locked']")
 								var inputVisible = listing.querySelector("input[property='visible']")
 								var inputText = listing.querySelector("input[property='text']")
+								var inputTextSize = listing.querySelector("input[property='textSize']")
+								var inputTextColor = listing.querySelector("input[property='textColor']")
 								var inputX = listing.querySelector("input[property='x']")
 								var inputY = listing.querySelector("input[property='y']")
 								var inputWidth = listing.querySelector("input[property='width']")
@@ -5740,11 +5924,13 @@ window.onload = function() {
 
 						// set values
 							var activeElement = document.activeElement
-							listing.setAttribute("selected", ELEMENTS.gametable.selected && ELEMENTS.gametable.selected.arenaObject.id == object.id)
+							listing.setAttribute("selected", ELEMENTS.gametable.selected && Object.keys(ELEMENTS.gametable.selected).includes(object.id))
 							if (									listing.style.order		!== object.z) { 			listing.style.order = object.z || 0 }
 							if (									inputLocked.checked 	!== object.locked) { 		inputLocked.checked = object.locked || false }
 							if (									inputVisible.checked 	!== object.visible) { 		inputVisible.checked = object.visible || false }
 							if (inputText != activeElement && 		inputText.value 		!== object.text) { 			inputText.value = object.text || "" }
+							if (inputTextSize != activeElement && 	inputTextSize.value 	!== object.textSize) { 		inputTextSize.value = object.textSize || 0 }
+							if (inputTextColor != activeElement && 	inputTextColor.value 	!== object.textColor) { 	inputTextColor.value = object.textColor || ELEMENTS.gametable.canvas.gridColor }
 							if (inputX != activeElement && 			inputX.value 			!== object.x) { 			inputX.value = object.x || 0 }
 							if (inputY != activeElement && 			inputY.value 			!== object.y) { 			inputY.value = object.y || 0 }
 							if (inputWidth != activeElement && 		inputWidth.value 		!== object.width) { 		inputWidth.value = object.width || 0 }
@@ -5910,7 +6096,7 @@ window.onload = function() {
 
 						// text
 							if (object.text) {
-								FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x + width / 2, y + height / 2, object.text, {color: ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow:ELEMENTS.gametable.canvas.gridBackground, size: cellSize / 2})
+								FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x + width / 2, y + height / 2, object.text, {color: object.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: (object.textSize || 0) * cellSize / 2})
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -6802,14 +6988,19 @@ window.onload = function() {
 							}
 
 						// set selection
-							ELEMENTS.gametable.selected = {
-								arenaObject: CONTENT.arena.objects[id]
+							if (!ELEMENTS.gametable.selected || !event.shiftKey) {
+								ELEMENTS.gametable.selected = {}
 							}
+							ELEMENTS.gametable.selected[id] = CONTENT.arena.objects[id]
 
 						// center (if actually selected on sidebar)
 							if (event.type || event.timeStamp) {
-								ELEMENTS.gametable.canvas.offsetX = -ELEMENTS.gametable.selected.arenaObject.x * ELEMENTS.gametable.canvas.cellSize
-								ELEMENTS.gametable.canvas.offsetY = -ELEMENTS.gametable.selected.arenaObject.y * ELEMENTS.gametable.canvas.cellSize
+								var keys = Object.keys(ELEMENTS.gametable.selected)
+								var id = keys[keys.length - 1]
+								if (id) {
+									ELEMENTS.gametable.canvas.offsetX = -CONTENT.arena.objects[id].x * ELEMENTS.gametable.canvas.cellSize
+									ELEMENTS.gametable.canvas.offsetY = -CONTENT.arena.objects[id].y * ELEMENTS.gametable.canvas.cellSize
+								}
 							}
 						
 						// redisplay
@@ -6901,8 +7092,8 @@ window.onload = function() {
 							ELEMENTS.gametable.canvas.cursorX = coordinates.x
 							ELEMENTS.gametable.canvas.cursorY = coordinates.y
 
-						// shift-click --> signal
-							if (event.shiftKey) {
+						// alt-click --> signal
+							if (event.altKey) {
 								submitContentArenaSignal(coordinates)
 								return
 							}
@@ -6919,62 +7110,69 @@ window.onload = function() {
 						// loop through to find top-most object
 							for (var i in sortedKeys) {
 								var arenaObject = CONTENT.arena.objects[sortedKeys[i]]
-								if (!arenaObject.visible && !(arenaObject.userId == USER.id || CONTENT.userId == USER.id)) { continue }
-								if (!(CONTENT.userId == USER.id || arenaObject.userId == USER.id || (CHARACTER && arenaObject.characterId == CHARACTER.id))) { continue }
 
-								var xRadius = (arenaObject.width / 2)
-								var yRadius = (arenaObject.height / 2)
+								// locked --> continue
+									if (arenaObject.locked) {
+										continue
+									}
 
-								var top = Number(arenaObject.y) + yRadius
-								var right = Number(arenaObject.x) + xRadius
-								var bottom = Number(arenaObject.y) - yRadius
-								var left = Number(arenaObject.x) - xRadius
+								// not yours
+									if (!(CONTENT.userId == USER.id || arenaObject.userId == USER.id || (CHARACTER && arenaObject.characterId == CHARACTER.id))) {
+										continue
+									}
 
-								if ((left <= ELEMENTS.gametable.canvas.cursorX && ELEMENTS.gametable.canvas.cursorX <= right)
-								 && (bottom <= ELEMENTS.gametable.canvas.cursorY && ELEMENTS.gametable.canvas.cursorY <= top)) {
-								 	// alt-click --> load character
-										if (event.altKey) {
-											// not a character
-												if (!arenaObject.characterId) {
-													FUNCTIONS.showToast({success: false, message: "arena object is not a character"})
-													return
-												}
-											
-											// open character
-												var post = {
-													action: "readCharacter",
-													character: {
-														userId: USER ? USER.id : null,
-														gameId: GAME ? GAME.id : null,
-														id: arenaObject.characterId
+								// get edges
+									var xRadius = (arenaObject.width / 2)
+									var yRadius = (arenaObject.height / 2)
+
+									var top = Number(arenaObject.y) + yRadius
+									var right = Number(arenaObject.x) + xRadius
+									var bottom = Number(arenaObject.y) - yRadius
+									var left = Number(arenaObject.x) - xRadius
+
+								// click within edges?
+									if ((left <= ELEMENTS.gametable.canvas.cursorX && ELEMENTS.gametable.canvas.cursorX <= right)
+									 && (bottom <= ELEMENTS.gametable.canvas.cursorY && ELEMENTS.gametable.canvas.cursorY <= top)) {
+									 	// double-click --> load character
+											if (event.type == "dblclick") {
+												// not a character
+													if (!arenaObject.characterId) {
+														return
 													}
-												}
+												
+												// open character
+													var post = {
+														action: "readCharacter",
+														character: {
+															userId: USER ? USER.id : null,
+															gameId: GAME ? GAME.id : null,
+															id: arenaObject.characterId
+														}
+													}
 
-												SOCKET.send(JSON.stringify(post))
-												displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
+													SOCKET.send(JSON.stringify(post))
+													displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
+													return
+											}
+
+									 	// locked
+											if (arenaObject.locked) {
+												FUNCTIONS.showToast({success: false, message: "arena object locked"})
 												return
-										}
+											}
 
-								 	// locked
-										if (arenaObject.locked) {
-											FUNCTIONS.showToast({success: false, message: "arena object locked"})
-											return
-										}
+										// grab
+											ELEMENTS.gametable.grabbed = arenaObject
 
-									// grab
-										ELEMENTS.gametable.grabbed = {
-											arenaObject: arenaObject
-										}
+										// grabbing style
+											ELEMENTS.body.setAttribute("grabbing", true)
 
-									// grabbing style
-										ELEMENTS.body.setAttribute("grabbing", true)
-
-									// scroll to listing
-										var listing = document.querySelector("#arena-object-" + arenaObject.id)
-										ELEMENTS.content.element.scrollTop = listing.offsetTop - 5
-										selectContentArenaObject({target: listing})
-									return
-								}
+										// scroll to listing
+											var listing = document.querySelector("#arena-object-" + arenaObject.id)
+											ELEMENTS.content.element.scrollTop = listing.offsetTop - 5
+											selectContentArenaObject({target: listing, shiftKey: event.shiftKey || false})
+										return
+									}
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -7021,17 +7219,26 @@ window.onload = function() {
 							ELEMENTS.gametable.canvas.cursorY = coordinates.y
 
 						// grabbed?
-							if (ELEMENTS.gametable.grabbed && ELEMENTS.gametable.grabbed.arenaObject) {
+							if (ELEMENTS.gametable.grabbed) {
 								// locked
-									if (CONTENT.arena.objects[ELEMENTS.gametable.grabbed.arenaObject.id].locked) {
-										ELEMENTS.gametable.grabbed = null
-										FUNCTIONS.showToast({success: false, message: "arena object locked"})
-										return
+									for (var i in ELEMENTS.gametable.selected) {
+										if (CONTENT.arena.objects[i].locked) {
+											ELEMENTS.gametable.grabbed = null
+											FUNCTIONS.showToast({success: false, message: "arena object locked"})
+											return
+										}
 									}
 
-								// move
-									ELEMENTS.gametable.grabbed.arenaObject.x = Math.round(coordinates.x * 2) / 2
-									ELEMENTS.gametable.grabbed.arenaObject.y = Math.round(coordinates.y * 2) / 2
+								// before
+									var differenceX = (Math.round(coordinates.x * 2) / 2) - Number(ELEMENTS.gametable.grabbed.x)
+									var differenceY = (Math.round(coordinates.y * 2) / 2) - Number(ELEMENTS.gametable.grabbed.y)
+
+								// other items selected?
+									for (var i in ELEMENTS.gametable.selected) {
+										CONTENT.arena.objects[i].x += differenceX
+										CONTENT.arena.objects[i].y += differenceY
+									}
+
 									displayContentArena()
 									return
 							}
@@ -7066,11 +7273,18 @@ window.onload = function() {
 							}
 
 						// no grabbed content
-							if (!ELEMENTS.gametable.grabbed || !ELEMENTS.gametable.grabbed.arenaObject) {
+							if (!ELEMENTS.gametable.grabbed) {
 								ELEMENTS.gametable.grabbed = null
 								if (wasMeasuring) {
 									displayContentArenaImages()
 								}
+								return
+							}
+
+						// locked
+							if (CONTENT.arena.objects[ELEMENTS.gametable.grabbed.id].locked) {
+								ELEMENTS.gametable.grabbed = null
+								FUNCTIONS.showToast({success: false, message: "arena object locked"})
 								return
 							}
 
@@ -7088,17 +7302,11 @@ window.onload = function() {
 							}
 
 						// snap object
-							var arenaObject = ELEMENTS.gametable.grabbed.arenaObject
-							post.content.arena.objects[arenaObject.id] = {
-								x: Math.round(arenaObject.x * 2) / 2,
-								y: Math.round(arenaObject.y * 2) / 2
-							}
-
-						// locked
-							if (CONTENT.arena.objects[ELEMENTS.gametable.grabbed.arenaObject.id].locked) {
-								ELEMENTS.gametable.grabbed = null
-								FUNCTIONS.showToast({success: false, message: "arena object locked"})
-								return
+							for (var i in ELEMENTS.gametable.selected) {
+								post.content.arena.objects[i] = {
+									x: Math.round(CONTENT.arena.objects[i].x * 2) / 2,
+									y: Math.round(CONTENT.arena.objects[i].y * 2) / 2
+								}
 							}
 
 						// unselect
@@ -7113,7 +7321,7 @@ window.onload = function() {
 				function nudgeContentArenaObject(event) {
 					try {
 						// no content
-							if (!CONTENT || !ELEMENTS.gametable.selected || !ELEMENTS.gametable.selected.arenaObject || document.activeElement !== ELEMENTS.gametable.canvas.element) {
+							if (!CONTENT || !ELEMENTS.gametable.selected || document.activeElement !== ELEMENTS.gametable.canvas.element) {
 								return
 							}
 
@@ -7123,23 +7331,34 @@ window.onload = function() {
 							}
 
 						// locked
-							if (CONTENT.arena.objects[ELEMENTS.gametable.selected.arenaObject.id].locked) {
-								FUNCTIONS.showToast({success: false, message: "arena object locked"})
-								return
+							for (var i in ELEMENTS.gametable.selected) {
+								if (CONTENT.arena.objects[i].locked) {
+									FUNCTIONS.showToast({success: false, message: "arena object locked"})
+									return
+								}
 							}
 
 						// keycode
 							if (event.which == 37) { // left
-								ELEMENTS.gametable.selected.arenaObject.x += -1
+								var direction = "x"
+								var amount = -1
 							}
 							else if (event.which == 38) { // up
-								ELEMENTS.gametable.selected.arenaObject.y += 1
+								var direction = "y"
+								var amount = 1
 							}
 							else if (event.which == 39) { // right
-								ELEMENTS.gametable.selected.arenaObject.x += 1
+								var direction = "x"
+								var amount = 1
 							}
 							else if (event.which == 40) { // down
-								ELEMENTS.gametable.selected.arenaObject.y += -1
+								var direction = "y"
+								var amount = -1
+							}
+
+						// update objects
+							for (var i in ELEMENTS.gametable.selected) {
+								CONTENT.arena.objects[i][direction] += amount
 							}
 
 						// post
@@ -7156,10 +7375,11 @@ window.onload = function() {
 							}
 
 						// snap object
-							var arenaObject = ELEMENTS.gametable.selected.arenaObject
-							post.content.arena.objects[arenaObject.id] = {
-								x: Math.round(arenaObject.x * 2) / 2,
-								y: Math.round(arenaObject.y * 2) / 2
+							for (var i in ELEMENTS.gametable.selected) {
+								post.content.arena.objects[i] = {
+									x: Math.round(CONTENT.arena.objects[i].x * 2) / 2,
+									y: Math.round(CONTENT.arena.objects[i].y * 2) / 2
+								}
 							}
 						
 						// send
@@ -7241,7 +7461,7 @@ window.onload = function() {
 							var currentOffsetCellsX = ELEMENTS.gametable.canvas.offsetX / ELEMENTS.gametable.canvas.cellSize
 							var currentOffsetCellsY = ELEMENTS.gametable.canvas.offsetY / ELEMENTS.gametable.canvas.cellSize
 
-						// set zoom & cellsize
+						// set zoom & cellSize
 							ELEMENTS.gametable.canvas.zoomPower = modifier ? (ELEMENTS.gametable.canvas.zoomPower * 4 + modifier * 4) / 4 : 0
 							ELEMENTS.gametable.canvas.cellSize = 50 * Math.pow(2, ELEMENTS.gametable.canvas.zoomPower)
 

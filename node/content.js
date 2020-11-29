@@ -755,8 +755,14 @@
 
 											var character = results.documents[0]
 											object.characterId = character.id
-											object.image = character.info.image
-											object.text = character.info.name
+											
+											// arenaPresets
+												if (character.arenaPresets) {
+													for (var i in character.arenaPresets) {
+														object[i] = character.arenaPresets[i]
+													}
+												}
+												
 											saveArenaObject()
 											return
 										})
@@ -849,7 +855,12 @@
 												continue
 											}
 
-											arena.objects[i][j] = arenaObjects[i][j]
+											if (["x","y","z","width","height","textSize","corners","rotation","glow","opacity"].includes(j)) {
+												arena.objects[i][j] = Number(arenaObjects[i][j]) || 0
+											}
+											else {
+												arena.objects[i][j] = arenaObjects[i][j]
+											}
 										}
 									}
 								}
