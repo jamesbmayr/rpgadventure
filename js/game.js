@@ -111,6 +111,7 @@ window.onload = function() {
 								cellSize: 50,
 								gridColor: "#dddddd",
 								gridBackground: "#555555",
+								gridHighlight: "#5555aa",
 								images: {}
 							}
 						}
@@ -6109,6 +6110,12 @@ window.onload = function() {
 								options.blur = cellSize * object.glow
 							}
 
+						// selected
+							if (ELEMENTS.gametable.selected && ELEMENTS.gametable.selected[object.id]) {
+								options.shadow = ELEMENTS.gametable.canvas.gridHighlight
+								options.blur = cellSize
+							}
+
 						// image
 							if (object.image) {
 								options.image = ELEMENTS.gametable.canvas.images[object.id]
@@ -6247,7 +6254,7 @@ window.onload = function() {
 							}
 
 						// origin
-							FUNCTIONS.drawCircle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, 0, 0, (ELEMENTS.gametable.canvas.cellSize / 4), {color: ELEMENTS.gametable.canvas.gridColor, opacity: 0.5})
+							FUNCTIONS.drawCircle(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, 0, 0, (ELEMENTS.gametable.canvas.cellSize / 10), {color: ELEMENTS.gametable.canvas.gridColor, opacity: 0.5})
 					} catch (error) {console.log(error)}
 				}
 
@@ -7017,15 +7024,25 @@ window.onload = function() {
 								return
 							}
 
-						// set selection
-							if (!ELEMENTS.gametable.selected || !event.shiftKey) {
-								ELEMENTS.gametable.selected = {}
+						// shift-click on already selected --> unselect
+							if ((event.type || event.timeStamp) && event.shiftKey && ELEMENTS.gametable.selected && ELEMENTS.gametable.selected[arenaObject.id]) {
+								delete ELEMENTS.gametable.selected[arenaObject.id]
+								displayContentArenaPanel()
+								displayContentArenaImages()
+								return
 							}
-							ELEMENTS.gametable.selected[id] = CONTENT.arena.objects[id]
+
+						// set selection
+							if (!arenaObject.locked) {
+								if (!ELEMENTS.gametable.selected || !event.shiftKey) {
+									ELEMENTS.gametable.selected = {}
+								}
+								ELEMENTS.gametable.selected[id] = CONTENT.arena.objects[id]
+							}
 
 						// center (if actually selected on sidebar)
-							if (event.type || event.timeStamp) {
-								var keys = Object.keys(ELEMENTS.gametable.selected)
+							if ((event.type || event.timeStamp) && !arenaObject.locked) {
+								var keys = Object.keys(ELEMENTS.gametable.selected || {})
 								var id = keys[keys.length - 1]
 								if (id) {
 									ELEMENTS.gametable.canvas.offsetX = -CONTENT.arena.objects[id].x * ELEMENTS.gametable.canvas.cellSize
@@ -7191,6 +7208,14 @@ window.onload = function() {
 												return
 											}
 
+										// shift-click on already selected --> unselect
+											if (event.shiftKey && ELEMENTS.gametable.selected && ELEMENTS.gametable.selected[arenaObject.id]) {
+												delete ELEMENTS.gametable.selected[arenaObject.id]
+												displayContentArenaPanel()
+												displayContentArenaImages()
+												return
+											}
+
 										// grab
 											ELEMENTS.gametable.grabbed = arenaObject
 
@@ -7200,10 +7225,19 @@ window.onload = function() {
 										// scroll to listing
 											var listing = document.querySelector("#arena-object-" + arenaObject.id)
 											ELEMENTS.content.element.scrollTop = listing.offsetTop - 5
-											selectContentArenaObject({target: listing, shiftKey: event.shiftKey || false})
+
+										// not already selected?
+											if (!ELEMENTS.gametable.selected || !ELEMENTS.gametable.selected[arenaObject.id]) {
+												selectContentArenaObject({target: listing, shiftKey: event.shiftKey || false})
+											}
 										return
 									}
 							}
+
+						// nothing selected --> redisplay
+							ELEMENTS.gametable.grabbed = ELEMENTS.gametable.selected = null
+							displayContentArenaPanel()
+							displayContentArenaImages()
 					} catch (error) {console.log(error)}
 				}
 

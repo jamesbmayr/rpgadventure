@@ -55,6 +55,8 @@
 			height: var(--edge-size);
 			overflow: hidden;
 			background-color: var(--dark-gray);
+			box-shadow: 0 0 var(--shadow-size) var(--dark-gray);
+			z-index: 3;
 		}
 
 		#left {
@@ -62,6 +64,8 @@
 			width: var(--panel-size);
 			height: calc(100% - var(--edge-size));
 			background-color: var(--dark-gray);
+			box-shadow: 0 0 var(--shadow-size) var(--dark-gray);
+			z-index: 2;
 		}
 
 		#right {
@@ -69,6 +73,7 @@
 			left: var(--panel-size);
 			width: calc(100% - var(--panel-size));
 			height: calc(100% - var(--edge-size));
+			z-index: 1;
 		}
 
 /*** stream ***/
@@ -2001,7 +2006,15 @@
 			}
 
 			.arena-object[selected=true] {
-				box-shadow: 0 0 calc(2 * var(--shadow-size)) var(--dark-blue);
+				box-shadow: 0 0 calc(3 * var(--shadow-size)) var(--medium-blue);
+			}
+
+			.arena-object span {
+				user-select: none;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				-o-user-select: none;
 			}
 
 		/* label */
@@ -2013,6 +2026,7 @@
 				color: var(--light-gray);
 				border-radius: var(--border-radius);
 				margin-bottom: var(--small-gap-size);
+				pointer-events: none;
 			}
 
 			.arena-object-label:nth-child(odd) {
@@ -2026,6 +2040,7 @@
 				margin: 0 var(--small-gap-size) 0 0;
 				width: calc(100% - var(--small-gap-size) - var(--edge-size));
 				height: var(--medium-font-size);
+				pointer-events: all;
 			}
 
 			.arena-object-select {
@@ -2035,6 +2050,7 @@
 				margin: 0 var(--small-gap-size) 0 0;
 				width: calc(100% + var(--small-gap-size) - var(--edge-size));
 				height: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
+				pointer-events: all;
 			}
 
 			.arena-object-label-text {
@@ -2061,6 +2077,7 @@
 				font-size: var(--medium-font-size);
 				color: var(--light-gray);
 				margin: 0 0;
+				pointer-events: all;
 			}
 
 			.arena-object-up {
@@ -2087,11 +2104,13 @@
 				width: calc(100% / 4 - 2 * var(--large-gap-size));
 				text-align: center;
 				padding: var(--small-gap-size) var(--large-gap-size);
+				pointer-events: none;
 			}
 
 			.arena-object-visible, .arena-object-locked {
 				width: var(--large-gap-size);
 				margin: 0 var(--small-gap-size);
+				pointer-events: all;
 			}
 
 			.arena-object-visible-label span, .arena-object-locked-label span {
@@ -2099,6 +2118,7 @@
 				height: 100%;
 				line-height: 1.25;
 				cursor: pointer;
+				pointer-events: all;
 			}
 
 			.arena-object-empty {
@@ -2117,7 +2137,6 @@
 	/** top level **/
 		#gametable {
 			background-color: var(--medium-gray);
-			box-shadow: 0 0 var(--shadow-size) var(--dark-gray) inset;
 			overflow: hidden;
 		}
 
