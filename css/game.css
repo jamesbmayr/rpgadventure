@@ -969,6 +969,7 @@
 				margin: var(--medium-gap-size) var(--small-gap-size) var(--medium-gap-size) 0;
 				font-weight: bold;
 				text-align: center;
+				border-radius: 100%;
 			}
 
 			.statistic-maximum {
@@ -1066,6 +1067,7 @@
 				margin: 0 var(--small-gap-size) 0 0;
 				font-weight: bold;
 				text-align: center;
+				border-radius: 100%;
 			}
 
 			.skill-maximum {
@@ -1324,6 +1326,7 @@
 				font-weight: bold;
 				text-align: center;
 				color: var(--dark-yellow);
+				border-radius: 100%;
 			}
 			
 			#character[mode="items"] .item-usage-skill {
