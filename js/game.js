@@ -104,6 +104,10 @@ window.onload = function() {
 								offsetY: 0,
 								cursorX: null,
 								cursorY: null,
+								moveStartX: null,
+								moveStartY: null,
+								moveOffsetX: null,
+								moveOffsetY: null,
 								measureStartX: null,
 								measureStartY: null,
 								zoomPower: 0,
@@ -2682,6 +2686,8 @@ window.onload = function() {
 							FUNCTIONS.clearCanvas(canvas, context)
 							FUNCTIONS.drawRectangle(canvas, context, 0, 0, canvas.width, canvas.height, {color: ELEMENTS.gametable.canvas.gridBackground})
 							FUNCTIONS.translateCanvas(canvas, context, 0, 0)
+							FUNCTIONS.drawLine(canvas, context, -canvas.width / 2, 0, canvas.width / 2, 0, {color: ELEMENTS.gametable.canvas.gridColor})
+							FUNCTIONS.drawLine(canvas, context, 0, -canvas.height / 2, 0, canvas.height / 2, {color: ELEMENTS.gametable.canvas.gridColor})
 
 						// presets
 							if (!character.arenaPresets) {
@@ -2689,7 +2695,7 @@ window.onload = function() {
 							}
 
 						// dimensions
-							var cellSize = 50
+							var cellSize = 200
 							var x = -cellSize / 2
 							var y = -cellSize / 2
 							var rotateX = 0
@@ -7110,6 +7116,8 @@ window.onload = function() {
 							var coordinates = {
 								x: (actualOffset.x - Number(ELEMENTS.gametable.canvas.offsetX)) / cellSize,
 								y: (actualOffset.y + Number(ELEMENTS.gametable.canvas.offsetY)) / cellSize * -1,
+								actualOffsetX: actualOffset.x,
+								actualOffsetY: actualOffset.y
 							}
 
 						// return
@@ -7234,8 +7242,14 @@ window.onload = function() {
 									}
 							}
 
-						// nothing selected --> redisplay
+						// nothing selected --> set coordinates
 							ELEMENTS.gametable.grabbed = ELEMENTS.gametable.selected = null
+							ELEMENTS.gametable.canvas.moveOffsetX = ELEMENTS.gametable.canvas.offsetX
+							ELEMENTS.gametable.canvas.moveOffsetY = ELEMENTS.gametable.canvas.offsetY
+							ELEMENTS.gametable.canvas.moveStartX = coordinates.actualOffsetX
+							ELEMENTS.gametable.canvas.moveStartY = coordinates.actualOffsetY
+
+						// redisplay
 							displayContentArenaPanel()
 							displayContentArenaImages()
 					} catch (error) {console.log(error)}
@@ -7310,6 +7324,15 @@ window.onload = function() {
 						// redisplay
 							if (ELEMENTS.gametable.canvas.measureStartX !== null && ELEMENTS.gametable.canvas.measureStartY !== null) {
 								displayContentArenaImages()
+								return
+							}
+
+						// move
+							if (ELEMENTS.gametable.canvas.moveStartX !== null && ELEMENTS.gametable.canvas.moveStartY !== null) {
+								ELEMENTS.gametable.canvas.offsetX = Math.round((ELEMENTS.gametable.canvas.moveOffsetX + (coordinates.actualOffsetX - ELEMENTS.gametable.canvas.moveStartX)) * 100) / 100
+								ELEMENTS.gametable.canvas.offsetY = Math.round((ELEMENTS.gametable.canvas.moveOffsetY - (coordinates.actualOffsetY - ELEMENTS.gametable.canvas.moveStartY)) * 100) / 100
+								displayContentArenaImages()
+								return
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -7323,6 +7346,10 @@ window.onload = function() {
 								ELEMENTS.gametable.canvas.measureStartY = null
 								ELEMENTS.gametable.canvas.cursorX = null
 								ELEMENTS.gametable.canvas.cursorY = null
+								ELEMENTS.gametable.canvas.moveStartX = null
+								ELEMENTS.gametable.canvas.moveStartY = null
+								ELEMENTS.gametable.canvas.moveOffsetX = null
+								ELEMENTS.gametable.canvas.moveOffsetY = null
 								ELEMENTS.gametable.grabbed = null
 								ELEMENTS.gametable.selected = null
 								ELEMENTS.gametable.canvas.element.blur()
@@ -7338,7 +7365,11 @@ window.onload = function() {
 
 						// no grabbed content
 							if (!ELEMENTS.gametable.grabbed) {
-								ELEMENTS.gametable.grabbed = null
+								ELEMENTS.gametable.canvas.moveStartX = null
+								ELEMENTS.gametable.canvas.moveStartY = null
+								ELEMENTS.gametable.canvas.moveOffsetX = null
+								ELEMENTS.gametable.canvas.moveOffsetY = null
+								
 								if (wasMeasuring) {
 									displayContentArenaImages()
 								}
@@ -7476,6 +7507,11 @@ window.onload = function() {
 			/* startPanningContentArena */
 				function startPanningContentArena(event) {
 					try {
+						// already drag-moving?
+							if (ELEMENTS.gametable.canvas.moveStartX !== null && ELEMENTS.gametable.canvas.moveStartY !== null) {
+								return
+							}
+
 						// get direction & multiplier
 							var directions = event.target.getAttribute("directions").split(/\s/gi)
 							var multiplier = Number(event.target.getAttribute("multiplier"))

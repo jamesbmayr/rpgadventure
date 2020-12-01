@@ -299,7 +299,6 @@
 			outline: none;
 			color: var(--medium-blue);
 			cursor: pointer;
-			vertical-align: middle;
 			font-family: var(--font-0);
 		}
 
@@ -518,8 +517,8 @@
 		}
 
 		.option-search-result:hover, .option-search-result:focus {
-			background-color: var(--medium-gray);
 			color: var(--light-gray) !important;
+			background-color: var(--dark-gray) !important;
 		}
 
 		.option-search-select, .option-search-button {

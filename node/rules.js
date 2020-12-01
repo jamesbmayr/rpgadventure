@@ -5640,6 +5640,18 @@
 										description: "from animals"
 									},
 									{
+										name: "hood",
+										count: 1,
+										type: "armor",
+										armorType: "head",
+										d6: 2,
+										weight: 1,
+										fuel: 1,
+										materials: "cloth",
+										cost: 10,
+										description: "opponents at -10 to facial recognition"
+									},
+									{
 										name: "hourglass",
 										count: 1,
 										weight: 1,
@@ -5798,6 +5810,25 @@
 										materials: "paper",
 										cost: 25,
 										description: "+5 geography"
+									},
+									{
+										name: "mask",
+										count: 1,
+										type: "armor",
+										armorType: "head",
+										d6: 1,
+										weight: 0.5,
+										fuel: 1,
+										usage: [
+											{
+												statistic: "immunity",
+												skill: "infection_resistance",
+												modifier: 5
+											}
+										],
+										materials: "cloth",
+										cost: 10,
+										description: "opponents at -10 to facial recognition, boosts infection resistance"
 									},
 									{
 										name: "measuring cups",
