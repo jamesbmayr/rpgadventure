@@ -397,14 +397,17 @@
 					}
 
 				// loop through settings
-					REQUEST.user.settings.volume = Math.max(0, Math.min(1, REQUEST.post.user.settings.volume))
+					var settings = {
+						volume: Math.max(0, Math.min(1, REQUEST.post.user.settings.volume)),
+						color: REQUEST.post.user.settings.color || "#000000"
+					}
 
 				// query
 					var query = CORE.getSchema("query")
 						query.collection = "users"
 						query.command = "update"
 						query.filters = {id: REQUEST.user.id}
-						query.document = {settings: REQUEST.user.settings}
+						query.document = {settings: settings}
 
 				// update
 					CORE.accessDatabase(query, function(results) {

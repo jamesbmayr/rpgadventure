@@ -166,12 +166,16 @@ window.onload = function() {
 							},
 							user: {
 								element: document.getElementById("settings-user"),
-								audio: {
-									volume: document.getElementById("settings-audio-volume")
-								},
 								name: {
 									form: document.getElementById("settings-user-name-form"),
 									input: document.getElementById("settings-user-name-input")
+								},
+								color: {
+									form: document.getElementById("settings-color-form"),
+									input: document.getElementById("settings-color-input")
+								},
+								audio: {
+									volume: document.getElementById("settings-audio-volume")
 								},
 								password: {
 									form: document.getElementById("settings-user-password-form"),
@@ -238,8 +242,8 @@ window.onload = function() {
 									form: document.getElementById("character-settings-access-form"),
 									select: {
 										element: document.getElementById("character-settings-access-select"),
-										all: document.getElementById("character-settings-access-select-all"),
-										me: document.getElementById("character-settings-access-select-me")
+										public: document.getElementById("character-settings-access-select-public"),
+										private: document.getElementById("character-settings-access-select-private")
 									}
 								},
 								download: {
@@ -380,9 +384,11 @@ window.onload = function() {
 							},
 							access: {
 								form: document.getElementById("content-access-form"),
-								select: document.getElementById("content-access-select"),
-								all: document.getElementById("content-access-select-all"),
-								me: document.getElementById("content-access-select-me")
+								select: {
+									element: document.getElementById("content-access-select"),
+									public: document.getElementById("content-access-select-public"),
+									private: document.getElementById("content-access-select-private")
+								},
 							},
 							code: {
 								form: document.getElementById("content-code-form"),
@@ -421,6 +427,11 @@ window.onload = function() {
 								form: document.getElementById("content-delete-form"),
 								button: document.getElementById("content-delete-button")
 							},
+							turnOrder: {
+								form: document.getElementById("content-turn-order-form"),
+								button: document.getElementById("content-turn-order-button"),
+								list: document.getElementById("content-turn-order-list")
+							},
 							controls: {
 								zoom: {
 									out: {
@@ -446,10 +457,6 @@ window.onload = function() {
 									right: {
 										form: document.getElementById("content-controls-pan-right-form")
 									}
-								},
-								turn: {
-									form: document.getElementById("content-controls-turn-form"),
-									button: document.getElementById("content-controls-turn-button")
 								}
 							},
 							objects: {
@@ -484,8 +491,9 @@ window.onload = function() {
 						ELEMENTS.settings.game.clearChat.form.addEventListener(TRIGGERS.submit, submitGameUpdateChatDelete)
 						ELEMENTS.settings.game.clearRolls.form.addEventListener(TRIGGERS.submit, submitGameUpdateRollsDelete)
 						ELEMENTS.settings.game.delete.form.addEventListener(TRIGGERS.submit, submitGameDelete)
-						ELEMENTS.settings.user.audio.volume.addEventListener(TRIGGERS.change, submitUserUpdateVolume)
 						ELEMENTS.settings.user.name.input.addEventListener(TRIGGERS.change, submitUserUpdateName)
+						ELEMENTS.settings.user.color.input.addEventListener(TRIGGERS.change, submitUserUpdateColor)
+						ELEMENTS.settings.user.audio.volume.addEventListener(TRIGGERS.change, submitUserUpdateVolume)
 						ELEMENTS.settings.user.password.old.addEventListener(TRIGGERS.change, submitUserUpdatePassword)
 						ELEMENTS.settings.user.password.new.addEventListener(TRIGGERS.change, submitUserUpdatePassword)
 						ELEMENTS.settings.auth.signout.form.addEventListener(TRIGGERS.submit, submitUserUpdateSignout)
@@ -523,7 +531,7 @@ window.onload = function() {
 						ELEMENTS.content.add.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateRules)
 						ELEMENTS.content.send.form.addEventListener(TRIGGERS.submit, submitChatCreateContent)
 						ELEMENTS.content.name.input.addEventListener(TRIGGERS.change, submitContentUpdateName)
-						ELEMENTS.content.access.select.addEventListener(TRIGGERS.change, submitContentUpdateAccess)
+						ELEMENTS.content.access.select.element.addEventListener(TRIGGERS.change, submitContentUpdateAccess)
 						ELEMENTS.content.code.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
 						ELEMENTS.content.url.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
 						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
@@ -533,6 +541,7 @@ window.onload = function() {
 						ELEMENTS.content.code.searchButton.addEventListener(TRIGGERS.click, submitContentComponentSearch)
 						ELEMENTS.body.addEventListener(TRIGGERS.mousemove, moveContent)
 						ELEMENTS.body.addEventListener(TRIGGERS.mouseup, ungrabContent)
+						ELEMENTS.content.turnOrder.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateTurnOrder)
 						ELEMENTS.content.controls.zoom.in.form.addEventListener(TRIGGERS.submit, zoomContent)
 						ELEMENTS.content.controls.zoom.zero.form.addEventListener(TRIGGERS.submit, zoomContent)
 						ELEMENTS.content.controls.zoom.out.form.addEventListener(TRIGGERS.submit, zoomContent)
@@ -540,7 +549,6 @@ window.onload = function() {
 						ELEMENTS.content.controls.pan.up.form.addEventListener(TRIGGERS.submit, panContentArena)
 						ELEMENTS.content.controls.pan.down.form.addEventListener(TRIGGERS.submit, panContentArena)
 						ELEMENTS.content.controls.pan.right.form.addEventListener(TRIGGERS.submit, panContentArena)
-						ELEMENTS.content.controls.turn.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateTurnOrder)
 						ELEMENTS.content.objects.searchButton.addEventListener(TRIGGERS.click, submitContentArenaObjectCreate)
 						window.addEventListener(TRIGGERS.resize, displayContentArena)
 
@@ -1158,13 +1166,17 @@ window.onload = function() {
 								return false
 							}
 
-						// volume
+						// settings
 							if (USER.settings) {
-								ELEMENTS.settings.user.audio.volume.value = Math.max(0, Math.min(1, USER.settings.volume))
-								var audios = Array.from(ELEMENTS.body.querySelectorAll("audio"))
-								for (var a in audios) {
-									audios[a].volume = Math.max(0, Math.min(1, USER.settings.volume))
-								}
+								// volume
+									ELEMENTS.settings.user.audio.volume.value = Math.max(0, Math.min(1, USER.settings.volume))
+									var audios = Array.from(ELEMENTS.body.querySelectorAll("audio"))
+									for (var a in audios) {
+										audios[a].volume = Math.max(0, Math.min(1, USER.settings.volume))
+									}
+
+								// color
+									ELEMENTS.settings.user.color.input.value = USER.settings.color || "#000000"
 							}
 
 						// username
@@ -1183,34 +1195,6 @@ window.onload = function() {
 				}
 
 		/** submit **/
-			/* submitUserUpdateVolume */
-				function submitUserUpdateVolume(event) {
-					try {
-						// connected?
-							if (!SOCKET) {
-								FUNCTIONS.showToast({success: false, message: "no websocket connection"})
-								return
-							}
-
-						// get number
-							var volume = Math.max(0, Math.min(1, Number(event.target.value)))
-
-						// save
-							USER.settings.volume = volume
-
-						// post
-							var post = {
-								action: "updateUserSettings",
-								user: {
-									settings: USER.settings
-								}
-							}
-
-						// send
-							SOCKET.send(JSON.stringify(post))
-					} catch (error) {console.log(error)}
-				}
-
 			/* submitUserUpdateName */
 				function submitUserUpdateName(event) {
 					try {
@@ -1232,6 +1216,62 @@ window.onload = function() {
 							if (!post.user.name || !FUNCTIONS.isNumLet(post.user.name) || post.user.name.length < 8) {
 								FUNCTIONS.showToast({success: false, message: "name must be 8+ numbers and letters"})
 								return
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitUserUpdateColor */
+				function submitUserUpdateColor(event) {
+					try {
+						// connected?
+							if (!SOCKET) {
+								FUNCTIONS.showToast({success: false, message: "no websocket connection"})
+								return
+							}
+
+						// get color
+							var color = event.target.value
+
+						// save
+							USER.settings.color = color
+
+						// post
+							var post = {
+								action: "updateUserSettings",
+								user: {
+									settings: USER.settings
+								}
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitUserUpdateVolume */
+				function submitUserUpdateVolume(event) {
+					try {
+						// connected?
+							if (!SOCKET) {
+								FUNCTIONS.showToast({success: false, message: "no websocket connection"})
+								return
+							}
+
+						// get number
+							var volume = Math.max(0, Math.min(1, Number(event.target.value)))
+
+						// save
+							USER.settings.volume = volume
+
+						// post
+							var post = {
+								action: "updateUserSettings",
+								user: {
+									settings: USER.settings
+								}
 							}
 
 						// send
@@ -1361,6 +1401,19 @@ window.onload = function() {
 
 						// scroll
 							ELEMENTS.stream.history.scrollLeft = ELEMENTS.stream.history.scrollWidth
+
+						// turn order?
+							if (rollGroup.options && rollGroup.options.turnOrder && CONTENT && CONTENT.id == rollGroup.contentId) {
+								ELEMENTS.content.turnOrder.list.innerHTML = ""
+								for (var i in rollGroup.rolls) {
+									if (!rollGroup.rolls[i].display.spacer) {
+										var turnOrderItem = document.createElement("li")
+											turnOrderItem.className = "content-turn-order-item"
+											turnOrderItem.innerHTML = rollGroup.rolls[i].display.text + " " + rollGroup.rolls[i].display.total
+										ELEMENTS.content.turnOrder.list.appendChild(turnOrderItem)
+									}
+								}
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -1491,6 +1544,7 @@ window.onload = function() {
 								rollGroup: {
 									userId: USER ? USER.id : null,
 									gameId: GAME ? GAME.id : null,
+									contentId: CONTENT ? CONTENT.id : null,
 									characterId: CHARACTER ? CHARACTER.id : null,
 									rolls: rolls
 								}
@@ -2623,9 +2677,9 @@ window.onload = function() {
 
 						// metadata
 							ELEMENTS.character.settings.metadata.setAttribute("visibility", true)
-							ELEMENTS.character.settings.access.select.element.value = CHARACTER.access ? ELEMENTS.character.settings.access.select.me.value : ELEMENTS.character.settings.access.select.all.value
-							ELEMENTS.character.settings.access.form.setAttribute("visibility", (CHARACTER && CHARACTER.id && CHARACTER.userId == USER.id) ? true : false)
-							ELEMENTS.character.settings.delete.gate.setAttribute("visibility", (CHARACTER && CHARACTER.id && CHARACTER.userId == USER.id) ? true : false)
+							ELEMENTS.character.settings.access.select.element.value = CHARACTER.access ? ELEMENTS.character.settings.access.select.private.value : ELEMENTS.character.settings.access.select.public.value
+							ELEMENTS.character.settings.access.form.setAttribute("visibility", (CHARACTER && CHARACTER.id && (CHARACTER.userId == USER.id || CHARACTER.gameUserId == USER.id)) ? true : false)
+							ELEMENTS.character.settings.delete.gate.setAttribute("visibility", (CHARACTER && CHARACTER.id && (CHARACTER.userId == USER.id || CHARACTER.gameUserId == USER.id)) ? true : false)
 
 						// arena object
 							ELEMENTS.character.settings.arenaPresets.setAttribute("visibility", true)
@@ -2737,7 +2791,8 @@ window.onload = function() {
 										})
 
 										if (character.arenaPresets.text) {
-											FUNCTIONS.drawText(canvas, context, x + width / 2, y + height / 2, character.arenaPresets.text, {color: character.arenaPresets.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: (character.arenaPresets.textSize || 0) * cellSize / 2})
+											var textSize = (character.arenaPresets.textSize || 0) * cellSize / 100
+											FUNCTIONS.drawText(canvas, context, x + width / 2, y + height + textSize / 2, character.arenaPresets.text, {color: character.arenaPresets.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: textSize})
 										}
 									}
 							}
@@ -2749,7 +2804,8 @@ window.onload = function() {
 								})
 
 								if (character.arenaPresets.text) {
-									FUNCTIONS.drawText(canvas, context, x + width / 2, y + height / 2, character.arenaPresets.text, {color: character.arenaPresets.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: (character.arenaPresets.textSize || 0) * cellSize / 2})
+									var textSize = (character.arenaPresets.textSize || 0) * cellSize / 100
+									FUNCTIONS.drawText(canvas, context, x + width / 2, y + height + textSize / 2, character.arenaPresets.text, {color: character.arenaPresets.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: textSize})
 								}
 							}
 					} catch (error) {console.log(error)}
@@ -3725,11 +3781,11 @@ window.onload = function() {
 							}
 								
 						// set
-							if (post.character.access == ELEMENTS.character.settings.access.select.all.value) {
+							if (post.character.access == ELEMENTS.character.settings.access.select.public.value) {
 								post.character.access = null
 							}
-							if (post.character.access == ELEMENTS.character.settings.access.select.me.value) {
-								post.character.access = USER.id
+							if (post.character.access == ELEMENTS.character.settings.access.select.private.value) {
+								post.character.access = CHARACTER.userId
 							}
 
 						// send socket request
@@ -3774,8 +3830,14 @@ window.onload = function() {
 							}
 
 						// property
+							var type = event.target.type || event.target.getAttribute("type")
 							var property = event.target.getAttribute("property")
-							if (["opacity", "glow", "corners", "rotation", "textSize"].includes(property)) {
+
+						// set value
+							if (type == "checkbox") {
+								var value = !event.target.checked
+							}
+							else if (type == "range" || type == "number") {
 								var value = Number(event.target.value) || 0
 							}
 							else {
@@ -4672,6 +4734,9 @@ window.onload = function() {
 							var messageElement = document.createElement("div")
 								messageElement.className = "chat-message" + (message.recipientId ? " chat-secret" : "")
 								messageElement.id = "chat-" + message.id
+								if (message.display.color && !message.recipientId) {
+									messageElement.style.backgroundColor = message.display.color
+								}
 							ELEMENTS.chat.messages.appendChild(messageElement)
 
 						// left
@@ -4895,12 +4960,21 @@ window.onload = function() {
 									gameId: GAME ? GAME.id : null,
 									recipientId: ELEMENTS.chat.send.recipients.select.value,
 									display: {
+										color: USER.settings.color ? USER.settings.color : null,
 										sender: ELEMENTS.chat.send.sender.select.value,
 										recipient: ELEMENTS.chat.send.recipients.select.querySelector("option[value='" + ELEMENTS.chat.send.recipients.select.value + "']").innerText,
 										time: new Date().getTime(),
 										text: ELEMENTS.chat.send.input.value
 									}
 								}
+							}
+
+						// color
+							if (ELEMENTS.chat.send.sender.select.value == ELEMENTS.chat.send.sender.anonymous.value) {
+								post.chat.display.color = null
+							}
+							if (ELEMENTS.chat.send.recipients.select.value !== ELEMENTS.chat.send.recipients.all.value) {
+								post.chat.display.color = null
 							}
 
 						// validate
@@ -5051,15 +5125,15 @@ window.onload = function() {
 							ELEMENTS.content.name.input.value = CONTENT.name
 
 						// access
-							ELEMENTS.content.access.select.value = CONTENT.access ? ELEMENTS.content.access.me.value : ELEMENTS.content.access.all.value
-							ELEMENTS.content.access.form.setAttribute("visibility", (CONTENT && CONTENT.id && CONTENT.userId == USER.id) ? true : false)
+							ELEMENTS.content.access.select.element.value = CONTENT.access ? ELEMENTS.content.access.select.private.value : ELEMENTS.content.access.select.public.value
+							ELEMENTS.content.access.form.setAttribute("visibility", (CONTENT && CONTENT.id && (CONTENT.userId == USER.id || CONTENT.gameUserId == USER.id)) ? true : false)
 
 						// data
 							ELEMENTS.content.url.input.value = CONTENT.url || null
 							ELEMENTS.content.code.input.value = CONTENT.code || null
 
 						// delete gate
-							ELEMENTS.content.delete.gate.setAttribute("visibility", (CONTENT && CONTENT.id && CONTENT.userId == USER.id) ? true : false)
+							ELEMENTS.content.delete.gate.setAttribute("visibility", (CONTENT && CONTENT.id && (CONTENT.userId == USER.id || CONTENT.gameUserId == USER.id)) ? true : false)
 
 						// mode
 							ELEMENTS.content.element.setAttribute("mode", CONTENT.type || "none")
@@ -5909,10 +5983,10 @@ window.onload = function() {
 										var inputTextSize = document.createElement("input")
 											inputTextSize.className = "arena-object-input"
 											inputTextSize.setAttribute("property", "textSize")
-											inputTextSize.step = 0.1
+											inputTextSize.step = 1
 											inputTextSize.min = 0
-											inputTextSize.max = 10
-											inputTextSize.type = "range"
+											inputTextSize.max = 100
+											inputTextSize.type = "number"
 											inputTextSize.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
 										labelTextSize.appendChild(inputTextSize)
 
@@ -6139,7 +6213,8 @@ window.onload = function() {
 
 						// text
 							if (object.text) {
-								FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x + width / 2, y + height / 2, object.text, {color: object.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: (object.textSize || 0) * cellSize / 2})
+								var textSize = (object.textSize || 0) * cellSize / 100
+								FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x + width / 2, y + height + textSize / 2, object.text, {color: object.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: textSize})
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -6224,7 +6299,7 @@ window.onload = function() {
 							FUNCTIONS.drawLine(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, startX, startY, endX, endY, {color: ELEMENTS.gametable.canvas.gridColor, opacity: 1, border: cellSize / 10})
 
 						// text
-							FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, midX, midY, distance, {color: ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow:ELEMENTS.gametable.canvas.gridBackground, size: cellSize / 2})
+							FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, midX, midY, distance, {color: ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: cellSize / 2})
 					} catch (error) {console.log(error)}
 				}
 
@@ -6478,7 +6553,7 @@ window.onload = function() {
 									id: CONTENT.id,
 									userId: USER ? USER.id : null,
 									gameId: GAME ? GAME.id : null,
-									access: ELEMENTS.content.access.select.value
+									access: ELEMENTS.content.access.select.element.value
 								}
 							}
 
@@ -6487,11 +6562,11 @@ window.onload = function() {
 								FUNCTIONS.showToast({success: false, message: "no content selected"})
 								return
 							}
-							if (post.content.access == ELEMENTS.content.access.all.value) {
+							if (post.content.access == ELEMENTS.content.access.select.public.value) {
 								post.content.access = null
 							}
-							if (post.content.access == ELEMENTS.content.access.me.value) {
-								post.content.access = USER.id
+							if (post.content.access == ELEMENTS.content.access.select.private.value) {
+								post.content.access = CONTENT.userId
 							}
 
 						// send socket request
@@ -6715,17 +6790,28 @@ window.onload = function() {
 							post.content.arena.objects[id] = {}
 
 						// set property
+							var type = event.target.type || event.target.getAttribute("type")
 							var property = event.target.getAttribute("property")
 							if (!property) {
 								FUNCTIONS.showToast({success: false, message: "no property updated"})
 								return
 							}
-							post.content.arena.objects[id][property] = (event.target.type == "checkbox") ? !event.target.checked : (event.target.value || event.target.getAttribute("value"))
 
 						// locked
 							if (property !== "locked" && CONTENT.arena.objects[id].locked) {
 								FUNCTIONS.showToast({success: false, message: "arena object locked"})
 								return
+							}
+
+						// set value
+							if (type == "checkbox") {
+								post.content.arena.objects[id][property] = !event.target.checked
+							}
+							else if (type == "range" || type == "number") {
+								post.content.arena.objects[id][property] = Number(event.target.value) || 0
+							}
+							else {
+								post.content.arena.objects[id][property] = event.target.value
 							}
 
 						// send socket request
@@ -7308,13 +7394,21 @@ window.onload = function() {
 									}
 
 								// before
-									var differenceX = (Math.round(coordinates.x * 2) / 2) - Number(ELEMENTS.gametable.grabbed.x)
-									var differenceY = (Math.round(coordinates.y * 2) / 2) - Number(ELEMENTS.gametable.grabbed.y)
+									var roundedX = (Math.round(coordinates.x * 2) / 2)
+									var roundedY = (Math.round(coordinates.y * 2) / 2)
+									var differenceX = roundedX - Number(ELEMENTS.gametable.grabbed.x)
+									var differenceY = roundedY - Number(ELEMENTS.gametable.grabbed.y)
 
 								// other items selected?
 									for (var i in ELEMENTS.gametable.selected) {
-										CONTENT.arena.objects[i].x += differenceX
-										CONTENT.arena.objects[i].y += differenceY
+										if (i == ELEMENTS.gametable.grabbed.id) {
+											CONTENT.arena.objects[i].x = roundedX
+											CONTENT.arena.objects[i].y = roundedY
+										}
+										else {
+											CONTENT.arena.objects[i].x += Number(differenceX)
+											CONTENT.arena.objects[i].y += Number(differenceY)
+										}
 									}
 
 									displayContentArena()

@@ -418,8 +418,8 @@
 						callback({success: false, message: "no character object", recipients: [REQUEST.user.id]})
 						return
 					}
-					if (REQUEST.post.character.userId !== REQUEST.user.id) {
-						callback({success: false, message: "only the creator may change access", recipients: [REQUEST.user.id]})
+					if (REQUEST.post.character.userId !== REQUEST.user.id && REQUEST.post.character.gameUserId !== REQUEST.user.id) {
+						callback({success: false, message: "only the creator or game owner may change access", recipients: [REQUEST.user.id]})
 						return
 					}
 
@@ -427,7 +427,7 @@
 					var query = CORE.getSchema("query")
 						query.collection = "characters"
 						query.command = "update"
-						query.filters = {id: REQUEST.post.character.id, userId: REQUEST.user.id}
+						query.filters = {id: REQUEST.post.character.id}
 						query.document = {access: REQUEST.post.character.access}
 
 				// update
@@ -735,12 +735,8 @@
 
 						// validate
 							var character = results.documents[0]
-							if (character.access && character.access !== REQUEST.user.id) {
-								callback({success: false, message: "no access to this character", recipients: [REQUEST.user.id]})
-								return
-							}
-							if (character.userId !== REQUEST.user.id) {
-								callback({success: false, message: "only the creator may delete the character", recipients: [REQUEST.user.id]})
+							if (character.userId !== REQUEST.user.id && character.gameUserId !== REQUEST.user.id) {
+								callback({success: false, message: "only the creator or game owner may delete the character", recipients: [REQUEST.user.id]})
 								return
 							}
 
@@ -748,7 +744,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "characters"
 								query.command = "delete"
-								query.filters = {id: character.id, userId: REQUEST.user.id}
+								query.filters = {id: character.id}
 
 						// delete
 							CORE.accessDatabase(query, function(results) {

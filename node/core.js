@@ -273,6 +273,7 @@
 									salt: null
 								},
 								settings: {
+									color: getAsset("colors")["medium-gray"],
 									volume: 1
 								},
 								gameId: null,
@@ -316,8 +317,10 @@
 								time: new Date().getTime(),
 								userId: null,
 								gameId: null,
+								contentId: null,
 								characterId: null,
-								rolls: []
+								rolls: [],
+								options: {}
 							}
 						break
 
@@ -406,7 +409,7 @@
 								visible: true,
 								text: null,
 								textColor: colors["light-gray"],
-								textSize: 1,
+								textSize: 50,
 								x: 0,
 								y: 0,
 								z: 0,

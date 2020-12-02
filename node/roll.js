@@ -32,6 +32,7 @@
 				// gameId
 					var postRollGroup = REQUEST.post.rollGroup
 					var gameId = REQUEST.post.rollGroup.gameId
+					var contentId = REQUEST.post.rollGroup.contentId || null
 					var characterId = REQUEST.post.rollGroup.characterId || null
 
 				// query
@@ -64,6 +65,7 @@
 							var rollGroup = CORE.getSchema("rollGroup")
 								rollGroup.userId = REQUEST.user.id
 								rollGroup.gameId = gameId
+								rollGroup.contentId = contentId
 								rollGroup.characterId = characterId
 
 						// rolls
@@ -428,6 +430,7 @@
 
 										var run = character.statistics.speed.skills.find(function(skill) { return skill.name == "run" }) || {maximum: 0, condition: 0}
 										turnOrder[i].initiative = Math.max(0, character.statistics.speed.maximum + character.statistics.speed.damage + character.statistics.speed.condition + run.maximum + run.condition)
+										turnOrder[i].name = turnOrder[i].name || character.info.name || "?"
 									}
 
 								// sort
@@ -439,6 +442,10 @@
 									var rollGroup = CORE.getSchema("rollGroup")
 										rollGroup.userId = REQUEST.user.id
 										rollGroup.gameId = gameId
+										rollGroup.contentId = contentId
+										rollGroup.options = {
+											turnOrder: true
+										}
 
 									var roll = CORE.getSchema("roll")
 										roll.display.spacer = true

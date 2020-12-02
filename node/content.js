@@ -408,8 +408,8 @@
 						callback({success: false, message: "no content object", recipients: [REQUEST.user.id]})
 						return
 					}
-					if (REQUEST.post.content.userId !== REQUEST.user.id) {
-						callback({success: false, message: "only the creator may change access", recipients: [REQUEST.user.id]})
+					if (REQUEST.post.content.userId !== REQUEST.user.id && REQUEST.post.content.gameUserId !== REQUEST.user.id) {
+						callback({success: false, message: "only the creator or game owner may change access", recipients: [REQUEST.user.id]})
 						return
 					}
 
@@ -417,7 +417,7 @@
 					var query = CORE.getSchema("query")
 						query.collection = "content"
 						query.command = "update"
-						query.filters = {id: REQUEST.post.content.id, userId: REQUEST.post.content.userId}
+						query.filters = {id: REQUEST.post.content.id}
 						query.document = {access: REQUEST.post.content.access}
 
 				// update
@@ -727,7 +727,7 @@
 									arenaSignal.y = Number(signal.y) || 0
 								arena.signals[arenaSignal.id] = arenaSignal
 
-								saveArenaObject()
+								saveArenaObject(REQUEST, arena, callback)
 								return
 							}
 
@@ -749,7 +749,7 @@
 									// find
 										CORE.accessDatabase(query, function(results) {
 											if (!results.success) {
-												saveArenaObject()
+												saveArenaObject(REQUEST, arena, callback)
 												return
 											}
 
@@ -763,7 +763,7 @@
 													}
 												}
 												
-											saveArenaObject()
+											saveArenaObject(REQUEST, arena, callback)
 											return
 										})
 									return
@@ -778,7 +778,7 @@
 									// find
 										CORE.accessDatabase(query, function(results) {
 											if (!results.success) {
-												saveArenaObject()
+												saveArenaObject(REQUEST, arena, callback)
 												return
 											}
 
@@ -786,7 +786,7 @@
 											object.contentId = content.id
 											object.image = content.url
 											object.text = content.name
-											saveArenaObject()
+											saveArenaObject(REQUEST, arena, callback)
 											return
 										})
 									return
@@ -804,11 +804,11 @@
 										}
 
 									// save
-										saveArenaObject()
+										saveArenaObject(REQUEST, arena, callback)
 										return
 								}
 								else {
-									saveArenaObject()
+									saveArenaObject(REQUEST, arena, callback)
 									return
 								}
 							}
@@ -829,7 +829,7 @@
 										}
 									}
 								}
-								saveArenaObject()
+								saveArenaObject(REQUEST, arena, callback)
 								return
 							} 
 
@@ -864,72 +864,85 @@
 										}
 									}
 								}
-								saveArenaObject()
+								saveArenaObject(REQUEST, arena, callback)
 								return
 							}
+					})
+			}
+			catch (error) {
+				CORE.logError(error)
+				callback({success: false, message: "unable to " + arguments.callee.name})
+			}
+		}
 
-						// save
-							function saveArenaObject() {
-								// signals
-									var now = new Date().getTime()
-									for (var i in arena.signals) {
-										if (arena.signals[i].expiration < now) {
-											delete arena.signals[i]
-										}
-									}
+	/* saveArenaObject */
+		module.exports.saveArenaObject = saveArenaObject
+		function saveArenaObject(REQUEST, arena, callback) {
+			try {
+				// no arena?
+					if (!arena || !REQUEST.post || !REQUEST.post.content) {
+						callback({success: false, message: "arena inaccessible", recipients: [REQUEST.user.id]})
+						return
+					}
 
-								// query
-									var query = CORE.getSchema("query")
-										query.collection = "content"
-										query.command = "update"
-										query.filters = {id: REQUEST.post.content.id}
-										query.document = {arena: arena}
+				// signals
+					var now = new Date().getTime()
+					for (var i in arena.signals) {
+						if (arena.signals[i].expiration < now) {
+							delete arena.signals[i]
+						}
+					}
 
-								// update
-									CORE.accessDatabase(query, function(results) {
-										if (!results.success) {
-											results.recipients = [REQUEST.user.id]
-											callback(results)
-											return
-										}
+				// query
+					var query = CORE.getSchema("query")
+						query.collection = "content"
+						query.command = "update"
+						query.filters = {id: REQUEST.post.content.id}
+						query.document = {arena: arena}
 
-										// content
-											var content = results.documents[0]
-											var contentList = [{
-												id: content.id,
-												type: content.type,
-												name: content.name,
-												access: content.access
-											}]
+				// update
+					CORE.accessDatabase(query, function(results) {
+						if (!results.success) {
+							results.recipients = [REQUEST.user.id]
+							callback(results)
+							return
+						}
 
-										// query
-											var query = CORE.getSchema("query")
-												query.collection = "users"
-												query.command = "find"
-												query.filters = {gameId: content.gameId}
+						// content
+							var content = results.documents[0]
+							var contentList = [{
+								id: content.id,
+								type: content.type,
+								name: content.name,
+								access: content.access
+							}]
 
-										// find
-											CORE.accessDatabase(query, function(results) {
-												if (!results.success) {
-													results.recipients = [REQUEST.user.id]
-													callback(results)
-													return
-												}
+						// query
+							var query = CORE.getSchema("query")
+								query.collection = "users"
+								query.command = "find"
+								query.filters = {gameId: content.gameId}
 
-												// ids
-													var ids = results.documents.filter(function(u) {
-														return u.contentId == content.id
-													}).map(function(u) {
-														return u.id
-													}) || []
+						// find
+							CORE.accessDatabase(query, function(results) {
+								if (!results.success) {
+									results.recipients = [REQUEST.user.id]
+									callback(results)
+									return
+								}
 
-												// return content
-													var recipients = ids
-													callback({success: true, content: content, contentList: contentList, recipients: recipients})
-													return
-											})
-									})
-							}
+								// ids
+									var ids = results.documents.filter(function(u) {
+										return u.contentId == content.id
+									}).map(function(u) {
+										return u.id
+									}) || []
+
+								// return content
+									var recipients = ids
+									callback({success: true, content: content, contentList: contentList, recipients: recipients})
+									return
+							})
 					})
 			}
 			catch (error) {
@@ -971,12 +984,8 @@
 
 						// validate
 							var content = results.documents[0]
-							if (content.access && content.access !== REQUEST.user.id) {
-								callback({success: false, message: "no access to this content", recipients: [REQUEST.user.id]})
-								return
-							}
-							if (content.userId !== REQUEST.user.id) {
-								callback({success: false, message: "only the creator may delete the content", recipients: [REQUEST.user.id]})
+							if (content.userId !== REQUEST.user.id && content.gameUserId !== REQUEST.user.id) {
+								callback({success: false, message: "only the creator or game owner may delete the content", recipients: [REQUEST.user.id]})
 								return
 							}
 
@@ -984,7 +993,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "content"
 								query.command = "delete"
-								query.filters = {id: content.id, userId: REQUEST.user.id}
+								query.filters = {id: content.id}
 
 						// delete
 							CORE.accessDatabase(query, function(results) {

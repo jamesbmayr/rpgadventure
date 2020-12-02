@@ -108,14 +108,19 @@
 				</div>
 				<div id="settings-user" class="subsection">
 					<h3>user</h3>
+					<form id="settings-user-name-form" method="post" action="javascript:;">
+						<h4>name</h4>
+						<input id="settings-user-name-input" type="text" placeholder="name" autocomplete="off"/>
+					</form>
+					<form id="settings-color-form" method="post" action="javascript:;">
+						<h4>color</h4>
+						<div id="settings-color-label" class="form-pair">&#x1f3a8;</div>
+						<input id="settings-color-input" type="color"/>
+					</form>
 					<form id="settings-audio-form" method="post" action="javascript:;">
 						<h4>audio</h4>
 						<div id="settings-audio-label" class="form-pair">&#x1f50a;</div>
 						<input id="settings-audio-volume" type="range" min="0" max="1" step="0.01" value="1" class="form-pair"/>
-					</form>
-					<form id="settings-user-name-form" method="post" action="javascript:;">
-						<h4>name</h4>
-						<input id="settings-user-name-input" type="text" placeholder="name" autocomplete="off"/>
 					</form>
 					<form id="settings-user-password-form" method="post" action="javascript:;">
 						<h4>password</h4>
@@ -193,8 +198,8 @@
 						<form id="character-settings-access-form" method="post" action="javascript:;">
 							<h4>access</h4>
 							<select id="character-settings-access-select">
-								<option id="character-settings-access-select-all" value="[all]">[all]</option>
-								<option id="character-settings-access-select-me" value="[me]" selected>[me]</option>
+								<option id="character-settings-access-select-public" value="[public]">[public]</option>
+								<option id="character-settings-access-select-private" value="[private]" selected>[private]</option>
 							</select>
 						</form>
 						<form id="character-settings-download-form" method="post" action="javascript:;">
@@ -248,7 +253,7 @@
 							</label>
 							<label class="arena-object-label arena-object-empty"></label>
 							<label class="arena-object-label">
-								<input class="arena-object-input" property="textSize" step="0.1" min="0" max="10" type="range" value="1">
+								<input class="arena-object-input" property="textSize" step="1" min="0" max="100" type="number" value="50">
 								<span class="arena-object-label-text">text size</span>
 							</label>
 							<label class="arena-object-label">
@@ -561,8 +566,8 @@
 					<form id="content-access-form" method="post" action="javascript:;">
 						<h4>access</h4>
 						<select id="content-access-select">
-							<option id="content-access-select-all" value="[all]">[all]</option>
-							<option id="content-access-select-me" value="[me]" selected>[me]</option>
+							<option id="content-access-select-public" value="[public]">[public]</option>
+							<option id="content-access-select-private" value="[private]" selected>[private]</option>
 						</select>
 					</form>
 					<form id="content-code-form" method="post" action="javascript:;">
@@ -608,6 +613,13 @@
 						</form>
 					</details>
 				</div>
+				<div id="content-turn-order" class="subsection">
+					<h3>turn order</h3>
+					<form id="content-turn-order-form" method="post" action="javascript:;">
+						<button id="content-turn-order-button" title="turn order">calculate turn order</button>
+					</form>
+					<div id="content-turn-order-list"></div>
+				</div>
 				<div id="content-controls" class="subsection">
 					<h3 id="content-controls-header">controls</h3>
 					<div id="content-controls-zoom">
@@ -637,10 +649,6 @@
 							<button id="content-controls-pan-right-button" title="pan right">&rarr;</button>
 						</form>
 					</div>
-					<form id="content-controls-turn-form" method="post" action="javascript:;">
-						<h4>turn order</h4>
-						<button id="content-controls-turn-button" title="turn order">calculate turn order</button>
-					</form>
 					<div id="content-controls-mouse">
 						<h4>mouse</h4>
 						<li><b>click</b>: select object</li>

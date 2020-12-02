@@ -534,7 +534,7 @@ window.addEventListener("load", function() {
 					// variables
 						options = options || {}
 						context.textBaseline = options.baseline || "middle"
-						context.font         = (options.style ? options.style + " " : "") + (options.size || 0) + "px " + (options.font || "sans-serif")
+						context.font         = (options.style ? options.style + " " : "") + (options.size > 0 ? options.size : 0) + "px " + (options.font || "sans-serif")
 						context.fillStyle    = options.color || "transparent"
 						context.textAlign    = options.alignment || "center"
 						context.shadowBlur   = options.blur ? options.blur : 0
