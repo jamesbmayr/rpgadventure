@@ -440,7 +440,8 @@
 		#settings-audio-volume {
 			float: left;
 			height: var(--medium-font-size);
-			margin: var(--small-gap-size);
+			margin: var(--small-gap-size) 0 var(--small-gap-size) var(--small-gap-size);
+			width: calc(100% - (var(--medium-font-size) + 4 * var(--small-gap-size)) - var(--small-gap-size));
 		}
 
 	/** user **/
