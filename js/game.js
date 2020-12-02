@@ -685,6 +685,11 @@ window.onload = function() {
 			/* displayTool */
 				function displayTool(event) {
 					try {
+						// no target?
+							if (!event || !event.target) {
+								return false
+							}
+
 						// get tool
 							var tool = event.target.value
 
@@ -2406,7 +2411,6 @@ window.onload = function() {
 									ELEMENTS.character.info.element.removeAttribute("open")
 
 								// close items
-									ELEMENTS.character.items.element.removeAttribute("open")
 									ELEMENTS.character.content.querySelectorAll("details.item").forEach(function(details) {
 										details.removeAttribute("open")
 									})
@@ -4322,6 +4326,7 @@ window.onload = function() {
 
 						// add to items
 							item.id = FUNCTIONS.generateRandom()
+							item.equipped = true
 							CHARACTER.items.push(item)
 
 						// save
