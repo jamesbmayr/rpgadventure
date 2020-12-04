@@ -203,6 +203,7 @@ window.addEventListener("load", function() {
 							// option
 								var button = document.createElement("button")
 									button.className = "option-search-result"
+									button.setAttribute("tabindex", "0")
 									if (results[i].disabled) {
 										button.setAttribute("disabled", true)
 									}
