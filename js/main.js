@@ -270,6 +270,8 @@ window.addEventListener("load", function() {
 			window.FUNCTIONS.cancelSearch = cancelSearch
 			function cancelSearch(event) {
 				try {
+					console.log(event)
+					console.log(event.target)
 					// elements
 						var componentElement = event.target.closest(".option-search")
 						if (!componentElement) {
