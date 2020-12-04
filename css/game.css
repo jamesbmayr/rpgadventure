@@ -1043,7 +1043,7 @@
 				text-overflow: ellipsis;
 				background-color: transparent;
 				font-size: var(--small-font-size);
-				color: var(--medium-gray);
+				color: var(--dark-gray);
 				width: calc(100% - var(--small-gap-size));
 				height: calc(var(--medium-font-size) + 2 * (var(--small-gap-size) + var(--border-size)));
 				border: 0;
