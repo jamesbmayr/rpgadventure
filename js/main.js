@@ -201,28 +201,34 @@ window.addEventListener("load", function() {
 						})
 						for (var i in results) {
 							// option
-								var button = document.createElement("button")
-									button.className = "option-search-result"
-									button.setAttribute("tabindex", "0")
+								var label = document.createElement("label")
+									label.className = "option-search-result"
+									label.innerText = results[i].text
+									label.setAttribute("tabindex", 1)
+
+								var button = document.createElement("input")
+									button.type = "submit"
+									button.className = "option-search-result-input"
 									if (results[i].disabled) {
+										label.setAttribute("disabled", true)
 										button.setAttribute("disabled", true)
 									}
-									button.innerText = results[i].text
 									button.value = results[i].value
 									button.addEventListener(TRIGGERS.click, selectOption)
+								label.appendChild(button)
 
 							// append
 								if (results[i].group) {
 									var parent = resultsElement.querySelector(".option-search-group[label='" + results[i].group + "']")
 									if (parent) {
-										parent.appendChild(button)
+										parent.appendChild(label)
 									}
 									else {
-										resultsElement.appendChild(button)
+										resultsElement.appendChild(label)
 									}
 								}
 								else {
-									resultsElement.appendChild(button)
+									resultsElement.appendChild(label)
 								}
 						}
 
