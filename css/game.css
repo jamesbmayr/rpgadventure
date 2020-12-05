@@ -1185,50 +1185,12 @@
 				padding-top: var(--small-gap-size);
 			}
 
-		/* equipped */
-			#character-items-equipped-header {
-				padding: var(--large-gap-size) 0 var(--large-gap-size) 0;
-			}
-
-			#character-items-equipped {
-				padding: 0;
-			}
-
-			#character-items-equipped .item:first-child {
+		/* first / last */
+			#character-items-equipped-list .item:first-child, #character-items-unequipped-list .item:first-child {
 				margin-top: 0;
 			}
 
-			#character-items-equipped .item:last-child {
-				margin-bottom: var(--medium-gap-size);
-			}
-
-		/* unequipped */
-			#character-items-summary {
-				pointer-events: none;
-			}
-
-			#character-items-unequipped-header {
-				float: left;
-				width: 100%;
-				pointer-events: all;
-				padding: var(--large-gap-size) 0 var(--large-gap-size) 0;
-			}
-
-			#character-items-unequipped {
-				float: left;
-				width: 100%;
-				padding: 0;
-			}
-
-			#character-items-unequipped-header:hover, #character-items-unequipped-header:focus {
-				text-shadow: 0 0 var(--shadow-size) var(--medium-gray);
-			}
-
-			#character[mode="items"] #character-items-unequipped .item:first-child {
-				margin-top: var(--medium-gap-size);
-			}
-
-			#character-items-unequipped .item:last-child {
+			#character-items-equipped-list .item:last-child, #character-items-unequipped-list .item:last-child {
 				margin-bottom: var(--medium-gap-size);
 			}
 
@@ -1452,7 +1414,7 @@
 			}
 
 		/* editing */
-			#character[mode="items"] .section:not(#character-items), #character[mode="items"] #character-items-equipped-header, #character[mode="items"] #character-items-unequipped-header {
+			#character[mode="items"] .section:not(#character-items) {
 				display: none;
 			}
 
@@ -1534,6 +1496,8 @@
 				float: left;
 				width: 100%;
 				pointer-events: all;
+				padding-bottom: var(--medium-gap-size);
+				border-bottom: var(--border-size) solid var(--medium-gray);
 			}
 
 			#character-items-search input, #character-items-search button {
@@ -1683,7 +1647,16 @@
 				display: none;
 			}
 
-			#character[mode="damage"] #character-items-equipped .item:first-child, #character[mode="damage"] #character-items-unequipped .item:first-child {
+			#character[mode="damage"] #character-items-equipped {
+				padding-bottom: 0;
+				border: 0;
+			}
+
+			#character[mode="damage"] #character-items-unequipped {
+				padding-top: 0;
+			}
+
+			#character[mode="damage"] #character-items-equipped-list .item:first-child, #character[mode="damage"] #character-items-unequipped-list .item:first-child {
 				margin-top: var(--medium-gap-size);
 			}
 

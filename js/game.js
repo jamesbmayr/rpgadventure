@@ -305,10 +305,18 @@ window.onload = function() {
 							},
 							items: {
 								element: document.getElementById("character-items"),
+								equipped: {
+									element: document.getElementById("character-items-equipped"),
+									count: document.getElementById("character-items-equipped-count"),
+									list: document.getElementById("character-items-equipped-list"),
+								},
+								unequipped: {
+									element: document.getElementById("character-items-unequipped"),
+									count: document.getElementById("character-items-unequipped-count"),
+									list: document.getElementById("character-items-unequipped-list"),
+								},
 								searchButton: document.getElementById("character-items-search-button"),
-								select: document.getElementById("character-items-select"),
-								equipped: document.getElementById("character-items-equipped"),
-								unequipped: document.getElementById("character-items-unequipped"),
+								select: document.getElementById("character-items-select")
 							},
 							conditions: {
 								element: document.getElementById("character-conditions"),
@@ -2409,6 +2417,8 @@ window.onload = function() {
 							if (mode == "play") {
 								// close info
 									ELEMENTS.character.info.element.removeAttribute("open")
+									ELEMENTS.character.items.equipped.element.setAttribute("open", true)
+									ELEMENTS.character.items.unequipped.element.setAttribute("open", true)
 
 								// close items
 									ELEMENTS.character.content.querySelectorAll("details.item").forEach(function(details) {
@@ -2455,7 +2465,8 @@ window.onload = function() {
 						// items
 							else if (mode == "items") {
 								// items
-									ELEMENTS.character.items.element.setAttribute("open", true)
+									ELEMENTS.character.items.equipped.element.setAttribute("open", true)
+									ELEMENTS.character.items.unequipped.element.setAttribute("open", true)
 									ELEMENTS.character.items.select.removeAttribute("disabled")
 
 								// open items
@@ -2493,7 +2504,8 @@ window.onload = function() {
 						// damage
 							else if (mode == "damage") {
 								// open items
-									ELEMENTS.character.items.element.setAttribute("open", true)
+									ELEMENTS.character.items.equipped.element.setAttribute("open", true)
+									ELEMENTS.character.items.unequipped.element.setAttribute("open", true)
 
 								// close up inputs
 									ELEMENTS.character.content.querySelectorAll(".editable:not(.always-editable)").forEach(function(input) {
@@ -3076,20 +3088,34 @@ window.onload = function() {
 							}
 						
 						// clear
-							ELEMENTS.character.items.equipped.innerHTML   = ""
-							ELEMENTS.character.items.unequipped.innerHTML = ""
+							ELEMENTS.character.items.equipped.list.innerHTML   = ""
+							ELEMENTS.character.items.unequipped.list.innerHTML = ""
 
 						// loop through items
 							character.items.sort(function(a, b) {
 								return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1
 							})
+							var equippedCount = 0
+							var unequippedCount = 0
 							for (var i in character.items) {
-								displayCharacterItem(character, character.items[i], enable)
+								if (character.items[i].equipped) {
+									equippedCount++
+									displayCharacterItem(character, character.items[i], ELEMENTS.character.items.equipped.list, enable)
+								}
+								else {
+									unequippedCount++
+									displayCharacterItem(character, character.items[i], ELEMENTS.character.items.unequipped.list, enable)	
+								}
 							}
+
+						// equip / unequip count
+							ELEMENTS.character.items.equipped.count.innerText = equippedCount
+							ELEMENTS.character.items.unequipped.count.innerText = unequippedCount
 
 						// open all?
 							if (enable) {
-								ELEMENTS.character.items.element.setAttribute("open", true)
+								ELEMENTS.character.items.equipped.element.setAttribute("open", true)
+								ELEMENTS.character.items.unequipped.element.setAttribute("open", true)
 							}
 
 						// currentItem?
@@ -3100,28 +3126,21 @@ window.onload = function() {
 				}
 
 			/* displayCharacterItem */
-				function displayCharacterItem(character, item, enable) {
+				function displayCharacterItem(character, item, parent, enable) {
 					try {
 						// block
 							var block = document.createElement("details")
 								block.className = "item " + (item.type || "miscellaneous")
 								block.id = item.id
-							if (enable) {
-								block.setAttribute("open", true)
-							}
+								if (enable) {
+									block.setAttribute("open", true)
+								}
+							parent.append(block)
 
 						// summary
 							var summary = document.createElement("summary")
 								summary.className = "item-summary"
 							block.appendChild(summary)
-
-						// equipped?
-							if (item.equipped) {
-								ELEMENTS.character.items.equipped.append(block)
-							}
-							else {
-								ELEMENTS.character.items.unequipped.append(block)
-							}
 
 						// remove
 							var removeForm = document.createElement("form")

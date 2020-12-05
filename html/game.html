@@ -479,14 +479,20 @@
 						<select id="character-items-select" class="option-search-select"></select>
 						<button id="character-items-search-button" class="option-search-button" title="submit"></button>
 					</div>
-					<details id="character-items" class="section" open>
-						<summary id="character-items-summary">
-							<h3 id="character-items-equipped-header">equipped items</h3>
-							<div id="character-items-equipped" class="subsection"></div>
-							<h3 id="character-items-unequipped-header">unequipped items</h3>
-						</summary>
-						<div id="character-items-unequipped"></div>
-					</details>
+					<div id="character-items" class="section">
+						<details id="character-items-equipped" class="subsection" open>
+							<summary id="character-items-equipped-summary">
+								<h3 id="character-items-equipped-header">equipped items (<span id="character-items-equipped-count">0</span>)</h3>
+							</summary>
+							<div id="character-items-equipped-list"></div>
+						</details>
+						<details id="character-items-unequipped" class="subsection" open>
+							<summary id="character-items-unequipped-summary">
+								<h3 id="character-items-unequipped-header">unequipped items (<span id="character-items-unequipped-count">0</span>)</h3>
+							</summary>
+							<div id="character-items-unequipped-list"></div>
+						</details>
+					</div>
 					<div id="character-recipient" class="subsection">
 						<h3 id="character-recipient-header">targeting</h3>
 						<form id="character-recipient-form" method="post" action="javascript:;">
