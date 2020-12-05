@@ -410,6 +410,8 @@
 								text: null,
 								textColor: colors["light-gray"],
 								textSize: 50,
+								textPlacement: "center",
+								textShadow: colors["medium-gray"],
 								x: 0,
 								y: 0,
 								z: 0,

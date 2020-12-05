@@ -518,6 +518,7 @@ window.onload = function() {
 						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, submitCharacterCreateDuplicate)
 						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, submitCharacterDelete)
 						ELEMENTS.character.settings.arenaPresets.querySelectorAll("input").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
+						ELEMENTS.character.settings.arenaPresets.querySelectorAll("select").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
 						ELEMENTS.character.content.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20) })
 						// ELEMENTS.character.info.imageForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImage)
 						ELEMENTS.character.info.imageInput.addEventListener(TRIGGERS.change, submitCharacterUpdateImage)
@@ -2732,7 +2733,7 @@ window.onload = function() {
 
 						// loop through fields
 							var presets = character.arenaPresets || {}
-							var fields = Array.from(ELEMENTS.character.settings.arenaPresets.querySelectorAll("input"))
+							var fields = Array.from(ELEMENTS.character.settings.arenaPresets.querySelectorAll("input")).concat(Array.from(ELEMENTS.character.settings.arenaPresets.querySelectorAll("select")))
 							for (var i in fields) {
 								var property = fields[i].getAttribute("property")
 								if (property) {
@@ -2742,7 +2743,7 @@ window.onload = function() {
 
 						// currentField ?
 							if (currentFieldProperty) {
-								document.querySelector("input[property='" + currentFieldProperty + "']").focus()
+								(document.querySelector("input[property='" + currentFieldProperty + "']") || document.querySelector("select[property='" + currentFieldProperty + "']")).focus()
 							}
 
 						// get canvas
@@ -2796,6 +2797,14 @@ window.onload = function() {
 								options.blur = cellSize * character.arenaPresets.glow
 							}
 
+						// text
+							if (character.arenaPresets.text && character.arenaPresets.textSize && character.arenaPresets.textPlacement && character.arenaPresets.textPlacement !== "none") {
+								options.textSize = (character.arenaPresets.textSize || 0) * cellSize / 100
+								options.alignment = character.arenaPresets.textPlacement == "left" ? "right" : character.arenaPresets.textPlacement == "right" ? "left" : "center"
+								options.textX = character.arenaPresets.textPlacement == "left" ? (x - options.textSize / 4) : character.arenaPresets.textPlacement == "right" ? (x + width + options.textSize / 4) : (x + width / 2)
+								options.textY = character.arenaPresets.textPlacement == "top" ? (y + height + options.textSize / 2) : character.arenaPresets.textPlacement == "bottom" ? (y - options.textSize / 2) : (y + height / 2)
+							}
+
 						// image
 							if (character.arenaPresets.image) {
 								var image = document.createElement("img")
@@ -2807,8 +2816,7 @@ window.onload = function() {
 										})
 
 										if (character.arenaPresets.text) {
-											var textSize = (character.arenaPresets.textSize || 0) * cellSize / 100
-											FUNCTIONS.drawText(canvas, context, x + width / 2, y + height + textSize / 2, character.arenaPresets.text, {color: character.arenaPresets.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: textSize})
+											FUNCTIONS.drawText(canvas, context, options.textX, options.textY, character.arenaPresets.text, {color: character.arenaPresets.textColor, blur: cellSize / 10, shadow: character.arenaPresets.textShadow, size: options.textSize, alignment: options.alignment})
 										}
 									}
 							}
@@ -2821,7 +2829,7 @@ window.onload = function() {
 
 								if (character.arenaPresets.text) {
 									var textSize = (character.arenaPresets.textSize || 0) * cellSize / 100
-									FUNCTIONS.drawText(canvas, context, x + width / 2, y + height + textSize / 2, character.arenaPresets.text, {color: character.arenaPresets.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: textSize})
+									FUNCTIONS.drawText(canvas, context, options.textX, options.textY, character.arenaPresets.text, {color: character.arenaPresets.textColor, blur: cellSize / 10, shadow: character.arenaPresets.textShadow, size: options.textSize, alignment: options.alignment})
 								}
 							}
 					} catch (error) {console.log(error)}
@@ -6035,48 +6043,93 @@ window.onload = function() {
 											spanTextColor.className = "arena-object-label-text"
 											spanTextColor.innerText = "text color"
 										labelTextColor.appendChild(spanTextColor)
+
+									// textPlacement
+										var labelTextPlacement = document.createElement("label")
+											labelTextPlacement.className = "arena-object-label"
+										listing.appendChild(labelTextPlacement)
+
+										var inputTextPlacement = document.createElement("select")
+											inputTextPlacement.className = "arena-object-select"
+											inputTextPlacement.setAttribute("property", "textPlacement")
+											inputTextPlacement.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelTextPlacement.appendChild(inputTextPlacement)
+
+										var options = ["top", "left", "center", "right", "bottom", "none"]
+										for (var i in options) {
+											var option = document.createElement("option")
+												option.value = options[i]
+												option.innerText = options[i]
+											inputTextPlacement.appendChild(option)
+										}
+
+										var spanTextPlacement = document.createElement("span")
+											spanTextPlacement.className = "arena-object-label-text"
+											spanTextPlacement.innerText = "placement"
+										labelTextPlacement.appendChild(spanTextPlacement)
+
+									// textShadow
+										var labelTextShadow = document.createElement("label")
+											labelTextShadow.className = "arena-object-label"
+										listing.appendChild(labelTextShadow)
+
+										var inputTextShadow = document.createElement("input")
+											inputTextShadow.className = "arena-object-input"
+											inputTextShadow.setAttribute("property", "textShadow")
+											inputTextShadow.type = "color"
+											inputTextShadow.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelTextShadow.appendChild(inputTextShadow)
+
+										var spanTextShadow = document.createElement("span")
+											spanTextShadow.className = "arena-object-label-text"
+											spanTextShadow.innerText = "text shadow"
+										labelTextShadow.appendChild(spanTextShadow)
 							}
 
 						// find
 							else {
 								var inputLocked = listing.querySelector("input[property='locked']")
 								var inputVisible = listing.querySelector("input[property='visible']")
-								var inputText = listing.querySelector("input[property='text']")
-								var inputTextSize = listing.querySelector("input[property='textSize']")
-								var inputTextColor = listing.querySelector("input[property='textColor']")
 								var inputX = listing.querySelector("input[property='x']")
 								var inputY = listing.querySelector("input[property='y']")
 								var inputWidth = listing.querySelector("input[property='width']")
 								var inputHeight = listing.querySelector("input[property='height']")
-								var inputCorners = listing.querySelector("input[property='corners']")
-								var inputRotation = listing.querySelector("input[property='rotation']")
-								var inputGlow = listing.querySelector("input[property='glow']")
-								var inputShadow = listing.querySelector("input[property='shadow']")
+								var inputImage = listing.querySelector("input[property='image']")
 								var inputOpacity = listing.querySelector("input[property='opacity']")
 								var inputColor = listing.querySelector("input[property='color']")
-								var inputImage = listing.querySelector("input[property='image']")
+								var inputGlow = listing.querySelector("input[property='glow']")
+								var inputShadow = listing.querySelector("input[property='shadow']")
+								var inputCorners = listing.querySelector("input[property='corners']")
+								var inputRotation = listing.querySelector("input[property='rotation']")
+								var inputText = listing.querySelector("input[property='text']")
+								var inputTextSize = listing.querySelector("input[property='textSize']")
+								var inputTextColor = listing.querySelector("input[property='textColor']")
+								var inputTextPlacement = listing.querySelector("select[property='textPlacement']")
+								var inputTextShadow = listing.querySelector("input[property='textShadow']")
 							}
 
 						// set values
 							var activeElement = document.activeElement
 							listing.setAttribute("selected", ELEMENTS.gametable.selected && Object.keys(ELEMENTS.gametable.selected).includes(object.id))
-							if (									listing.style.order		!== object.z) { 			listing.style.order = object.z || 0 }
-							if (									inputLocked.checked 	!== object.locked) { 		inputLocked.checked = object.locked || false }
-							if (									inputVisible.checked 	!== object.visible) { 		inputVisible.checked = object.visible || false }
-							if (inputText != activeElement && 		inputText.value 		!== object.text) { 			inputText.value = object.text || "" }
-							if (inputTextSize != activeElement && 	inputTextSize.value 	!== object.textSize) { 		inputTextSize.value = object.textSize || 0 }
-							if (inputTextColor != activeElement && 	inputTextColor.value 	!== object.textColor) { 	inputTextColor.value = object.textColor || ELEMENTS.gametable.canvas.gridColor }
-							if (inputX != activeElement && 			inputX.value 			!== object.x) { 			inputX.value = object.x || 0 }
-							if (inputY != activeElement && 			inputY.value 			!== object.y) { 			inputY.value = object.y || 0 }
-							if (inputWidth != activeElement && 		inputWidth.value 		!== object.width) { 		inputWidth.value = object.width || 0 }
-							if (inputHeight != activeElement && 	inputHeight.value 		!== object.height) { 		inputHeight.value = object.height || 0 }
-							if (inputCorners != activeElement && 	inputCorners.value 		!== object.corners) { 		inputCorners.value = object.corners || 0 }
-							if (inputRotation != activeElement && 	inputRotation.value 	!== object.rotation) { 		inputRotation.value = object.rotation || 0 }
-							if (inputGlow != activeElement && 		inputGlow.value 		!== object.glow) { 			inputGlow.value = object.glow || 0 }
-							if (inputShadow != activeElement && 	inputShadow.value 		!== object.shadow) { 		inputShadow.value = object.shadow || ELEMENTS.gametable.canvas.gridBackground }
-							if (inputOpacity != activeElement && 	inputOpacity.value 		!== object.opacity) { 		inputOpacity.value = object.opacity || 0 }
-							if (inputColor != activeElement && 		inputColor.value 		!== object.color) { 		inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor }
-							if (inputImage != activeElement && 		inputImage.value 		!== object.image) { 		inputImage.value = object.image || "" }
+							if (										listing.style.order			!== object.z) { 			listing.style.order = object.z || 0 }
+							if (										inputLocked.checked 		!== object.locked) { 		inputLocked.checked = object.locked || false }
+							if (										inputVisible.checked 		!== object.visible) { 		inputVisible.checked = object.visible || false }
+							if (inputX != activeElement && 				inputX.value 				!== object.x) { 			inputX.value = object.x || 0 }
+							if (inputY != activeElement && 				inputY.value 				!== object.y) { 			inputY.value = object.y || 0 }
+							if (inputWidth != activeElement && 			inputWidth.value 			!== object.width) { 		inputWidth.value = object.width || 0 }
+							if (inputHeight != activeElement && 		inputHeight.value 			!== object.height) { 		inputHeight.value = object.height || 0 }
+							if (inputImage != activeElement && 			inputImage.value 			!== object.image) { 		inputImage.value = object.image || "" }
+							if (inputOpacity != activeElement && 		inputOpacity.value 			!== object.opacity) { 		inputOpacity.value = object.opacity || 0 }
+							if (inputColor != activeElement && 			inputColor.value 			!== object.color) { 		inputColor.value = object.color || ELEMENTS.gametable.canvas.gridColor }
+							if (inputGlow != activeElement && 			inputGlow.value 			!== object.glow) { 			inputGlow.value = object.glow || 0 }
+							if (inputShadow != activeElement && 		inputShadow.value 			!== object.shadow) { 		inputShadow.value = object.shadow || ELEMENTS.gametable.canvas.gridBackground }
+							if (inputCorners != activeElement && 		inputCorners.value 			!== object.corners) { 		inputCorners.value = object.corners || 0 }
+							if (inputRotation != activeElement && 		inputRotation.value 		!== object.rotation) { 		inputRotation.value = object.rotation || 0 }
+							if (inputText != activeElement && 			inputText.value 			!== object.text) { 			inputText.value = object.text || "" }
+							if (inputTextSize != activeElement && 		inputTextSize.value 		!== object.textSize) { 		inputTextSize.value = object.textSize || 0 }
+							if (inputTextColor != activeElement && 		inputTextColor.value 		!== object.textColor) { 	inputTextColor.value = object.textColor || ELEMENTS.gametable.canvas.gridColor }
+							if (inputTextPlacement != activeElement && 	inputTextPlacement.value 	!== object.textPlacement) { inputTextPlacement.value = object.textPlacement || null }
+							if (inputTextShadow != activeElement && 	inputTextShadow.value 		!== object.textShadow) { 	inputTextShadow.value = object.textShadow || ELEMENTS.gametable.canvas.gridBackground }
 					} catch (error) {console.log(error)}
 				}
 
@@ -6220,6 +6273,14 @@ window.onload = function() {
 								options.blur = cellSize
 							}
 
+						// text
+							if (object.text && object.textSize && object.textPlacement && object.textPlacement !== "none") {
+								options.textSize = (object.textSize || 0) * cellSize / 100
+								options.alignment = object.textPlacement == "left" ? "right" : object.textPlacement == "right" ? "left" : "center"
+								options.textX = object.textPlacement == "left" ? (x - options.textSize / 4) : object.textPlacement == "right" ? (x + width + options.textSize / 4) : (x + width / 2)
+								options.textY = object.textPlacement == "top" ? (y + height + options.textSize / 2) : object.textPlacement == "bottom" ? (y - options.textSize / 2) : (y + height / 2)
+							}
+
 						// image
 							if (object.image) {
 								options.image = ELEMENTS.gametable.canvas.images[object.id]
@@ -6237,8 +6298,7 @@ window.onload = function() {
 
 						// text
 							if (object.text) {
-								var textSize = (object.textSize || 0) * cellSize / 100
-								FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, x + width / 2, y + height + textSize / 2, object.text, {color: object.textColor || ELEMENTS.gametable.canvas.gridColor, blur: cellSize / 10, shadow: ELEMENTS.gametable.canvas.gridBackground, size: textSize})
+								FUNCTIONS.drawText(ELEMENTS.gametable.canvas.element, ELEMENTS.gametable.canvas.context, options.textX, options.textY, object.text, {color: object.textColor, blur: cellSize / 10, shadow: object.textShadow, size: options.textSize, alignment: options.alignment})
 							}
 					} catch (error) {console.log(error)}
 				}
