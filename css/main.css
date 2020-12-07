@@ -53,12 +53,8 @@
 	/* sections */
 		section {
 			position: absolute;
-			top: 0;
-			left: 0;
 			width: 100%;
 			height: 100%;
-			overflow-x: hidden;
-			overflow-y: scroll;
 			background-color: var(--light-gray);
 			color: var(--medium-gray);
 		}		
@@ -74,15 +70,8 @@
 			font-size: var(--huge-font-size);
 			font-weight: bold;
 			color: var(--medium-gray);
-			margin-bottom: var(--huge-font-size);
+			margin-bottom: var(--large-font-size);
 			font-family: var(--font-0);
-		}
-
-		h1 img {
-			float: right;
-			height: 100%;
-			width: auto;
-			filter: drop-shadow(0 0 var(--shadow-size) var(--medium-gray));
 		}
 
 		h2 {
@@ -127,6 +116,7 @@
 		form {
 			float: left;
 			width: 100%;
+			text-align: left;
 		}
 
 	/* input */
@@ -456,6 +446,12 @@
 			float: left;
 		}
 
+		.option-search-cancel-form {
+			float: right;
+			width: auto;
+			height: auto;
+		}
+
 		.option-search-cancel {
 			margin-top: calc(-1 * var(--medium-font-size) - 4 * var(--small-gap-size) + var(--border-size));
 			margin-bottom: 0;
@@ -548,8 +544,19 @@
 			transform: translateX(-50%) translateY(-50%);
 			width: auto;
 			height: auto;
-			max-height: calc(100% - 2 * (var(--edge-size)));
-			max-width: calc(100% - 2 * (var(--edge-size)));
+			max-height: calc(100% - 2 * var(--edge-size));
+			max-width: calc(100% - 2 * var(--edge-size));
+			text-align: center;
+			overflow-x: hidden;
+			overflow-y: auto;
+			padding: var(--medium-gap-size);
+		}
+
+		@media screen and (max-width: 799px) {
+			.center-container {
+				max-height: calc(100% - var(--large-gap-size));
+				max-width: calc(100% - var(--large-gap-size));
+			}
 		}
 
 		.subsection {
@@ -589,6 +596,37 @@
 
 		#toast[success=false] {
 			background-color: var(--medium-red);
+		}
+
+	/* logo */
+		#logo {
+			background-size: contain;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-image: url("logo.png");
+			margin: auto auto;
+			height: calc(var(--edge-size) - 4 * var(--large-gap-size));
+			width: var(--edge-size);
+			filter: drop-shadow(0 0 var(--shadow-size) var(--medium-gray));
+			padding: calc(2 * var(--large-gap-size)) 0;
+			font-family: var(--font-family);
+			font-size: var(--medium-font-size);
+			font-weight: bold;
+			color: var(--medium-gray);
+			text-align: center;
+			vertical-align: middle;
+			user-select: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+			cursor: pointer;
+		}
+
+		#logo[rotate="true"] {
+			transition: 1s;
+			transform: rotate(720deg);
+			pointer-events: none;
 		}
 
 	/* form pair */

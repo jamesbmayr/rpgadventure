@@ -62,7 +62,8 @@ window.onload = function() {
 						ELEMENTS.structure = {
 							top: document.getElementById("top"),
 							left: document.getElementById("left"),
-							right: document.getElementById("right")
+							right: document.getElementById("right"),
+							toggle: document.getElementById("sidebar-toggle-form")
 						}
 
 					// special
@@ -125,8 +126,12 @@ window.onload = function() {
 							element: document.getElementById("settings"),
 							game: {
 								element: document.getElementById("settings-game"),
-								search: document.getElementById("settings-game-search"),
-								input: document.getElementById("settings-game-search-input"),
+								search: {
+									element: document.getElementById("settings-game-search"),
+									form: document.getElementById("settings-game-search-form"),
+									input: document.getElementById("settings-game-search-input"),
+									button: document.getElementById("settings-game-search-button")
+								},
 								select: {
 									element: document.getElementById("settings-game-select"),
 									custom: document.getElementById("settings-game-select-custom"),
@@ -134,7 +139,6 @@ window.onload = function() {
 									new: document.getElementById("settings-game-select-new"),
 									search: document.getElementById("settings-game-select-search")
 								},
-								searchButton: document.getElementById("settings-game-search-button"),
 								name: {
 									form: document.getElementById("settings-game-name-form"),
 									input: document.getElementById("settings-game-name-input"),
@@ -230,7 +234,7 @@ window.onload = function() {
 									none: document.getElementById("character-settings-select-none"),
 									new: document.getElementById("character-settings-select-new"),
 									search: document.getElementById("character-settings-select-search"),
-									searchButton: document.getElementById("character-settings-select-search-button")
+									form: document.getElementById("character-settings-select-search-form")
 								},
 								upload: document.getElementById("character-settings-upload"),
 								metadata: document.getElementById("character-settings-metadata"),
@@ -315,12 +319,16 @@ window.onload = function() {
 									count: document.getElementById("character-items-unequipped-count"),
 									list: document.getElementById("character-items-unequipped-list"),
 								},
-								searchButton: document.getElementById("character-items-search-button"),
+								search: {
+									form: document.getElementById("character-items-search-form")
+								},
 								select: document.getElementById("character-items-select")
 							},
 							conditions: {
 								element: document.getElementById("character-conditions"),
-								searchButton: document.getElementById("character-conditions-search-button"),
+								search: {
+									form: document.getElementById("character-conditions-search-form")
+								},
 								select: document.getElementById("character-conditions-select"),
 								list: document.getElementById("character-conditions-list")
 							},
@@ -366,7 +374,9 @@ window.onload = function() {
 								form: document.getElementById("content-add-form")
 							},
 							choose: {
-								searchButton: document.getElementById("content-choose-search-button"),
+								search: {
+									form: document.getElementById("content-choose-search-form")
+								},
 								select: {
 									element: document.getElementById("content-choose-select"),
 									none: document.getElementById("content-choose-select-none"),
@@ -403,9 +413,9 @@ window.onload = function() {
 								input: document.getElementById("content-code-input"),
 								button: document.getElementById("content-code-button"),
 								select: document.getElementById("content-component-code-select"),
-								searchButton: document.getElementById("content-component-code-search-button"),
 								sample: document.getElementById("content-component-code-sample"),
 								search: {
+									form: document.getElementById("content-component-code-search-form"),
 									races: document.getElementById("content-component-code-select-races"),
 									skills: document.getElementById("content-component-code-select-skills"),
 									conditions: document.getElementById("content-component-code-select-conditions"),
@@ -468,12 +478,13 @@ window.onload = function() {
 								}
 							},
 							objects: {
-								searchButton: document.getElementById("content-objects-search-button"),
+								search: {
+									form: document.getElementById("content-objects-search-form")
+								},
 								select: document.getElementById("content-objects-select"),
 								blank: document.getElementById("content-objects-select-blank"),
 								characters: document.getElementById("content-objects-select-characters"),
 								images: document.getElementById("content-objects-select-images"),
-								button: document.getElementById("content-objects-button"),
 								list: document.getElementById("content-objects-list")
 							}
 						}
@@ -487,14 +498,14 @@ window.onload = function() {
 						ELEMENTS.stream.rng.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateCustom)
 
 					// tools
+						ELEMENTS.structure.toggle.addEventListener(TRIGGERS.submit, displaySidebar)
 						ELEMENTS.tools.form.addEventListener(TRIGGERS.change, displayTool)
 
 					// gametable
 						ELEMENTS.body.addEventListener(TRIGGERS.keydown, nudgeContentArenaObject)
 
 					// settings
-						ELEMENTS.settings.game.searchButton.addEventListener(TRIGGERS.click, submitGameRead)
-						ELEMENTS.settings.game.input.addEventListener(TRIGGERS.keydown, submitGameRead)
+						ELEMENTS.settings.game.search.form.addEventListener(TRIGGERS.submit, submitGameRead)
 						ELEMENTS.settings.game.name.input.addEventListener(TRIGGERS.change, submitGameUpdateName)
 						ELEMENTS.settings.game.clearChat.form.addEventListener(TRIGGERS.submit, submitGameUpdateChatDelete)
 						ELEMENTS.settings.game.clearRolls.form.addEventListener(TRIGGERS.submit, submitGameUpdateRollsDelete)
@@ -511,7 +522,7 @@ window.onload = function() {
 
 					// character
 						ELEMENTS.character.modes.form.addEventListener(TRIGGERS.change, displayCharacterMode)
-						ELEMENTS.character.settings.select.searchButton.addEventListener(TRIGGERS.click, submitCharacterRead)
+						ELEMENTS.character.settings.select.form.addEventListener(TRIGGERS.submit, submitCharacterRead)
 						ELEMENTS.character.settings.download.form.addEventListener(TRIGGERS.submit, displayCharacterDownload)
 						ELEMENTS.character.settings.name.input.addEventListener(TRIGGERS.change, submitCharacterUpdateName)
 						ELEMENTS.character.settings.access.select.element.addEventListener(TRIGGERS.change, submitCharacterUpdateAccess)
@@ -525,9 +536,9 @@ window.onload = function() {
 						ELEMENTS.character.info.imageResetForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImageDelete)
 						ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateInfo) })
 						ELEMENTS.character.content.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, submitCharacterUpdateStatistic) })
-						ELEMENTS.character.content.querySelectorAll(".statistic .option-search-button").forEach(function(form) { form.addEventListener(TRIGGERS.click, submitCharacterUpdateSkillCreate) })
-						ELEMENTS.character.items.searchButton.addEventListener(TRIGGERS.click, submitCharacterUpdateItemCreate)
-						ELEMENTS.character.conditions.searchButton.addEventListener(TRIGGERS.click, submitCharacterUpdateConditionCreate)
+						ELEMENTS.character.content.querySelectorAll(".statistic .option-search-form").forEach(function(form) { form.addEventListener(TRIGGERS.submit, submitCharacterUpdateSkillCreate) })
+						ELEMENTS.character.items.search.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateItemCreate)
+						ELEMENTS.character.conditions.search.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateConditionCreate)
 						ELEMENTS.character.damage.input.addEventListener(TRIGGERS.change, submitCharacterUpdateDamage)
 						ELEMENTS.character.damage.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateRecover)
 						ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateDamageStatistic) })
@@ -536,7 +547,7 @@ window.onload = function() {
 						ELEMENTS.chat.send.form.addEventListener(TRIGGERS.submit, submitChatCreate)
 
 					// content
-						ELEMENTS.content.choose.searchButton.addEventListener(TRIGGERS.click, submitContentRead)
+						ELEMENTS.content.choose.search.form.addEventListener(TRIGGERS.submit, submitContentRead)
 						ELEMENTS.content.add.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateRules)
 						ELEMENTS.content.send.form.addEventListener(TRIGGERS.submit, submitChatCreateContent)
 						ELEMENTS.content.name.input.addEventListener(TRIGGERS.change, submitContentUpdateName)
@@ -547,7 +558,7 @@ window.onload = function() {
 						// ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, submitContentUpdateFile)
 						ELEMENTS.content.duplicate.form.addEventListener(TRIGGERS.submit, submitContentCreateDuplicate)
 						ELEMENTS.content.delete.form.addEventListener(TRIGGERS.submit, submitContentDelete)
-						ELEMENTS.content.code.searchButton.addEventListener(TRIGGERS.click, submitContentComponentSearch)
+						ELEMENTS.content.code.search.form.addEventListener(TRIGGERS.submit, submitContentComponentSearch)
 						ELEMENTS.body.addEventListener(TRIGGERS.mousemove, moveContent)
 						ELEMENTS.body.addEventListener(TRIGGERS.mouseup, ungrabContent)
 						ELEMENTS.content.turnOrder.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateTurnOrder)
@@ -558,19 +569,19 @@ window.onload = function() {
 						ELEMENTS.content.controls.pan.up.form.addEventListener(TRIGGERS.submit, panContentArena)
 						ELEMENTS.content.controls.pan.down.form.addEventListener(TRIGGERS.submit, panContentArena)
 						ELEMENTS.content.controls.pan.right.form.addEventListener(TRIGGERS.submit, panContentArena)
-						ELEMENTS.content.objects.searchButton.addEventListener(TRIGGERS.click, submitContentArenaObjectCreate)
+						ELEMENTS.content.objects.search.form.addEventListener(TRIGGERS.submit, submitContentArenaObjectCreate)
 						window.addEventListener(TRIGGERS.resize, displayContentArena)
 
 					// select search
 						var selectSearchInputs = Array.from(ELEMENTS.body.querySelectorAll(".option-search-input"))
-							selectSearchInputs.forEach(function(element) {
-								element.addEventListener(TRIGGERS.input, FUNCTIONS.searchSelect)
-								element.addEventListener(TRIGGERS.focus, FUNCTIONS.searchSelect)
-								element.addEventListener(TRIGGERS.blur, FUNCTIONS.cancelSearch)
+							selectSearchInputs.forEach(function(input) {
+								input.addEventListener(TRIGGERS.input, FUNCTIONS.searchSelect)
+								input.addEventListener(TRIGGERS.focus, FUNCTIONS.searchSelect)
+								input.addEventListener(TRIGGERS.blur, FUNCTIONS.cancelSearch)
 							})
-						var selectSearchCancels = Array.from(ELEMENTS.body.querySelectorAll(".option-search-cancel"))
-							selectSearchCancels.forEach(function(element) {
-								element.addEventListener(TRIGGERS.click, FUNCTIONS.cancelSearch)
+						var selectSearchCancels = Array.from(ELEMENTS.body.querySelectorAll(".option-search-cancel-form"))
+							selectSearchCancels.forEach(function(form) {
+								form.addEventListener(TRIGGERS.submit, FUNCTIONS.cancelSearch)
 							})
 				} catch (error) {console.log(error)}
 			}
@@ -691,6 +702,28 @@ window.onload = function() {
 
 	/*** TOOLS ***/
 		/** display **/
+			/* displaySidebar */
+				function displaySidebar(event) {
+					try {
+						// toggle current left status
+							if (ELEMENTS.structure.left.getAttribute("closed")) {
+								ELEMENTS.structure.left.removeAttribute("closed")
+								ELEMENTS.structure.right.removeAttribute("full")
+							}
+							else {
+								ELEMENTS.structure.left.setAttribute("closed", true)
+								ELEMENTS.structure.right.setAttribute("full", true)
+							}
+
+						// arena?
+							if (CONTENT && CONTENT.arena) {
+								setTimeout(function() {
+									displayContentArena()
+								}, 500)
+							}
+					} catch (error) {console.log(error)}
+				}
+
 			/* displayTool */
 				function displayTool(event) {
 					try {
@@ -721,6 +754,11 @@ window.onload = function() {
 							if (tool == "chat") {
 								ELEMENTS.tools.notification.setAttribute("visibility", false)
 								ELEMENTS.chat.messages.scrollTop = ELEMENTS.chat.messages.scrollHeight
+							}
+
+						// character preset
+							if (tool == "character" && CHARACTER) {
+								displayCharacterArenaPresets(CHARACTER)
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -847,13 +885,19 @@ window.onload = function() {
 								playerElement.appendChild(playerName)
 
 								if (GAME.userId == USER.id && GAME.allUsers[sortedPlayers[i]].id !== GAME.userId) {
+									var flagForm = document.createElement("form")
+										flagForm.setAttribute("method", "post")
+										flagForm.setAttribute("action", "javascript:;")
+										flagForm.className = "settings-game-players-listing-flag-form"
+										flagForm.addEventListener(TRIGGERS.submit, submitGameUpdateBanUser)
+									playerElement.appendChild(flagForm)
+
 									var flagButton = document.createElement("button")
 										flagButton.className = "settings-game-players-listing-flag minor-button"
 										flagButton.innerHTML = "&#x1f6a9;"
 										flagButton.title = "ban player"
 										flagButton.value = GAME.allUsers[sortedPlayers[i]].id
-										flagButton.addEventListener(TRIGGERS.click, submitGameUpdateBanUser)
-									playerElement.appendChild(flagButton)
+									flagForm.appendChild(flagButton)
 								}
 							}
 
@@ -876,13 +920,20 @@ window.onload = function() {
 												playerName.innerText = GAME.bannedUsers[sortedBanned[i]].name
 											playerElement.appendChild(playerName)
 
+											var flagForm = document.createElement("form")
+												flagForm.setAttribute("method", "post")
+												flagForm.setAttribute("action", "javascript:;")
+												flagForm.className = "settings-game-players-listing-flag-form"
+												flagForm.addEventListener(TRIGGERS.submit, submitGameUpdateBanUser)
+											playerElement.appendChild(flagForm)
+
+
 											var flagButton = document.createElement("button")
 												flagButton.className = "settings-game-players-listing-flag minor-button"
 												flagButton.innerHTML = "&#x2705;"
 												flagButton.title = "unban player"
 												flagButton.value = GAME.bannedUsers[sortedBanned[i]].id
-												flagButton.addEventListener(TRIGGERS.click, submitGameUpdateBanUser)
-											playerElement.appendChild(flagButton)
+											flagForm.appendChild(flagButton)
 										}
 									}
 
@@ -944,13 +995,6 @@ window.onload = function() {
 			/* submitGameRead */
 				function submitGameRead(event) {
 					try {
-						// keyboard
-							if (event.key) {
-								if (!(event.key.toLowerCase() == "enter" || event.which == 13)) {
-									return false
-								}
-							}
-
 						// select value
 							var value = ELEMENTS.settings.game.select.element.value
 							ELEMENTS.settings.game.select.element.value = null
@@ -967,7 +1011,7 @@ window.onload = function() {
 									action: "readGame",
 									game: {
 										id: null,
-										name: ELEMENTS.settings.game.input.value.trim()
+										name: ELEMENTS.settings.game.search.input.value.trim()
 									}
 								}
 
@@ -1005,7 +1049,7 @@ window.onload = function() {
 							}
 
 						// send socket request
-							ELEMENTS.settings.game.input.value = null
+							ELEMENTS.settings.game.search.input.value = null
 							SOCKET.send(JSON.stringify(post))
 					} catch (error) {console.log(error)}
 				}
@@ -1064,7 +1108,7 @@ window.onload = function() {
 									id: GAME ? GAME.id : null,
 									userId: USER ? USER.id : null,
 									ban: event.target.closest("#settings-game-players") ? true : false,
-									banUserId: event.target.value || null
+									banUserId: event.target.querySelector(".settings-game-players-listing-flag").value || null
 								}
 							}
 
@@ -2414,6 +2458,11 @@ window.onload = function() {
 								event.target.checked = true
 							}
 
+						// settings
+							if (mode == "settings") {
+								displayCharacterArenaPresets(CHARACTER)
+							}
+
 						// play
 							if (mode == "play") {
 								// close info
@@ -2694,16 +2743,18 @@ window.onload = function() {
 
 						// metadata
 							ELEMENTS.character.settings.metadata.setAttribute("visibility", true)
+							ELEMENTS.character.settings.arenaPresets.setAttribute("visibility", true)
 							ELEMENTS.character.settings.access.select.element.value = CHARACTER.access ? ELEMENTS.character.settings.access.select.private.value : ELEMENTS.character.settings.access.select.public.value
 							ELEMENTS.character.settings.access.form.setAttribute("visibility", (CHARACTER && CHARACTER.id && (CHARACTER.userId == USER.id || CHARACTER.gameUserId == USER.id)) ? true : false)
 							ELEMENTS.character.settings.delete.gate.setAttribute("visibility", (CHARACTER && CHARACTER.id && (CHARACTER.userId == USER.id || CHARACTER.gameUserId == USER.id)) ? true : false)
 
-						// arena object
-							ELEMENTS.character.settings.arenaPresets.setAttribute("visibility", true)
-							displayCharacterArenaPresets(CHARACTER)
-
 						// mode
 							var mode = ELEMENTS.character.element.getAttribute("mode") || "play"
+
+						// settings
+							if (mode == "settings") {
+								displayCharacterArenaPresets(CHARACTER)
+							}
 
 						// conditions
 							displayCharacterConditions(CHARACTER)
@@ -3071,13 +3122,13 @@ window.onload = function() {
 								right.appendChild(damage)
 
 							// d20
-								var current = document.createElement("input")
-									current.type = "number"
-									current.setAttribute("readonly", true)
-									current.className = "skill-current d20"
-									current.value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition + skill.maximum + skill.condition)
-									current.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
-								right.appendChild(current)
+								var d20 = document.createElement("input")
+									d20.type = "number"
+									d20.setAttribute("readonly", true)
+									d20.className = "skill-current d20"
+									d20.value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition + skill.maximum + skill.condition)
+									d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
+								right.appendChild(d20)
 						
 						// disable in select
 							var option = ELEMENTS.character.statistics[statistic].querySelector("option[value=" + skill.name + "]")
@@ -5681,7 +5732,7 @@ window.onload = function() {
 											labelLocked.className = "arena-object-locked-label"
 										listing.appendChild(labelLocked)
 
-										var spanLocked = document.createElement("span")
+										var spanLocked = document.createElement("div")
 											spanLocked.innerHTML = "&#x1f512;"
 											spanLocked.title = "lock"
 										labelLocked.appendChild(spanLocked)
@@ -5699,7 +5750,7 @@ window.onload = function() {
 											labelVisible.className = "arena-object-visible-label"
 										listing.appendChild(labelVisible)
 
-										var spanVisible = document.createElement("span")
+										var spanVisible = document.createElement("div")
 											spanVisible.innerHTML = "&#x1f441;"
 											spanVisible.title = "visibility"
 										labelVisible.appendChild(spanVisible)

@@ -62,13 +62,21 @@
 					</label>
 				</form>
 			</section>
+			<form id="sidebar-toggle-form" method="post" action="javascript:;">
+				<button id="sidebar-toggle-close">&larr;</button>
+				<button id="sidebar-toggle-open">&rarr;</button>
+			</form>
 			<section id="settings">
 				<div id="settings-game" class="subsection">
 					<h3>game</h3>
 					<div id="settings-game-search" class="option-search">
-						<input id="settings-game-search-input" autocomplete="off" placeholder="select game..." class="option-search-input form-pair"/>
-						<button id="settings-game-search-button" class="option-search-button form-pair" title="submit">&#x1f50e;</button>
-						<button id="settings-game-search-cancel" class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						<form id="settings-game-search-form" class="option-search-form" method="post" action="javascript:;">
+							<input id="settings-game-search-input" autocomplete="off" placeholder="select game..." class="option-search-input form-pair"/>
+							<button id="settings-game-search-button" class="option-search-button form-pair" title="submit">&#x1f50e;</button>
+						</form>
+						<form class="option-search-cancel-form" method="post" action="javascript:;">
+							<button id="settings-game-search-cancel" class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						</form>
 						<div class="option-search-results"></div>
 						<select id="settings-game-select" class="option-search-select">
 							<optgroup label="..." id="settings-game-select-other">
@@ -176,8 +184,12 @@
 						<div id="character-settings-select-search" class="option-search">
 							<input id="character-settings-upload" type="file"/>
 							<input autocomplete="off" placeholder="select character..." class="option-search-input"/>
-							<button id="character-settings-select-search-button" class="option-search-button" title="submit"></button>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<form class="option-search-cancel-form" method="post" action="javascript:;">
+								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							</form>
+							<form id="character-settings-select-search-form" class="option-search-form" method="post" action="javascript:;">
+								<button id="character-settings-select-search-button" class="option-search-button" title="submit"></button>
+							</form>
 							<div class="option-search-results"></div>
 							<select id="character-settings-select" class="option-search-select">
 								<optgroup label="..." id="character-settings-select-other">
@@ -283,10 +295,14 @@
 					<div id="character-conditions" class="section">
 						<div id="character-conditions-search" class="option-search">
 							<input autocomplete="off" placeholder="+ condition" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<form class="option-search-cancel-form" method="post" action="javascript:;">
+								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							</form>
+							<form id="character-conditions-search-form" class="option-search-form" method="post" action="javascript:;">
+								<button id="character-conditions-search-button" class="option-search-button" title="submit"></button>
+							</form>
 							<div class="option-search-results"></div>
 							<select id="character-conditions-select" class="option-search-select"></select>
-							<button id="character-conditions-search-button" class="option-search-button" title="submit"></button>
 						</div>
 						<div id="character-conditions-list"></div>
 					</div>
@@ -355,10 +371,14 @@
 						<div class="skills-list"></div>
 						<div id="character-perception-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<form class="option-search-cancel-form" method="post" action="javascript:;">
+								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							</form>
+							<form id="character-perception-search-form" class="option-search-form" method="post" action="javascript:;">
+								<button class="option-search-button" title="submit"></button>
+							</form>
 							<div class="option-search-results"></div>
 							<select id="character-perception-select" class="option-search-select"></select>
-							<button class="option-search-button" title="submit"></button>
 						</div>
 					</details>
 					<details id="character-memory" class="statistic section">
@@ -376,10 +396,14 @@
 						<div class="skills-list"></div>
 						<div id="character-memory-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<form class="option-search-cancel-form" method="post" action="javascript:;">
+								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							</form>
+							<form id="character-memory-search-form" class="option-search-form" method="post" action="javascript:;">
+								<button class="option-search-button" title="submit"></button>
+							</form>
 							<div class="option-search-results"></div>
 							<select id="character-memory-select" class="option-search-select"></select>
-							<button class="option-search-button" title="submit"></button>
 						</div>
 					</details>
 					<details id="character-logic" class="statistic section">
@@ -397,10 +421,14 @@
 						<div class="skills-list"></div>
 						<div id="character-logic-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<form class="option-search-cancel-form" method="post" action="javascript:;">
+								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							</form>
+							<form id="character-logic-search-form" class="option-search-form" method="post" action="javascript:;">
+								<button class="option-search-button" title="submit"></button>
+							</form>
 							<div class="option-search-results"></div>
 							<select id="character-logic-select" class="option-search-select"></select>
-							<button class="option-search-button" title="submit"></button>
 						</div>
 					</details>
 					<details id="character-strength" class="statistic section">
@@ -418,10 +446,14 @@
 						<div class="skills-list"></div>
 						<div id="character-strength-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<form class="option-search-cancel-form" method="post" action="javascript:;">
+								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							</form>
+							<form id="character-strength-search-form" class="option-search-form" method="post" action="javascript:;">
+								<button class="option-search-button" title="submit"></button>
+							</form>
 							<div class="option-search-results"></div>
 							<select id="character-strength-select" class="option-search-select"></select>
-							<button class="option-search-button" title="submit"></button>
 						</div>
 					</details>
 					<details id="character-dexterity" class="statistic section">
@@ -439,10 +471,14 @@
 						<div class="skills-list"></div>
 						<div id="character-dexterity-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<form class="option-search-cancel-form" method="post" action="javascript:;">
+								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							</form>
+							<form id="character-dexterity-search-form" class="option-search-form" method="post" action="javascript:;">
+								<button class="option-search-button" title="submit"></button>
+							</form>
 							<div class="option-search-results"></div>
 							<select id="character-dexterity-select" class="option-search-select"></select>
-							<button class="option-search-button" title="submit"></button>
 						</div>
 					</details>
 					<details id="character-immunity" class="statistic section">
@@ -460,10 +496,14 @@
 						<div class="skills-list"></div>
 						<div id="character-immunity-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<form class="option-search-cancel-form" method="post" action="javascript:;">
+								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							</form>
+							<form id="character-immunity-search-form" class="option-search-form" method="post" action="javascript:;">
+								<button class="option-search-button" title="submit"></button>
+							</form>
 							<div class="option-search-results"></div>
 							<select id="character-immunity-select" class="option-search-select"></select>
-							<button class="option-search-button" title="submit"></button>
 						</div>
 					</details>
 					<details id="character-speed" class="statistic section">
@@ -481,18 +521,26 @@
 						<div class="skills-list"></div>
 						<div id="character-speed-search" class="option-search">
 							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							<form class="option-search-cancel-form" method="post" action="javascript:;">
+								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							</form>
+							<form id="character-speed-search-form" class="option-search-form" method="post" action="javascript:;">
+								<button class="option-search-button" title="submit"></button>
+							</form>
 							<div class="option-search-results"></div>
 							<select id="character-speed-select" class="option-search-select"></select>
-							<button class="option-search-button" title="submit"></button>
 						</div>
 					</details>
 					<div id="character-items-search" class="option-search">
 						<input autocomplete="off" placeholder="+ item" class="option-search-input"/>
-						<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						<form class="option-search-cancel-form" method="post" action="javascript:;">
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						</form>
+						<form id="character-items-search-form" class="option-search-form" method="post" action="javascript:;">
+							<button id="character-items-search-button" class="option-search-button" title="submit"></button>
+						</form>
 						<div class="option-search-results"></div>
 						<select id="character-items-select" class="option-search-select"></select>
-						<button id="character-items-search-button" class="option-search-button" title="submit"></button>
 					</div>
 					<div id="character-items" class="section">
 						<details id="character-items-equipped" class="subsection" open>
@@ -551,8 +599,12 @@
 			<section id="content" mode="none">
 				<div id="content-choose-search" class="option-search subsection">
 					<input autocomplete="off" placeholder="select content..." class="option-search-input"/>
-					<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-					<button id="content-choose-search-button" class="option-search-button" title="submit"></button>
+					<form class="option-search-cancel-form" method="post" action="javascript:;">
+						<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+					</form>
+					<form id="content-choose-search-form" class="option-search-form" method="post" action="javascript:;">
+						<button id="content-choose-search-button" class="option-search-button" title="submit"></button>
+					</form>
 					<div class="option-search-results"></div>
 					<select id="content-choose-select" class="option-search-select">
 						<optgroup id="content-choose-select-other" label="...">
@@ -599,8 +651,12 @@
 						<div id="content-component-code-help-instructions">Enter JSON for a custom component. See samples:</div>
 						<div id="content-component-code-options-search" class="option-search">
 							<input autocomplete="off" placeholder="search race, skill, condition, item..." class="option-search-input"/>
-							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							<button id="content-component-code-search-button" class="option-search-button" title="submit"></button>
+							<form class="option-search-cancel-form" method="post" action="javascript:;">
+								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+							</form>
+							<form id="content-component-code-search-form" class="option-search-form" method="post" action="javascript:;">
+								<button id="content-component-code-search-button" class="option-search-button" title="submit"></button>
+							</form>
 							<div class="option-search-results"></div>
 							<select id="content-component-code-select" class="option-search-select">
 								<optgroup id="content-component-code-select-races" label="races"></optgroup>
@@ -688,8 +744,12 @@
 					<h3 id="content-objects-header">objects</h3>
 					<div id="content-objects-search" class="option-search">
 						<input autocomplete="off" placeholder="add object..." class="option-search-input"/>
-						<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-						<button id="content-objects-search-button" class="option-search-button" title="submit"></button>
+						<form class="option-search-cancel-form" method="post" action="javascript:;">
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						</form>
+						<form id="content-objects-search-form" class="option-search-form" method="post" action="javascript:;">
+							<button id="content-objects-search-button" class="option-search-button" title="submit"></button>
+						</form>
 						<div class="option-search-results"></div>
 						<select id="content-objects-select" class="option-search-select">
 							<optgroup label="...">

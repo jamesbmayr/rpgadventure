@@ -214,7 +214,7 @@ window.addEventListener("load", function() {
 										button.setAttribute("disabled", true)
 									}
 									button.value = results[i].value
-									button.addEventListener(TRIGGERS.click, selectOption)
+									button.addEventListener("click", selectOption)
 								label.appendChild(button)
 
 							// append
