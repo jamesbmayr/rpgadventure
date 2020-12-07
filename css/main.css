@@ -623,12 +623,6 @@
 			cursor: pointer;
 		}
 
-		#logo[rotate="true"] {
-			transition: 1s;
-			transform: rotate(720deg);
-			pointer-events: none;
-		}
-
 	/* form pair */
 		select.form-pair {
 			width: calc(100% - (var(--medium-font-size) + 4 * var(--small-gap-size)));
@@ -705,4 +699,9 @@
 			min-width: 0px !important;
 			max-height: 0px !important;
 			max-width: 0px !important;
+		}
+
+		[rolling="true"] {
+			transition: 1s;
+			transform: rotate(360deg);
 		}

@@ -1627,6 +1627,15 @@ window.onload = function() {
 								return
 							}
 
+						// animate
+							if (event.target.getAttribute("rolling")) {
+								return
+							}
+							event.target.setAttribute("rolling", true)
+							setTimeout(function() {
+								event.target.removeAttribute("rolling")
+							}, 1000)
+
 						// rolls
 							var rolls = []
 
@@ -1757,6 +1766,15 @@ window.onload = function() {
 							if (ELEMENTS.character.element.getAttribute("mode") !== "play" && ELEMENTS.character.element.getAttribute("mode") !== "damage") {
 								return
 							}
+
+						// animate
+							if (event.target.getAttribute("rolling")) {
+								return
+							}
+							event.target.setAttribute("rolling", true)
+							setTimeout(function() {
+								event.target.removeAttribute("rolling")
+							}, 1000)
 
 						// rolls
 							var rolls = []
@@ -1919,6 +1937,15 @@ window.onload = function() {
 			/* submitRollGroupCreateCustom */
 				function submitRollGroupCreateCustom(event) {
 					try {
+						// animate
+							if (event.target.getAttribute("rolling")) {
+								return
+							}
+							event.target.setAttribute("rolling", true)
+							setTimeout(function() {
+								event.target.removeAttribute("rolling")
+							}, 1000)
+							
 						// rolls
 							var rolls = []
 

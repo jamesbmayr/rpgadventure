@@ -125,9 +125,9 @@ window.addEventListener("load", function() {
 				function rollLogo(event) {
 					try {
 						ELEMENTS.logo.innerText = ""
-						ELEMENTS.logo.setAttribute("rotate", true)
+						ELEMENTS.logo.setAttribute("rolling", true)
 						setTimeout(function() {
-							ELEMENTS.logo.removeAttribute("rotate")
+							ELEMENTS.logo.removeAttribute("rolling")
 							ELEMENTS.logo.innerText = Math.floor(Math.random() * 20) + 1
 						}, 1000)
 					} catch (error) {console.log(error)}
