@@ -203,6 +203,10 @@
 			filter: drop-shadow(0 0 var(--shadow-size) var(--light-gray));
 		}
 
+		input[type=color] {
+			box-sizing: content-box;
+		}
+
 		textarea {
 			float: left;
 			width: calc(100% - 2 * (var(--small-gap-size) + var(--border-size)));
