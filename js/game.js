@@ -127,6 +127,7 @@ window.onload = function() {
 							game: {
 								element: document.getElementById("settings-game"),
 								search: {
+									title: document.getElementById("settings-game-search-title"),
 									element: document.getElementById("settings-game-search"),
 									form: document.getElementById("settings-game-search-form"),
 									input: document.getElementById("settings-game-search-input"),
@@ -209,24 +210,8 @@ window.onload = function() {
 					// character
 						ELEMENTS.character = {
 							element: document.getElementById("character"),
-							content: document.getElementById("character-content"),
-							modes: {
-								form: document.getElementById("character-modes-form"),
-								settings: document.getElementById("character-modes-settings"),
-								settingsRadio: document.getElementById("character-modes-settings-radio"),
-								play: document.getElementById("character-modes-play"),
-								playRadio: document.getElementById("character-modes-play-radio"),
-								edit: document.getElementById("character-modes-edit"),
-								editRadio: document.getElementById("character-modes-edit-radio"),
-								items: document.getElementById("character-modes-items"),
-								itemsRadio: document.getElementById("character-modes-items-radio"),
-								conditions: document.getElementById("character-modes-conditions"),
-								conditionsRadio: document.getElementById("character-modes-conditions-radio"),
-								damage: document.getElementById("character-modes-damage"),
-								damageRadio: document.getElementById("character-modes-damage-radio")
-							},
 							settings: {
-								element: document.getElementById("character-settings"),
+								title: document.getElementById("character-settings-title"),
 								select: {
 									element: document.getElementById("character-settings-select"),
 									custom: document.getElementById("character-settings-select-custom"),
@@ -266,14 +251,6 @@ window.onload = function() {
 							},
 							info: {
 								element: document.getElementById("character-info"),
-								name: document.getElementById("character-info-name"),
-								nameText: document.getElementById("character-info-name-text"),
-								image: document.getElementById("character-info-image"),
-								imageReset: document.getElementById("character-info-image-reset"),
-								imageResetForm: document.getElementById("character-info-image-reset-form"),
-								imageForm: document.getElementById("character-info-image-form"),
-								imageInput: document.getElementById("character-info-image-input"),
-								imageUpload: document.getElementById("character-info-image-upload"),
 								burden: document.getElementById("character-info-burden"),
 								points: document.getElementById("character-info-points"),
 								damage: document.getElementById("character-info-damage"),
@@ -292,12 +269,6 @@ window.onload = function() {
 								throw: document.getElementById("character-info-throw"),
 								carry: document.getElementById("character-info-carry")
 							},
-							damage: {
-								element: document.getElementById("character-damage"),
-								input: document.getElementById("character-damage-input"),
-								form: document.getElementById("character-damage-form"),
-								recover: document.getElementById("character-damage-recover")
-							},
 							statistics: {
 								perception: document.getElementById("character-perception"),
 								memory: document.getElementById("character-memory"),
@@ -308,16 +279,17 @@ window.onload = function() {
 								speed: document.getElementById("character-speed")
 							},
 							items: {
-								element: document.getElementById("character-items"),
 								equipped: {
 									element: document.getElementById("character-items-equipped"),
 									count: document.getElementById("character-items-equipped-count"),
-									list: document.getElementById("character-items-equipped-list"),
+									form: document.getElementById("character-items-equipped-form"),
+									list: document.getElementById("character-items-equipped-list")
 								},
 								unequipped: {
 									element: document.getElementById("character-items-unequipped"),
 									count: document.getElementById("character-items-unequipped-count"),
-									list: document.getElementById("character-items-unequipped-list"),
+									form: document.getElementById("character-items-unequipped-form"),
+									list: document.getElementById("character-items-unequipped-list")
 								},
 								search: {
 									form: document.getElementById("character-items-search-form")
@@ -374,6 +346,7 @@ window.onload = function() {
 								form: document.getElementById("content-add-form")
 							},
 							choose: {
+								title: document.getElementById("content-choose-title"),
 								search: {
 									form: document.getElementById("content-choose-search-form")
 								},
@@ -521,7 +494,6 @@ window.onload = function() {
 						ELEMENTS.rules.search.form.addEventListener(TRIGGERS.submit, submitRulesSearch)
 
 					// character
-						ELEMENTS.character.modes.form.addEventListener(TRIGGERS.change, displayCharacterMode)
 						ELEMENTS.character.settings.select.form.addEventListener(TRIGGERS.submit, submitCharacterRead)
 						ELEMENTS.character.settings.download.form.addEventListener(TRIGGERS.submit, displayCharacterDownload)
 						ELEMENTS.character.settings.name.input.addEventListener(TRIGGERS.change, submitCharacterUpdateName)
@@ -530,18 +502,15 @@ window.onload = function() {
 						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, submitCharacterDelete)
 						ELEMENTS.character.settings.arenaPresets.querySelectorAll("input").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
 						ELEMENTS.character.settings.arenaPresets.querySelectorAll("select").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
-						ELEMENTS.character.content.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20) })
-						// ELEMENTS.character.info.imageForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImage)
-						ELEMENTS.character.info.imageInput.addEventListener(TRIGGERS.change, submitCharacterUpdateImage)
-						ELEMENTS.character.info.imageResetForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateImageDelete)
+						ELEMENTS.character.element.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20) })
 						ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateInfo) })
-						ELEMENTS.character.content.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, submitCharacterUpdateStatistic) })
-						ELEMENTS.character.content.querySelectorAll(".statistic .option-search-form").forEach(function(form) { form.addEventListener(TRIGGERS.submit, submitCharacterUpdateSkillCreate) })
+						ELEMENTS.character.element.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, submitCharacterUpdateStatistic) })
+						ELEMENTS.character.element.querySelectorAll(".statistic .option-search-form").forEach(function(form) { form.addEventListener(TRIGGERS.submit, submitCharacterUpdateSkillCreate) })
 						ELEMENTS.character.items.search.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateItemCreate)
+						ELEMENTS.character.items.equipped.form.addEventListener(TRIGGERS.submit, displayCharacterItemMode)
+						ELEMENTS.character.items.unequipped.form.addEventListener(TRIGGERS.submit, displayCharacterItemMode)
 						ELEMENTS.character.conditions.search.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateConditionCreate)
-						ELEMENTS.character.damage.input.addEventListener(TRIGGERS.change, submitCharacterUpdateDamage)
-						ELEMENTS.character.damage.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateRecover)
-						ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateDamageStatistic) })
+						ELEMENTS.character.element.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateDamageStatistic) })
 
 					// chat
 						ELEMENTS.chat.send.form.addEventListener(TRIGGERS.submit, submitChatCreate)
@@ -582,6 +551,10 @@ window.onload = function() {
 						var selectSearchCancels = Array.from(ELEMENTS.body.querySelectorAll(".option-search-cancel-form"))
 							selectSearchCancels.forEach(function(form) {
 								form.addEventListener(TRIGGERS.submit, FUNCTIONS.cancelSearch)
+							})
+						var selectSearchCloses = Array.from(ELEMENTS.body.querySelectorAll(".option-search-close-form"))
+							selectSearchCloses.forEach(function(form) {
+								form.addEventListener(TRIGGERS.submit, FUNCTIONS.selectOption)
 							})
 				} catch (error) {console.log(error)}
 			}
@@ -825,6 +798,8 @@ window.onload = function() {
 					try {
 						// no game
 							if (!GAME || !GAME.id) {
+								ELEMENTS.settings.element.setAttribute("mode", "none")
+								ELEMENTS.settings.game.search.title.innerText = ""
 								ELEMENTS.settings.game.name.form.setAttribute("visibility", false)
 								ELEMENTS.settings.game.name.input.setAttribute("disabled", true)
 								ELEMENTS.settings.game.players.element.setAttribute("visibility", false)
@@ -835,7 +810,9 @@ window.onload = function() {
 
 						// owned by another player
 							if (GAME.userId !== USER.id) {
-								ELEMENTS.settings.game.name.form.setAttribute("visibility", true)
+								ELEMENTS.settings.element.setAttribute("mode", "game")
+								ELEMENTS.settings.game.search.title.innerText = GAME.name
+								ELEMENTS.settings.game.name.form.setAttribute("visibility", false)
 								ELEMENTS.settings.game.name.input.setAttribute("disabled", true)
 								ELEMENTS.settings.game.name.input.value = GAME.name
 								ELEMENTS.settings.game.players.element.setAttribute("visibility", true)
@@ -845,6 +822,8 @@ window.onload = function() {
 
 						// owned by this player
 							else {
+								ELEMENTS.settings.element.setAttribute("mode", "game")
+								ELEMENTS.settings.game.search.title.innerText = GAME.name
 								ELEMENTS.settings.game.name.form.setAttribute("visibility", true)
 								ELEMENTS.settings.game.name.input.removeAttribute("disabled")
 								ELEMENTS.settings.game.name.input.value = GAME.name
@@ -1622,11 +1601,6 @@ window.onload = function() {
 			/* submitRollGroupCreateD20 */
 				function submitRollGroupCreateD20(event) {
 					try {
-						// play?
-							if (ELEMENTS.character.element.getAttribute("mode") !== "play") {
-								return
-							}
-
 						// animate
 							if (event.target.getAttribute("rolling")) {
 								return
@@ -1762,8 +1736,8 @@ window.onload = function() {
 			/* submitRollGroupCreateD6 */
 				function submitRollGroupCreateD6(event) {
 					try {
-						// play?
-							if (ELEMENTS.character.element.getAttribute("mode") !== "play" && ELEMENTS.character.element.getAttribute("mode") !== "damage") {
+						// edit mode on item?
+							if (event.target.closest(".item") && ELEMENTS.character.element.getAttribute("mode") !== "play") {
 								return
 							}
 
@@ -2460,146 +2434,6 @@ window.onload = function() {
 				}
 
 		/** display - settings **/
-			/* displayCharacterMode */
-				function displayCharacterMode(event) {
-					try {
-						// mode
-							var mode = event.target.value
-
-						// no character?
-							if (!CHARACTER) {
-								ELEMENTS.character.element.setAttribute("mode", "settings")
-								ELEMENTS.character.modes.settingsRadio.checked = true
-
-								if (mode !== "settings") {
-									FUNCTIONS.showToast({success: false, message: "no character selected"})
-								}
-								return
-							}
-
-						// set mode
-							ELEMENTS.character.element.setAttribute("mode", mode)
-
-						// forceSet?
-							if (event.forceSet) {
-								event.target.checked = true
-							}
-
-						// settings
-							if (mode == "settings") {
-								displayCharacterArenaPresets(CHARACTER)
-							}
-
-						// play
-							if (mode == "play") {
-								// close info
-									ELEMENTS.character.info.element.removeAttribute("open")
-									ELEMENTS.character.items.equipped.element.setAttribute("open", true)
-									ELEMENTS.character.items.unequipped.element.setAttribute("open", true)
-
-								// close items
-									ELEMENTS.character.content.querySelectorAll("details.item").forEach(function(details) {
-										details.removeAttribute("open")
-									})
-
-								// close up inputs
-									ELEMENTS.character.content.querySelectorAll(".editable:not(.always-editable)").forEach(function(input) {
-										input.setAttribute("readonly", true)
-									})
-									ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
-										input.setAttribute("readonly", true)
-									})
-									ELEMENTS.character.content.querySelectorAll("select:not(.always-editable").forEach(function(select) {
-										select.setAttribute("disabled", true)
-									})
-							}
-
-						// edit
-							else if (mode == "edit") {
-								// open info
-									ELEMENTS.character.info.element.setAttribute("open", true)
-
-								// info
-									ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(input) {
-										input.removeAttribute("readonly")
-									})
-									ELEMENTS.character.info.race.removeAttribute("disabled")
-
-								// statistics
-									ELEMENTS.character.content.querySelectorAll(".statistic input.editable").forEach(function(input) {
-										input.removeAttribute("readonly")
-									})
-									ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
-										input.setAttribute("readonly", true)
-									})
-
-								// skills
-									ELEMENTS.character.content.querySelectorAll(".statistic select").forEach(function(select) {
-										select.removeAttribute("disabled")
-									})
-							}
-
-						// items
-							else if (mode == "items") {
-								// items
-									ELEMENTS.character.items.equipped.element.setAttribute("open", true)
-									ELEMENTS.character.items.unequipped.element.setAttribute("open", true)
-									ELEMENTS.character.items.select.removeAttribute("disabled")
-
-								// open items
-									ELEMENTS.character.content.querySelectorAll("details.item").forEach(function(details) {
-										details.setAttribute("open", true)
-									})
-
-								// fields
-									ELEMENTS.character.content.querySelectorAll(".item .editable").forEach(function(input) {
-										input.removeAttribute("readonly")
-									})
-
-									ELEMENTS.character.content.querySelectorAll(".item select.editable").forEach(function(select) {
-										select.removeAttribute("disabled")
-									})
-							}
-
-						// conditions
-							else if (mode == "conditions") {
-								// conditions select
-									ELEMENTS.character.conditions.select.removeAttribute("disabled")
-
-								// close up inputs
-									ELEMENTS.character.content.querySelectorAll(".editable:not(.always-editable)").forEach(function(input) {
-										input.setAttribute("readonly", true)
-									})
-									ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
-										input.setAttribute("readonly", true)
-									})
-									ELEMENTS.character.content.querySelectorAll("select:not(.always-editable").forEach(function(select) {
-										select.setAttribute("disabled", true)
-									})
-							}
-
-						// damage
-							else if (mode == "damage") {
-								// open items
-									ELEMENTS.character.items.equipped.element.setAttribute("open", true)
-									ELEMENTS.character.items.unequipped.element.setAttribute("open", true)
-
-								// close up inputs
-									ELEMENTS.character.content.querySelectorAll(".editable:not(.always-editable)").forEach(function(input) {
-										input.setAttribute("readonly", true)
-									})
-									ELEMENTS.character.content.querySelectorAll("select:not(.always-editable").forEach(function(select) {
-										select.setAttribute("disabled", true)
-									})
-
-								// statistics
-									ELEMENTS.character.content.querySelectorAll(".statistic-damage").forEach(function(input) {
-										input.removeAttribute("readonly")
-									})
-							}
-					} catch (error) {console.log(error)}
-				}
-
 			/* displayCharacterList */
 				function displayCharacterList(characterList) {
 					try {
@@ -2761,26 +2595,23 @@ window.onload = function() {
 					try {
 						// no character?
 							if (!CHARACTER) {
-								ELEMENTS.character.settings.metadata.setAttribute("visibility", false)
-								ELEMENTS.character.settings.arenaPresets.setAttribute("visibility", false)
-								displayCharacterMode({target: ELEMENTS.character.modes.settingsRadio, forceSet: true})
+								ELEMENTS.character.settings.title.innerText = ""
+								ELEMENTS.character.element.setAttribute("mode", "none")
 								displayChatListSenders()
 								return
 							}
 
 						// metadata
-							ELEMENTS.character.settings.metadata.setAttribute("visibility", true)
-							ELEMENTS.character.settings.arenaPresets.setAttribute("visibility", true)
+							ELEMENTS.character.settings.title.innerText = CHARACTER.info.name
 							ELEMENTS.character.settings.access.select.element.value = CHARACTER.access ? ELEMENTS.character.settings.access.select.private.value : ELEMENTS.character.settings.access.select.public.value
 							ELEMENTS.character.settings.access.form.setAttribute("visibility", (CHARACTER && CHARACTER.id && (CHARACTER.userId == USER.id || CHARACTER.gameUserId == USER.id)) ? true : false)
 							ELEMENTS.character.settings.delete.gate.setAttribute("visibility", (CHARACTER && CHARACTER.id && (CHARACTER.userId == USER.id || CHARACTER.gameUserId == USER.id)) ? true : false)
 
 						// mode
 							var mode = ELEMENTS.character.element.getAttribute("mode") || "play"
-
-						// settings
-							if (mode == "settings") {
-								displayCharacterArenaPresets(CHARACTER)
+							if (ELEMENTS.character.element.getAttribute("mode") == "none") {
+								mode = "play"
+								ELEMENTS.character.element.setAttribute("mode", "play")
 							}
 
 						// conditions
@@ -2790,10 +2621,13 @@ window.onload = function() {
 							displayCharacterItems(CHARACTER, mode == "items")
 
 						// statistics
-							displayCharacterStatistics(CHARACTER, mode == "edit")
+							displayCharacterStatistics(CHARACTER)
 
 						// info
 							displayCharacterInfo(CHARACTER)
+
+						// arena presets
+							displayCharacterArenaPresets(CHARACTER)
 
 						// chat
 							displayChatListSenders()
@@ -2826,9 +2660,8 @@ window.onload = function() {
 
 						// get canvas
 							var canvas = ELEMENTS.character.settings.arenaPreview
-							var rect = window.getComputedStyle(canvas)
-								canvas.height = rect.height.replace("px","")
-								canvas.width = rect.width.replace("px","")
+								canvas.height = Number(canvas.height)
+								canvas.width = Number(canvas.width)
 							var context = canvas.getContext("2d")
 
 						// clear & background
@@ -2923,24 +2756,7 @@ window.onload = function() {
 							}
 
 						// name
-							ELEMENTS.character.info.name.innerText = CHARACTER.info.name
-							ELEMENTS.character.info.nameText.value = CHARACTER.info.name
 							ELEMENTS.character.settings.name.input.value = CHARACTER.info.name
-
-						// image
-							if (character.info.image) {
-								ELEMENTS.character.info.imageInput.value = character.info.image
-								ELEMENTS.character.info.image.style.backgroundImage = "url(" + character.info.image + (character.info.file ? ("?" + new Date().getTime()) : "") + ")"
-								ELEMENTS.character.info.image.setAttribute("visibility", true)
-							}
-							else {
-								ELEMENTS.character.info.imageInput.value = ""
-								ELEMENTS.character.info.image.style.backgroundImage = ""
-								ELEMENTS.character.info.image.setAttribute("visibility", false)
-							}
-
-						// damage
-							ELEMENTS.character.damage.input.value = CHARACTER.info.status.damage || null
 
 						// demographics
 							for (var i in CHARACTER.info.demographics) {
@@ -2995,7 +2811,7 @@ window.onload = function() {
 				}
 
 			/* displayCharacterStatistics */
-				function displayCharacterStatistics(character, enable) {
+				function displayCharacterStatistics(character) {
 					try {
 						// current statistic
 							var currentStatistic = document.activeElement.closest(".statistic")
@@ -3015,12 +2831,12 @@ window.onload = function() {
 							for (var i in CHARACTER.statistics) {
 								// statistic
 									var container = ELEMENTS.character.statistics[i]
-									displayCharacterStatistic(CHARACTER, container, i, enable)
+									displayCharacterStatistic(CHARACTER, container, i)
 
 								// skills
 									container.querySelector(".skills-list").innerHTML = ""
 									for (var s in CHARACTER.statistics[i].skills) {
-										displayCharacterSkill(CHARACTER, container, i, CHARACTER.statistics[i].skills[s], enable)
+										displayCharacterSkill(CHARACTER, container, i, CHARACTER.statistics[i].skills[s])
 									}
 							}
 
@@ -3039,7 +2855,7 @@ window.onload = function() {
 				}
 
 			/* displayCharacterStatistic */
-				function displayCharacterStatistic(character, container, statistic, enable) {
+				function displayCharacterStatistic(character, container, statistic) {
 					try {
 						// statistic
 							container.querySelector(".statistic-maximum"  ).value = character.statistics[statistic].maximum
@@ -3057,31 +2873,12 @@ window.onload = function() {
 				}
 
 			/* displayCharacterSkill */
-				function displayCharacterSkill(character, container, statistic, skill, enable) {
+				function displayCharacterSkill(character, container, statistic, skill) {
 					try {
 						// block
 							var block = document.createElement("div")
 								block.className = "skill"
 							container.querySelector(".skills-list").appendChild(block)
-
-						// remove?
-							if (skill.unremovable) {
-								block.className += " unremovable"
-							}
-							else {
-								var removeForm = document.createElement("form")
-									removeForm.className = "skill-remove-form"
-									removeForm.setAttribute("method", "post")
-									removeForm.setAttribute("action", "javascript:;")
-									removeForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateSkillDelete)
-								block.prepend(removeForm)
-
-								var remove = document.createElement("button")
-									remove.className = "skill-remove"
-									remove.title = "remove skill"
-									remove.innerText = "x"
-								removeForm.appendChild(remove)
-							}
 
 						// left column
 							var left = document.createElement("div")
@@ -3098,9 +2895,6 @@ window.onload = function() {
 										d6.type = "number"
 										d6.step = 1
 										d6.min = 0
-										if (!enable) {
-											d6.setAttribute("readonly", true)
-										}
 										d6.className = "d6 editable"
 										d6.placeholder = "d6"
 										d6.value = skill.d6
@@ -3117,6 +2911,25 @@ window.onload = function() {
 									text.value = skill.name.replace(/_/g, " ")
 								name.appendChild(text)
 
+							// remove?
+								if (skill.unremovable) {
+									block.className += " unremovable"
+								}
+								else if (!skill.maximum) {
+									var removeForm = document.createElement("form")
+										removeForm.className = "skill-remove-form"
+										removeForm.setAttribute("method", "post")
+										removeForm.setAttribute("action", "javascript:;")
+										removeForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateSkillDelete)
+									left.prepend(removeForm)
+
+									var remove = document.createElement("button")
+										remove.className = "skill-remove"
+										remove.title = "remove skill"
+										remove.innerText = "x"
+									removeForm.appendChild(remove)
+								}
+
 						// right column
 							var right = document.createElement("div")
 								right.className = "column-right"
@@ -3125,9 +2938,6 @@ window.onload = function() {
 							// numbers
 								var maximum = document.createElement("input")
 									maximum.type = "number"
-									if (!enable) {
-										maximum.setAttribute("readonly", true)
-									}
 									maximum.className = "skill-maximum editable"
 									maximum.value = skill.maximum
 									maximum.placeholder = "#"
@@ -3160,6 +2970,27 @@ window.onload = function() {
 						// disable in select
 							var option = ELEMENTS.character.statistics[statistic].querySelector("option[value=" + skill.name + "]")
 							if (option) { option.setAttribute("disabled", true) }
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterItemMode */
+				function displayCharacterItemMode(event) {
+					try {
+						// no character
+							if (!CHARACTER || !CHARACTER.items) {
+								return
+							}
+
+						// stop editing
+							if (ELEMENTS.character.element.getAttribute("mode") == "items") {
+								ELEMENTS.character.element.setAttribute("mode", "play")
+								displayCharacterItems(CHARACTER, false)
+								return
+							}
+
+						// start editing
+							ELEMENTS.character.element.setAttribute("mode", "items")
+							displayCharacterItems(CHARACTER, true)
 					} catch (error) {console.log(error)}
 				}
 
@@ -3393,7 +3224,7 @@ window.onload = function() {
 							if (item.conditions) {
 								var conditions = document.createElement("div")
 									conditions.className = "item-conditions"
-								block.appendChild(conditions)
+								summary.appendChild(conditions)
 
 								var index = 0
 								for (var i in item.conditions) {
@@ -3964,89 +3795,9 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* submitCharacterUpdateImage */
-				function submitCharacterUpdateImage(event) {
-					try {
-						// url
-							if (event.target.id == ELEMENTS.character.info.imageInput.id) {
-								CHARACTER.info.image = event.target.value
-								if (!CHARACTER.arenaPresets) { CHARACTER.arenaPresets = {} }
-								CHARACTER.arenaPresets.image = event.target.value
-								submitCharacterUpdate(CHARACTER)
-								return
-							}
-
-						// upload
-							ELEMENTS.character.info.imageUpload.click()
-							ELEMENTS.character.info.imageUpload.addEventListener(TRIGGERS.change, function(event) {
-								if (ELEMENTS.character.info.imageUpload.value && ELEMENTS.character.info.imageUpload.value.length) {
-									// start reading
-										var file = ELEMENTS.character.info.imageUpload.files[0]
-										var reader = new FileReader()
-											reader.readAsBinaryString(file)
-
-									// end reading
-										reader.onload = function(event) {
-											try {
-												// parse character
-													var post = {
-														action: "uploadCharacterImage",
-														character: CHARACTER
-													}
-													
-													post.character.file = {
-														name: file.name,
-														data: event.target.result
-													}
-
-												// validate
-													if (!post.character.id) {
-														FUNCTIONS.showToast({success: false, message: "no character selected"})
-														return
-													}
-													if (!post.character.file || !post.character.file.name || !post.character.file.data) {
-														FUNCTIONS.showToast({success: false, message: "no image uploaded"})
-														return
-													}
-
-												// send socket request
-													FUNCTIONS.sendPost(post, function(response) {
-														FUNCTIONS.showToast(response)
-													})
-											}
-											catch (error) {
-												console.log(error)
-												FUNCTIONS.showToast({success: false, message: "unable to read image"})
-												return
-											}
-										}
-								}
-							})
-					} catch (error) {console.log(error)}
-				}
-
-			/* submitCharacterUpdateImageDelete */
-				function submitCharacterUpdateImageDelete(event) {
-					try {
-						// change image
-							CHARACTER.info.image = null
-							if (!CHARACTER.arenaPresets) { CHARACTER.arenaPresets = {} }
-							CHARACTER.arenaPresets.image = null
-
-						// save
-							submitCharacterUpdate(CHARACTER)
-					} catch (error) {console.log(error)}
-				}
-
 			/* submitCharacterUpdateInfo */
 				function submitCharacterUpdateInfo(event) {
 					try {
-						// name
-							if (event.target.id == "character-info-name-text") {
-								submitCharacterUpdateName(event)
-								return
-							}
-
 						// race & sex
 							if (event.target.id == "character-info-race") {
 								submitCharacterUpdateRace({name: event.target.value.toLowerCase().trim()})
@@ -4248,28 +3999,24 @@ window.onload = function() {
 							if (result.type == "race") {
 								submitCharacterUpdateRace(result.data)
 								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
-								displayCharacterMode({target: ELEMENTS.character.modes.editRadio, forceSet: true})
 							}
 							
 						// skill
 							else if (result.type == "skill") {
 								submitCharacterUpdateSkillCreate(result.data)
 								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
-								displayCharacterMode({target: ELEMENTS.character.modes.editRadio, forceSet: true})
 							}
 
 						// item
 							else if (result.type == "item") {
 								submitCharacterUpdateItemCreate(result.data)
 								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
-								displayCharacterMode({target: ELEMENTS.character.modes.itemsRadio, forceSet: true})
 							}
 
 						// condition
 							else if (result.type == "condition") {
 								submitCharacterUpdateConditionCreate(result.data)
 								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
-								displayCharacterMode({target: ELEMENTS.character.modes.conditionsRadio, forceSet: true})
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -4690,17 +4437,6 @@ window.onload = function() {
 									}
 								}
 							}
-
-						// save
-							submitCharacterUpdate(CHARACTER)
-					} catch (error) {console.log(error)}
-				}
-
-			/* submitCharacterUpdateDamage */
-				function submitCharacterUpdateDamage(event) {
-					try {
-						// change damage
-							CHARACTER.info.status.damage = Number(event.target.value)
 
 						// save
 							submitCharacterUpdate(CHARACTER)
@@ -5228,10 +4964,12 @@ window.onload = function() {
 						// no content?
 							if (!CONTENT) {
 								ELEMENTS.content.element.setAttribute("mode", "none")
+								ELEMENTS.content.choose.title.innerText = ""
 								return
 							}
 
 						// name
+							ELEMENTS.content.choose.title.innerText = CONTENT.name
 							ELEMENTS.content.name.input.value = CONTENT.name
 
 						// access

@@ -256,6 +256,13 @@ window.addEventListener("load", function() {
 							return false
 						}
 
+					// close
+						if (event.target.className.includes("option-search-close")) {
+							selectElement.value = "[none]"
+							buttonElement.click()
+							return
+						}
+
 					// value
 						var value = event.target.value
 						if (!value) {

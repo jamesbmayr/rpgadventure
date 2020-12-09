@@ -66,29 +66,35 @@
 				<button id="sidebar-toggle-close">&larr;</button>
 				<button id="sidebar-toggle-open">&rarr;</button>
 			</form>
-			<section id="settings">
-				<div id="settings-game" class="subsection">
-					<h3>game</h3>
-					<div id="settings-game-search" class="option-search">
-						<form id="settings-game-search-form" class="option-search-form" method="post" action="javascript:;">
-							<input id="settings-game-search-input" autocomplete="off" placeholder="select game..." class="option-search-input form-pair"/>
-							<button id="settings-game-search-button" class="option-search-button form-pair" title="submit">&#x1f50e;</button>
-						</form>
-						<form class="option-search-cancel-form" method="post" action="javascript:;">
-							<button id="settings-game-search-cancel" class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-						</form>
-						<div class="option-search-results"></div>
-						<select id="settings-game-select" class="option-search-select">
-							<optgroup label="..." id="settings-game-select-other">
-								<option id="settings-game-select-none" value="[none]" disabled>[close game]</option>
-								<option id="settings-game-select-new" value="[new]">[new game]</option>
-							</optgroup>
-							<optgroup label="my games" id="settings-game-select-custom"></optgroup>
-						</select>
-					</div>
+			<section id="settings" mode="none">
+				<div id="settings-game-search" class="option-search subsection">
+					<h2 id="settings-game-search-title" class="option-search-title"></h2>
+					<form class="option-search-close-form" method="post" action="javascript:;">
+						<button class="option-search-close-button minor-button">x</button>
+					</form>
+					<form id="settings-game-search-form" class="option-search-form" method="post" action="javascript:;">
+						<input id="settings-game-search-input" autocomplete="off" placeholder="select game..." class="option-search-input form-pair"/>
+						<button id="settings-game-search-button" class="option-search-button form-pair" title="submit">&#x1f50e;</button>
+					</form>
+					<form class="option-search-cancel-form" method="post" action="javascript:;">
+						<button id="settings-game-search-cancel" class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+					</form>
+					<div class="option-search-results"></div>
+					<select id="settings-game-select" class="option-search-select">
+						<optgroup label="..." id="settings-game-select-other">
+							<option id="settings-game-select-none" value="[none]" disabled>[close game]</option>
+							<option id="settings-game-select-new" value="[new]">[new game]</option>
+						</optgroup>
+						<optgroup label="my games" id="settings-game-select-custom"></optgroup>
+					</select>
+				</div>
+				<details id="settings-game" class="subsection" open>
+					<summary>
+						<h3>game</h3>
+					</summary>
 					<form id="settings-game-name-form" method="post" action="javascript:;" visibility="false">
 						<h4>name</h4>
-						<input id="settings-game-name-input" disabled>
+						<input id="settings-game-name-input" disabled autocomplete="off">
 					</form>
 					<form id="settings-game-players" method="post" action="javascript:;" visibility="false">
 						<h4>players</h4>
@@ -113,9 +119,11 @@
 							</form>
 						</details>
 					</div>
-				</div>
-				<div id="settings-user" class="subsection">
-					<h3>user</h3>
+				</details>
+				<details id="settings-user" class="subsection" open>
+					<summary>
+						<h3>user</h3>
+					</summary>
 					<form id="settings-user-name-form" method="post" action="javascript:;">
 						<h4>name</h4>
 						<input id="settings-user-name-input" type="text" placeholder="name" autocomplete="off"/>
@@ -135,7 +143,7 @@
 						<input id="settings-user-password-input-old" type="password" placeholder="old password" autocomplete="off"/>
 						<input id="settings-user-password-input-new" type="password" placeholder="new password"autocomplete="off"/>
 					</form>
-				</div>
+				</details>
 				<div id="settings-auth" class="subsection">
 					<form id="settings-auth-signout-form" method="post" action="javascript:;">
 						<button id="settings-auth-signout-button" title="sign out">sign out</button>
@@ -144,432 +152,395 @@
 			</section>
 			<section id="rules">
 				<form id="rules-search-form" method="post" action="javascript:;" class="subsection">
-					<input type="text" id="rules-search-input" placeholder="search rules" class="form-pair" autocomplete="off"/>
+					<input type="text" id="rules-search-input" placeholder="search rules..." class="form-pair" autocomplete="off"/>
 					<button id="rules-search-button" class="form-pair" title="search">&#x1f50e;</button>
 				</form>
 				<div id="rules-results"></div>
 				<a id="rules-link" target="_blank" href="<script node>getAsset('rules-doc')</script>node>">[explore rules guide]</a>
 			</section>
-			<section id="character" mode="settings">
-				<div id="character-modes">
-					<form id="character-modes-form" method="post" action="javascript:;" autocomplete="off">
-						<label class="mode nav-tab pseudo-button" id="character-modes-settings" title="settings">
-							<span>&#x2699;</span>
-							<input id="character-modes-settings-radio" type="radio" name="mode" value="settings" checked/>
-						</label>
-						<label class="mode nav-tab pseudo-button" id="character-modes-play" title="play">
-							<span>&#x1f3b2;</span>
-							<input id="character-modes-play-radio" type="radio" name="mode" value="play"/>
-						</label>
-						<label class="mode nav-tab pseudo-button" id="character-modes-edit" title="edit">
-							<span>&#x1f4dd;</span>
-							<input id="character-modes-edit-radio" type="radio" name="mode" value="edit"/>
-						</label>
-						<label class="mode nav-tab pseudo-button" id="character-modes-items" title="items">
-							<span>&#x1f392;</span>
-							<input id="character-modes-items-radio" type="radio" name="mode" value="items"/>
-						</label>
-						<label class="mode nav-tab pseudo-button" id="character-modes-conditions" title="conditions">
-							<span>&#x2728;</span>
-							<input id="character-modes-conditions-radio" type="radio" name="mode" value="conditions"/>
-						</label>
-						<label class="mode nav-tab pseudo-button" id="character-modes-damage" title="damage">
-							<span>&#x1f480;</span>
-							<input id="character-modes-damage-radio" type="radio" name="mode" value="damage"/>
-						</label>
+			<section id="character" mode="none">
+				<div id="character-settings-select-search" class="option-search subsection">
+					<h2 id="character-settings-title" class="option-search-title"></h2>
+					<form class="option-search-close-form" method="post" action="javascript:;">
+						<button class="option-search-close-button minor-button">x</button>
 					</form>
+					<input id="character-settings-upload" type="file"/>
+					<input autocomplete="off" placeholder="select character..." class="option-search-input"/>
+					<form class="option-search-cancel-form" method="post" action="javascript:;">
+						<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+					</form>
+					<form id="character-settings-select-search-form" class="option-search-form" method="post" action="javascript:;">
+						<button id="character-settings-select-search-button" class="option-search-button" title="submit"></button>
+					</form>
+					<div class="option-search-results"></div>
+					<select id="character-settings-select" class="option-search-select">
+						<optgroup label="..." id="character-settings-select-other">
+							<option id="character-settings-select-none" value="[none]" disabled>[close character]</option>
+							<option id="character-settings-select-upload" value="[upload]">[upload character]</option>
+							<option id="character-settings-select-new" value="[template-blank]" selected>[new blank character]</option>
+						</optgroup>
+						<optgroup label="my characters" id="character-settings-select-custom"></optgroup>
+					</select>
 				</div>
-				<div id="character-settings">
-					<div id="character-settings-main" class="subsection">
-						<div id="character-settings-select-search" class="option-search">
-							<input id="character-settings-upload" type="file"/>
-							<input autocomplete="off" placeholder="select character..." class="option-search-input"/>
-							<form class="option-search-cancel-form" method="post" action="javascript:;">
-								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							</form>
-							<form id="character-settings-select-search-form" class="option-search-form" method="post" action="javascript:;">
-								<button id="character-settings-select-search-button" class="option-search-button" title="submit"></button>
-							</form>
-							<div class="option-search-results"></div>
-							<select id="character-settings-select" class="option-search-select">
-								<optgroup label="..." id="character-settings-select-other">
-									<option id="character-settings-select-none" value="[none]" disabled>[close character]</option>
-									<option id="character-settings-select-upload" value="[upload]">[upload character]</option>
-									<option id="character-settings-select-new" value="[template-blank]" selected>[new blank character]</option>
-								</optgroup>
-								<optgroup label="my characters" id="character-settings-select-custom"></optgroup>
-							</select>
+				<details id="character-settings-metadata" class="subsection" visibility="false" open>
+					<summary>
+						<h3>file</h3>
+					</summary>
+					<form id="character-settings-name-form" method="post" action="javascript:;">
+						<h4>name</h4>
+						<input id="character-settings-name-input">
+					</form>
+					<form id="character-settings-access-form" method="post" action="javascript:;">
+						<h4>access</h4>
+						<select id="character-settings-access-select">
+							<option id="character-settings-access-select-public" value="[public]">[public]</option>
+							<option id="character-settings-access-select-private" value="[private]" selected>[private]</option>
+						</select>
+					</form>
+					<form id="character-settings-download-form" method="post" action="javascript:;">
+						<h4>actions</h4>
+						<button id="character-settings-download-button" title="download">download</button>
+					</form>
+					<form id="character-settings-duplicate-form" method="post" action="javascript:;">
+						<button id="character-settings-duplicate-button" title="duplicate">duplicate</button>
+					</form>
+					<details id="character-settings-delete-gate" class="delete-gate">
+						<summary>delete?</summary>
+						<form id="character-settings-delete-form" method="post" action="javascript:;">
+							<button id="character-settings-delete-button" title="delete">confirm delete</button>
+						</form>
+					</details>
+				</details>
+				<details id="character-info" class="subsection">
+					<summary>
+						<h3>info</h3>
+					</summary>
+					<div id="character-info-demographics">
+						<div class="column-left">
+							<label>race<select class="editable" type="text" id="character-info-race" dir="rtl">
+								<option id="character-info-race-disabled" disabled selected>race</option>
+							</select></label>
+							<label>sex<input class="editable" type="text" id="character-info-sex"></label>
+							<label>age<input class="editable" type="number" step="1" min="0" id="character-info-age" placeholder="y"></label>
+						</div>
+						<div class="column-right">
+							<label>height<input class="editable" type="number" step="1" min="0" id="character-info-height" placeholder="ft"></label>
+							<label>weight<input class="editable" type="number" step="1" min="0" id="character-info-weight" placeholder="lb"></label>
+							<label>exp<input class="editable" type="number" step="1" id="character-info-points" placeholder="exp"></label>
 						</div>
 					</div>
-					<div id="character-settings-metadata" class="subsection" visibility="false">
-						<h3>character</h3>
-						<form id="character-settings-name-form" method="post" action="javascript:;">
-							<h4>name</h4>
-							<input id="character-settings-name-input">
-						</form>
-						<form id="character-settings-access-form" method="post" action="javascript:;">
-							<h4>access</h4>
-							<select id="character-settings-access-select">
-								<option id="character-settings-access-select-public" value="[public]">[public]</option>
-								<option id="character-settings-access-select-private" value="[private]" selected>[private]</option>
-							</select>
-						</form>
-						<form id="character-settings-download-form" method="post" action="javascript:;">
-							<h4>file</h4>
-							<button id="character-settings-download-button" title="download">download</button>
-						</form>
-						<form id="character-settings-duplicate-form" method="post" action="javascript:;">
-							<button id="character-settings-duplicate-button" title="duplicate">duplicate</button>
-						</form>
-						<details id="character-settings-delete-gate" class="delete-gate">
-							<summary>delete?</summary>
-							<form id="character-settings-delete-form" method="post" action="javascript:;">
-								<button id="character-settings-delete-button" title="delete">confirm delete</button>
-							</form>
-						</details>
+					<div id="character-info-abilities">
+						<div class="column-left">
+							<label>run (mph)<input readonly type="number" id="character-info-run"></label>
+							<label>move (sq)<input readonly type="number" id="character-info-move"></label>
+							<label>swim (mph)<input readonly type="number" id="character-info-swim"></label>
+						</div>
+						<div class="column-right">
+							<label>carry (lb)<input readonly type="number" id="character-info-carry"><span>/</span><input readonly type="number" id="character-info-burden"></label>
+							<label>throw (ft-lb)<input readonly type="number" id="character-info-throw"></label>
+							<label>jump (in)<input readonly type="number" id="character-info-jump"></label>
+						</div>
 					</div>
-					<div id="character-settings-arena-presets" class="subsection" visibility="false">
-						<h3>arena token presets</h3>
-						<div class="arena-object">
-							<label class="arena-object-label arena-object-image">
-								<input class="arena-object-input" property="image" placeholder="image url" type="text">
-								<span class="arena-object-label-text">image</span>
-							</label>
-							<label class="arena-object-label arena-object-empty"></label>
-							<label class="arena-object-label">
-								<input class="arena-object-input" property="opacity" step="0.01" min="0" max="1" type="range" value="1">
-								<span class="arena-object-label-text">opacity</span>
-							</label>
-							<label class="arena-object-label">
-								<input class="arena-object-input" property="color" type="color" value="#dddddd">
-								<span class="arena-object-label-text">color</span>
-							</label>
-							<label class="arena-object-label">
-								<input class="arena-object-input" property="glow" step="0.05" min="0" max="1" type="range" value="0">
-								<span class="arena-object-label-text">glow</span>
-							</label>
-							<label class="arena-object-label">
-								<input class="arena-object-input" property="shadow" type="color" value="#555555">
-								<span class="arena-object-label-text">shadow</span>
-							</label>
-							<label class="arena-object-label">
-								<input class="arena-object-input" property="corners" step="1" min="0" max="50" type="range" value="0">
-								<span class="arena-object-label-text">roundness</span>
-							</label>
-							<label class="arena-object-label">
-								<input class="arena-object-input" property="rotation" step="45" min="0" max="360" type="range" value="0">
-								<span class="arena-object-label-text">rotation</span>
-							</label>
-							<label class="arena-object-label arena-object-text">
-								<input class="arena-object-input" property="text" placeholder="text" type="text"><span class="arena-object-label-text">text</span>
-							</label>
-							<label class="arena-object-label arena-object-empty"></label>
-							<label class="arena-object-label">
-								<input class="arena-object-input" property="textSize" step="1" min="0" max="100" type="number" value="50">
-								<span class="arena-object-label-text">text size</span>
-							</label>
-							<label class="arena-object-label">
-								<input class="arena-object-input" property="textColor" type="color" value="#dddddd">
-								<span class="arena-object-label-text">text color</span>
-							</label>
-							<label class="arena-object-label">
-								<select class="arena-object-select" property="textPlacement">
-									<option value="top">top</option>
-									<option value="left">left</option>
-									<option value="center">center</option>
-									<option value="right">right</option>
-									<option value="bottom">bottom</option>
-									<option value="none">none</option>
-								</select>
-								<span class="arena-object-label-text">placement</span>
-							</label>
-							<label class="arena-object-label">
-								<input class="arena-object-input" property="textShadow" type="color" value="#555555">
-								<span class="arena-object-label-text">text shadow</span>
-							</label>
-						</div>
-						<canvas id="character-settings-arena-preview"></canvas>
-					</div>
-				</div>
-				<div id="character-content">
-					<div id="character-conditions" class="section">
-						<div id="character-conditions-search" class="option-search">
-							<input autocomplete="off" placeholder="+ condition" class="option-search-input"/>
-							<form class="option-search-cancel-form" method="post" action="javascript:;">
-								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							</form>
-							<form id="character-conditions-search-form" class="option-search-form" method="post" action="javascript:;">
-								<button id="character-conditions-search-button" class="option-search-button" title="submit"></button>
-							</form>
-							<div class="option-search-results"></div>
-							<select id="character-conditions-select" class="option-search-select"></select>
-						</div>
-						<div id="character-conditions-list"></div>
-					</div>
-					<div id="character-damage" class="section">
-						<input id="character-damage-input" type="number" step="1" placeholder="health"/>
-						<form id="character-damage-form" method="post" action="javascript:;">
-							<button id="character-damage-recover" title="recover">recover</button>
-						</form>
-					</div>
-					<details id="character-info" class="section">
-						<summary>
-							<div id="character-info-name"></div>
-						</summary>
-						<input readonly class="editable" type="text" id="character-info-name-text" placeholder="name">
-						<div id="character-info-image">
-							<form id="character-info-image-reset-form" method="post" action="javascript:;">
-								<button id="character-info-image-reset" class="minor-button" title="remove image">x</button>
-							</form>
-						</div>
-						<form id="character-info-image-form" method="post" action="javascript:;">
-							<input readonly class="editable" type="text" id="character-info-image-input" autocomplete="off" placeholder="image url"/>
-							<!-- <input id="character-info-image-upload" type="file" visibility="false"/>
-							<button id="character-info-image-button" title="upload image" visibility="false">upload image</button> -->
-						</form>
-						<div id="character-info-demographics">
-							<div class="column-left">
-								<label>race<select disabled class="editable" type="text" id="character-info-race" dir="rtl">
-									<option id="character-info-race-disabled" disabled selected>race</option>
-								</select></label>
-								<label>sex<input readonly class="editable" type="text" id="character-info-sex"></label>
-								<label>age<input readonly class="editable" type="number" step="1" min="0" id="character-info-age" placeholder="y"></label>
-							</div>
-							<div class="column-right">
-								<label>height<input readonly class="editable" type="number" step="1" min="0" id="character-info-height" placeholder="ft"></label>
-								<label>weight<input readonly class="editable" type="number" step="1" min="0" id="character-info-weight" placeholder="lb"></label>
-								<label>exp<input readonly class="editable" type="number" step="1" id="character-info-points" placeholder="exp"></label>
-							</div>
-						</div>
-						<div id="character-info-abilities">
-							<div class="column-left">
-								<label>run (mph)<input readonly type="number" id="character-info-run"></label>
-								<label>move (sq)<input readonly type="number" id="character-info-move"></label>
-								<label>swim (mph)<input readonly type="number" id="character-info-swim"></label>
-							</div>
-							<div class="column-right">
-								<label>carry (lb)<input readonly type="number" id="character-info-carry"><span>/</span><input readonly type="number" id="character-info-burden"></label>
-								<label>throw (ft-lb)<input readonly type="number" id="character-info-throw"></label>
-								<label>jump (in)<input readonly type="number" id="character-info-jump"></label>
-							</div>
-						</div>
-						<textarea id="character-info-race-ability" readonly></textarea>
-						<textarea id="character-info-description" readonly class="editable" placeholder="description"></textarea>
-					</details>
-					<details id="character-perception" class="statistic section">
-						<summary>
-							<div class="column-left">
-								<div class="statistic-name">perception</div>
-							</div>
-							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
-								<input readonly type="number" step="1" class="statistic-condition">
-								<input readonly type="number" step="1" class="statistic-damage">
-								<input readonly type="number" step="1" class="statistic-current d20">
-							</div>
-						</summary>
-						<div class="skills-list"></div>
-						<div id="character-perception-search" class="option-search">
-							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<form class="option-search-cancel-form" method="post" action="javascript:;">
-								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							</form>
-							<form id="character-perception-search-form" class="option-search-form" method="post" action="javascript:;">
-								<button class="option-search-button" title="submit"></button>
-							</form>
-							<div class="option-search-results"></div>
-							<select id="character-perception-select" class="option-search-select"></select>
-						</div>
-					</details>
-					<details id="character-memory" class="statistic section">
-						<summary>
-							<div class="column-left">
-								<div class="statistic-name">memory</div>
-							</div>
-							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
-								<input readonly type="number" step="1" class="statistic-condition">
-								<input readonly type="number" step="1" class="statistic-damage">
-								<input readonly type="number" step="1" class="statistic-current d20">
-							</div>
-						</summary>
-						<div class="skills-list"></div>
-						<div id="character-memory-search" class="option-search">
-							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<form class="option-search-cancel-form" method="post" action="javascript:;">
-								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							</form>
-							<form id="character-memory-search-form" class="option-search-form" method="post" action="javascript:;">
-								<button class="option-search-button" title="submit"></button>
-							</form>
-							<div class="option-search-results"></div>
-							<select id="character-memory-select" class="option-search-select"></select>
-						</div>
-					</details>
-					<details id="character-logic" class="statistic section">
-						<summary>
-							<div class="column-left">
-								<div class="statistic-name">logic</div>
-							</div>
-							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
-								<input readonly type="number" step="1" class="statistic-condition">
-								<input readonly type="number" step="1" class="statistic-damage">
-								<input readonly type="number" step="1" class="statistic-current d20">
-							</div>
-						</summary>
-						<div class="skills-list"></div>
-						<div id="character-logic-search" class="option-search">
-							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<form class="option-search-cancel-form" method="post" action="javascript:;">
-								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							</form>
-							<form id="character-logic-search-form" class="option-search-form" method="post" action="javascript:;">
-								<button class="option-search-button" title="submit"></button>
-							</form>
-							<div class="option-search-results"></div>
-							<select id="character-logic-select" class="option-search-select"></select>
-						</div>
-					</details>
-					<details id="character-strength" class="statistic section">
-						<summary>
-							<div class="column-left">
-								<div class="statistic-name">strength</div>
-							</div>
-							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
-								<input readonly type="number" step="1" class="statistic-condition">
-								<input readonly type="number" step="1" class="statistic-damage">
-								<input readonly type="number" step="1" class="statistic-current d20">
-							</div>
-						</summary>
-						<div class="skills-list"></div>
-						<div id="character-strength-search" class="option-search">
-							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<form class="option-search-cancel-form" method="post" action="javascript:;">
-								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							</form>
-							<form id="character-strength-search-form" class="option-search-form" method="post" action="javascript:;">
-								<button class="option-search-button" title="submit"></button>
-							</form>
-							<div class="option-search-results"></div>
-							<select id="character-strength-select" class="option-search-select"></select>
-						</div>
-					</details>
-					<details id="character-dexterity" class="statistic section">
-						<summary>
-							<div class="column-left">
-								<div class="statistic-name">dexterity</div>
-							</div>
-							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
-								<input readonly type="number" step="1" class="statistic-condition">
-								<input readonly type="number" step="1" class="statistic-damage">
-								<input readonly type="number" step="1" class="statistic-current d20">
-							</div>
-						</summary>
-						<div class="skills-list"></div>
-						<div id="character-dexterity-search" class="option-search">
-							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<form class="option-search-cancel-form" method="post" action="javascript:;">
-								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							</form>
-							<form id="character-dexterity-search-form" class="option-search-form" method="post" action="javascript:;">
-								<button class="option-search-button" title="submit"></button>
-							</form>
-							<div class="option-search-results"></div>
-							<select id="character-dexterity-select" class="option-search-select"></select>
-						</div>
-					</details>
-					<details id="character-immunity" class="statistic section">
-						<summary>
-							<div class="column-left">
-								<div class="statistic-name">immunity</div>
-							</div>
-							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
-								<input readonly type="number" step="1" class="statistic-condition">
-								<input readonly type="number" step="1" class="statistic-damage">
-								<input readonly type="number" step="1" class="statistic-current d20">
-							</div>
-						</summary>
-						<div class="skills-list"></div>
-						<div id="character-immunity-search" class="option-search">
-							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<form class="option-search-cancel-form" method="post" action="javascript:;">
-								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							</form>
-							<form id="character-immunity-search-form" class="option-search-form" method="post" action="javascript:;">
-								<button class="option-search-button" title="submit"></button>
-							</form>
-							<div class="option-search-results"></div>
-							<select id="character-immunity-select" class="option-search-select"></select>
-						</div>
-					</details>
-					<details id="character-speed" class="statistic section">
-						<summary>
-							<div class="column-left">
-								<div class="statistic-name">speed</div>
-							</div>
-							<div class="column-right">
-								<input readonly type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
-								<input readonly type="number" step="1" class="statistic-condition">
-								<input readonly type="number" step="1" class="statistic-damage">
-								<input readonly type="number" step="1" class="statistic-current d20">
-							</div>
-						</summary>
-						<div class="skills-list"></div>
-						<div id="character-speed-search" class="option-search">
-							<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
-							<form class="option-search-cancel-form" method="post" action="javascript:;">
-								<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
-							</form>
-							<form id="character-speed-search-form" class="option-search-form" method="post" action="javascript:;">
-								<button class="option-search-button" title="submit"></button>
-							</form>
-							<div class="option-search-results"></div>
-							<select id="character-speed-select" class="option-search-select"></select>
-						</div>
-					</details>
-					<div id="character-items-search" class="option-search">
-						<input autocomplete="off" placeholder="+ item" class="option-search-input"/>
+					<textarea id="character-info-race-ability" readonly></textarea>
+					<textarea id="character-info-description" class="editable" placeholder="description"></textarea>
+				</details>
+				<div id="character-conditions" class="section">
+					<div id="character-conditions-search" class="option-search">
+						<input autocomplete="off" placeholder="+ condition" class="option-search-input"/>
 						<form class="option-search-cancel-form" method="post" action="javascript:;">
 							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
 						</form>
-						<form id="character-items-search-form" class="option-search-form" method="post" action="javascript:;">
-							<button id="character-items-search-button" class="option-search-button" title="submit"></button>
+						<form id="character-conditions-search-form" class="option-search-form" method="post" action="javascript:;">
+							<button id="character-conditions-search-button" class="option-search-button" title="submit"></button>
 						</form>
 						<div class="option-search-results"></div>
-						<select id="character-items-select" class="option-search-select"></select>
+						<select id="character-conditions-select" class="option-search-select"></select>
 					</div>
-					<div id="character-items" class="section">
-						<details id="character-items-equipped" class="subsection" open>
-							<summary id="character-items-equipped-summary">
-								<h3 id="character-items-equipped-header">equipped items (<span id="character-items-equipped-count">0</span>)</h3>
-							</summary>
-							<div id="character-items-equipped-list"></div>
-						</details>
-						<details id="character-items-unequipped" class="subsection" open>
-							<summary id="character-items-unequipped-summary">
-								<h3 id="character-items-unequipped-header">unequipped items (<span id="character-items-unequipped-count">0</span>)</h3>
-							</summary>
-							<div id="character-items-unequipped-list"></div>
-						</details>
-					</div>
-					<div id="character-recipient" class="subsection">
-						<h3 id="character-recipient-header">targeting</h3>
-						<form id="character-recipient-form" method="post" action="javascript:;">
-							<select id="character-recipient-select" class="editable always-editable">
-								<optgroup label="...">
-									<option id="character-recipient-none" value="">[none]</option>
-									<option id="character-recipient-environment" value="[environment]">[environment]</option>
-								</optgroup>
-								<optgroup id="character-recipient-characters" label="MY CHARACTERS"></optgroup>
-								<optgroup id="character-recipient-arena" label="ARENA"></optgroup>
-							</select>
-						</form>
-					</div>
+					<div id="character-conditions-list"></div>
 				</div>
+				<details id="character-perception" class="statistic section">
+					<summary>
+						<div class="column-left">
+							<div class="statistic-name">perception</div>
+						</div>
+						<div class="column-right">
+							<input type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
+							<input readonly type="number" step="1" class="statistic-condition">
+							<input type="number" step="1" max="0" class="statistic-damage">
+							<input readonly type="number" step="1" class="statistic-current d20">
+						</div>
+					</summary>
+					<div class="skills-list"></div>
+					<div id="character-perception-search" class="option-search">
+						<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+						<form class="option-search-cancel-form" method="post" action="javascript:;">
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						</form>
+						<form id="character-perception-search-form" class="option-search-form" method="post" action="javascript:;">
+							<button class="option-search-button" title="submit"></button>
+						</form>
+						<div class="option-search-results"></div>
+						<select id="character-perception-select" class="option-search-select"></select>
+					</div>
+				</details>
+				<details id="character-memory" class="statistic section">
+					<summary>
+						<div class="column-left">
+							<div class="statistic-name">memory</div>
+						</div>
+						<div class="column-right">
+							<input type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
+							<input readonly type="number" step="1" class="statistic-condition">
+							<input type="number" step="1" max="0" class="statistic-damage">
+							<input readonly type="number" step="1" class="statistic-current d20">
+						</div>
+					</summary>
+					<div class="skills-list"></div>
+					<div id="character-memory-search" class="option-search">
+						<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+						<form class="option-search-cancel-form" method="post" action="javascript:;">
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						</form>
+						<form id="character-memory-search-form" class="option-search-form" method="post" action="javascript:;">
+							<button class="option-search-button" title="submit"></button>
+						</form>
+						<div class="option-search-results"></div>
+						<select id="character-memory-select" class="option-search-select"></select>
+					</div>
+				</details>
+				<details id="character-logic" class="statistic section">
+					<summary>
+						<div class="column-left">
+							<div class="statistic-name">logic</div>
+						</div>
+						<div class="column-right">
+							<input type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
+							<input readonly type="number" step="1" class="statistic-condition">
+							<input type="number" step="1" max="0" class="statistic-damage">
+							<input readonly type="number" step="1" class="statistic-current d20">
+						</div>
+					</summary>
+					<div class="skills-list"></div>
+					<div id="character-logic-search" class="option-search">
+						<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+						<form class="option-search-cancel-form" method="post" action="javascript:;">
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						</form>
+						<form id="character-logic-search-form" class="option-search-form" method="post" action="javascript:;">
+							<button class="option-search-button" title="submit"></button>
+						</form>
+						<div class="option-search-results"></div>
+						<select id="character-logic-select" class="option-search-select"></select>
+					</div>
+				</details>
+				<details id="character-strength" class="statistic section">
+					<summary>
+						<div class="column-left">
+							<div class="statistic-name">strength</div>
+						</div>
+						<div class="column-right">
+							<input type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
+							<input readonly type="number" step="1" class="statistic-condition">
+							<input type="number" step="1" max="0" class="statistic-damage">
+							<input readonly type="number" step="1" class="statistic-current d20">
+						</div>
+					</summary>
+					<div class="skills-list"></div>
+					<div id="character-strength-search" class="option-search">
+						<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+						<form class="option-search-cancel-form" method="post" action="javascript:;">
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						</form>
+						<form id="character-strength-search-form" class="option-search-form" method="post" action="javascript:;">
+							<button class="option-search-button" title="submit"></button>
+						</form>
+						<div class="option-search-results"></div>
+						<select id="character-strength-select" class="option-search-select"></select>
+					</div>
+				</details>
+				<details id="character-dexterity" class="statistic section">
+					<summary>
+						<div class="column-left">
+							<div class="statistic-name">dexterity</div>
+						</div>
+						<div class="column-right">
+							<input type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
+							<input readonly type="number" step="1" class="statistic-condition">
+							<input type="number" step="1" max="0" class="statistic-damage">
+							<input readonly type="number" step="1" class="statistic-current d20">
+						</div>
+					</summary>
+					<div class="skills-list"></div>
+					<div id="character-dexterity-search" class="option-search">
+						<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+						<form class="option-search-cancel-form" method="post" action="javascript:;">
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						</form>
+						<form id="character-dexterity-search-form" class="option-search-form" method="post" action="javascript:;">
+							<button class="option-search-button" title="submit"></button>
+						</form>
+						<div class="option-search-results"></div>
+						<select id="character-dexterity-select" class="option-search-select"></select>
+					</div>
+				</details>
+				<details id="character-immunity" class="statistic section">
+					<summary>
+						<div class="column-left">
+							<div class="statistic-name">immunity</div>
+						</div>
+						<div class="column-right">
+							<input type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
+							<input readonly type="number" step="1" class="statistic-condition">
+							<input type="number" step="1" max="0" class="statistic-damage">
+							<input readonly type="number" step="1" class="statistic-current d20">
+						</div>
+					</summary>
+					<div class="skills-list"></div>
+					<div id="character-immunity-search" class="option-search">
+						<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+						<form class="option-search-cancel-form" method="post" action="javascript:;">
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						</form>
+						<form id="character-immunity-search-form" class="option-search-form" method="post" action="javascript:;">
+							<button class="option-search-button" title="submit"></button>
+						</form>
+						<div class="option-search-results"></div>
+						<select id="character-immunity-select" class="option-search-select"></select>
+					</div>
+				</details>
+				<details id="character-speed" class="statistic section">
+					<summary>
+						<div class="column-left">
+							<div class="statistic-name">speed</div>
+						</div>
+						<div class="column-right">
+							<input type="number" step="1" min="0" class="statistic-maximum editable" placeholder="#">
+							<input readonly type="number" step="1" class="statistic-condition">
+							<input type="number" step="1" max="0" class="statistic-damage">
+							<input readonly type="number" step="1" class="statistic-current d20">
+						</div>
+					</summary>
+					<div class="skills-list"></div>
+					<div id="character-speed-search" class="option-search">
+						<input autocomplete="off" placeholder="+ skill" class="option-search-input"/>
+						<form class="option-search-cancel-form" method="post" action="javascript:;">
+							<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+						</form>
+						<form id="character-speed-search-form" class="option-search-form" method="post" action="javascript:;">
+							<button class="option-search-button" title="submit"></button>
+						</form>
+						<div class="option-search-results"></div>
+						<select id="character-speed-select" class="option-search-select"></select>
+					</div>
+				</details>
+				<div id="character-items-search" class="option-search">
+					<input autocomplete="off" placeholder="+ item" class="option-search-input"/>
+					<form class="option-search-cancel-form" method="post" action="javascript:;">
+						<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
+					</form>
+					<form id="character-items-search-form" class="option-search-form" method="post" action="javascript:;">
+						<button id="character-items-search-button" class="option-search-button" title="submit"></button>
+					</form>
+					<div class="option-search-results"></div>
+					<select id="character-items-select" class="option-search-select"></select>
+				</div>
+				<details id="character-items-equipped" class="subsection">
+					<summary id="character-items-equipped-summary">
+						<h3 id="character-items-equipped-header">equipped items (<span id="character-items-equipped-count">0</span>)</h3>
+						<form id="character-items-equipped-form" method="post" action="javascript:;">
+							<button id="character-items-equipped-button" class="minor-button" title="edit items">&#x1f4dd;</button>
+						</form>
+					</summary>
+					<div id="character-items-equipped-list"></div>
+				</details>
+				<details id="character-items-unequipped" class="subsection">
+					<summary id="character-items-unequipped-summary">
+						<h3 id="character-items-unequipped-header">unequipped items (<span id="character-items-unequipped-count">0</span>)</h3>
+						<form id="character-items-unequipped-form" method="post" action="javascript:;">
+							<button id="character-items-unequipped-button" class="minor-button" title="edit items">&#x1f4dd;</button>
+						</form>
+					</summary>
+					<div id="character-items-unequipped-list"></div>
+				</details>
+				<details id="character-settings-arena-presets" class="subsection" visibility="false">
+					<summary>
+						<h3>arena presets</h3>
+					</summary>
+					<div class="arena-object">
+						<label class="arena-object-label arena-object-image">
+							<input class="arena-object-input" property="image" placeholder="image url" type="text">
+							<span class="arena-object-label-text">image</span>
+						</label>
+						<label class="arena-object-label arena-object-empty"></label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="opacity" step="0.01" min="0" max="1" type="range" value="1">
+							<span class="arena-object-label-text">opacity</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="color" type="color" value="#dddddd">
+							<span class="arena-object-label-text">color</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="glow" step="0.05" min="0" max="1" type="range" value="0">
+							<span class="arena-object-label-text">glow</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="shadow" type="color" value="#555555">
+							<span class="arena-object-label-text">shadow</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="corners" step="1" min="0" max="50" type="range" value="0">
+							<span class="arena-object-label-text">roundness</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="rotation" step="45" min="0" max="360" type="range" value="0">
+							<span class="arena-object-label-text">rotation</span>
+						</label>
+						<label class="arena-object-label arena-object-text">
+							<input class="arena-object-input" property="text" placeholder="text" type="text"><span class="arena-object-label-text">text</span>
+						</label>
+						<label class="arena-object-label arena-object-empty"></label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="textSize" step="1" min="0" max="100" type="number" value="50">
+							<span class="arena-object-label-text">text size</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="textColor" type="color" value="#dddddd">
+							<span class="arena-object-label-text">text color</span>
+						</label>
+						<label class="arena-object-label">
+							<select class="arena-object-select" property="textPlacement">
+								<option value="top">top</option>
+								<option value="left">left</option>
+								<option value="center">center</option>
+								<option value="right">right</option>
+								<option value="bottom">bottom</option>
+								<option value="none">none</option>
+							</select>
+							<span class="arena-object-label-text">placement</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="textShadow" type="color" value="#555555">
+							<span class="arena-object-label-text">text shadow</span>
+						</label>
+					</div>
+					<canvas id="character-settings-arena-preview" height="400" width="400"></canvas>
+				</details>
+				<details id="character-recipient" class="subsection" open>
+					<summary>
+						<h3 id="character-recipient-header">targeting</h3>
+					</summary>
+					<form id="character-recipient-form" method="post" action="javascript:;">
+						<select id="character-recipient-select" class="editable always-editable">
+							<optgroup label="...">
+								<option id="character-recipient-none" value="">[none]</option>
+								<option id="character-recipient-environment" value="[environment]">[environment]</option>
+							</optgroup>
+							<optgroup id="character-recipient-characters" label="MY CHARACTERS"></optgroup>
+							<optgroup id="character-recipient-arena" label="ARENA"></optgroup>
+						</select>
+					</form>
+				</details>
 			</section>
 			<section id="chat">
 				<div id="chat-messages"></div>
@@ -598,6 +569,10 @@
 			</section>
 			<section id="content" mode="none">
 				<div id="content-choose-search" class="option-search subsection">
+					<h2 id="content-choose-title" class="option-search-title"></h2>
+					<form class="option-search-close-form" method="post" action="javascript:;">
+						<button class="option-search-close-button minor-button">x</button>
+					</form>
 					<input autocomplete="off" placeholder="select content..." class="option-search-input"/>
 					<form class="option-search-cancel-form" method="post" action="javascript:;">
 						<button class="option-search-cancel minor-button" visibility="false" title="clear search">x</button>
@@ -624,14 +599,16 @@
 						<optgroup id="content-choose-select-text" label="text"></optgroup>
 					</select>
 				</div>
-				<div id="content-metadata" class="subsection">
-					<h3 id="content-metadata-header">content</h3>
-					<form id="content-send-form" method="post" action="javascript:;">
-						<button id="content-send-button" class="minor-button" title="send to chat">&#x1f4ac;</button>
-					</form>
-					<form id="content-add-form" method="post" action="javascript:;">
-						<button id="content-add-button" class="minor-button" title="add to character">&#x1f464;</button>
-					</form>
+				<details id="content-metadata" class="subsection" open>
+					<summary>
+						<h3 id="content-metadata-header">file</h3>
+						<form id="content-send-form" method="post" action="javascript:;">
+							<button id="content-send-button" class="minor-button" title="send to chat">&#x1f4ac;</button>
+						</form>
+						<form id="content-add-form" method="post" action="javascript:;">
+							<button id="content-add-button" class="minor-button" title="add to character">&#x1f464;</button>
+						</form>
+					</summary>
 					<form id="content-name-form" method="post" action="javascript:;">
 						<h4>name</h4>
 						<input type="text" id="content-name-input" placeholder="document name" autocomplete="off"/>
@@ -680,7 +657,7 @@
 						<button id="content-upload-button" title="upload">upload</button>
 					</form> -->
 					<form id="content-duplicate-form" method="post" action="javascript:;">
-						<h4>file</h4>
+						<h4>actions</h4>
 						<button id="content-duplicate-button" title="duplicate">duplicate</button>
 					</form>
 					<details id="content-delete-gate" class="delete-gate">
@@ -689,16 +666,20 @@
 							<button id="content-delete-button" title="delete">confirm delete</button>
 						</form>
 					</details>
-				</div>
-				<div id="content-turn-order" class="subsection">
-					<h3>turn order</h3>
+				</details>
+				<details id="content-turn-order" class="subsection" open>
+					<summary>
+						<h3>turn order</h3>
+					</summary>
 					<form id="content-turn-order-form" method="post" action="javascript:;">
 						<button id="content-turn-order-button" title="turn order">calculate turn order</button>
 					</form>
 					<div id="content-turn-order-list"></div>
-				</div>
-				<div id="content-controls" class="subsection">
-					<h3 id="content-controls-header">controls</h3>
+				</details>
+				<details id="content-controls" class="subsection" open>
+					<summary>
+						<h3 id="content-controls-header">controls</h3>
+					</summary>
 					<div id="content-controls-zoom">
 						<h4>zoom</h4>
 						<form id="content-controls-zoom-out-form" method="post" action="javascript:;" value="-0.25">
@@ -739,9 +720,11 @@
 						<li><b>alt/option-click</b>: signal location</li>
 						<li><b>ctrl/right-click & drag</b>: measure distance</li>
 					</div>
-				</div>
-				<div id="content-objects" class="subsection">
-					<h3 id="content-objects-header">objects</h3>
+				</details>
+				<details id="content-objects" class="subsection" open>
+					<summary>
+						<h3 id="content-objects-header">objects</h3>
+					</summary>
 					<div id="content-objects-search" class="option-search">
 						<input autocomplete="off" placeholder="add object..." class="option-search-input"/>
 						<form class="option-search-cancel-form" method="post" action="javascript:;">
@@ -760,7 +743,7 @@
 						</select>
 					</div>
 					<div id="content-objects-list"></div>
-				</div>
+				</details>
 			</section>
 		</section>
 		<section id="right">

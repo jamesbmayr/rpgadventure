@@ -47,14 +47,6 @@
 			-o-user-select: none !important;
 		}
 
-		.d6:hover, .d6:focus {
-			box-shadow: 0 0 var(--shadow-size) var(--medium-gray) !important;
-		}
-
-		.d20:hover, .d20:focus {
-			filter: drop-shadow(0 0 var(--shadow-size) var(--medium-gray)) !important;
-		}
-
 	/** layout **/
 		#top {
 			top: 0;
@@ -408,6 +400,16 @@
 		}
 
 	/** game **/
+		/* title */
+			#settings[mode="none"] #settings-game-search .option-search-title, #settings[mode="none"] #settings-game-search .option-search-close-form {
+				display: none;
+			}
+
+		/* search */
+			#settings:not([mode="none"]) #settings-game-search .option-search-input, #settings:not([mode="none"]) #settings-game-search .option-search-button, #settings:not([mode="none"]) #settings-game-search .option-search-results {
+				display: none;
+			}
+
 		/* search */
 			#settings-game-search-button {
 				float: left;
@@ -723,6 +725,7 @@
 		#character {
 			top: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
 			height: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)));
+			width: calc(100% - 2 * var(--medium-gap-size));
 			font-size: 0;
 			user-select: none;
 			-webkit-user-select: none;
@@ -732,6 +735,7 @@
 			overflow-x: hidden;
 			overflow-y: scroll;
 			color: var(--medium-gray);
+			padding: var(--medium-gap-size);
 		}
 
 		#left:not([tool="character"]) #character {
@@ -739,100 +743,32 @@
 		}
 
 		#left[tool="character"] #tools-character {
-			background-color: var(--medium-gray);
+			background-color: var(--light-gray);
 		}
 
-	/** modes **/
-		#character-modes {
-			position: -webkit-sticky;
-			position: sticky;
-			width: 100%;
-			top: 0;
-			height: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
-			z-index: 100;
-		}
-
-		#character-modes label {
-			width: calc(100% / 6);
-			background-color: var(--medium-gray);
-			vertical-align: text-bottom;
-			line-height: 1.75;
-		}
-
-		/* mode buttons */
-			#character[mode="settings"] #character-modes-settings, #character-modes-settings:hover {
-				background-color: var(--light-gray);
-				color: var(--medium-gray);
-			}
-
-			#character[mode="play"] #character-modes-play, #character-modes-play:hover {
-				background-color: var(--light-gray);
-				color: var(--medium-gray);
-			}
-
-			#character[mode="edit"] #character-modes-edit, #character-modes-edit:hover {
-				background-color: var(--light-green);
-				color: var(--medium-gray);
-			}
-
-			#character[mode="items"] #character-modes-items, #character-modes-items:hover {
-				background-color: var(--light-yellow);
-				color: var(--medium-gray);
-			}
-
-			#character[mode="conditions"] #character-modes-conditions, #character-modes-conditions:hover {
-				background-color: var(--light-blue);
-				color: var(--medium-gray);
-			}
-
-			#character[mode="damage"] #character-modes-damage, #character-modes-damage:hover {
-				background-color: var(--light-red);
-				color: var(--medium-gray);
-			}
-
-	/** settings **/
-		#character:not([mode="settings"]) #character-settings {
+	/** title **/
+		#character[mode="none"] #character-settings-select-search .option-search-title, #character[mode="none"] #character-settings-select-search .option-search-close-form {
 			display: none;
 		}
 
-		#character-settings {
-			float: left;
-			width: calc(100% - 2 * var(--medium-gap-size));
-			padding: var(--medium-gap-size);
-		}
-
-		#character-settings-arena-preview {
-			float: left;
-			margin-top: var(--small-gap-size);
-			width: 100%;
-			height: 100%;
-			min-width: calc(var(--panel-size) - 2 * var(--medium-gap-size));
-			min-height: calc(var(--panel-size) - 2 * var(--medium-gap-size));
-			border-radius: var(--border-radius);
-		}
-
-		@media screen and (max-width: 799px) {
-			#character-settings-arena-preview {
-				min-width: calc(100vw - 2 * var(--large-gap-size) - 2 * var(--medium-gap-size));
-				min-height: calc(100vw - 2 * var(--large-gap-size) - 2 * var(--medium-gap-size));
-			}
-		}
-
-	/** content **/
-		#character-content {
-			float: left;
-			width: calc(100% - 2 * var(--medium-gap-size));
-			padding: var(--medium-gap-size);
-		}
-
-		#character[mode="settings"] #character-content {
+	/** search **/
+		#character:not([mode="none"]) #character-settings-select-search .option-search-input, #character:not([mode="none"]) #character-settings-select-search .option-search-results {
 			display: none;
+		}
+
+	/** dice **/
+		#character .d6:hover, #character .d6:focus {
+			box-shadow: 0 0 var(--shadow-size) var(--medium-gray) !important;
+		}
+
+		#character .d20:hover, #character .d20:focus {
+			filter: drop-shadow(0 0 var(--shadow-size) var(--medium-gray)) !important;
 		}
 
 	/** info **/
 		/* top level */
-			#character-info {
-				padding: var(--small-gap-size) 0 var(--medium-gap-size) 0;
+			#character[mode="none"] #character-info {
+				display: none;
 			}
 
 			#character-info .column-left, #character-info .column-right {
@@ -845,69 +781,6 @@
 
 			#character-info .column-left {
 				margin-right: var(--medium-gap-size);
-			}
-
-		/* name */
-			#character-info-name {
-				font-size: var(--large-font-size);
-				height: calc(var(--large-font-size) + 2 * var(--small-gap-size));
-				width: 100%;
-				margin: var(--medium-gap-size) 0 var(--medium-gap-size) 0;
-				text-align: center;
-				background-color: transparent;
-				color: var(--medium-gray);
-				overflow: hidden;
-				text-overflow: ellipsis;
-				font-weight: bold;
-			}
-
-			#character:not([mode="edit"]) #character-info-name-text {
-				display: none;
-			}
-
-			#character-info-name-text {
-				margin: 0 0 var(--small-gap-size) 0;
-				padding: var(--small-gap-size);
-				height: calc(var(--large-font-size) + 2 * var(--small-gap-size));
-				font-weight: bold;
-				font-size: var(--large-font-size);
-				text-align: center;
-				border-radius: var(--border-radius);
-			}
-
-		/* image */
-			#character-info-image {
-				float: left;
-				width: calc(var(--panel-size) - 2 * var(--medium-gap-size));
-				height: calc(var(--panel-size) - 2 * var(--medium-gap-size));
-				border-radius: var(--border-radius);
-				background-size: cover;
-				background-repeat: no-repeat;
-				background-position: center center;
-			}
-
-			@media screen and (max-width: 799px) {
-				#character-info-image {
-					min-width: calc(100vw - 6 * var(--medium-gap-size));
-					min-height: calc(100vw - 6 * var(--medium-gap-size));
-					width: calc(100vw - 6 * var(--medium-gap-size));
-					height: calc(100vw - 6 * var(--medium-gap-size));
-					max-width: calc(var(--panel-size) - 2 * var(--medium-gap-size));
-					max-height: calc(var(--panel-size) - 2 * var(--medium-gap-size));
-				}
-			}
-
-			#character-info-image-reset {
-				margin: 0;
-			}
-
-			#character-info-image[visibility=false] {
-				display: none;
-			}
-
-			#character:not([mode="edit"]) #character-info-image-form, #character:not([mode="edit"]) #character-info-image-reset-form {
-				display: none;
-				pointer-events: none;
 			}
 
 		/* demographics */
@@ -965,6 +838,11 @@
 			input#character-info-sex {
 				padding: var(--small-gap-size);
 				width: calc(6 * var(--small-font-size));
+			}
+
+			input#character-info-points {
+				border-color: var(--medium-green);
+				color: var(--medium-green);
 			}
 
 		/* abilities */
@@ -1036,8 +914,112 @@
 				background-color: transparent;
 			}
 
+	/** conditions **/
+		/* top level */
+			#character[mode="none"] #character-conditions {
+				display: none;
+			}
+
+			.section#character-conditions {
+				float: left;
+				padding: var(--medium-gap-size) 0;
+				width: 100%;
+				font-size: var(--small-font-size);
+				border-bottom: var(--border-size) solid var(--medium-gray);
+			}
+
+		/* list */
+			.condition {
+				border-radius: var(--border-radius);
+				background-color: var(--medium-blue);
+				color: var(--light-gray);
+				float: left;
+				width: 100%;
+				height: auto;
+				vertical-align: middle;
+				margin: var(--small-gap-size) 0;
+				user-select: none;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				-o-user-select: none;
+			}
+
+			.condition-remove-form {
+				float: right;
+				width: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+				height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+			}
+
+			.condition-remove {
+				float: right;
+				margin: 0;
+				width: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+				background-color: transparent;
+				color: var(--light-blue);
+				font-size: var(--medium-font-size);
+				height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+				text-align: center;
+				font-weight: bold;
+				padding: 0;
+			}
+
+			.condition-remove:hover, .condition-remove:focus {
+				box-shadow: none;
+				text-shadow: 0 0 var(--shadow-size) var(--light-blue);
+			}
+
+			.condition-name {
+				float: left;
+				width: calc(100% - 2 * var(--small-gap-size) - (var(--small-font-size) + 2 * var(--small-gap-size)));
+				padding: var(--small-gap-size) var(--small-gap-size) 0 var(--small-gap-size);
+				font-weight: bold;
+				color: var(--light-gray);
+				font-size: var(--medium-font-size);
+				text-align: left;
+			}
+
+			.condition-description {
+				float: left;
+				width: calc(100% - 2 * var(--small-gap-size));
+				padding: var(--small-gap-size);
+				font-size: var(--small-font-size);
+				color: var(--light-gray);
+				text-align: left;
+			}
+
+		/* select */
+			#character-conditions-search {
+				float: left;
+				width: 100%;
+				pointer-events: all;
+			}
+
+			#character-conditions-search input, #character-conditions-search button {
+				color: var(--medium-blue);
+				border-color: var(--medium-blue);
+			}
+
+			#character-conditions-search input::placeholder {
+				color: var(--medium-blue);
+				font-weight: bold;
+			}
+
+			#character-conditions-search .option-search-results {
+				border-color: var(--medium-blue);
+			}
+
+			#character-conditions-search .option-search-result:hover, #character-conditions-search .option-search-result:focus {
+				color: var(--light-gray) !important;
+				background-color: var(--medium-blue) !important;
+			}
+
 	/** statistics **/
 		/* statistic top level */
+			#character[mode="none"] .statistic {
+				display: none;
+			}
+
 			.statistic summary {
 				float: left;
 			}
@@ -1090,14 +1072,17 @@
 
 			.statistic-maximum {
 				color: var(--medium-green);
+				border-color: var(--medium-green) !important;
 			}
 
 			.statistic-condition {
 				color: var(--medium-blue);
+				border-color: var(--medium-blue) !important;
 			}
 
 			.statistic-damage {
 				color: var(--medium-red);
+				border-color: var(--medium-red) !important;
 			}
 
 			.statistic-current {
@@ -1131,7 +1116,7 @@
 
 			.skill-name {
 				float: left;
-				width: 100%;
+				width: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)));
 				height: 100%;
 			}
 
@@ -1188,14 +1173,17 @@
 
 			.skill-maximum {
 				color: var(--medium-green);
+				border-color: var(--medium-green) !important;
 			}
 
 			.skill-condition {
 				color: var(--medium-blue);
+				border-color: var(--medium-blue) !important;
 			}
 
 			.skill-damage {
 				color: var(--medium-red);
+				border-color: transparent !important;
 			}
 
 			.skill-current {
@@ -1207,33 +1195,20 @@
 				border: 0;
 			}
 
-		/* editing */
-			#character[mode="edit"] {
-				background-color: var(--light-green);
-			}
-
-			#character[mode="edit"] .section#character-items, #character[mode="edit"] #character-info-name {
-				display: none;
-			}
-
 		/* remove */
-			#character:not([mode="edit"]) .skill-remove-form {
-				display: none;
-			}
-
 			.skill-remove-form {
 				float: right;
-				height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+				height: auto;
+				width: auto;
 			}
 
 			.skill-remove {
-				float: right;
 				text-align: center;
-				margin: 0;
+				margin: calc(var(--small-gap-size) + var(--border-size)) 0;
 				color: var(--medium-green);
 				font-size: var(--medium-font-size);
-				height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
-				width: calc(var(--small-font-size) + 2 * var(--small-gap-size));
+				height: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
+				width: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
 				font-weight: bold;
 				padding: 0;
 				border-radius: 100%;
@@ -1246,23 +1221,25 @@
 			}
 
 		/* skill select */
-			#character:not([mode="edit"]) .statistic .option-search {
-				display: none;
-			}
-
 			.statistic .option-search {
 				float: left;
 				width: 100%;
 				pointer-events: all;
+				margin-top: var(--medium-gap-size);
 			}
 
 			.statistic .option-search input, .statistic .option-search button {
 				color: var(--medium-green);
+				border-color: var(--medium-green);
 			}
 
 			.statistic .option-search input::placeholder {
 				color: var(--medium-green);
 				font-weight: bold;
+			}
+
+			.statistic .option-search-results {
+				border-color: var(--medium-green);
 			}
 
 			.statistic .option-search-result:hover, .statistic .option-search-result:focus {
@@ -1272,16 +1249,21 @@
 
 	/** items **/
 		/* top level */
-			#character[mode="items"] {
-				background-color: var(--medium-yellow);
+			#character[mode="none"] #character-items-search, #character[mode="none"] #character-items-equipped, #character[mode="none"] #character-items-unequipped {
+				display: none;
 			}
 
-			#character-items {
-				padding: 0;
+			#character-items-equipped-header, #character-items-unequipped-header {
+				width: calc(100% - (var(--medium-font-size) + 2 * var(--small-gap-size)));
 			}
 
-			#character[mode="items"] #character-items {
-				padding-top: var(--small-gap-size);
+		/* equip toggle */
+			#character-items-equipped-form, #character-items-unequipped-form {
+				width: auto;
+			}
+
+			#character[mode="items"] #character-items-equipped-button, #character[mode="items"] #character-items-unequipped-button {
+				text-shadow: 0 0 calc(2 * var(--shadow-size)) var(--medium-yellow);
 			}
 
 		/* first / last */
@@ -1512,15 +1494,6 @@
 				pointer-events: all;
 			}
 
-		/* editing */
-			#character[mode="items"] .section:not(#character-items) {
-				display: none;
-			}
-
-			#character[mode="items"] {
-				background-color: var(--light-yellow);
-			}
-
 		/* equip */
 			#character:not([mode="items"]) .item-equip-form {
 				display: none;
@@ -1587,25 +1560,26 @@
 			}
 
 		/* items select */
-			#character:not([mode="items"]) #character-items-search {
-				display: none;
-			}
-
 			#character-items-search {
 				float: left;
 				width: 100%;
 				pointer-events: all;
-				padding-bottom: var(--medium-gap-size);
+				padding: var(--medium-gap-size) 0;
 				border-bottom: var(--border-size) solid var(--medium-gray);
 			}
 
 			#character-items-search input, #character-items-search button {
-				color: var(--dark-yellow);
+				color: var(--medium-yellow);
+				border-color: var(--medium-yellow);
 			}
 
 			#character-items-search input::placeholder {
-				color: var(--dark-yellow);
+				color: var(--medium-yellow);
 				font-weight: bold;
+			}
+
+			#character-items-search .option-search-results {
+				border-color: var(--medium-yellow);
 			}
 
 			#character-items-search .option-search-result:hover, #character-items-search .option-search-result:focus {
@@ -1613,177 +1587,35 @@
 				background-color: var(--medium-yellow) !important;
 			}
 
-	/** conditions **/
+	/** arena presets **/
 		/* top level */
-			#character:not([mode="conditions"]) #character-conditions {
+			#character[mode="none"] #character-settings-arena-presets {
 				display: none;
 			}
 
-			#character[mode="conditions"] #character-items, #character[mode="conditions"] #character-info {
-				display: none;
-			}
-
-			#character[mode="conditions"] {
-				background-color: var(--light-blue);
-			}
-
-			.section#character-conditions {
+		/* preview  */
+			#character-settings-arena-preview {
 				float: left;
-				background-color: var(--light-blue);
-				padding-bottom: var(--medium-gap-size);
-				width: 100%;
-				font-size: var(--small-font-size);
-				border-bottom: var(--border-size) solid var(--medium-gray);
-			}
-
-		/* list */
-			.condition {
-				border-radius: var(--border-radius);
-				background-color: var(--medium-blue);
-				color: var(--light-gray);
-				float: left;
-				width: 100%;
-				height: auto;
-				vertical-align: middle;
-				margin: var(--small-gap-size) 0;
-				user-select: none;
-				-webkit-user-select: none;
-				-moz-user-select: none;
-				-ms-user-select: none;
-				-o-user-select: none;
-			}
-
-			.condition-remove-form {
-				float: right;
-				width: calc(var(--small-font-size) + 2 * var(--small-gap-size));
-				height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
-			}
-
-			.condition-remove {
-				float: right;
-				margin: 0;
-				width: calc(var(--small-font-size) + 2 * var(--small-gap-size));
-				background-color: transparent;
-				color: var(--light-blue);
-				font-size: var(--medium-font-size);
-				height: calc(var(--small-font-size) + 2 * var(--small-gap-size));
-				text-align: center;
-				font-weight: bold;
-				padding: 0;
-			}
-
-			.condition-remove:hover, .condition-remove:focus {
-				box-shadow: none;
-				text-shadow: 0 0 var(--shadow-size) var(--light-blue);
-			}
-
-			.condition-name {
-				float: left;
-				width: calc(100% - 2 * var(--small-gap-size) - (var(--small-font-size) + 2 * var(--small-gap-size)));
-				padding: var(--small-gap-size) var(--small-gap-size) 0 var(--small-gap-size);
-				font-weight: bold;
-				color: var(--light-gray);
-				font-size: var(--medium-font-size);
-				text-align: left;
-			}
-
-			.condition-description {
-				float: left;
-				width: calc(100% - 2 * var(--small-gap-size));
-				padding: var(--small-gap-size);
-				font-size: var(--small-font-size);
-				color: var(--light-gray);
-				text-align: left;
-			}
-
-		/* select */
-			#character-conditions-search {
-				float: left;
-				width: 100%;
-				pointer-events: all;
-			}
-
-			#character-conditions-search input, #character-conditions-search button {
-				color: var(--medium-blue);
-			}
-
-			#character-conditions-search input::placeholder {
-				color: var(--medium-blue);
-				font-weight: bold;
-			}
-
-			#character-conditions-search .option-search-result:hover, #character-conditions-search .option-search-result:focus {
-				color: var(--light-gray) !important;
-				background-color: var(--medium-blue) !important;
-			}
-
-	/** damage **/
-		/* top level */
-			#character:not([mode="damage"]) #character-damage {
-				display: none;
-			}
-
-			#character[mode="damage"] {
-				background-color: var(--light-red);
-			}
-
-			.section#character-damage {
-				float: left;
-				background-color: var(--light-red);
-				padding-bottom: var(--medium-gap-size);
-				width: 100%;
-				font-size: var(--small-font-size);
-				border-bottom: var(--border-size) solid var(--medium-gray);
-			}
-
-		/* other sections */
-			#character[mode="damage"] #character-info, #character[mode="damage"] .skills-list {
-				display: none;
-			}
-
-			#character[mode="damage"] #character-items-equipped-header, #character[mode="damage"] #character-items-unequipped-header, 
-			#character[mode="damage"] .item:not(.healing) {
-				display: none;
-			}
-
-			#character[mode="damage"] #character-items-equipped {
-				padding-bottom: 0;
-				border: 0;
-			}
-
-			#character[mode="damage"] #character-items-unequipped {
-				padding-top: 0;
-			}
-
-			#character[mode="damage"] #character-items-equipped-list .item:first-child, #character[mode="damage"] #character-items-unequipped-list .item:first-child {
-				margin-top: var(--medium-gap-size);
-			}
-
-		/* input */
-			#character-damage-input {
-				font-size: var(--medium-font-size);
-				text-align: center;
-				color: var(--medium-red);
-				font-weight: bold;
-			}
-
-			#character-damage-input::placeholder {
-				color: var(--medium-red);
-				font-weight: bold;
-			}
-
-		/* recover */
-			#character-damage-recover {
 				margin-top: var(--small-gap-size);
-				background-color: var(--medium-gray);
-				color: var(--medium-green);
-				text-overflow: ellipsis;
+				width: 100%;
+				height: 100%;
+				min-width: calc(var(--panel-size) - 2 * var(--medium-gap-size));
+				min-height: calc(var(--panel-size) - 2 * var(--medium-gap-size));
+				border-radius: var(--border-radius);
+			}
+
+			@media screen and (max-width: 799px) {
+				#character-settings-arena-preview {
+					min-width: calc(100vw - 2 * var(--large-gap-size) - 2 * var(--medium-gap-size));
+					min-height: calc(100vw - 2 * var(--large-gap-size) - 2 * var(--medium-gap-size));
+				}
 			}
 
 	/** targeting **/
-		#character:not([mode="play"]) #character-recipient {
-			display: none;
-		}
+		/* top level */
+			#character[mode="none"] #character-recipient {
+				display: none;
+			}
 
 /*** chat ***/
 	/** top level **/
@@ -1952,6 +1784,16 @@
 
 		#left[tool="content"] #tools-content {
 			background-color: var(--light-gray);
+		}
+
+	/** title **/
+		#content[mode="none"] #content-choose-search .option-search-title, #content[mode="none"] #content-choose-search .option-search-close-form {
+			display: none;
+		}
+
+	/** search **/
+		#content:not([mode="none"]) #content-choose-search .option-search-input, #content:not([mode="none"]) #content-choose-search .option-search-results {
+			display: none;
 		}
 
 	/** metadata **/

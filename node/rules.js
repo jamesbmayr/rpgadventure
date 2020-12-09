@@ -2499,7 +2499,7 @@
 												d6: 3
 											}
 										],
-										conditions: {smoke: 2, bleeding: 1},
+										conditions: {smoke: 1, bleeding: 1},
 										hands: 1,
 										materials: "glass",
 										cost: 20,
@@ -3904,7 +3904,7 @@
 											}
 										],
 										recipe: {w: 10, r: 4, g: 2, b: 2},
-										conditions: {smoke: 2},
+										conditions: {smoke: 1},
 										cost: 16,
 										description: "causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds"
 									},
@@ -6955,7 +6955,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7087,7 +7087,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7219,7 +7219,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7351,7 +7351,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7483,7 +7483,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7615,7 +7615,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7747,7 +7747,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -7879,7 +7879,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8011,7 +8011,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8143,7 +8143,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8275,7 +8275,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8407,7 +8407,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
@@ -8539,7 +8539,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:10,description:"prevents extreme cold",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,conditions: {extreme_cold: 0},materials:"leather",cost:15,description:"prevents extreme cold",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":2},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
+											{equipped:true,name:"concoction of smoke",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":4,"g":2,"b":2},"conditions":{"smoke":1},cost:16,description:"causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds",id:"qiqrjziyuizptbmh"},
 										]
 									},
 									{
