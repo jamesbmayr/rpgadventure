@@ -4093,7 +4093,7 @@ window.onload = function() {
 								
 								while (loops) {
 									for (var i in CHARACTER.statistics) {
-										if (CHARACTER.statistics[i].maximum + CHARACTER.statistics[i].damage > 1) {
+										if (CHARACTER.statistics[i].maximum + CHARACTER.statistics[i].damage > 2) {
 											CHARACTER.statistics[i].damage--
 										}
 										else {
@@ -4137,6 +4137,9 @@ window.onload = function() {
 								while (remainder) {
 									statisticNames.sort(function(a, b) {
 										return (CHARACTER.statistics[a].maximum + CHARACTER.statistics[a].damage) - (CHARACTER.statistics[b].maximum + CHARACTER.statistics[b].damage)
+									})
+									statisticNames.sort(function(a, b) {
+										return (CHARACTER.statistics[a].damage - CHARACTER.statistics[b].damage)
 									})
 									if (CHARACTER.statistics[statisticNames[0]].damage < 0) {
 										CHARACTER.statistics[statisticNames[0]].damage++
@@ -4353,7 +4356,7 @@ window.onload = function() {
 						// add to items
 							item.id = FUNCTIONS.generateRandom()
 							item.equipped = true
-							CHARACTER.items.push(item)
+							CHARACTER.items.unshift(item)
 
 						// save
 							submitCharacterUpdate(CHARACTER)
