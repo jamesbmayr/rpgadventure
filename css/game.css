@@ -1343,21 +1343,25 @@
 				text-shadow: 0 0 calc(2 * var(--shadow-size)) var(--medium-yellow);
 			}
 
-		/* first / last */
-			#character-items-equipped-list .item:first-child, #character-items-unequipped-list .item:first-child {
-				margin-top: 0;
-			}
-
-			#character-items-equipped-list .item:last-child, #character-items-unequipped-list .item:last-child {
-				margin-bottom: var(--medium-gap-size);
+		/* dragging */
+			#character-items-equipped[dragging="true"], #character-items-unequipped[dragging="true"] {
+				cursor: grab;
+				background-color: var(--light-yellow);
 			}
 
 		/* item */
+			.item-shell {
+				float: left;
+				width: 100%;
+				height: auto;
+				padding: var(--small-gap-size) 0;
+			}
+
 			.item {
 				float: left;
 				width: calc(100% - 2 * var(--small-gap-size));
 				padding: var(--small-gap-size);
-				margin: var(--small-gap-size) 0;
+				margin: 0;
 				background-color: var(--medium-yellow);
 				border-radius: var(--border-radius);
 				pointer-events: none;

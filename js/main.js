@@ -15,7 +15,11 @@ window.addEventListener("load", function() {
 				keyup: "keyup",
 				scroll: "wheel",
 				rightclick: "contextmenu",
-				doubleclick: "dblclick"
+				doubleclick: "dblclick",
+				dragstart: "dragstart",
+				dragend: "dragend",
+				dragover: "dragover",
+				drop: "drop"
 			}
 			if ((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent)) {
 				window.TRIGGERS.click = "touchstart"
@@ -40,6 +44,10 @@ window.addEventListener("load", function() {
 			})
 
 			document.addEventListener(TRIGGERS.rightclick, function(event) {
+				event.preventDefault()
+			})
+
+			document.addEventListener(TRIGGERS.dragover, function(event) {
 				event.preventDefault()
 			})
 

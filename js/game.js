@@ -289,6 +289,7 @@ window.onload = function() {
 								speed: document.getElementById("character-speed")
 							},
 							items: {
+								dragging: null,
 								equipped: {
 									element: document.getElementById("character-items-equipped"),
 									count: document.getElementById("character-items-equipped-count"),
@@ -2984,9 +2985,6 @@ window.onload = function() {
 							ELEMENTS.character.items.unequipped.list.innerHTML = ""
 
 						// loop through items
-							character.items.sort(function(a, b) {
-								return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1
-							})
 							var equippedCount = 0
 							var unequippedCount = 0
 							for (var i in character.items) {
@@ -3020,14 +3018,23 @@ window.onload = function() {
 			/* displayCharacterItem */
 				function displayCharacterItem(character, item, parent, enable) {
 					try {
+						// shell
+							var shell = document.createElement("div")
+								shell.className = "item-shell"
+								shell.addEventListener(TRIGGERS.drop, submitCharacterUpdateItemPosition)
+							parent.append(shell)
+
 						// block
 							var block = document.createElement("details")
 								block.className = "item " + (item.type || "miscellaneous")
 								block.id = item.id
+								block.draggable = true
+								block.addEventListener(TRIGGERS.dragstart, displayCharacterItemDragging)
+								block.addEventListener(TRIGGERS.dragend, displayCharacterItemDragging)
 								if (enable) {
 									block.setAttribute("open", true)
 								}
-							parent.append(block)
+							shell.append(block)
 
 						// summary
 							var summary = document.createElement("summary")
@@ -3398,6 +3405,28 @@ window.onload = function() {
 							if (item.description)  { description.value += " | " + item.description}
 
 							description.value = description.value.slice(3)
+					} catch (error) {console.log(error)}
+				}
+
+			/* displayCharacterItemDragging */
+				function displayCharacterItemDragging(event) {
+					try {
+						// validate
+							if (!event.target || !event.target.draggable || !event.target.className.includes("item")) {
+								return false
+							}
+
+						// stop dragging
+							if (event.type !== "dragstart") {
+								ELEMENTS.character.items.dragging = null
+								ELEMENTS.character.items.equipped.element.removeAttribute("dragging")
+								ELEMENTS.character.items.unequipped.element.removeAttribute("dragging")
+								return
+							}
+
+						// start dragging
+							ELEMENTS.character.items.dragging = event.target
+							event.target.closest(".subsection").setAttribute("dragging", true)
 					} catch (error) {console.log(error)}
 				}
 
@@ -4478,8 +4507,51 @@ window.onload = function() {
 					
 						// save
 							submitCharacterUpdate(CHARACTER)
-					}
-					catch (error) {console.log(error)}
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterUpdateItemPosition */
+				function submitCharacterUpdateItemPosition(event) {
+					try {
+						// no dragging?
+							if (!ELEMENTS.character.items.dragging) {
+								return false
+							}
+
+						// item ids
+							var ids = CHARACTER.items.map(function (item) {
+								return item.id
+							})
+						
+						// get dragging item
+							var draggedItemIndex = ids.indexOf(ELEMENTS.character.items.dragging.id)
+							var draggedItem = CHARACTER.items[draggedItemIndex]
+
+						// get position
+							if (event.target.closest(".item")) {
+								var targetItemIndex = ids.indexOf(event.target.closest(".item").id)
+							}
+							else if (event.target.querySelector(".item")) {
+								var targetItemIndex = ids.indexOf(event.target.querySelector(".item").id)
+							}
+							else {
+								return false
+							}
+
+						// update order
+							if (targetItemIndex > draggedItemIndex) {
+								CHARACTER.items.splice(targetItemIndex + 1, 0, draggedItem)
+								CHARACTER.items.splice(draggedItemIndex, 1)
+							}
+							else {
+								CHARACTER.items.splice(targetItemIndex, 0, draggedItem)
+								CHARACTER.items.splice(draggedItemIndex + 1, 1)
+							}
+
+						// save
+							ELEMENTS.character.items.dragging = null
+							submitCharacterUpdate(CHARACTER)
+					} catch (error) {console.log(error)}
 				}
 
 			/* submitCharacterUpdateItemDelete */
