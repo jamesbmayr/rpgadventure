@@ -72,7 +72,7 @@
 			color: var(--medium-gray);
 			margin-bottom: var(--large-font-size);
 			font-family: var(--font-0);
-			word-break: break-all;
+			word-break: break-word;
 		}
 
 		h2 {
@@ -86,7 +86,7 @@
 			color: var(--medium-gray);
 			border-bottom: var(--border-size) solid var(--medium-gray);
 			font-family: var(--font-0);
-			word-break: break-all;
+			word-break: break-word;
 		}
 
 		h3 {
@@ -100,7 +100,7 @@
 			font-weight: bold;
 			color: var(--medium-gray);
 			font-family: var(--font-0);
-			word-break: break-all;
+			word-break: break-word;
 		}
 
 		h4 {
@@ -113,7 +113,7 @@
 			font-weight: bold;
 			color: var(--medium-gray);
 			font-family: var(--font-0);
-			word-break: break-all;
+			word-break: break-word;
 		}
 
 	/* form */
