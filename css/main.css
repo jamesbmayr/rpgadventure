@@ -500,7 +500,7 @@
 			margin: calc(-1 * var(--small-gap-size) - var(--border-size)) var(--small-gap-size) 0 var(--small-gap-size);
 			overflow-x: hidden;
 			overflow-y: auto;
-			max-height: var(--panel-size);
+			max-height: calc(100vh - var(--edge-size) - (var(--medium-font-size) + 2 * var(--small-gap-size)) - 2 * var(--medium-gap-size) - (var(--medium-font-size) + var(--small-gap-size) + 2 * var(--border-size)) - 2 * var(--border-size) - var(--large-gap-size));
 			border: var(--border-size) solid var(--medium-gray);
 			border-top: 0;
 		}

@@ -63,20 +63,18 @@ window.onload = function() {
 							top: document.getElementById("top"),
 							left: document.getElementById("left"),
 							right: document.getElementById("right"),
-							toggle: document.getElementById("sidebar-toggle-form")
+							toggle: document.getElementById("left-toggle-form")
 						}
 
 					// special
 						ELEMENTS.stream = {
 							history: document.getElementById("stream-history"),
 							rng: {
-								element: document.getElementById("rng"),
 								form: document.getElementById("rng-form"),
 								count: document.getElementById("rng-count"),
 								d: document.getElementById("rng-d"),
-								label: document.getElementById("rng-label"),
-								button: document.getElementById("rng-button")
-							},
+								label: document.getElementById("rng-label")
+							}
 						}
 						ELEMENTS.tools = {
 							element: document.getElementById("tools"),
@@ -128,24 +126,19 @@ window.onload = function() {
 								element: document.getElementById("settings-game"),
 								search: {
 									title: document.getElementById("settings-game-search-title"),
-									element: document.getElementById("settings-game-search"),
 									form: document.getElementById("settings-game-search-form"),
-									input: document.getElementById("settings-game-search-input"),
-									button: document.getElementById("settings-game-search-button")
+									input: document.getElementById("settings-game-search-input")
 								},
 								select: {
 									element: document.getElementById("settings-game-select"),
 									custom: document.getElementById("settings-game-select-custom"),
 									none: document.getElementById("settings-game-select-none"),
-									new: document.getElementById("settings-game-select-new"),
-									search: document.getElementById("settings-game-select-search")
+									new: document.getElementById("settings-game-select-new")
 								},
 								name: {
-									form: document.getElementById("settings-game-name-form"),
-									input: document.getElementById("settings-game-name-input"),
+									input: document.getElementById("settings-game-name-input")
 								},
 								players: {
-									element: document.getElementById("settings-game-players"),
 									list: document.getElementById("settings-game-players-list")
 								},
 								banned: {
@@ -156,41 +149,34 @@ window.onload = function() {
 									element: document.getElementById("settings-game-data")
 								},
 								clearChat: {
-									form: document.getElementById("settings-game-clearChat-form"),
-									button: document.getElementById("settings-game-clearChat-button"),
+									form: document.getElementById("settings-game-clearChat-form")
 								},
 								clearRolls: {
-									form: document.getElementById("settings-game-clearRolls-form"),
-									button: document.getElementById("settings-game-clearRolls-button"),
+									form: document.getElementById("settings-game-clearRolls-form")
 								},
 								delete: {
 									gate: document.getElementById("settings-game-delete-gate"),
-									form: document.getElementById("settings-game-delete-form"),
-									button: document.getElementById("settings-game-delete-button")
+									form: document.getElementById("settings-game-delete-form")
 								}
 							},
 							user: {
 								element: document.getElementById("settings-user"),
 								name: {
-									form: document.getElementById("settings-user-name-form"),
 									input: document.getElementById("settings-user-name-input")
 								},
 								color: {
-									form: document.getElementById("settings-color-form"),
-									input: document.getElementById("settings-color-input")
+									input: document.getElementById("settings-user-color-input")
 								},
 								audio: {
-									volume: document.getElementById("settings-audio-volume")
+									input: document.getElementById("settings-user-audio-input")
 								},
 								password: {
 									form: document.getElementById("settings-user-password-form"),
 									old: document.getElementById("settings-user-password-input-old"),
 									new: document.getElementById("settings-user-password-input-new")
-								}
-							},
-							auth: {
+								},
 								signout: {
-									form: document.getElementById("settings-auth-signout-form")
+									form: document.getElementById("settings-user-signout-form")
 								}
 							}
 						}
@@ -203,26 +189,27 @@ window.onload = function() {
 								input: document.getElementById("rules-search-input"),
 								button: document.getElementById("rules-search-button"),
 							},
-							results: document.getElementById("rules-results"),
-							link: document.getElementById("rules-link")
+							results: document.getElementById("rules-results")
 						}
 
 					// character
 						ELEMENTS.character = {
 							element: document.getElementById("character"),
-							settings: {
-								title: document.getElementById("character-settings-title"),
+							choose: {
+								element: document.getElementById("character-choose"),
+								title: document.getElementById("character-choose-title"),
+								upload: document.getElementById("character-choose-upload"),
+								form: document.getElementById("character-choose-form"),
 								select: {
-									element: document.getElementById("character-settings-select"),
-									custom: document.getElementById("character-settings-select-custom"),
-									upload: document.getElementById("character-settings-select-upload"),
-									none: document.getElementById("character-settings-select-none"),
-									new: document.getElementById("character-settings-select-new"),
-									search: document.getElementById("character-settings-select-search"),
-									form: document.getElementById("character-settings-select-search-form")
-								},
-								upload: document.getElementById("character-settings-upload"),
-								metadata: document.getElementById("character-settings-metadata"),
+									element: document.getElementById("character-choose-select"),
+									custom: document.getElementById("character-choose-select-custom"),
+									upload: document.getElementById("character-choose-select-upload"),
+									none: document.getElementById("character-choose-select-none"),
+									new: document.getElementById("character-choose-select-new")
+								}
+							},
+							settings: {
+								element: document.getElementById("character-settings"),
 								name: {
 									form: document.getElementById("character-settings-name-form"),
 									input: document.getElementById("character-settings-name-input")
@@ -245,29 +232,52 @@ window.onload = function() {
 								delete: {
 									gate: document.getElementById("character-settings-delete-gate"),
 									form: document.getElementById("character-settings-delete-form")
-								},
-								arenaPresets: document.getElementById("character-settings-arena-presets"),
-								arenaPreview: document.getElementById("character-settings-arena-preview")
+								}
 							},
 							info: {
 								element: document.getElementById("character-info"),
-								burden: document.getElementById("character-info-burden"),
-								points: document.getElementById("character-info-points"),
-								damage: document.getElementById("character-info-damage"),
 								race: document.getElementById("character-info-race"),
 								raceDisabled: document.getElementById("character-info-race-disabled"),
 								raceAbility: document.getElementById("character-info-race-ability"),
-								age: document.getElementById("character-info-age"),
 								sex: document.getElementById("character-info-sex"),
+								age: document.getElementById("character-info-age"),
 								height: document.getElementById("character-info-height"),
 								weight: document.getElementById("character-info-weight"),
-								description: document.getElementById("character-info-description"),
+								points: document.getElementById("character-info-points"),
 								run: document.getElementById("character-info-run"),
 								move: document.getElementById("character-info-move"),
 								swim: document.getElementById("character-info-swim"),
 								jump: document.getElementById("character-info-jump"),
 								throw: document.getElementById("character-info-throw"),
-								carry: document.getElementById("character-info-carry")
+								carry: document.getElementById("character-info-carry"),
+								burden: document.getElementById("character-info-burden"),
+								description: document.getElementById("character-info-description")
+							},
+							status: {
+								targeting: {
+									form: document.getElementById("character-status-targeting-form"),
+									select: document.getElementById("character-status-targeting-select"),
+									none: document.getElementById("character-status-targeting-none"),
+									environment: document.getElementById("character-status-targeting-environment"),
+									characters: document.getElementById("character-status-targeting-characters"),
+									arena: document.getElementById("character-status-targeting-arena")
+								},
+								damage: {
+									form: document.getElementById("character-status-damage-form"),
+									input: document.getElementById("character-status-damage-input")
+								},
+								recover: {
+									form: document.getElementById("character-status-recover-form"),
+									input: document.getElementById("character-status-recover-input")
+								},
+								conditions: {
+									element: document.getElementById("character-status-conditions"),
+									search: {
+										form: document.getElementById("character-status-conditions-search-form")
+									},
+									select: document.getElementById("character-status-conditions-select"),
+									list: document.getElementById("character-status-conditions-list")
+								}
 							},
 							statistics: {
 								perception: document.getElementById("character-perception"),
@@ -296,27 +306,14 @@ window.onload = function() {
 								},
 								select: document.getElementById("character-items-select")
 							},
-							conditions: {
-								element: document.getElementById("character-conditions"),
-								search: {
-									form: document.getElementById("character-conditions-search-form")
-								},
-								select: document.getElementById("character-conditions-select"),
-								list: document.getElementById("character-conditions-list")
-							},
-							recipient: {
-								form: document.getElementById("character-recipient-form"),
-								select: document.getElementById("character-recipient-select"),
-								none: document.getElementById("character-recipient-none"),
-								environment: document.getElementById("character-recipient-environment"),
-								characters: document.getElementById("character-recipient-characters"),
-								arena: document.getElementById("character-recipient-arena")
+							arena: {
+								presets: document.getElementById("character-arena-presets"),
+								preview: document.getElementById("character-arena-preview")
 							}
 						}
 
 					// chat
 						ELEMENTS.chat = {
-							element: document.getElementById("chat"),
 							messages: document.getElementById("chat-messages"),
 							send: {
 								form: document.getElementById("chat-send-form"),
@@ -331,8 +328,7 @@ window.onload = function() {
 									all: document.getElementById("chat-send-recipients-all"),
 									players: document.getElementById("chat-send-recipients-players")
 								},
-								input: document.getElementById("chat-send-input"),
-								button: document.getElementById("chat-send-button"),
+								input: document.getElementById("chat-send-input")
 							}
 						}
 
@@ -347,9 +343,7 @@ window.onload = function() {
 							},
 							choose: {
 								title: document.getElementById("content-choose-title"),
-								search: {
-									form: document.getElementById("content-choose-search-form")
-								},
+								form: document.getElementById("content-choose-form"),
 								select: {
 									element: document.getElementById("content-choose-select"),
 									none: document.getElementById("content-choose-select-none"),
@@ -370,7 +364,6 @@ window.onload = function() {
 								}
 							},
 							name: {
-								form: document.getElementById("content-name-form"),
 								input: document.getElementById("content-name-input")
 							},
 							access: {
@@ -382,9 +375,7 @@ window.onload = function() {
 								},
 							},
 							code: {
-								form: document.getElementById("content-code-form"),
 								input: document.getElementById("content-code-input"),
-								button: document.getElementById("content-code-button"),
 								select: document.getElementById("content-component-code-select"),
 								sample: document.getElementById("content-component-code-sample"),
 								search: {
@@ -396,31 +387,24 @@ window.onload = function() {
 								}
 							},
 							url: {
-								form: document.getElementById("content-url-form"),
-								input: document.getElementById("content-url-input"),
-								button: document.getElementById("content-url-button")
+								input: document.getElementById("content-url-input")
 							},
 							data: {
-								form: document.getElementById("content-data-form"),
-								button: document.getElementById("content-data-button")
+								form: document.getElementById("content-data-form")
 							},
-							upload: {
-								form: document.getElementById("content-upload-form"),
-								input: document.getElementById("content-upload-input"),
-								button: document.getElementById("content-upload-button")
-							},
+							// upload: {
+							// 	form: document.getElementById("content-upload-form"),
+							// 	input: document.getElementById("content-upload-input")
+							// },
 							duplicate: {
-								form: document.getElementById("content-duplicate-form"),
-								button: document.getElementById("content-duplicate-button")
+								form: document.getElementById("content-duplicate-form")
 							},
 							delete: {
 								gate: document.getElementById("content-delete-gate"),
-								form: document.getElementById("content-delete-form"),
-								button: document.getElementById("content-delete-button")
+								form: document.getElementById("content-delete-form")
 							},
 							turnOrder: {
 								form: document.getElementById("content-turn-order-form"),
-								button: document.getElementById("content-turn-order-button"),
 								list: document.getElementById("content-turn-order-list")
 							},
 							controls: {
@@ -485,51 +469,51 @@ window.onload = function() {
 						ELEMENTS.settings.game.delete.form.addEventListener(TRIGGERS.submit, submitGameDelete)
 						ELEMENTS.settings.user.name.input.addEventListener(TRIGGERS.change, submitUserUpdateName)
 						ELEMENTS.settings.user.color.input.addEventListener(TRIGGERS.change, submitUserUpdateColor)
-						ELEMENTS.settings.user.audio.volume.addEventListener(TRIGGERS.change, submitUserUpdateVolume)
+						ELEMENTS.settings.user.audio.input.addEventListener(TRIGGERS.change, submitUserUpdateVolume)
 						ELEMENTS.settings.user.password.old.addEventListener(TRIGGERS.change, submitUserUpdatePassword)
 						ELEMENTS.settings.user.password.new.addEventListener(TRIGGERS.change, submitUserUpdatePassword)
-						ELEMENTS.settings.auth.signout.form.addEventListener(TRIGGERS.submit, submitUserUpdateSignout)
+						ELEMENTS.settings.user.signout.form.addEventListener(TRIGGERS.submit, submitUserUpdateSignout)
 
 					// rules
 						ELEMENTS.rules.search.form.addEventListener(TRIGGERS.submit, submitRulesSearch)
 
 					// character
-						ELEMENTS.character.settings.select.form.addEventListener(TRIGGERS.submit, submitCharacterRead)
+						ELEMENTS.character.choose.form.addEventListener(TRIGGERS.submit, submitCharacterRead)
 						ELEMENTS.character.settings.download.form.addEventListener(TRIGGERS.submit, displayCharacterDownload)
 						ELEMENTS.character.settings.name.input.addEventListener(TRIGGERS.change, submitCharacterUpdateName)
 						ELEMENTS.character.settings.access.select.element.addEventListener(TRIGGERS.change, submitCharacterUpdateAccess)
 						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, submitCharacterCreateDuplicate)
 						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, submitCharacterDelete)
-						ELEMENTS.character.settings.arenaPresets.querySelectorAll("input").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
-						ELEMENTS.character.settings.arenaPresets.querySelectorAll("select").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
-						ELEMENTS.character.element.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20) })
 						ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateInfo) })
+						ELEMENTS.character.status.damage.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateDamage)
+						ELEMENTS.character.status.recover.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateDamage)
+						ELEMENTS.character.status.conditions.search.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateConditionCreate)
+						ELEMENTS.character.element.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20) })
 						ELEMENTS.character.element.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, submitCharacterUpdateStatistic) })
 						ELEMENTS.character.element.querySelectorAll(".statistic .option-search-form").forEach(function(form) { form.addEventListener(TRIGGERS.submit, submitCharacterUpdateSkillCreate) })
+						ELEMENTS.character.element.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateDamageStatistic) })
 						ELEMENTS.character.items.search.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateItemCreate)
 						ELEMENTS.character.items.equipped.form.addEventListener(TRIGGERS.submit, displayCharacterItemMode)
 						ELEMENTS.character.items.unequipped.form.addEventListener(TRIGGERS.submit, displayCharacterItemMode)
-						ELEMENTS.character.conditions.search.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateConditionCreate)
-						ELEMENTS.character.element.querySelectorAll(".statistic-damage").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateDamageStatistic) })
+						ELEMENTS.character.arena.presets.querySelectorAll("input").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
+						ELEMENTS.character.arena.presets.querySelectorAll("select").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
 
 					// chat
 						ELEMENTS.chat.send.form.addEventListener(TRIGGERS.submit, submitChatCreate)
 
 					// content
-						ELEMENTS.content.choose.search.form.addEventListener(TRIGGERS.submit, submitContentRead)
+						ELEMENTS.content.choose.form.addEventListener(TRIGGERS.submit, submitContentRead)
 						ELEMENTS.content.add.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateRules)
 						ELEMENTS.content.send.form.addEventListener(TRIGGERS.submit, submitChatCreateContent)
 						ELEMENTS.content.name.input.addEventListener(TRIGGERS.change, submitContentUpdateName)
 						ELEMENTS.content.access.select.element.addEventListener(TRIGGERS.change, submitContentUpdateAccess)
-						ELEMENTS.content.code.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
-						ELEMENTS.content.url.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
-						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
-						// ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, submitContentUpdateFile)
 						ELEMENTS.content.duplicate.form.addEventListener(TRIGGERS.submit, submitContentCreateDuplicate)
 						ELEMENTS.content.delete.form.addEventListener(TRIGGERS.submit, submitContentDelete)
+						ELEMENTS.content.url.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
+						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
+						ELEMENTS.content.code.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
 						ELEMENTS.content.code.search.form.addEventListener(TRIGGERS.submit, submitContentComponentSearch)
-						ELEMENTS.body.addEventListener(TRIGGERS.mousemove, moveContent)
-						ELEMENTS.body.addEventListener(TRIGGERS.mouseup, ungrabContent)
+						// ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, submitContentUpdateFile)
 						ELEMENTS.content.turnOrder.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateTurnOrder)
 						ELEMENTS.content.controls.zoom.in.form.addEventListener(TRIGGERS.submit, zoomContent)
 						ELEMENTS.content.controls.zoom.zero.form.addEventListener(TRIGGERS.submit, zoomContent)
@@ -539,6 +523,10 @@ window.onload = function() {
 						ELEMENTS.content.controls.pan.down.form.addEventListener(TRIGGERS.submit, panContentArena)
 						ELEMENTS.content.controls.pan.right.form.addEventListener(TRIGGERS.submit, panContentArena)
 						ELEMENTS.content.objects.search.form.addEventListener(TRIGGERS.submit, submitContentArenaObjectCreate)
+
+					// special
+						ELEMENTS.body.addEventListener(TRIGGERS.mousemove, moveContent)
+						ELEMENTS.body.addEventListener(TRIGGERS.mouseup, ungrabContent)
 						window.addEventListener(TRIGGERS.resize, displayContentArena)
 
 					// select search
@@ -765,7 +753,6 @@ window.onload = function() {
 							if (!GAME) {
 								// clear stream & chat
 									ELEMENTS.stream.history.innerHTML = ""
-									ELEMENTS.stream.rng.element.setAttribute("visibility", false)
 									ELEMENTS.chat.messages.innerHTML = ""
 								
 								// clear content
@@ -778,10 +765,9 @@ window.onload = function() {
 									displayCharacter()
 									displayCharacterList()
 							}
-							else {
-								// rng
-									ELEMENTS.stream.rng.element.setAttribute("visibility", true)
-							}
+
+						// mode
+							ELEMENTS.body.setAttribute("mode", GAME ? "game" : "none")
 
 						// relist chat
 							displayChatListSenders()
@@ -798,36 +784,25 @@ window.onload = function() {
 					try {
 						// no game
 							if (!GAME || !GAME.id) {
-								ELEMENTS.settings.element.setAttribute("mode", "none")
 								ELEMENTS.settings.game.search.title.innerText = ""
-								ELEMENTS.settings.game.name.form.setAttribute("visibility", false)
-								ELEMENTS.settings.game.name.input.setAttribute("disabled", true)
-								ELEMENTS.settings.game.players.element.setAttribute("visibility", false)
-								ELEMENTS.settings.game.banned.element.setAttribute("visibility", false)
-								ELEMENTS.settings.game.data.element.setAttribute("visibility", false)
+								ELEMENTS.settings.game.name.input.value = ""
 								return
 							}
 
 						// owned by another player
 							if (GAME.userId !== USER.id) {
-								ELEMENTS.settings.element.setAttribute("mode", "game")
 								ELEMENTS.settings.game.search.title.innerText = GAME.name
-								ELEMENTS.settings.game.name.form.setAttribute("visibility", false)
 								ELEMENTS.settings.game.name.input.setAttribute("disabled", true)
 								ELEMENTS.settings.game.name.input.value = GAME.name
-								ELEMENTS.settings.game.players.element.setAttribute("visibility", true)
 								ELEMENTS.settings.game.banned.element.setAttribute("visibility", false)
 								ELEMENTS.settings.game.data.element.setAttribute("visibility", false)
 							}
 
 						// owned by this player
 							else {
-								ELEMENTS.settings.element.setAttribute("mode", "game")
 								ELEMENTS.settings.game.search.title.innerText = GAME.name
-								ELEMENTS.settings.game.name.form.setAttribute("visibility", true)
 								ELEMENTS.settings.game.name.input.removeAttribute("disabled")
 								ELEMENTS.settings.game.name.input.value = GAME.name
-								ELEMENTS.settings.game.players.element.setAttribute("visibility", true)
 								ELEMENTS.settings.game.banned.element.setAttribute("visibility", true)
 								ELEMENTS.settings.game.data.element.setAttribute("visibility", true)
 							}
@@ -1206,7 +1181,7 @@ window.onload = function() {
 						// settings
 							if (USER.settings) {
 								// volume
-									ELEMENTS.settings.user.audio.volume.value = Math.max(0, Math.min(1, USER.settings.volume))
+									ELEMENTS.settings.user.audio.input.value = Math.max(0, Math.min(1, USER.settings.volume))
 									var audios = Array.from(ELEMENTS.body.querySelectorAll("audio"))
 									for (var a in audios) {
 										audios[a].volume = Math.max(0, Math.min(1, USER.settings.volume))
@@ -1678,7 +1653,7 @@ window.onload = function() {
 								d: 20,
 								target: Number(event.target.value),
 								text: skill ? skill.name.replace(/_/g, " ") : statistic ? statistic : item ? item.name : "",
-								recipient: ELEMENTS.character.recipient.select.value || null
+								recipient: ELEMENTS.character.status.targeting.select.value || null
 							}
 
 						// charisma
@@ -1851,7 +1826,7 @@ window.onload = function() {
 								d: 6,
 								count: count,
 								text: condition ? condition : item ? item.name : skill ? skill.name.replace(/_/g, " ") : statistic ? statistic : "",
-								recipient: ELEMENTS.character.recipient.select.value || null
+								recipient: ELEMENTS.character.status.targeting.select.value || null
 							})
 
 						// post
@@ -1938,7 +1913,7 @@ window.onload = function() {
 								d: d,
 								count: count,
 								text: text,
-								recipient: ELEMENTS.character.recipient.select.value || null
+								recipient: ELEMENTS.character.status.targeting.select.value || null
 							})
 
 						// post
@@ -2289,7 +2264,7 @@ window.onload = function() {
 						// NPCs
 							var optgroup = document.createElement("optgroup")
 								optgroup.label = "NPCs"
-							ELEMENTS.character.settings.select.element.appendChild(optgroup)
+							ELEMENTS.character.choose.select.element.appendChild(optgroup)
 
 							for (var n in RULES.npcs) {
 								var option = document.createElement("option")
@@ -2301,7 +2276,7 @@ window.onload = function() {
 						// animals
 							var optgroup = document.createElement("optgroup")
 								optgroup.label = "animals"
-							ELEMENTS.character.settings.select.element.appendChild(optgroup)
+							ELEMENTS.character.choose.select.element.appendChild(optgroup)
 
 							for (var a in RULES.animals) {
 								var option = document.createElement("option")
@@ -2313,7 +2288,7 @@ window.onload = function() {
 						// creatures
 							var optgroup = document.createElement("optgroup")
 								optgroup.label = "creatures"
-							ELEMENTS.character.settings.select.element.appendChild(optgroup)
+							ELEMENTS.character.choose.select.element.appendChild(optgroup)
 
 							for (var c in RULES.creatures) {
 								var option = document.createElement("option")
@@ -2419,7 +2394,7 @@ window.onload = function() {
 			/* displayCharacterListConditions */
 				function displayCharacterListConditions() {
 					try {
-						var container = ELEMENTS.character.conditions.select
+						var container = ELEMENTS.character.status.conditions.select
 
 						// add conditions
 							for (var i in RULES.conditions) {
@@ -2441,12 +2416,12 @@ window.onload = function() {
 							if (characterList) { CHARACTERLIST = characterList }
 
 						// close option?
-							ELEMENTS.character.settings.select.none.disabled = (CHARACTER && CHARACTER.id) ? false : true
+							ELEMENTS.character.choose.select.none.disabled = (CHARACTER && CHARACTER.id) ? false : true
 
 						// no game?
 							if (!GAME) {
 								CHARACTERLIST = null
-								ELEMENTS.character.settings.select.custom.innerHTML = ""
+								ELEMENTS.character.choose.select.custom.innerHTML = ""
 								displayCharacterListRecipients(characterList, null)
 								displayContentArenaObjectList(characterList, null)
 								return
@@ -2458,7 +2433,7 @@ window.onload = function() {
 									var character = characterList[c]
 
 								// find character
-									var option = ELEMENTS.character.settings.select.custom.querySelector("option[value='" + character.id + "']")
+									var option = ELEMENTS.character.choose.select.custom.querySelector("option[value='" + character.id + "']")
 
 								// delete?
 									if (option && character.delete) {
@@ -2475,7 +2450,7 @@ window.onload = function() {
 										option = document.createElement("option")
 										option.value = character.id
 										option.innerText = character.name
-										ELEMENTS.character.settings.select.custom.appendChild(option)
+										ELEMENTS.character.choose.select.custom.appendChild(option)
 									}
 							}
 
@@ -2492,20 +2467,20 @@ window.onload = function() {
 					try {
 						// no game
 							if (!GAME) {
-								ELEMENTS.character.recipient.characters.innerHTML = ""
-								ELEMENTS.character.recipient.arena.innerHTML = ""
+								ELEMENTS.character.status.targeting.characters.innerHTML = ""
+								ELEMENTS.character.status.targeting.arena.innerHTML = ""
 							}
 
 						// loop through characterList
 							for (var i in characterList) {
 								// find character
 									var character = characterList[i]
-									var targetOption = ELEMENTS.character.recipient.characters.querySelector("option[value='" + character.id + "']")
+									var targetOption = ELEMENTS.character.status.targeting.characters.querySelector("option[value='" + character.id + "']")
 
 								// delete?
 									if (targetOption && character.delete) {
-										if (ELEMENTS.character.recipient.select.value == targetOption.value) {
-											ELEMENTS.character.recipient.select.value = ELEMENTS.character.recipient.none.value
+										if (ELEMENTS.character.status.targeting.select.value == targetOption.value) {
+											ELEMENTS.character.status.targeting.select.value = ELEMENTS.character.status.targeting.none.value
 										}
 										targetOption.remove()
 									}
@@ -2520,7 +2495,7 @@ window.onload = function() {
 										targetOption = document.createElement("option")
 										targetOption.value = character.id
 										targetOption.innerText = character.name
-										ELEMENTS.character.recipient.characters.appendChild(targetOption)
+										ELEMENTS.character.status.targeting.characters.appendChild(targetOption)
 									}
 							}
 
@@ -2532,12 +2507,12 @@ window.onload = function() {
 									}) || []
 
 								// loop through existing options
-									var targetingOptions = Array.from(ELEMENTS.character.recipient.arena.querySelectorAll("option"))
+									var targetingOptions = Array.from(ELEMENTS.character.status.targeting.arena.querySelectorAll("option"))
 									for (var i in targetingOptions) {
 										var targetOption = targetingOptions[i]
 										if (!ids.includes(targetOption.value)) {
-											if (ELEMENTS.character.recipient.select.value == targetOption.value) {
-												ELEMENTS.character.recipient.select.value = ELEMENTS.character.recipient.none.value
+											if (ELEMENTS.character.status.targeting.select.value == targetOption.value) {
+												ELEMENTS.character.status.targeting.select.value = ELEMENTS.character.status.targeting.none.value
 											}
 
 											targetOption.remove()
@@ -2550,7 +2525,7 @@ window.onload = function() {
 								if (contentList[i].characterId && contentList[i].visible) {
 									// find character
 										var character = contentList[i]
-										var targetOption = ELEMENTS.character.recipient.arena.querySelector("option[value='" + character.characterId + "']")
+										var targetOption = ELEMENTS.character.status.targeting.arena.querySelector("option[value='" + character.characterId + "']")
 
 									// rename
 										if (targetOption) {
@@ -2562,7 +2537,7 @@ window.onload = function() {
 											targetOption = document.createElement("option")
 											targetOption.value = character.characterId
 											targetOption.innerText = character.text || "[?]"
-											ELEMENTS.character.recipient.arena.appendChild(targetOption)
+											ELEMENTS.character.status.targeting.arena.appendChild(targetOption)
 										}
 									
 								}
@@ -2595,14 +2570,14 @@ window.onload = function() {
 					try {
 						// no character?
 							if (!CHARACTER) {
-								ELEMENTS.character.settings.title.innerText = ""
+								ELEMENTS.character.choose.title.innerText = ""
 								ELEMENTS.character.element.setAttribute("mode", "none")
 								displayChatListSenders()
 								return
 							}
 
 						// metadata
-							ELEMENTS.character.settings.title.innerText = CHARACTER.info.name
+							ELEMENTS.character.choose.title.innerText = CHARACTER.info.name
 							ELEMENTS.character.settings.access.select.element.value = CHARACTER.access ? ELEMENTS.character.settings.access.select.private.value : ELEMENTS.character.settings.access.select.public.value
 							ELEMENTS.character.settings.access.form.setAttribute("visibility", (CHARACTER && CHARACTER.id && (CHARACTER.userId == USER.id || CHARACTER.gameUserId == USER.id)) ? true : false)
 							ELEMENTS.character.settings.delete.gate.setAttribute("visibility", (CHARACTER && CHARACTER.id && (CHARACTER.userId == USER.id || CHARACTER.gameUserId == USER.id)) ? true : false)
@@ -2645,7 +2620,7 @@ window.onload = function() {
 
 						// loop through fields
 							var presets = character.arenaPresets || {}
-							var fields = Array.from(ELEMENTS.character.settings.arenaPresets.querySelectorAll("input")).concat(Array.from(ELEMENTS.character.settings.arenaPresets.querySelectorAll("select")))
+							var fields = Array.from(ELEMENTS.character.arena.presets.querySelectorAll("input")).concat(Array.from(ELEMENTS.character.arena.presets.querySelectorAll("select")))
 							for (var i in fields) {
 								var property = fields[i].getAttribute("property")
 								if (property) {
@@ -2659,7 +2634,7 @@ window.onload = function() {
 							}
 
 						// get canvas
-							var canvas = ELEMENTS.character.settings.arenaPreview
+							var canvas = ELEMENTS.character.arena.preview
 								canvas.height = Number(canvas.height)
 								canvas.width = Number(canvas.width)
 							var context = canvas.getContext("2d")
@@ -2795,7 +2770,7 @@ window.onload = function() {
 							ELEMENTS.character.info.throw.value = Math.max(0, ((CHARACTER.statistics.strength.maximum + CHARACTER.statistics.strength.damage + CHARACTER.statistics.strength.condition) + (thro.maximum  + thro.condition )) * 10)
 
 						// carrying
-							ELEMENTS.character.info.burden.value = Math.round((CHARACTER.items.length ? (CHARACTER.items.reduce(function(a, b) { return a + ((b.weight || 0) * (b.count || 0)) }, 0) || 0) : 0) * 100) / 100
+							ELEMENTS.character.info.burden.value = Math.round((CHARACTER.items.length ? (CHARACTER.items.reduce(function(a, b) { return a + (b.equipped ? (b.weight || 0) * (b.count || 0) : 0) }, 0) || 0) : 0) * 100) / 100
 							if (Number(ELEMENTS.character.info.burden.value) > Number(ELEMENTS.character.info.carry.value)) {
 								ELEMENTS.character.info.burden.setAttribute("overburdened", true)
 							}
@@ -3083,7 +3058,7 @@ window.onload = function() {
 
 							var equip = document.createElement("button")
 								equip.className = "item-equip"
-								equip.title = "toggle equipped"
+								equip.title = item.equipped ? "move to stockpile" : "move to inventory"
 								equip.innerHTML = "&#x2713;"
 								if (item.equipped) {
 									equip.setAttribute("equipped", true)
@@ -3430,8 +3405,8 @@ window.onload = function() {
 				function displayCharacterConditions(character) {
 					try {
 						// unset
-							ELEMENTS.character.conditions.list.innerHTML = ""
-							var options = Array.from(ELEMENTS.character.conditions.select.querySelectorAll("option"))
+							ELEMENTS.character.status.conditions.list.innerHTML = ""
+							var options = Array.from(ELEMENTS.character.status.conditions.select.querySelectorAll("option"))
 							for (var i in options) {
 								options[i].removeAttribute("disabled")
 							}
@@ -3453,7 +3428,7 @@ window.onload = function() {
 							var conditionElement = document.createElement("div")
 								conditionElement.className = "condition"
 								conditionElement.setAttribute("value", condition.name)
-							ELEMENTS.character.conditions.list.append(conditionElement)
+							ELEMENTS.character.status.conditions.list.append(conditionElement)
 
 						// name
 							var name = document.createElement("div")
@@ -3482,7 +3457,7 @@ window.onload = function() {
 							removeForm.prepend(remove)
 
 						// disable in select
-							var conditionOption = ELEMENTS.character.conditions.select.querySelector("[value=" + condition.name + "]")
+							var conditionOption = ELEMENTS.character.status.conditions.select.querySelector("[value=" + condition.name + "]")
 							if (conditionOption) {
 								conditionOption.setAttribute("disabled", true)
 							}
@@ -3494,10 +3469,10 @@ window.onload = function() {
 				function submitCharacterRead(event) {
 					try {
 						// value
-							var value = ELEMENTS.character.settings.select.element.value
+							var value = ELEMENTS.character.choose.select.element.value
 
 						// none
-							if (value == ELEMENTS.character.settings.select.none.value) {
+							if (value == ELEMENTS.character.choose.select.none.value) {
 								var post = {
 									action: "unreadCharacter",
 									character: {
@@ -3513,13 +3488,13 @@ window.onload = function() {
 							}
 
 						// upload
-							else if (value == ELEMENTS.character.settings.select.upload.value) {
+							else if (value == ELEMENTS.character.choose.select.upload.value) {
 								submitCharacterCreateUpload()
 								return
 							}
 
 						// new
-							else if (value == ELEMENTS.character.settings.select.new.value) {
+							else if (value == ELEMENTS.character.choose.select.new.value) {
 								// blank template
 									var post = {
 										action: "createCharacter",
@@ -3581,9 +3556,9 @@ window.onload = function() {
 			/* submitCharacterCreateUpload */
 				function submitCharacterCreateUpload(event) {
 					try {
-						ELEMENTS.character.settings.upload.click()
-						ELEMENTS.character.settings.upload.addEventListener(TRIGGERS.change, function(event) {
-							if (ELEMENTS.character.settings.upload.value && ELEMENTS.character.settings.upload.value.length) {
+						ELEMENTS.character.choose.upload.click()
+						ELEMENTS.character.choose.upload.addEventListener(TRIGGERS.change, function(event) {
+							if (ELEMENTS.character.choose.upload.value && ELEMENTS.character.choose.upload.value.length) {
 								// start reading
 									var reader = new FileReader()
 										reader.readAsText(event.target.files[0])
@@ -3696,6 +3671,33 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
+			/* submitCharacterUpdateName */
+				function submitCharacterUpdateName(event) {
+					try {
+						// update name
+							CHARACTER.info.name = event.target.value
+
+						// post
+							var post = {
+								action: "updateCharacterName",
+								character: CHARACTER
+							}
+
+						// validate
+							if (!post.character || !post.character.id) {
+								FUNCTIONS.showToast({success: false, message: "no character selected"})
+								return	
+							}
+							if (!post.character.gameId) {
+								FUNCTIONS.showToast({success: false, message: "no game selected"})
+								return
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
 			/* submitCharacterUpdateAccess */
 				function submitCharacterUpdateAccess(event) {
 					try {
@@ -3734,64 +3736,61 @@ window.onload = function() {
 				}
 
 		/** submit - gameplay **/
-			/* submitCharacterUpdateName */
-				function submitCharacterUpdateName(event) {
+			/* submitCharacterUpdateRules */
+				function submitCharacterUpdateRules(event) {
 					try {
-						// update name
-							CHARACTER.info.name = event.target.value
-
-						// post
-							var post = {
-								action: "updateCharacterName",
-								character: CHARACTER
-							}
-
-						// validate
-							if (!post.character || !post.character.id) {
+						// no character
+							if (!CHARACTER) {
 								FUNCTIONS.showToast({success: false, message: "no character selected"})
-								return	
-							}
-							if (!post.character.gameId) {
-								FUNCTIONS.showToast({success: false, message: "no game selected"})
 								return
 							}
 
-						// send
-							SOCKET.send(JSON.stringify(post))
-					} catch (error) {console.log(error)}
-				}
-
-			/* submitCharacterUpdateArenaPresets */
-				function submitCharacterUpdateArenaPresets(event) {
-					try {
-						// no preset?
-							if (!CHARACTER.arenaPresets) {
-								CHARACTER.arenaPresets = {}
+						// custom component
+							if (event.target.id == "content-add-form") {
+								var code = ELEMENTS.content.code.input.value || ""
+								try {
+									var result = JSON.parse(code.trim())
+								} catch (error) {
+									FUNCTIONS.showToast({success: false, message: "invalid component code"})
+									return
+								}
 							}
 
-						// property
-							var type = event.target.type || event.target.getAttribute("type")
-							var property = event.target.getAttribute("property")
-
-						// set value
-							if (type == "checkbox") {
-								var value = !event.target.checked
-							}
-							else if (type == "range" || type == "number") {
-								var value = Number(event.target.value) || 0
-							}
+						// get data from search result
 							else {
-								var value = event.target.value
+								var resultElement = event.target.closest(".search-result")
+								var result = JSON.parse(resultElement.getAttribute("data") || "{}")
 							}
 
-						// image?
-							if (property == "image") {
-								CHARACTER.info.image = value
+						// result
+							if (!result || !result.data) {
+								FUNCTIONS.showToast({success: false, message: "invalid component data"})
+								return
 							}
 
-						// update
-							CHARACTER.arenaPresets[property] = value
-							submitCharacterUpdate(CHARACTER)
+						// race
+							if (result.type == "race") {
+								submitCharacterUpdateRace(result.data)
+								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
+							}
+							
+						// skill
+							else if (result.type == "skill") {
+								submitCharacterUpdateSkillCreate(result.data)
+								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
+							}
+
+						// item
+							else if (result.type == "item") {
+								submitCharacterUpdateItemCreate(result.data)
+								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
+							}
+
+						// condition
+							else if (result.type == "condition") {
+								submitCharacterUpdateConditionCreate(result.data)
+								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -3944,6 +3943,210 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
+			/* submitCharacterUpdateConditionCreate	*/
+				function submitCharacterUpdateConditionCreate(event) {
+					try {
+						// from dropdown (search)
+							if (event.target) {
+								var conditionName = ELEMENTS.character.status.conditions.select.value
+								var condition = RULES.conditions[conditionName] || {name: conditionName}
+							}
+
+						// from search result
+							else {
+								var condition = event
+							}
+
+						// already there?
+							if (CHARACTER.info.status.conditions.find(function(c) { return c.name == condition.name })) {
+								return
+							}
+
+						// add to conditions array
+							CHARACTER.info.status.conditions.push(condition)
+
+						// add effects
+							if (condition.effects) {
+								for (var i in condition.effects) {
+									for (var j in condition.effects[i]) {
+										if (j == "statistic") {
+											CHARACTER.statistics[i].condition += condition.effects[i][j]
+										}
+										else {
+											var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
+											if (!skill) {
+												submitCharacterUpdateSkillCreate({skillName: j, statistic: i, fromConditions: true})
+												var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
+											}
+
+											skill.condition += condition.effects[i][j]
+										}
+									}
+								}
+							}
+
+						// save
+							submitCharacterUpdate(CHARACTER)
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterUpdateConditionDelete */
+				function submitCharacterUpdateConditionDelete(event) {
+					try {
+						// get condition
+							var conditionName = event.target.parentNode.getAttribute("value")
+							var condition = CHARACTER.info.status.conditions.find(function(c) {
+								return c.name == conditionName
+							}) || {name: conditionName}
+
+						// remove from conditions array
+							CHARACTER.info.status.conditions = CHARACTER.info.status.conditions.filter(function(c) {
+								return c.name !== conditionName
+							})
+
+						// remove effects
+							var effects = condition.effects
+							for (var i in effects) {
+								for (var j in effects[i]) {
+									if (j == "statistic") {
+										CHARACTER.statistics[i].condition -= effects[i][j]
+									}
+									else {
+										var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
+										if (skill) {
+											skill.condition -= effects[i][j]
+
+											if (!skill.maximum && !skill.unremovable) {
+												submitCharacterUpdateSkillDelete({skillName: j, statistic: i, fromConditions: true})
+											}
+										}
+									}
+								}
+							}
+
+						// save
+							submitCharacterUpdate(CHARACTER)
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterUpdateDamage */
+				function submitCharacterUpdateDamage(event) {
+					try {
+						// validate
+							if (!CHARACTER) {
+								return
+							}
+
+						// inputs
+							var type = (event.target == ELEMENTS.character.status.damage.form ? "damage" : "recover")
+							var amount = (type == "damage" ? ELEMENTS.character.status.damage.input.value : ELEMENTS.character.status.recover.input.value)
+
+						// no amount
+							if (!amount || isNaN(amount)) {
+								return
+							}
+							amount = Math.round(Math.abs(amount))
+
+						// change damage
+							CHARACTER.info.status.damage += amount * (type == "damage" ? -1 : 1)
+							if (CHARACTER.info.status.damage > 0) {
+								CHARACTER.info.status.damage = 0
+							}
+
+						// split damage
+							var statisticNames = Object.keys(CHARACTER.statistics)
+							var loops = Math.floor(amount / statisticNames.length)
+							var remainder = amount % statisticNames.length
+
+						// damage
+							if (type == "damage") {
+								ELEMENTS.character.status.damage.input.value = null
+								
+								while (loops) {
+									for (var i in CHARACTER.statistics) {
+										if (CHARACTER.statistics[i].maximum + CHARACTER.statistics[i].damage > 1) {
+											CHARACTER.statistics[i].damage--
+										}
+										else {
+											remainder++
+										}
+									}
+									loops--
+								}
+
+								while (remainder) {
+									statisticNames.sort(function(a, b) {
+										return (CHARACTER.statistics[b].maximum + CHARACTER.statistics[b].damage) - (CHARACTER.statistics[a].maximum + CHARACTER.statistics[a].damage)
+									})
+
+									if (CHARACTER.statistics[statisticNames[0]].maximum + CHARACTER.statistics[statisticNames[0]].damage > 0) {
+										CHARACTER.statistics[statisticNames[0]].damage--
+										remainder--
+									}
+									else {
+										break
+									}
+								}
+							}
+
+						// recover
+							else {
+								ELEMENTS.character.status.recover.input.value = null
+
+								while (loops) {
+									for (var i in CHARACTER.statistics) {
+										if (CHARACTER.statistics[i].damage) {
+											CHARACTER.statistics[i].damage++
+										}
+										else {
+											remainder++
+										}
+									}
+									loops--
+								}
+
+								while (remainder) {
+									statisticNames.sort(function(a, b) {
+										return (CHARACTER.statistics[a].maximum + CHARACTER.statistics[a].damage) - (CHARACTER.statistics[b].maximum + CHARACTER.statistics[b].damage)
+									})
+									if (CHARACTER.statistics[statisticNames[0]].damage < 0) {
+										CHARACTER.statistics[statisticNames[0]].damage++
+										remainder--
+									}
+									else {
+										break
+									}
+								}
+							}
+
+						// save
+							submitCharacterUpdate(CHARACTER)
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterUpdateDamageStatistic */
+				function submitCharacterUpdateDamageStatistic(event) {
+					try {
+						// change statistic
+							var statistic = event.target.closest(".statistic").id.replace("character-", "")
+							var difference = CHARACTER.statistics[statistic].damage - event.target.value
+							CHARACTER.statistics[statistic].damage = Number(event.target.value)
+
+						// change damage
+							CHARACTER.info.status.damage += difference
+							var outstandingDamage = 0
+							for (var s in CHARACTER.statistics) {
+								outstandingDamage += CHARACTER.statistics[s].damage
+							}
+							if (!outstandingDamage) {
+								CHARACTER.info.status.damage = 0
+							}
+
+						// save
+							submitCharacterUpdate(CHARACTER)
+					} catch (error) {console.log(error)}
+				}
+
 			/* submitCharacterUpdateStatistic */
 				function submitCharacterUpdateStatistic(event) {
 					try {
@@ -3960,64 +4163,6 @@ window.onload = function() {
 
 						// save
 							submitCharacterUpdate(CHARACTER)
-					} catch (error) {console.log(error)}
-				}
-
-			/* submitCharacterUpdateRules */
-				function submitCharacterUpdateRules(event) {
-					try {
-						// no character
-							if (!CHARACTER) {
-								FUNCTIONS.showToast({success: false, message: "no character selected"})
-								return
-							}
-
-						// custom component
-							if (event.target.id == "content-add-form") {
-								var code = ELEMENTS.content.code.input.value || ""
-								try {
-									var result = JSON.parse(code.trim())
-								} catch (error) {
-									FUNCTIONS.showToast({success: false, message: "invalid component code"})
-									return
-								}
-							}
-
-						// get data from search result
-							else {
-								var resultElement = event.target.closest(".search-result")
-								var result = JSON.parse(resultElement.getAttribute("data") || "{}")
-							}
-
-						// result
-							if (!result || !result.data) {
-								FUNCTIONS.showToast({success: false, message: "invalid component data"})
-								return
-							}
-
-						// race
-							if (result.type == "race") {
-								submitCharacterUpdateRace(result.data)
-								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
-							}
-							
-						// skill
-							else if (result.type == "skill") {
-								submitCharacterUpdateSkillCreate(result.data)
-								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
-							}
-
-						// item
-							else if (result.type == "item") {
-								submitCharacterUpdateItemCreate(result.data)
-								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
-							}
-
-						// condition
-							else if (result.type == "condition") {
-								submitCharacterUpdateConditionCreate(result.data)
-								displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
-							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -4357,111 +4502,36 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
-			/* submitCharacterUpdateConditionCreate	*/
-				function submitCharacterUpdateConditionCreate(event) {
+			/* submitCharacterUpdateArenaPresets */
+				function submitCharacterUpdateArenaPresets(event) {
 					try {
-						// from dropdown (search)
-							if (event.target) {
-								var conditionName = ELEMENTS.character.conditions.select.value
-								var condition = RULES.conditions[conditionName] || {name: conditionName}
+						// no preset?
+							if (!CHARACTER.arenaPresets) {
+								CHARACTER.arenaPresets = {}
 							}
 
-						// from search result
+						// property
+							var type = event.target.type || event.target.getAttribute("type")
+							var property = event.target.getAttribute("property")
+
+						// set value
+							if (type == "checkbox") {
+								var value = !event.target.checked
+							}
+							else if (type == "range" || type == "number") {
+								var value = Number(event.target.value) || 0
+							}
 							else {
-								var condition = event
+								var value = event.target.value
 							}
 
-						// already there?
-							if (CHARACTER.info.status.conditions.find(function(c) { return c.name == condition.name })) {
-								return
+						// image?
+							if (property == "image") {
+								CHARACTER.info.image = value
 							}
 
-						// add to conditions array
-							CHARACTER.info.status.conditions.push(condition)
-
-						// add effects
-							if (condition.effects) {
-								for (var i in condition.effects) {
-									for (var j in condition.effects[i]) {
-										if (j == "statistic") {
-											CHARACTER.statistics[i].condition += condition.effects[i][j]
-										}
-										else {
-											var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
-											if (!skill) {
-												submitCharacterUpdateSkillCreate({skillName: j, statistic: i, fromConditions: true})
-												var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
-											}
-
-											skill.condition += condition.effects[i][j]
-										}
-									}
-								}
-							}
-
-						// save
-							submitCharacterUpdate(CHARACTER)
-					} catch (error) {console.log(error)}
-				}
-
-			/* submitCharacterUpdateConditionDelete */
-				function submitCharacterUpdateConditionDelete(event) {
-					try {
-						// get condition
-							var conditionName = event.target.parentNode.getAttribute("value")
-							var condition = CHARACTER.info.status.conditions.find(function(c) {
-								return c.name == conditionName
-							}) || {name: conditionName}
-
-						// remove from conditions array
-							CHARACTER.info.status.conditions = CHARACTER.info.status.conditions.filter(function(c) {
-								return c.name !== conditionName
-							})
-
-						// remove effects
-							var effects = condition.effects
-							for (var i in effects) {
-								for (var j in effects[i]) {
-									if (j == "statistic") {
-										CHARACTER.statistics[i].condition -= effects[i][j]
-									}
-									else {
-										var skill = CHARACTER.statistics[i].skills.find(function (skill) { return skill.name == j })
-										if (skill) {
-											skill.condition -= effects[i][j]
-
-											if (!skill.maximum && !skill.unremovable) {
-												submitCharacterUpdateSkillDelete({skillName: j, statistic: i, fromConditions: true})
-											}
-										}
-									}
-								}
-							}
-
-						// save
-							submitCharacterUpdate(CHARACTER)
-					} catch (error) {console.log(error)}
-				}
-
-			/* submitCharacterUpdateDamageStatistic */
-				function submitCharacterUpdateDamageStatistic(event) {
-					try {
-						// change statistic
-							var statistic = event.target.closest(".statistic").id.replace("character-", "")
-							var difference = CHARACTER.statistics[statistic].damage - event.target.value
-							CHARACTER.statistics[statistic].damage = Number(event.target.value)
-
-						// change damage
-							CHARACTER.info.status.damage += difference
-							var outstandingDamage = 0
-							for (var s in CHARACTER.statistics) {
-								outstandingDamage += CHARACTER.statistics[s].damage
-							}
-							if (!outstandingDamage) {
-								CHARACTER.info.status.damage = 0
-							}
-
-						// save
+						// update
+							CHARACTER.arenaPresets[property] = value
 							submitCharacterUpdate(CHARACTER)
 					} catch (error) {console.log(error)}
 				}
@@ -4942,7 +5012,7 @@ window.onload = function() {
 					try {
 						// no content?
 							if (!CONTENT) {
-								ELEMENTS.character.recipient.arena.innerHTML = ""
+								ELEMENTS.character.status.targeting.arena.innerHTML = ""
 							}
 
 						// sidebar panel
@@ -6507,60 +6577,60 @@ window.onload = function() {
 				}
 
 			/* submitContentUpdateFile */
-				function submitContentUpdateFile(event) {
-					try {
-						ELEMENTS.content.upload.input.click()
-						ELEMENTS.content.upload.input.addEventListener(TRIGGERS.change, function(event) {
-							if (ELEMENTS.content.upload.input.value && ELEMENTS.content.upload.input.value.length) {
-								// start reading
-									var file = ELEMENTS.content.upload.input.files[0]
-									var reader = new FileReader()
-										reader.readAsBinaryString(file)
+				// function submitContentUpdateFile(event) {
+				// 	try {
+				// 		ELEMENTS.content.upload.input.click()
+				// 		ELEMENTS.content.upload.input.addEventListener(TRIGGERS.change, function(event) {
+				// 			if (ELEMENTS.content.upload.input.value && ELEMENTS.content.upload.input.value.length) {
+				// 				// start reading
+				// 					var file = ELEMENTS.content.upload.input.files[0]
+				// 					var reader = new FileReader()
+				// 						reader.readAsBinaryString(file)
 
-								// end reading
-									reader.onload = function(event) {
-										try {
-											// parse character
-												var post = {
-													action: "uploadContentFile",
-													content: {
-														id: CONTENT.id,
-														gameId: GAME ? GAME.id : null,
-														userId: USER ? USER.id : null,
-														type: CONTENT.type,
-														name: CONTENT.name,
-														file: {
-															name: file.name,
-															data: event.target.result
-														}
-													}
-												}
+				// 				// end reading
+				// 					reader.onload = function(event) {
+				// 						try {
+				// 							// parse character
+				// 								var post = {
+				// 									action: "uploadContentFile",
+				// 									content: {
+				// 										id: CONTENT.id,
+				// 										gameId: GAME ? GAME.id : null,
+				// 										userId: USER ? USER.id : null,
+				// 										type: CONTENT.type,
+				// 										name: CONTENT.name,
+				// 										file: {
+				// 											name: file.name,
+				// 											data: event.target.result
+				// 										}
+				// 									}
+				// 								}
 
-											// validate
-												if (!post.content.id || !post.content.type || !post.content.name) {
-													FUNCTIONS.showToast({success: false, message: "no content selected"})
-													return
-												}
-												if (!post.content.file || !post.content.file.name || !post.content.file.data) {
-													FUNCTIONS.showToast({success: false, message: "no file uploaded"})
-													return
-												}
+				// 							// validate
+				// 								if (!post.content.id || !post.content.type || !post.content.name) {
+				// 									FUNCTIONS.showToast({success: false, message: "no content selected"})
+				// 									return
+				// 								}
+				// 								if (!post.content.file || !post.content.file.name || !post.content.file.data) {
+				// 									FUNCTIONS.showToast({success: false, message: "no file uploaded"})
+				// 									return
+				// 								}
 
-											// send socket request
-												FUNCTIONS.sendPost(post, function(response) {
-													FUNCTIONS.showToast(response)
-												})
-										}
-										catch (error) {
-											console.log(error)
-											FUNCTIONS.showToast({success: false, message: "unable to read file"})
-											return
-										}
-									}
-							}
-						})
-					} catch (error) {console.log(error)}
-				}
+				// 							// send socket request
+				// 								FUNCTIONS.sendPost(post, function(response) {
+				// 									FUNCTIONS.showToast(response)
+				// 								})
+				// 						}
+				// 						catch (error) {
+				// 							console.log(error)
+				// 							FUNCTIONS.showToast({success: false, message: "unable to read file"})
+				// 							return
+				// 						}
+				// 					}
+				// 			}
+				// 		})
+				// 	} catch (error) {console.log(error)}
+				// }
 
 			/* submitContentCreateDuplicate */
 				function submitContentCreateDuplicate(event) {
