@@ -177,7 +177,8 @@
 							<option id="character-choose-select-upload" value="[upload]">[upload character]</option>
 							<option id="character-choose-select-new" value="[template-blank]" selected>[new blank character]</option>
 						</optgroup>
-						<optgroup label="my characters" id="character-choose-select-custom"></optgroup>
+						<optgroup label="my characters" id="character-choose-select-mine"></optgroup>
+						<optgroup label="shared characters" id="character-choose-select-shared"></optgroup>
 					</select>
 				</div>
 				<details id="character-settings" class="subsection">
@@ -208,6 +209,70 @@
 							<button id="character-settings-delete-button" title="delete">confirm delete</button>
 						</form>
 					</details>
+				</details>
+				<details id="character-arena-presets" class="subsection">
+					<summary>
+						<h3>arena presets</h3>
+					</summary>
+					<div class="arena-object">
+						<label class="arena-object-label arena-object-image">
+							<input class="arena-object-input" property="image" placeholder="image url" type="text">
+							<span class="arena-object-label-text">image</span>
+						</label>
+						<label class="arena-object-label arena-object-empty"></label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="opacity" step="0.01" min="0" max="1" type="range" value="1">
+							<span class="arena-object-label-text">opacity</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="color" type="color" value="#dddddd">
+							<span class="arena-object-label-text">color</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="glow" step="0.05" min="0" max="1" type="range" value="0">
+							<span class="arena-object-label-text">glow</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="shadow" type="color" value="#555555">
+							<span class="arena-object-label-text">shadow</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="corners" step="1" min="0" max="50" type="range" value="0">
+							<span class="arena-object-label-text">roundness</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="rotation" step="45" min="0" max="360" type="range" value="0">
+							<span class="arena-object-label-text">rotation</span>
+						</label>
+						<label class="arena-object-label arena-object-text">
+							<input class="arena-object-input" property="text" placeholder="text" type="text"><span class="arena-object-label-text">text</span>
+						</label>
+						<label class="arena-object-label arena-object-empty"></label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="textSize" step="1" min="0" max="100" type="number" value="50">
+							<span class="arena-object-label-text">text size</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="textColor" type="color" value="#dddddd">
+							<span class="arena-object-label-text">text color</span>
+						</label>
+						<label class="arena-object-label">
+							<select class="arena-object-select" property="textPlacement">
+								<option value="top">top</option>
+								<option value="left">left</option>
+								<option value="center">center</option>
+								<option value="right">right</option>
+								<option value="bottom">bottom</option>
+								<option value="none">none</option>
+							</select>
+							<span class="arena-object-label-text">placement</span>
+						</label>
+						<label class="arena-object-label">
+							<input class="arena-object-input" property="textShadow" type="color" value="#555555">
+							<span class="arena-object-label-text">text shadow</span>
+						</label>
+					</div>
+					<canvas id="character-arena-preview" height="400" width="400"></canvas>
 				</details>
 				<details id="character-info" class="subsection">
 					<summary>
@@ -527,70 +592,6 @@
 					</summary>
 					<div id="character-items-unequipped-list"></div>
 				</details>
-				<details id="character-arena-presets" class="subsection">
-					<summary>
-						<h3>arena presets</h3>
-					</summary>
-					<div class="arena-object">
-						<label class="arena-object-label arena-object-image">
-							<input class="arena-object-input" property="image" placeholder="image url" type="text">
-							<span class="arena-object-label-text">image</span>
-						</label>
-						<label class="arena-object-label arena-object-empty"></label>
-						<label class="arena-object-label">
-							<input class="arena-object-input" property="opacity" step="0.01" min="0" max="1" type="range" value="1">
-							<span class="arena-object-label-text">opacity</span>
-						</label>
-						<label class="arena-object-label">
-							<input class="arena-object-input" property="color" type="color" value="#dddddd">
-							<span class="arena-object-label-text">color</span>
-						</label>
-						<label class="arena-object-label">
-							<input class="arena-object-input" property="glow" step="0.05" min="0" max="1" type="range" value="0">
-							<span class="arena-object-label-text">glow</span>
-						</label>
-						<label class="arena-object-label">
-							<input class="arena-object-input" property="shadow" type="color" value="#555555">
-							<span class="arena-object-label-text">shadow</span>
-						</label>
-						<label class="arena-object-label">
-							<input class="arena-object-input" property="corners" step="1" min="0" max="50" type="range" value="0">
-							<span class="arena-object-label-text">roundness</span>
-						</label>
-						<label class="arena-object-label">
-							<input class="arena-object-input" property="rotation" step="45" min="0" max="360" type="range" value="0">
-							<span class="arena-object-label-text">rotation</span>
-						</label>
-						<label class="arena-object-label arena-object-text">
-							<input class="arena-object-input" property="text" placeholder="text" type="text"><span class="arena-object-label-text">text</span>
-						</label>
-						<label class="arena-object-label arena-object-empty"></label>
-						<label class="arena-object-label">
-							<input class="arena-object-input" property="textSize" step="1" min="0" max="100" type="number" value="50">
-							<span class="arena-object-label-text">text size</span>
-						</label>
-						<label class="arena-object-label">
-							<input class="arena-object-input" property="textColor" type="color" value="#dddddd">
-							<span class="arena-object-label-text">text color</span>
-						</label>
-						<label class="arena-object-label">
-							<select class="arena-object-select" property="textPlacement">
-								<option value="top">top</option>
-								<option value="left">left</option>
-								<option value="center">center</option>
-								<option value="right">right</option>
-								<option value="bottom">bottom</option>
-								<option value="none">none</option>
-							</select>
-							<span class="arena-object-label-text">placement</span>
-						</label>
-						<label class="arena-object-label">
-							<input class="arena-object-input" property="textShadow" type="color" value="#555555">
-							<span class="arena-object-label-text">text shadow</span>
-						</label>
-					</div>
-					<canvas id="character-arena-preview" height="400" width="400"></canvas>
-				</details>
 			</section>
 			<section id="chat">
 				<div id="chat-messages"></div>
@@ -788,7 +789,8 @@
 							<optgroup label="...">
 								<option id="content-objects-select-blank" value="[blank object]" selected>[new object]</option>
 							</optgroup>
-							<optgroup id="content-objects-select-characters" label="my characters"></optgroup>
+							<optgroup id="content-objects-select-characters-mine" label="my characters"></optgroup>
+							<optgroup id="content-objects-select-characters-shared" label="shared characters"></optgroup>
 							<optgroup id="content-objects-select-images" label="my images"></optgroup>
 						</select>
 					</div>

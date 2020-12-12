@@ -19,6 +19,8 @@ window.addEventListener("load", function() {
 				dragstart: "dragstart",
 				dragend: "dragend",
 				dragover: "dragover",
+				dragenter: "dragenter",
+				dragleave: "dragleave",
 				drop: "drop"
 			}
 			if ((/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i).test(navigator.userAgent)) {

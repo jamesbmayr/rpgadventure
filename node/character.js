@@ -110,6 +110,8 @@
 									var characterList = [{
 										id: character.id,
 										name: character.info.name,
+										userId: character.userId,
+										gameUserId: character.gameUserId,
 										access: character.access
 									}]
 
@@ -182,6 +184,8 @@
 							var characterList = [{
 								id: character.id,
 								name: character.info.name,
+								userId: character.userId,
+								gameUserId: character.gameUserId,
 								access: character.access
 							}]
 							callback({success: true, message: "opening " + character.info.name, characterList: characterList, recipients: [REQUEST.user.id]})
@@ -263,6 +267,8 @@
 								return {
 									id: i.id,
 									name: i.info.name,
+									userId: i.userId,
+									gameUserId: i.gameUserId,
 									access: i.access
 								}
 							}) || []
@@ -369,6 +375,8 @@
 							var characterList = [{
 								id: character.id,
 								name: character.info.name,
+								userId: character.userId,
+								gameUserId: character.gameUserId,
 								access: character.access
 							}]
 
@@ -443,6 +451,8 @@
 							var characterList = [{
 								id: character.id,
 								name: character.info.name,
+								userId: character.userId,
+								gameUserId: character.gameUserId,
 								access: character.access
 							}]
 
@@ -564,6 +574,8 @@
 							var characterList = [{
 								id: character.id,
 								name: character.info.name,
+								userId: character.userId,
+								gameUserId: character.gameUserId,
 								access: character.access
 							}]
 
@@ -663,6 +675,8 @@
 									var characterList = [{
 										id: character.id,
 										name: character.info.name,
+										userId: character.userId,
+										gameUserId: character.gameUserId,
 										access: character.access
 									}]
 

@@ -93,6 +93,8 @@
 										id: content.id,
 										type: content.type,
 										name: content.name,
+										userId: content.userId,
+										gameUserId: content.gameUserId,
 										access: content.access
 									}]
 
@@ -166,6 +168,8 @@
 								id: content.id,
 								type: content.type,
 								name: content.name,
+								userId: content.userId,
+								gameUserId: content.gameUserId,
 								access: content.access
 							}]
 							callback({success: true, message: "opening " + content.name, contentList: contentList, recipients: [REQUEST.user.id]})
@@ -248,6 +252,8 @@
 									id: i.id,
 									type: i.type,
 									name: i.name,
+									userId: i.userId,
+									gameUserId: i.gameUserId,
 									access: i.access
 								}
 							}) || []
@@ -359,6 +365,8 @@
 								id: content.id,
 								type: content.type,
 								name: content.name,
+								userId: content.userId,
+								gameUserId: content.gameUserId,
 								access: content.access
 							}]
 
@@ -434,6 +442,8 @@
 								id: content.id,
 								type: content.type,
 								name: content.name,
+								userId: content.userId,
+								gameUserId: content.gameUserId,
 								access: content.access
 							}]
 
@@ -545,6 +555,8 @@
 								id: content.id,
 								type: content.type,
 								name: content.name,
+								userId: content.userId,
+								gameUserId: content.gameUserId,
 								access: content.access
 							}]
 
@@ -644,6 +656,8 @@
 										id: content.id,
 										type: content.type,
 										name: content.name,
+										userId: content.userId,
+										gameUserId: content.gameUserId,
 										access: content.access
 									}]
 
@@ -914,6 +928,8 @@
 								id: content.id,
 								type: content.type,
 								name: content.name,
+								userId: content.userId,
+								gameUserId: content.gameUserId,
 								access: content.access
 							}]
 

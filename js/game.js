@@ -19,6 +19,8 @@ window.onload = function() {
 			var PROTOCOLREGEX = /^(http|https|rtsp|ftp):\/\//i
 			var URLREGEX = /((?:(http|https|rtsp|ftp):\/\/(?:(?:[a-z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-f0-9]{2})){1,64}(?:\:(?:[a-z0-9\$\-\_\.\+\!\*\'\(\)\,\;\?\&\=]|(?:\%[a-f0-9]{2})){1,25})?\@)?)?((?:(?:[a-z0-9][a-z0-9\-]{0,64}\.)+(?:(?:aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(?:biz|b[abdefghijmnorstvwyz])|(?:cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(?:edu|e[cegrstu])|f[ijkmor]|(?:gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(?:info|int|i[delmnoqrst])|(?:jobs|j[emop])|k[eghimnrwyz]|l[abcikrstuvy]|(?:mil|mobi|museum|m[acdghklmnopqrstuvwxyz])|(?:name|net|n[acefgilopruz])|(?:org|om)|(?:pro|p[aefghklmnrstwy])|qa|r[eouw]|s[abcdeghijklmnortuvyz]|(?:tel|travel|t[cdfghjklmnoprtvwz])|u[agkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]))|(?:(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(?:25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9])))(?:\:\d{1,5})?)(\/(?:(?:[a-z0-9\;\/\?\:\@\&\=\#\~\-\.\+\!\*\'\(\)\,\_])|(?:\%[a-f0-9]{2}))*)?(?:\b|$)/gi
 			var IMAGEURLREGEX = /\.(jpeg|jpg|png|svg|gif|tiff|tif|bmp|iso|webp)(\?.*)?(\#.*)?$/i
+			var AUDIOURLREGEX = /\.(aac|midi|wav|mid|mp3|oga|weba)(\?.*)?(\#.*)?$/i
+			var YOUTUBEURLREGEX = /youtube\.com\/[a-zA-Z0-9]+/i
 
 		/* initiateApp */
 			initiateApp()
@@ -202,7 +204,8 @@ window.onload = function() {
 								form: document.getElementById("character-choose-form"),
 								select: {
 									element: document.getElementById("character-choose-select"),
-									custom: document.getElementById("character-choose-select-custom"),
+									mine: document.getElementById("character-choose-select-mine"),
+									shared: document.getElementById("character-choose-select-shared"),
 									upload: document.getElementById("character-choose-select-upload"),
 									none: document.getElementById("character-choose-select-none"),
 									new: document.getElementById("character-choose-select-new")
@@ -233,6 +236,10 @@ window.onload = function() {
 									gate: document.getElementById("character-settings-delete-gate"),
 									form: document.getElementById("character-settings-delete-form")
 								}
+							},
+							arena: {
+								presets: document.getElementById("character-arena-presets"),
+								preview: document.getElementById("character-arena-preview")
 							},
 							info: {
 								element: document.getElementById("character-info"),
@@ -306,10 +313,6 @@ window.onload = function() {
 									form: document.getElementById("character-items-search-form")
 								},
 								select: document.getElementById("character-items-select")
-							},
-							arena: {
-								presets: document.getElementById("character-arena-presets"),
-								preview: document.getElementById("character-arena-preview")
 							}
 						}
 
@@ -439,10 +442,13 @@ window.onload = function() {
 								search: {
 									form: document.getElementById("content-objects-search-form")
 								},
-								select: document.getElementById("content-objects-select"),
-								blank: document.getElementById("content-objects-select-blank"),
-								characters: document.getElementById("content-objects-select-characters"),
-								images: document.getElementById("content-objects-select-images"),
+								select: {
+									element: document.getElementById("content-objects-select"),
+									blank: document.getElementById("content-objects-select-blank"),
+									myCharacters: document.getElementById("content-objects-select-characters-mine"),
+									sharedCharacters: document.getElementById("content-objects-select-characters-shared"),
+									images: document.getElementById("content-objects-select-images")
+								},
 								list: document.getElementById("content-objects-list")
 							}
 						}
@@ -711,6 +717,17 @@ window.onload = function() {
 
 						// switch
 							ELEMENTS.structure.left.setAttribute("tool", tool)
+							if (ELEMENTS.structure.left.getAttribute("closed")) {
+								ELEMENTS.structure.left.removeAttribute("closed")
+								ELEMENTS.structure.right.removeAttribute("full")
+
+								// arena?
+									if (CONTENT && CONTENT.arena) {
+										setTimeout(function() {
+											displayContentArena()
+										}, 500)
+									}
+							}
 
 						// chat notification & scroll
 							if (tool == "chat") {
@@ -2102,6 +2119,9 @@ window.onload = function() {
 									}
 								}
 							}
+
+						// return result
+							return resultElement
 					} catch (error) {console.log(error)}
 				}
 
@@ -2422,7 +2442,8 @@ window.onload = function() {
 						// no game?
 							if (!GAME) {
 								CHARACTERLIST = null
-								ELEMENTS.character.choose.select.custom.innerHTML = ""
+								ELEMENTS.character.choose.select.mine.innerHTML = ""
+								ELEMENTS.character.choose.select.shared.innerHTML = ""
 								displayCharacterListRecipients(characterList, null)
 								displayContentArenaObjectList(characterList, null)
 								return
@@ -2434,7 +2455,7 @@ window.onload = function() {
 									var character = characterList[c]
 
 								// find character
-									var option = ELEMENTS.character.choose.select.custom.querySelector("option[value='" + character.id + "']")
+									var option = ELEMENTS.character.choose.select.element.querySelector("option[value='" + character.id + "']")
 
 								// delete?
 									if (option && character.delete) {
@@ -2451,7 +2472,12 @@ window.onload = function() {
 										option = document.createElement("option")
 										option.value = character.id
 										option.innerText = character.name
-										ELEMENTS.character.choose.select.custom.appendChild(option)
+										if (character.userId == USER.id) {
+											ELEMENTS.character.choose.select.mine.appendChild(option)
+										}
+										else {
+											ELEMENTS.character.choose.select.shared.appendChild(option)	
+										}
 									}
 							}
 
@@ -2983,6 +3009,11 @@ window.onload = function() {
 						// clear
 							ELEMENTS.character.items.equipped.list.innerHTML   = ""
 							ELEMENTS.character.items.unequipped.list.innerHTML = ""
+							
+						// stop dragging
+							ELEMENTS.character.items.dragging = null
+							ELEMENTS.character.items.equipped.element.removeAttribute("dragging")
+							ELEMENTS.character.items.unequipped.element.removeAttribute("dragging")
 
 						// loop through items
 							var equippedCount = 0
@@ -3029,8 +3060,17 @@ window.onload = function() {
 								block.className = "item " + (item.type || "miscellaneous")
 								block.id = item.id
 								block.draggable = true
+								block.setAttribute("ondragstart", "event.dataTransfer.setData('text/plain',null)")
 								block.addEventListener(TRIGGERS.dragstart, displayCharacterItemDragging)
 								block.addEventListener(TRIGGERS.dragend, displayCharacterItemDragging)
+								block.addEventListener(TRIGGERS.dragenter, function(event) {
+									(event.target.closest(".item") || event.target).setAttribute("draggedOver", true)
+								})
+								block.addEventListener(TRIGGERS.dragleave, function(event) {
+									var newTarget = (event.target.closest(".item") || event.target)
+									var nextTarget = (event.relatedTarget || event.fromElement)
+									if (!nextTarget || !(nextTarget == newTarget || nextTarget.closest(".item") == newTarget)) { newTarget.removeAttribute("draggedOver") }
+								})
 								if (enable) {
 									block.setAttribute("open", true)
 								}
@@ -3124,7 +3164,7 @@ window.onload = function() {
 							if (item.usage) {
 								var usages = document.createElement("div")
 									usages.className = "item-usages"
-								summary.appendChild(usages)
+								block.appendChild(usages)
 
 								for (var u in item.usage) {
 									var usage = item.usage[u]
@@ -3206,7 +3246,7 @@ window.onload = function() {
 							if (item.conditions) {
 								var conditions = document.createElement("div")
 									conditions.className = "item-conditions"
-								summary.appendChild(conditions)
+								block.appendChild(conditions)
 
 								var index = 0
 								for (var i in item.conditions) {
@@ -3418,14 +3458,33 @@ window.onload = function() {
 
 						// stop dragging
 							if (event.type !== "dragstart") {
-								ELEMENTS.character.items.dragging = null
-								ELEMENTS.character.items.equipped.element.removeAttribute("dragging")
-								ELEMENTS.character.items.unequipped.element.removeAttribute("dragging")
-								return
+								// item being dragged
+									if (ELEMENTS.character.items.dragging) {
+										ELEMENTS.character.items.dragging.removeAttribute("dragging")
+										ELEMENTS.character.items.dragging = null
+									}
+
+								// items dragged over
+									var draggedOvers = Array.from(document.querySelectorAll(".item[draggedOver='true']")) || []
+									for (var i in draggedOvers) {
+										draggedOvers[i].removeAttribute("draggedOver")
+									}
+
+								// container
+									ELEMENTS.character.items.equipped.element.removeAttribute("dragging")
+									ELEMENTS.character.items.unequipped.element.removeAttribute("dragging")
+									return
+							}
+
+						// input ?
+							if (document.activeElement.tagName.toLowerCase() == "input" || document.activeElement.tagName.toLowerCase() == "textarea") {
+								event.preventDefault()
+								return false
 							}
 
 						// start dragging
 							ELEMENTS.character.items.dragging = event.target
+							ELEMENTS.character.items.dragging.setAttribute("dragging", true)
 							event.target.closest(".subsection").setAttribute("dragging", true)
 					} catch (error) {console.log(error)}
 				}
@@ -4541,6 +4600,11 @@ window.onload = function() {
 								return false
 							}
 
+						// same position
+							if (targetItemIndex == draggedItemIndex) {
+								return false
+							}
+
 						// update order
 							if (targetItemIndex > draggedItemIndex) {
 								CHARACTER.items.splice(targetItemIndex + 1, 0, draggedItem)
@@ -4619,6 +4683,7 @@ window.onload = function() {
 						// clear messages?
 							if (messages.delete) {
 								ELEMENTS.chat.messages.innerHTML = ""
+								ELEMENTS.tools.notification.setAttribute("visibility", false)
 								return
 							}
 
@@ -4686,29 +4751,30 @@ window.onload = function() {
 								// search result
 									if (messages[i].display.data) {
 										newMessages = true
-										displayRulesSearchResult(messages[i].display.data, messages[i].id)
+										messages[i].element = displayRulesSearchResult(messages[i].display.data, messages[i].id)
 										continue
 									}
 
 								// content
 									if (messages[i].display.content) {
 										newMessages = true
-										displayChatContent(messages[i])
+										messages[i].element = displayChatContent(messages[i])
 										continue
 									}
 
 								// chat message
 									newMessages = true
-									displayChatMessage(messages[i])
+									messages[i].element = displayChatMessage(messages[i])
 							}
 
 						// scroll
 							ELEMENTS.chat.messages.scrollTop = ELEMENTS.chat.messages.scrollHeight
 
 						// one message, and it's a sound?
-							if (messages && messages.length == 1 && messages[0].display.content && messages[0].display.content.type == "audio") {
-								var parent = ELEMENTS.chat.messages.querySelector("#chat-" + messages[0].id)
-									parent.querySelector("audio").play()
+							if (messages && messages.length == 1 && messages[0].element.querySelector("audio")) {
+								try {
+									messages[0].element.querySelector("audio").play()
+								} catch (error) {}
 							}
 
 						// notification
@@ -4754,10 +4820,14 @@ window.onload = function() {
 
 						// text
 							var messageImages = []
+							var messageAudios = []
+							var messageYoutubes = []
 							var messageText = document.createElement("div")
 								messageText.className = "chat-message-text"
 								messageText.innerHTML = message.display.text.replace(URLREGEX, function(url) {
 									if (IMAGEURLREGEX.test(url)) { messageImages.push(url) }
+									if (AUDIOURLREGEX.test(url)) { messageAudios.push(url) }
+									if (YOUTUBEURLREGEX.test(url)) { messageYoutubes.push(url) }
 									return "<a target='_blank' href='" + (PROTOCOLREGEX.test(url) ? "" : "http://") + url + "'>" + url + "</a>"
 								})
 							messageElement.appendChild(messageText)
@@ -4769,6 +4839,48 @@ window.onload = function() {
 									messageImage.src = (PROTOCOLREGEX.test(messageImages[i]) ? "" : "http://") + messageImages[i]
 								messageText.append(messageImage)
 							}
+
+						// audios
+							for (var i in messageAudios) {
+								var messageAudio = document.createElement("audio")
+									messageAudio.className = "chat-message-audio"
+									messageAudio.volume = USER.settings.volume || 0
+									messageAudio.setAttribute("controls", true)
+									messageAudio.setAttribute("controlsList", "nodownload")
+								messageText.append(messageAudio)
+
+								var fileType = messageAudios[i].split("?")[0].slice(-3).toLowerCase()
+									fileType = (fileType == "wav" ? "wav" : fileType == "ogg" ? "ogg" : "mpeg")
+								var source = document.createElement("source")
+									source.src = (PROTOCOLREGEX.test(messageAudios[i]) ? "" : "http://") + messageAudios[i]
+									source.setAttribute("type", "audio/" + fileType)
+								messageAudio.appendChild(source)
+							}
+
+						// youtube
+							for (var i in messageYoutubes) {
+								var messageYoutube = document.createElement("iframe")
+									messageYoutube.className = "chat-message-youtube"
+									messageYoutube.height = "100%"
+									messageYoutube.width = "100%"
+									messageYoutube.setAttribute("allowfullscreen", true)
+									if (messageYoutubes[i].includes("/embed/")) {
+										messageYoutube.src = messageYoutubes[i]
+									}
+									else {
+										var queryString = messageYoutubes[i].split("?")[1].split("&")
+										var queryParameters = {}
+										for (var i in queryString) {
+											var pair = queryString[i].split("=")
+											queryParameters[pair[0]] = pair[1]
+										}
+										messageYoutube.src = "https://www.youtube.com/embed/" + (queryParameters.v || "")
+									}
+								messageText.append(messageYoutube)
+							}
+
+						// return
+							return messageElement
 					} catch (error) {console.log(error)}
 				}
 
@@ -4810,38 +4922,32 @@ window.onload = function() {
 
 						// arena
 							if (content.type == "arena") {
-								displayChatContentArena(messageElement, content)
-								return
+								return displayChatContentArena(messageElement, content)
 							}
 
 						// text
 							if (content.type == "text") {
-								displayChatContentText(messageElement, content)
-								return
+								return displayChatContentText(messageElement, content)								
 							}
 
 						// image
 							if (content.type == "image") {
-								displayChatContentImage(messageElement, content)
-								return
+								return displayChatContentImage(messageElement, content)
 							}
 
 						// audio
 							if (content.type == "audio") {
-								displayChatContentAudio(messageElement, content)
-								return
+								return displayChatContentAudio(messageElement, content)
 							}
 
 						// embed
 							if (content.type == "embed") {
-								displayChatContentEmbed(messageElement, content)
-								return
+								return displayChatContentEmbed(messageElement, content)
 							}
 
 						// component
 							if (content.type == "component") {
-								displayChatContentComponent(messageElement, content)
-								return
+								return displayChatContentComponent(messageElement, content)
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -4854,6 +4960,9 @@ window.onload = function() {
 								messageDataContent.className = "content-chat-data"
 								messageDataContent.innerHTML = ""
 							messageElement.appendChild(messageDataContent)
+
+						// return
+							return messageElement
 					} catch (error) {console.log(error)}
 				}
 
@@ -4865,6 +4974,9 @@ window.onload = function() {
 								messageDataContent.className = "content-chat-data"
 								messageDataContent.innerHTML = content.text
 							messageElement.appendChild(messageDataContent)
+
+						// return
+							return messageElement
 					} catch (error) {console.log(error)}
 				}
 
@@ -4879,6 +4991,9 @@ window.onload = function() {
 								messageDataContent.className = "content-chat-data content-image"
 								messageDataContent.src = url
 							messageElement.appendChild(messageDataContent)
+
+						// return
+							return messageElement
 					} catch (error) {console.log(error)}
 				}
 
@@ -4890,6 +5005,7 @@ window.onload = function() {
 								messageDataContent.className = "content-chat-data content-audio"
 								messageDataContent.volume = USER.settings.volume || 0
 								messageDataContent.setAttribute("controls", true)
+								messageDataContent.setAttribute("controlsList", "nodownload")
 							messageElement.appendChild(messageDataContent)
 
 						// file
@@ -4901,6 +5017,9 @@ window.onload = function() {
 									source.setAttribute("type", "audio/" + fileType)
 								messageDataContent.appendChild(source)
 							}
+
+						// return
+							return messageElement
 					} catch (error) {console.log(error)}
 				}
 
@@ -4915,12 +5034,42 @@ window.onload = function() {
 						// code
 							if (content.code) {
 								messageDataContent.innerText = content.code
+
+								// youtube
+									if (YOUTUBEURLREGEX.test(content.code)) {
+										messageDataContent.innerHTML += content.code
+									}
 							}
 
 						// embed
 							else if (content.url) {
 								messageDataContent.innerHTML = `<a target="_blank" href="` + content.url + `">` + content.url + `</a>`
+
+								// youtube
+									if (YOUTUBEURLREGEX.test(content.url)) {
+										var messageYoutube = document.createElement("iframe")
+											messageYoutube.className = "chat-message-youtube"
+											messageYoutube.height = "100%"
+											messageYoutube.width = "100%"
+											messageYoutube.setAttribute("allowfullscreen", true)
+											if (content.url.includes("/embed/")) {
+												messageYoutube.src = content.url
+											}
+											else {
+												var queryString = content.url.split("?")[1].split("&")
+												var queryParameters = {}
+												for (var i in queryString) {
+													var pair = queryString[i].split("=")
+													queryParameters[pair[0]] = pair[1]
+												}
+												messageYoutube.src = "https://www.youtube.com/embed/" + (queryParameters.v || "")
+											}
+										messageDataContent.append(messageYoutube)
+									}
 							}
+
+						// return
+							return messageElement
 					} catch (error) {console.log(error)}
 				}
 
@@ -4935,7 +5084,7 @@ window.onload = function() {
 							}
 
 						// display as search result
-							displayRulesSearchResult(code, messageElement.id + "-data")
+							return displayRulesSearchResult(code, messageElement.id + "-data")
 					} catch (error) {console.log(error)}
 				}
 
@@ -5204,7 +5353,7 @@ window.onload = function() {
 										arena.addEventListener(TRIGGERS.rightclick, measureContentArena)
 										arena.addEventListener(TRIGGERS.doubleclick, grabContentArena)
 										arena.addEventListener(TRIGGERS.mousedown, grabContentArena)
-										arena.addEventListener(TRIGGERS.scroll, zoomContentArena)
+										arena.addEventListener(TRIGGERS.scroll, zoomContentArena, {passive: true})
 									ELEMENTS.gametable.element.appendChild(arena)
 
 								// panning
@@ -5273,7 +5422,7 @@ window.onload = function() {
 										image = document.createElement("img")
 										image.className = "content-image content-grabbable"
 										image.addEventListener(TRIGGERS.mousedown, grabContent)
-										image.addEventListener(TRIGGERS.scroll, zoomContent)
+										image.addEventListener(TRIGGERS.scroll, zoomContent, {passive: true})
 									ELEMENTS.gametable.element.appendChild(image)
 							}
 
@@ -5316,6 +5465,7 @@ window.onload = function() {
 										audio.className = "content-audio"
 										audio.volume = USER.settings.volume || 0
 										audio.setAttribute("controls", true)
+										audio.setAttribute("controlsList", "nodownload")
 									ELEMENTS.gametable.element.appendChild(audio)
 							}
 
@@ -5359,10 +5509,12 @@ window.onload = function() {
 									if (embed.innerHTML !== CONTENT.code) {
 										embed.innerHTML = CONTENT.code
 									}
+
+								return
 							}
 
 						// url
-							else if (CONTENT.url) {
+							if (CONTENT.url) {
 								// element
 									var embed = ELEMENTS.gametable.element.querySelector("iframe.content-embed")
 
@@ -5376,16 +5528,38 @@ window.onload = function() {
 											ELEMENTS.gametable.element.appendChild(embed)
 									}
 
+								// youtube
+									if (YOUTUBEURLREGEX.test(CONTENT.url)) {
+										if (CONTENT.url.includes("/embed/")) {
+											youtubeUrl = CONTENT.url
+										}
+										else {
+											var queryString = CONTENT.url.split("?")[1].split("&")
+											var queryParameters = {}
+											for (var i in queryString) {
+												var pair = queryString[i].split("=")
+												queryParameters[pair[0]] = pair[1]
+											}
+											youtubeUrl = "https://www.youtube.com/embed/" + (queryParameters.v || "")
+										}
+
+										if (embed.src !== youtubeUrl) {
+											embed.setAttribute("allowfullscreen", true)
+											embed.src = youtubeUrl
+											return
+										}
+									}
+
 								// update
 									if (embed.src !== CONTENT.url) {
 										embed.src = CONTENT.url
 									}
+
+								return
 							}
 
 						// neither
-							else {
-								ELEMENTS.gametable.element.innerHTML = ""
-							}
+							ELEMENTS.gametable.element.innerHTML = ""
 					} catch (error) {console.log(error)}
 				}
 
@@ -5544,20 +5718,21 @@ window.onload = function() {
 					try {
 						// no game?
 							if (!GAME) {
-								ELEMENTS.content.objects.characters.innerHTML = ""
-								ELEMENTS.content.objects.images.innerHTML = ""
+								ELEMENTS.content.objects.select.myCharacters.innerHTML = ""
+								ELEMENTS.content.objects.select.sharedCharacters.innerHTML = ""
+								ELEMENTS.content.objects.select.images.innerHTML = ""
 							}
 
 						// loop through characterList
 							for (var i in characterList) {
 								// find option
 									var character = characterList[i]
-									var contentOption = ELEMENTS.content.objects.characters.querySelector("option[value='" + character.id + "']")
+									var contentOption = ELEMENTS.content.objects.select.element.querySelector("option[value='" + character.id + "']")
 
 								// delete?
 									if (contentOption && character.delete) {
-										if (ELEMENTS.content.objects.select.value == contentOption.value) {
-											ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
+										if (ELEMENTS.content.objects.select.element.value == contentOption.value) {
+											ELEMENTS.content.objects.select.element.value = ELEMENTS.content.objects.select.blank.value
 										}
 										contentOption.remove()
 									}
@@ -5573,7 +5748,13 @@ window.onload = function() {
 										contentOption.value = character.id
 										contentOption.innerText = character.name
 										contentOption.setAttribute("type", "character")
-										ELEMENTS.content.objects.characters.appendChild(contentOption)
+
+										if (character.userId == USER.id) {
+											ELEMENTS.content.objects.select.myCharacters.appendChild(contentOption)
+										}
+										else {
+											ELEMENTS.content.objects.select.sharedCharacters.appendChild(contentOption)	
+										}
 									}
 							}
 
@@ -5586,12 +5767,12 @@ window.onload = function() {
 
 								// find option
 									var content = contentList[i]
-									var contentOption = ELEMENTS.content.objects.images.querySelector("option[value='" + content.id + "']")
+									var contentOption = ELEMENTS.content.objects.select.images.querySelector("option[value='" + content.id + "']")
 
 								// delete?
 									if (contentOption && content.delete) {
-										if (ELEMENTS.content.objects.select.value == contentOption.value) {
-											ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
+										if (ELEMENTS.content.objects.select.element.value == contentOption.value) {
+											ELEMENTS.content.objects.select.element.value = ELEMENTS.content.objects.select.blank.value
 										}
 										contentOption.remove()
 									}
@@ -5610,7 +5791,7 @@ window.onload = function() {
 										contentOption.value = content.id
 										contentOption.innerText = content.name
 										contentOption.setAttribute("type", "content")
-										ELEMENTS.content.objects.images.appendChild(contentOption)
+										ELEMENTS.content.objects.select.images.appendChild(contentOption)
 									}
 							}
 					} catch (error) {console.log(error)}
@@ -6784,11 +6965,11 @@ window.onload = function() {
 							}
 
 						// character / image
-							if (ELEMENTS.content.objects.select.value !== ELEMENTS.content.objects.blank.value) {
-								var option = ELEMENTS.content.objects.select.querySelector("option[value='" + ELEMENTS.content.objects.select.value + "']")
+							if (ELEMENTS.content.objects.select.element.value !== ELEMENTS.content.objects.select.blank.value) {
+								var option = ELEMENTS.content.objects.select.element.querySelector("option[value='" + ELEMENTS.content.objects.select.element.value + "']")
 								var type = option.getAttribute("type")
 								post.content.arena.objects.new = {}
-								post.content.arena.objects.new[type + "Id"] = ELEMENTS.content.objects.select.value
+								post.content.arena.objects.new[type + "Id"] = ELEMENTS.content.objects.select.element.value
 							}
 
 						// validate
@@ -6798,7 +6979,7 @@ window.onload = function() {
 							}
 
 						// send socket request
-							ELEMENTS.content.objects.select.value = ELEMENTS.content.objects.blank.value
+							ELEMENTS.content.objects.select.element.value = ELEMENTS.content.objects.select.blank.value
 							SOCKET.send(JSON.stringify(post))
 							FUNCTIONS.showToast({success: true, message: "object added"})
 					} catch (error) {console.log(error)}
