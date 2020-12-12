@@ -904,7 +904,7 @@
 									}
 								},
 								dim_lighting: {
-									name: "dim lighting",
+									name: "dim_lighting",
 									description: "Impairs sight. -3 on skills where sight matters, such as combat.",
 									effects: {
 										perception: {sight: -3},
@@ -9393,7 +9393,7 @@
 										strength: { maximum: 2, damage: 0, condition: 0, skills: [{name: "carry", statistic: "strength", maximum: 2, condition: 0}, {name: "throw", statistic: "strength", maximum: 0, condition: 0, combat: true}, {name: "bite", statistic: "strength", combat: true, animals: true, d6: 2, maximum: 5, condition: 0}] },
 										dexterity: { maximum: 3, damage: 0, condition: 0, skills: [] },
 										immunity: { maximum: 5, damage: 0, condition: 0, skills: [{name: "recover", statistic: "immunity", maximum: 0, condition: 0, d6: 1}] },
-										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", statistic: "speed", maximum: 7, condition: 0}, {name: "run", statistic: "speed", maximum: 5, condition: 0}, {name: "swim", statistic: "speed", maximum: 3, condition: 0}, {name: "sneak", statistic: "speed", maximum: 5, condition: 0}] }
+										speed: { maximum: 8, damage: 0, condition: 0, skills: [{name: "jump", statistic: "speed", maximum: 7, condition: 0}, {name: "run", statistic: "speed", maximum: 5, condition: 0}, {name: "swim", statistic: "speed", maximum: 3, condition: 0}, {name: "sneak", statistic: "speed", maximum: 5, condition: 0}, {name: "kick", statistic: "speed", combat: true, d6: 2, maximum: 5, condition: 0}] }
 									},
 									items: []
 								},

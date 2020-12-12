@@ -6,6 +6,7 @@ window.addEventListener("load", function() {
 		/* triggers */
 			window.TRIGGERS = {
 				submit: "submit",
+				reset: "reset",
 				change: "change",
 				input: "input",
 				focus: "focus",
@@ -161,8 +162,7 @@ window.addEventListener("load", function() {
 
 						var resultsElement = componentElement.querySelector(".option-search-results")
 						var selectElement = componentElement.querySelector(".option-search-select")
-						var cancelElement = componentElement.querySelector(".option-search-cancel")
-						if (!resultsElement || !selectElement || !cancelElement) {
+						if (!resultsElement || !selectElement) {
 							return false
 						}
 
@@ -189,6 +189,7 @@ window.addEventListener("load", function() {
 					// no results
 						resultsElement.innerHTML = ""
 						if (!results.length) {
+							selectElement.value = ""
 							return
 						}
 
@@ -242,8 +243,9 @@ window.addEventListener("load", function() {
 								}
 						}
 
-					// show x
-						cancelElement.setAttribute("visibility", true)
+					// select one
+						var options = Array.from(resultsElement.querySelectorAll(".option-search-result-input:not([disabled='true'])"))
+						selectElement.value = options.length ? options[0].value : ""
 				} catch (error) {console.log(error)}
 			}
 
@@ -261,8 +263,7 @@ window.addEventListener("load", function() {
 						var resultsElement = componentElement.querySelector(".option-search-results")
 						var selectElement = componentElement.querySelector(".option-search-select")
 						var buttonElement = componentElement.querySelector(".option-search-button")
-						var cancelElement = componentElement.querySelector(".option-search-cancel")
-						if (!inputElement || !resultsElement || !selectElement || !buttonElement || !cancelElement) {
+						if (!inputElement || !resultsElement || !selectElement || !buttonElement) {
 							return false
 						}
 
@@ -282,7 +283,6 @@ window.addEventListener("load", function() {
 					// reset search
 						resultsElement.innerHTML = ""
 						inputElement.value = ""
-						cancelElement.setAttribute("visibility", false)
 
 					// set select
 						selectElement.value = value
@@ -313,15 +313,14 @@ window.addEventListener("load", function() {
 
 						var inputElement = componentElement.querySelector(".option-search-input")
 						var resultsElement = componentElement.querySelector(".option-search-results")
-						var cancelElement = componentElement.querySelector(".option-search-cancel")
-						if (!inputElement || !resultsElement || !cancelElement) {
+						if (!inputElement || !resultsElement) {
 							return false
 						}
 
 					// reset search
 						resultsElement.innerHTML = ""
 						inputElement.value = ""
-						cancelElement.setAttribute("visibility", false)
+						document.activeElement.blur()
 				} catch (error) {console.log(error)}
 			}
 

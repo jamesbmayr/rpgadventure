@@ -131,10 +131,16 @@
 		input:disabled {
 			-webkit-text-fill-color: currentcolor;
 			opacity: 1;
+			cursor: default;
 		}
 
 		input[type=radio] {
-			display: none;
+			opacity: 0;
+			height: 0 !important;
+			width: 0 !important;
+			margin: 0 !important;
+			padding: 0 !important;
+			border: 0;
 		}
 
 		input[readonly], textarea[readonly], select[disabled] {
@@ -146,6 +152,7 @@
 			border-color: transparent;
 			box-shadow: none !important;
 			background-color: transparent;
+			cursor: default;
 		}
 
 		input[type=number]::-webkit-inner-spin-button, 
@@ -194,6 +201,7 @@
 
 		input[type=color] {
 			box-sizing: content-box;
+			cursor: pointer;
 		}
 
 		textarea {
@@ -323,7 +331,7 @@
 			display: none;
 		}
 
-		details summary:hover {
+		details summary:hover, details summary:focus {
 			text-shadow: 0 0 var(--shadow-size) var(--medium-gray);
 		}
 
@@ -453,6 +461,10 @@
 			height: auto;
 		}
 
+		.option-search:not(:focus-within) .option-search-results * {
+			display: none;
+		}
+
 		.option-search.subsection {
 			padding: 0 0 var(--medium-gap-size) 0;
 		}
@@ -467,20 +479,25 @@
 			width: auto;
 		}
 
+		.option-search-form {
+			overflow: hidden;
+		}
+
 		.option-search-input {
 			color: var(--medium-gray);
 			float: left;
 		}
 
-		.option-search-cancel-form {
-			float: right;
-			width: auto;
-			height: auto;
+		.option-search:not(:focus-within) .option-search-cancel {
+			display: none;
 		}
 
 		.option-search-cancel {
-			margin-top: calc(-1 * var(--medium-font-size) - 4 * var(--small-gap-size) + var(--border-size));
+			float: left !important;
+			margin-top: calc(var(--small-gap-size) + var(--border-size));
+			margin-left: calc(-1 * var(--medium-font-size) - 2 * var(--small-gap-size));
 			margin-bottom: 0;
+			cursor: pointer;
 		}
 
 		.option-search-results {
@@ -683,6 +700,7 @@
 			width: calc(var(--medium-font-size) + 2 * var(--small-gap-size));
 			padding: var(--small-gap-size);
 			color: var(--medium-gray);
+			border: 0;
 		}
 
 		.minor-button:hover, .minor-button:focus {
@@ -698,6 +716,7 @@
 			border-radius: 0;
 			margin: 0;
 			background-color: var(--dark-gray);
+			outline: none;
 		}
 
 		.nav-tab:hover {
@@ -705,8 +724,9 @@
 			box-shadow: none;
 		}
 
-		.nav-tab:focus {
+		.nav-tab:focus-within {
 			box-shadow: none;
+			background-color: var(--medium-gray);
 		}
 
 /*** status ***/

@@ -65,7 +65,11 @@ window.onload = function() {
 							top: document.getElementById("top"),
 							left: document.getElementById("left"),
 							right: document.getElementById("right"),
-							toggle: document.getElementById("left-toggle-form")
+							toggle: {
+								form: document.getElementById("left-toggle-form"),
+								close: document.getElementById("left-toggle-close"),
+								open: document.getElementById("left-toggle-open")
+							}
 						}
 
 					// special
@@ -269,13 +273,16 @@ window.onload = function() {
 									characters: document.getElementById("character-status-targeting-characters"),
 									arena: document.getElementById("character-status-targeting-arena")
 								},
+								recover: {
+									form: document.getElementById("character-status-recover-form")
+								},
+								health: {
+									form: document.getElementById("character-status-health-form"),
+									input: document.getElementById("character-status-health-input")
+								},
 								damage: {
 									form: document.getElementById("character-status-damage-form"),
 									input: document.getElementById("character-status-damage-input")
-								},
-								recover: {
-									form: document.getElementById("character-status-recover-form"),
-									input: document.getElementById("character-status-recover-input")
 								},
 								conditions: {
 									element: document.getElementById("character-status-conditions"),
@@ -462,7 +469,7 @@ window.onload = function() {
 						ELEMENTS.stream.rng.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateCustom)
 
 					// tools
-						ELEMENTS.structure.toggle.addEventListener(TRIGGERS.submit, displaySidebar)
+						ELEMENTS.structure.toggle.form.addEventListener(TRIGGERS.submit, displaySidebar)
 						ELEMENTS.tools.form.addEventListener(TRIGGERS.change, displayTool)
 
 					// gametable
@@ -492,8 +499,9 @@ window.onload = function() {
 						ELEMENTS.character.settings.duplicate.form.addEventListener(TRIGGERS.submit, submitCharacterCreateDuplicate)
 						ELEMENTS.character.settings.delete.form.addEventListener(TRIGGERS.submit, submitCharacterDelete)
 						ELEMENTS.character.info.element.querySelectorAll(".editable").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateInfo) })
-						ELEMENTS.character.status.damage.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateDamage)
 						ELEMENTS.character.status.recover.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateDamage)
+						ELEMENTS.character.status.health.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateDamage)
+						ELEMENTS.character.status.damage.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateDamage)
 						ELEMENTS.character.status.conditions.search.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateConditionCreate)
 						ELEMENTS.character.element.querySelectorAll(".statistic-current").forEach(function(d20) { d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20) })
 						ELEMENTS.character.element.querySelectorAll(".statistic-maximum").forEach(function(statistic) { statistic.addEventListener(TRIGGERS.change, submitCharacterUpdateStatistic) })
@@ -543,9 +551,9 @@ window.onload = function() {
 								input.addEventListener(TRIGGERS.focus, FUNCTIONS.searchSelect)
 								input.addEventListener(TRIGGERS.blur, FUNCTIONS.cancelSearch)
 							})
-						var selectSearchCancels = Array.from(ELEMENTS.body.querySelectorAll(".option-search-cancel-form"))
+						var selectSearchCancels = Array.from(ELEMENTS.body.querySelectorAll(".option-search-form"))
 							selectSearchCancels.forEach(function(form) {
-								form.addEventListener(TRIGGERS.submit, FUNCTIONS.cancelSearch)
+								form.addEventListener(TRIGGERS.reset, FUNCTIONS.cancelSearch)
 							})
 						var selectSearchCloses = Array.from(ELEMENTS.body.querySelectorAll(".option-search-close-form"))
 							selectSearchCloses.forEach(function(form) {
@@ -677,10 +685,12 @@ window.onload = function() {
 							if (ELEMENTS.structure.left.getAttribute("closed")) {
 								ELEMENTS.structure.left.removeAttribute("closed")
 								ELEMENTS.structure.right.removeAttribute("full")
+								ELEMENTS.structure.toggle.close.focus()
 							}
 							else {
 								ELEMENTS.structure.left.setAttribute("closed", true)
 								ELEMENTS.structure.right.setAttribute("full", true)
+								ELEMENTS.structure.toggle.open.focus()
 							}
 
 						// arena?
@@ -1033,8 +1043,13 @@ window.onload = function() {
 							var post = {
 								action: "unreadGame",
 								game: {
-									id: GAME.id || null
+									id: GAME ? GAME.id : null
 								}
+							}
+
+						// no game?
+							if (!GAME) {
+								return false
 							}
 						
 						// send
@@ -1488,10 +1503,16 @@ window.onload = function() {
 								var d6 = document.createElement("div")
 									d6.id = "roll-" + rollGroup.id + "-" + data.id + "-" + r
 									d6.className = "d6"
+									d6.title = "toggle die"
 									d6.setAttribute("counting", data.display.dice[r].counting)
 									d6.addEventListener(TRIGGERS.click, submitRollGroupUpdate)
 									d6.innerText = data.display.dice[r].number
 								label.prepend(d6)
+							}
+
+						// healing?
+							if (data.display.type == "healing" && CHARACTER && CHARACTER.id == rollGroup.characterId) {
+								ELEMENTS.character.status.health.input.value = data.display.total
 							}
 					} catch (error) {console.log(error)}
 				}
@@ -1888,13 +1909,6 @@ window.onload = function() {
 
 						// post
 							submitRollGroupCreate(rolls)
-
-						// increase each damaged stat by 1
-							for (var i in CHARACTER.statistics) {
-								if (CHARACTER.statistics[i].damage < 0) {
-									CHARACTER.statistics[i].damage++
-								}
-							}
 
 						// post
 							submitCharacterUpdate(CHARACTER)
@@ -2899,6 +2913,7 @@ window.onload = function() {
 										d6.min = 0
 										d6.className = "d6 editable"
 										d6.placeholder = "d6"
+										d6.title = "roll skill d6"
 										d6.value = skill.d6
 										d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
 										d6.addEventListener(TRIGGERS.change, submitCharacterUpdateSkillUpdate)
@@ -2965,6 +2980,7 @@ window.onload = function() {
 									d20.type = "number"
 									d20.setAttribute("readonly", true)
 									d20.className = "skill-current d20"
+									d20.title = "roll skill"
 									d20.value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition + skill.maximum + skill.condition)
 									d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
 								right.appendChild(d20)
@@ -3128,11 +3144,12 @@ window.onload = function() {
 								d6.className = "d6 editable"
 								d6.setAttribute("field", "d6")
 								d6.placeholder = "d6"
+								d6.title = "roll item d6"
 								d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
 								d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
 								d6.value = item.d6 || 0
 								if (!item.d6) {
-									d6.className += " d6-zero"
+									d6.className += " input-zero"
 								}
 							name.appendChild(d6)
 
@@ -3189,6 +3206,7 @@ window.onload = function() {
 											d6.className += " combat"
 										}
 										d6.placeholder = "d6"
+										d6.title = "roll item usage d6"
 										d6.setAttribute("field", "skills-" + u + "-d6")
 										d6.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
 										d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
@@ -3225,6 +3243,9 @@ window.onload = function() {
 										}
 										modifier.step = 1
 										modifier.className = "item-usage-modifier editable"
+										if (!usage.modifier || usage.modifier == 0) {
+											modifier.className += " input-zero"
+										}
 										modifier.placeholder = "#"
 										modifier.setAttribute("field", "skills-" + u + "-modifier")
 										modifier.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
@@ -3236,6 +3257,7 @@ window.onload = function() {
 										d20.setAttribute("readonly", true)
 										d20.step = 1
 										d20.className = "d20"
+										d20.title = "roll skill"
 										d20.value = Math.max(0, character.statistics[usage.statistic].maximum + character.statistics[usage.statistic].damage + character.statistics[usage.statistic].condition + (usage.skill ? skill.maximum + skill.condition : 0) + (usage.modifier ? usage.modifier : 0))
 										d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
 									usageElement.appendChild(d20)
@@ -3267,6 +3289,7 @@ window.onload = function() {
 										d6.addEventListener(TRIGGERS.click, submitRollGroupCreateD6)
 										d6.value = item.conditions[i] || 0
 										d6.placeholder = "d6"
+										d6.title = "roll item condition d6"
 									condition.appendChild(d6)
 
 									var select = document.createElement("select")
@@ -3556,6 +3579,11 @@ window.onload = function() {
 			/* submitCharacterRead */
 				function submitCharacterRead(event) {
 					try {
+						// no search
+							if (!ELEMENTS.character.choose.select.element.value) {
+								return false
+							}
+
 						// value
 							var value = ELEMENTS.character.choose.select.element.value
 
@@ -3566,8 +3594,12 @@ window.onload = function() {
 									character: {
 										userId: USER ? USER.id : null,
 										gameId: GAME ? GAME.id : null,
-										id: CHARACTER.id || null
+										id: CHARACTER ? CHARACTER.id : null
 									}
+								}
+
+								if (!CHARACTER) {
+									return false
 								}
 
 								CHARACTER = null
@@ -4036,8 +4068,14 @@ window.onload = function() {
 					try {
 						// from dropdown (search)
 							if (event.target) {
+								// no search
+									if (!ELEMENTS.character.status.conditions.select.value) {
+										return false
+									}
+
 								var conditionName = ELEMENTS.character.status.conditions.select.value
 								var condition = RULES.conditions[conditionName] || {name: conditionName}
+								document.activeElement.blur()
 							}
 
 						// from search result
@@ -4125,89 +4163,107 @@ window.onload = function() {
 								return
 							}
 
-						// inputs
-							var type = (event.target == ELEMENTS.character.status.damage.form ? "damage" : "recover")
-							var amount = (type == "damage" ? ELEMENTS.character.status.damage.input.value : ELEMENTS.character.status.recover.input.value)
-
-						// no amount
-							if (!amount || isNaN(amount)) {
-								return
-							}
-							amount = Math.round(Math.abs(amount))
-
-						// change damage
-							CHARACTER.info.status.damage += amount * (type == "damage" ? -1 : 1)
-							if (CHARACTER.info.status.damage > 0) {
-								CHARACTER.info.status.damage = 0
-							}
-
-						// split damage
-							var statisticNames = Object.keys(CHARACTER.statistics)
-							var loops = Math.floor(amount / statisticNames.length)
-							var remainder = amount % statisticNames.length
-
-						// damage
-							if (type == "damage") {
-								ELEMENTS.character.status.damage.input.value = null
-								
-								while (loops) {
-									for (var i in CHARACTER.statistics) {
-										if (CHARACTER.statistics[i].maximum + CHARACTER.statistics[i].damage > 2) {
-											CHARACTER.statistics[i].damage--
-										}
-										else {
-											remainder++
-										}
-									}
-									loops--
-								}
-
-								while (remainder) {
-									statisticNames.sort(function(a, b) {
-										return (CHARACTER.statistics[b].maximum + CHARACTER.statistics[b].damage) - (CHARACTER.statistics[a].maximum + CHARACTER.statistics[a].damage)
-									})
-
-									if (CHARACTER.statistics[statisticNames[0]].maximum + CHARACTER.statistics[statisticNames[0]].damage > 0) {
-										CHARACTER.statistics[statisticNames[0]].damage--
-										remainder--
-									}
-									else {
-										break
-									}
-								}
-							}
-
-						// recover
-							else {
-								ELEMENTS.character.status.recover.input.value = null
-
-								while (loops) {
+						// rest recover
+							if (event.target == ELEMENTS.character.status.recover.form) {
+								// loop through statistics
+									var actualChange = 0
 									for (var i in CHARACTER.statistics) {
 										if (CHARACTER.statistics[i].damage) {
 											CHARACTER.statistics[i].damage++
-										}
-										else {
-											remainder++
+											actualChange++
 										}
 									}
-									loops--
-								}
 
-								while (remainder) {
-									statisticNames.sort(function(a, b) {
-										return (CHARACTER.statistics[a].maximum + CHARACTER.statistics[a].damage) - (CHARACTER.statistics[b].maximum + CHARACTER.statistics[b].damage)
-									})
-									statisticNames.sort(function(a, b) {
-										return (CHARACTER.statistics[a].damage - CHARACTER.statistics[b].damage)
-									})
-									if (CHARACTER.statistics[statisticNames[0]].damage < 0) {
+								// no actualChange
+									if (!actualChange) {
+										return false
+									}
+
+								// update actual
+									CHARACTER.info.status.damage = Math.min(0, CHARACTER.info.status.damage + actualChange)
+									submitRollGroupCreateRecover()
+							}
+
+						// damage
+							else if (event.target == ELEMENTS.character.status.damage.form) {
+								// get amount
+									var amount = ELEMENTS.character.status.damage.input.value
+										ELEMENTS.character.status.damage.input.value = null
+									if (!amount || isNaN(amount)) {
+										return false
+									}
+									amount = Math.round(Math.abs(amount))
+									var actualChange = 0
+
+								// only stats with remaining health
+									var statisticNames = Object.keys(CHARACTER.statistics)
+										statisticNames = statisticNames.filter(function(a) {
+											return CHARACTER.statistics[a].maximum + CHARACTER.statistics[a].damage
+										})
+
+								// send damage to highest current stat
+									while (amount && statisticNames.length) {
+										statisticNames.sort(function(a, b) {
+											return (CHARACTER.statistics[b].maximum + CHARACTER.statistics[b].damage) - (CHARACTER.statistics[a].maximum + CHARACTER.statistics[a].damage)
+										})
+
+										CHARACTER.statistics[statisticNames[0]].damage--
+										amount--
+										actualChange--
+
+										statisticNames = statisticNames.filter(function(a) {
+											return CHARACTER.statistics[a].maximum + CHARACTER.statistics[a].damage
+										})
+									}
+
+								// no actualChange
+									if (!actualChange) {
+										return false
+									}
+
+								// update actual
+									CHARACTER.info.status.damage = Math.min(0, CHARACTER.info.status.damage + actualChange)
+							}
+
+						// health
+							else if (event.target == ELEMENTS.character.status.health.form) {
+								// get amount
+									var amount = ELEMENTS.character.status.health.input.value
+										ELEMENTS.character.status.health.input.value = null
+									if (!amount || isNaN(amount)) {
+										return false
+									}
+									amount = Math.round(Math.abs(amount))
+									var actualChange = 0
+
+								// only stats with damage
+									var statisticNames = Object.keys(CHARACTER.statistics)
+										statisticNames = statisticNames.filter(function(a) {
+											return CHARACTER.statistics[a].damage
+										})
+
+								// send health to lowest current stat
+									while (amount && statisticNames.length) {
+										statisticNames.sort(function(a, b) {
+											return (CHARACTER.statistics[a].maximum + CHARACTER.statistics[a].damage) - (CHARACTER.statistics[b].maximum + CHARACTER.statistics[b].damage)
+										})
+
 										CHARACTER.statistics[statisticNames[0]].damage++
-										remainder--
+										amount--
+										actualChange++
+
+										statisticNames = statisticNames.filter(function(a) {
+											return CHARACTER.statistics[a].damage
+										})
 									}
-									else {
-										break
+
+								// no actualChange
+									if (!actualChange) {
+										return false
 									}
-								}
+
+								// update actual
+									CHARACTER.info.status.damage = Math.min(0, CHARACTER.info.status.damage + actualChange)
 							}
 
 						// save
@@ -4263,6 +4319,12 @@ window.onload = function() {
 						// from dropdown (search)
 							if (event.target) {
 								var select = event.target.closest(".option-search").querySelector(".option-search-select")
+
+								// no search
+									if (!select.value) {
+										return false
+									}
+
 								var skillName = select.value.replace(/\s/g, "_")
 								var statistic = select.id.replace("character-", "").replace("-select", "")
 							}
@@ -4399,6 +4461,11 @@ window.onload = function() {
 					try {
 						// from dropdown (search)
 							if (event.target) {
+								// no search
+									if (!ELEMENTS.character.items.select.value) {
+										return false
+									}
+
 								var name = ELEMENTS.character.items.select.value
 								var option = ELEMENTS.character.items.select.querySelector("option[value='" + name + "']")
 								var category = option.getAttribute("category")
@@ -4416,6 +4483,7 @@ window.onload = function() {
 							item.id = FUNCTIONS.generateRandom()
 							item.equipped = true
 							CHARACTER.items.unshift(item)
+							document.activeElement.blur()
 
 						// save
 							submitCharacterUpdate(CHARACTER)
@@ -4604,6 +4672,10 @@ window.onload = function() {
 							if (targetItemIndex == draggedItemIndex) {
 								return false
 							}
+
+						// set equipped
+							var targetItem = CHARACTER.items[targetItemIndex]
+							draggedItem.equipped = targetItem.equipped
 
 						// update order
 							if (targetItemIndex > draggedItemIndex) {
@@ -6569,6 +6641,11 @@ window.onload = function() {
 			/* submitContentRead */
 				function submitContentRead(event) {
 					try {
+						// no search
+							if (!ELEMENTS.content.choose.select.element.value) {
+								return false
+							}
+
 						// select value
 							var value = ELEMENTS.content.choose.select.element.value
 
@@ -6579,8 +6656,12 @@ window.onload = function() {
 									content: {
 										userId: USER ? USER.id : null,
 										gameId: GAME ? GAME.id : null,
-										id: CONTENT.id || null
+										id: CONTENT ? CONTENT.id : null
 									}
+								}
+
+								if (!CONTENT) {
+									return false
 								}
 
 								CONTENT = null
@@ -6692,6 +6773,11 @@ window.onload = function() {
 			/* submitContentComponentSearch */
 				function submitContentComponentSearch(event) {
 					try {
+						// no search
+							if (!ELEMENTS.content.code.select.value) {
+								return false
+							}
+
 						// identify value
 							var value = ELEMENTS.content.code.select.value.split("-")
 							var type = value.shift()
@@ -6737,6 +6823,7 @@ window.onload = function() {
 
 						// populate pre
 							ELEMENTS.content.code.sample.innerText = JSON.stringify(sample, null, 2)
+							document.activeElement.blur()
 					} catch (error) {console.log(error)}
 				}
 
@@ -6846,7 +6933,7 @@ window.onload = function() {
 				// 				// end reading
 				// 					reader.onload = function(event) {
 				// 						try {
-				// 							// parse character
+				// 							// parse content
 				// 								var post = {
 				// 									action: "uploadContentFile",
 				// 									content: {
@@ -6949,6 +7036,11 @@ window.onload = function() {
 			/* submitContentArenaObjectCreate */
 				function submitContentArenaObjectCreate(event) {
 					try {
+						// value
+							if (!ELEMENTS.content.objects.select.element.value) {
+								return false
+							}
+
 						// new object
 							var post = {
 								action: "updateContentData",
@@ -6980,6 +7072,7 @@ window.onload = function() {
 
 						// send socket request
 							ELEMENTS.content.objects.select.element.value = ELEMENTS.content.objects.select.blank.value
+							document.activeElement.blur()
 							SOCKET.send(JSON.stringify(post))
 							FUNCTIONS.showToast({success: true, message: "object added"})
 					} catch (error) {console.log(error)}
