@@ -7131,6 +7131,7 @@ window.onload = function() {
 						// set property
 							var type = event.target.type || event.target.getAttribute("type")
 							var property = event.target.getAttribute("property")
+
 							if (!property) {
 								FUNCTIONS.showToast({success: false, message: "no property updated"})
 								return
@@ -7143,7 +7144,10 @@ window.onload = function() {
 							}
 
 						// set value
-							if (type == "checkbox") {
+							if (property == "z") {
+								post.content.arena.objects[id][property] = Number(event.target.getAttribute("value"))
+							}
+							else if (type == "checkbox") {
 								post.content.arena.objects[id][property] = !event.target.checked
 							}
 							else if (type == "range" || type == "number") {
