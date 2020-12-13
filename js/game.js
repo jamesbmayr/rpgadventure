@@ -2516,6 +2516,11 @@ window.onload = function() {
 								ELEMENTS.character.status.targeting.select.arena.innerHTML = ""
 							}
 
+						// sort
+							if (characterList) {
+								characterList.sort(function(a, b) { return (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 1 })
+							}
+
 						// loop through characterList
 							for (var i in characterList) {
 								// find character
@@ -2552,15 +2557,19 @@ window.onload = function() {
 						// contentList? remove deleted objects
 							if (contentList) {
 								// get ids
-									var ids = Object.keys(contentList).map(function(k) {
-										return contentList[k].visible ? (contentList[k].characterId || null) : null
+									var ids = Object.keys(contentList).filter(function(k) { 
+										return contentList[k].visible && contentList[k].characterId
+									}) || []
+
+									var characterIds = ids.map(function(k) {
+										return contentList[k].characterId
 									}) || []
 
 								// loop through existing options
 									var targetingOptions = Array.from(ELEMENTS.character.status.targeting.select.arena.querySelectorAll("option"))
 									for (var i in targetingOptions) {
 										var targetOption = targetingOptions[i]
-										if (!ids.includes(targetOption.value)) {
+										if (!characterIds.includes(targetOption.value)) {
 											if (ELEMENTS.character.status.targeting.select.element.value == targetOption.value) {
 												ELEMENTS.character.status.targeting.select.element.value = ELEMENTS.character.status.targeting.select.none.value
 											}
@@ -2570,27 +2579,29 @@ window.onload = function() {
 									}
 							}
 
+						// sort
+							if (ids) {
+								ids.sort(function(a, b) { return (contentList[a].text || "").toLowerCase() < (contentList[b].text || "").toLowerCase() ? -1 : 1 })
+							}
+
 						// loop through contentList
-							for (var i in contentList) {
-								if (contentList[i].characterId && contentList[i].visible) {
-									// find character
-										var character = contentList[i]
-										var targetOption = ELEMENTS.character.status.targeting.select.arena.querySelector("option[value='" + character.characterId + "']")
+							for (var i in ids) {
+								// find character
+									var character = contentList[ids[i]]
+									var targetOption = ELEMENTS.character.status.targeting.select.arena.querySelector("option[value='" + character.characterId + "']")
 
-									// rename
-										if (targetOption) {
-											targetOption.innerText = character.text
-										}
+								// rename
+									if (targetOption) {
+										targetOption.innerText = character.text
+									}
 
-									// create
-										else {
-											targetOption = document.createElement("option")
-											targetOption.value = character.characterId
-											targetOption.innerText = character.text || "[?]"
-											ELEMENTS.character.status.targeting.select.arena.appendChild(targetOption)
-										}
-									
-								}
+								// create
+									else {
+										targetOption = document.createElement("option")
+										targetOption.value = character.characterId
+										targetOption.innerText = character.text || "[?]"
+										ELEMENTS.character.status.targeting.select.arena.appendChild(targetOption)
+									}
 							}
 					} catch (error) {console.log(error)}
 				}
