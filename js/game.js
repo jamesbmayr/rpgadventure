@@ -267,11 +267,14 @@ window.onload = function() {
 							status: {
 								targeting: {
 									form: document.getElementById("character-status-targeting-form"),
-									select: document.getElementById("character-status-targeting-select"),
-									none: document.getElementById("character-status-targeting-none"),
-									environment: document.getElementById("character-status-targeting-environment"),
-									characters: document.getElementById("character-status-targeting-characters"),
-									arena: document.getElementById("character-status-targeting-arena")
+									select: {
+										element: document.getElementById("character-status-targeting-select"),
+										none: document.getElementById("character-status-targeting-select-none"),
+										environment: document.getElementById("character-status-targeting-select-environment"),
+										myCharacters: document.getElementById("character-status-targeting-select-characters-mine"),
+										sharedCharacters: document.getElementById("character-status-targeting-select-characters-shared"),
+										arena: document.getElementById("character-status-targeting-select-arena")
+									}
 								},
 								recover: {
 									form: document.getElementById("character-status-recover-form")
@@ -1692,7 +1695,7 @@ window.onload = function() {
 								d: 20,
 								target: Number(event.target.value),
 								text: skill ? skill.name.replace(/_/g, " ") : statistic ? statistic : item ? item.name : "",
-								recipient: ELEMENTS.character.status.targeting.select.value || null
+								recipient: ELEMENTS.character.status.targeting.select.element.value || null
 							}
 
 						// charisma
@@ -1865,7 +1868,7 @@ window.onload = function() {
 								d: 6,
 								count: count,
 								text: condition ? condition : item ? item.name : skill ? skill.name.replace(/_/g, " ") : statistic ? statistic : "",
-								recipient: ELEMENTS.character.status.targeting.select.value || null
+								recipient: ELEMENTS.character.status.targeting.select.element.value || null
 							})
 
 						// post
@@ -1945,7 +1948,7 @@ window.onload = function() {
 								d: d,
 								count: count,
 								text: text,
-								recipient: ELEMENTS.character.status.targeting.select.value || null
+								recipient: ELEMENTS.character.status.targeting.select.element.value || null
 							})
 
 						// post
@@ -2508,20 +2511,21 @@ window.onload = function() {
 					try {
 						// no game
 							if (!GAME) {
-								ELEMENTS.character.status.targeting.characters.innerHTML = ""
-								ELEMENTS.character.status.targeting.arena.innerHTML = ""
+								ELEMENTS.character.status.targeting.select.myCharacters.innerHTML = ""
+								ELEMENTS.character.status.targeting.select.sharedCharacters.innerHTML = ""
+								ELEMENTS.character.status.targeting.select.arena.innerHTML = ""
 							}
 
 						// loop through characterList
 							for (var i in characterList) {
 								// find character
 									var character = characterList[i]
-									var targetOption = ELEMENTS.character.status.targeting.characters.querySelector("option[value='" + character.id + "']")
+									var targetOption = ELEMENTS.character.status.targeting.select.element.querySelector("option[value='" + character.id + "']")
 
 								// delete?
 									if (targetOption && character.delete) {
-										if (ELEMENTS.character.status.targeting.select.value == targetOption.value) {
-											ELEMENTS.character.status.targeting.select.value = ELEMENTS.character.status.targeting.none.value
+										if (ELEMENTS.character.status.targeting.select.element.value == targetOption.value) {
+											ELEMENTS.character.status.targeting.select.element.value = ELEMENTS.character.status.targeting.select.none.value
 										}
 										targetOption.remove()
 									}
@@ -2536,7 +2540,12 @@ window.onload = function() {
 										targetOption = document.createElement("option")
 										targetOption.value = character.id
 										targetOption.innerText = character.name
-										ELEMENTS.character.status.targeting.characters.appendChild(targetOption)
+										if (character.userId == USER.id) {
+											ELEMENTS.character.status.targeting.select.myCharacters.appendChild(targetOption)
+										}
+										else {
+											ELEMENTS.character.status.targeting.select.sharedCharacters.appendChild(targetOption)	
+										}
 									}
 							}
 
@@ -2548,12 +2557,12 @@ window.onload = function() {
 									}) || []
 
 								// loop through existing options
-									var targetingOptions = Array.from(ELEMENTS.character.status.targeting.arena.querySelectorAll("option"))
+									var targetingOptions = Array.from(ELEMENTS.character.status.targeting.select.arena.querySelectorAll("option"))
 									for (var i in targetingOptions) {
 										var targetOption = targetingOptions[i]
 										if (!ids.includes(targetOption.value)) {
-											if (ELEMENTS.character.status.targeting.select.value == targetOption.value) {
-												ELEMENTS.character.status.targeting.select.value = ELEMENTS.character.status.targeting.none.value
+											if (ELEMENTS.character.status.targeting.select.element.value == targetOption.value) {
+												ELEMENTS.character.status.targeting.select.element.value = ELEMENTS.character.status.targeting.select.none.value
 											}
 
 											targetOption.remove()
@@ -2566,7 +2575,7 @@ window.onload = function() {
 								if (contentList[i].characterId && contentList[i].visible) {
 									// find character
 										var character = contentList[i]
-										var targetOption = ELEMENTS.character.status.targeting.arena.querySelector("option[value='" + character.characterId + "']")
+										var targetOption = ELEMENTS.character.status.targeting.select.arena.querySelector("option[value='" + character.characterId + "']")
 
 									// rename
 										if (targetOption) {
@@ -2578,7 +2587,7 @@ window.onload = function() {
 											targetOption = document.createElement("option")
 											targetOption.value = character.characterId
 											targetOption.innerText = character.text || "[?]"
-											ELEMENTS.character.status.targeting.arena.appendChild(targetOption)
+											ELEMENTS.character.status.targeting.select.arena.appendChild(targetOption)
 										}
 									
 								}
@@ -5308,7 +5317,7 @@ window.onload = function() {
 					try {
 						// no content?
 							if (!CONTENT) {
-								ELEMENTS.character.status.targeting.arena.innerHTML = ""
+								ELEMENTS.character.status.targeting.select.arena.innerHTML = ""
 							}
 
 						// sidebar panel
