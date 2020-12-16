@@ -4883,7 +4883,7 @@ window.onload = function() {
 							var messageElement = document.createElement("div")
 								messageElement.className = "chat-message" + (message.recipientId ? " chat-secret" : "")
 								messageElement.id = "chat-" + message.id
-								if (message.display.color && !message.recipientId) {
+								if (message.display.color) {
 									messageElement.style.backgroundColor = message.display.color
 								}
 							ELEMENTS.chat.messages.appendChild(messageElement)
@@ -5203,9 +5203,6 @@ window.onload = function() {
 
 						// color
 							if (ELEMENTS.chat.send.sender.select.value == ELEMENTS.chat.send.sender.anonymous.value) {
-								post.chat.display.color = null
-							}
-							if (ELEMENTS.chat.send.recipients.select.value !== ELEMENTS.chat.send.recipients.all.value) {
 								post.chat.display.color = null
 							}
 

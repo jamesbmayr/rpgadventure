@@ -1794,14 +1794,14 @@
 			.chat-message {
 				float: left;
 				display: table;
-				width: calc(100% - 2 * var(--small-gap-size) - 2 * var(--border-size));
+				width: 100%;
 				height: auto;
 				margin-bottom: var(--medium-gap-size);
 				background-color: var(--medium-gray);
 				color: var(--light-gray);
 				border-radius: var(--border-radius);
-				border: var(--border-size) solid var(--medium-gray);
-				padding: var(--small-gap-size);
+				padding: 0;
+				overflow: hidden;
 			}
 
 			.chat-message:last-child {
@@ -1814,7 +1814,7 @@
 				width: calc(var(--edge-size) - 2 * var(--small-gap-size));
 				overflow: hidden;
 				height: 100%;
-				padding: 0 var(--small-gap-size) 0 0;
+				padding: var(--small-gap-size);
 			}
 
 		/* message components */
@@ -1850,15 +1850,18 @@
 				font-size: var(--small-font-size);
 				height: 100%;
 				border-left: var(--border-size) solid var(--light-gray);
-				padding: 0 0 0 var(--small-gap-size);
+				padding: var(--small-gap-size);
 				word-break: break-word;
 			}
 
 		/* special */
-			.chat-secret {
+			.chat-secret .chat-message-left {
 				background-color: var(--dark-gray);
-				color: var(--light-gray);
-				border-color: var(--dark-gray);
+				opacity: 0.5;
+			}
+
+			.chat-message a, .chat-message a:visited {
+				color: var(--light-blue);
 			}
 
 			.chat-message-image {
@@ -1868,14 +1871,6 @@
 				margin-top: var(--small-gap-size);
 				background: transparent;
 				border-radius: var(--border-radius);
-			}
-
-			.chat-message:not(.chat-secret) a, .chat-message:not(.chat-secret) a:visited {
-				color: var(--light-blue);
-			} 
-
-			.chat-secret .chat-message-text {
-				border-left-color: var(--light-gray);
 			}
 
 			.chat-message-youtube {
