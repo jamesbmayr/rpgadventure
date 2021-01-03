@@ -3096,7 +3096,7 @@ window.onload = function() {
 								block.className = "item " + (item.type || "miscellaneous")
 								block.id = item.id
 								block.draggable = true
-								block.setAttribute("ondragstart", "event.dataTransfer.setData('text/plain',null)")
+								block.setAttribute("ondragstart", "event.dataTransfer.setData('text/plain','#')")
 								block.addEventListener(TRIGGERS.dragstart, displayCharacterItemDragging)
 								block.addEventListener(TRIGGERS.dragend, displayCharacterItemDragging)
 								block.addEventListener(TRIGGERS.dragenter, function(event) {
