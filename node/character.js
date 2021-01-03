@@ -583,7 +583,7 @@
 							var query = CORE.getSchema("query")
 								query.collection = "users"
 								query.command = "find"
-								query.filters = {gameId: REQUEST.post.character.gameId}
+								query.filters = {gameId: results.documents[0].gameId}
 
 						// find
 							CORE.accessDatabase(query, function(results) {
