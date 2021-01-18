@@ -308,38 +308,30 @@ window.addEventListener("load", function() {
 			window.FUNCTIONS.cancelSearch = cancelSearch
 			function cancelSearch(event) {
 				try {
-					console.log(event)
-					console.log(0)
 					// elements
 						var componentElement = event.target.closest(".option-search")
 						if (!componentElement) {
-							console.log(1)
 							return false
 						}
 
 					// cancel button or other element within search?
 						if (event.target.className.includes("option-search-cancel")) {
-							console.log(2)
 							// continue
 						}
 						else if (event.relatedTarget && componentElement == event.relatedTarget.closest(".option-search")) {
-							console.log(3)
 							return false
 						}
 						else if (event.explicitOriginalTarget && (componentElement == event.explicitOriginalTarget.parentNode || componentElement == event.explicitOriginalTarget.parentNode.closest(".option-search"))) {
-							console.log(4)
 							return false
 						}
 
 						var inputElement = componentElement.querySelector(".option-search-input")
 						var resultsElement = componentElement.querySelector(".option-search-results")
 						if (!inputElement || !resultsElement) {
-							console.log(5)
 							return false
 						}
 
 					// reset search
-						console.log(6)
 						resultsElement.innerHTML = ""
 						inputElement.value = ""
 						document.activeElement.blur()

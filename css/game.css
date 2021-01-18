@@ -440,6 +440,11 @@
 				float: left;
 				display: block;
 				line-height: 1.5;
+				width: calc(var(--medium-font-size) + 4 * var(--small-gap-size));
+				height: calc(var(--medium-font-size) + 3 * (var(--small-gap-size)));
+				padding: var(--small-gap-size);
+				margin: var(--small-gap-size) 0;
+				pointer-events: all;
 			}
 
 			body:not([mode="game"]) #settings-game-name-form {
