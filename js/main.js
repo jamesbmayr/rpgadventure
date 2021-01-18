@@ -212,40 +212,53 @@ window.addEventListener("load", function() {
 						})
 						for (var i in results) {
 							// option
-								var label = document.createElement("label")
-									label.className = "option-search-result"
-									label.innerText = results[i].text
-									label.setAttribute("tabindex", 1)
+								// var label = document.createElement("label")
+								// 	label.className = "option-search-result"
+								// 	label.innerText = results[i].text
+								// 	label.setAttribute("tabindex", 1)
 
 								var button = document.createElement("input")
-									button.type = "submit"
-									button.className = "option-search-result-input"
+									button.type = "text"
+									button.setAttribute("readonly", true)
+									// button.className = "option-search-result-input"
+									button.className = "option-search-result"
 									if (results[i].disabled) {
-										label.setAttribute("disabled", true)
+										// label.setAttribute("disabled", true)
 										button.setAttribute("disabled", true)
 									}
-									button.value = results[i].value
+									button.value = results[i].text
+									button.setAttribute("data-value", results[i].value)
 									button.addEventListener("click", selectOption)
-								label.appendChild(button)
+									button.addEventListener("keydown", function(event) {
+										if (event.key.toLowerCase() == "Enter" || event.code.toLowerCase() == "enter") {
+											selectOption(event)
+										}
+									})
+								// label.appendChild(button)
 
 							// append
 								if (results[i].group) {
 									var parent = resultsElement.querySelector(".option-search-group[label='" + results[i].group + "']")
 									if (parent) {
-										parent.appendChild(label)
+										// parent.appendChild(label)
+										parent.appendChild(button)
 									}
 									else {
-										resultsElement.appendChild(label)
+										// resultsElement.appendChild(label)
+										resultsElement.appendChild(button)
 									}
 								}
 								else {
-									resultsElement.appendChild(label)
+									// resultsElement.appendChild(label)
+									resultsElement.appendChild(button)
 								}
 						}
 
 					// select one
-						var options = Array.from(resultsElement.querySelectorAll(".option-search-result-input:not([disabled='true'])"))
-						selectElement.value = options.length ? options[0].value : ""
+						// var options = Array.from(resultsElement.querySelectorAll(".option-search-result-input:not([disabled='true'])"))
+						var options = Array.from(resultsElement.querySelectorAll(".option-search-result:not([disabled='true'])"))
+						// selectElement.value = options.length ? options[0].value : ""
+						selectElement.value = options.length ? options[0].getAttribute("data-value") : ""
 				} catch (error) {console.log(error)}
 			}
 
@@ -275,7 +288,8 @@ window.addEventListener("load", function() {
 						}
 
 					// value
-						var value = event.target.value
+						// var value = event.target.value
+						var value = event.target.getAttribute("data-value")
 						if (!value) {
 							return false
 						}
