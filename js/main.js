@@ -319,11 +319,9 @@ window.addEventListener("load", function() {
 							// continue
 						}
 						else if (event.relatedTarget && componentElement == event.relatedTarget.closest(".option-search")) {
-							event.preventDefault()
 							return false
 						}
 						else if (event.explicitOriginalTarget && (componentElement == event.explicitOriginalTarget.parentNode || componentElement == event.explicitOriginalTarget.parentNode.closest(".option-search"))) {
-							event.preventDefault()
 							return false
 						}
 
