@@ -497,7 +497,22 @@
 			margin-top: calc(var(--small-gap-size) + var(--border-size));
 			margin-left: calc(-1 * var(--medium-font-size) - 2 * var(--small-gap-size));
 			margin-bottom: 0;
-			cursor: pointer;
+			cursor: pointer !important;
+			box-sizing: border-box;
+			text-align: center;
+			user-select: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+		}
+
+		.option-search-cancel::selection {
+			background: transparent;
+		}
+
+		.option-search-cancel::-moz-selection {
+			background: transparent;
 		}
 
 		.option-search-results {

@@ -554,9 +554,14 @@ window.onload = function() {
 								input.addEventListener(TRIGGERS.focus, FUNCTIONS.searchSelect)
 								input.addEventListener(TRIGGERS.blur, FUNCTIONS.cancelSearch)
 							})
-						var selectSearchCancels = Array.from(ELEMENTS.body.querySelectorAll(".option-search-form"))
-							selectSearchCancels.forEach(function(form) {
-								form.addEventListener(TRIGGERS.reset, FUNCTIONS.cancelSearch)
+						var selectSearchCancels = Array.from(ELEMENTS.body.querySelectorAll(".option-search-cancel"))
+							selectSearchCancels.forEach(function(button) {
+								button.addEventListener(TRIGGERS.click, FUNCTIONS.cancelSearch)
+								button.addEventListener(TRIGGERS.keydown, function(event) {
+									if (event.key.toLowerCase() == "enter" || event.code.toLowerCase() == "enter") {
+										FUNCTIONS.cancelSearch(event)
+									}
+								})
 							})
 						var selectSearchCloses = Array.from(ELEMENTS.body.querySelectorAll(".option-search-close-form"))
 							selectSearchCloses.forEach(function(form) {
