@@ -4341,6 +4341,7 @@ window.onload = function() {
 			/* submitCharacterUpdateSkillCreate */
 				function submitCharacterUpdateSkillCreate(event) {
 					try {
+						console.log(event)
 						// from dropdown (search)
 							if (event.target) {
 								var select = event.target.closest(".option-search").querySelector(".option-search-select")
