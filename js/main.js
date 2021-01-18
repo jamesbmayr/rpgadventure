@@ -308,32 +308,21 @@ window.addEventListener("load", function() {
 			window.FUNCTIONS.cancelSearch = cancelSearch
 			function cancelSearch(event) {
 				try {
-					console.log("cancelling")
-					console.log(event)
-					console.log(event.target)
-					console.log(event.target ? event.target.closest(".option-search") : "???")
-					console.log(event.relatedTarget)
-					console.log(event.relatedTarget ? event.relatedTarget.closest(".option-search") : "???")
-					console.log(event.target && event.relatedTarget ? event.target.closest(".option-search") == event.relatedTarget.closest(".option-search") : "???")
 					// elements
 						var componentElement = event.target.closest(".option-search")
 						if (!componentElement) {
-							console.log("choice a")
 							return false
 						}
 
 					// cancel button or other element within search?
 						if (event.target.className.includes("option-search-cancel")) {
-							console.log("choice b")
 							// continue
 						}
 						else if (event.relatedTarget && componentElement == event.relatedTarget.closest(".option-search")) {
-							console.log("choice c")
 							event.preventDefault()
 							return false
 						}
 						else if (event.explicitOriginalTarget && (componentElement == event.explicitOriginalTarget.parentNode || componentElement == event.explicitOriginalTarget.parentNode.closest(".option-search"))) {
-							console.log("choice d")
 							event.preventDefault()
 							return false
 						}
@@ -341,12 +330,10 @@ window.addEventListener("load", function() {
 						var inputElement = componentElement.querySelector(".option-search-input")
 						var resultsElement = componentElement.querySelector(".option-search-results")
 						if (!inputElement || !resultsElement) {
-							console.log("choice e")
 							return false
 						}
 
 					// reset search
-						console.log("choice f")
 						resultsElement.innerHTML = ""
 						inputElement.value = ""
 						document.activeElement.blur()
