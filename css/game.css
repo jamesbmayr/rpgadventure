@@ -444,6 +444,7 @@
 				height: calc(var(--medium-font-size) + 3 * (var(--small-gap-size)));
 				padding: var(--small-gap-size);
 				margin: var(--small-gap-size) 0;
+				opacity: 1;
 				pointer-events: all;
 			}
 
