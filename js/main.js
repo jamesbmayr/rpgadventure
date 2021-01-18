@@ -318,27 +318,35 @@ window.addEventListener("load", function() {
 					// elements
 						var componentElement = event.target.closest(".option-search")
 						if (!componentElement) {
+							console.log("choice a")
 							return false
 						}
 
 					// cancel button or other element within search?
 						if (event.target.className.includes("option-search-cancel")) {
+							console.log("choice b")
 							// continue
 						}
 						else if (event.relatedTarget && componentElement == event.relatedTarget.closest(".option-search")) {
+							console.log("choice c")
+							event.preventDefault()
 							return false
 						}
 						else if (event.explicitOriginalTarget && (componentElement == event.explicitOriginalTarget.parentNode || componentElement == event.explicitOriginalTarget.parentNode.closest(".option-search"))) {
+							console.log("choice d")
+							event.preventDefault()
 							return false
 						}
 
 						var inputElement = componentElement.querySelector(".option-search-input")
 						var resultsElement = componentElement.querySelector(".option-search-results")
 						if (!inputElement || !resultsElement) {
+							console.log("choice e")
 							return false
 						}
 
 					// reset search
+						console.log("choice f")
 						resultsElement.innerHTML = ""
 						inputElement.value = ""
 						document.activeElement.blur()
