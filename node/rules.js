@@ -1471,6 +1471,24 @@
 										description: " "
 									},
 									{
+										name: "etherium sword",
+										count: 1,
+										type: "weapon",
+										usage: [
+											{
+												statistic: "dexterity",
+												skill: "fencing",
+												d6: 6
+											}
+										],
+										conditions: {bleeding: 1, darkness: 0},
+										weight: 2,
+										hands: 1,
+										materials: "leather, stone",
+										cost: 75,
+										description: "light-range: 10-ft circle"
+									},
+									{
 										name: "flail",
 										count: 1,
 										type: "weapon",
@@ -1632,6 +1650,26 @@
 										description: "free block action"
 									},
 									{
+										name: "lance",
+										count: 1,
+										type: "weapon",
+										usage: [
+											{
+												statistic: "dexterity",
+												skill: "fencing",
+												d6: 7
+											}
+										],
+										conditions: {bleeding: 1},
+										weight: 20,
+										fuel: 4,
+										hands: 1,
+										magnetic: true,
+										materials: "wood, metal",
+										cost: 80,
+										description: "used in conjunction with ride animals or other mount; attack from up to 10 feet away"
+									},
+									{
 										name: "longbow",
 										count: 1,
 										type: "weapon",
@@ -1763,6 +1801,26 @@
 										fuel: 3,
 										materials: "wood, metal",
 										cost: 30,
+										description: " "
+									},
+									{
+										name: "pitchfork",
+										count: 1,
+										type: "weapon",
+										usage: [
+											{
+												statistic: "dexterity",
+												skill: "fencing",
+												d6: 3
+											}
+										],
+										conditions: {bleeding: 1},
+										weight: 4,
+										hands: 1,
+										magnetic: true,
+										fuel: 2,
+										materials: "wood, metal",
+										cost: 10,
 										description: " "
 									},
 									{
@@ -2032,6 +2090,30 @@
 										description: "range: 50 ft"
 									},
 									{
+										name: "tessen",
+										count: 1,
+										type: "weapon",
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 2,
+											},
+											{
+												statistic: "dexterity",
+												skill: "martial_arts",
+												d6: 4,
+											}
+										],
+										conditions: {bleeding: 1},
+										weight: 1,
+										hands: 1,
+										magnetic: true,
+										materials: "metal",
+										cost: 45,
+										description: "iron fan"
+									},
+									{
 										name: "throwing axe",
 										count: 1,
 										type: "weapon",
@@ -2122,6 +2204,30 @@
 										description: "free block action"
 									},
 									{
+										name: "trident",
+										count: 1,
+										type: "weapon",
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 4,
+											},
+											{
+												statistic: "dexterity",
+												skill: "fencing",
+												d6: 5,
+											}
+										],
+										conditions: {bleeding: 1},
+										weight: 4,
+										hands: 1,
+										magnetic: true,
+										materials: "metal",
+										cost: 40,
+										description: " "
+									},
+									{
 										name: "warhammer",
 										count: 1,
 										type: "weapon",
@@ -2176,7 +2282,25 @@
 										materials: "wood",
 										cost: 5,
 										description: " "
-									}
+									},
+									{
+										name: "wooden sword",
+										count: 1,
+										type: "weapon",
+										usage: [
+											{
+												statistic: "dexterity",
+												skill: "fencing",
+												d6: 3
+											}
+										],
+										weight: 2,
+										hands: 1,
+										fuel: 2,
+										materials: "wood",
+										cost: 20,
+										description: " "
+									},
 								],
 								ammunition: [
 									{
@@ -2760,6 +2884,54 @@
 										description: " "
 									},
 									{
+										name: "etherium armor",
+										count: 1,
+										type: "armor",
+										armorType: "body",
+										d6: 5,
+										weight: 20,
+										materials: "stone",
+										conditions: {darkness: 0},
+										cost: 90,
+										description: "light-range: 10-ft circle"
+									},
+									{
+										name: "etherium boots",
+										count: 1,
+										type: "armor",
+										armorType: "legs",
+										d6: 5,
+										weight: 4,
+										materials: "stone",
+										conditions: {darkness: 0},
+										cost: 40,
+										description: "light-range: 10-ft circle"
+									},
+									{
+										name: "etherium gloves",
+										count: 1,
+										type: "armor",
+										armorType: "hands",
+										d6: 5,
+										weight: 2,
+										materials: "stone",
+										conditions: {darkness: 0},
+										cost: 30,
+										description: "light-range: 10-ft circle"
+									},
+									{
+										name: "etherium helmet",
+										count: 1,
+										type: "armor",
+										armorType: "head",
+										d6: 5,
+										weight: 4,
+										materials: "stone",
+										conditions: {darkness: 0},
+										cost: 40,
+										description: "light-range: 10-ft circle"
+									},
+									{
 										name: "fine clothes",
 										count: 1,
 										type: "armor",
@@ -2878,6 +3050,54 @@
 										materials: "leather",
 										cost: 10,
 										description: " "
+									},
+									{
+										name: "obsidian armor",
+										count: 1,
+										type: "armor",
+										armorType: "body",
+										d6: 6,
+										weight: 50,
+										materials: "stone",
+										conditions: {bleeding: 1, extreme_heat: 0, encumbrance: 1},
+										cost: 130,
+										description: "causes bleeding to opponents who attack with punch, kick, or martial arts (without weapon); resistant to extreme heat; causes encumbrance to wearer"
+									},
+									{
+										name: "obsidian boots",
+										count: 1,
+										type: "armor",
+										armorType: "legs",
+										d6: 6,
+										weight: 14,
+										materials: "stone",
+										conditions: {bleeding: 1, extreme_heat: 0, encumbrance: 1},
+										cost: 70,
+										description: "causes bleeding to opponents who attack with punch, kick, or martial arts (without weapon); resistant to extreme heat; causes encumbrance to wearer"
+									},
+									{
+										name: "obsidian gloves",
+										count: 1,
+										type: "armor",
+										armorType: "hands",
+										d6: 6,
+										weight: 8,
+										materials: "stone",
+										conditions: {bleeding: 1, extreme_heat: 0, encumbrance: 1},
+										cost: 50,
+										description: "causes bleeding to opponents who attack with punch, kick, or martial arts (without weapon); resistant to extreme heat; causes encumbrance to wearer"
+									},
+									{
+										name: "obsidian helmet",
+										count: 1,
+										type: "armor",
+										armorType: "head",
+										d6: 6,
+										weight: 8,
+										materials: "stone",
+										conditions: {bleeding: 1, extreme_heat: 0, encumbrance: 1},
+										cost: 50,
+										description: "causes bleeding to opponents who attack with punch, kick, or martial arts (without weapon); resistant to extreme heat; causes encumbrance to wearer"
 									},
 									{
 										name: "padded / fur clothes",
@@ -3155,6 +3375,30 @@
 										materials: "scale, bone",
 										cost: 75,
 										description: " "
+									},
+									{
+										name: "buckler",
+										count: 1,
+										type: "shield",
+										d6: 3,
+										weight: 3,
+										hands: 1,
+										magnetic: true,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "block",
+												d6: 5
+											},
+											{
+												statistic: "strength",
+												skill: "melee",
+												d6: 2
+											}
+										],
+										materials: "metal",
+										cost: 30,
+										description: "cannot block ranged attacks; on a block success roll of 1, 2, or 3, deflect damage to adjacent square to the left or right of the character"
 									},
 									{
 										name: "metal shield",
