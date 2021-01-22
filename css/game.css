@@ -265,7 +265,7 @@
 				background-color: var(--medium-green);
 			}
 
-			#stream-history .d6[type="potion"] {
+			#stream-history .d6[type="potion"], #stream-history .d6[type="condition"] {
 				background-color: var(--medium-blue);
 			}
 
@@ -1080,12 +1080,28 @@
 
 			.condition-name {
 				float: left;
-				width: calc(100% - 2 * var(--small-gap-size) - (var(--small-font-size) + 2 * var(--small-gap-size)));
-				padding: var(--small-gap-size) var(--small-gap-size) 0 var(--small-gap-size);
+				width: calc(100% - 2 * var(--small-gap-size) - (var(--small-font-size) + 2 * var(--small-gap-size)) - (2 * var(--small-font-size) + 4 * var(--small-gap-size)));
+				padding: 0;
+				margin: var(--small-gap-size) var(--small-gap-size) 0 var(--small-gap-size);
 				font-weight: bold;
 				color: var(--light-gray);
 				font-size: var(--medium-font-size);
 				text-align: left;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			.condition-rounds {
+				float: left;
+				width: calc(var(--small-font-size) * 2);
+				height: calc(var(--small-font-size) + var(--small-gap-size));
+				padding: 0 var(--small-gap-size);
+				background-color: var(--light-gray);
+				font-size: var(--small-font-size);
+				color: var(--medium-blue);
+				text-align: right;
+				border: none;
+				margin: var(--small-gap-size) var(--small-gap-size) 0 var(--small-gap-size);
 			}
 
 			.condition-description {

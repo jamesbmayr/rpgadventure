@@ -606,15 +606,6 @@
 			outline: none;
 		}
 
-		/*.option-search-result-input {
-			height: 0 !important;
-			width: 0 !important;
-			padding: 0 !important;
-			margin: 0 !important;
-			border: 0 !important;
-			overflow: hidden;
-		}*/
-
 		.option-search-select, .option-search-button {
 			height: 0;
 			width: 0;

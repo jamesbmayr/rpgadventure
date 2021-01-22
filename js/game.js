@@ -1494,17 +1494,21 @@ window.onload = function() {
 								text.innerText = data.display.text
 							label.prepend(text)
 
-							var total = document.createElement("div")
-								total.className = "d6 total"
-								total.id = "roll-" + rollGroup.id + "-" + data.id + "-total"
-								total.innerText = data.display.total
-								total.setAttribute("type", data.display.type)
-							label.prepend(total)
+							if (data.display.type !== "armor") {
+								var total = document.createElement("div")
+									total.className = "d6 total"
+									total.id = "roll-" + rollGroup.id + "-" + data.id + "-total"
+									total.innerText = data.display.total
+									total.setAttribute("type", data.display.type)
+								label.prepend(total)
+							}
 
-							var equals = document.createElement("div")
-								equals.className = "equals"
-								equals.innerHTML = "&rarr;"
-							label.prepend(equals)
+							if (data.display.type !== "armor") {
+								var equals = document.createElement("div")
+									equals.className = "equals"
+									equals.innerHTML = "&rarr;"
+								label.prepend(equals)
+							}
 
 						// dice
 							for (var r in data.display.dice) {
@@ -1515,6 +1519,9 @@ window.onload = function() {
 									d6.setAttribute("counting", data.display.dice[r].counting)
 									d6.addEventListener(TRIGGERS.click, submitRollGroupUpdate)
 									d6.innerText = data.display.dice[r].number
+									if (data.display.type == "armor") {
+										d6.setAttribute("type", "armor")
+									}
 								label.prepend(d6)
 							}
 
@@ -1582,7 +1589,9 @@ window.onload = function() {
 					try {
 						// update total
 							var total = rollGroupElement.querySelector("#roll-" + rollGroup.id + "-" + data.id + "-total")
+							if (total) {
 								total.innerText = data.display.total
+							}
 
 						// update dice
 							for (var r in data.display.dice) {
@@ -1864,7 +1873,7 @@ window.onload = function() {
 
 						// condition?
 							if (item && event.target.closest(".item-condition")) {
-								type = "potion"
+								type = "condition"
 							}
 
 						// add to history
@@ -3044,6 +3053,7 @@ window.onload = function() {
 							var currentItem = document.activeElement.closest(".item")
 							if (currentItem) {
 								var currentItemId = currentItem.id
+								var currentItemOpen = currentItem.open || false
 								var currentItemField = document.activeElement.getAttribute("field")	
 							}
 						
@@ -3082,6 +3092,9 @@ window.onload = function() {
 
 						// currentItem?
 							if (currentItemId && currentItemField) {
+								if (currentItemOpen) {
+									document.querySelector("#" + currentItemId).open = true
+								}
 								document.querySelector("#" + currentItemId + " [field='" + currentItemField + "']").focus()
 							}
 					} catch (error) {console.log(error)}
@@ -3540,6 +3553,12 @@ window.onload = function() {
 			/* displayCharacterConditions */
 				function displayCharacterConditions(character) {
 					try {
+						// current condition
+							var currentCondition = document.activeElement.closest(".condition")
+							if (currentCondition) {
+								var currentConditionValue = currentCondition.getAttribute("value")
+							}
+
 						// unset
 							ELEMENTS.character.status.conditions.list.innerHTML = ""
 							var options = Array.from(ELEMENTS.character.status.conditions.select.querySelectorAll("option"))
@@ -3554,6 +3573,14 @@ window.onload = function() {
 							for (var i in character.info.status.conditions) {
 								displayCharacterCondition(character.info.status.conditions[i])
 							}
+
+						// return focus to current condition
+							if (currentConditionValue) {
+								var currentConditionInput = document.querySelector(".condition[value='" + currentConditionValue + "'] input")
+								if (currentConditionInput) {
+									currentConditionInput.focus()
+								}
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -3566,17 +3593,22 @@ window.onload = function() {
 								conditionElement.setAttribute("value", condition.name)
 							ELEMENTS.character.status.conditions.list.append(conditionElement)
 
+						// rounds counter
+							var rounds = document.createElement("input")
+								rounds.type = "number"
+								rounds.className = "condition-rounds"
+								rounds.min = 0
+								rounds.step = 1
+								rounds.value = condition.rounds || 0
+								rounds.placeholder = "#"
+								rounds.addEventListener(TRIGGERS.change, submitCharacterUpdateConditionUpdate)
+							conditionElement.appendChild(rounds)
+
 						// name
 							var name = document.createElement("div")
 								name.className = "condition-name"
 								name.innerText = condition.name.replace(/_/g, " ")
 							conditionElement.appendChild(name)
-
-						// description
-							var description = document.createElement("div")
-								description.className = "condition-description"
-								description.innerText = condition.description || ""
-							conditionElement.appendChild(description)
 
 						// remove
 							var removeForm = document.createElement("form")
@@ -3584,13 +3616,19 @@ window.onload = function() {
 								removeForm.setAttribute("method", "post")
 								removeForm.setAttribute("action", "javascript:;")
 								removeForm.addEventListener(TRIGGERS.submit, submitCharacterUpdateConditionDelete)
-							conditionElement.prepend(removeForm)
+							conditionElement.appendChild(removeForm)
 
 							var remove = document.createElement("button")
 								remove.className = "condition-remove"
 								remove.title = "remove condition"
 								remove.innerText = "x"
 							removeForm.prepend(remove)
+
+						// description
+							var description = document.createElement("div")
+								description.className = "condition-description"
+								description.innerText = condition.description || ""
+							conditionElement.appendChild(description)
 
 						// disable in select
 							var conditionOption = ELEMENTS.character.status.conditions.select.querySelector("[value=" + condition.name + "]")
@@ -4091,6 +4129,11 @@ window.onload = function() {
 			/* submitCharacterUpdateConditionCreate	*/
 				function submitCharacterUpdateConditionCreate(event) {
 					try {
+						// validate
+							if (!CHARACTER) {
+								return
+							}
+
 						// from dropdown (search)
 							if (event.target) {
 								// no search
@@ -4141,9 +4184,31 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
+			/* submitCharacterUpdateConditionUpdate */
+				function submitCharacterUpdateConditionUpdate(event) {
+					try {
+						// get condition
+							var conditionName = event.target.parentNode.getAttribute("value")
+							var condition = CHARACTER.info.status.conditions.find(function(c) {
+								return c.name == conditionName
+							}) || {name: conditionName}
+
+						// update rounds
+							condition.rounds = Math.max(0, Number(event.target.value))
+
+						// save
+							submitCharacterUpdate(CHARACTER)
+					} catch (error) {console.log(error)}
+				}
+
 			/* submitCharacterUpdateConditionDelete */
 				function submitCharacterUpdateConditionDelete(event) {
 					try {
+						// validate
+							if (!CHARACTER) {
+								return
+							}
+
 						// get condition
 							var conditionName = event.target.parentNode.getAttribute("value")
 							var condition = CHARACTER.info.status.conditions.find(function(c) {

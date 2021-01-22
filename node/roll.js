@@ -43,24 +43,14 @@
 
 				// find
 					CORE.accessDatabase(query, function(results) {
-						if (!results.success) {
-							createRolls({})
-							return
-						}
-
 						// characters
 							var characters = {}
-							for (var i in results.documents) {
-								characters[results.documents[i].id] = results.documents[i]
+							if (results.success) {
+								for (var i in results.documents) {
+									characters[results.documents[i].id] = results.documents[i]
+								}
 							}
-
-						// move on
-							createRolls(characters)
-							return
-					})
-
-				// create rolls
-					function createRolls(characters) {
+					
 						// rollGroup
 							var rollGroup = CORE.getSchema("rollGroup")
 								rollGroup.userId = REQUEST.user.id
@@ -191,6 +181,78 @@
 													thisDie.number = CORE.rollRandom(data.d || 6)
 												roll.display.dice.push(thisDie)
 												roll.display.total += thisDie.number
+											}
+
+										// condition
+											if ((data.type == "potion" || data.type == "condition") && data.recipient && characters[data.recipient]) {
+												// recipient
+													var recipient = characters[data.recipient]
+													var spacer = false
+
+												// find condition in character
+													var conditionName = data.text.replace(/\s/g, "_")
+													var condition = recipient.info.status.conditions.find(function(c) { return c.name == conditionName })
+
+												// no condition? --> add
+													if (!condition) {
+														condition = CORE.getAsset("conditions")[conditionName]
+														if (condition) {
+															recipient.info.status.conditions.push(condition)
+														}
+													}
+
+												// condition
+													if (condition) {
+														// update rounds
+															condition.rounds = Math.max(0, roll.display.total)
+
+														// no rounds --> remove
+															if (!condition.rounds) {
+																recipient.info.status.conditions = recipient.info.status.conditions.filter(function(c) {
+																	return c.name !== conditionName
+																}) || []
+															}
+
+														// query
+															var query = CORE.getSchema("query")
+																query.collection = "characters"
+																query.command = "update"
+																query.filters = {id: recipient.id}
+																query.document = recipient
+
+														// update
+															CORE.accessDatabase(query, function(results) {
+																if (!results.success) {
+																	results.recipients = [REQUEST.user.id]
+																	callback(results)
+																	return
+																}
+
+																// character
+																	var character = results.documents[0]
+
+																// query
+																	var query = CORE.getSchema("query")
+																		query.collection = "users"
+																		query.command = "find"
+																		query.filters = {gameId: gameId}
+
+																// find
+																	CORE.accessDatabase(query, function(results) {
+																		if (!results.success) {
+																			results.recipients = [REQUEST.user.id]
+																			callback(results)
+																			return
+																		}
+
+																		// return
+																			var ids = results.documents.map(function(u) {
+																				return u.id
+																			}) || []
+																			callback({success: true, message: character.info.name + " updated", character: character, recipients: ids})
+																	})
+															})
+													}
 											}
 
 										// weapon
@@ -326,7 +388,7 @@
 											return
 									})
 							})
-					}
+					})
 			}
 			catch (error) {
 				CORE.logError(error)
@@ -494,11 +556,56 @@
 												}
 
 												// return
+													var users = results.documents
 													var ids = results.documents.map(function(u) {
 														return u.id
 													}) || []
 													callback({success: true, roll: rollGroups, recipients: ids})
-													return
+
+												// update characters' conditions
+													for (var i in characters) {
+														if (characters[i].info.status.conditions && characters[i].info.status.conditions.length) {
+															// get character
+																var thisCharacter = characters[i]
+
+															// loop through and update conditions counters
+																for (var j in thisCharacter.info.status.conditions) {
+																	thisCharacter.info.status.conditions[j].rounds--
+																	if (thisCharacter.info.status.conditions[j].rounds <= 0) {
+																		thisCharacter.info.status.conditions.splice(j, 1)
+																		j--
+																	}
+																}
+
+															// query
+																var query = CORE.getSchema("query")
+																	query.collection = "characters"
+																	query.command = "update"
+																	query.filters = {id: thisCharacter.id}
+																	query.document = thisCharacter
+
+															// update
+																CORE.accessDatabase(query, function(results) {
+																	if (!results.success) {
+																		results.recipients = [REQUEST.user.id]
+																		callback(results)
+																		return
+																	}
+
+																	// character
+																		var character = results.documents[0]
+
+																	// ids
+																		var ids = users.filter(function(u) {
+																			return u.characterId == character.id
+																		}).map(function(u) {
+																			return u.id
+																		}) || []
+
+																		callback({success: true, message: character.info.name + " updated", character: character, recipients: ids})
+																})
+														}
+													}
 											})
 									})
 							})
