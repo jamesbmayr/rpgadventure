@@ -478,6 +478,7 @@
 										callback({success: false, message: "characters not found", recipients: [REQUEST.user.id]})
 										return
 									}
+									var arenaCharacters = []
 
 								// calculate speed
 									for (var i in turnOrder) {
@@ -490,6 +491,7 @@
 											continue
 										}
 
+										arenaCharacters.push(character)
 										var run = character.statistics.speed.skills.find(function(skill) { return skill.name == "run" }) || {maximum: 0, condition: 0}
 										turnOrder[i].initiative = Math.max(0, character.statistics.speed.maximum + character.statistics.speed.damage + character.statistics.speed.condition + run.maximum + run.condition)
 										turnOrder[i].name = turnOrder[i].name || character.info.name || "?"
@@ -563,10 +565,10 @@
 													callback({success: true, roll: rollGroups, recipients: ids})
 
 												// update characters' conditions
-													for (var i in characters) {
-														if (characters[i].info.status.conditions && characters[i].info.status.conditions.length) {
+													for (var i in arenaCharacters) {
+														if (arenaCharacters[i].info.status.conditions && arenaCharacters[i].info.status.conditions.length) {
 															// get character
-																var thisCharacter = characters[i]
+																var thisCharacter = arenaCharacters[i]
 
 															// loop through and update conditions counters
 																for (var j in thisCharacter.info.status.conditions) {
