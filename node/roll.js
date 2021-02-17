@@ -208,9 +208,32 @@
 
 														// no rounds --> remove
 															if (!condition.rounds) {
-																recipient.info.status.conditions = recipient.info.status.conditions.filter(function(c) {
-																	return c.name !== conditionName
-																}) || []
+																// remove effects
+																	var effects = condition.effects
+																	for (var k in effects) {
+																		for (var l in effects[k]) {
+																			if (l == "statistic") {
+																				recipient.statistics[k].condition -= effects[k][l]
+																			}
+																			else {
+																				var skill = recipient.statistics[k].skills.find(function (skill) { return skill.name == l })
+																				if (skill) {
+																					skill.condition -= effects[k][l]
+
+																					if (!skill.maximum && !skill.unremovable) {
+																						recipient.statistics[k].skills = recipient.statistics[k].skills.filter(function (s) {
+																							return s.name !== l
+																						}) || []
+																					}
+																				}
+																			}
+																		}
+																	}
+
+																// remove condition from array
+																	recipient.info.status.conditions = recipient.info.status.conditions.filter(function(c) {
+																		return c.name !== conditionName
+																	}) || []
 															}
 
 														// query
@@ -574,8 +597,31 @@
 																for (var j in thisCharacter.info.status.conditions) {
 																	thisCharacter.info.status.conditions[j].rounds--
 																	if (thisCharacter.info.status.conditions[j].rounds <= 0) {
-																		thisCharacter.info.status.conditions.splice(j, 1)
-																		j--
+																		// remove effects
+																			var effects = thisCharacter.info.status.conditions[j].effects
+																			for (var k in effects) {
+																				for (var l in effects[k]) {
+																					if (l == "statistic") {
+																						thisCharacter.statistics[k].condition -= effects[k][l]
+																					}
+																					else {
+																						var skill = thisCharacter.statistics[k].skills.find(function (skill) { return skill.name == l })
+																						if (skill) {
+																							skill.condition -= effects[k][l]
+
+																							if (!skill.maximum && !skill.unremovable) {
+																								thisCharacter.statistics[k].skills = thisCharacter.statistics[k].skills.filter(function (s) {
+																									return s.name !== l
+																								}) || []
+																							}
+																						}
+																					}
+																				}
+																			}
+
+																		// remove condition
+																			thisCharacter.info.status.conditions.splice(j, 1)
+																			j--
 																	}
 																}
 

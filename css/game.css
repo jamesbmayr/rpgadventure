@@ -1276,6 +1276,24 @@
 				background-color: var(--medium-red);
 			}
 
+			.skill-name .skill-specialization {
+				font-size: var(--small-font-size);
+				font-style: italic;
+				float: left;
+				color: var(--medium-green);
+				margin-top: calc(-1 * var(--small-font-size));
+			}
+
+			.skill-name .skill-specialization:before {
+				content: "(";
+				font-size: var(--small-font-size);
+			}
+
+			.skill-name .skill-specialization:after {
+				content: ")";
+				font-size: var(--small-font-size);
+			}
+
 			#character-immunity .skill-name .d6 {
 				background-color: var(--medium-green);	
 			}

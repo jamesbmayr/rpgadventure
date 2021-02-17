@@ -758,7 +758,7 @@
 									blockable: false,
 									description: [
 										"immunity check to resist pain or else body pain",
-										"damage incurred every hour of exposure",
+										"damage incurred every round of exposure",
 										"if applicable, reduces item nd6 by 1"
 									]
 								},
@@ -768,7 +768,7 @@
 									blockable: false,
 									description: [
 										"immunity check to resist pain or else body pain",
-										"damage incurred every hour of exposure",
+										"damage incurred every round of exposure",
 										"if applicable, reduces item nd6 by 1"
 									]
 								},
@@ -790,12 +790,13 @@
 										"immunity check to resist pain",
 										"dexterity or speed check to put out flames",
 										"fuel determines burn duration; if flammable, reduces item nd6 by 1",
-										"light range: 30-ft circle"
+										"light range: 30-ft circle",
+										"damage incurred every round of exposure"
 									]
 								},
 								hard_object: {
 									name: "hard object",
-									d6: 3,
+									d6: 2,
 									blockable: true,
 									description: [
 										"weight determines damage: small: 1d6; medium: 2d6; large: 3d6",
@@ -1988,7 +1989,7 @@
 										fuel: 1,
 										materials: "leather",
 										cost: 15,
-										description: " "
+										description: "doubles throw range for small objects"
 									},
 									{
 										name: "spear",

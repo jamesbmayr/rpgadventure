@@ -2356,7 +2356,7 @@ window.onload = function() {
 					try {
 						var container = ELEMENTS.character.info.race
 						for (var i in RULES.races) {
-							if (!container.querySelector("option[value=" + i + "]")) {
+							if (!container.querySelector("option[value='" + i + "']")) {
 								var option = document.createElement("option")
 									option.value = i
 									option.innerText = i
@@ -2396,7 +2396,7 @@ window.onload = function() {
 
 							// loop through skills
 								for (var j in RULES.skills[i]) {
-									if (!container.querySelector("option[value=" + RULES.skills[i][j].name + "]")) {
+									if (!container.querySelector("option[value='" + RULES.skills[i][j].name + "']")) {
 										var option = document.createElement("option")
 											option.value = RULES.skills[i][j].name
 											option.innerText = RULES.skills[i][j].name.replace(/_/g, " ")
@@ -2873,7 +2873,7 @@ window.onload = function() {
 								}
 								else {
 									var currentSkillId = currentSkill.querySelector(".skill-name-text").value
-									var currentSkillType = document.activeElement.className.includes("skill-maximum") ? "skill-maximum" : "d6"
+									var currentSkillType = document.activeElement.className.includes("skill-maximum") ? "skill-maximum" : document.activeElement.className.includes("d6") ? "d6" : null
 								}
 							}
 
@@ -3009,18 +3009,32 @@ window.onload = function() {
 									damage.value = ""
 								right.appendChild(damage)
 
+							// specialization
+								if (skill.specialization) {
+									var specializationSpan = document.createElement("span")
+										specializationSpan.className = "skill-specialization"
+										specializationSpan.innerText = skill.specialization
+									name.appendChild(specializationSpan)
+
+									var primarySkill = character.statistics[statistic].skills.find(function(s) { return s.name == skill.specialization.replace(/_/g, " ")})
+									var primarySkillCurrent = primarySkill ? primarySkill.maximum + primarySkill.condition : 0
+								}
+								else {
+									var primarySkillCurrent = 0
+								}
+
 							// d20
 								var d20 = document.createElement("input")
 									d20.type = "number"
 									d20.setAttribute("readonly", true)
 									d20.className = "skill-current d20"
 									d20.title = "roll skill"
-									d20.value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition + skill.maximum + skill.condition)
+									d20.value = Math.max(0, character.statistics[statistic].maximum + character.statistics[statistic].damage + character.statistics[statistic].condition + skill.maximum + skill.condition + primarySkillCurrent)
 									d20.addEventListener(TRIGGERS.click, submitRollGroupCreateD20)
 								right.appendChild(d20)
 						
 						// disable in select
-							var option = ELEMENTS.character.statistics[statistic].querySelector("option[value=" + skill.name + "]")
+							var option = ELEMENTS.character.statistics[statistic].querySelector("option[value='" + skill.name + "']")
 							if (option) { option.setAttribute("disabled", true) }
 					} catch (error) {console.log(error)}
 				}
@@ -3631,7 +3645,7 @@ window.onload = function() {
 							conditionElement.appendChild(description)
 
 						// disable in select
-							var conditionOption = ELEMENTS.character.status.conditions.select.querySelector("[value=" + condition.name + "]")
+							var conditionOption = ELEMENTS.character.status.conditions.select.querySelector("[value='" + condition.name + "']")
 							if (conditionOption) {
 								conditionOption.setAttribute("disabled", true)
 							}
@@ -5431,7 +5445,11 @@ window.onload = function() {
 
 						// data
 							ELEMENTS.content.url.input.value = CONTENT.url || null
-							ELEMENTS.content.code.input.value = CONTENT.code || null
+							try {
+								ELEMENTS.content.code.input.value = (CONTENT.type == "component" ? JSON.stringify(JSON.parse(CONTENT.code), null, 2) : CONTENT.code) || null
+							} catch (error) {
+								ELEMENTS.content.code.input.value = CONTENT.code || null
+							}
 
 						// delete gate
 							ELEMENTS.content.delete.gate.setAttribute("visibility", (CONTENT && CONTENT.id && (CONTENT.userId == USER.id || CONTENT.gameUserId == USER.id)) ? true : false)
@@ -6995,9 +7013,42 @@ window.onload = function() {
 								FUNCTIONS.showToast({success: false, message: "no content selected"})
 								return
 							}
+
+						// validate embed
 							if (CONTENT.type == "embed" && !post.content.url && !post.content.code) {
 								FUNCTIONS.showToast({success: false, message: "no url or embed code entered"})
 								return
+							}
+
+						// validate component
+							if (CONTENT.type == "component") {
+								try {
+									var test = JSON.parse(post.content.code)
+								} catch (error) {
+									FUNCTIONS.showToast({success: false, message: "malformed JSON"})
+									return
+								}
+
+								if (!test.type || !["race", "skill", "condition", "item"].includes(test.type)) {
+									FUNCTIONS.showToast({success: false, message: "type must be one of: race, skill, condition, item"})
+									return
+								}
+
+								if (!test.data) {
+									FUNCTIONS.showToast({success: false, message: "no data"})
+									return
+								}
+
+								if (!test.data.name) {
+									FUNCTIONS.showToast({success: false, message: "data must include a name"})
+									return
+								}
+
+								if ((test.type == "skill" || test.type == "condition" || test.type == "race")) {
+									test.data.name = test.data.name.replace(/\s/g, "_")
+								}
+
+								post.content.code = JSON.stringify(test)
 							}
 
 						// send socket request
