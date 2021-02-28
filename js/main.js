@@ -46,13 +46,20 @@ window.addEventListener("load", function() {
 				event.preventDefault()
 			})
 
-			document.addEventListener(TRIGGERS.rightclick, function(event) {
-				event.preventDefault()
-			})
+			// document.addEventListener(TRIGGERS.rightclick, function(event) {
+			// 	event.preventDefault()
+			// })
 
 			document.addEventListener(TRIGGERS.dragover, function(event) {
 				event.preventDefault()
 			})
+
+			document.addEventListener(TRIGGERS.scroll, function(event) {
+				if (event.ctrlKey) {
+					event.stopPropagation()
+					event.preventDefault()
+				}
+			}, {passive: false})
 
 	/*** checks ***/
 		/* isNumLet */
