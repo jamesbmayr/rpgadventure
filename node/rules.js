@@ -1012,6 +1012,13 @@
 										speed: {statistic: -2}
 									}
 								},
+								internal_bleeding: {
+									name: "internal_bleeding",
+									description: "Unable to recover. Causes 2d6 unblockable damage during recovery sessions.",
+									effects: {
+										immunity: {recover: -20, pain_tolerance: -5}
+									}
+								},
 								liquid_barrier: {
 									name: "liquid_barrier",
 									description: "Impairs sound.",

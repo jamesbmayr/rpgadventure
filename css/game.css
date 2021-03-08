@@ -985,6 +985,20 @@
 				display: none;
 			}
 
+		/* targeting */
+			#character-status-targeting-select {
+				height: calc(var(--large-font-size) * 4);
+			}
+
+			#character-status-targeting-select optgroup, #character-status-targeting-select option {
+				padding-top: var(--small-gap-size);
+				border-radius: var(--border-radius);
+			}
+
+			#character-status-targeting-select:focus option:checked {
+				background: var(--light-blue) linear-gradient(0deg, var(--light-blue) 0%, var(--light-blue) 100%);
+			}
+
 		/* recover */
 			#character-status-recover-button {
 				background-color: var(--medium-green);

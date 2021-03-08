@@ -46,10 +46,6 @@ window.addEventListener("load", function() {
 				event.preventDefault()
 			})
 
-			// document.addEventListener(TRIGGERS.rightclick, function(event) {
-			// 	event.preventDefault()
-			// })
-
 			document.addEventListener(TRIGGERS.dragover, function(event) {
 				event.preventDefault()
 			})

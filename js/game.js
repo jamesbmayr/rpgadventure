@@ -1644,12 +1644,6 @@ window.onload = function() {
 						// rolls
 							var rolls = []
 
-						// spacer
-							rolls.push({
-								spacer: true,
-								text: CHARACTER.info.name
-							})
-
 						// within an item ?
 							if (event.target.closest(".item")) {
 								// item
@@ -1709,11 +1703,11 @@ window.onload = function() {
 								d: 20,
 								target: Number(event.target.value),
 								text: skill ? skill.name.replace(/_/g, " ") : statistic ? statistic : item ? item.name : "",
-								recipient: ELEMENTS.character.status.targeting.select.element.value || null
+								recipient: null
 							}
 
 						// charisma
-							if (roll.recipient && skill && skill.charisma) {
+							if (skill && skill.charisma) {
 								roll.charisma = true
 								roll.counters = []
 								for (var c in skill.counters) {
@@ -1747,16 +1741,38 @@ window.onload = function() {
 								}
 							}
 
+						// recipients
+							var recipients = Array.from(ELEMENTS.character.status.targeting.select.element.selectedOptions).map(function(element) { return element.value }) || [""]
+
 						// add to history
 							if (!immunity_checks.length) {
-								rolls.push(roll)
+								for (var i in recipients) {
+									rolls.push({
+										spacer: true,
+										text: CHARACTER.info.name
+									})
+
+									var thisRoll = FUNCTIONS.duplicateObject(roll)
+										thisRoll.recipient = recipients[i]
+									rolls.push(thisRoll)
+								}
 							}
 							else {
-								for (var i = 0; i < immunity_checks.length - 1; i++) {
-									immunity_checks[i].ifSuccess = immunity_checks[i + 1]
+								for (var i in recipients) {
+									for (var j = 0; j < immunity_checks.length - 1; j++) {
+										immunity_checks[j].ifSuccess = immunity_checks[j + 1]
+									}
+
+									rolls.push({
+										spacer: true,
+										text: CHARACTER.info.name
+									})
+									
+									var thisRoll = FUNCTIONS.duplicateObject(roll)
+										thisRoll.recipient = recipients[i]
+									immunity_checks[immunity_checks.length - 1].ifSuccess = thisRoll
+									rolls.push(immunity_checks[0])
 								}
-								immunity_checks[immunity_checks.length - 1].ifSuccess = roll
-								rolls.push(immunity_checks[0])
 							}
 
 						// post
@@ -1783,12 +1799,6 @@ window.onload = function() {
 
 						// rolls
 							var rolls = []
-
-						// spacer
-							rolls.push({
-								spacer: true,
-								text: CHARACTER.info.name
-							})
 
 						// within an item ?
 							if (event.target.closest(".item")) {
@@ -1867,8 +1877,11 @@ window.onload = function() {
 									count += specialSkill.d6
 								}
 							}
-							else if (skill && (skill.name == "recover" || skill.name == "defend")) {
+							else if (skill && (skill.name == "recover")) {
 								type = "healing"
+							}
+							else if (skill && (skill.name == "defend")) {
+								type = "armor"
 							}
 
 						// condition?
@@ -1876,14 +1889,24 @@ window.onload = function() {
 								type = "condition"
 							}
 
+						// recipients
+							var recipients = Array.from(ELEMENTS.character.status.targeting.select.element.selectedOptions).map(function(element) { return element.value }) || [""]
+
 						// add to history
-							rolls.push({
-								type: type,
-								d: 6,
-								count: count,
-								text: condition ? condition : item ? item.name : skill ? skill.name.replace(/_/g, " ") : statistic ? statistic : "",
-								recipient: ELEMENTS.character.status.targeting.select.element.value || null
-							})
+							for (var i in recipients) {
+								rolls.push({
+									spacer: true,
+									text: CHARACTER.info.name
+								})
+
+								rolls.push({
+									type: type,
+									d: 6,
+									count: count,
+									text: condition ? condition : item ? item.name : skill ? skill.name.replace(/_/g, " ") : statistic ? statistic : "",
+									recipient: recipients[i]
+								})
+							}
 
 						// post
 							submitRollGroupCreate(rolls)
@@ -1947,23 +1970,27 @@ window.onload = function() {
 						// rolls
 							var rolls = []
 
-						// spacer
-							rolls.push({
-								spacer: true,
-								text: CHARACTER && CHARACTER.info ? CHARACTER.info.name : "environment"
-							})
+						// recipients
+							var recipients = Array.from(ELEMENTS.character.status.targeting.select.element.selectedOptions).map(function(element) { return element.value }) || [""]
 
 						// add to history
 							var d = Math.max(2, ELEMENTS.stream.rng.d.value || 6)
 							var count = Math.max(1, ELEMENTS.stream.rng.count.value)
-							var text = (ELEMENTS.stream.rng.label.value || "?") + " (" + count + "d" + d + ")" 
-							rolls.push({
-								type: "environment",
-								d: d,
-								count: count,
-								text: text,
-								recipient: ELEMENTS.character.status.targeting.select.element.value || null
-							})
+							var text = (ELEMENTS.stream.rng.label.value || "?") + " (" + count + "d" + d + ")"
+							for (var i in recipients) {
+								rolls.push({
+									spacer: true,
+									text: CHARACTER && CHARACTER.info ? CHARACTER.info.name : "environment"
+								})
+
+								rolls.push({
+									type: "environment",
+									d: d,
+									count: count,
+									text: text,
+									recipient: recipients[i]
+								})
+							}
 
 						// post
 							submitRollGroupCreate(rolls)
@@ -2943,6 +2970,7 @@ window.onload = function() {
 								if (skill.d6 !== undefined) {
 									var d6 = document.createElement("input")
 										d6.type = "number"
+										d6.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 										d6.step = 1
 										d6.min = 0
 										d6.className = "d6 editable"
@@ -2989,6 +3017,7 @@ window.onload = function() {
 							// numbers
 								var maximum = document.createElement("input")
 									maximum.type = "number"
+									maximum.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 									maximum.className = "skill-maximum editable"
 									maximum.value = skill.maximum
 									maximum.placeholder = "#"
@@ -2997,6 +3026,7 @@ window.onload = function() {
 
 								var condition = document.createElement("input")
 									condition.type = "number"
+									condition.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 									condition.setAttribute("readonly", true)
 									condition.className = "skill-condition"
 									condition.value = Math.max(-99, Math.min(99, skill.condition)) || ""
@@ -3004,6 +3034,7 @@ window.onload = function() {
 
 								var damage = document.createElement("input")
 									damage.type = "number"
+									damage.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 									damage.setAttribute("readonly", true)
 									damage.className = "skill-damage"
 									damage.value = ""
@@ -3026,6 +3057,7 @@ window.onload = function() {
 							// d20
 								var d20 = document.createElement("input")
 									d20.type = "number"
+									d20.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 									d20.setAttribute("readonly", true)
 									d20.className = "skill-current d20"
 									d20.title = "roll skill"
@@ -3188,6 +3220,7 @@ window.onload = function() {
 						// d6
 							var d6 = document.createElement("input")
 								d6.type = "number"
+								d6.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 								if (!enable) {
 									d6.setAttribute("readonly", true)
 								}
@@ -3220,6 +3253,7 @@ window.onload = function() {
 
 							var count = document.createElement("input")
 								count.type = "number"
+								count.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 								count.step = 1
 								count.min = 0
 								count.className = "item-count editable always-editable"
@@ -3248,6 +3282,7 @@ window.onload = function() {
 
 									var d6 = document.createElement("input")
 										d6.type = "number"
+										d6.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 										if (!enable) {
 											d6.setAttribute("readonly", true)
 										}
@@ -3290,6 +3325,7 @@ window.onload = function() {
 
 									var modifier = document.createElement("input")
 										modifier.type = "number"
+										modifier.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 										if (!enable) {
 											modifier.setAttribute("readonly", true)
 										}
@@ -3306,6 +3342,7 @@ window.onload = function() {
 
 									var d20 = document.createElement("input")
 										d20.type = "number"
+										d20.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 										d20.setAttribute("readonly", true)
 										d20.step = 1
 										d20.className = "d20"
@@ -3330,6 +3367,7 @@ window.onload = function() {
 
 									var d6 = document.createElement("input")
 										d6.type = "number"
+										d6.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 										if (!enable) {
 											d6.setAttribute("readonly", true)
 										}
@@ -3378,6 +3416,7 @@ window.onload = function() {
 
 								var input = document.createElement("input")
 									input.type = "number"
+									input.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 									input.className = "item-info-input editable"
 									input.placeholder = "weight"
 									input.value = item.weight || 0
@@ -3400,6 +3439,7 @@ window.onload = function() {
 
 								var input = document.createElement("input")
 									input.type = "number"
+									input.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 									input.className = "item-info-input editable"
 									input.placeholder = "cost"
 									input.value = item.cost || 0
@@ -3422,6 +3462,7 @@ window.onload = function() {
 
 								var input = document.createElement("input")
 									input.type = "number"
+									input.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 									input.className = "item-info-input editable"
 									input.placeholder = "fuel"
 									input.value = item.fuel || 0
@@ -3470,6 +3511,7 @@ window.onload = function() {
 
 								var input = document.createElement("input")
 									input.type = "number"
+									input.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 									input.className = "item-info-input editable"
 									input.placeholder = "hands"
 									input.value = item.hands || 0
@@ -3610,6 +3652,7 @@ window.onload = function() {
 						// rounds counter
 							var rounds = document.createElement("input")
 								rounds.type = "number"
+								rounds.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 								rounds.className = "condition-rounds"
 								rounds.min = 0
 								rounds.step = 1
@@ -4171,6 +4214,9 @@ window.onload = function() {
 							}
 
 						// add to conditions array
+							if (!condition.rounds) {
+								condition.rounds = 600
+							}
 							CHARACTER.info.status.conditions.push(condition)
 
 						// add effects
@@ -6101,6 +6147,7 @@ window.onload = function() {
 											inputX.placeholder = "x"
 											inputX.step = 0.5
 											inputX.type = "number"
+											inputX.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 											inputX.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
 										labelX.appendChild(inputX)
 
@@ -6120,6 +6167,7 @@ window.onload = function() {
 											inputY.placeholder = "y"
 											inputY.step = 0.5
 											inputY.type = "number"
+											inputY.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 											inputY.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
 										labelY.appendChild(inputY)
 
@@ -6140,6 +6188,7 @@ window.onload = function() {
 											inputWidth.step = 1
 											inputWidth.min = 0
 											inputWidth.type = "number"
+											inputWidth.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 											inputWidth.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
 										labelWidth.appendChild(inputWidth)
 
@@ -6160,6 +6209,7 @@ window.onload = function() {
 											inputHeight.step = 1
 											inputHeight.min = 0
 											inputHeight.type = "number"
+											inputHeight.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 											inputHeight.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
 										labelHeight.appendChild(inputHeight)
 
@@ -6338,6 +6388,7 @@ window.onload = function() {
 											inputTextSize.min = 0
 											inputTextSize.max = 100
 											inputTextSize.type = "number"
+											inputTextSize.addEventListener(TRIGGERS.scroll,function(){this.blur()})
 											inputTextSize.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
 										labelTextSize.appendChild(inputTextSize)
 
