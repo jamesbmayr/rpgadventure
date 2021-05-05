@@ -39,7 +39,7 @@
 								"charisma": {name: "charisma", description: "Opponents can also be defeated through charisma and diplomacy. Encounters usually involve several logic rolls in which the opponent must roll at or under its logic on 1d20 in order to avoid being swayed. \n\nCharacters may influence these encounters using skills which impact the logic rolls. Roll logic (with these skills) for each instance in which a character attempts to sway an opponent. \n\n(resister's logic + skill) - (influencer's skill)\n\nThe influencer may also choose to use these skills to affect the resister with a psychological condition, which lasts for 1 combat or 10 non-combat minutes.\n\nA character may also choose to affect itself for 1 combat or 10 non-combat minutes with one of the following psychological conditions intentionally using the meditate skill: alertness, concentration, determination, perceptiveness, rage."},
 								"taming & training": {name: "taming & training", description: "Taming an animal uses handle animals as a charisma encounter (similar to persuade): the animal rolls under its logic to resist, but the target is lowered by the character's handle animals skill and the animal's training skill. (Note that at first, the animal will not have this training skill.) A character can attempt to tame the animal once a day. If the animal does not resist, it gains 1 point in this training skill, under its logic statistic, up to the skill maximum. \n\ntaming: fail (animal's logic + animal's aggression - animal's training - character's handle animals) \n\nOn a successful taming roll, the character can also attempt to train the animal to do a specific command. The animal does a logic + training check, now aided by the character's handle animals. If this training is successful, the animal gains 1 point in the specific skill being trained; this falls under the memory statistic. \n\ntraining: succeed (animal's logic + animal's training + character's handle animals) \n\nWhen the character wants the animal to obey a command, the player must roll a taming check as above. Then the animal must roll a check similar to training, using with the specific command as the skill: \n\n{command}: succeed (animal's memory + animal's {command skill} + character's handle animals)"},
 								"services": {name: "services", description: "Many NPCs will perform a service for a cost. This allows players who do not know a certain skill to exchange money for that skill to be performed on their behalf."},
-								"combat": {name: "combat", description: "In an armed conflict, the team with the member with the highest speed begins turn-based combat (unless one team is surprised by the other), but all actions in a 6-second round are considered to be simultaneous. Within each team, turn order is determined by speed. Each combatant can take one action per round; the most common actions are moving (with the run skill), attacking, dodging, using an item, or changing weapons. \n\nCharacters aim by making a 1d20 attempt on the dexterity-, strength-, or speed-based skill associated with their attack (melee, fencing, archery, missile aim, throw, kick, punch, or martial arts). \n\nIf the roll is a 1, the attack is focused on the opponent's head; on a 2 or 3, the attack is focused on the opponent's arms or legs. \n\nEach weapon or attack has a corresponding damage roll, of nd6. Armor and shields also have a damage blocking attribute: nd6 are rolled, and each die cancels all damage dice of the same value. (In other words, subtract the set of armor dice from the set of weapon dice.) \n\n[weapon nd6] \ [armor nd6] → [damage nd6] \n\nThe remaining damage is summed, then subtracted from the opponent's statistics; the opponent may choose how to distribute this damage, limited by the area of the attack's focus: \n\nDamage to the head (attack roll of 1) reduces logic, memory, and/or perception. Pass an immunity + pain tolerance check, or else be surprised and unable to act for 1 round. Damage to arms or legs (attack roll of 2 or 3) reduces strength, dexterity, speed, and/or immunity. Pass an immunity + pain tolerance check, or else be either disarmed (dropping held items) or immobilized (unable to run, dodge, etc.) for 1 round. All other damage (attack roll of 4 or more) can reduce any statistic. \n\nEach attack can also be avoided using speed and the dodge skill, each with an individual roll. A player who is dodging cannot take another action, except to move (ie, run)."},
+								"combat": {name: "combat", description: "In an armed conflict, the team with the member with the highest speed begins turn-based combat (unless one team is surprised by the other), but all actions in a 6-second round are considered to be simultaneous. Within each team, turn order is determined by speed. Each combatant can take one action per round; the most common actions are moving (with the run skill), attacking, dodging, using an item, or changing weapons. \n\nCharacters aim by making a 1d20 attempt on the dexterity-, strength-, or speed-based skill associated with their attack (melee, fencing, archery, missile aim, throw, kick, punch, or martial arts). \n\nIf the roll is a 1, the attack is focused on the opponent's head; on a 2 or 3, the attack is focused on the opponent's arms or legs. \n\nEach weapon or attack has a corresponding damage roll, of nd6. Armor and shields also have a damage blocking attribute: nd6 are rolled, and each die cancels all damage dice of the same value. (In other words, subtract the set of armor dice from the set of weapon dice.) \n\n[weapon nd6] \ [armor nd6] → [damage nd6] \n\nThe remaining damage is summed, then subtracted from the opponent's statistics; the opponent may choose how to distribute this damage, limited by the area of the attack's focus: \n\nDamage to the head (attack roll of 1) reduces logic, memory, and/or perception. Pass an immunity + pain tolerance check, or else be surprised and unable to act for 1 round. Damage to arms or legs (attack roll of 2 or 3) reduces strength, dexterity, speed, and/or immunity. Pass an immunity + pain tolerance check, or else be either disarmed (dropping held items, unable to use hands) or immobilized (unable to run, dodge, etc.) for 1 round. All other damage (attack roll of 4 or more) can reduce any statistic. \n\nEach attack can also be avoided using speed and the dodge skill, each with an individual roll. A player who is dodging cannot take another action, except to move (ie, run)."},
 								"damage": {name: "damage", description: "Many forces can damage a character; damage is subtracted from a character's statistics. Damage to the head reduces logic, memory, and/or perception; other damage reduces strength, dexterity, speed, and/or immunity. A player may choose how damage is applied."},
 								"conditions": {name: "conditions", description: "Circumstances often affect a character's skills and statistics. These are generally temporary."},
 								"weapons": {name: "weapons", description: "Weapons each have an associated skill to determine a character's success in using them. They also have an attribute of nd6 corresponding to how much damage they deal. This ability decreases by one d6 per week of use, to a minimum of 1d6. Weapons can be repaired to full with the metalworking, woodworking, or other appropriate skill, with the right time and materials. Some weapons cause bleeding on a failed recover roll."},
@@ -4129,13 +4129,20 @@
 										],
 										recipe: {w: 10, r: 1, g: 5, b: 4},
 										cost: 20,
-										description: "reflects different colors, depending on time heated; worn as war paint for +5 intimidate"
+										description: "reflects different colors, depending on time heated; -5 to opponent sight checks; worn as war paint for +5 intimidate"
 									},
 									{
 										name: "concoction of slipperiness",
 										count: 1,
 										type: "potion",
 										weight: 0.2,
+										usage: [
+											{
+												statistic: "dexterity",
+												skill: "escape_bonds",
+												modifier: 5
+											}
+										],
 										recipe: {w: 10, r: 6, g: 4, b: 2},
 										cost: 24,
 										description: "items require a dexterity check to hold"
@@ -5185,6 +5192,11 @@
 												statistic: "logic",
 												skill: "mathematics",
 												modifier: 5
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										materials: "wood",
@@ -5400,7 +5412,8 @@
 										usage: [
 											{
 												statistic: "strength",
-												skill: "throw"
+												skill: "throw",
+												d6: 2
 											}
 										],
 										materials: "wood, string",
@@ -5410,13 +5423,18 @@
 									{
 										name: "book",
 										count: 1,
-										weight: 3,
+										weight: 1,
 										hands: 1,
 										usage: [
 											{
 												statistic: "memory",
 												skill: "astronomy",
 												modifier: 5
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										fuel: 1,
@@ -5433,9 +5451,10 @@
 											{
 												statistic: "strength",
 												skill: "throw",
-												d6: 3
+												d6: 2
 											}
 										],
+										conditions: {bleeding: 1},
 										materials: "glass",
 										cost: 1,
 										description: "shatters on impact"
@@ -5445,6 +5464,13 @@
 										count: 1,
 										weight: 0.5,
 										hands: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										materials: "wood, metal, ceramic, glass",
 										cost: 1,
 										description: "used to carry food"
@@ -5479,6 +5505,13 @@
 										name: "bucket",
 										count: 1,
 										weight: 2,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 2
+											}
+										],
 										hands: 1,
 										fuel: 1,
 										materials: "wood",
@@ -5514,6 +5547,11 @@
 											{
 												statistic: "logic",
 												skill: "game_playing"
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										cost: 5,
@@ -5552,6 +5590,11 @@
 											{
 												statistic: "memory",
 												skill: "alchemy"
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
 											}
 										],
 										magnetic: true,
@@ -5568,6 +5611,16 @@
 												statistic: "strength",
 												skill: "climb",
 												modifier: 5
+											},
+											{
+												statistic: "strength",
+												skill: "melee",
+												d6: 2
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 2
 											}
 										],
 										conditions: {paralysis_arms: 1, paralysis_legs: 1},
@@ -5676,6 +5729,11 @@
 												statistic: "strength",
 												skill: "melee",
 												d6: 4
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
 											}
 										],
 										magnetic: true,
@@ -5691,6 +5749,13 @@
 										weight: 1,
 										magnetic: true,
 										d6: 2,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										materials: "metal",
 										cost: 40,
 										description: "provides head armor"
@@ -5700,6 +5765,13 @@
 										count: 1,
 										weight: 0.5,
 										hands: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										materials: "wood, metal, ceramic, glass",
 										cost: 1,
 										description: "used to carry liquid items"
@@ -5724,6 +5796,13 @@
 										count: 3,
 										weight: 0.5,
 										hands: 2,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										materials: "glass",
 										cost: 1,
 										description: "for potion-making (alchemy, medicine); made of a special material that prevents corrosion"
@@ -5757,6 +5836,13 @@
 										count: 1,
 										weight: 0.5,
 										hands: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										materials: "leather, metal",
 										cost: 10,
 										description: "used to carry liquids"
@@ -5847,6 +5933,11 @@
 												statistic: "strength",
 												skill: "melee",
 												d6: 2
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 2
 											}
 										],
 										conditions: {bleeding: 1},
@@ -5862,14 +5953,14 @@
 										usage: [
 											{
 												statistic: "strength",
-												skill: "climb",
-												modifier: 5
+												skill: "throw",
+												d6: 3
 											}
 										],
 										magnetic: true,
 										materials: "metal",
 										cost: 25,
-										description: "+5 climb"
+										description: " "
 									},
 									{
 										name: "hammer",
@@ -5883,6 +5974,11 @@
 											{
 												statistic: "memory",
 												skill: "metalworking"
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
 											}
 										],
 										hands: 1,
@@ -5931,6 +6027,13 @@
 										count: 1,
 										weight: 1,
 										hands: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										materials: "glass",
 										cost: 15,
 										description: "contains sand; for measuring the passage of time"
@@ -5943,6 +6046,11 @@
 											{
 												statistic: "dexterity",
 												skill: "penmanship"
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										materials: "glass",
@@ -5960,6 +6068,11 @@
 												statistic: "strength",
 												skill: "melee",
 												d6: 4
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
 											}
 										],
 										materials: "metal",
@@ -5971,6 +6084,13 @@
 										count: 1,
 										weight: 4,
 										hands: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										fuel: 1,
 										materials: "wood, metal, ceramic, glass",
 										cost: 12,
@@ -6022,6 +6142,13 @@
 										count: 1,
 										weight: 1,
 										hands: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										magnetic: true,
 										materials: "metal",
 										cost: 10,
@@ -6062,6 +6189,11 @@
 												statistic: "perception",
 												skill: "sight",
 												modifier: 5
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										hands: 1,
@@ -6128,6 +6260,14 @@
 										name: "mirror",
 										count: 1,
 										weight: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
+										conditions: {bleeding: 1},
 										materials: "glass",
 										cost: 5,
 										description: "reflective; shatters on impact"
@@ -6144,6 +6284,11 @@
 											{
 												statistic: "memory",
 												skill: "medicine"
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										hands: 1,
@@ -6246,6 +6391,13 @@
 										count: 1,
 										weight: 2,
 										hands: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										materials: "metal",
 										cost: 15,
 										description: "burns for 6 hours per pint of oil; negates darkness; light range: 40-ft circle"
@@ -6264,6 +6416,18 @@
 										count: 1,
 										weight: 2,
 										hands: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "melee",
+												d6: 2
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 2
+											}
+										],
 										magnetic: true,
 										materials: "metal",
 										cost: 20,
@@ -6325,6 +6489,11 @@
 												statistic: "strength",
 												skill: "melee",
 												d6: 4
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 3
 											}
 										],
 										hands: 1,
@@ -6348,6 +6517,13 @@
 										count: 1,
 										weight: 4,
 										hands: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										fuel: 1,
 										materials: "wood, metal, ceramic, glass",
 										cost: 12,
@@ -6369,6 +6545,11 @@
 												statistic: "dexterity",
 												skill: "knifing",
 												d6: 3
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										conditions: {bleeding: 1},
@@ -6397,6 +6578,11 @@
 											{
 												statistic: "memory",
 												skill: "alchemy"
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 2
 											}
 										],
 										hands: 1,
@@ -6418,6 +6604,13 @@
 										name: "prism",
 										count: 1,
 										weight: 2,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										materials: "glass",
 										cost: 10,
 										description: "glass block that splits white light into colors"
@@ -6554,6 +6747,11 @@
 												statistic: "dexterity",
 												skill: "missile",
 												modifier: 5
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										materials: "wood, metal, glass",
@@ -6602,6 +6800,11 @@
 												statistic: "memory",
 												skill: "geography",
 												modifier: 5
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										hands: 1,
@@ -6614,6 +6817,13 @@
 										count: 1,
 										weight: 6,
 										hands: 2,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										magnetic: true,
 										conditions: {paralysis_arms: 1, paralysis_legs: 1},
 										materials: "metal",
@@ -6631,6 +6841,11 @@
 												statistic: "dexterity",
 												skill: "knifing",
 												d6: 3
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										conditions: {bleeding: 1},
@@ -6650,6 +6865,11 @@
 												statistic: "strength",
 												skill: "melee",
 												d6: 4
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 2
 											}
 										],
 										materials: "wood, metal",
@@ -6660,6 +6880,18 @@
 										name: "ski",
 										count: 2,
 										weight: 14,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "melee",
+												d6: 2
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										fuel: 2,
 										materials: "wood",
 										cost: 30,
@@ -6725,6 +6957,11 @@
 												statistic: "dexterity",
 												skill: "missile",
 												modifier: 5
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										materials: "wood, metal, glass",
@@ -6739,6 +6976,11 @@
 												statistic: "strength",
 												skill: "melee",
 												d6: 2
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										weight: 3,
@@ -6805,6 +7047,13 @@
 										count: 1,
 										weight: 1,
 										hands: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										fuel: 2,
 										materials: "wood, leather",
 										cost: 2,
@@ -6814,6 +7063,13 @@
 										name: "totem",
 										count: 1,
 										weight: 1,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
+											}
+										],
 										materials: "wood, metal, ceramic, glass",
 										cost: 20,
 										description: "emblem or statue"
@@ -6845,6 +7101,11 @@
 												statistic: "strength",
 												skill: "melee",
 												d6: 2
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 1
 											}
 										],
 										materials: "wood, cloth",
@@ -6860,9 +7121,10 @@
 											{
 												statistic: "strength",
 												skill: "throw",
-												d6: 3
+												d6: 2
 											}
 										],
+										conditions: {bleeding: 1},
 										materials: "glass",
 										cost: 1,
 										description: "shatters on impact"
@@ -6884,6 +7146,11 @@
 											{
 												statistic: "memory",
 												skill: "metalworking"
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 2
 											}
 										],
 										hands: 1,
@@ -6919,6 +7186,11 @@
 											{
 												statistic: "memory",
 												skill: "alchemy"
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 2
 											}
 										],
 										hands: 1,
@@ -7175,7 +7447,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -7307,7 +7579,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -7439,7 +7711,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -7571,7 +7843,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -7703,7 +7975,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -7835,7 +8107,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -7967,7 +8239,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -8099,7 +8371,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -8231,7 +8503,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -8363,7 +8635,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -8495,7 +8767,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -8627,7 +8899,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
@@ -8759,7 +9031,7 @@
 											{equipped:true,name:"leather cap",count:1,type:"armor",armorType:"head",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"sqyqswjpiusuywdf"},
 											{equipped:true,name:"leather gloves",count:1,type:"armor",armorType:"hands",d6:3,weight:1,fuel:2,materials:"leather",cost:10,description:" ",id:"kiqpazniusjvozcu"},
 											{equipped:true,name:"leather boots",count:1,type:"armor",armorType:"legs",d6:3,weight:3,fuel:2,materials:"leather",cost:15,description:" ",id:"oveelvzlgrbgwxfx"},
-											{equipped:true,name:"book",count:1,weight:3,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
+											{equipped:true,name:"book",count:1,weight:1,hands:1,usage:[{statistic:"memory",skill:"astronomy",modifier:5}],fuel:1,materials:"paper",cost:5,description:"+5 specific memory/logic skill (mathematics, alchemy, zoology, etc.)",id:"ctpvtxpllbiibxhw"},
 										]
 									},
 									{
