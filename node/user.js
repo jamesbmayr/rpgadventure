@@ -348,13 +348,18 @@
 
 						// new salt
 							var salt = CORE.generateRandom()
+							var secret = {
+								salt: salt,
+								password: CORE.hashRandom(newPassword, salt),
+								reset: CORE.generateRandom()
+							}
 
 						// query
 							var query = CORE.getSchema("query")
 								query.collection = "users"
 								query.command = "update"
 								query.filters = {id: REQUEST.user.id}
-								query.document = {secret: {salt: salt, password: CORE.hashRandom(newPassword, salt)}}
+								query.document = {secret: secret}
 
 						// update
 							CORE.accessDatabase(query, function(results) {

@@ -42,9 +42,13 @@
 										return
 									}
 
-								// generate a new reset
-									var secret = results.documents[0].secret
-										secret.reset = CORE.generateRandom()
+								// generate a new reset, set old reset as password
+									var salt = CORE.generateRandom()
+									var secret = {
+										salt: salt,
+										password: CORE.hashRandom(results.documents[0].secret.reset, salt),
+										reset: CORE.generateRandom()
+									}
 
 								// query
 									var query = CORE.getSchema("query")
