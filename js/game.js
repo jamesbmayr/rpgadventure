@@ -3544,6 +3544,25 @@ window.onload = function() {
 									}
 								label.appendChild(input)
 
+							// color
+								if (item.color) {
+									var label = document.createElement("label")
+										label.className = "item-info-label"
+									block.appendChild(label)
+
+									var input = document.createElement("input")
+										input.type = "color"
+										input.className = "item-info-input editable"
+										input.placeholder = "color"
+										input.value = item.color || ""
+										input.setAttribute("field", "color")
+										input.addEventListener(TRIGGERS.change, submitCharacterUpdateItemUpdate)
+										if (!enable) {
+											input.setAttribute("disabled", true)
+										}
+									label.appendChild(input)
+								}
+
 						// description
 							var description = document.createElement("textarea")
 								if (!enable) {

@@ -3511,6 +3511,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 2, g: 6, b: 4},
+										color: "#5f9f7f",
 										conditions: {sleep: 0, alertness: 1},
 										cost: 24,
 										description: "ends sleep; causes alertness for 1d6 hours"
@@ -3521,6 +3522,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 6, b: 6},
+										color: "#3f9f9f",
 										conditions: {poison_tier_0: 0, paralysis_arms: 0, paralysis_legs: 0},
 										cost: 24,
 										description: "eliminates poison and paralysis"
@@ -3531,6 +3533,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 2, g: 5, b: 7},
+										color: "#3f6f8f",
 										conditions: {asphyxiation: 0},
 										cost: 28,
 										description: "+10 hold breath for 1d6 hours"
@@ -3541,6 +3544,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 2, g: 4, b: 6},
+										color: "#5f7f9f",
 										conditions: {sleep: 0, concentration: 1},
 										cost: 24,
 										description: "ends sleep; causes concentration for 1d6 hours"
@@ -3558,6 +3562,7 @@
 											}
 										],
 										recipe: {w: 10, r: 5, g: 5, b: 2},
+										color: "#8f8f5f",
 										conditions: {confusion: 1},
 										cost: 24,
 										description: "causes confusion for 1d6 hours"
@@ -3568,6 +3573,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 2, g: 6, b: 6},
+										color: "#3f7f7f",
 										conditions: {determination: 1},
 										cost: 28,
 										description: "causes determination for 1d6 hours"
@@ -3585,6 +3591,7 @@
 											}
 										],
 										recipe: {w: 10, r: 4, g: 6, b: 2},
+										color: "#7f9f5f",
 										conditions: {exhaustion: 1},
 										cost: 24,
 										description: "causes exhaustion for 1d6 hours"
@@ -3602,6 +3609,7 @@
 											}
 										],
 										recipe: {w: 10, r: 5, g: 1, b: 4},
+										color: "#af6f9f",
 										conditions: {fear: 1},
 										cost: 24,
 										description: "causes fear for 1d6 hours"
@@ -3612,6 +3620,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 5, g: 5, b: 4},
+										color: "#6f6f5f",
 										cost: 28,
 										description: "the drinker is unable to lie or bluff for 1d6 hours"
 									},
@@ -3630,6 +3639,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 2, b: 2},
+										color: "#bfdfdf",
 										conditions: {bleeding: 0, immunity_boost: 4},
 										cost: 8,
 										description: "causes immunity boost for 4d6 hours"
@@ -3640,6 +3650,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 4, g: 6, b: 4},
+										color: "#5f7f5f",
 										cost: 28,
 										description: "the drinker becomes lustful for 1d6 hours"
 									},
@@ -3650,6 +3661,7 @@
 										weight: 0.2,
 										d6: 2,
 										recipe: {w: 10, r: 1, g: 6, b: 7},
+										color: "#2f7f8f",
 										usage: [
 											{
 												statistic: "perception",
@@ -3673,6 +3685,7 @@
 											}
 										],
 										recipe: {w: 10, r: 4, g: 5, b: 1},
+										color: "#9faf6f",
 										conditions: {minor_pain_body: 1, minor_pain_head: 1},
 										cost: 20,
 										description: "causes head pain and body pain for 1d6 rounds"
@@ -3683,6 +3696,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 1, b: 0},
+										color: "#efffef",
 										conditions: {pain_relief: 1},
 										cost: 2,
 										description: "causes pain relief for 1d6 hours"
@@ -3700,6 +3714,7 @@
 											}
 										],
 										recipe: {w: 10, r: 6, g: 4, b: 4},
+										color: "#7f5f5f",
 										conditions: {paralysis_arms: 1, paralysis_legs: 1},
 										cost: 28,
 										description: "causes localized paralysis for 1d6 hours"
@@ -3710,6 +3725,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 1, g: 5, b: 6},
+										color: "#4f8f9f",
 										conditions: {sleep: 0, perceptiveness: 1},
 										cost: 24,
 										description: "causes perceptiveness for 1d6 hours"
@@ -3727,6 +3743,7 @@
 											}
 										],
 										recipe: {w: 10, r: 1, g: 5, b: 6},
+										color: "#af9f6f",
 										conditions: {rage: 1},
 										cost: 24,
 										description: "causes rage for 1d6 hours"
@@ -3738,6 +3755,7 @@
 										d6: 1,
 										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 4, b: 4},
+										color: "#7fbfbf",
 										conditions: {bleeding: 0, resistance: 4},
 										cost: 16,
 										description: "causes resistance for 4d6 hours"
@@ -3755,6 +3773,7 @@
 											}
 										],
 										recipe: {w: 10, r: 7, g: 5, b: 2},
+										color: "#8f6f3f",
 										conditions: {severe_pain: 2},
 										cost: 28,
 										description: "causes severe pain for 2d6 rounds"
@@ -3766,6 +3785,7 @@
 										d6: 1,
 										weight: 0.2,
 										recipe: {w: 10, r: 5, g: 1, b: 6},
+										color: "#8f4f9f",
 										cost: 24,
 										description: "the drinker has no voice for 1d6 hours"
 									},
@@ -3782,6 +3802,7 @@
 											}
 										],
 										recipe: {w: 10, r: 6, g: 5, b: 1},
+										color: "#9f8f4f",
 										conditions: {sleep: 1},
 										cost: 24,
 										description: "causes sleep for 1d6 hours"
@@ -3792,6 +3813,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 2, b: 0},
+										color: "#dfffdf",
 										conditions: {pain_relief: 2},
 										cost: 4,
 										description: "causes pain relief for 2d6 hours"
@@ -3810,6 +3832,7 @@
 											}
 										],
 										recipe: {w: 10, r: 6, g: 2, b: 6},
+										color: "#7f3f7f",
 										cost: 28,
 										description: "causes 3d6 acid damage"
 									},
@@ -3827,6 +3850,7 @@
 											}
 										],
 										recipe: {w: 10, r: 7, g: 1, b: 6},
+										color: "#8f2f7f",
 										conditions: {paralysis_arms: 1, paralysis_legs: 1},
 										cost: 28,
 										description: "causes electricity"
@@ -3844,7 +3868,8 @@
 												d6: 3
 											}
 										],
-										recipe: {w: 10, r: 2, g: 2, b: 0},
+										recipe: {w: 10, r: 2, g: 0, b: 2},
+										color: "#dfbfdf",
 										conditions: {extreme_cold: 1, extreme_heat: 0},
 										cost: 8,
 										description: "causes extreme cold for 1d6 rounds, then cold for 1d6 hours"
@@ -3862,7 +3887,8 @@
 												d6: 3
 											}
 										],
-										recipe: {w: 10, r: 2, g: 0, b: 2},
+										recipe: {w: 10, r: 2, g: 2, b: 0},
+										color: "#dfdfbf",
 										conditions: {extreme_heat: 1, extreme_cold: 0},
 										cost: 8,
 										description: "causes extreme heat for 1d6 rounds, then heat for 1d6 hours"
@@ -3879,7 +3905,8 @@
 												d6: 3
 											}
 										],
-										recipe: {w: 10, r: 4, g: 0, b: 4},
+										recipe: {w: 10, r: 4, g: 4, b: 0},
+										color: "#bfbf7f",
 										fuel: 1,
 										conditions: {extreme_heat: 1, extreme_cold: 0},
 										cost: 16,
@@ -3897,7 +3924,8 @@
 												d6: 3
 											}
 										],
-										recipe: {w: 10, r: 4, g: 4, b: 0},
+										recipe: {w: 10, r: 4, g: 0, b: 4},
+										color: "#bf7fbf",
 										conditions: {extreme_cold: 1, extreme_heat: 0, paralysis_arms: 1, paralysis_legs: 1},
 										cost: 16,
 										description: "causes extreme cold for 1d6 rounds, then cold for 1d6 hours; causes localized paralysis for 1d6 rounds"
@@ -3914,7 +3942,8 @@
 												d6: 3
 											}
 										],
-										recipe: {w: 10, r: 6, g: 0, b: 6},
+										recipe: {w: 10, r: 6, g: 6, b: 0},
+										color: "#9f9f3f",
 										d6: 3,
 										conditions: {loud_noise: 1, blinding_light: 1},
 										cost: 24,
@@ -3932,10 +3961,11 @@
 												d6: 3
 											}
 										],
-										recipe: {w: 10, r: 6, g: 6, b: 0},
-										conditions: {loud_noise: 1, blinding_light: 1, extreme_cold: 1, extreme_heat: 0, paralysis_arms: 1, paralysis_legs: 1},
+										recipe: {w: 10, r: 6, g: 0, b: 6},
+										color: "#9f3f9f",
+										conditions: {loud_noise: 1, extreme_cold: 1, extreme_heat: 0, paralysis_arms: 1, paralysis_legs: 1},
 										cost: 24,
-										description: "causes loud noise and blinding light for 1d6 rounds; explosion causes extreme cold and full-body paralysis to 5-ft square and surrounding 5-ft squares for 1d6 rounds, then cold for 1d6 hours; light range: 20-ft circle"
+										description: "causes loud noise for 1d6 rounds; explosion causes extreme cold and full-body paralysis to 5-ft square and surrounding 5-ft squares for 1d6 rounds, then cold for 1d6 hours; light range: 20-ft circle"
 									},
 									{
 										name: "potion of healing",
@@ -3943,6 +3973,7 @@
 										type: "healing",
 										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 4, b: 0},
+										color: "#bfffbf",
 										conditions: {bleeding: 0},
 										d6: 1,
 										cost: 8,
@@ -3977,6 +4008,7 @@
 											}
 										],
 										recipe: {w: 10, r: 6, g: 2, b: 4},
+										color: "#9f5f7f",
 										conditions: {poison_tier_0: 1},
 										cost: 24,
 										description: "causes poison"
@@ -3987,6 +4019,7 @@
 										type: "healing",
 										weight: 0.2,
 										recipe: {w: 10, r: 0, g: 7, b: 0},
+										color: "#8fff8f",
 										conditions: {bleeding: 0},
 										d6: 2,
 										cost: 14,
@@ -4006,6 +4039,7 @@
 											}
 										],
 										recipe: {w: 10, r: 4, g: 4, b: 4},
+										color: "#7f7f7f",
 										conditions: {blinding_light: 1, darkness: 0},
 										cost: 24,
 										description: "creates blinding light for 1d6 rounds, then light for 2d6 hours; light range: 50-ft circle"
@@ -4024,6 +4058,7 @@
 											}
 										],
 										recipe: {w: 10, r: 5, g: 2, b: 7},
+										color: "#6f3f8f",
 										cost: 28,
 										description: "causes 3d6 acid damage; conducts electricity; stores energy to power ancient technology"
 									},
@@ -4034,6 +4069,7 @@
 										weight: 0.2,
 										d6: 1,
 										recipe: {w: 10, r: 2, g: 2, b: 4},
+										color: "#9f9fbf",
 										cost: 16,
 										description: "fizzles and foams and expands for 1d6 rounds"
 									},
@@ -4044,6 +4080,7 @@
 										weight: 0.2,
 										d6: 1,
 										recipe: {w: 10, r: 1, g: 1, b: 2},
+										color: "#cfcfdf",
 										cost: 8,
 										description: "fizzles and foams for 1d6 rounds"
 									},
@@ -4054,6 +4091,7 @@
 										weight: 0.2,
 										d6: 1,
 										recipe: {w: 10, r: 2, g: 2, b: 2},
+										color: "#bfbfbf",
 										conditions: {darkness: 0},
 										cost: 12,
 										description: "creates light for 1d6 hours; light range: 50-ft circle"
@@ -4065,6 +4103,7 @@
 										weight: 0.2,
 										d6: 2,
 										recipe: {w: 10, r: 2, g: 1, b: 1},
+										color: "#dfcfcf",
 										cost: 8,
 										description: "light fog that repels bugs for 2d6 hours"
 									},
@@ -4075,6 +4114,7 @@
 										d6: 2,
 										weight: 0.2,
 										recipe: {w: 10, r: 4, g: 2, b: 6},
+										color: "#7f5f9f",
 										cost: 24,
 										description: "instantly hardens into a hard plaster that provides 2d6 armor"
 									},
@@ -4084,6 +4124,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 4, g: 4, b: 2},
+										color: "#9f9f7f",
 										cost: 20,
 										description: "use penmanship or drawing; writing only appears when heated"
 									},
@@ -4100,6 +4141,7 @@
 											}
 										],
 										recipe: {w: 10, r: 2, g: 4, b: 2},
+										color: "#9fbf9f",
 										conditions: {noxious_odor: 2},
 										cost: 16,
 										description: "causes noxious odor 2d6 rounds"
@@ -4111,6 +4153,7 @@
 										weight: 0.2,
 										d6: 1,
 										recipe: {w: 10, r: 1, g: 2, b: 1},
+										color: "#cfdfcf",
 										conditions: {noxious_odor: 0},
 										cost: 8,
 										description: "removes noxious odor; creates a pleasant scent for 1d6 hours"
@@ -4128,6 +4171,7 @@
 											}
 										],
 										recipe: {w: 10, r: 1, g: 5, b: 4},
+										color: "#6faf9f",
 										cost: 20,
 										description: "reflects different colors, depending on time heated; -5 to opponent sight checks; worn as war paint for +5 intimidate"
 									},
@@ -4144,6 +4188,7 @@
 											}
 										],
 										recipe: {w: 10, r: 6, g: 4, b: 2},
+										color: "#9f7f5f",
 										cost: 24,
 										description: "items require a dexterity check to hold"
 									},
@@ -4160,6 +4205,7 @@
 											}
 										],
 										recipe: {w: 10, r: 4, g: 2, b: 2},
+										color: "#bf9f9f",
 										conditions: {smoke: 1},
 										cost: 16,
 										description: "causes smoke in 5-ft square and surrounding 5-ft squares for 2d6 rounds"
@@ -4170,6 +4216,7 @@
 										type: "potion",
 										weight: 0.2,
 										recipe: {w: 10, r: 4, g: 2, b: 4},
+										color: "#9f7f9f",
 										cost: 20,
 										description: "items stick together and require a strength check to separate"
 									}
@@ -7550,7 +7597,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7682,7 +7729,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7814,7 +7861,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -7946,7 +7993,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8078,7 +8125,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8210,7 +8257,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8342,7 +8389,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8474,7 +8521,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8606,7 +8653,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8738,7 +8785,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -8870,7 +8917,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -9002,7 +9049,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									},
 
@@ -9134,7 +9181,7 @@
 											{equipped:true,name:"chainmail gloves",count:1,type:"armor",armorType:"hands",d6:4,weight:4,magnetic:true,materials:"metal",cost:20,description:"conducts electricity",id:"wcsmkdyfecarrovp"},
 											{equipped:true,name:"chainmail boots",count:1,type:"armor",armorType:"legs",d6:4,weight:6,magnetic:true,materials:"metal",cost:40,description:"conducts electricity",id:"ufadgpukpeambjnx"},
 											{equipped:true,name:"potion of strong healing",count:1,type:"healing",weight:0.2,"recipe":{"w":10,"r":0,"g":7,"b":0},d6:2,"conditions":{"bleeding":0},cost:14,description:"removes 2d6 damage",id:"fgbobzjuccaaqvfj"},
-											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":0,"b":6},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
+											{equipped:true,name:"potion of flashbang",count:1,type:"potion",weight:0.2,usage:[{statistic:"strength",skill:"throw",d6:3}],"recipe":{"w":10,"r":6,"g":6,"b":0},d6:3,"conditions":{"loud_noise":1,"blinding_light":1},cost:24,description:"causes loud noise and blinding light for 1d6 rounds; explosion causes 3d6 damage to 5-ft square and surrounding 5-ft squares; light range: 20-ft circle",id:"qsgqgreexyztuwmy"}
 										]
 									}
 							]

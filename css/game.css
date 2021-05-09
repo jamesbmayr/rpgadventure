@@ -1668,6 +1668,27 @@
 				text-align: left;
 			}
 
+			input.item-info-input[type="color"] {
+				width: calc(2 * var(--small-gap-size) + var(--medium-font-size));
+				height: calc(2 * var(--small-gap-size) + var(--medium-font-size));
+				border-radius: 100%;
+				padding: 0;
+				border: 0;
+				outline: none;
+				background-color: var(--medium-gray);
+			}
+
+			input.item-info-input[type="color"]::-webkit-color-swatch-wrapper {
+				border: 0;
+				margin: 0;
+				padding: 0;
+				background-color: var(--medium-gray);
+			}
+
+			input.item-info-input[type="color"][disabled="true"] {
+				cursor: default;
+			}
+
 			select.item-info-input {
 				height: calc(var(--medium-font-size) + 2 * calc(var(--small-gap-size)));
 				width: var(--edge-size);
