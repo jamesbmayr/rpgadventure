@@ -270,7 +270,8 @@
 								name: null,
 								secret: {
 									password: null,
-									salt: null
+									salt: null,
+									reset: generateRandom()
 								},
 								settings: {
 									color: getAsset("colors")["medium-gray"],

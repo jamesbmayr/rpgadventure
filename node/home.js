@@ -36,8 +36,29 @@
 						// compare passwords
 							var salt = results.documents[0].secret.salt
 							if (CORE.hashRandom(passwordAttempt, salt) !== results.documents[0].secret.password) {
-								callback({success: false, message: "invalid name or password"})
-								return
+								// not a one-time reset?
+									if (passwordAttempt !== results.documents[0].secret.reset) {
+										callback({success: false, message: "invalid name or password"})
+										return
+									}
+
+								// generate a new reset
+									var secret = results.documents[0].secret
+										secret.reset = CORE.generateRandom()
+
+								// query
+									var query = CORE.getSchema("query")
+										query.collection = "users"
+										query.command = "update"
+										query.filters = {id: results.documents[0].id}
+										query.document = {secret: secret}
+
+								// update
+									CORE.accessDatabase(query, function(results) {
+										if (!results.success) {
+											callback(results)
+										}
+									})
 							}
 
 						// query
