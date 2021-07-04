@@ -35,7 +35,7 @@
 								"statistics": {name: "statistics", description: "Throughout the game, players will roll 1d20 each time they need to determine if their characters are able to accomplish a task. Each task is associated with a statistic. \n\nTo create a character, set each of the statistics to 7, then move points between them as desired, with each statistic having a maximum of 10 and a minimum of 4. (For example, boosting perception from 7 to 8 would mean taking a point from somewhere else, like bringing memory from 7 to 6.)"},
 								"skill points": {name: "skill points", description: "Characters are awarded skill points throughout the course of a campaign by completing quests, visiting new places, successfully performing new skills, and more. Characters are also awarded skill points by overcoming opponents in some way - often  through combat or charisma. This is generally 1-3 skill points. \n\nA character may increase a statistic by 1 for 28 skill points, or increase a skill 1 level per skill point. \n\nThe maximum level at which a skill can be learned is +7. A character may also choose to learn specializations of a particular skill by selecting a more specific and limited field or aspect, to a maximum of +3, at a cost of 1 skill point per +1. \n\nA character may only learn or improve a skill that is plausible, given the circumstances; for example, a character cannot learn to swim while in the desert, even with the requisite skill points. Furthermore, a character may only increment a specific skill level by 1 point within a day. \n\nCharacters start with 28 skill points to distribute amongst starting skills. A GM may impose additional restrictions during character creation, such as a skill maximum of 4, to prevent unbalanced characters."},
 								"skills": {name: "skills", description: "Every skill is associated with a statistic; to perform a skill, the player must roll at or under the corresponding statistic + skill modifier on 1d20."},
-								"non-player characters (npcs)": {name: "non-player characters (npcs)", description: "Characters will interact with non-player characters, including other characters of playable races, real-world animals, and fantasy monsters. \n\nCreatures generally use an aggression skill when resisting handle animals attempts. \n\nSome creatures have special senses: infrared vision, night vision, infrasound, echolocation, internal compass. \n\nSome creatures also have special movement: fly. \n\nSome creatures also use special combat skills; in some cases, these could also cause a condition, such as sleep or paralysis, or inflict special damage, such as poison, infection, extreme cold, fire, or electricity: bite (nd6), slam (nd6), tusk (nd6), claws (nd6) x (number of claws), talons (nd6) x (number of talons). \n\nSome creatures also have special abilities: camoflauge: opponents at disadvantage on sight checks; temperature resistance: nullifies the effects of extreme heat and extreme cold. \n\nFinally, many creatures have natural armor that protects against nd6 physical damage."},
+								"non-player characters (npcs)": {name: "non-player characters (npcs)", description: "Characters will interact with non-player characters, including other characters of playable races, real-world animals, and fantasy monsters. \n\nCreatures generally use an aggression skill when resisting handle animals attempts. \n\nSome creatures have special senses: infrared vision, night vision, infrasound, echolocation, internal compass. \n\nSome creatures also have special movement: fly. \n\nSome creatures also use special combat skills; in some cases, these could also cause a condition, such as sleep or paralysis, or inflict special damage, such as poison, infection, extreme cold, fire, or electricity: bite (nd6), slam (nd6), tusk (nd6), claws (nd6) x (number of claws), talons (nd6) x (number of talons). \n\nSome creatures also have special abilities: camouflage: opponents at disadvantage on sight checks; temperature resistance: nullifies the effects of extreme heat and extreme cold. \n\nFinally, many creatures have natural armor that protects against nd6 physical damage."},
 								"charisma": {name: "charisma", description: "Opponents can also be defeated through charisma and diplomacy. Encounters usually involve several logic rolls in which the opponent must roll at or under its logic on 1d20 in order to avoid being swayed. \n\nCharacters may influence these encounters using skills which impact the logic rolls. Roll logic (with these skills) for each instance in which a character attempts to sway an opponent. \n\n(resister's logic + skill) - (influencer's skill)\n\nThe influencer may also choose to use these skills to affect the resister with a psychological condition, which lasts for 1 combat or 10 non-combat minutes.\n\nA character may also choose to affect itself for 1 combat or 10 non-combat minutes with one of the following psychological conditions intentionally using the meditate skill: alertness, concentration, determination, perceptiveness, rage."},
 								"taming & training": {name: "taming & training", description: "Taming an animal uses handle animals as a charisma encounter (similar to persuade): the animal rolls under its logic to resist, but the target is lowered by the character's handle animals skill and the animal's training skill. (Note that at first, the animal will not have this training skill.) A character can attempt to tame the animal once a day. If the animal does not resist, it gains 1 point in this training skill, under its logic statistic, up to the skill maximum. \n\ntaming: fail (animal's logic + animal's aggression - animal's training - character's handle animals) \n\nOn a successful taming roll, the character can also attempt to train the animal to do a specific command. The animal does a logic + training check, now aided by the character's handle animals. If this training is successful, the animal gains 1 point in the specific skill being trained; this falls under the memory statistic. \n\ntraining: succeed (animal's logic + animal's training + character's handle animals) \n\nWhen the character wants the animal to obey a command, the player must roll a taming check as above. Then the animal must roll a check similar to training, using with the specific command as the skill: \n\n{command}: succeed (animal's memory + animal's {command skill} + character's handle animals)"},
 								"services": {name: "services", description: "Many NPCs will perform a service for a cost. This allows players who do not know a certain skill to exchange money for that skill to be performed on their behalf."},
@@ -374,7 +374,7 @@
 										height: 5,
 										weight: 150,
 										description: "Standard fantasy lizard people, with medium-sized reptilian/humanoid bodies, forked tongues, webbed feet, and scales.",
-										ability: "Lizardfolk can camouflage in any setting, giving opponents a -14 on sight checks, and can use their tail like a punch attack.",
+										ability: "Lizardfolk can camouflage in any setting, giving opponents a -10 on sight checks, and can use their tail like a punch attack.",
 									},
 									statistics: {
 										perception: 1,
@@ -386,7 +386,7 @@
 										speed: 0
 									},
 									skills: {
-										perception: { sight: 6, sound: 5, scent: 7, taste: 7, touch: 3, camouflage: 14 },
+										perception: { sight: 6, sound: 5, scent: 7, taste: 7, touch: 3, camouflage: 10 },
 										memory: { lang_lizardfolk: 7 },
 										logic: {},
 										strength: { punch: 0, carry: 1, throw: 1 },
@@ -5311,6 +5311,15 @@
 										description: " "
 									},
 									{
+										name: "bandage",
+										count: 1,
+										weight: 0.01,
+										conditions: {bleeding: 0},
+										materials: "cloth",
+										cost: 1,
+										description: "stops bleeding"
+									},
+									{
 										name: "barrel",
 										count: 1,
 										weight: 100,
@@ -5461,11 +5470,37 @@
 												statistic: "strength",
 												skill: "throw",
 												d6: 2
+											},
+											{
+												statistic: "dexterity",
+												skill: "missile",
+												d6: 2
 											}
 										],
 										materials: "wood, string",
 										cost: 20,
-										description: "must be thrown; can cause arm or leg paralysis; can be overcome with escape bonds"
+										description: "thrown or launched from stonebow; can cause arm or leg paralysis; can be overcome with escape bonds"
+									},
+									{
+										name: "bone saw",
+										count: 1,
+										weight: 2,
+										hands: 2,
+										usage: [
+											{
+												statistic: "memory",
+												skill: "medicine",
+											},
+											{
+												statistic: "dexterity",
+												skill: "knifing",
+												d6: 4
+											}
+										],
+										magnetic: true,
+										materials: "metal",
+										cost: 40,
+										description: "for removing limbs when medically necessary"
 									},
 									{
 										name: "book",
@@ -5674,9 +5709,42 @@
 										hands: 1,
 										magnetic: true,
 										materials: "metal",
-										cost: 1,
-										costPerPound: 1,
+										cost: 2,
+										costPerPound: 2,
 										description: "per foot; conducts electricity; arm bindings cause arm paralysis; leg bindings cause leg paralysis"
+									},
+									{
+										name: "chain net",
+										count: 1,
+										weight: 20,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "fishing",
+												modifier: 5
+											},
+											{
+												statistic: "logic",
+												skill: "handle_animals",
+												modifier: 5
+											},
+											{
+												statistic: "strength",
+												skill: "melee",
+												d6: 2
+											},
+											{
+												statistic: "strength",
+												skill: "throw",
+												d6: 2
+											}
+										],
+										conditions: {paralysis_arms: 1, paralysis_legs: 1},
+										hands: 2,
+										magnetic: true,
+										materials: "metal",
+										cost: 80,
+										description: "for catching fish and other animals"
 									},
 									{
 										name: "chest",
@@ -6733,6 +6801,29 @@
 										description: "per foot; +5 climbing; helps with crafting; arm bindings cause arm paralysis; leg bindings cause leg paralysis"
 									},
 									{
+										name: "rope net",
+										count: 1,
+										weight: 10,
+										usage: [
+											{
+												statistic: "strength",
+												skill: "fishing",
+												modifier: 5
+											},
+											{
+												statistic: "logic",
+												skill: "handle_animals",
+												modifier: 5
+											},
+										],
+										conditions: {paralysis_arms: 1, paralysis_legs: 1},
+										hands: 2,
+										fuel: 2,
+										materials: "hemp",
+										cost: 60,
+										description: "for catching fish and other animals"
+									},
+									{
 										name: "sack",
 										count: 1,
 										weight: 0.5,
@@ -7051,6 +7142,25 @@
 										cost: 0.02,
 										costPerPound: 40,
 										description: "per foot; used in crafting"
+									},
+									{
+										name: "suture kit",
+										count: 1,
+										type: "healing",
+										weight: 2,
+										usage: [
+											{
+												statistic: "memory",
+												skill: "medicine",
+												modifier: 2
+											}
+										],
+										hands: 2,
+										conditions: {bleeding: 0},
+										d6: 1,
+										materials: "string",
+										cost: 30,
+										description: "on a successful medicine check, remove 1d6 damage and remove bleeding"
 									},
 									{
 										name: "syringe (needle)",
@@ -8534,7 +8644,7 @@
 											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
-											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", statistic: "perception", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", statistic: "perception", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", statistic: "perception", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", statistic: "perception", maximum: 14, condition: 0}] },
+											perception: { maximum: 9, damage: 0, condition: 0, skills: [{ name: "sight", statistic: "perception", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", statistic: "perception", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", statistic: "perception", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", statistic: "perception", maximum: 10, condition: 0}] },
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", statistic: "memory", language: true, maximum: 7, condition: 0 }, { name: "medicine", statistic: "memory", maximum: 5, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "mechanics", statistic: "logic", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", statistic: "strength", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", statistic: "strength", maximum: 1, condition: 0 }, { name: "throw", statistic: "strength", maximum: 1, condition: 0, combat: true }] },
@@ -8561,7 +8671,7 @@
 											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
-											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", statistic: "perception", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", statistic: "perception", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", statistic: "perception", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", statistic: "perception", maximum: 14, condition: 0}] },
+											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", statistic: "perception", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", statistic: "perception", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", statistic: "perception", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", statistic: "perception", maximum: 10, condition: 0}] },
 											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", statistic: "memory", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "pattern_recognition", statistic: "logic", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 5, damage: 0, condition: 0, skills: [{ name: "punch", statistic: "strength", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", statistic: "strength", maximum: 1, condition: 0 }, { name: "throw", statistic: "strength", maximum: 1, condition: 0, combat: true }] },
@@ -8589,7 +8699,7 @@
 											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
-											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", statistic: "perception", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", statistic: "perception", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", statistic: "perception", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", statistic: "perception", maximum: 14, condition: 0}] },
+											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", statistic: "perception", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", statistic: "perception", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", statistic: "perception", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", statistic: "perception", maximum: 10, condition: 0}] },
 											memory:     { maximum: 5, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", statistic: "memory", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 5, damage: 0, condition: 0, skills: [{ name: "remain_calm", statistic: "logic", maximum: 5, condition: 0 }] },
 											strength:   { maximum: 10, damage: 0, condition: 0, skills: [{ name: "melee", statistic: "strength", combat: true, maximum: 5, condition: 0 }, { name: "punch", statistic: "strength", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", statistic: "strength", maximum: 1, condition: 0 }, { name: "throw", statistic: "strength", maximum: 1, condition: 0, combat: true }] },
@@ -8616,7 +8726,7 @@
 											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
-											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", statistic: "perception", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", statistic: "perception", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", statistic: "perception", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", statistic: "perception", maximum: 14, condition: 0}] },
+											perception: { maximum: 8, damage: 0, condition: 0, skills: [{ name: "sight", statistic: "perception", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", statistic: "perception", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", statistic: "perception", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", statistic: "perception", maximum: 10, condition: 0}] },
 											memory:     { maximum: 4, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", statistic: "memory", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 4, damage: 0, condition: 0, skills: [] },
 											strength:   { maximum: 4, damage: 0, condition: 0, skills: [{ name: "punch", statistic: "strength", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", statistic: "strength", maximum: 1, condition: 0 }, { name: "throw", statistic: "strength", maximum: 1, condition: 0, combat: true }] },
@@ -8637,7 +8747,7 @@
 											status: { points: 0, conditions: [], damage: 0 }
 										},
 										statistics: {
-											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", statistic: "perception", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", statistic: "perception", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", statistic: "perception", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", statistic: "perception", maximum: 14, condition: 0}] },
+											perception: { maximum: 10, damage: 0, condition: 0, skills: [{ name: "sight", statistic: "perception", unremovable: true, maximum: 6, condition: 0 }, { name: "sound", statistic: "perception", unremovable: true, maximum: 5, condition: 0 }, { name: "scent", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "taste", statistic: "perception", unremovable: true, maximum: 7, condition: 0 }, { name: "touch", statistic: "perception", unremovable: true, maximum: 3, condition: 0 }, { name: "camouflage", statistic: "perception", maximum: 10, condition: 0}] },
 											memory:     { maximum: 8, damage: 0, condition: 0, skills: [{ name: "lang_lizardfolk", statistic: "memory", language: true, maximum: 7, condition: 0 }] },
 											logic:      { maximum: 8, damage: 0, condition: 0, skills: [{ name: "intimidate", statistic: "logic", maximum: 7, condition: 0, charisma: true, counters: ["remain_calm"] }, { name: "judge_character", statistic: "logic", maximum: 7, condition: 0 }] },
 											strength:   { maximum: 9, damage: 0, condition: 0, skills: [{ name: "melee", statistic: "strength", combat: true, maximum: 7, condition: 0 }, { name: "punch", statistic: "strength", combat: true, unremovable: true, maximum: 0, condition: 0, d6: 2 }, { name: "carry", statistic: "strength", maximum: 1, condition: 0 }, { name: "throw", statistic: "strength", maximum: 1, condition: 0, combat: true }] },
