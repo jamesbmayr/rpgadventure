@@ -6658,7 +6658,8 @@ window.onload = function() {
 				function displayContentArenaObject(object) {
 					try {
 						// not in layer
-							if (Number(object.layer) !== ELEMENTS.gametable.canvas.layer) {
+							if (!object.layer) { object.layer = 0 }
+							if (Number(object.layer) != ELEMENTS.gametable.canvas.layer) {
 								return
 							}
 								
