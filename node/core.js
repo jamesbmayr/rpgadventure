@@ -403,6 +403,7 @@
 							return {
 								id: generateRandom(),
 								time: new Date().getTime(),
+								name: null,
 								userId: null,
 								characterId: null,
 								contentId: null,
@@ -416,6 +417,7 @@
 								x: 0,
 								y: 0,
 								z: 0,
+								layer: 0,
 								width: 1,
 								height: 1,
 								corners: 0,

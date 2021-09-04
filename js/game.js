@@ -105,6 +105,7 @@ window.onload = function() {
 							canvas: {
 								element: null,
 								context: null,
+								layer: 0,
 								offsetX: 0,
 								offsetY: 0,
 								cursorX: null,
@@ -446,6 +447,10 @@ window.onload = function() {
 									right: {
 										form: document.getElementById("content-controls-pan-right-form")
 									}
+								},
+								layer: {
+									form: document.getElementById("content-controls-layer-form"),
+									input: document.getElementById("content-controls-layer-input")
 								}
 							},
 							objects: {
@@ -540,6 +545,7 @@ window.onload = function() {
 						ELEMENTS.content.controls.pan.up.form.addEventListener(TRIGGERS.submit, panContentArena)
 						ELEMENTS.content.controls.pan.down.form.addEventListener(TRIGGERS.submit, panContentArena)
 						ELEMENTS.content.controls.pan.right.form.addEventListener(TRIGGERS.submit, panContentArena)
+						ELEMENTS.content.controls.layer.input.addEventListener(TRIGGERS.change, setLayerContentArena)
 						ELEMENTS.content.objects.search.form.addEventListener(TRIGGERS.submit, submitContentArenaObjectCreate)
 
 					// special
@@ -6053,17 +6059,29 @@ window.onload = function() {
 						// create
 							if (!listing) {
 								// block
-									var listing = document.createElement("div")
+									var listing = document.createElement("details")
 										listing.id = "arena-object-" + object.id
 										listing.className = "arena-object"
 										listing.addEventListener(TRIGGERS.click, selectContentArenaObject)
 									ELEMENTS.content.objects.list.appendChild(listing)
 
+								// name
+									var summary = document.createElement("summary")
+										summary.className = "arena-object-summary"
+									listing.appendChild(summary)
+
+									var inputName = document.createElement("input")
+										inputName.className = "arena-object-name"
+										inputName.type = "text"
+										inputName.setAttribute("readonly", true)
+										inputName.setAttribute("property", "name")
+									summary.appendChild(inputName)
+
 								// inputs
 									// locked
 										var labelLocked = document.createElement("label")
 											labelLocked.className = "arena-object-locked-label"
-										listing.appendChild(labelLocked)
+										summary.appendChild(labelLocked)
 
 										var spanLocked = document.createElement("div")
 											spanLocked.innerHTML = "&#x1f512;"
@@ -6081,7 +6099,7 @@ window.onload = function() {
 									// visible
 										var labelVisible = document.createElement("label")
 											labelVisible.className = "arena-object-visible-label"
-										listing.appendChild(labelVisible)
+										summary.appendChild(labelVisible)
 
 										var spanVisible = document.createElement("div")
 											spanVisible.innerHTML = "&#x1f441;"
@@ -6104,11 +6122,11 @@ window.onload = function() {
 											upForm.setAttribute("property", "z")
 											upForm.setAttribute("value", 1)
 											upForm.addEventListener(TRIGGERS.submit, submitContentArenaObjectUpdate)
-										listing.appendChild(upForm)
+										summary.appendChild(upForm)
 
 										var upButton = document.createElement("button")
 											upButton.className = "arena-object-up"
-											upButton.title = "raise object"
+											upButton.title = "raise object within layer"
 											upButton.innerHTML = "&#x1f53c;"
 										upForm.appendChild(upButton)
 
@@ -6119,11 +6137,11 @@ window.onload = function() {
 											downForm.setAttribute("property", "z")
 											downForm.setAttribute("value", -1)
 											downForm.addEventListener(TRIGGERS.submit, submitContentArenaObjectUpdate)
-										listing.appendChild(downForm)
+										summary.appendChild(downForm)
 
 										var downButton = document.createElement("button")
 											downButton.className = "arena-object-down"
-											downButton.title = "lower object"
+											downButton.title = "lower object within layer"
 											downButton.innerHTML = "&#x1f53d;"
 										downForm.appendChild(downButton)
 
@@ -6133,7 +6151,7 @@ window.onload = function() {
 											duplicateForm.setAttribute("method", "post")
 											duplicateForm.setAttribute("action", "javascript:;")
 											duplicateForm.addEventListener(TRIGGERS.submit, submitContentArenaObjectDuplicate)
-										listing.appendChild(duplicateForm)
+										summary.appendChild(duplicateForm)
 
 										var duplicateButton = document.createElement("button")
 											duplicateButton.className = "arena-object-duplicate"
@@ -6147,13 +6165,33 @@ window.onload = function() {
 											removeForm.setAttribute("method", "post")
 											removeForm.setAttribute("action", "javascript:;")
 											removeForm.addEventListener(TRIGGERS.submit, submitContentArenaObjectDelete)
-										listing.appendChild(removeForm)
+										summary.appendChild(removeForm)
 
 										var removeButton = document.createElement("button")
 											removeButton.className = "arena-object-remove"
 											removeButton.title = "remove object"
 											removeButton.innerText = "x"
 										removeForm.appendChild(removeButton)
+
+									// layer
+										var labelLayer = document.createElement("label")
+											labelLayer.className = "arena-object-label arena-object-layer"
+										listing.appendChild(labelLayer)
+
+										var inputLayer = document.createElement("input")
+											inputLayer.className = "arena-object-input"
+											inputLayer.setAttribute("property", "layer")
+											inputLayer.placeholder = "layer"
+											inputLayer.step = 1
+											inputLayer.type = "number"
+											inputLayer.addEventListener(TRIGGERS.scroll, function() {this.blur()})
+											inputLayer.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelLayer.appendChild(inputLayer)
+
+										var spanLayer = document.createElement("span")
+											spanLayer.className = "arena-object-label-text"
+											spanLayer.innerText = "arena layer"
+										labelLayer.appendChild(spanLayer)
 
 									// x
 										var labelX = document.createElement("label")
@@ -6477,8 +6515,10 @@ window.onload = function() {
 
 						// find
 							else {
+								var inputName = listing.querySelector("input[property='name']")
 								var inputLocked = listing.querySelector("input[property='locked']")
 								var inputVisible = listing.querySelector("input[property='visible']")
+								var inputLayer = listing.querySelector("input[property='layer']")
 								var inputX = listing.querySelector("input[property='x']")
 								var inputY = listing.querySelector("input[property='y']")
 								var inputWidth = listing.querySelector("input[property='width']")
@@ -6500,9 +6540,11 @@ window.onload = function() {
 						// set values
 							var activeElement = document.activeElement
 							listing.setAttribute("selected", ELEMENTS.gametable.selected && Object.keys(ELEMENTS.gametable.selected).includes(object.id))
-							if (										listing.style.order			!== object.z) { 			listing.style.order = object.z || 0 }
+							if (										listing.style.order			!== object.layer * 1000000 + object.z) { listing.style.order = object.layer * 1000000 + object.z || 0 }
+							if (							 			inputName.value 			!== object.name) {	 		inputName.value = object.name || object.text || object.id }
 							if (										inputLocked.checked 		!== object.locked) { 		inputLocked.checked = object.locked || false }
 							if (										inputVisible.checked 		!== object.visible) { 		inputVisible.checked = object.visible || false }
+							if (inputLayer != activeElement && 			inputLayer.value 			!== object.layer) { 		inputLayer.value = object.layer || 0 }
 							if (inputX != activeElement && 				inputX.value 				!== object.x) { 			inputX.value = object.x || 0 }
 							if (inputY != activeElement && 				inputY.value 				!== object.y) { 			inputY.value = object.y || 0 }
 							if (inputWidth != activeElement && 			inputWidth.value 			!== object.width) { 		inputWidth.value = object.width || 0 }
@@ -6527,9 +6569,14 @@ window.onload = function() {
 					try {
 						// sort objects
 							var sortedKeys = Object.keys(CONTENT.arena.objects) || []
-								sortedKeys = sortedKeys.sort(function(a, b) {
+							if (sortedKeys.length) {
+								sortedKeys = sortedKeys.sort(function(a, b) { // by z-index
 									return CONTENT.arena.objects[a].z - CONTENT.arena.objects[b].z
 								})
+								sortedKeys = sortedKeys.sort(function(a, b) { // within layer
+									return CONTENT.arena.objects[a].layer - CONTENT.arena.objects[b].layer
+								})
+							}
 
 						// update images
 							var unloadedCount = 0
@@ -6610,6 +6657,11 @@ window.onload = function() {
 			/* displayContentArenaObject */
 				function displayContentArenaObject(object) {
 					try {
+						// not in layer
+							if (Number(object.layer) !== ELEMENTS.gametable.canvas.layer) {
+								return
+							}
+								
 						// not visible?
 							var visibilityMultiplier = 1
 							if (!object.visible) {
@@ -8200,6 +8252,20 @@ window.onload = function() {
 								ELEMENTS.gametable.canvas.offsetY = 0
 							}
 						
+						// redraw
+							displayContentArena()
+					} catch (error) {console.log(error)}
+				}
+
+			/* setLayerContentArena */
+				function setLayerContentArena(event) {
+					try {
+						// get value
+							var value = Math.round(event.target.value || 0)
+						
+						// adjust
+							ELEMENTS.gametable.canvas.layer = value
+
 						// redraw
 							displayContentArena()
 					} catch (error) {console.log(error)}

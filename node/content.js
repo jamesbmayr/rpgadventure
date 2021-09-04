@@ -776,6 +776,10 @@
 														object[i] = character.arenaPresets[i]
 													}
 												}
+
+												if (!object.name) {
+													object.name = character.info.name
+												}
 												
 											saveArenaObject(REQUEST, arena, callback)
 											return
@@ -799,7 +803,7 @@
 											var content = results.documents[0]
 											object.contentId = content.id
 											object.image = content.url
-											object.text = content.name
+											object.name = content.name
 											saveArenaObject(REQUEST, arena, callback)
 											return
 										})
