@@ -770,8 +770,7 @@
 
 				// write
 					if (data.command == "write") {
-						data.path = ENVIRONMENT.storage_bucket + data.path
-						FS.writeFile(data.path, data.content, data.encoding || "binary", function (error) {
+						FS.writeFile(ENVIRONMENT.storage_bucket + data.path, data.content, data.encoding || "binary", function (error) {
 							if (error) {
 								callback({success: false, message: error})
 								return

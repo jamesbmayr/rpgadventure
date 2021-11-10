@@ -2097,9 +2097,13 @@
 			}
 
 		/* upload */
-			/*#content[mode="arena"] #content-upload-form, #content[mode="text"] #content-upload-form, #content[mode="embed"] #content-upload-form, #content[mode="component"] #content-upload-form {
+			#content[mode="arena"] #content-upload-form, #content[mode="text"] #content-upload-form, #content[mode="embed"] #content-upload-form, #content[mode="component"] #content-upload-form {
 				display: none;
-			}*/
+			}
+
+			#content-upload-form label {
+				padding: var(--small-gap-size) 0;
+			}
 
 	/** turn order **/
 		#content:not([mode="arena"]) #content-turn-order {

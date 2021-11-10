@@ -1,4 +1,5 @@
 /*** modules ***/
+	if (!FS)   { var FS   = require("fs")}
 	if (!CORE) { var CORE = require("../node/core") }
 	if (!USER) { var USER = require("../node/user") }
 	module.exports = {}
@@ -627,8 +628,11 @@
 						return
 					}
 
+				// remove headers
+					var data = REQUEST.post.content.file.data.split(",")[1]
+
 				// write file
-					CORE.accessFiles({command: "write", path: contentId + "." + extension, content: REQUEST.post.content.file.data, contentType: contentType, encoding: "binary"}, function(results) {
+					CORE.accessFiles({command: "write", path: contentId + "." + extension, content: new Buffer.from(data, 'base64'), contentType: contentType, encoding: "base64"}, function(results) {
 						if (!results.success || !results.path) {
 							results.recipients = [REQUEST.user.id]
 							callback(results)

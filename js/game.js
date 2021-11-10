@@ -407,10 +407,10 @@ window.onload = function() {
 							data: {
 								form: document.getElementById("content-data-form")
 							},
-							// upload: {
-							// 	form: document.getElementById("content-upload-form"),
-							// 	input: document.getElementById("content-upload-input")
-							// },
+							upload: {
+								form: document.getElementById("content-upload-form"),
+								input: document.getElementById("content-upload-input")
+							},
 							duplicate: {
 								form: document.getElementById("content-duplicate-form")
 							},
@@ -536,7 +536,7 @@ window.onload = function() {
 						ELEMENTS.content.data.form.addEventListener(TRIGGERS.submit, submitContentUpdateData)
 						ELEMENTS.content.code.input.addEventListener(TRIGGERS.change, submitContentUpdateData)
 						ELEMENTS.content.code.search.form.addEventListener(TRIGGERS.submit, submitContentComponentSearch)
-						// ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, submitContentUpdateFile)
+						ELEMENTS.content.upload.form.addEventListener(TRIGGERS.submit, submitContentUpdateFile)
 						ELEMENTS.content.turnOrder.form.addEventListener(TRIGGERS.submit, submitRollGroupCreateTurnOrder)
 						ELEMENTS.content.controls.zoom.in.form.addEventListener(TRIGGERS.submit, zoomContent)
 						ELEMENTS.content.controls.zoom.zero.form.addEventListener(TRIGGERS.submit, zoomContent)
@@ -7181,60 +7181,62 @@ window.onload = function() {
 				}
 
 			/* submitContentUpdateFile */
-				// function submitContentUpdateFile(event) {
-				// 	try {
-				// 		ELEMENTS.content.upload.input.click()
-				// 		ELEMENTS.content.upload.input.addEventListener(TRIGGERS.change, function(event) {
-				// 			if (ELEMENTS.content.upload.input.value && ELEMENTS.content.upload.input.value.length) {
-				// 				// start reading
-				// 					var file = ELEMENTS.content.upload.input.files[0]
-				// 					var reader = new FileReader()
-				// 						reader.readAsBinaryString(file)
+				function submitContentUpdateFile(event) {
+					try {
+						ELEMENTS.content.upload.input.click()
+						ELEMENTS.content.upload.input.addEventListener(TRIGGERS.change, function(event) {
+							if (ELEMENTS.content.upload.input.value && ELEMENTS.content.upload.input.value.length) {
+								// start reading
+									var files = ELEMENTS.content.upload.input.files
+									var reader = new FileReader()
 
-				// 				// end reading
-				// 					reader.onload = function(event) {
-				// 						try {
-				// 							// parse content
-				// 								var post = {
-				// 									action: "uploadContentFile",
-				// 									content: {
-				// 										id: CONTENT.id,
-				// 										gameId: GAME ? GAME.id : null,
-				// 										userId: USER ? USER.id : null,
-				// 										type: CONTENT.type,
-				// 										name: CONTENT.name,
-				// 										file: {
-				// 											name: file.name,
-				// 											data: event.target.result
-				// 										}
-				// 									}
-				// 								}
+								// end reading
+									reader.onload = function(event) {
+										try {
+											// parse content
+												var post = {
+													action: "uploadContentFile",
+													content: {
+														id: CONTENT.id,
+														gameId: GAME ? GAME.id : null,
+														userId: USER ? USER.id : null,
+														type: CONTENT.type,
+														name: CONTENT.name,
+														file: {
+															name: files[0].name,
+															data: event.target.result
+														}
+													}
+												}
 
-				// 							// validate
-				// 								if (!post.content.id || !post.content.type || !post.content.name) {
-				// 									FUNCTIONS.showToast({success: false, message: "no content selected"})
-				// 									return
-				// 								}
-				// 								if (!post.content.file || !post.content.file.name || !post.content.file.data) {
-				// 									FUNCTIONS.showToast({success: false, message: "no file uploaded"})
-				// 									return
-				// 								}
+											// validate
+												if (!post.content.id || !post.content.type || !post.content.name) {
+													FUNCTIONS.showToast({success: false, message: "no content selected"})
+													return
+												}
+												if (!post.content.file || !post.content.file.name || !post.content.file.data) {
+													FUNCTIONS.showToast({success: false, message: "no file uploaded"})
+													return
+												}
 
-				// 							// send socket request
-				// 								FUNCTIONS.sendPost(post, function(response) {
-				// 									FUNCTIONS.showToast(response)
-				// 								})
-				// 						}
-				// 						catch (error) {
-				// 							console.log(error)
-				// 							FUNCTIONS.showToast({success: false, message: "unable to read file"})
-				// 							return
-				// 						}
-				// 					}
-				// 			}
-				// 		})
-				// 	} catch (error) {console.log(error)}
-				// }
+											// send socket request
+												FUNCTIONS.sendPost(post, function(response) {
+													FUNCTIONS.showToast(response)
+												})
+										}
+										catch (error) {
+											console.log(error)
+											FUNCTIONS.showToast({success: false, message: "unable to read file"})
+											return
+										}
+									}
+
+								// start reading
+									reader.readAsDataURL(files[0])
+							}
+						})
+					} catch (error) {console.log(error)}
+				}
 
 			/* submitContentCreateDuplicate */
 				function submitContentCreateDuplicate(event) {
