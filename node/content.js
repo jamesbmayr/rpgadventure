@@ -1,5 +1,4 @@
 /*** modules ***/
-	if (!FS)   { var FS   = require("fs")}
 	if (!CORE) { var CORE = require("../node/core") }
 	if (!USER) { var USER = require("../node/user") }
 	module.exports = {}

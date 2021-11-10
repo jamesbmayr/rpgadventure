@@ -2101,10 +2101,6 @@
 				display: none;
 			}
 
-			#content-upload-form label {
-				padding: var(--small-gap-size) 0;
-			}
-
 	/** turn order **/
 		#content:not([mode="arena"]) #content-turn-order {
 			display: none;
