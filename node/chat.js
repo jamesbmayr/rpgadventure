@@ -127,7 +127,7 @@
 							chats = chats.filter(function(c) { 
 								return (c.userId == REQUEST.user.id) || (c.recipientId == REQUEST.user.id) || !c.recipientId
 							})
-							chats = chats.slice(0, 1000) || []
+							chats = chats.slice(0, 100) || []
 
 						// return
 							callback({success: true, chat: chats, recipients: [REQUEST.user.id]})

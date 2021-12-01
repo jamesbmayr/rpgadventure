@@ -693,7 +693,7 @@
 							var rollGroups = results.documents.sort(function(a, b) {
 								return b.time - a.time
 							}) || []
-							rollGroups = rollGroups.slice(0, 1000) || []
+							rollGroups = rollGroups.slice(0, 100) || []
 
 						// return
 							callback({success: true, roll: rollGroups, recipients: [REQUEST.user.id]})

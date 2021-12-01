@@ -1414,6 +1414,13 @@ window.onload = function() {
 			/* displayRollGroups */
 				function displayRollGroups(rollGroups) {
 					try {
+						// sort messages by reverse chronology
+							if (rollGroups && rollGroups.length) {
+								rollGroups = rollGroups.sort(function(a, b) {
+									return a.time - b.time
+								})
+							}
+							
 						// loop through rollGroups
 							for (var i in rollGroups) {
 								// already exists
@@ -4988,7 +4995,14 @@ window.onload = function() {
 						// no new messages
 							var newMessages = false
 
-						// loop through messages
+						// sort messages by reverse chronology
+							if (messages && messages.length) {
+								messages = messages.sort(function(a, b) {
+									return a.time - b.time
+								})
+							}
+
+						// loop through messages	
 							for (var i in messages) {
 								// already exists
 									if (ELEMENTS.chat.messages.querySelector("#chat-" + messages[i].id)) {
