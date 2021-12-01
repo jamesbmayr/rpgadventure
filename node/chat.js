@@ -120,7 +120,7 @@
 					CORE.accessDatabase(query, function(results) {
 						// sort & limit
 							var chats = results.documents.sort(function(a, b) {
-								return a.time - b.time
+								return b.time - a.time
 							}) || []
 
 						// filter

@@ -691,7 +691,7 @@
 					CORE.accessDatabase(query, function(results) {
 						// sort & limit
 							var rollGroups = results.documents.sort(function(a, b) {
-								return a.time - b.time
+								return b.time - a.time
 							}) || []
 							rollGroups = rollGroups.slice(0, 1000) || []
 
