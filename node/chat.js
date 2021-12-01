@@ -119,19 +119,15 @@
 				// find
 					CORE.accessDatabase(query, function(results) {
 						// sort & limit
-							var timestamp = new Date().getTime() - CORE.getAsset("constants").contentDuration
 							var chats = results.documents.sort(function(a, b) {
 								return a.time - b.time
-							}) || []
-							chats = chats.slice(0, 100) || []
-							chats = chats.filter(function(c) {
-								return c.time > timestamp
 							}) || []
 
 						// filter
 							chats = chats.filter(function(c) { 
 								return (c.userId == REQUEST.user.id) || (c.recipientId == REQUEST.user.id) || !c.recipientId
 							})
+							chats = chats.slice(0, 1000) || []
 
 						// return
 							callback({success: true, chat: chats, recipients: [REQUEST.user.id]})
