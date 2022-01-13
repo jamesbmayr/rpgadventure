@@ -94,6 +94,7 @@
 			color: var(--medium-gray);
 			font-family: var(--font-0);
 			word-break: break-word;
+			user-select: none;
 		}
 
 	/* form */

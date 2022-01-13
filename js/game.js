@@ -177,6 +177,18 @@ window.onload = function() {
 								audio: {
 									input: document.getElementById("settings-user-audio-input")
 								},
+								autoplayAudio: {
+									select: document.getElementById("settings-user-autoplay-audio-select")
+								},
+								autoplayVideo: {
+									select: document.getElementById("settings-user-autoplay-video-select")
+								},
+								inventorySort: {
+									select: document.getElementById("settings-user-inventory-sort-select")
+								},
+								arenaEdgePan: {
+									select: document.getElementById("settings-user-arena-edge-pan-select")
+								},
 								password: {
 									form: document.getElementById("settings-user-password-form"),
 									old: document.getElementById("settings-user-password-input-old"),
@@ -310,13 +322,17 @@ window.onload = function() {
 								dragging: null,
 								equipped: {
 									element: document.getElementById("character-items-equipped"),
+									summary: document.getElementById("character-items-equipped-summary"),
 									count: document.getElementById("character-items-equipped-count"),
+									filter: document.getElementById("character-items-equipped-filter-input"),
 									form: document.getElementById("character-items-equipped-form"),
 									list: document.getElementById("character-items-equipped-list")
 								},
 								unequipped: {
 									element: document.getElementById("character-items-unequipped"),
+									summary: document.getElementById("character-items-unequipped-summary"),
 									count: document.getElementById("character-items-unequipped-count"),
+									filter: document.getElementById("character-items-unequipped-filter-input"),
 									form: document.getElementById("character-items-unequipped-form"),
 									list: document.getElementById("character-items-unequipped-list")
 								},
@@ -492,6 +508,10 @@ window.onload = function() {
 						ELEMENTS.settings.user.name.input.addEventListener(TRIGGERS.change, submitUserUpdateName)
 						ELEMENTS.settings.user.color.input.addEventListener(TRIGGERS.change, submitUserUpdateColor)
 						ELEMENTS.settings.user.audio.input.addEventListener(TRIGGERS.change, submitUserUpdateVolume)
+						ELEMENTS.settings.user.autoplayAudio.select.addEventListener(TRIGGERS.change, submitUserUpdateAutoplayAudio)
+						ELEMENTS.settings.user.autoplayVideo.select.addEventListener(TRIGGERS.change, submitUserUpdateAutoplayVideo)
+						ELEMENTS.settings.user.inventorySort.select.addEventListener(TRIGGERS.change, submitUserUpdateInventorySort)
+						ELEMENTS.settings.user.arenaEdgePan.select.addEventListener(TRIGGERS.change, submitUserUpdateArenaEdgePan)
 						ELEMENTS.settings.user.password.old.addEventListener(TRIGGERS.change, submitUserUpdatePassword)
 						ELEMENTS.settings.user.password.new.addEventListener(TRIGGERS.change, submitUserUpdatePassword)
 						ELEMENTS.settings.user.signout.form.addEventListener(TRIGGERS.submit, submitUserUpdateSignout)
@@ -518,6 +538,12 @@ window.onload = function() {
 						ELEMENTS.character.items.search.form.addEventListener(TRIGGERS.submit, submitCharacterUpdateItemCreate)
 						ELEMENTS.character.items.equipped.form.addEventListener(TRIGGERS.submit, displayCharacterItemMode)
 						ELEMENTS.character.items.unequipped.form.addEventListener(TRIGGERS.submit, displayCharacterItemMode)
+						ELEMENTS.character.items.equipped.summary.addEventListener(TRIGGERS.drop, submitCharacterUpdateItemPosition)
+						ELEMENTS.character.items.unequipped.summary.addEventListener(TRIGGERS.drop, submitCharacterUpdateItemPosition)
+						ELEMENTS.character.items.equipped.summary.addEventListener(  TRIGGERS.keyup, submitCharacterUpdateItemExpand) 
+						ELEMENTS.character.items.unequipped.summary.addEventListener(TRIGGERS.keyup, submitCharacterUpdateItemExpand)
+						ELEMENTS.character.items.equipped.filter.addEventListener(TRIGGERS.input, submitCharacterUpdateItemFilter)
+						ELEMENTS.character.items.unequipped.filter.addEventListener(TRIGGERS.input, submitCharacterUpdateItemFilter)
 						ELEMENTS.character.arena.presets.querySelectorAll("input").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
 						ELEMENTS.character.arena.presets.querySelectorAll("select").forEach(function(element) { element.addEventListener(TRIGGERS.change, submitCharacterUpdateArenaPresets) })
 
@@ -1236,6 +1262,16 @@ window.onload = function() {
 
 								// color
 									ELEMENTS.settings.user.color.input.value = USER.settings.color || "#000000"
+
+								// autoplay
+									ELEMENTS.settings.user.autoplayAudio.select.value = USER.settings.autoplayAudio || false
+									ELEMENTS.settings.user.autoplayVideo.select.value = USER.settings.autoplayVideo || false
+
+								// inventorySort
+									ELEMENTS.settings.user.inventorySort.select.value = USER.settings.inventorySort || false
+
+								// arenaEdgePan
+									ELEMENTS.settings.user.arenaEdgePan.select.value = USER.settings.arenaEdgePan || false
 							}
 
 						// username
@@ -1324,6 +1360,118 @@ window.onload = function() {
 
 						// save
 							USER.settings.volume = volume
+
+						// post
+							var post = {
+								action: "updateUserSettings",
+								user: {
+									settings: USER.settings
+								}
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitUserUpdateAutoplayAudio */
+				function submitUserUpdateAutoplayAudio(event) {
+					try {
+						// connected?
+							if (!SOCKET) {
+								FUNCTIONS.showToast({success: false, message: "no websocket connection"})
+								return
+							}
+
+						// get selection
+							var autoplayAudio = event.target.value == "false" ? false : true
+
+						// save
+							USER.settings.autoplayAudio = autoplayAudio
+
+						// post
+							var post = {
+								action: "updateUserSettings",
+								user: {
+									settings: USER.settings
+								}
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitUserUpdateAutoplayVideo */
+				function submitUserUpdateAutoplayVideo(event) {
+					try {
+						// connected?
+							if (!SOCKET) {
+								FUNCTIONS.showToast({success: false, message: "no websocket connection"})
+								return
+							}
+
+						// get selection
+							var autoplayVideo = event.target.value == "false" ? false : true
+
+						// save
+							USER.settings.autoplayVideo = autoplayVideo
+
+						// post
+							var post = {
+								action: "updateUserSettings",
+								user: {
+									settings: USER.settings
+								}
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitUserUpdateInventorySort */
+				function submitUserUpdateInventorySort(event) {
+					try {
+						// connected?
+							if (!SOCKET) {
+								FUNCTIONS.showToast({success: false, message: "no websocket connection"})
+								return
+							}
+
+						// get selection
+							var inventorySort = event.target.value == "false" ? false : event.target.value
+
+						// save
+							USER.settings.inventorySort = inventorySort
+
+						// post
+							var post = {
+								action: "updateUserSettings",
+								user: {
+									settings: USER.settings
+								}
+							}
+
+						// send
+							SOCKET.send(JSON.stringify(post))
+					} catch (error) {console.log(error)}
+				}
+
+			/* submitUserUpdateArenaEdgePan */
+				function submitUserUpdateArenaEdgePan(event) {
+					try {
+						// connected?
+							if (!SOCKET) {
+								FUNCTIONS.showToast({success: false, message: "no websocket connection"})
+								return
+							}
+
+						// get selection
+							var arenaEdgePan = event.target.value == "false" ? false : true
+
+						// save
+							USER.settings.arenaEdgePan = arenaEdgePan
 
 						// post
 							var post = {
@@ -3125,17 +3273,47 @@ window.onload = function() {
 							ELEMENTS.character.items.equipped.element.removeAttribute("dragging")
 							ELEMENTS.character.items.unequipped.element.removeAttribute("dragging")
 
-						// loop through items
+						// filter
+							var filterText = ELEMENTS.character.items.equipped.filter.value.trim() || null
+
+						// set counters
 							var equippedCount = 0
 							var unequippedCount = 0
-							for (var i in character.items) {
-								if (character.items[i].equipped) {
+
+						// sort list?
+							var allItems = FUNCTIONS.duplicateObject(character.items)
+							if (USER.settings.inventorySort == "alphabetical") {
+								allItems.sort(function(a, b) { return a.name.toLowerCase().localeCompare(b.name.toLowerCase()) })
+							}
+							else if (USER.settings.inventorySort == "reverse-alphabetical") {
+								allItems.sort(function(a, b) { return b.name.toLowerCase().localeCompare(a.name.toLowerCase()) })
+							}
+							else if (USER.settings.inventorySort == "weight") {
+								allItems.sort(function(a, b) { return b.weight - a.weight })
+							}
+							else if (USER.settings.inventorySort == "reverse-weight") {
+								allItems.sort(function(a, b) { return a.weight - b.weight })
+							}
+							else if (USER.settings.inventorySort == "value") {
+								allItems.sort(function(a, b) { return b.weight - a.weight })
+							}
+							else if (USER.settings.inventorySort == "reverse-value") {
+								allItems.sort(function(a, b) { return a.weight - b.weight })
+							}
+						
+						// loop through list
+							for (var i in allItems) {
+								if (allItems[i].equipped) {
 									equippedCount++
-									displayCharacterItem(character, character.items[i], ELEMENTS.character.items.equipped.list, enable)
+									if (!filterText || allItems[i].name.toLowerCase().includes(filterText.toLowerCase())) {
+										displayCharacterItem(character, allItems[i], ELEMENTS.character.items.equipped.list, enable)
+									}
 								}
 								else {
 									unequippedCount++
-									displayCharacterItem(character, character.items[i], ELEMENTS.character.items.unequipped.list, enable)	
+									if (!filterText || allItems[i].name.toLowerCase().includes(filterText.toLowerCase())) {
+										displayCharacterItem(character, allItems[i], ELEMENTS.character.items.unequipped.list, enable)	
+									}
 								}
 							}
 
@@ -3622,6 +3800,8 @@ window.onload = function() {
 								// container
 									ELEMENTS.character.items.equipped.element.removeAttribute("dragging")
 									ELEMENTS.character.items.unequipped.element.removeAttribute("dragging")
+
+								// try to drop
 									return
 							}
 
@@ -3634,7 +3814,8 @@ window.onload = function() {
 						// start dragging
 							ELEMENTS.character.items.dragging = event.target
 							ELEMENTS.character.items.dragging.setAttribute("dragging", true)
-							event.target.closest(".subsection").setAttribute("dragging", true)
+							ELEMENTS.character.items.equipped.element.setAttribute("dragging", true)
+							ELEMENTS.character.items.unequipped.element.setAttribute("dragging", true)
 					} catch (error) {console.log(error)}
 				}
 
@@ -4638,6 +4819,34 @@ window.onload = function() {
 					} catch (error) {console.log(error)}
 				}
 
+			/* submitCharacterUpdateItemExpand */
+				function submitCharacterUpdateItemExpand(event) {
+					try {
+						// don't toggle on input
+							if (event.target == ELEMENTS.character.items.equipped.filter || event.target == ELEMENTS.character.items.unequipped.filter)   {
+								event.preventDefault()
+							}
+					}
+					catch (error) {console.log(error)}
+				}
+
+			/* submitCharacterUpdateItemFilter */
+				function submitCharacterUpdateItemFilter(event) {
+					try {
+						// get text
+							var filterText = event.target.value || ""
+							ELEMENTS.character.items.equipped.filter.value = ELEMENTS.character.items.unequipped.filter.value = filterText
+
+						// redisplay
+							displayCharacterItems(CHARACTER, ELEMENTS.character.element.getAttribute("mode") == "items")
+
+						// expand
+							ELEMENTS.character.items.equipped.element.setAttribute("open", true)
+							ELEMENTS.character.items.unequipped.element.setAttribute("open", true)
+					}
+					catch (error) {console.log(error)}
+				}
+
 			/* submitCharacterUpdateItemCreate */
 				function submitCharacterUpdateItemCreate(event) {
 					try {
@@ -4840,7 +5049,15 @@ window.onload = function() {
 							var draggedItem = CHARACTER.items[draggedItemIndex]
 
 						// get position
-							if (event.target.closest(".item")) {
+							if (event.target.closest("#character-items-equipped-summary")) {
+								var targetItemIndex = -1
+								var targetList = "equipped"
+							}
+							else if (event.target.closest("#character-items-unequipped-summary")) {
+								var targetItemIndex = -1
+								var targetList = "unequipped"
+							}
+							else if (event.target.closest(".item")) {
 								var targetItemIndex = ids.indexOf(event.target.closest(".item").id)
 							}
 							else if (event.target.querySelector(".item")) {
@@ -4850,14 +5067,25 @@ window.onload = function() {
 								return false
 							}
 
+						// moving to top of list
+							if (targetList) {
+								var equippedStatus = (targetList == "equipped") ? true : false
+								targetItemIndex = CHARACTER.items.find(function (item) {
+									return item.equipped == equippedStatus
+								}) || -1
+								draggedItem.equipped = equippedStatus
+							}
+
 						// same position
-							if (targetItemIndex == draggedItemIndex) {
+							else if (targetItemIndex == draggedItemIndex) {
 								return false
 							}
 
-						// set equipped
-							var targetItem = CHARACTER.items[targetItemIndex]
-							draggedItem.equipped = targetItem.equipped
+						// set position and equipped based on 
+							else {
+								var targetItem = CHARACTER.items[targetItemIndex]
+								draggedItem.equipped = targetItem.equipped
+							}
 
 						// update order
 							if (targetItemIndex > draggedItemIndex) {
@@ -4865,7 +5093,7 @@ window.onload = function() {
 								CHARACTER.items.splice(draggedItemIndex, 1)
 							}
 							else {
-								CHARACTER.items.splice(targetItemIndex, 0, draggedItem)
+								CHARACTER.items.splice(Math.max(targetItemIndex, 0), 0, draggedItem)
 								CHARACTER.items.splice(draggedItemIndex + 1, 1)
 							}
 
@@ -5032,9 +5260,17 @@ window.onload = function() {
 							ELEMENTS.chat.messages.scrollTop = ELEMENTS.chat.messages.scrollHeight
 
 						// one message, and it's a sound?
-							if (messages && messages.length == 1 && messages[0].element.querySelector("audio")) {
+							if (USER.settings.autoplayAudio && messages && messages.length == 1 && messages[0].element.querySelector("audio")) {
 								try {
 									messages[0].element.querySelector("audio").play()
+								} catch (error) {}
+							}
+
+						// one message, and it's a youtube video?
+							if (USER.settings.autoplayVideo && messages && messages.length == 1 && messages[0].element.querySelector(".chat-message-youtube")) {
+								try {
+									messages[0].element.querySelector(".chat-message-youtube").setAttribute("allow", "autoplay")
+									messages[0].element.querySelector(".chat-message-youtube").src += "?&autoplay=1"
 								} catch (error) {}
 							}
 
@@ -5619,23 +5855,25 @@ window.onload = function() {
 									ELEMENTS.gametable.element.appendChild(arena)
 
 								// panning
-									var directions = ["-y", "-y -x", "-x", "-x y", "y", "y x", "x", "x -y"]
-									for (var i in directions) {
-										var panningOverlay = document.createElement("div")
-											panningOverlay.setAttribute("directions", directions[i])
-											panningOverlay.setAttribute("multiplier", 1)
-											panningOverlay.className = "content-arena-panning"
-											panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
-											panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
-										ELEMENTS.gametable.element.appendChild(panningOverlay)
+									if (USER.settings.arenaEdgePan) {
+										var directions = ["-y", "-y -x", "-x", "-x y", "y", "y x", "x", "x -y"]
+										for (var i in directions) {
+											var panningOverlay = document.createElement("div")
+												panningOverlay.setAttribute("directions", directions[i])
+												panningOverlay.setAttribute("multiplier", 1)
+												panningOverlay.className = "content-arena-panning"
+												panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
+												panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
+											ELEMENTS.gametable.element.appendChild(panningOverlay)
 
-										var panningOverlay = document.createElement("div")
-											panningOverlay.setAttribute("directions", directions[i])
-											panningOverlay.setAttribute("multiplier", 2)
-											panningOverlay.className = "content-arena-panning"
-											panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
-											panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
-										ELEMENTS.gametable.element.appendChild(panningOverlay)
+											var panningOverlay = document.createElement("div")
+												panningOverlay.setAttribute("directions", directions[i])
+												panningOverlay.setAttribute("multiplier", 2)
+												panningOverlay.className = "content-arena-panning"
+												panningOverlay.addEventListener(TRIGGERS.mouseenter, startPanningContentArena)
+												panningOverlay.addEventListener(TRIGGERS.mouseleave, stopPanningContentArena)
+											ELEMENTS.gametable.element.appendChild(panningOverlay)
+										}
 									}
 							}
 
@@ -7204,6 +7442,9 @@ window.onload = function() {
 									var files = ELEMENTS.content.upload.input.files
 									var reader = new FileReader()
 
+								// toast
+									FUNCTIONS.showToast({success: true, message: "uploading..."})
+
 								// end reading
 									reader.onload = function(event) {
 										try {
@@ -7871,6 +8112,22 @@ window.onload = function() {
 									var bottom = Number(arenaObject.y) - yRadius
 									var left = Number(arenaObject.x) - xRadius
 
+								// rotation?
+									if (arenaObject.rotation == 90 || arenaObject.rotation == 270) {
+										top = Number(arenaObject.y) + xRadius
+										right = Number(arenaObject.x) + yRadius
+										bottom = Number(arenaObject.y) - xRadius
+										left = Number(arenaObject.x) - yRadius
+									}
+
+									if (arenaObject.rotation == 45 || arenaObject.rotation == 135 || arenaObject.rotation == 225 || arenaObject.rotation == 315) {
+										var averageRadius = (xRadius + yRadius) / 2
+										top = Number(arenaObject.y) + averageRadius
+										right = Number(arenaObject.x) + averageRadius
+										bottom = Number(arenaObject.y) - averageRadius
+										left = Number(arenaObject.x) - averageRadius
+									}
+
 								// click within edges?
 									if ((left <= ELEMENTS.gametable.canvas.cursorX && ELEMENTS.gametable.canvas.cursorX <= right)
 									 && (bottom <= ELEMENTS.gametable.canvas.cursorY && ELEMENTS.gametable.canvas.cursorY <= top)) {
@@ -7912,6 +8169,10 @@ window.onload = function() {
 
 										// grab
 											ELEMENTS.gametable.grabbed = arenaObject
+											var arenaObjectOffsetX = (left + right) / 2 - ELEMENTS.gametable.canvas.cursorX
+											var arenaObjectOffsetY = (top + bottom) / 2 - ELEMENTS.gametable.canvas.cursorY
+											ELEMENTS.gametable.canvas.moveOffsetX = arenaObjectOffsetX
+											ELEMENTS.gametable.canvas.moveOffsetY = arenaObjectOffsetY
 
 										// grabbing style
 											ELEMENTS.body.setAttribute("grabbing", true)
@@ -7994,8 +8255,8 @@ window.onload = function() {
 									}
 
 								// before
-									var roundedX = (Math.round(coordinates.x * 2) / 2)
-									var roundedY = (Math.round(coordinates.y * 2) / 2)
+									var roundedX = (Math.round((coordinates.x + ELEMENTS.gametable.canvas.moveOffsetX) * 2) / 2)
+									var roundedY = (Math.round((coordinates.y + ELEMENTS.gametable.canvas.moveOffsetY) * 2) / 2)
 									var differenceX = roundedX - Number(ELEMENTS.gametable.grabbed.x)
 									var differenceY = roundedY - Number(ELEMENTS.gametable.grabbed.y)
 
@@ -8100,6 +8361,8 @@ window.onload = function() {
 
 						// unselect
 							ELEMENTS.gametable.grabbed = null
+							ELEMENTS.gametable.canvas.moveOffsetX = null
+							ELEMENTS.gametable.canvas.moveOffsetY = null
 						
 						// send
 							SOCKET.send(JSON.stringify(post))
@@ -8201,6 +8464,11 @@ window.onload = function() {
 			/* startPanningContentArena */
 				function startPanningContentArena(event) {
 					try {
+						// disabled
+							if (!USER.settings.arenaEdgePan) {
+								return
+							}
+
 						// already drag-moving?
 							if (ELEMENTS.gametable.canvas.moveStartX !== null && ELEMENTS.gametable.canvas.moveStartY !== null) {
 								return

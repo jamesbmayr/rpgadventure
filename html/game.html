@@ -120,21 +120,59 @@
 				</details>
 				<details id="settings-user" class="subsection" open>
 					<summary>
-						<h3>user</h3>
+						<h3>player</h3>
 					</summary>
 					<form id="settings-user-name-form" method="post" action="javascript:;">
 						<h4>name</h4>
 						<input id="settings-user-name-input" type="text" placeholder="name" autocomplete="off"/>
 					</form>
 					<form id="settings-user-color-form" method="post" action="javascript:;">
-						<h4>color</h4>
-						<div id="settings-user-color-label" class="form-pair">&#x1f3a8;</div>
+						<h4>chat color</h4>
+						<div id="settings-user-color-label" class="form-pair settings-label" title="chat message background">&#x1f3a8;</div>
 						<input id="settings-user-color-input" type="color"/>
 					</form>
 					<form id="settings-user-audio-form" method="post" action="javascript:;">
-						<h4>audio</h4>
-						<div id="settings-user-audio-label" class="form-pair">&#x1f50a;</div>
+						<h4>audio volume</h4>
+						<div id="settings-user-audio-label" class="form-pair settings-label" title="volume">&#x1f50a;</div>
 						<input id="settings-user-audio-input" type="range" min="0" max="1" step="0.01" value="1" class="form-pair"/>
+					</form>
+					<form id="settings-user-autoplay-form" method="post" action="javascript:;">
+						<h4>autoplay</h4>
+						<div>
+							<div id="settings-user-autoplay-audio-label" class="form-pair settings-label" title="audio">&#x1f3b6;</div>
+							<select id="settings-user-autoplay-audio-select" class="form-pair settings-select">
+								<option value="true" selected>on</option>
+								<option value="false">off</option>
+							</select>
+						</div>
+						<div>
+							<div id="settings-user-autoplay-video-label" class="form-pair settings-label" title="video">&#x1f4fa;</div>
+							<select id="settings-user-autoplay-video-select" class="form-pair settings-select">
+								<option value="true" selected>on</option>
+								<option value="false">off</option>
+							</select>
+						</div>
+					</form>
+					<form id="settings-user-inventory-form" method="post" action="javascript:;">
+						<h4>inventory sort</h4>
+						<div id="settings-user-inventory-sort-label" class="form-pair settings-label" title="item list sort type">&#x1f392;</div>
+						<select id="settings-user-inventory-sort-select" class="form-pair settings-select">
+							<option value="false" selected>custom</option>
+							<option value="alphabetical">alphabetical</option>
+							<option value="reverse-alphabetical">reverse-alphabetical</option>
+							<option value="weight">weight</option>
+							<option value="reverse-weight">reverse-weight</option>
+							<option value="value">value</option>
+							<option value="reverse-value">reverse-value</option>
+						</select>
+					</form>
+					<form id="settings-user-arena-edge-pan-form" method="post" action="javascript:;">
+						<h4>arena edge</h4>
+						<div id="settings-user-arena-edge-pan-label" class="form-pair settings-label" title="behavior at arena edge">&#x1f5fa;</div>
+						<select id="settings-user-arena-edge-pan-select" class="form-pair settings-select">
+							<option value="true">pan in direction</option>
+							<option value="false" selected>stay in place</option>
+						</select>
 					</form>
 					<form id="settings-user-password-form" method="post" action="javascript:;">
 						<h4>password</h4>
@@ -558,7 +596,12 @@
 				</div>
 				<details id="character-items-equipped" class="subsection">
 					<summary id="character-items-equipped-summary">
-						<h3 id="character-items-equipped-header">inventory (<span id="character-items-equipped-count">0</span>)</h3>
+						<h3 id="character-items-equipped-header">
+							inventory (<span id="character-items-equipped-count">0</span>)
+							<form id="character-items-equipped-filter-form" method="post" action="javascript:;">
+								<input autocomplete="off" placeholder="filter..." id="character-items-equipped-filter-input"/>
+							</form>
+						</h3>
 						<form id="character-items-equipped-form" method="post" action="javascript:;">
 							<button id="character-items-equipped-button" class="minor-button" title="edit items">&#x1f4dd;</button>
 						</form>
@@ -567,7 +610,12 @@
 				</details>
 				<details id="character-items-unequipped" class="subsection">
 					<summary id="character-items-unequipped-summary">
-						<h3 id="character-items-unequipped-header">stockpile (<span id="character-items-unequipped-count">0</span>)</h3>
+						<h3 id="character-items-unequipped-header">
+							stockpile (<span id="character-items-unequipped-count">0</span>)
+							<form id="character-items-unequipped-filter-form" method="post" action="javascript:;">
+								<input autocomplete="off" placeholder="filter..." id="character-items-unequipped-filter-input"/>
+							</form>
+						</h3>
 						<form id="character-items-unequipped-form" method="post" action="javascript:;">
 							<button id="character-items-unequipped-button" class="minor-button" title="edit items">&#x1f4dd;</button>
 						</form>

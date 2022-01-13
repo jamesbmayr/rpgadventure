@@ -275,7 +275,11 @@
 								},
 								settings: {
 									color: getAsset("colors")["medium-gray"],
-									volume: 1
+									volume: 1,
+									autoplayAudio: true,
+									autoplayVideo: true,
+									inventorySort: false,
+									arenaEdgePan: false
 								},
 								gameId: null,
 								characterId: null,

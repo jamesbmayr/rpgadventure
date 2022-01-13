@@ -404,7 +404,11 @@
 				// loop through settings
 					var settings = {
 						volume: Math.max(0, Math.min(1, REQUEST.post.user.settings.volume)),
-						color: REQUEST.post.user.settings.color || "#000000"
+						color: REQUEST.post.user.settings.color || "#000000",
+						autoplayAudio: REQUEST.post.user.settings.autoplayAudio || false,
+						autoplayVideo: REQUEST.post.user.settings.autoplayVideo || false,
+						inventorySort: REQUEST.post.user.settings.inventorySort || false,
+						arenaEdgePan: REQUEST.post.user.settings.arenaEdgePan || false
 					}
 
 				// query
