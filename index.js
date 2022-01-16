@@ -496,7 +496,7 @@
 								catch (error) {_400(REQUEST, "unable to " + REQUEST.post.action)}
 							break
 
-					// character
+					// character
 						// create
 							case "createCharacter":
 								try {

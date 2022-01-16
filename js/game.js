@@ -5290,6 +5290,12 @@ window.onload = function() {
 								messageElement.id = "chat-" + message.id
 								if (message.display.color) {
 									messageElement.style.backgroundColor = message.display.color
+
+									var lightContrast = FUNCTIONS.getContrast(message.display.color, "#dddddd") // var(--light-gray)
+									var darkContrast = FUNCTIONS.getContrast(message.display.color, "#111111") // var(--dark-gray)
+									if (darkContrast > lightContrast) {
+										messageElement.className += " chat-invert"
+									}
 								}
 							ELEMENTS.chat.messages.appendChild(messageElement)
 
@@ -5303,7 +5309,7 @@ window.onload = function() {
 								messageName.innerText = message.display.sender
 							messageLeft.appendChild(messageName)
 
-							if (message.display.recipient) {
+							if (message.display.recipient) {
 								var messageRecipient = document.createElement("div")
 									messageRecipient.className = "chat-message-recipient"
 									messageRecipient.innerHTML = "&rarr; " + message.display.recipient

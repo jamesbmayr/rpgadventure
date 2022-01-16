@@ -541,14 +541,6 @@
 			border-radius: var(--border-radius) !important;
 		}
 
-	/** color **/
-		#settings-user-color-input {
-			float: left;
-			height: var(--medium-font-size);
-			width: calc(100% - (var(--medium-font-size) + 4 * var(--small-gap-size)) - 3 * var(--small-gap-size) - 2 * var(--border-size));
-			margin: var(--small-gap-size) 0 var(--small-gap-size) var(--small-gap-size);
-		}
-
 	/** audio **/
 		#settings-user-audio-input {
 			float: left;
@@ -1981,6 +1973,14 @@
 				border-top: var(--border-size) solid var(--light-gray);
 				padding: var(--small-gap-size);
 				word-break: break-word;
+			}
+
+			.chat-message.chat-invert .chat-message-text {
+				color: var(--dark-gray);
+			}
+
+			.chat-message.chat-invert:not(.chat-secret) .chat-message-left {
+				color: var(--dark-gray);
 			}
 
 		/* special */

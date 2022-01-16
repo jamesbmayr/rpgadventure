@@ -152,6 +152,26 @@ window.addEventListener("load", function() {
 				} catch (error) {console.log(error)}
 			}
 
+		/* getContrast */
+			window.FUNCTIONS.getContrast = getContrast
+			function getContrast(hex1, hex2) {
+				try {
+					// luminosities
+						var luminosities = [0.3, 0.59, 0.11]
+
+					// get rgb
+						var rgb1 = [parseInt(hex1.slice(1,3), 16), parseInt(hex1.slice(3,5), 16), parseInt(hex1.slice(5,7), 16)]
+						var rgb2 = [parseInt(hex2.slice(1,3), 16), parseInt(hex2.slice(3,5), 16), parseInt(hex2.slice(5,7), 16)]
+
+					// get luminance
+						var luminance1 = rgb1[0] * luminosities[0] + rgb1[1] * luminosities[1] + rgb1[2] * luminosities[2]
+						var luminance2 = rgb2[0] * luminosities[0] + rgb2[1] * luminosities[1] + rgb2[2] * luminosities[2]
+
+					// get contrast
+						return Math.abs(luminance1 - luminance2)
+				} catch (error) {console.log(error)}
+			}
+
 	/*** search ***/
 		/* searchSelect */
 			window.FUNCTIONS.searchSelect = searchSelect
