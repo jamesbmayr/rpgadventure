@@ -8262,6 +8262,17 @@ window.onload = function() {
 														}
 
 														var post = {
+															action: "unreadContent",
+															content: {
+																userId: USER ? USER.id : null,
+																gameId: GAME ? GAME.id : null,
+																id: CONTENT ? CONTENT.id : null
+															}
+														}
+
+														SOCKET.send(JSON.stringify(post))
+
+														var post = {
 															action: "readContent",
 															content: {
 																userId: USER ? USER.id : null,
