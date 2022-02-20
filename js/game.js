@@ -8272,17 +8272,19 @@ window.onload = function() {
 
 														SOCKET.send(JSON.stringify(post))
 
-														var post = {
-															action: "readContent",
-															content: {
-																userId: USER ? USER.id : null,
-																gameId: GAME ? GAME.id : null,
-																id: arenaObject.contentLinkId
+														setTimeout(function() {
+															var post = {
+																action: "readContent",
+																content: {
+																	userId: USER ? USER.id : null,
+																	gameId: GAME ? GAME.id : null,
+																	id: arenaObject.contentLinkId
+																}
 															}
-														}
 
-														SOCKET.send(JSON.stringify(post))
-														return
+															SOCKET.send(JSON.stringify(post))
+															return
+														}, 1000)
 													}
 
 												// character
