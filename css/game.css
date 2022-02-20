@@ -2393,6 +2393,27 @@
 				width: calc(100% + var(--small-gap-size) - var(--edge-size));;
 			}
 
+			.arena-object-label-linked {
+				text-align: center;
+				padding: var(--small-gap-size) 0;
+			}
+
+			.arena-object-label-linked span {
+				vertical-align: text-bottom;
+			}
+
+			.arena-object-input[property="contentLinkId"] {
+				width: calc(100% - 2 * var(--small-gap-size));
+			}
+
+			.arena-object-select[property="contentLinkId"] {
+				width: calc(100%);	
+			}
+
+			.arena-object-input[property="contentLinkId"][hidden], .arena-object-select[property="contentLinkId"][hidden] {
+				display: none;
+			}
+
 /*** gametable ***/
 	/** top level **/
 		#gametable {

@@ -430,7 +430,10 @@
 								shadow: colors["dark-gray"],
 								opacity: 1,
 								color: colors["light-gray"],
-								image: null
+								image: null,
+								contentLinked: false,
+								contentLinkType: null,
+								contentLinkId: null
 							}
 						break
 

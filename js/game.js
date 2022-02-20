@@ -6769,6 +6769,61 @@ window.onload = function() {
 											spanTextShadow.className = "arena-object-label-text"
 											spanTextShadow.innerText = "text shadow"
 										labelTextShadow.appendChild(spanTextShadow)
+
+									// contentLinkType
+										var labelContentLinked = document.createElement("label")
+											labelContentLinked.className = "arena-object-label"
+										listing.appendChild(labelContentLinked)
+
+										var spanContentLinkType = document.createElement("span")
+											spanContentLinkType.className = "arena-object-label-text arena-object-label-linked"
+										labelContentLinked.appendChild(spanContentLinkType)
+
+										var spanContentLinked = document.createElement("span")
+											spanContentLinked.innerHTML = "&#x1f517;"
+											spanContentLinked.title = "linked"
+										spanContentLinkType.appendChild(spanContentLinked)
+
+										var inputContentLinked = document.createElement("input")
+											inputContentLinked.className = "arena-object-visible"
+											inputContentLinked.setAttribute("property", "contentLinked")
+											inputContentLinked.type = "checkbox"
+											inputContentLinked.title = "linked"
+											inputContentLinked.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										spanContentLinkType.appendChild(inputContentLinked)
+
+										var inputContentLinkType = document.createElement("select")
+											inputContentLinkType.className = "arena-object-select"
+											inputContentLinkType.setAttribute("property", "contentLinkType")
+											inputContentLinkType.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelContentLinked.appendChild(inputContentLinkType)
+
+										var options = [null, "external", "arena", "audio", "component", "embed", "image", "text"]
+										for (var i in options) {
+											var option = document.createElement("option")
+												option.value = options[i]
+												option.innerText = options[i] ? options[i] : "no link"
+											inputContentLinkType.appendChild(option)
+										}
+
+									// contentLinkId
+										var labelContentLinkId = document.createElement("label")
+											labelContentLinkId.className = "arena-object-label"
+										listing.appendChild(labelContentLinkId)
+
+										var inputContentLinkId = document.createElement("input")
+											inputContentLinkId.className = "arena-object-input"
+											inputContentLinkId.setAttribute("property", "contentLinkId")
+											inputContentLinkId.placeholder = "url"
+											inputContentLinkId.type = "text"
+											inputContentLinkId.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelContentLinkId.appendChild(inputContentLinkId)
+
+										var selectContentLinkId = document.createElement("select")
+											selectContentLinkId.className = "arena-object-select"
+											selectContentLinkId.setAttribute("property", "contentLinkId")
+											selectContentLinkId.addEventListener(TRIGGERS.change, submitContentArenaObjectUpdate)
+										labelContentLinkId.appendChild(selectContentLinkId)
 							}
 
 						// find
@@ -6793,6 +6848,10 @@ window.onload = function() {
 								var inputTextColor = listing.querySelector("input[property='textColor']")
 								var inputTextPlacement = listing.querySelector("select[property='textPlacement']")
 								var inputTextShadow = listing.querySelector("input[property='textShadow']")
+								var inputContentLinkType = listing.querySelector("select[property='contentLinkType']")
+								var inputContentLinked = listing.querySelector("input[property='contentLinked']")
+								var inputContentLinkId = listing.querySelector("input[property='contentLinkId']")
+								var selectContentLinkId = listing.querySelector("select[property='contentLinkId']")
 							}
 
 						// set values
@@ -6819,6 +6878,39 @@ window.onload = function() {
 							if (inputTextColor != activeElement && 		inputTextColor.value 		!== object.textColor) { 	inputTextColor.value = object.textColor || ELEMENTS.gametable.canvas.gridColor }
 							if (inputTextPlacement != activeElement && 	inputTextPlacement.value 	!== object.textPlacement) { inputTextPlacement.value = object.textPlacement || null }
 							if (inputTextShadow != activeElement && 	inputTextShadow.value 		!== object.textShadow) { 	inputTextShadow.value = object.textShadow || ELEMENTS.gametable.canvas.gridBackground }
+							if (										inputContentLinked.value 	!== object.contentLinked) { inputContentLinked.checked = object.contentLinked || false }
+							if (inputContentLinkType != activeElement &&inputContentLinkType.value 	!== object.contentLinkType){inputContentLinkType.value = object.contentLinkType || null }
+
+						// linking
+							selectContentLinkId.innerHTML = ""
+							if (!object.contentLinkType) {
+								inputContentLinkId.setAttribute("hidden", true)
+								selectContentLinkId.setAttribute("hidden", true)
+							}
+							else if (object.contentLinkType == "external") {
+								inputContentLinkId.removeAttribute("hidden")
+								if (inputContentLinkId != activeElement && 	inputContentLinkId.value !== object.contentLinkId) { inputContentLinkId.value = object.contentLinkId || null }
+								selectContentLinkId.setAttribute("hidden", true)
+							}
+							else {
+								inputContentLinkId.setAttribute("hidden", true)
+								selectContentLinkId.removeAttribute("hidden")
+								
+								var noneOption = document.createElement("option")
+									noneOption.value = null
+									noneOption.innerText = "none"
+								selectContentLinkId.appendChild(noneOption)
+
+								var options = Array.from(document.querySelectorAll("#content-choose-select #content-choose-select-" + object.contentLinkType + " option"))
+								for (var i in options) {
+									var clonedOption = document.createElement("option")
+										clonedOption.value = options[i].value
+										clonedOption.innerText = options[i].innerText
+									selectContentLinkId.appendChild(clonedOption)
+								}
+								
+								if (										selectContentLinkId.value != object.contentLinkId) { selectContentLinkId.value = object.contentLinkId || null }
+							}
 					} catch (error) {console.log(error)}
 				}
 
@@ -7647,6 +7739,16 @@ window.onload = function() {
 								return
 							}
 
+						// contentLink
+							if (property == "contentLinkType") {
+								if (event.target.value == "null") {
+									post.content.arena.objects[id]["contentLinkId"] = null
+								}
+								else if (event.target.value !== CONTENT.arena.objects[id][property]) {
+									post.content.arena.objects[id]["contentLinkId"] = null	
+								}
+							}
+
 						// set value
 							if (property == "z") {
 								post.content.arena.objects[id][property] = Number(event.target.getAttribute("value"))
@@ -7656,6 +7758,9 @@ window.onload = function() {
 							}
 							else if (type == "range" || type == "number") {
 								post.content.arena.objects[id][property] = Number(event.target.value) || 0
+							}
+							else if (event.target.value == "null") {
+								post.content.arena.objects[id][property] = null
 							}
 							else {
 								post.content.arena.objects[id][property] = event.target.value
@@ -8137,26 +8242,53 @@ window.onload = function() {
 								// click within edges?
 									if ((left <= ELEMENTS.gametable.canvas.cursorX && ELEMENTS.gametable.canvas.cursorX <= right)
 									 && (bottom <= ELEMENTS.gametable.canvas.cursorY && ELEMENTS.gametable.canvas.cursorY <= top)) {
-									 	// double-click --> load character
+									 	// double-click --> load content
 											if (event.type == "dblclick") {
-												// not a character
-													if (!arenaObject.characterId) {
+												// external
+													if (arenaObject.contentLinked && arenaObject.contentLinkType == "external") {
+														if (!arenaObject.contentLinkId || !arenaObject.contentLinkId.length) {
+															return
+														}
+
+														var url = arenaObject.contentLinkId.indexOf("http://") == 0 || arenaObject.contentLinkId.indexOf("https://") == 0 ? arenaObject.contentLinkId : "https://" + arenaObject.contentLinkId
+														window.open(url, "_blank")
 														return
 													}
-												
-												// open character
-													var post = {
-														action: "readCharacter",
-														character: {
-															userId: USER ? USER.id : null,
-															gameId: GAME ? GAME.id : null,
-															id: arenaObject.characterId
+
+												// internal
+													if (arenaObject.contentLinked) {
+														if (!arenaObject.contentLinkType || !arenaObject.contentLinkId || !arenaObject.contentLinkId.length) {
+															return
 														}
+
+														var post = {
+															action: "readContent",
+															content: {
+																userId: USER ? USER.id : null,
+																gameId: GAME ? GAME.id : null,
+																id: arenaObject.contentLinkId
+															}
+														}
+
+														SOCKET.send(JSON.stringify(post))
+														return
 													}
 
-													SOCKET.send(JSON.stringify(post))
-													displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
-													return
+												// character
+													if (arenaObject.characterId) {
+														var post = {
+															action: "readCharacter",
+															character: {
+																userId: USER ? USER.id : null,
+																gameId: GAME ? GAME.id : null,
+																id: arenaObject.characterId
+															}
+														}
+
+														SOCKET.send(JSON.stringify(post))
+														displayTool({target: ELEMENTS.tools.characterRadio, forceSet: true})
+														return
+													}											
 											}
 
 									 	// locked
