@@ -474,7 +474,7 @@
 									<meta property="og:title" content="Adventure"/>
 									<meta property="og:url" content="https://jamesmayr.com/adventure/"/>
 									<meta property="og:description" content="Adventure is a fantasy tabletop RPG created by James Mayr"/>
-									<meta property="og:image" content="https://jamesmayr.com/adventure/d20.png"/>
+									<meta property="og:image" content="https://jamesmayr.com/adventure/banner.png"/>
 									<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>`
 						break
 						case "fonts":

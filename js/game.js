@@ -14,6 +14,7 @@ window.onload = function() {
 			var SIGNALS = window.SIGNALS || {}
 			var SOCKET = window.SOCKET = null
 			var SOCKETCHECK = null
+			var PINGINTERVAL = 60 * 1000
 
 		/* regex */
 			var PROTOCOLREGEX = /^(http|https|rtsp|ftp):\/\//i
@@ -627,6 +628,15 @@ window.onload = function() {
 						}
 						catch (error) {console.log(error)}
 					}
+
+					if (SOCKET.pingLoop) {
+						clearInterval(SOCKET.pingLoop)
+					}
+					SOCKET.pingLoop = setInterval(function() {
+						fetch("/ping", {method: "GET"})
+							.then(function(response){ return response.json() })
+							.then(function(data) {})
+					}, PINGINTERVAL)
 				}
 				catch (error) {console.log(error)}
 			}

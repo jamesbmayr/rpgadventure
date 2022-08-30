@@ -45,7 +45,7 @@
 		function readOne(REQUEST, RESPONSE, callback) {
 			try {
 				// asset
-					if (REQUEST.fileType) {
+					if (REQUEST.fileType || (/^\/ping\/?$/).test(REQUEST.url)) {
 						callback(REQUEST, RESPONSE)
 						return
 					}
